@@ -1,0 +1,2 @@
+import"../../../index-DsOHg7BP.chunk.js";/* empty css                           */import{S as e,P as n}from"../../../preset_utils-BI4Zd4bY.chunk.js";import{P as s,T as t}from"../../../detailed_results-BMSIvwql.chunk.js";import{B as i}from"../../../sim-OR1s1z0u.chunk.js";const o=new e,r=new n(s.BloodDeathKnight,o);r.enableHealing(),o.raid.setPlayer(t.nextEventID(),0,r),new i(document.body,r);
+//# sourceMappingURL=index.html-f0RzW4sy.entry.js.map

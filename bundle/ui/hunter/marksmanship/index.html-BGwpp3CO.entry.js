@@ -1,0 +1,2 @@
+import"../../../index-DsOHg7BP.chunk.js";/* empty css                           */import{S as s,P as n}from"../../../preset_utils-BI4Zd4bY.chunk.js";import{P as t,T as e}from"../../../detailed_results-BMSIvwql.chunk.js";import{M as i}from"../../../sim-G-JOA58v.chunk.js";import"../../../apl_utils-YVupLIXZ.chunk.js";import"../../../inputs-BgOPpQxo.chunk.js";const r=new s,m=new n(t.MarksmanshipHunter,r);r.raid.setPlayer(e.nextEventID(),0,m),new i(document.body,m);
+//# sourceMappingURL=index.html-BGwpp3CO.entry.js.map

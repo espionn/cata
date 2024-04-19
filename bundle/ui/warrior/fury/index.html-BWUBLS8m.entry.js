@@ -1,0 +1,2 @@
+import"../../../index-DsOHg7BP.chunk.js";/* empty css                           */import{S as s,P as r}from"../../../preset_utils-BI4Zd4bY.chunk.js";import{P as e,T as n}from"../../../detailed_results-BMSIvwql.chunk.js";import{F as t}from"../../../sim-CXl4t_Dr.chunk.js";import"../../../inputs-CLkV5ght.chunk.js";const i=new s,o=new r(e.FuryWarrior,i);i.raid.setPlayer(n.nextEventID(),0,o),new t(document.body,o);
+//# sourceMappingURL=index.html-BWUBLS8m.entry.js.map
