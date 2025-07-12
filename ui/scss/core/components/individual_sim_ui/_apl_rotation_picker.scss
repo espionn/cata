@@ -6,11 +6,7 @@
 	--apl-spacer: var(--spacer-2);
 }
 
-.apl-rotation-picker-root {
-	display: flex;
-	flex-direction: column;
-	gap: var(--section-spacer);
-
+#rotation-tab {
 	.apl-list-item-picker,
 	.apl-prepull-action-picker,
 	.apl-groups-picker,

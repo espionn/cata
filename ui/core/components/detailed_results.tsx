@@ -87,7 +87,6 @@ export abstract class DetailedResults extends Component {
 			<div className="dr-root dr-no-results">
 				<div className="dr-toolbar">
 					<div className="results-filter"></div>
-					<div className="tabs-filler"></div>
 					<ul className="nav nav-tabs" attributes={{ role: 'tablist' }}>
 						{tabs.map(({ label, targetId, isActive, classes }) => (
 							<li className={`nav-item dr-tab-tab ${classes?.join(' ') || ''}`} attributes={{ role: 'presentation' }}>

@@ -16,6 +16,7 @@ export const EP_TOOLTIP = `
 	EP (Equivalence Points) is way of comparing items by multiplying the raw stats of an item with your current stat weights.
 	More EP does not necessarily mean more DPS, as EP doesn't take into account stat caps and non-linear stat calculations.
 `;
+export const
 
 export const TOOLTIP_METRIC_LABELS = {
 	// Damage metrics

@@ -4,9 +4,11 @@ import { SimUI } from '../../sim_ui';
 import { EventID, TypedEvent } from '../../typed_event';
 import { randomUUID } from '../../utils';
 import { Component } from '../component';
-import { Input, InputConfig } from '../input';
+import { Input } from '../input';
 import { ListItemPickerConfig, ListPicker } from '../pickers/list_picker';
 import { AdaptiveStringPicker } from '../pickers/string_picker';
+import { APLHidePicker } from './apl/hide_picker';
+import { APLListItemPicker } from './apl/list_item_picker';
 import { APLActionPicker } from './apl_actions';
 import { APLGroupEditor } from './apl_group_editor';
 import { APLValueImplStruct, APLValuePicker } from './apl_values';
@@ -358,7 +360,7 @@ class APLPrepullActionPicker extends Input<Player<any>, APLPrepullAction> {
 		const itemHeaderElem = ListPicker.getItemHeaderElem(this);
 		ListPicker.makeListItemValidations(itemHeaderElem, player, player => player.getCurrentStats().rotationStats?.prepullActions[index]?.validations || []);
 
-		this.hidePicker = new HidePicker(itemHeaderElem, player, {
+		this.hidePicker = new APLHidePicker(itemHeaderElem, player, {
 			changedEvent: () => this.player.rotationChangeEmitter,
 			getValue: () => this.getItem().hide,
 			setValue: (eventID: EventID, player: Player<any>, newValue: boolean) => {
@@ -421,117 +423,6 @@ class APLPrepullActionPicker extends Input<Player<any>, APLPrepullAction> {
 		this.hidePicker.setInputValue(newValue.hide);
 		this.doAtPicker.setInputValue((newValue.doAtValue?.value as APLValueImplStruct<'const'> | undefined)?.const.val || '');
 		this.actionPicker.setInputValue(newValue.action || APLAction.create());
-	}
-}
-
-class APLListItemPicker extends Input<Player<any>, APLListItem> {
-	private readonly player: Player<any>;
-	private readonly hidePicker: Input<Player<any>, boolean>;
-	private readonly actionPicker: APLActionPicker;
-
-	private getItem(): APLListItem {
-		return (
-			this.getSourceValue() ||
-			APLListItem.create({
-				action: {},
-			})
-		);
-	}
-
-	constructor(parent: HTMLElement, player: Player<any>, config: ListItemPickerConfig<Player<any>, APLListItem>, index: number) {
-		config.enableWhen = () => !this.getItem().hide;
-		super(parent, 'apl-list-item-picker-root', player, config);
-		this.player = player;
-
-		const itemHeaderElem = ListPicker.getItemHeaderElem(this);
-		ListPicker.makeListItemValidations(itemHeaderElem, player, player => player.getCurrentStats().rotationStats?.priorityList[index]?.validations || []);
-
-		this.hidePicker = new HidePicker(itemHeaderElem, player, {
-			changedEvent: () => this.player.rotationChangeEmitter,
-			getValue: () => this.getItem().hide,
-			setValue: (eventID: EventID, player: Player<any>, newValue: boolean) => {
-				this.getItem().hide = newValue;
-				this.player.rotationChangeEmitter.emit(eventID);
-			},
-		});
-
-		this.actionPicker = new APLActionPicker(this.rootElem, this.player, {
-			changedEvent: () => this.player.rotationChangeEmitter,
-			getValue: () => this.getItem().action!,
-			setValue: (eventID: EventID, player: Player<any>, newValue: APLAction) => {
-				this.getItem().action = newValue;
-				this.player.rotationChangeEmitter.emit(eventID);
-			},
-		});
-		this.init();
-	}
-
-	getInputElem(): HTMLElement | null {
-		return this.rootElem;
-	}
-
-	getInputValue(): APLListItem {
-		const item = APLListItem.create({
-			hide: this.hidePicker.getInputValue(),
-			action: this.actionPicker.getInputValue(),
-		});
-		return item;
-	}
-
-	setInputValue(newValue: APLListItem) {
-		if (!newValue) {
-			return;
-		}
-		this.hidePicker.setInputValue(newValue.hide);
-		this.actionPicker.setInputValue(newValue.action || APLAction.create());
-	}
-}
-
-class HidePicker extends Input<Player<any>, boolean> {
-	private readonly inputElem: HTMLElement;
-	private readonly iconElem: HTMLElement;
-	private tooltip: any; // TippyInstance type would need import
-
-	constructor(parent: HTMLElement, modObject: Player<any>, config: InputConfig<Player<any>, boolean>) {
-		super(parent, 'hide-picker-root', modObject, config);
-
-		this.inputElem = ListPicker.makeActionElem('hide-picker-button', 'fa-eye');
-		this.iconElem = this.inputElem.childNodes[0] as HTMLElement;
-
-		this.inputElem.addEventListener(
-			'click',
-			() => {
-				this.setInputValue(!this.getInputValue());
-				this.inputChanged(TypedEvent.nextEventID());
-			},
-			{ signal: this.signal },
-		);
-
-		this.rootElem.appendChild(this.inputElem);
-		// TODO: Add tooltip back with proper import
-		// this.tooltip = tippy(this.inputElem, { content: 'Enable/Disable' });
-
-		this.init();
-	}
-
-	getInputElem(): HTMLElement {
-		return this.inputElem;
-	}
-
-	getInputValue(): boolean {
-		return this.iconElem.classList.contains('fa-eye-slash');
-	}
-
-	setInputValue(newValue: boolean) {
-		if (newValue) {
-			this.iconElem.classList.add('fa-eye-slash');
-			this.iconElem.classList.remove('fa-eye');
-			// TODO: Update tooltip when available
-		} else {
-			this.iconElem.classList.add('fa-eye');
-			this.iconElem.classList.remove('fa-eye-slash');
-			// TODO: Update tooltip when available
-		}
 	}
 }
 
