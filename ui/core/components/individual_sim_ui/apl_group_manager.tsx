@@ -7,7 +7,7 @@ import { randomUUID } from '../../utils';
 import { Component } from '../component';
 import { Input, InputConfig } from '../input';
 import { ListItemPickerConfig, ListPicker } from '../pickers/list_picker';
-import { APLGroupEditor } from './apl_group_editor';
+import { APLGroupEditor } from './apl/apl_group_editor';
 
 export interface APLGroupManagerConfig extends InputConfig<Player<any>, Array<APLGroup>> {}
 

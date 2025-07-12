@@ -1,3 +1,4 @@
+import i18n from "../../../../i18n/config";
 import { Player } from "../../../player";
 import { APLAction, APLPrepullAction, APLValue } from "../../../proto/apl";
 import { EventID } from "../../../typed_event";
@@ -6,19 +7,21 @@ import { Component } from "../../component";
 import { Input } from "../../input";
 import { ListItemPickerConfig, ListPicker } from "../../pickers/list_picker";
 import { AdaptiveStringPicker } from "../../pickers/string_picker";
+import { TooltipButton } from "../../tooltip_button";
 import { APLActionPicker } from "../apl_actions";
 import { APLValueImplStruct } from "../apl_values";
 import { APLHidePicker } from "./hide_picker";
 
 export class APLPrePullListPicker extends Component{
 	constructor(container: HTMLElement, player: Player<any>) {
-		super(container, 'apl-priority-list-picker');
+		super(container, 'apl-pre-pull-list-picker');
 
-		this.rootElem.appendChild(<h6>Pre-Pull Action List</h6>);
+		const header = this.rootElem.appendChild(<h6>{i18n.t('rotation.apl.prePullActions.header')}</h6>) as HTMLElement;
+		new TooltipButton(header, i18n.t('rotation.apl.prePullActions.tooltip'), ['ms-2']);
 
-		new ListPicker<Player<any>, APLPrepullAction>(container, player, {
+		new ListPicker<Player<any>, APLPrepullAction>(this.rootElem, player, {
 			extraCssClasses: ['apl-prepull-action-picker'],
-			itemLabel: 'Prepull Action',
+			itemLabel: i18n.t('rotation.apl.prePullActions.name'),
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: (player: Player<any>) => player.aplRotation.prepullActions,
 			setValue: (eventID: EventID, player: Player<any>, newValue: Array<APLPrepullAction>) => {

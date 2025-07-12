@@ -229,26 +229,6 @@ export class PresetConfigurationPicker extends Component {
 		const hasBuffs = settings?.buffs ? IndividualBuffs.equals(this.simUI.player.getBuffs(), settings.buffs) : true;
 		const hasDebuffs = settings?.debuffs ? Debuffs.equals(this.simUI.sim.raid.getDebuffs(), settings.debuffs) : true;
 
-		console.log({
-			hasGear,
-hasTalents,
-hasRotation,
-hasEpWeights,
-hasEncounter,
-hasHealingModel,
-hasRace,
-hasProfession1,
-hasProfession2,
-hasDistanceFromTarget,
-hasEnableItemSwap,
-hasItemSwap,
-hasSpecOptions,
-hasConsumables,
-hasRaidBuffs,
-hasBuffs,
-hasDebuffs,
-		})
-
 		return (
 			hasGear &&
 			hasTalents &&

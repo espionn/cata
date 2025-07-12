@@ -20,6 +20,7 @@ import { ResultsFilter } from './detailed_results/results_filter';
 import { Timeline } from './detailed_results/timeline';
 import { ToplineResults } from './detailed_results/topline_results';
 import { RaidSimResultsManager } from './raid_sim_action';
+import { StickyToolbar } from './sticky_toolbar';
 
 type Tab = {
 	isActive?: boolean;
@@ -85,7 +86,7 @@ export abstract class DetailedResults extends Component {
 
 		this.rootElem.appendChild(
 			<div className="dr-root dr-no-results">
-				<div className="dr-toolbar">
+				<div className="dr-toolbar sticky-toolbar">
 					<div className="results-filter"></div>
 					<ul className="nav nav-tabs" attributes={{ role: 'tablist' }}>
 						{tabs.map(({ label, targetId, isActive, classes }) => (
@@ -186,16 +187,7 @@ export abstract class DetailedResults extends Component {
 
 		// Allow styling the sticky toolbar
 		const toolbar = document.querySelector<HTMLElement>('.dr-toolbar')!;
-		new IntersectionObserver(
-			([e]) => {
-				e.target.classList.toggle('stuck', e.intersectionRatio < 1);
-			},
-			{
-				// Intersect with the sim header or top of the separate tab
-				rootMargin: this.simUI ? `-${this.simUI.simHeader.rootElem.offsetHeight + 1}px 0px 0px 0px` : '0px',
-				threshold: [1],
-			},
-		).observe(toolbar);
+		new StickyToolbar(toolbar, this.simUI);
 
 		this.resultsFilter = new ResultsFilter({
 			parent: this.rootElem.querySelector('.results-filter')!,

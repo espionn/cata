@@ -18,6 +18,9 @@ import { EnumPicker } from '../pickers/enum_picker';
 import { NumberPicker } from '../pickers/number_picker';
 import { SavedDataManager } from '../saved_data_manager';
 import { SimTab } from '../sim_tab';
+import { StickyToolbar } from '../sticky_toolbar';
+import { APLGroupListPicker } from './apl/apl_group_list_picker';
+import { APLVariablesListPicker } from './apl/apl_variables_list_picker';
 import { APLPrePullListPicker } from './apl/pre_pull_list_picker';
 import { APLPriorityListPicker } from './apl/priority_list_picker';
 import { CooldownsPicker } from './cooldowns_picker';
@@ -110,18 +113,21 @@ export class RotationTab extends SimTab {
 
 	private buildAplTab() {
 		const navbar = this.aplTab.appendChild(<div className="apl-rotation-navbar" />) as HTMLElement;
+		new StickyToolbar(navbar, this.simUI);
 		this.buildRotationTypePicker(navbar);
 
 		const navTabs = navbar.appendChild(<ul className="nav nav-tabs" attributes={{ role: 'tablist' }} />) as HTMLUListElement;
 		const leftCol = this.aplTab.appendChild(<div className="rotation-tab-col tab-panel-left tab-content" />) as HTMLElement;
 		const rightCol = this.aplTab.appendChild(<div className="rotation-tab-col tab-panel-right" />) as HTMLElement;
 
-		const priorityListTab = this.buildAPLTab(navTabs, leftCol, 'Priority List', 'apl-priority-list', true);
-		const actionGroupsTab = this.buildAPLTab(navTabs, leftCol, 'Action Groups', 'apl-action-groups');
-		const variablesTab = this.buildAPLTab(navTabs, leftCol, 'Variables', 'apl-variables');
+		const priorityListTab = this.buildAPLTab(navTabs, leftCol, i18n.t("rotation.apl.tabs.priorityList"), 'apl-priority-list', true);
+		const actionGroupsTab = this.buildAPLTab(navTabs, leftCol, i18n.t("rotation.apl.tabs.actionGroups"), 'apl-action-groups');
+		const variablesTab = this.buildAPLTab(navTabs, leftCol, i18n.t("rotation.apl.tabs.variables"), 'apl-variables');
 
 		new APLPrePullListPicker(priorityListTab, this.simUI.player);
 		new APLPriorityListPicker(priorityListTab, this.simUI.player);
+		new APLGroupListPicker(actionGroupsTab, this.simUI.player);
+		new APLVariablesListPicker(variablesTab, this.simUI.player);
 
 		this.buildPresetConfigurationPicker(rightCol);
 		this.buildSavedDataPickers(rightCol);
@@ -236,6 +242,7 @@ export class RotationTab extends SimTab {
 		const container = (<div className="rotation-type-container" />) as HTMLElement;
 		parent.appendChild(container);
 
+		// TODO: Replace with a flush variant similar to the unit pickers in the Results tab
 		new EnumPicker(container, this.simUI.player, {
 			extraCssClasses: ['w-auto'],
 			id: 'rotation-tab-rotation-type',

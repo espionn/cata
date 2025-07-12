@@ -1,11 +1,11 @@
-import { Player } from '../../player';
-import { APLAction, APLGroup, APLListItem } from '../../proto/apl';
-import { EventID } from '../../typed_event';
-import { randomUUID } from '../../utils';
-import { Input, InputConfig } from '../input';
-import { ListItemPickerConfig, ListPicker } from '../pickers/list_picker';
-import { AdaptiveStringPicker } from '../pickers/string_picker';
-import { APLActionPicker } from './apl_actions';
+import { Player } from '../../../player';
+import { APLAction, APLGroup, APLListItem } from '../../../proto/apl';
+import { EventID } from '../../../typed_event';
+import { randomUUID } from '../../../utils';
+import { Input, InputConfig } from '../../input';
+import { ListItemPickerConfig, ListPicker } from '../../pickers/list_picker';
+import { AdaptiveStringPicker } from '../../pickers/string_picker';
+import { APLActionPicker } from '../apl_actions';
 
 export interface APLGroupEditorConfig extends InputConfig<Player<any>, APLGroup> {}
 

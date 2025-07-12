@@ -153,7 +153,37 @@
 		"title": "Talents"
 	},
 	"rotation": {
-		"title": "Rotation"
+		"title": "Rotation",
+		"apl": {
+			"actionGroups": {
+				"header": "Action Groups",
+				"name": "Action Group",
+				"newGroupName": "New Action Group",
+				"tooltip": "Groups of actions that can be referenced in the Action Priority List (APL). Useful for organizing your APL and reusing common action sequences. Actions are performed in order from top to bottom within a group."
+			},
+			"prePullActions": {
+				"header": "Pre-Pull Action List",
+				"name": "Pre-Pull Action",
+				"tooltip": "Actions executed before the fight starts, such as pre-pull buffs or potions."
+			},
+			"priorityList": {
+				"header": "Action Priority List (APL)",
+				"name": "Action",
+				"tooltip": "A list of actions representing your character's actions during the fight. The sim will evaluate the list from top (highest priority) to bottom (lowest priority) and choose the first valid action to take at any given time."
+			},
+			"tabs": {
+				"actionGroups": "Action Groups",
+				"priorityList": "Priority List",
+				"variables": "Variables"
+			},
+			"variables": {
+				"copyName": "{variableName} (Copy)",
+				"header": "Variables",
+				"name": "Variable",
+				"newVariableName": "New Variable",
+				"tooltip": "Variables can be used to store complex conditions that can be referenced in the Action Priority List (APL). This is useful for storing dynamic values that change during the fight, such as cooldown timers or resource levels."
+			}
+		}
 	},
 	"results": {
 		"title": "Results"

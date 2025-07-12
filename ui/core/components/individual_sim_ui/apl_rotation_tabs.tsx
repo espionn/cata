@@ -1,17 +1,9 @@
 import { Player } from '../../player';
-import { APLAction, APLGroup, APLListItem, APLPrepullAction, APLValue, APLValueVariable, APLValueVariable as APLValueVariableClass } from '../../proto/apl';
+import { APLGroup, APLListItem, APLPrepullAction, APLValueVariable } from '../../proto/apl';
 import { SimUI } from '../../sim_ui';
-import { EventID, TypedEvent } from '../../typed_event';
-import { randomUUID } from '../../utils';
+import { TypedEvent } from '../../typed_event';
 import { Component } from '../component';
-import { Input } from '../input';
-import { ListItemPickerConfig, ListPicker } from '../pickers/list_picker';
-import { AdaptiveStringPicker } from '../pickers/string_picker';
-import { APLHidePicker } from './apl/hide_picker';
-import { APLListItemPicker } from './apl/list_item_picker';
-import { APLActionPicker } from './apl_actions';
-import { APLGroupEditor } from './apl_group_editor';
-import { APLValueImplStruct, APLValuePicker } from './apl_values';
+import { ListPicker } from '../pickers/list_picker';
 
 export class APLRotationTabs extends Component {
 	private activeTab = 'priority-list';
@@ -28,7 +20,6 @@ export class APLRotationTabs extends Component {
 		this.modPlayer = modPlayer;
 
 		this.createTabStructure();
-		this.createTabs();
 		this.showTab('priority-list');
 	}
 
@@ -161,146 +152,6 @@ export class APLRotationTabs extends Component {
 		}
 	}
 
-	private createTabs() {
-		this.createPriorityListTab();
-		this.createPrepullTab();
-		this.createGroupsTab();
-		this.createVariablesTab();
-	}
-
-	private createPriorityListTab() {
-		const tabPane = this.tabs.get('priority-list')!;
-
-		this.priorityListPicker = new ListPicker<Player<any>, APLListItem>(tabPane, this.modPlayer, {
-			extraCssClasses: ['apl-list-item-picker'],
-			itemLabel: 'Action',
-			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
-			getValue: (player: Player<any>) => player.aplRotation.priorityList,
-			setValue: (eventID: EventID, player: Player<any>, newValue: Array<APLListItem>) => {
-				player.aplRotation.priorityList = newValue;
-				player.rotationChangeEmitter.emit(eventID);
-			},
-			newItem: () =>
-				APLListItem.create({
-					action: {},
-				}),
-			copyItem: (oldItem: APLListItem) => APLListItem.clone(oldItem),
-			newItemPicker: (
-				parent: HTMLElement,
-				listPicker: ListPicker<Player<any>, APLListItem>,
-				index: number,
-				config: ListItemPickerConfig<Player<any>, APLListItem>,
-			) => new APLListItemPicker(parent, this.modPlayer, config, index),
-			allowedActions: ['create', 'copy', 'delete', 'move'],
-			inlineMenuBar: true,
-		});
-	}
-
-	private createPrepullTab() {
-		const tabPane = this.tabs.get('prepull')!;
-
-		this.prepullListPicker = new ListPicker<Player<any>, APLPrepullAction>(tabPane, this.modPlayer, {
-			extraCssClasses: ['apl-prepull-action-picker'],
-			itemLabel: 'Prepull Action',
-			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
-			getValue: (player: Player<any>) => player.aplRotation.prepullActions,
-			setValue: (eventID: EventID, player: Player<any>, newValue: Array<APLPrepullAction>) => {
-				player.aplRotation.prepullActions = newValue;
-				player.rotationChangeEmitter.emit(eventID);
-			},
-			newItem: () =>
-				APLPrepullAction.create({
-					action: {},
-					doAtValue: {
-						value: { oneofKind: 'const', const: { val: '-1s' } },
-					},
-				}),
-			copyItem: (oldItem: APLPrepullAction) => APLPrepullAction.clone(oldItem),
-			newItemPicker: (
-				parent: HTMLElement,
-				listPicker: ListPicker<Player<any>, APLPrepullAction>,
-				index: number,
-				config: ListItemPickerConfig<Player<any>, APLPrepullAction>,
-			) => new APLPrepullActionPicker(parent, this.modPlayer, config, index),
-			allowedActions: ['create', 'copy', 'delete', 'move'],
-			inlineMenuBar: true,
-		});
-	}
-
-	private createGroupsTab() {
-		const tabPane = this.tabs.get('groups')!;
-
-		this.groupsListPicker = new ListPicker<Player<any>, APLGroup>(tabPane, this.modPlayer, {
-			extraCssClasses: ['apl-groups-picker'],
-			itemLabel: 'Group',
-			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
-			getValue: (player: Player<any>) => player.aplRotation.groups || [],
-			setValue: (eventID: EventID, player: Player<any>, newValue: Array<APLGroup>) => {
-				player.aplRotation.groups = newValue;
-				player.rotationChangeEmitter.emit(eventID);
-			},
-			newItem: () =>
-				APLGroup.create({
-					name: 'new_group',
-					actions: [],
-					variables: [],
-				}),
-			copyItem: (oldItem: APLGroup) => APLGroup.clone(oldItem),
-			newItemPicker: (
-				parent: HTMLElement,
-				listPicker: ListPicker<Player<any>, APLGroup>,
-				index: number,
-				config: ListItemPickerConfig<Player<any>, APLGroup>,
-			) => new APLGroupEditor(parent, this.modPlayer, config),
-			allowedActions: ['create', 'copy', 'delete', 'move'],
-			inlineMenuBar: true,
-		});
-	}
-
-	private createVariablesTab() {
-		const tabPane = this.tabs.get('variables')!;
-
-		this.variablesListPicker = new ListPicker<Player<any>, APLValueVariable>(tabPane, this.modPlayer, {
-			extraCssClasses: ['apl-value-variables-picker'],
-			itemLabel: 'Variable',
-			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
-			getValue: (player: Player<any>) => player.aplRotation.valueVariables || [],
-			setValue: (eventID: EventID, player: Player<any>, newValue: Array<APLValueVariable>) => {
-				player.aplRotation.valueVariables = newValue;
-				player.rotationChangeEmitter.emit(eventID);
-			},
-			newItem: () => this.createValueVariable(),
-			copyItem: (oldItem: APLValueVariable) => this.copyValueVariable(oldItem),
-			newItemPicker: (
-				parent: HTMLElement,
-				listPicker: ListPicker<Player<any>, APLValueVariable>,
-				index: number,
-				config: ListItemPickerConfig<Player<any>, APLValueVariable>,
-			) => new APLValueVariablePicker(parent, this.modPlayer, listPicker, index, config),
-			allowedActions: ['create', 'copy', 'delete', 'move'],
-			actions: {
-				create: {
-					useIcon: false,
-				},
-			},
-			inlineMenuBar: true,
-		});
-	}
-
-	private createValueVariable(): APLValueVariable {
-		return APLValueVariableClass.create({
-			name: '',
-			value: undefined,
-		});
-	}
-
-	private copyValueVariable(oldItem: APLValueVariable): APLValueVariable {
-		return APLValueVariableClass.create({
-			name: oldItem.name + ' Copy',
-			value: oldItem.value,
-		});
-	}
-
 	private addNewPriorityListItem() {
 		if (this.priorityListPicker) {
 			const newItem = this.priorityListPicker.config.newItem();
@@ -326,170 +177,13 @@ export class APLRotationTabs extends Component {
 	}
 
 	private addNewVariable() {
-		if (this.variablesListPicker) {
-			const newItem = this.createValueVariable();
-			const newList = this.variablesListPicker.config.getValue(this.variablesListPicker.modObject).concat([newItem]);
-			this.variablesListPicker.config.setValue(TypedEvent.nextEventID(), this.variablesListPicker.modObject, newList);
-		}
+		// if (this.variablesListPicker) {
+		// 	const newItem = this.createValueVariable();
+		// 	const newList = this.variablesListPicker.config.getValue(this.variablesListPicker.modObject).concat([newItem]);
+		// 	this.variablesListPicker.config.setValue(TypedEvent.nextEventID(), this.variablesListPicker.modObject, newList);
+		// }
 	}
 }
 
-// These classes are copied from the original apl_rotation_picker.ts
-// We'll need to extract them to a shared file or keep them here for now
 
-class APLPrepullActionPicker extends Input<Player<any>, APLPrepullAction> {
-	private readonly player: Player<any>;
-	private readonly hidePicker: Input<Player<any>, boolean>;
-	private readonly doAtPicker: Input<Player<any>, string>;
-	private readonly actionPicker: APLActionPicker;
 
-	private getItem(): APLPrepullAction {
-		return (
-			this.getSourceValue() ||
-			APLPrepullAction.create({
-				action: {},
-			})
-		);
-	}
-
-	constructor(parent: HTMLElement, player: Player<any>, config: ListItemPickerConfig<Player<any>, APLPrepullAction>, index: number) {
-		config.enableWhen = () => !this.getItem().hide;
-		super(parent, 'apl-list-item-picker-root', player, config);
-		this.player = player;
-
-		const itemHeaderElem = ListPicker.getItemHeaderElem(this);
-		ListPicker.makeListItemValidations(itemHeaderElem, player, player => player.getCurrentStats().rotationStats?.prepullActions[index]?.validations || []);
-
-		this.hidePicker = new APLHidePicker(itemHeaderElem, player, {
-			changedEvent: () => this.player.rotationChangeEmitter,
-			getValue: () => this.getItem().hide,
-			setValue: (eventID: EventID, player: Player<any>, newValue: boolean) => {
-				this.getItem().hide = newValue;
-				this.player.rotationChangeEmitter.emit(eventID);
-			},
-		});
-
-		this.doAtPicker = new AdaptiveStringPicker(this.rootElem, this.player, {
-			id: randomUUID(),
-			label: 'Do At',
-			labelTooltip: "Time before pull to do the action. Should be negative, and formatted like, '-1s' or '-2500ms'.",
-			extraCssClasses: ['apl-prepull-actions-doat'],
-			changedEvent: () => this.player.rotationChangeEmitter,
-			getValue: () => (this.getItem().doAtValue?.value as APLValueImplStruct<'const'> | undefined)?.const.val || '',
-			setValue: (eventID: EventID, player: Player<any>, newValue: string) => {
-				if (newValue) {
-					this.getItem().doAtValue = APLValue.create({
-						value: { oneofKind: 'const', const: { val: newValue } },
-						uuid: { value: randomUUID() },
-					});
-				} else {
-					this.getItem().doAtValue = undefined;
-				}
-				this.player.rotationChangeEmitter.emit(eventID);
-			},
-			inline: true,
-		});
-
-		this.actionPicker = new APLActionPicker(this.rootElem, this.player, {
-			changedEvent: () => this.player.rotationChangeEmitter,
-			getValue: () => this.getItem().action!,
-			setValue: (eventID: EventID, player: Player<any>, newValue: APLAction) => {
-				this.getItem().action = newValue;
-				this.player.rotationChangeEmitter.emit(eventID);
-			},
-		});
-		this.init();
-	}
-
-	getInputElem(): HTMLElement | null {
-		return this.rootElem;
-	}
-
-	getInputValue(): APLPrepullAction {
-		const item = APLPrepullAction.create({
-			hide: this.hidePicker.getInputValue(),
-			doAtValue: {
-				value: { oneofKind: 'const', const: { val: this.doAtPicker.getInputValue() } },
-			},
-			action: this.actionPicker.getInputValue(),
-		});
-		return item;
-	}
-
-	setInputValue(newValue: APLPrepullAction) {
-		if (!newValue) {
-			return;
-		}
-		this.hidePicker.setInputValue(newValue.hide);
-		this.doAtPicker.setInputValue((newValue.doAtValue?.value as APLValueImplStruct<'const'> | undefined)?.const.val || '');
-		this.actionPicker.setInputValue(newValue.action || APLAction.create());
-	}
-}
-
-class APLValueVariablePicker extends Input<Player<any>, APLValueVariable> {
-	private namePicker: AdaptiveStringPicker<Player<any>>;
-	private valuePicker: APLValuePicker;
-	private config: ListItemPickerConfig<Player<any>, APLValueVariable>;
-	public modObject: Player<any>;
-	private index: number;
-
-	constructor(
-		parent: HTMLElement,
-		player: Player<any>,
-		listPicker: ListPicker<Player<any>, APLValueVariable>,
-		index: number,
-		config: ListItemPickerConfig<Player<any>, APLValueVariable>,
-	) {
-		super(parent, 'apl-value-variable-picker-root', player, config);
-		this.config = config;
-		this.modObject = player;
-		this.index = index;
-
-		// Add consistent layout styling
-		this.rootElem.classList.add('d-flex', 'flex-column', 'gap-2');
-
-		this.namePicker = new AdaptiveStringPicker(this.rootElem, player, {
-			id: randomUUID(),
-			label: 'Variable Name',
-			labelTooltip: 'Name of the variable (e.g., "my_dot_remains", "boss_health_pct")',
-			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
-			getValue: () => this.getSourceValue().name,
-			setValue: (eventID: EventID, player: Player<any>, newValue: string) => {
-				const sourceValue = this.getSourceValue();
-				sourceValue.name = newValue;
-				this.config.setValue(eventID, player, this.config.getValue(player));
-			},
-		});
-
-		this.valuePicker = new APLValuePicker(this.rootElem, player, {
-			id: randomUUID(),
-			label: 'Variable Value',
-			labelTooltip: 'The value expression that this variable represents',
-			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
-			getValue: () => this.getSourceValue().value,
-			setValue: (eventID: EventID, player: Player<any>, newValue: any) => {
-				const sourceValue = this.getSourceValue();
-				sourceValue.value = newValue;
-				this.config.setValue(eventID, player, this.config.getValue(player));
-			},
-		});
-
-		this.init();
-	}
-
-	getInputElem(): HTMLElement | null {
-		return this.rootElem;
-	}
-
-	getInputValue(): APLValueVariable {
-		return {
-			name: this.namePicker.getInputValue(),
-			value: this.valuePicker.getInputValue(),
-		};
-	}
-
-	setInputValue(newValue: APLValueVariable) {
-		this.namePicker.setInputValue(newValue.name);
-		this.valuePicker.setInputValue(newValue.value);
-	}
-}

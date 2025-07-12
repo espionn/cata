@@ -43,9 +43,7 @@
 		gap: var(--gap-width) var(--container-padding);
 
 		.apl-rotation-navbar {
-			width: 100%;
-			display: flex;
-			border-bottom: var(--border-default);
+			flex: 1 0 100%;
 
 			.nav-tabs {
 				margin-left: auto;
@@ -55,6 +53,12 @@
 
 		.tab-pane {
 			padding-top: 0;
+			gap: var(--section-spacer);
+
+			&.active {
+				display: flex;
+				flex-direction: column;
+			}
 		}
 	}
 }
