@@ -1,4 +1,3 @@
-import tippy from "tippy.js";
 import { Player } from "../../../player";
 import { APLAction, APLPrepullAction, APLValue } from "../../../proto/apl";
 import { EventID } from "../../../typed_event";
@@ -15,14 +14,7 @@ export class APLPrePullListPicker extends Component{
 	constructor(container: HTMLElement, player: Player<any>) {
 		super(container, 'apl-priority-list-picker');
 
-		const header = this.rootElem.appendChild(<h6>Pre-Pull Action List</h6>);
-		const headerTooltipBtn = header.appendChild(<button>
-			<i className="far fa-question-circle fa-lg" />
-		</button>)
-
-		tippy(headerTooltipBtn, {
-			content: ,
-		});
+		this.rootElem.appendChild(<h6>Pre-Pull Action List</h6>);
 
 		new ListPicker<Player<any>, APLPrepullAction>(container, player, {
 			extraCssClasses: ['apl-prepull-action-picker'],
