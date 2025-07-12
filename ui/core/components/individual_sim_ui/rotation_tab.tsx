@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { ref } from 'tsx-vanilla';
 
+import i18n from '../../../i18n/config';
 import * as Tooltips from '../../constants/tooltips';
 import { IndividualSimUI, InputSection } from '../../individual_sim_ui';
 import { Player } from '../../player';
@@ -30,7 +31,7 @@ export class RotationTab extends SimTab {
 	readonly aplTab: HTMLElement;
 
 	constructor(parentElem: HTMLElement, simUI: IndividualSimUI<any>) {
-		super(parentElem, simUI, { identifier: 'rotation-tab', title: 'Rotation' });
+		super(parentElem, simUI, { identifier: 'rotation-tab', title: i18n.t('rotation.title') });
 		this.simUI = simUI;
 
 		this.autoTab = (<div className="rotation-tab rotation-tab-auto" />) as HTMLElement;
