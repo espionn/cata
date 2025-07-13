@@ -9,14 +9,15 @@ export class TooltipButton extends Component {
 				<i className="far fa-question-circle" />
 			</button>
 		) as HTMLElement;
+		button.classList.add(...extraCssClasses);
 
 		super(parent, 'tooltip-button', button);
 
-		button.classList.add(...extraCssClasses);
-
-		tippy(button, {
+		const tippyInstance = tippy(button, {
 			content: tooltip,
 			allowHTML: true,
 		});
+
+		this.addOnDisposeCallback(() => tippyInstance?.destroy());
 	}
 }

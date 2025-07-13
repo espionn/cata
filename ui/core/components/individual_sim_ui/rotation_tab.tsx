@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { ref } from 'tsx-vanilla';
 
 import i18n from '../../../i18n/config';
 import * as Tooltips from '../../constants/tooltips';

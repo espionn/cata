@@ -63,6 +63,7 @@ export class APLActionPicker extends Input<Player<any>, APLAction> {
 
 	constructor(parent: HTMLElement, player: Player<any>, config: APLActionPickerConfig) {
 		super(parent, 'apl-action-picker-root', player, config);
+
 		this.conditionPicker = new AplValues.APLValuePicker(this.rootElem, this.modObject, {
 			label: 'If:',
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,

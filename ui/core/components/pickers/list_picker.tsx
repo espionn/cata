@@ -8,6 +8,7 @@ import { ActionId } from '../../proto_utils/action_id';
 import { EventID, TypedEvent } from '../../typed_event.js';
 import { existsInDOM } from '../../utils';
 import { Input, InputConfig } from '../input.js';
+import { TooltipButton } from '../tooltip_button';
 
 export type ListItemAction = 'create' | 'delete' | 'move' | 'copy';
 
@@ -79,12 +80,10 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 		this.config = { ...DEFAULT_CONFIG, ...config };
 		this.itemPickerPairs = [];
 
-		this.rootElem.appendChild(
-			<>
-				{config.title && <label className="list-picker-title form-label">{config.title}</label>}
-				<div className="list-picker-items"></div>
-			</>,
-		);
+		if (config.title) {
+			this.rootElem.appendChild(<label className="list-picker-title form-label">{config.title}</label>);
+		}
+		this.itemsDiv = this.rootElem.appendChild(<div className="list-picker-items hide" />) as HTMLElement;
 
 		if (this.config.hideUi) {
 			this.rootElem.classList.add('d-none');
@@ -95,13 +94,12 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 		}
 
 		if (this.config.titleTooltip) {
-			const titleTooltip = tippy(this.rootElem.querySelector('.list-picker-title') as HTMLElement, {
-				content: this.config.titleTooltip,
-			});
-			this.addOnDisposeCallback(() => titleTooltip?.destroy());
+			new TooltipButton(
+				this.rootElem.querySelector('.list-picker-title') as HTMLElement,
+				this.config.titleTooltip,
+				['ms-2'],
+			);
 		}
-
-		this.itemsDiv = this.rootElem.getElementsByClassName('list-picker-items')[0] as HTMLElement;
 
 		if (this.actionEnabled('create')) {
 			let newItemButton: HTMLElement | null = null;
@@ -154,6 +152,12 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 			for (let i = 0; i < numToAdd; i++) {
 				this.addNewPicker();
 			}
+		}
+
+		if (newValue.length === 0) {
+			this.itemsDiv.classList.add('hide');
+		} else if (this.itemsDiv.classList.contains('hide')) {
+			this.itemsDiv.classList.remove('hide');
 		}
 
 		// Set all the values.
@@ -458,12 +462,12 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 
 					const srcIdx = curDragData.item.idx;
 					let dstIdx = index;
-					
+
 					const targetRect = itemContainer.getBoundingClientRect();
 					if (event.clientY > targetRect.top + targetRect.height / 2) {
 						dstIdx++;
 					}
-					
+
 					const newList = this.config.getValue(this.modObject);
 					let arrElem;
 

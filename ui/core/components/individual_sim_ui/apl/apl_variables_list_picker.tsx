@@ -7,18 +7,16 @@ import { Component } from "../../component";
 import { Input } from "../../input";
 import { ListItemPickerConfig, ListPicker } from "../../pickers/list_picker";
 import { AdaptiveStringPicker } from "../../pickers/string_picker";
-import { TooltipButton } from "../../tooltip_button";
 import { APLValuePicker } from "../apl_values";
 
 export class APLVariablesListPicker extends Component {
 	constructor(container: HTMLElement, player: Player<any>) {
 		super(container, 'apl-variables-list-picker');
 
-		const header = this.rootElem.appendChild(<h6>{i18n.t('rotation.apl.variables.header')}</h6>) as HTMLElement;
-		new TooltipButton(header, i18n.t('rotation.apl.variables.tooltip'), ['ms-2']);
-
 		new ListPicker<Player<any>, APLValueVariable>(this.rootElem, player, {
-			extraCssClasses: ['apl-value-variables-picker'],
+			title: i18n.t('rotation.apl.variables.header'),
+			titleTooltip: i18n.t('rotation.apl.variables.tooltips.overview'),
+			extraCssClasses: ['apl-list-item-picker', 'apl-value-variables-picker'],
 			itemLabel: i18n.t('rotation.apl.variables.name'),
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: (player: Player<any>) => player.aplRotation.valueVariables || [],
@@ -30,10 +28,10 @@ export class APLVariablesListPicker extends Component {
 			copyItem: (oldItem: APLValueVariable) => this.copyValueVariable(oldItem),
 			newItemPicker: (
 				parent: HTMLElement,
-				listPicker: ListPicker<Player<any>, APLValueVariable>,
+				_: ListPicker<Player<any>, APLValueVariable>,
 				index: number,
 				config: ListItemPickerConfig<Player<any>, APLValueVariable>,
-			) => new APLValueVariablePicker(parent, player, listPicker, index, config),
+			) => new APLValueVariablePicker(parent, player, index, config),
 			allowedActions: ['create', 'copy', 'delete', 'move'],
 			actions: {
 				create: {
@@ -69,22 +67,24 @@ class APLValueVariablePicker extends Input<Player<any>, APLValueVariable> {
 	constructor(
 		parent: HTMLElement,
 		player: Player<any>,
-		listPicker: ListPicker<Player<any>, APLValueVariable>,
 		index: number,
 		config: ListItemPickerConfig<Player<any>, APLValueVariable>,
 	) {
 		super(parent, 'apl-value-variable-picker-root', player, config);
+		this.rootElem.classList.add('apl-list-item-picker-root');
+
 		this.config = config;
 		this.modObject = player;
 		this.index = index;
 
-		// Add consistent layout styling
-		this.rootElem.classList.add('d-flex', 'flex-column', 'gap-2');
+		const container = this.rootElem.appendChild(<div className="apl-action-picker-root" />) as HTMLElement;
 
-		this.namePicker = new AdaptiveStringPicker(this.rootElem, player, {
+		this.namePicker = new AdaptiveStringPicker(container, player, {
 			id: randomUUID(),
-			label: 'Name',
-			labelTooltip: 'Name of the variable (e.g., "my_dot_remains", "boss_health_pct")',
+			label: i18n.t('rotation.apl.variables.attributes.name'),
+			labelTooltip: i18n.t('rotation.apl.variables.attributes.nameTooltip'),
+			extraCssClasses: ['apl-variable-name-picker'],
+			inline: true,
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: () => this.getSourceValue().name,
 			setValue: (eventID: EventID, player: Player<any>, newValue: string) => {
@@ -94,10 +94,10 @@ class APLValueVariablePicker extends Input<Player<any>, APLValueVariable> {
 			},
 		});
 
-		this.valuePicker = new APLValuePicker(this.rootElem, player, {
+		this.valuePicker = new APLValuePicker(container, player, {
 			id: randomUUID(),
-			label: 'Value',
-			labelTooltip: 'The value expression that this variable represents',
+			label: i18n.t('rotation.apl.variables.attributes.value'),
+			labelTooltip: i18n.t('rotation.apl.variables.attributes.valueTooltip'),
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: () => this.getSourceValue().value,
 			setValue: (eventID: EventID, player: Player<any>, newValue: any) => {

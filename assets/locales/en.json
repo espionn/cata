@@ -156,20 +156,32 @@
 		"title": "Rotation",
 		"apl": {
 			"actionGroups": {
+				"attributes": {
+					"actions": "Actions",
+					"name": "Name"
+				},
 				"header": "Action Groups",
 				"name": "Action Group",
 				"newGroupName": "New Action Group",
-				"tooltip": "Groups of actions that can be referenced in the Action Priority List (APL). Useful for organizing your APL and reusing common action sequences. Actions are performed in order from top to bottom within a group."
+				"tooltips": {
+					"actions": "Actions in this group. These will be executed in order when the group is referenced.",
+					"name": "Name of this action group (e.g., 'careful_aim', 'cooldowns').",
+					"overview": "Groups of actions that can be referenced in the Action Priority List (APL). Useful for organizing your APL and reusing common action sequences. Actions are performed in order from top to bottom within a group."
+				}
 			},
 			"prePullActions": {
 				"header": "Pre-Pull Action List",
 				"name": "Pre-Pull Action",
-				"tooltip": "Actions executed before the fight starts, such as pre-pull buffs or potions."
+				"tooltips": {
+					"overview": "Actions executed before the fight starts, such as pre-pull buffs or potions."
+				}
 			},
 			"priorityList": {
 				"header": "Action Priority List (APL)",
 				"name": "Action",
-				"tooltip": "A list of actions representing your character's actions during the fight. The sim will evaluate the list from top (highest priority) to bottom (lowest priority) and choose the first valid action to take at any given time."
+				"tooltips": {
+					"overview": "A list of actions representing your character's actions during the fight. The sim will evaluate the list from top (highest priority) to bottom (lowest priority) and choose the first valid action to take at any given time."
+				}
 			},
 			"tabs": {
 				"actionGroups": "Action Groups",
@@ -177,11 +189,19 @@
 				"variables": "Variables"
 			},
 			"variables": {
+				"attributes": {
+					"name": "Name",
+					"value": "Value"
+				},
 				"copyName": "{variableName} (Copy)",
 				"header": "Variables",
 				"name": "Variable",
 				"newVariableName": "New Variable",
-				"tooltip": "Variables can be used to store complex conditions that can be referenced in the Action Priority List (APL). This is useful for storing dynamic values that change during the fight, such as cooldown timers or resource levels."
+				"tooltips": {
+					"name": "Name of the variable (e.g., 'my_dot_remains', 'boss_health_pct')",
+					"overview": "Variables can be used to store complex conditions that can be referenced in the Action Priority List (APL). This is useful for storing dynamic values that change during the fight, such as cooldown timers or resource levels.",
+					"value": "The value expression that this variable represents."
+				}
 			}
 		}
 	},

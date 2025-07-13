@@ -5,7 +5,6 @@ import { EventID } from "../../../typed_event";
 import { Component } from "../../component";
 import { Input } from "../../input";
 import { ListItemPickerConfig, ListPicker } from "../../pickers/list_picker";
-import { TooltipButton } from "../../tooltip_button";
 import { APLActionPicker } from "../apl_actions";
 import { APLHidePicker } from "./hide_picker";
 
@@ -13,10 +12,9 @@ export class APLPriorityListPicker extends Component{
 	constructor(container: HTMLElement, player: Player<any>) {
 		super(container, 'apl-priority-list-picker');
 
-		const header = this.rootElem.appendChild(<h6>{i18n.t('rotation.apl.priorityList.header')}</h6>) as HTMLElement;
-		new TooltipButton(header, i18n.t('rotation.apl.priorityList.tooltip'), ['ms-2']);
-
 		new ListPicker<Player<any>, APLListItem>(this.rootElem, player, {
+			title: i18n.t('rotation.apl.priorityList.header'),
+			titleTooltip: i18n.t('rotation.apl.priorityList.tooltips.overview'),
 			extraCssClasses: ['apl-list-item-picker'],
 			itemLabel: i18n.t('rotation.apl.priorityList.name'),
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,

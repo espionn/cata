@@ -7,7 +7,6 @@ import { Component } from "../../component";
 import { Input } from "../../input";
 import { ListItemPickerConfig, ListPicker } from "../../pickers/list_picker";
 import { AdaptiveStringPicker } from "../../pickers/string_picker";
-import { TooltipButton } from "../../tooltip_button";
 import { APLActionPicker } from "../apl_actions";
 import { APLValueImplStruct } from "../apl_values";
 import { APLHidePicker } from "./hide_picker";
@@ -16,11 +15,10 @@ export class APLPrePullListPicker extends Component{
 	constructor(container: HTMLElement, player: Player<any>) {
 		super(container, 'apl-pre-pull-list-picker');
 
-		const header = this.rootElem.appendChild(<h6>{i18n.t('rotation.apl.prePullActions.header')}</h6>) as HTMLElement;
-		new TooltipButton(header, i18n.t('rotation.apl.prePullActions.tooltip'), ['ms-2']);
-
 		new ListPicker<Player<any>, APLPrepullAction>(this.rootElem, player, {
-			extraCssClasses: ['apl-prepull-action-picker'],
+			title: i18n.t('rotation.apl.prePullActions.header'),
+			titleTooltip: i18n.t('rotation.apl.prePullActions.tooltips.overview'),
+			extraCssClasses: ['apl-list-item-picker', 'apl-prepull-action-picker'],
 			itemLabel: i18n.t('rotation.apl.prePullActions.name'),
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: (player: Player<any>) => player.aplRotation.prepullActions,
@@ -38,7 +36,7 @@ export class APLPrePullListPicker extends Component{
 			copyItem: (oldItem: APLPrepullAction) => APLPrepullAction.clone(oldItem),
 			newItemPicker: (
 				parent: HTMLElement,
-				listPicker: ListPicker<Player<any>, APLPrepullAction>,
+				_: ListPicker<Player<any>, APLPrepullAction>,
 				index: number,
 				config: ListItemPickerConfig<Player<any>, APLPrepullAction>,
 			) => new APLPrepullActionPicker(parent, player, config, index),
