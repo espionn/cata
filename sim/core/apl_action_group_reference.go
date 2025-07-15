@@ -18,6 +18,14 @@ func (rot *APLRotation) newActionGroupReference(config *proto.APLActionGroupRefe
 		return nil
 	}
 
+	fmt.Printf("Creating APLActionGroupReference with GroupName: '%s'\n", config.GroupName)
+
+	// Don't create group references with empty names
+	if config.GroupName == "" {
+		fmt.Println("Skipping group reference creation: GroupName is empty")
+		return nil
+	}
+
 	vars := make(map[string]*proto.APLValue)
 	for _, v := range config.Variables {
 		vars[v.Name] = v.Value
@@ -48,20 +56,36 @@ func (action *APLActionGroupReference) GetAPLValues() []APLValue {
 
 	var values []APLValue
 	for _, groupAction := range action.group.actions {
+		// Defensive check to prevent nil pointer dereference
+		if groupAction == nil {
+			continue
+		}
 		values = append(values, groupAction.GetAllAPLValues()...)
 	}
 	return values
 }
 
 func (action *APLActionGroupReference) Finalize(rot *APLRotation) {
+	fmt.Printf("Finalizing APLActionGroupReference with groupName: '%s'\n", action.groupName)
+
+	// Skip finalization if groupName is empty
+	if action.groupName == "" {
+		fmt.Println("Skipping finalization: groupName is empty")
+		return
+	}
+
 	// Find the referenced group
 	for _, group := range rot.groups {
 		if group.name == action.groupName {
+			fmt.Println("Found group:", group.name, action.groupName, action.group)
+			fmt.Println(group.name)
+			fmt.Println(action.groupName)
 			action.group = group
+			fmt.Println("Assigned group:", action.group.name)
 			break
 		}
 	}
-
+	fmt.Println("Finalized group:", action.groupName, action.group)
 	if action.group == nil {
 		rot.ValidationMessage(proto.LogLevel_Error, "Group reference '%s' not found", action.groupName)
 		return
@@ -80,11 +104,18 @@ func (action *APLActionGroupReference) Finalize(rot *APLRotation) {
 		}
 	}
 
-	// Check that all placeholders are set
+	// Check that all placeholders are set and provide detailed error messages
+	hasUnfilledPlaceholders := false
 	for name := range placeholders {
 		if _, ok := action.variables[name]; !ok {
-			rot.ValidationMessage(proto.LogLevel_Error, "Group '%s' requires variable '%s' to be set via Variable Placeholder", action.groupName, name)
+			rot.ValidationMessage(proto.LogLevel_Error, "Group '%s' requires variable placeholder '%s' to be filled with a variable", action.groupName, name)
+			hasUnfilledPlaceholders = true
 		}
+	}
+
+	// If there are unfilled placeholders, don't continue with finalization
+	if hasUnfilledPlaceholders {
+		return
 	}
 
 	// Replace placeholder values with provided variables

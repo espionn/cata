@@ -12,6 +12,11 @@ type APLAction struct {
 }
 
 func (action *APLAction) Finalize(rot *APLRotation) {
+	// Defensive check to prevent nil pointer dereference
+	if action == nil || action.impl == nil {
+		return
+	}
+
 	action.impl.Finalize(rot)
 	for _, value := range action.GetAllAPLValues() {
 		value.Finalize(rot)
@@ -28,6 +33,11 @@ func (action *APLAction) Execute(sim *Simulation) {
 
 // Returns this Action, along with all inner Actions.
 func (action *APLAction) GetAllActions() []*APLAction {
+	// Defensive check to prevent nil pointer dereference
+	if action == nil || action.impl == nil {
+		return nil
+	}
+
 	actions := action.impl.GetInnerActions()
 	actions = append(actions, action)
 	return actions
@@ -37,6 +47,11 @@ func (action *APLAction) GetAllActions() []*APLAction {
 func (action *APLAction) GetAllAPLValues() []APLValue {
 	var values []APLValue
 	for _, a := range action.GetAllActions() {
+		// Defensive check to prevent nil pointer dereference
+		if a == nil || a.impl == nil {
+			continue
+		}
+
 		unprocessed := a.impl.GetAPLValues()
 		if a.condition != nil {
 			unprocessed = append(unprocessed, a.condition)
@@ -45,6 +60,9 @@ func (action *APLAction) GetAllAPLValues() []APLValue {
 		for len(unprocessed) > 0 {
 			next := unprocessed[len(unprocessed)-1]
 			unprocessed = unprocessed[:len(unprocessed)-1]
+			if next == nil {
+				continue
+			}
 			values = append(values, next)
 			unprocessed = append(unprocessed, next.GetInnerValues()...)
 		}
@@ -123,22 +141,27 @@ func (rot *APLRotation) newAPLAction(config *proto.APLAction) *APLAction {
 		return nil
 	}
 
-	action := &APLAction{
-		condition: rot.coerceTo(rot.newAPLValue(config.Condition), proto.APLValueType_ValueTypeBool),
-		impl:      rot.newAPLActionImpl(config),
+	impl := rot.newAPLActionImpl(config)
+	if impl == nil {
+		// Don't create an action with a nil implementation
+		return nil
 	}
 
-	if action.impl == nil {
-		return nil
-	} else {
-		return action
+	action := &APLAction{
+		condition: rot.coerceTo(rot.newAPLValue(config.Condition), proto.APLValueType_ValueTypeBool),
+		impl:      impl,
 	}
+
+	return action
 }
 
 func (rot *APLRotation) newAPLActionImpl(config *proto.APLAction) APLActionImpl {
 	if config == nil {
+		fmt.Println("newAPLActionImpl called with nil config")
 		return nil
 	}
+
+	fmt.Printf("newAPLActionImpl called with action type: %T\n", config.Action)
 
 	customAction := rot.unit.Env.GetAgentFromUnit(rot.unit).NewAPLAction(rot, config)
 	if customAction != nil {

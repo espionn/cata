@@ -115,6 +115,32 @@ class APLGroupActionPicker extends Input<Player<any>, APLListItem> {
 		super(parent, 'apl-list-item-picker-root', player, config);
 		this.rootElem.classList.add('apl-list-item-picker-root');
 
+		// Add validation support just like Priority List picker
+		const itemHeaderElem = ListPicker.getItemHeaderElem(this);
+		const index = config.index || 0;
+		
+		// Find parent group index to get proper validation path
+		let groupIndex = 0;
+		let currentElem = parent.parentElement;
+		while (currentElem && !currentElem.classList.contains('apl-group-editor-root')) {
+			currentElem = currentElem.parentElement;
+		}
+		if (currentElem) {
+			const groupListElem = currentElem.parentElement;
+			if (groupListElem) {
+				const groupItems = Array.from(groupListElem.querySelectorAll('.apl-group-editor-root'));
+				groupIndex = groupItems.indexOf(currentElem);
+			}
+		}
+		
+		ListPicker.makeListItemValidations(itemHeaderElem, player, player => {
+			const groups = player.aplRotation.groups || [];
+			if (groupIndex < groups.length && groups[groupIndex].actions && index < groups[groupIndex].actions.length) {
+				return player.getCurrentStats().rotationStats?.groups?.[groupIndex]?.actions?.[index]?.validations || [];
+			}
+			return [];
+		});
+
 		this.actionPicker = new APLActionPicker(this.rootElem, this.modObject, {
 			changedEvent: () => this.modObject.rotationChangeEmitter,
 			getValue: () => this.getSourceValue()?.action || APLAction.create(),

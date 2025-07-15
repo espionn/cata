@@ -145,7 +145,7 @@ export class APLValuePicker extends Input<Player<any>, APLValue | undefined> {
 		super(parent, 'apl-value-picker-root', player, config);
 
 		const isPrepull = this.rootElem.closest('.apl-prepull-action-picker') != null;
-		const isGroup = this.rootElem.closest('.apl-group-actions-picker') != null;
+		const isGroup = this.rootElem.closest('.apl-group-list-picker') != null;
 
 		const allValueKinds = (Object.keys(valueKindFactories) as ValidAPLValueKind[]).filter(
 			(valueKind): valueKind is ValidAPLValueKind => (!!valueKind && valueKindFactories[valueKind].includeIf?.(player, isPrepull, isGroup)) ?? true,
@@ -1457,14 +1457,14 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 	}),
 	variableRef: inputBuilder({
 		label: 'Variable Reference',
-		submenu: ['Logic'],
+		submenu: ['Variables'],
 		shortDescription: 'Reference a named condition variable',
 		newValue: () => ({ name: '' }),
 		fields: [AplHelpers.variableNameFieldConfig('name')],
 	}),
 	variablePlaceholder: inputBuilder({
 		label: 'Variable Placeholder',
-		submenu: ['Groups'],
+		submenu: ['Variables'],
 		shortDescription: 'Placeholder value that gets replaced when group is referenced',
 		fullDescription: `
 			<p>Defines a placeholder value that must be set when this group is referenced. This allows groups to be parameterized.</p>
