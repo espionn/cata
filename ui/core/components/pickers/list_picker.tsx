@@ -112,7 +112,12 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 				});
 				this.addOnDisposeCallback(() => newButtonTooltip?.destroy());
 			} else {
-				newItemButton = (<button className="btn btn-primary">New {config.itemLabel}</button>) as HTMLButtonElement;
+				newItemButton = (
+					<button className="btn btn-primary">
+						<i className="fa fa-plus me-2" />
+						New {config.itemLabel}
+					</button>
+				) as HTMLButtonElement;
 			}
 			newItemButton.classList.add('list-picker-new-button');
 			newItemButton.addEventListener(

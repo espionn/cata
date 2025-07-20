@@ -1,4 +1,5 @@
 import i18n from "../../../../i18n/config";
+import { IndividualSimUI } from "../../../individual_sim_ui";
 import { Player } from "../../../player";
 import { APLAction, APLPrepullAction, APLValue } from "../../../proto/apl";
 import { EventID } from "../../../typed_event";
@@ -12,10 +13,10 @@ import { APLValueImplStruct } from "../apl_values";
 import { APLHidePicker } from "./hide_picker";
 
 export class APLPrePullListPicker extends Component{
-	constructor(container: HTMLElement, player: Player<any>) {
-		super(container, 'apl-pre-pull-list-picker');
+	constructor(container: HTMLElement, simUI: IndividualSimUI<any>) {
+		super(container, 'apl-pre-pull-list-picker-root');
 
-		new ListPicker<Player<any>, APLPrepullAction>(this.rootElem, player, {
+		new ListPicker<Player<any>, APLPrepullAction>(this.rootElem, simUI.player, {
 			title: i18n.t('rotation.apl.prePullActions.header'),
 			titleTooltip: i18n.t('rotation.apl.prePullActions.tooltips.overview'),
 			extraCssClasses: ['apl-list-item-picker', 'apl-prepull-action-picker'],
@@ -39,7 +40,7 @@ export class APLPrePullListPicker extends Component{
 				_: ListPicker<Player<any>, APLPrepullAction>,
 				index: number,
 				config: ListItemPickerConfig<Player<any>, APLPrepullAction>,
-			) => new APLPrepullActionPicker(parent, player, config, index),
+			) => new APLPrepullActionPicker(parent, simUI.player, config, index),
 			allowedActions: ['create', 'copy', 'delete', 'move'],
 			inlineMenuBar: true,
 		});
