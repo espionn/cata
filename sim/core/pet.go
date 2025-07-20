@@ -122,6 +122,10 @@ func NewPet(config PetConfig) Pet {
 	pet.AddStats(config.BaseStats)
 	pet.addUniversalStatDependencies()
 	pet.PseudoStats.InFrontOfTarget = config.Owner.PseudoStats.InFrontOfTarget
+
+	// Pre-allocate timeout action since it cannot be pooled.
+	pet.timeoutAction = &PendingAction{}
+
 	return pet
 }
 
@@ -290,7 +294,11 @@ func (pet *Pet) EnableWithTimeout(sim *Simulation, petAgent PetAgent, petDuratio
 }
 
 func (pet *Pet) SetTimeoutAction(sim *Simulation, duration time.Duration) {
-	pet.timeoutAction = sim.GetConsumedPendingActionFromPool()
+	if !pet.timeoutAction.consumed {
+		pet.timeoutAction.Cancel(sim)
+	}
+
+	pet.timeoutAction.cancelled = false
 	pet.timeoutAction.NextActionAt = sim.CurrentTime + duration
 	pet.timeoutAction.OnAction = pet.Disable
 	sim.AddPendingAction(pet.timeoutAction)
@@ -305,7 +313,7 @@ func (pet *Pet) enableDynamicMeleeSpeed(sim *Simulation) {
 		panic("Pet already present in dynamic melee speed pet list!")
 	}
 
-	if math.Abs(pet.inheritedMeleeSpeedMultiplier - 1) > 1e-14 {
+	if math.Abs(pet.inheritedMeleeSpeedMultiplier-1) > 1e-14 {
 		panic(fmt.Sprintf("Pet melee speed multiplier was not reset properly! Current inherited value = %.17f", pet.inheritedMeleeSpeedMultiplier))
 	}
 
@@ -330,7 +338,7 @@ func (pet *Pet) resetDynamicMeleeSpeed(sim *Simulation) {
 		panic("Pet not present in dynamic melee speed pet list!")
 	}
 
-	pet.dynamicMeleeSpeedInheritance(sim, 1 / pet.inheritedMeleeSpeedMultiplier)
+	pet.dynamicMeleeSpeedInheritance(sim, 1/pet.inheritedMeleeSpeedMultiplier)
 	pet.dynamicMeleeSpeedInheritance = nil
 }
 
@@ -339,7 +347,7 @@ func (pet *Pet) enableDynamicCastSpeed(sim *Simulation) {
 		panic("Pet already present in dynamic cast speed pet list!")
 	}
 
-	if math.Abs(pet.inheritedCastSpeedMultiplier - 1) > 1e-14 {
+	if math.Abs(pet.inheritedCastSpeedMultiplier-1) > 1e-14 {
 		panic(fmt.Sprintf("Pet cast speed multiplier was not reset properly! Current inherited value = %.17f", pet.inheritedCastSpeedMultiplier))
 	}
 
@@ -363,7 +371,7 @@ func (pet *Pet) resetDynamicCastSpeed(sim *Simulation) {
 		panic("Pet not present in dynamic cast speed pet list!")
 	}
 
-	pet.dynamicCastSpeedInheritance(sim, 1 / pet.inheritedCastSpeedMultiplier)
+	pet.dynamicCastSpeedInheritance(sim, 1/pet.inheritedCastSpeedMultiplier)
 	pet.dynamicCastSpeedInheritance = nil
 }
 
@@ -393,7 +401,7 @@ func (pet *Pet) Disable(sim *Simulation) {
 	// If a pet is immediately re-summoned it might try to use GCD, so we need to clear it.
 	pet.Hardcast = Hardcast{}
 
-	if (pet.timeoutAction != nil) && !pet.timeoutAction.consumed {
+	if !pet.timeoutAction.consumed {
 		pet.timeoutAction.Cancel(sim)
 	}
 
