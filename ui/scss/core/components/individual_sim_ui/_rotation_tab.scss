@@ -20,10 +20,21 @@
 		}
 	}
 
+	#rotation-tab-rotation-type {
+		padding: var(--spacer-3) 0;
+	}
+
 	.rotation-tab {
 		@extend .tab-pane-content-container;
 
 		width: 100%;
+	}
+
+	.rotation-tab-auto {
+		.tab-panel-left {
+			display: flex;
+			flex-direction: column;
+		}
 	}
 
 	.rotation-tab-simple {

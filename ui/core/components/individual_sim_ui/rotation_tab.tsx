@@ -24,6 +24,7 @@ import { APLPrePullListPicker } from './apl/pre_pull_list_picker';
 import { APLPriorityListPicker } from './apl/priority_list_picker';
 import { CooldownsPicker } from './cooldowns_picker';
 import { PresetConfigurationCategory, PresetConfigurationPicker } from './preset_configuration_picker';
+import { TextDropdownPicker } from '../pickers/dropdown_picker';
 
 export class RotationTab extends SimTab {
 	protected simUI: IndividualSimUI<any>;
@@ -64,6 +65,8 @@ export class RotationTab extends SimTab {
 		this.autoTab.appendChild(rightCol);
 
 		this.buildRotationTypePicker(leftCol);
+		leftCol.appendChild(<p>{i18n.t("rotation.auto.description")}</p>)
+
 		this.buildPresetConfigurationPicker(rightCol);
 		this.buildSavedDataPickers(rightCol);
 	}
@@ -73,7 +76,7 @@ export class RotationTab extends SimTab {
 			return;
 		}
 
-		const leftCol = (<div className="rotation-tab-col tab-panel-left" />) as HTMLElement;
+		const leftCol = (<div className="rotation-tab-col tab-panel-left tab-content" />) as HTMLElement;
 		const rightCol = (<div className="rotation-tab-col tab-panel-right" />) as HTMLElement;
 
 		this.simpleTab.appendChild(leftCol);
@@ -217,23 +220,18 @@ export class RotationTab extends SimTab {
 		const container = (<div className="rotation-type-container" />) as HTMLElement;
 		parent.appendChild(container);
 
-		new EnumPicker(container, this.simUI.player, {
-			extraCssClasses: ['w-auto'],
+		new TextDropdownPicker(container, this.simUI.player, {
 			id: 'rotation-tab-rotation-type',
-			label: '',
-			labelTooltip: 'Which set of options to use for specifying the rotation.',
-			inline: true,
-			flush: true,
-			values: this.simUI.player.hasSimpleRotationGenerator()
-				? [
-						{ value: APLRotationType.TypeAuto, name: 'Rotation Type: Auto' },
-						{ value: APLRotationType.TypeSimple, name: 'Rotation Type: Simple' },
-						{ value: APLRotationType.TypeAPL, name: 'Rotation Type: APL' },
-				  ]
-				: [
-						{ value: APLRotationType.TypeAuto, name: 'Rotation Type: Auto' },
-						{ value: APLRotationType.TypeAPL, name: 'Rotation Type: APL' },
-				  ],
+			defaultLabel: '',
+			values: this.simUI.player.hasSimpleRotationGenerator() ? [
+				{ value: APLRotationType.TypeAuto, label: 'Rotation Type: Auto' },
+				{ value: APLRotationType.TypeSimple, label: 'Rotation Type: Simple' },
+				{ value: APLRotationType.TypeAPL, label: 'Rotation Type: APL' },
+			]: [
+				{ value: APLRotationType.TypeAuto, label: 'Rotation Type: Auto' },
+				{ value: APLRotationType.TypeAPL, label: 'Rotation Type: APL' },
+			],
+			equals: (a, b) => a === b,
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: (player: Player<any>) => player.getRotationType(),
 			setValue: (eventID: EventID, player: Player<any>, newValue: number) => {

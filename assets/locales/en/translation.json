@@ -215,6 +215,9 @@
 				}
 			}
 		},
+		"auto": {
+			"description": "Automatically using a Saved Rotation based on your current settings."
+		},
 		"title": "Rotation"
 	},
 	"results": {
