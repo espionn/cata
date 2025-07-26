@@ -9,7 +9,6 @@ import (
 )
 
 func (moonkin *BalanceDruid) RegisterBalancePassives() {
-	moonkin.registerMoonkinForm()
 	moonkin.registerShootingStars()
 	moonkin.registerBalanceOfPower()
 	moonkin.registerEuphoria()
@@ -20,25 +19,6 @@ func (moonkin *BalanceDruid) RegisterBalancePassives() {
 	moonkin.registerTotalEclipse()
 	moonkin.registerLunarShower()
 	moonkin.registerNaturesGrace()
-}
-
-func (moonkin *BalanceDruid) registerMoonkinForm() {
-	moonkin.AddStaticMod(core.SpellModConfig{
-		School:     core.SpellSchoolArcane | core.SpellSchoolNature,
-		FloatValue: 0.2 + 0.1, // 2025-07-01 - Moonkin Form's damage increase to Nature and Arcane raised to 30% (was 20%).
-		Kind:       core.SpellMod_DamageDone_Pct,
-	})
-
-	moonkin.MultiplyStat(stats.Armor, 0.6)
-
-	core.MakePermanent(moonkin.RegisterAura(core.Aura{
-		Label: "Moonkin Form",
-		ActionID: core.ActionID{
-			SpellID: 24858,
-		},
-	}))
-
-	core.MakePermanent(core.MoonkinAura(&moonkin.Unit))
 }
 
 func (moonkin *BalanceDruid) registerShootingStars() {

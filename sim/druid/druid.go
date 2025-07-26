@@ -64,8 +64,9 @@ type Druid struct {
 	WildMushrooms         *DruidSpell
 	WildMushroomsDetonate *DruidSpell
 
-	CatForm  *DruidSpell
-	BearForm *DruidSpell
+	CatForm     *DruidSpell
+	BearForm    *DruidSpell
+	MoonkinForm *DruidSpell
 
 	BarkskinAura             *core.Aura
 	BearFormAura             *core.Aura
@@ -78,6 +79,7 @@ type Druid struct {
 	FrenziedRegenerationAura *core.Aura
 	LunarEclipseProcAura     *core.Aura
 	MightOfUrsocAura         *core.Aura
+	MoonkinFormAura          *core.Aura
 	ProwlAura                *core.Aura
 	SurvivalInstinctsAura    *core.Aura
 
