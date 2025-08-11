@@ -16,7 +16,7 @@
                     "$ref": "#/definitions/Sim"
                 },
                 "gear": {
-                    "$ref": "#/definitions/Export"
+                    "$ref": "#/definitions/Gear"
                 },
                 "settings": {
                     "$ref": "#/definitions/Export"
@@ -80,6 +80,9 @@
                 },
                 "stats": {
                     "$ref": "#/definitions/Stats"
+                },
+                "copy_button": {
+                    "$ref": "#/definitions/CopyButton"
                 }
             },
             "required": [
@@ -87,7 +90,8 @@
                 "phases",
                 "specs",
                 "stats",
-                "status"
+                "status",
+                "copy_button"
             ],
             "title": "Common"
         },
@@ -585,6 +589,23 @@
             ],
             "title": "Stats"
         },
+        "CopyButton": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "default_text": {
+                    "type": "string"
+                },
+                "copied": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "default_text",
+                "copied"
+            ],
+            "title": "CopyButton"
+        },
         "Status": {
             "type": "object",
             "additionalProperties": false,
@@ -622,6 +643,123 @@
                 "title"
             ],
             "title": "Export"
+        },
+        "Gear": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "gem_summary": {
+                    "$ref": "#/definitions/GemSummary"
+                },
+                "reforge_summary": {
+                    "$ref": "#/definitions/ReforgeSummary"
+                },
+                "reforge_success": {
+                    "$ref": "#/definitions/ReforgeSuccess"
+                },
+                "gear_sets": {
+                    "$ref": "#/definitions/GearSets"
+                }
+            },
+            "required": [
+                "title",
+                "gem_summary",
+                "reforge_summary",
+                "reforge_success",
+                "gear_sets"
+            ],
+            "title": "Gear"
+        },
+        "GemSummary": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "reset_gems": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title",
+                "reset_gems"
+            ],
+            "title": "GemSummary"
+        },
+        "ReforgeSummary": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "reset_reforges": {
+                    "type": "string"
+                },
+                "copy_to_reforge_lite": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title",
+                "reset_reforges",
+                "copy_to_reforge_lite"
+            ],
+            "title": "ReforgeSummary"
+        },
+        "ReforgeSuccess": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "removed_reforge": {
+                    "type": "string"
+                },
+                "no_changes": {
+                    "type": "string"
+                },
+                "copy_to_reforge_lite": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title",
+                "removed_reforge",
+                "no_changes",
+                "copy_to_reforge_lite"
+            ],
+            "title": "ReforgeSuccess"
+        },
+        "GearSets": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "gear_set": {
+                    "type": "string"
+                },
+                "gear_set_name": {
+                    "type": "string"
+                },
+                "save_gear_set": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title",
+                "gear_set",
+                "gear_set_name",
+                "save_gear_set"
+            ],
+            "title": "GearSets"
         },
         "Landing": {
             "type": "object",
@@ -690,6 +828,9 @@
                 },
                 "github": {
                     "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/InfoStatus"
                 }
             },
             "required": [
@@ -698,9 +839,48 @@
                 "github",
                 "known_issues",
                 "patreon",
-                "sim_options"
+                "sim_options",
+                "status"
             ],
             "title": "Info"
+        },
+        "InfoStatus": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "unlaunched": {
+                    "type": "string"
+                },
+                "alpha": {
+                    "type": "string"
+                },
+                "beta": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "alpha",
+                "beta",
+                "unlaunched"
+            ],
+            "title": "InfoStatus"
+        },
+        "SuggestReforges": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title",
+                "tooltip"
+            ],
+            "title": "SuggestReforges"
         },
         "Home": {
             "type": "object",
@@ -797,7 +977,7 @@
                     "$ref": "#/definitions/StatWeights"
                 },
                 "suggest_reforges": {
-                    "type": "string"
+                    "$ref": "#/definitions/SuggestReforges"
                 }
             },
             "required": [

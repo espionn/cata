@@ -8,7 +8,8 @@ import { UIEnchant as Enchant, UIGem as Gem } from '../../proto/ui';
 import { ActionId } from '../../proto_utils/action_id';
 import { getEnchantDescription } from '../../proto_utils/enchants';
 import { EquippedItem } from '../../proto_utils/equipped_item';
-import { shortSecondaryStatNames, slotNames } from '../../proto_utils/names';
+import { slotNames } from '../../proto_utils/names';
+import { translateStat } from '../../../i18n/localization';
 import { SimUI } from '../../sim_ui';
 import { EventID } from '../../typed_event';
 import { Component } from '../component';
@@ -189,8 +190,8 @@ export class ItemRenderer extends Component {
 
 		const reforgeData = newItem.withDynamicStats().getReforgeData();
 		if (reforgeData) {
-			const fromText = shortSecondaryStatNames.get(reforgeData.reforge?.fromStat);
-			const toText = shortSecondaryStatNames.get(reforgeData.reforge?.toStat);
+			const fromText = translateStat(reforgeData.reforge?.fromStat);
+			const toText = translateStat(reforgeData.reforge?.toStat);
 			this.reforgeElem.innerText = `Reforged ${Math.abs(reforgeData.fromAmount)} ${fromText} → ${reforgeData.toAmount} ${toText}`;
 			this.reforgeElem.classList.remove('hide');
 		} else {

@@ -18,6 +18,8 @@ export type SavedDataManagerConfig<ModObject, T> = {
 	setData: (eventID: EventID, modObject: ModObject, data: T) => void;
 	toJson: (a: T) => any;
 	fromJson: (obj: any) => T;
+	nameLabel?: string;
+	saveButtonText?: string;
 };
 
 export type SavedDataConfig<ModObject, T> = {
@@ -225,10 +227,10 @@ export class SavedDataManager<ModObject, T> extends Component {
 		const saveInputRef = ref<HTMLInputElement>();
 		const savedDataCreateFragment = (
 			<div className="saved-data-create-container">
-				<label className="form-label">{this.config.label} Name</label>
+				<label className="form-label">{this.config.label} {this.config.nameLabel || 'Name'}</label>
 				<input ref={saveInputRef} className="saved-data-save-input form-control" type="text" placeholder="Name" />
 				<button ref={saveButtonRef} className="saved-data-save-button btn btn-primary">
-					Save {this.config.label}
+					{this.config.saveButtonText || `Save ${this.config.label}`}
 				</button>
 			</div>
 		) as HTMLElement;

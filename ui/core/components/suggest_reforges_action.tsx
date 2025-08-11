@@ -12,9 +12,9 @@ import { UIGem as Gem, IndividualSimSettings, StatCapType } from '../proto/ui';
 import { ReforgeData } from '../proto_utils/equipped_item';
 import { Gear } from '../proto_utils/gear';
 import { gemMatchesSocket } from '../proto_utils/gems';
-import { shortSecondaryStatNames, slotNames, statCapTypeNames } from '../proto_utils/names';
+import { slotNames, statCapTypeNames } from '../proto_utils/names';
+import { translateStat } from '../../i18n/localization';
 import { pseudoStatIsCapped, StatCap, statIsCapped, Stats, UnitStat, UnitStatPresets } from '../proto_utils/stats';
-import { SpecTalents } from '../proto_utils/utils';
 import { Sim } from '../sim';
 import { ActionGroupItem } from '../sim_ui';
 import { EventID, TypedEvent } from '../typed_event';
@@ -209,7 +209,7 @@ export class ReforgeOptimizer {
 		this.enableBreakpointLimits = !!options?.enableBreakpointLimits;
 
 		const startReforgeOptimizationEntry: ActionGroupItem = {
-			label: i18n.t('sidebar.buttons.suggest_reforges'),
+			label: i18n.t('sidebar.buttons.suggest_reforges.title'),
 			cssClass: 'suggest-reforges-action-button flex-grow-1',
 			onClick: async ({ currentTarget }) => {
 				const button = currentTarget as HTMLButtonElement;
@@ -277,7 +277,7 @@ export class ReforgeOptimizer {
 
 		tippy(contextMenuButton, {
 			placement: 'bottom',
-			content: 'Change Reforge Optimizer settings',
+			content: i18n.t('sidebar.buttons.suggest_reforges.tooltip'),
 		});
 
 		this.buildContextMenu(contextMenuButton);
@@ -1525,21 +1525,21 @@ export class ReforgeOptimizer {
 		const copyButtonContainerRef = ref<HTMLDivElement>();
 		const changedReforgeMessage = (
 			<>
-				<p className="mb-0">The following items were reforged:</p>
+				<p className="mb-0">{i18n.t('gear.reforge_success.title')}</p>
 				<ul>
 					{[...changedSlots].map(([slot, reforge]) => {
 						if (reforge) {
 							const slotName = slotNames.get(slot);
 							const { fromStat, toStat } = reforge;
-							const fromText = shortSecondaryStatNames.get(fromStat);
-							const toText = shortSecondaryStatNames.get(toStat);
+							const fromText = translateStat(fromStat);
+							const toText = translateStat(toStat);
 							return (
 								<li>
 									{slotName}: {fromText} → {toText}
 								</li>
 							);
 						} else {
-							return <li>{slotNames.get(slot)}: Removed reforge</li>;
+							return <li>{slotNames.get(slot)}: {i18n.t('gear.reforge_success.removed_reforge')}</li>;
 						}
 					})}
 				</ul>
@@ -1553,13 +1553,13 @@ export class ReforgeOptimizer {
 				new CopyButton(copyButtonContainerRef.value!, {
 					extraCssClasses: ['btn-outline-primary'],
 					getContent: () => JSON.stringify(settingsExport),
-					text: 'Copy to Reforge Lite',
+					text: i18n.t('gear.reforge_success.copy_to_reforge_lite'),
 				});
 		}
 
 		new Toast({
 			variant: 'success',
-			body: hasReforgeChanges ? changedReforgeMessage : <>No reforge changes were made!</>,
+			body: hasReforgeChanges ? changedReforgeMessage : <>{i18n.t('gear.reforge_success.no_changes')}</>,
 			delay: hasReforgeChanges ? 5000 : 3000,
 		});
 	}

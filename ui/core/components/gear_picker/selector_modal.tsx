@@ -8,7 +8,8 @@ import { UIEnchant as Enchant, UIGem as Gem, UIItem as Item } from '../../proto/
 import { ActionId } from '../../proto_utils/action_id';
 import { EquippedItem, ReforgeData } from '../../proto_utils/equipped_item';
 import { gemMatchesSocket, getEmptyGemSocketIconUrl } from '../../proto_utils/gems';
-import { shortSecondaryStatNames, slotNames } from '../../proto_utils/names';
+import { slotNames } from '../../proto_utils/names';
+import { translateStat } from '../../../i18n/localization';
 import { Stats } from '../../proto_utils/stats';
 import { SimUI } from '../../sim_ui';
 import { EventID, TypedEvent } from '../../typed_event';
@@ -468,10 +469,10 @@ export default class SelectorModal extends BaseModal {
 					name: (
 						<div>
 							<span className="reforge-value negative">
-								{reforgeData.fromAmount} {shortSecondaryStatNames.get(reforgeData.fromStat)}
+								{reforgeData.fromAmount} {translateStat(reforgeData.fromStat)}
 							</span>
 							<span className="reforge-value positive">
-								+{reforgeData.toAmount} {shortSecondaryStatNames.get(reforgeData.toStat)}
+								+{reforgeData.toAmount} {translateStat(reforgeData.toStat)}
 							</span>
 						</div>
 					) as HTMLElement,

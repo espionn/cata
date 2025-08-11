@@ -287,13 +287,13 @@ export abstract class SimUI extends Component {
 		let statusStr = '';
 		switch (config.simStatus.status) {
 			case LaunchStatus.Unlaunched:
-				statusStr = 'This sim is a WORK IN PROGRESS. It is not fully developed and should not be used for general purposes.';
+				statusStr = i18n.t('info.status.unlaunched');
 				break;
 			case LaunchStatus.Alpha:
-				statusStr = 'This sim is in ALPHA. Bugs are expected; please let us know if you find one!';
+				statusStr = i18n.t('info.status.alpha');
 				break;
 			case LaunchStatus.Beta:
-				statusStr = 'This sim is in BETA. There may still be a few bugs; please let us know if you find one!';
+				statusStr = i18n.t('info.status.beta');
 				break;
 		}
 

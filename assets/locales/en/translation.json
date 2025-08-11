@@ -140,6 +140,10 @@
 			"melee_crit": "Melee Crit",
 			"melee_haste": "Melee Haste",
 			"ranged_haste": "Ranged Haste"
+		},
+		"copy_button": {
+			"default_text": "Copy to Clipboard",
+			"copied": "Copied"
 		}
 	},
 	"sim": {
@@ -147,7 +151,28 @@
 		"description": "{spec} {class} simulations for World of Warcraft® Mists of Pandaria Classic."
 	},
 	"gear": {
-		"title": "Gear"
+		"title": "Gear",
+		"gem_summary": {
+			"title": "Gem Summary",
+			"reset_gems": "Reset gems"
+		},
+		"reforge_summary": {
+			"title": "Reforge Summary",
+			"reset_reforges": "Reset Reforges",
+			"copy_to_reforge_lite": "Copy to Reforge Lite"
+		},
+		"reforge_success": {
+			"title": "The following items were reforged:",
+			"removed_reforge": "Removed reforge",
+			"no_changes": "No reforge changes were made!",
+			"copy_to_reforge_lite": "Copy to Reforge Lite"
+		},
+		"gear_sets": {
+			"title": "Gear Sets",
+			"gear_set": "Gear Set",
+			"gear_set_name": "Gear Set Name",
+			"save_gear_set": "Save Gear Set"
+		}
 	},
 	"settings": {
 		"title": "Settings"
@@ -173,7 +198,12 @@
 		"sim_options": "Sim Options",
 		"discord": "Join us on Discord",
 		"patreon": "Support us on Patreon",
-		"github": "Contribute on GitHub"
+		"github": "Contribute on GitHub",
+		"status": {
+			"unlaunched": "This sim is a WORK IN PROGRESS. It is not fully developed and should not be used for general purposes.",
+			"alpha": "This sim is in ALPHA. Bugs are expected; please let us know if you find one!",
+			"beta": "This sim is in BETA. There may still be a few bugs; please let us know if you find one!"
+		}
 	},
 	"sidebar": {
 		"iterations": "Iterations",
@@ -197,7 +227,10 @@
 					}
 				}
 			},
-			"suggest_reforges": "Suggest Reforges"
+			"suggest_reforges": {
+				"title": "Suggest Reforges",
+				"tooltip": "Change Reforge Optimizer settings"
+			}
 		},
 		"header": {
 			"title": "WoWSims - Mists of Pandaria",
