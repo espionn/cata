@@ -36,6 +36,9 @@
                 "export": {
                     "$ref": "#/definitions/Export"
                 },
+                "info": {
+                    "$ref": "#/definitions/Info"
+                },
                 "sidebar": {
                     "$ref": "#/definitions/Sidebar"
                 }
@@ -45,6 +48,7 @@
                 "export",
                 "gear",
                 "import",
+                "info",
                 "landing",
                 "results",
                 "rotation",
@@ -665,6 +669,39 @@
             ],
             "title": "LandingHeader"
         },
+        "Info": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "known_issues": {
+                    "type": "string"
+                },
+                "bug_report": {
+                    "type": "string"
+                },
+                "sim_options": {
+                    "type": "string"
+                },
+                "discord": {
+                    "type": "string"
+                },
+                "patreon": {
+                    "type": "string"
+                },
+                "github": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "bug_report",
+                "discord",
+                "github",
+                "known_issues",
+                "patreon",
+                "sim_options"
+            ],
+            "title": "Info"
+        },
         "Home": {
             "type": "object",
             "additionalProperties": false,
@@ -757,7 +794,7 @@
                     "type": "string"
                 },
                 "stat_weights": {
-                    "type": "string"
+                    "$ref": "#/definitions/StatWeights"
                 },
                 "suggest_reforges": {
                     "type": "string"
@@ -926,6 +963,99 @@
                 "title"
             ],
             "title": "Sim"
+        },
+        "StatWeights": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "ep_weights": {
+                    "$ref": "#/definitions/EpWeights"
+                }
+            },
+            "required": [
+                "ep_weights",
+                "title"
+            ],
+            "title": "StatWeights"
+        },
+        "EpWeights": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "use_custom": {
+                    "type": "string"
+                },
+                "description": {
+                    "$ref": "#/definitions/EpWeightsDescription"
+                },
+                "buttons": {
+                    "$ref": "#/definitions/EpWeightsButtons"
+                },
+                "options": {
+                    "$ref": "#/definitions/EpWeightsOptions"
+                }
+            },
+            "required": [
+                "buttons",
+                "description",
+                "options",
+                "use_custom"
+            ],
+            "title": "EpWeights"
+        },
+        "EpWeightsDescription": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "enable_modification": {
+                    "type": "string"
+                },
+                "modify_in_editor": {
+                    "type": "string"
+                },
+                "hard_cap_info": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "enable_modification",
+                "hard_cap_info",
+                "modify_in_editor"
+            ],
+            "title": "EpWeightsDescription"
+        },
+        "EpWeightsButtons": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "edit_weights": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "edit_weights"
+            ],
+            "title": "EpWeightsButtons"
+        },
+        "EpWeightsOptions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "include_gems": {
+                    "type": "string"
+                },
+                "freeze_item_slots": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "freeze_item_slots",
+                "include_gems"
+            ],
+            "title": "EpWeightsOptions"
         }
     }
 }

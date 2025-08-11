@@ -167,11 +167,36 @@
 	"export": {
 		"title": "Exporter"
 	},
+	"info": {
+		"known_issues": "Problèmes Connus",
+		"bug_report": "Signaler un bug ou Demander une fonctionnalité",
+		"sim_options": "Options de Simulation",
+		"discord": "Rejoignez-nous sur Discord",
+		"patreon": "Soutenez-nous sur Patreon",
+		"github": "Contribuer sur GitHub"
+	},
 	"sidebar": {
 		"iterations": "Itérations",
 		"buttons": {
 			"simulate": "Simuler",
-			"stat_weights": "Poids des Statistiques",
+			"stat_weights": {
+				"title": "Poids des Statistiques",
+				"ep_weights": {
+					"use_custom": "Utiliser des poids PE personnalisés",
+					"description": {
+						"enable_modification": "Ceci permettra la modification des poids PE par défaut et la définition de plafonds de statistiques personnalisés.",
+						"modify_in_editor": "Les poids PE peuvent être modifiés dans l'éditeur de Poids des Statistiques.",
+						"hard_cap_info": "Si vous voulez plafonner une statistique, assurez-vous de définir le PE de cette statistique plus haut."
+					},
+					"buttons": {
+						"edit_weights": "Modifier les poids"
+					},
+					"options": {
+						"include_gems": "Inclure les gemmes",
+						"freeze_item_slots": "Verrouiller les emplacements d'objets"
+					}
+				}
+			},
 			"suggest_reforges": "Suggérer des Reforges"
 		},
 		"header": {

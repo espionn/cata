@@ -167,11 +167,36 @@
 	"export": {
 		"title": "Export"
 	},
+	"info": {
+		"known_issues": "Known Issues",
+		"bug_report": "Report a bug or Request a feature",
+		"sim_options": "Sim Options",
+		"discord": "Join us on Discord",
+		"patreon": "Support us on Patreon",
+		"github": "Contribute on GitHub"
+	},
 	"sidebar": {
 		"iterations": "Iterations",
 		"buttons": {
 			"simulate": "Simulate",
-			"stat_weights": "Stat Weights",
+			"stat_weights": {
+				"title": "Stat Weights",
+				"ep_weights": {
+					"use_custom": "Use custom EP Weights",
+					"description": {
+						"enable_modification": "This will enable modification of the default EP weights and setting custom stat caps.",
+						"modify_in_editor": "Ep weights can be modified in the Stat Weights editor.",
+						"hard_cap_info": "If you want to hard cap a stat make sure to put the EP for that stat higher."
+					},
+					"buttons": {
+						"edit_weights": "Edit weights"
+					},
+					"options": {
+						"include_gems": "Include gems",
+						"freeze_item_slots": "Freeze item slots"
+					}
+				}
+			},
 			"suggest_reforges": "Suggest Reforges"
 		},
 		"header": {

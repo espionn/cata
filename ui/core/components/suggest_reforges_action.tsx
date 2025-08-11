@@ -471,7 +471,7 @@ export class ReforgeOptimizer {
 			onShow: instance => {
 				const useCustomEPValuesInput = new BooleanPicker(null, this.player, {
 					id: 'reforge-optimizer-enable-custom-ep-weights',
-					label: 'Use custom EP Weights',
+					label: i18n.t('sidebar.buttons.stat_weights.ep_weights.use_custom'),
 					inline: true,
 					changedEvent: () => this.sim.useCustomEPValuesChangeEmitter,
 					getValue: () => this.sim.getUseCustomEPValues(),
@@ -533,7 +533,7 @@ export class ReforgeOptimizer {
 
 				const includeGemsInput = new BooleanPicker(null, this.player, {
 					id: 'reforge-optimizer-include-gems',
-					label: 'Include gems',
+					label: i18n.t('sidebar.buttons.stat_weights.ep_weights.options.include_gems'),
 					labelTooltip:
 						'Optimize gems and Reforges simultaneously.',
 					inline: true,
@@ -546,7 +546,7 @@ export class ReforgeOptimizer {
 
 				const freezeItemSlotsInput = new BooleanPicker(null, this.player, {
 					id: 'reforge-optimizer-freeze-item-slots',
-					label: 'Freeze item slots',
+					label: i18n.t('sidebar.buttons.stat_weights.ep_weights.options.freeze_item_slots'),
 					labelTooltip:
 						'Flag one or more item slots to be "frozen", which will prevent the optimizer from changing the Reforge or gems in that slot from their current settings. This can be useful for hybrid classes who use the same gear piece for multiple raid roles.',
 					inline: true,
@@ -562,9 +562,9 @@ export class ReforgeOptimizer {
 					<>
 						{useCustomEPValuesInput.rootElem}
 						<div ref={descriptionRef} className={clsx('mb-0', this.sim.getUseCustomEPValues() && 'hide')}>
-							<p>This will enable modification of the default EP weights and setting custom stat caps.</p>
-							<p>Ep weights can be modified in the Stat Weights editor.</p>
-							<p>If you want to hard cap a stat make sure to put the EP for that stat higher.</p>
+							<p>{i18n.t('sidebar.buttons.stat_weights.ep_weights.description.enable_modification')}</p>
+							<p>{i18n.t('sidebar.buttons.stat_weights.ep_weights.description.modify_in_editor')}</p>
+							<p>{i18n.t('sidebar.buttons.stat_weights.ep_weights.description.hard_cap_info')}</p>
 						</div>
 						{this.buildCapsList({
 							useCustomEPValuesInput: useCustomEPValuesInput,
@@ -806,7 +806,7 @@ export class ReforgeOptimizer {
 							this.simUI.epWeightsModal?.open();
 							hideAll();
 						}}>
-						Edit weights
+						{i18n.t('sidebar.buttons.stat_weights.ep_weights.buttons.edit_weights')}
 					</button>
 				)}
 			</>

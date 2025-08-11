@@ -133,7 +133,7 @@ export class StatWeightActionSettings {
 
 export const addStatWeightsAction = (simUI: IndividualSimUI<any>, settings: StatWeightActionSettings) => {
 	const epWeightsModal = new EpWeightsMenu(simUI, settings);
-	simUI.addAction(i18n.t('sidebar.buttons.stat_weights'), 'ep-weights-action', () => {
+	simUI.addAction(i18n.t('sidebar.buttons.stat_weights.title'), 'ep-weights-action', () => {
 		epWeightsModal.open();
 	});
 
