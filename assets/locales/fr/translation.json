@@ -252,26 +252,49 @@
 		"title": "Paramètres",
 		"raid_buffs": {
 			"title": "Buffs de Raid",
-			"tooltip": "Buffs fournis par d'autres membres du groupe/raid.",
+			"tooltip": "Buffs fournis par <strong>d'autres</strong> membres du groupe/raid.",
 			"description": "Tous les buffs/debuffs de raid sélectionnés sont supposés être fournis par d'autres membres du raid que le joueur simulé.",
 			"misc": {
 				"label": "Divers"
-			}
+			},
+			"stats": "Stats",
+			"attack_power": "Puissance d'Attaque",
+			"attack_speed": "Vitesse d'Attaque",
+			"spell_power": "Puissance des Sorts",
+			"spell_haste": "Hâte des Sorts",
+			"crit_percent": "Crit %",
+			"mastery": "Maîtrise",
+			"stamina": "Endurance"
 		},
 		"external_damage_cooldowns": {
 			"title": "Cooldowns de Dégâts Externes",
-			"tooltip": "Cooldowns de dégâts majeurs fournis par d'autres membres du groupe/raid."
+			"tooltip": "Cooldowns de dégâts majeurs fournis par <strong>d'autres</strong> membres du groupe/raid.",
+			"bloodlust": "Furie Sanguinaire",
+			"skull_banner": "Bannière du Crâne",
+			"stormlash_totem": "Totem de Fouet de Tempête",
+			"tricks_of_the_trade": "Ruses du Métier",
+			"unholy_frenzy": "Frénésie Impie",
+			"shattering_throw": "Lancer Brisant"
 		},
 		"external_defensive_cooldowns": {
 			"title": "Cooldowns Défensifs Externes",
-			"tooltip": "Cooldowns défensifs majeurs fournis par d'autres membres du groupe/raid."
+			"tooltip": "Cooldowns défensifs majeurs fournis par <strong>d'autres</strong> membres du groupe/raid.",
+			"vigilance": "Vigilance",
+			"devotion_aura": "Aura de Dévotion",
+			"pain_suppression": "Suppression de la Douleur",
+			"rallying_cry": "Cri de Ralliement"
 		},
 		"debuffs": {
 			"title": "Debuffs",
 			"tooltip": "Debuffs appliqués par d'autres membres du raid.",
 			"misc": {
 				"label": "Divers"
-			}
+			},
+			"armor_reduction": "Réduction d'Armure",
+			"phys_dmg_reduction": "Réduction Dégâts Phys",
+			"cast_speed": "Vitesse de Sort",
+			"phys_dmg": "Dégâts Phys",
+			"spell_dmg": "Dégâts de Sort"
 		},
 		"other": {
 			"title": "Autre",

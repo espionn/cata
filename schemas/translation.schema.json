@@ -895,10 +895,10 @@
 					"$ref": "#/definitions/RaidBuffsSection"
 				},
 				"external_damage_cooldowns": {
-					"$ref": "#/definitions/InputField"
+					"$ref": "#/definitions/ExternalDamageCooldownsSection"
 				},
 				"external_defensive_cooldowns": {
-					"$ref": "#/definitions/InputField"
+					"$ref": "#/definitions/ExternalDefensiveCooldownsSection"
 				},
 				"debuffs": {
 					"$ref": "#/definitions/DebuffsSection"
@@ -1205,9 +1205,33 @@
 				},
 				"misc": {
 					"$ref": "#/definitions/InputField"
+				},
+				"stats": {
+					"type": "string"
+				},
+				"attack_power": {
+					"type": "string"
+				},
+				"attack_speed": {
+					"type": "string"
+				},
+				"spell_power": {
+					"type": "string"
+				},
+				"spell_haste": {
+					"type": "string"
+				},
+				"crit_percent": {
+					"type": "string"
+				},
+				"mastery": {
+					"type": "string"
+				},
+				"stamina": {
+					"type": "string"
 				}
 			},
-			"required": ["title", "tooltip", "description", "misc"],
+			"required": ["title", "tooltip", "description", "misc", "stats", "attack_power", "attack_speed", "spell_power", "spell_haste", "crit_percent", "mastery", "stamina"],
 			"title": "RaidBuffsSection"
 		},
 		"DebuffsSection": {
@@ -1222,10 +1246,83 @@
 				},
 				"misc": {
 					"$ref": "#/definitions/InputField"
+				},
+				"armor_reduction": {
+					"type": "string"
+				},
+				"phys_dmg_reduction": {
+					"type": "string"
+				},
+				"cast_speed": {
+					"type": "string"
+				},
+				"phys_dmg": {
+					"type": "string"
+				},
+				"spell_dmg": {
+					"type": "string"
 				}
 			},
-			"required": ["title", "tooltip", "misc"],
+			"required": ["title", "tooltip", "misc", "armor_reduction", "phys_dmg_reduction", "cast_speed", "phys_dmg", "spell_dmg"],
 			"title": "DebuffsSection"
+		},
+		"ExternalDamageCooldownsSection": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"tooltip": {
+					"type": "string"
+				},
+				"bloodlust": {
+					"type": "string"
+				},
+				"skull_banner": {
+					"type": "string"
+				},
+				"stormlash_totem": {
+					"type": "string"
+				},
+				"tricks_of_the_trade": {
+					"type": "string"
+				},
+				"unholy_frenzy": {
+					"type": "string"
+				},
+				"shattering_throw": {
+					"type": "string"
+				}
+			},
+			"required": ["title", "tooltip", "bloodlust", "skull_banner", "stormlash_totem", "tricks_of_the_trade", "unholy_frenzy", "shattering_throw"],
+			"title": "ExternalDamageCooldownsSection"
+		},
+		"ExternalDefensiveCooldownsSection": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"tooltip": {
+					"type": "string"
+				},
+				"vigilance": {
+					"type": "string"
+				},
+				"devotion_aura": {
+					"type": "string"
+				},
+				"pain_suppression": {
+					"type": "string"
+				},
+				"rallying_cry": {
+					"type": "string"
+				}
+			},
+			"required": ["title", "tooltip", "vigilance", "devotion_aura", "pain_suppression", "rallying_cry"],
+			"title": "ExternalDefensiveCooldownsSection"
 		},
 		"InfoOptions": {
 			"type": "object",

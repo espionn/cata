@@ -1,5 +1,4 @@
 import i18n from '../../../i18n/config';
-import * as Tooltips from '../../constants/tooltips.js';
 import { Encounter } from '../../encounter.js';
 import { IndividualSimUI, InputSection } from '../../individual_sim_ui.jsx';
 import { ConsumesSpec, Debuffs, HealingModel, IndividualBuffs, ItemSwap, PartyBuffs, Profession, RaidBuffs } from '../../proto/common.js';

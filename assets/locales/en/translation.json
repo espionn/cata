@@ -252,26 +252,49 @@
 		"title": "Settings",
 		"raid_buffs": {
 			"title": "Raid Buffs",
-			"tooltip": "Buffs provided by other party/raid members.",
+			"tooltip": "Buffs provided by <strong>other</strong> party/raid members.",
 			"description": "All raid buffs/debuffs selected are assumed to be provided by other raid members than the simulated player.",
 			"misc": {
 				"label": "Misc"
-			}
+			},
+			"stats": "Stats",
+			"attack_power": "Attack Power",
+			"attack_speed": "Attack Speed",
+			"spell_power": "Spell Power",
+			"spell_haste": "Spell Haste",
+			"crit_percent": "Crit %",
+			"mastery": "Mastery",
+			"stamina": "Stamina"
 		},
 		"external_damage_cooldowns": {
 			"title": "External Damage Cooldowns",
-			"tooltip": "Major damage cooldowns provided by other party/raid members."
+			"tooltip": "Major damage cooldowns provided by <strong>other</strong> party/raid members.",
+			"bloodlust": "Bloodlust",
+			"skull_banner": "Skull Banner",
+			"stormlash_totem": "Stormlash Totem",
+			"tricks_of_the_trade": "Tricks of the Trade",
+			"unholy_frenzy": "Unholy Frenzy",
+			"shattering_throw": "Shattering Throw"
 		},
 		"external_defensive_cooldowns": {
 			"title": "External Defensive Cooldowns",
-			"tooltip": "Major defensive cooldowns provided by other party/raid members."
+			"tooltip": "Major defensive cooldowns provided by <strong>other</strong> party/raid members.",
+			"vigilance": "Vigilance",
+			"devotion_aura": "Devotion Aura",
+			"pain_suppression": "Pain Suppression",
+			"rallying_cry": "Rallying Cry"
 		},
 		"debuffs": {
 			"title": "Debuffs",
 			"tooltip": "Debuffs applied by other raid members.",
 			"misc": {
 				"label": "Misc"
-			}
+			},
+			"armor_reduction": "Armor Reduction",
+			"phys_dmg_reduction": "Phys Dmg Reduction",
+			"cast_speed": "Cast Speed",
+			"phys_dmg": "Phys Dmg",
+			"spell_dmg": "Spell Dmg"
 		},
 		"other": {
 			"title": "Other",
