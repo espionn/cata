@@ -4,7 +4,7 @@ import { Encounter } from '../../encounter.js';
 import { IndividualSimUI, InputSection } from '../../individual_sim_ui.jsx';
 import { ConsumesSpec, Debuffs, HealingModel, IndividualBuffs, ItemSwap, PartyBuffs, Profession, RaidBuffs } from '../../proto/common.js';
 import { SavedEncounter, SavedSettings } from '../../proto/ui.js';
-import { professionNames, raceNames } from '../../proto_utils/names.js';
+import { translateRace, translateProfession } from '../../../i18n/localization.js';
 import { Stats } from '../../proto_utils/stats.js';
 import { EventID, TypedEvent } from '../../typed_event.js';
 import { getEnumValues } from '../../utils.js';
@@ -115,7 +115,7 @@ export class SettingsTab extends SimTab {
 			label: i18n.t('settings.player.race'),
 			values: races.map(race => {
 				return {
-					name: raceNames.get(race)!,
+					name: translateRace(race),
 					value: race,
 				};
 			}),
@@ -137,7 +137,7 @@ export class SettingsTab extends SimTab {
 			label: i18n.t('settings.player.profession_1'),
 			values: professions.map(p => {
 				return {
-					name: professionNames.get(p)!,
+					name: translateProfession(p),
 					value: p,
 				};
 			}),
@@ -151,7 +151,7 @@ export class SettingsTab extends SimTab {
 			label: i18n.t('settings.player.profession_2'),
 			values: professions.map(p => {
 				return {
-					name: professionNames.get(p)!,
+					name: translateProfession(p),
 					value: p,
 				};
 			}),

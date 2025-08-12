@@ -96,6 +96,12 @@
                 },
                 "mob_types": {
                     "$ref": "#/definitions/MobTypes"
+                },
+                "races": {
+                    "$ref": "#/definitions/Races"
+                },
+                "professions": {
+                    "$ref": "#/definitions/Professions"
                 }
             },
             "required": [
@@ -108,7 +114,9 @@
                 "status",
                 "copy_button",
                 "list_picker",
-                "mob_types"
+                "mob_types",
+                "races",
+                "professions"
             ],
             "title": "Common"
         },
@@ -804,6 +812,136 @@
                 "undead"
             ],
             "title": "MobTypes"
+        },
+        "Races": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "unknown": {
+                    "type": "string"
+                },
+                "blood_elf": {
+                    "type": "string"
+                },
+                "draenei": {
+                    "type": "string"
+                },
+                "dwarf": {
+                    "type": "string"
+                },
+                "gnome": {
+                    "type": "string"
+                },
+                "goblin": {
+                    "type": "string"
+                },
+                "human": {
+                    "type": "string"
+                },
+                "night_elf": {
+                    "type": "string"
+                },
+                "orc": {
+                    "type": "string"
+                },
+                "alliance_pandaren": {
+                    "type": "string"
+                },
+                "horde_pandaren": {
+                    "type": "string"
+                },
+                "tauren": {
+                    "type": "string"
+                },
+                "troll": {
+                    "type": "string"
+                },
+                "undead": {
+                    "type": "string"
+                },
+                "worgen": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "unknown",
+                "blood_elf",
+                "draenei",
+                "dwarf",
+                "gnome",
+                "goblin",
+                "human",
+                "night_elf",
+                "orc",
+                "alliance_pandaren",
+                "horde_pandaren",
+                "tauren",
+                "troll",
+                "undead",
+                "worgen"
+            ],
+            "title": "Races"
+        },
+        "Professions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "unknown": {
+                    "type": "string"
+                },
+                "alchemy": {
+                    "type": "string"
+                },
+                "blacksmithing": {
+                    "type": "string"
+                },
+                "enchanting": {
+                    "type": "string"
+                },
+                "engineering": {
+                    "type": "string"
+                },
+                "herbalism": {
+                    "type": "string"
+                },
+                "inscription": {
+                    "type": "string"
+                },
+                "jewelcrafting": {
+                    "type": "string"
+                },
+                "leatherworking": {
+                    "type": "string"
+                },
+                "mining": {
+                    "type": "string"
+                },
+                "skinning": {
+                    "type": "string"
+                },
+                "tailoring": {
+                    "type": "string"
+                },
+                "archeology": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "unknown",
+                "alchemy",
+                "blacksmithing",
+                "enchanting",
+                "engineering",
+                "herbalism",
+                "inscription",
+                "jewelcrafting",
+                "leatherworking",
+                "mining",
+                "skinning",
+                "tailoring",
+                "archeology"
+            ],
+            "title": "Professions"
         },
         "Status": {
             "type": "object",

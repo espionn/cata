@@ -1,5 +1,5 @@
 import { LaunchStatus } from '../core/launched_sims';
-import { Class, MobType, PseudoStat, Spec, Stat, SpellSchool } from '../core/proto/common';
+import { Class, MobType, PseudoStat, Race, Profession, Spec, Stat, SpellSchool } from '../core/proto/common';
 import i18n from './config';
 
 export const statI18nKeys: Record<Stat, string> = {
@@ -150,6 +150,40 @@ export const mobTypeI18nKeys: Record<MobType, string> = {
 	[MobType.MobTypeUndead]: 'undead',
 };
 
+export const raceI18nKeys: Record<Race, string> = {
+	[Race.RaceUnknown]: 'unknown',
+	[Race.RaceBloodElf]: 'blood_elf',
+	[Race.RaceDraenei]: 'draenei',
+	[Race.RaceDwarf]: 'dwarf',
+	[Race.RaceGnome]: 'gnome',
+	[Race.RaceGoblin]: 'goblin',
+	[Race.RaceHuman]: 'human',
+	[Race.RaceNightElf]: 'night_elf',
+	[Race.RaceOrc]: 'orc',
+	[Race.RaceAlliancePandaren]: 'alliance_pandaren',
+	[Race.RaceHordePandaren]: 'horde_pandaren',
+	[Race.RaceTauren]: 'tauren',
+	[Race.RaceTroll]: 'troll',
+	[Race.RaceUndead]: 'undead',
+	[Race.RaceWorgen]: 'worgen',
+};
+
+export const professionI18nKeys: Record<Profession, string> = {
+	[Profession.ProfessionUnknown]: 'unknown',
+	[Profession.Alchemy]: 'alchemy',
+	[Profession.Blacksmithing]: 'blacksmithing',
+	[Profession.Enchanting]: 'enchanting',
+	[Profession.Engineering]: 'engineering',
+	[Profession.Herbalism]: 'herbalism',
+	[Profession.Inscription]: 'inscription',
+	[Profession.Jewelcrafting]: 'jewelcrafting',
+	[Profession.Leatherworking]: 'leatherworking',
+	[Profession.Mining]: 'mining',
+	[Profession.Skinning]: 'skinning',
+	[Profession.Tailoring]: 'tailoring',
+	[Profession.Archeology]: 'archeology',
+};
+
 export const translateStat = (stat: Stat): string => {
 	const key = statI18nKeys[stat] || Stat[stat].toLowerCase();
 	return i18n.t(`common.stats.${key}`);
@@ -198,4 +232,22 @@ export function getMobTypeI18nKey(mobType: MobType): string {
 export const translateMobType = (mobType: MobType): string => {
 	const key = getMobTypeI18nKey(mobType);
 	return i18n.t(`common.mob_types.${key}`);
+};
+
+export function getRaceI18nKey(race: Race): string {
+	return raceI18nKeys[race] || Race[race].toLowerCase();
+}
+
+export const translateRace = (race: Race): string => {
+	const key = getRaceI18nKey(race);
+	return i18n.t(`common.races.${key}`);
+};
+
+export function getProfessionI18nKey(profession: Profession): string {
+	return professionI18nKeys[profession] || Profession[profession].toLowerCase();
+}
+
+export const translateProfession = (profession: Profession): string => {
+	const key = getProfessionI18nKey(profession);
+	return i18n.t(`common.professions.${key}`);
 };

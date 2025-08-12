@@ -1,8 +1,8 @@
 import { PlayerClass } from '../core/player_class';
 import { PlayerSpec } from '../core/player_spec';
-import { MobType, PseudoStat, SpellSchool, Stat } from '../core/proto/common';
+import { MobType, PseudoStat, Race, Profession, SpellSchool, Stat } from '../core/proto/common';
 import i18n from './config';
-import { getClassI18nKey, getMobTypeI18nKey, getSpecI18nKey, getTargetInputI18nKey, pseudoStatI18nKeys, spellSchoolI18nKeys, statI18nKeys } from './entity_mapping';
+import { getClassI18nKey, getMobTypeI18nKey, getRaceI18nKey, getProfessionI18nKey, getSpecI18nKey, getTargetInputI18nKey, pseudoStatI18nKeys, spellSchoolI18nKeys, statI18nKeys } from './entity_mapping';
 import { getLang, setLang, supportedLanguages } from './locale_service';
 
 /**
@@ -84,6 +84,32 @@ export const translateMobType = (mobType: MobType): string => {
 		return translated;
 	} catch {
 		return MobType[mobType];
+	}
+};
+
+export const translateRace = (race: Race): string => {
+	try {
+		const key = getRaceI18nKey(race);
+		const translated = i18n.t(`common.races.${key}`);
+		if (translated === `common.races.${key}`) {
+			return Race[race];
+		}
+		return translated;
+	} catch {
+		return Race[race];
+	}
+};
+
+export const translateProfession = (profession: Profession): string => {
+	try {
+		const key = getProfessionI18nKey(profession);
+		const translated = i18n.t(`common.professions.${key}`);
+		if (translated === `common.professions.${key}`) {
+			return Profession[profession];
+		}
+		return translated;
+	} catch {
+		return Profession[profession];
 	}
 };
 

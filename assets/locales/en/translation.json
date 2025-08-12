@@ -114,6 +114,38 @@
 			"mechanical": "Mechanical",
 			"undead": "Undead"
 		},
+		"races": {
+			"unknown": "None",
+			"blood_elf": "Blood Elf",
+			"draenei": "Draenei",
+			"dwarf": "Dwarf",
+			"gnome": "Gnome",
+			"goblin": "Goblin",
+			"human": "Human",
+			"night_elf": "Night Elf",
+			"orc": "Orc",
+			"alliance_pandaren": "Pandaren (A)",
+			"horde_pandaren": "Pandaren (H)",
+			"tauren": "Tauren",
+			"troll": "Troll",
+			"undead": "Undead",
+			"worgen": "Worgen"
+		},
+		"professions": {
+			"unknown": "None",
+			"alchemy": "Alchemy",
+			"blacksmithing": "Blacksmithing",
+			"enchanting": "Enchanting",
+			"engineering": "Engineering",
+			"herbalism": "Herbalism",
+			"inscription": "Inscription",
+			"jewelcrafting": "Jewelcrafting",
+			"leatherworking": "Leatherworking",
+			"mining": "Mining",
+			"skinning": "Skinning",
+			"tailoring": "Tailoring",
+			"archeology": "Archeology"
+		},
 		"spell_schools": {
 			"physical": "Physical",
 			"arcane": "Arcane",
