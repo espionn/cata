@@ -21,13 +21,8 @@
 		}
 	},
 	"common": {
-		"tank_assignment_values": {
-			"none": "None",
-			"main_tank": "Main Tank",
-			"tank_2": "Tank 2",
-			"tank_3": "Tank 3",
-			"tank_4": "Tank 4"
-		},
+		"none": "None",
+		"custom": "Custom",
 		"phases": {
 			"1": "Phase 1 (T14)",
 			"2": "Phase 2 (T15)",
@@ -273,7 +268,6 @@
 				"label": "Tank Assignment",
 				"tooltip": "Determines which mobs will be tanked. Most mobs default to targeting the Main Tank, but in preset multi-target encounters this is not always true.",
 				"values": {
-					"none": "None",
 					"main_tank": "Main Tank",
 					"tank_2": "Tank 2",
 					"tank_3": "Tank 3",
@@ -491,15 +485,6 @@
 			"suppress_dodge": "Suppress Dodge",
 			"second_tank_index": "Second Tank Index",
 			"disabled_at_start": "Disabled at Start",
-			"target_input": "Target Input",
-			"frenzy_time": {
-				"label": "Frenzy time",
-				"tooltip": "Simulation time (in seconds) at which to disable tank swaps and enable the boss Frenzy buff"
-			},
-			"spiritual_grasp_frequency": {
-				"label": "Spiritual Grasp frequency",
-				"tooltip": "Average time (in seconds) between Spiritual Grasp hits, following an exponential distribution"
-			},
 			"custom": "Custom",
 			"none": "None",
 			"tank": {

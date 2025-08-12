@@ -21,6 +21,8 @@
 		}
 	},
 	"common": {
+		"none": "Aucun",
+		"custom": "Personnalisé",
 		"phases": {
 			"1": "Phase 1 (T14)",
 			"2": "Phase 2 (T15)",
@@ -265,13 +267,12 @@
 				"tank_assignment": {
 					"label": "Attribution de tank",
 					"tooltip": "Détermine quels mobs seront tankés. La plupart des mobs ciblent par défaut le Tank Principal, mais dans les rencontres multi-cibles prédéfinies ce n'est pas toujours vrai.",
-					"values": {
-						"none": "Aucun",
-						"main_tank": "Tank Principal",
-						"tank_2": "Tank 2",
-						"tank_3": "Tank 3",
-						"tank_4": "Tank 4"
-					}
+									"values": {
+					"main_tank": "Tank Principal",
+					"tank_2": "Tank 2",
+					"tank_3": "Tank 3",
+					"tank_4": "Tank 4"
+				}
 				},
 				"incoming_hps": {
 					"label": "HPS entrant",

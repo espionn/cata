@@ -5,6 +5,7 @@ import { Sim } from '../../sim.js';
 import { EventID } from '../../typed_event.js';
 import { BooleanPicker } from '../pickers/boolean_picker.js';
 import { EnumPicker } from '../pickers/enum_picker.js';
+import i18n from '../../../i18n/config.js';
 
 export function makeShow1hWeaponsSelector(parent: HTMLElement, sim: Sim): BooleanPicker<Sim> {
 	parent.classList.remove('hide');
@@ -159,11 +160,11 @@ export const TankAssignment = {
 	labelTooltip:
 		'Determines which mobs will be tanked. Most mobs default to targeting the Main Tank, but in preset multi-target encounters this is not always true.',
 	values: [
-		{ name: 'None', value: -1 },
-		{ name: 'Main Tank', value: 0 },
-		{ name: 'Tank 2', value: 1 },
-		{ name: 'Tank 3', value: 2 },
-		{ name: 'Tank 4', value: 3 },
+		{ name: i18n.t('common.none'), value: -1 },
+		{ name: i18n.t('settings.other.tank_assignment.values.main_tank'), value: 0 },
+		{ name: i18n.t('settings.other.tank_assignment.values.tank_2'), value: 1 },
+		{ name: i18n.t('settings.other.tank_assignment.values.tank_3'), value: 2 },
+		{ name: i18n.t('settings.other.tank_assignment.values.tank_4'), value: 3 },
 	],
 	changedEvent: (player: Player<any>) => player.getRaid()!.tanksChangeEmitter,
 	getValue: (player: Player<any>) => (player.getRaid()?.getTanks() || []).findIndex(tank => UnitReference.equals(tank, player.makeUnitReference())),

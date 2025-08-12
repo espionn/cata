@@ -53,11 +53,11 @@ export class EncounterPicker extends Component {
 
 			const presetEncounters = modEncounter.sim.db.getAllPresetEncounters();
 			new EnumPicker<Encounter>(this.rootElem, modEncounter, {
-				id: 'encounter-preset-encouter',
-				label: i18n.t('settings.encounter.encounter_preset.label'),
-				//extraCssClasses: ['encounter-picker', 'mb-0', 'pe-2', 'order-first'],
-				extraCssClasses: ['damage-metrics', 'npc-picker'],
-				values: [{ name: 'Custom', value: -1 }].concat(
+			id: 'encounter-preset-encouter',
+			label: i18n.t('settings.encounter.encounter_preset.label'),
+			//extraCssClasses: ['encounter-picker', 'mb-0', 'pe-2', 'order-first'],
+			extraCssClasses: ['damage-metrics', 'npc-picker'],
+			values: [{ name: i18n.t('common.custom'), value: -1 }].concat(
 					presetEncounters.map((pe, i) => {
 						return {
 							name: pe.path,
@@ -297,7 +297,7 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 			extraCssClasses: ['npc-picker'],
 			label: i18n.t('settings.encounter.npc.label'),
 			labelTooltip: i18n.t('settings.encounter.npc.tooltip'),
-			values: [{ name: 'Custom', value: -1 }].concat(
+			values: [{ name: i18n.t('common.custom'), value: -1 }].concat(
 				presetTargets.map((pe, i) => {
 					return {
 						name: pe.path,
@@ -320,7 +320,7 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 			extraCssClasses: ['ai-picker'],
 			label: i18n.t('settings.encounter.ai.label'),
 			labelTooltip: i18n.t('settings.encounter.ai.tooltip'),
-			values: [{ name: i18n.t('settings.encounter.none'), value: 0 }].concat(
+			values: [{ name: i18n.t('common.none'), value: 0 }].concat(
 				presetTargets.map(pe => {
 					return {
 						name: pe.path,
@@ -375,7 +375,7 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 			label: i18n.t('settings.encounter.tanked_by.label'),
 			labelTooltip: i18n.t('settings.encounter.tanked_by.tooltip'),
 			values: [
-				{ name: i18n.t('settings.encounter.none'), value: -1 },
+				{ name: i18n.t('common.none'), value: -1 },
 				{ name: i18n.t('settings.encounter.tank.main_tank'), value: 0 },
 				{ name: i18n.t('settings.encounter.tank.tank_2'), value: 1 },
 				{ name: i18n.t('settings.encounter.tank.tank_3'), value: 2 },

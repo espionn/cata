@@ -63,6 +63,12 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
+                "none": {
+                    "type": "string"
+                },
+                "custom": {
+                    "type": "string"
+                },
                 "phases": {
                     "type": "object",
                     "additionalProperties": {
@@ -101,6 +107,8 @@
                 }
             },
             "required": [
+                "none",
+                "custom",
                 "classes",
                 "phases",
                 "specs",
@@ -532,29 +540,7 @@
             "title": "TargetInputField"
         },
         "Tank": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "main_tank": {
-                    "type": "string"
-                },
-                "tank_2": {
-                    "type": "string"
-                },
-                "tank_3": {
-                    "type": "string"
-                },
-                "tank_4": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "main_tank",
-                "tank_2",
-                "tank_3",
-                "tank_4"
-            ],
-            "title": "Tank"
+            "$ref": "#/definitions/TankAssignmentValues"
         },
         "Stats": {
             "type": "object",
@@ -1338,9 +1324,6 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "none": {
-                    "type": "string"
-                },
                 "main_tank": {
                     "type": "string"
                 },
@@ -1355,7 +1338,6 @@
                 }
             },
             "required": [
-                "none",
                 "main_tank",
                 "tank_2",
                 "tank_3",
