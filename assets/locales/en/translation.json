@@ -301,7 +301,8 @@
 			"tooltip": "Buffs provided by <strong>other</strong> party/raid members.",
 			"description": "All raid buffs/debuffs selected are assumed to be provided by other raid members than the simulated player.",
 			"misc": {
-				"label": "Misc"
+				"label": "Misc",
+				"tooltip": "Miscellaneous raid buffs"
 			},
 			"stats": "Stats",
 			"attack_power": "Attack Power",
@@ -334,7 +335,8 @@
 			"title": "Debuffs",
 			"tooltip": "Debuffs applied by other raid members.",
 			"misc": {
-				"label": "Misc"
+				"label": "Misc",
+				"tooltip": "Miscellaneous debuffs"
 			},
 			"armor_reduction": "Armor Reduction",
 			"phys_dmg_reduction": "Phys Dmg Reduction",
@@ -761,6 +763,41 @@
 						"include_gems": "Include gems",
 						"freeze_item_slots": "Freeze item slots"
 					}
+				},
+				"modal": {
+					"title": "Calculate Stat Weights",
+					"ep": "EP",
+					"weights": "Weights",
+					"show_all_stats": "Show All Stats",
+					"dps_tps_reference": "DPS/TPS reference:",
+					"healing_reference": "Healing reference:",
+					"mitigation_reference": "Mitigation reference:",
+					"reference_description": "The above stat selectors control which reference stat is used for EP normalisation for the different EP columns.",
+					"current_ep_description": "The 'Current EP' column displays the values currently used by the item pickers to sort items.",
+					"copy_icon_description": "Use the copy icon above the EPs to use newly calculated EPs.",
+					"stat": "Stat",
+					"update": "Update",
+					"ep_ratio": "EP Ratio",
+					"update_ep": "Update EP",
+					"calculate": "Calculate",
+					"compute_weighted_ep": "Compute Weighted EP",
+					"dps_weight": "DPS Weight",
+					"dps_ep": "DPS EP",
+					"hps_weight": "HPS Weight",
+					"hps_ep": "HPS EP",
+					"tps_weight": "TPS Weight",
+					"tps_ep": "TPS EP",
+					"dtps_weight": "DTPS Weight",
+					"dtps_ep": "DTPS EP",
+					"tmi_weight": "TMI Weight",
+					"tmi_ep": "TMI EP",
+					"death_weight": "Death Weight",
+					"death_ep": "Death EP",
+					"current_ep": "Current EP",
+					"not_applicable": "N/A"
+				},
+				"saved_ep_weights": {
+					"title": "Saved EP weights"
 				}
 			},
 			"suggest_reforges": {

@@ -302,7 +302,8 @@
 			"tooltip": "Buffs fournis par <strong>d'autres</strong> membres du groupe/raid.",
 			"description": "Tous les buffs/debuffs de raid sélectionnés sont supposés être fournis par d'autres membres du raid que le joueur simulé.",
 			"misc": {
-				"label": "Divers"
+				"label": "Divers",
+				"tooltip": "Buffs de raid divers"
 			},
 			"stats": "Stats",
 			"attack_power": "Puissance d'Attaque",
@@ -335,7 +336,8 @@
 			"title": "Debuffs",
 			"tooltip": "Debuffs appliqués par d'autres membres du raid.",
 			"misc": {
-				"label": "Divers"
+				"label": "Divers",
+				"tooltip": "Debuffs divers"
 			},
 			"armor_reduction": "Réduction d'Armure",
 			"phys_dmg_reduction": "Réduction Dégâts Phys",
@@ -762,6 +764,41 @@
 						"include_gems": "Inclure les gemmes",
 						"freeze_item_slots": "Verrouiller les emplacements d'objets"
 					}
+				},
+				"modal": {
+					"title": "Calculer les Poids des Statistiques",
+					"ep": "PE",
+					"weights": "Poids",
+					"show_all_stats": "Afficher Toutes les Statistiques",
+					"dps_tps_reference": "Référence DPS/TPS :",
+					"healing_reference": "Référence de soins :",
+					"mitigation_reference": "Référence d'atténuation :",
+					"reference_description": "Les sélecteurs de statistiques ci-dessus contrôlent quelle statistique de référence est utilisée pour la normalisation PE des différentes colonnes PE.",
+					"current_ep_description": "La colonne 'PE Actuel' affiche les valeurs actuellement utilisées par les sélecteurs d'objets pour trier les objets.",
+					"copy_icon_description": "Utilisez l'icône de copie au-dessus des PE pour utiliser les PE nouvellement calculés.",
+					"stat": "Statistique",
+					"update": "Mettre à jour",
+					"ep_ratio": "Ratio PE",
+					"update_ep": "Mettre à jour PE",
+					"calculate": "Calculer",
+					"compute_weighted_ep": "Calculer PE Pondéré",
+					"dps_weight": "Poids DPS",
+					"dps_ep": "PE DPS",
+					"hps_weight": "Poids SPS",
+					"hps_ep": "PE SPS",
+					"tps_weight": "Poids TPS",
+					"tps_ep": "PE TPS",
+					"dtps_weight": "Poids DTPS",
+					"dtps_ep": "PE DTPS",
+					"tmi_weight": "Poids TMI",
+					"tmi_ep": "PE TMI",
+					"death_weight": "Poids Mort",
+					"death_ep": "PE Mort",
+					"current_ep": "PE Actuel",
+					"not_applicable": "N/A"
+				},
+				"saved_ep_weights": {
+					"title": "Poids PE Sauvegardés"
 				}
 			},
 			"suggest_reforges": {
