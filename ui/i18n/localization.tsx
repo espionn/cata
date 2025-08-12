@@ -3,7 +3,7 @@ import { PlayerSpec } from '../core/player_spec';
 import { ArmorType, MobType, PseudoStat, Race, Profession, SpellSchool, Stat, WeaponType, RangedWeaponType, Spec } from '../core/proto/common';
 import { RaidFilterOption, SourceFilterOption } from '../core/proto/ui';
 import i18n from './config';
-import { getClassI18nKey, getMobTypeI18nKey, getRaceI18nKey, getProfessionI18nKey, getSpecI18nKey, getTargetInputI18nKey, pseudoStatI18nKeys, spellSchoolI18nKeys, statI18nKeys, getSourceFilterI18nKey, getRaidFilterI18nKey, getArmorTypeI18nKey, getWeaponTypeI18nKey, getRangedWeaponTypeI18nKey, getMasterySpellNameI18nKey, aplItemLabelI18nKeys } from './entity_mapping';
+import { getClassI18nKey, getMobTypeI18nKey, getRaceI18nKey, getProfessionI18nKey, getSpecI18nKey, getTargetInputI18nKey, pseudoStatI18nKeys, spellSchoolI18nKeys, statI18nKeys, getSourceFilterI18nKey, getRaidFilterI18nKey, getArmorTypeI18nKey, getWeaponTypeI18nKey, getRangedWeaponTypeI18nKey, getMasterySpellNameI18nKey, aplItemLabelI18nKeys, backendMetricI18nKeys as resultMetricI18nKeys } from './entity_mapping';
 import { getLang, setLang, supportedLanguages } from './locale_service';
 
 /**
@@ -372,6 +372,25 @@ export const translateItemLabel = (itemLabel: string): string => {
 	} catch {
 		return itemLabel;
 	}
+};
+
+export const translateResultMetricLabel = (metricName: string): string => {
+	const cleanName = metricName.replace(/[O0]$/, '');
+	const key = resultMetricI18nKeys[cleanName] || resultMetricI18nKeys[metricName];
+	if (!key) return metricName;
+
+	const translated = i18n.t(`sidebar.results.metrics.${key}.label`);
+	return translated === `sidebar.results.metrics.${key}.label` ? metricName : translated;
+};
+
+export const translateResultMetricTooltip = (metricName: string): string => {
+	const cleanName = metricName.replace(/[O0]$/, '');
+	const key = resultMetricI18nKeys[cleanName] || resultMetricI18nKeys[metricName];
+	if (!key) return metricName;
+
+	const tooltipKey = (key === 'tmi' || key === 'cod') ? `${key}.tooltip.title` : `${key}.tooltip`;
+	const translated = i18n.t(`sidebar.results.metrics.${tooltipKey}`);
+	return translated === `sidebar.results.metrics.${tooltipKey}` ? metricName : translated;
 };
 
 /**

@@ -1848,6 +1848,67 @@
 			"title": "WoWSims - Mists of Pandaria",
 			"phase": "{{phase}} - {{status}}"
 		},
+		"results": {
+			"progress": {
+				"presim_running": "pré-simulations en cours",
+				"iterations_complete": "itérations terminées"
+			},
+			"reference": {
+				"save_as_reference": "Sauvegarder comme Référence",
+				"use_as_reference": "Utiliser comme référence",
+				"swap": "Échanger",
+				"swap_reference_with_current": "Échanger la référence avec l'actuel",
+				"cancel": "Annuler",
+				"remove_reference": "Supprimer la référence",
+				"vs_ref": "vs réf"
+			},
+			"metrics": {
+				"dps": {
+					"label": "DPS",
+					"tooltip": "Dégâts Par Seconde"
+				},
+				"hps": {
+					"label": "SPS",
+					"tooltip": "Soins+Boucliers Par Seconde, incluant les soins excessifs."
+				},
+				"tps": {
+					"label": "TPS",
+					"tooltip": "Menace Par Seconde"
+				},
+				"dtps": {
+					"label": "DTPS",
+					"tooltip": "Dégâts Subis Par Seconde"
+				},
+				"tmi": {
+					"label": "TMI",
+					"tooltip": {
+						"title": "Indice Theck-Meloree (TMI)",
+						"description": "Une mesure de la régularité des dégâts entrants qui combine les avantages de l'esquive avec la santé effective.",
+						"note": "Plus bas est mieux. Ceci représente le % de vos PV à attendre dans une fenêtre d'éclatement de 6 secondes basée sur les paramètres de rencontre."
+					}
+				},
+				"cod": {
+					"label": "Chance de Mort",
+					"tooltip": {
+						"title": "Chance de Mort",
+						"description": "Le pourcentage d'itérations dans lesquelles le joueur est mort, basé sur les dégâts entrants des ennemis et les soins entrants (voir les options SPS Entrants et Cadence de Soins).",
+						"note": "DTPS seul n'est pas une bonne mesure de la résistance car il n'est pas affecté par la santé et ignore les pics de dégâts. La Chance de Mort tente de capturer la résistance globale."
+					}
+				},
+				"dur": {
+					"label": "DUR",
+					"tooltip": "Durée Moyenne de Combat"
+				},
+				"tto": {
+					"label": "TTO",
+					"tooltip": "Temps Vers OOM"
+				},
+				"oom": {
+					"label": "OOM",
+					"tooltip": "Temps passé Hors de Mana"
+				}
+			}
+		},
 		"character_stats": {
 			"title": "Statistiques",
 			"melee_crit_cap": "Plafond de Critique Mêlée",

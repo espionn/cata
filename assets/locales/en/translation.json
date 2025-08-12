@@ -1848,6 +1848,67 @@
 			"title": "WoWSims - Mists of Pandaria",
 			"phase": "{{phase}} - {{status}}"
 		},
+		"results": {
+			"progress": {
+				"presim_running": "presimulations running",
+				"iterations_complete": "iterations complete"
+			},
+			"reference": {
+				"save_as_reference": "Save as Reference",
+				"use_as_reference": "Use as reference",
+				"swap": "Swap",
+				"swap_reference_with_current": "Swap reference with current",
+				"cancel": "Cancel",
+				"remove_reference": "Remove reference",
+				"vs_ref": "vs ref"
+			},
+			"metrics": {
+				"dps": {
+					"label": "DPS",
+					"tooltip": "Damage Per Second"
+				},
+				"hps": {
+					"label": "HPS",
+					"tooltip": "Healing+Shielding Per Second, including overhealing."
+				},
+				"tps": {
+					"label": "TPS",
+					"tooltip": "Threat Per Second"
+				},
+				"dtps": {
+					"label": "DTPS",
+					"tooltip": "Damage Taken Per Second"
+				},
+				"tmi": {
+					"label": "TMI",
+					"tooltip": {
+						"title": "Theck-Meloree Index (TMI)",
+						"description": "A measure of incoming damage smoothness which combines the benefits of avoidance with effective health.",
+						"note": "Lower is better. This represents the % of your HP to expect in a 6-second burst window based on the encounter settings."
+					}
+				},
+				"cod": {
+					"label": "Chance of Death",
+					"tooltip": {
+						"title": "Chance of Death",
+						"description": "The percentage of iterations in which the player died, based on incoming damage from the enemies and incoming healing (see the Incoming HPS and Healing Cadence options).",
+						"note": "DTPS alone is not a good measure of tankiness because it is not affected by health and ignores damage spikes. Chance of Death attempts to capture overall tankiness."
+					}
+				},
+				"dur": {
+					"label": "DUR",
+					"tooltip": "Average Fight Duration"
+				},
+				"tto": {
+					"label": "TTO",
+					"tooltip": "Time To OOM"
+				},
+				"oom": {
+					"label": "OOM",
+					"tooltip": "Time spent Out of Mana"
+				}
+			}
+		},
 		"character_stats": {
 			"title": "Stats",
 			"melee_crit_cap": "Melee Crit Cap",
