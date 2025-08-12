@@ -292,8 +292,10 @@ export class SettingsTab extends SimTab {
 
 	private buildSavedDataPickers() {
 		const savedEncounterManager = new SavedDataManager<Encounter, SavedEncounter>(this.rightPanel, this.simUI.sim.encounter, {
-			label: 'Encounter',
-			header: { title: 'Saved Encounters' },
+			label: i18n.t('settings.saved_encounters.encounter'),
+			header: { title: i18n.t('settings.saved_encounters.title') },
+			nameLabel: i18n.t('settings.saved_encounters.encounter_name'),
+			saveButtonText: i18n.t('settings.saved_encounters.save_encounter'),
 			storageKey: this.simUI.getSavedEncounterStorageKey(),
 			getData: (encounter: Encounter) => SavedEncounter.create({ encounter: encounter.toProto() }),
 			setData: (eventID: EventID, encounter: Encounter, newEncounter: SavedEncounter) => encounter.fromProto(eventID, newEncounter.encounter!),
@@ -304,8 +306,10 @@ export class SettingsTab extends SimTab {
 		});
 
 		const savedSettingsManager = new SavedDataManager<IndividualSimUI<any>, SavedSettings>(this.rightPanel, this.simUI, {
-			label: 'Settings',
-			header: { title: 'Saved Settings' },
+			label: i18n.t('settings.saved_settings.settings'),
+			header: { title: i18n.t('settings.saved_settings.title') },
+			nameLabel: i18n.t('settings.saved_settings.settings_name'),
+			saveButtonText: i18n.t('settings.saved_settings.save_settings'),
 			storageKey: this.simUI.getSavedSettingsStorageKey(),
 			getData: () => {
 				return this.getCurrentSavedSettings();

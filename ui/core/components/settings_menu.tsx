@@ -16,7 +16,7 @@ export class SettingsMenu extends BaseModal {
 	private readonly simUI: SimUI;
 
 	constructor(parent: HTMLElement, simUI: SimUI) {
-		super(parent, 'settings-menu', { title: i18n.t('settings.options.title'), footer: true, disposeOnClose: false });
+		super(parent, 'settings-menu', { title: i18n.t('info.options.title'), footer: true, disposeOnClose: false });
 		this.simUI = simUI;
 
 		const restoreDefaultsButton = ref<HTMLButtonElement>();
@@ -36,7 +36,7 @@ export class SettingsMenu extends BaseModal {
 					<div className="fixed-rng-seed-container">
 						<div ref={fixedRngSeed} className="fixed-rng-seed"></div>
 						<div className="form-text">
-							<span>{i18n.t('settings.options.fixed_rng_seed.last_used')}</span>&nbsp;
+							<span>{i18n.t('info.options.fixed_rng_seed.last_used')}</span>&nbsp;
 							<span ref={lastUsedRngSeed} className="last-used-rng-seed">
 								0
 							</span>
@@ -59,7 +59,7 @@ export class SettingsMenu extends BaseModal {
 
 		const footer = (
 			<button ref={restoreDefaultsButton} className="restore-defaults-button btn btn-primary">
-				Restore Defaults
+				{i18n.t('info.options.restore_defaults.button')}
 			</button>
 		);
 		if (this.footer) {
@@ -69,13 +69,13 @@ export class SettingsMenu extends BaseModal {
 
 		if (restoreDefaultsButton.value) {
 			tippy(restoreDefaultsButton.value, {
-				content: i18n.t('settings.options.restore_defaults.tooltip'),
+				content: i18n.t('info.options.restore_defaults.tooltip'),
 			});
 			restoreDefaultsButton.value.addEventListener('click', () => {
 				this.simUI.applyDefaults(TypedEvent.nextEventID());
 				new Toast({
 					variant: 'success',
-					body: i18n.t('settings.options.restore_defaults.success_message'),
+					body: i18n.t('info.options.restore_defaults.success_message'),
 				});
 			});
 		}
@@ -83,8 +83,8 @@ export class SettingsMenu extends BaseModal {
 		if (fixedRngSeed.value)
 			new NumberPicker(fixedRngSeed.value, this.simUI.sim, {
 				id: 'simui-fixed-rng-seed',
-				label: i18n.t('settings.options.fixed_rng_seed.label'),
-				labelTooltip: i18n.t('settings.options.fixed_rng_seed.tooltip'),
+				label: i18n.t('info.options.fixed_rng_seed.label'),
+				labelTooltip: i18n.t('info.options.fixed_rng_seed.tooltip'),
 				extraCssClasses: ['mb-0'],
 				changedEvent: (sim: Sim) => sim.fixedRngSeedChangeEmitter,
 				getValue: (sim: Sim) => sim.getFixedRngSeed(),
@@ -105,8 +105,8 @@ export class SettingsMenu extends BaseModal {
 			const defaultLang = langs.indexOf('en');
 			const languagePicker = new EnumPicker(language.value, this.simUI.sim, {
 				id: 'simui-language-picker',
-				label: i18n.t('settings.options.language.label'),
-				labelTooltip: i18n.t('settings.options.language.tooltip'),
+				label: i18n.t('info.options.language.label'),
+				labelTooltip: i18n.t('info.options.language.tooltip'),
 				values: langs.map((lang, i) => {
 					return {
 						name: supportedLanguages[lang],
@@ -130,7 +130,7 @@ export class SettingsMenu extends BaseModal {
 		if (showThreatMetrics.value)
 			new BooleanPicker(showThreatMetrics.value, this.simUI.sim, {
 				id: 'simui-show-threat-metrics',
-				label: i18n.t('settings.options.feature_toggles.show_threat_metrics'),
+				label: i18n.t('info.options.feature_toggles.show_threat_metrics'),
 				labelTooltip: 'Shows all options and metrics relevant to tanks, like TPS/DTPS.',
 				inline: true,
 				changedEvent: (sim: Sim) => sim.showThreatMetricsChangeEmitter,
@@ -143,7 +143,7 @@ export class SettingsMenu extends BaseModal {
 		if (showExperimental.value)
 			new BooleanPicker(showExperimental.value, this.simUI.sim, {
 				id: 'simui-show-experimental',
-				label: i18n.t('settings.options.feature_toggles.show_experimental'),
+				label: i18n.t('info.options.feature_toggles.show_experimental'),
 				labelTooltip: 'Shows experimental options, if there are any active experiments.',
 				inline: true,
 				changedEvent: (sim: Sim) => sim.showExperimentalChangeEmitter,
@@ -155,7 +155,7 @@ export class SettingsMenu extends BaseModal {
 		if (showQuickSwap.value)
 			new BooleanPicker(showQuickSwap.value, this.simUI.sim, {
 				id: 'simui-show-quick-swap',
-				label: i18n.t('settings.options.feature_toggles.show_quick_swap'),
+				label: i18n.t('info.options.feature_toggles.show_quick_swap'),
 				labelTooltip: 'Allows you to quickly swap between Gems/Enchants through your favorites. (Disabled on touch devices)',
 				inline: true,
 				changedEvent: (sim: Sim) => sim.showQuickSwapChangeEmitter,
@@ -173,7 +173,7 @@ export class SettingsMenu extends BaseModal {
 
 			new EnumPicker<Sim>(useConcurrentWorkers.value, this.simUI.sim, {
 				id: 'simui-concurrent-workers-picker',
-				label: i18n.t('settings.options.use_multiple_cpu_cores.label'),
+				label: i18n.t('info.options.use_multiple_cpu_cores.label'),
 				labelTooltip: 'Use web workers to spread sim workload over multiple CPU cores.',
 				changedEvent: (sim: Sim) => sim.wasmConcurrencyChangeEmitter,
 				getValue: (sim: Sim) => sim.getWasmConcurrency(),

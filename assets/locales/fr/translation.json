@@ -176,30 +176,17 @@
 	},
 	"settings": {
 		"title": "Paramètres",
-		"options": {
-			"title": "Options",
-			"fixed_rng_seed": {
-				"label": "Graine RNG Fixe",
-				"tooltip": "Valeur de graine pour le générateur de nombres aléatoires utilisé pendant les simulations, ou 0 pour utiliser une aléatoire différente à chaque exécution. Utilisez ceci pour partager des résultats de simulation exacts ou pour le débogage.",
-				"last_used": "Dernière graine RNG utilisée :"
-			},
-			"language": {
-				"label": "Langue",
-				"tooltip": "Contrôle la langue pour les infobulles Wowhead."
-			},
-			"feature_toggles": {
-				"show_threat_metrics": "Afficher les Options de Menace/Tank",
-				"show_experimental": "Afficher l'Expérimental",
-				"show_quick_swap": "Afficher l'interface de changement rapide"
-			},
-			"use_multiple_cpu_cores": {
-				"label": "Utiliser Plusieurs Cœurs CPU"
-			},
-			"restore_defaults": {
-				"button": "Restaurer les Défauts",
-				"tooltip": "Restaure tous les paramètres par défaut (équipement, consommables, buffs, talents, poids PE, etc). Les paramètres sauvegardés sont préservés.",
-				"success_message": "Paramètres par défaut restaurés."
-			}
+		"saved_encounters": {
+			"title": "Rencontres Sauvegardées",
+			"encounter": "Rencontre",
+			"encounter_name": "Nom de la Rencontre",
+			"save_encounter": "Sauvegarder la Rencontre"
+		},
+		"saved_settings": {
+			"title": "Paramètres Sauvegardés",
+			"settings": "Paramètres",
+			"settings_name": "Nom des Paramètres",
+			"save_settings": "Sauvegarder les Paramètres"
 		}
 	},
 	"talents": {
@@ -228,6 +215,31 @@
 			"unlaunched": "Cette simulation est EN COURS DE DÉVELOPPEMENT. Elle n'est pas entièrement développée et ne devrait pas être utilisée à des fins générales.",
 			"alpha": "Cette simulation est en ALPHA. Des bugs sont attendus ; merci de nous informer si vous en trouvez un !",
 			"beta": "Cette simulation est en BÊTA. Il peut encore y avoir quelques bugs ; merci de nous informer si vous en trouvez un !"
+		},
+		"options": {
+			"title": "Options",
+			"fixed_rng_seed": {
+				"label": "Graine RNG Fixe",
+				"tooltip": "Valeur de graine pour le générateur de nombres aléatoires utilisé pendant les simulations, ou 0 pour utiliser une aléatoire différente à chaque exécution. Utilisez ceci pour partager des résultats de simulation exacts ou pour le débogage.",
+				"last_used": "Dernière graine RNG utilisée :"
+			},
+			"language": {
+				"label": "Langue",
+				"tooltip": "Contrôle la langue pour les infobulles Wowhead."
+			},
+			"feature_toggles": {
+				"show_threat_metrics": "Afficher les Options de Menace/Tank",
+				"show_experimental": "Afficher l'Expérimental",
+				"show_quick_swap": "Afficher l'interface de changement rapide"
+			},
+			"use_multiple_cpu_cores": {
+				"label": "Utiliser Plusieurs Cœurs CPU"
+			},
+			"restore_defaults": {
+				"button": "Restaurer les Défauts",
+				"tooltip": "Restaure tous les paramètres par défaut (équipement, consommables, buffs, talents, poids PE, etc). Les paramètres sauvegardés sont préservés.",
+				"success_message": "Paramètres par défaut restaurés."
+			}
 		}
 	},
 	"sidebar": {

@@ -651,17 +651,21 @@
                 "title": {
                     "type": "string"
                 },
-                "options": {
-                    "$ref": "#/definitions/SettingsOptions"
+                "saved_encounters": {
+                    "$ref": "#/definitions/SavedEncounters"
+                },
+                "saved_settings": {
+                    "$ref": "#/definitions/SavedSettings"
                 }
             },
             "required": [
                 "title",
-                "options"
+                "saved_encounters",
+                "saved_settings"
             ],
             "title": "Settings"
         },
-        "SettingsOptions": {
+        "InfoOptions": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -692,7 +696,7 @@
                 "use_multiple_cpu_cores",
                 "restore_defaults"
             ],
-            "title": "SettingsOptions"
+            "title": "InfoOptions"
         },
         "Gear": {
             "type": "object",
@@ -881,6 +885,9 @@
                 },
                 "status": {
                     "$ref": "#/definitions/InfoStatus"
+                },
+                "options": {
+                    "$ref": "#/definitions/InfoOptions"
                 }
             },
             "required": [
@@ -890,7 +897,8 @@
                 "known_issues",
                 "patreon",
                 "sim_options",
-                "status"
+                "status",
+                "options"
             ],
             "title": "Info"
         },
@@ -1379,6 +1387,56 @@
                 "success_message"
             ],
             "title": "RestoreDefaults"
+        },
+        "SavedEncounters": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "encounter": {
+                    "type": "string"
+                },
+                "encounter_name": {
+                    "type": "string"
+                },
+                "save_encounter": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title",
+                "encounter",
+                "encounter_name",
+                "save_encounter"
+            ],
+            "title": "SavedEncounters"
+        },
+        "SavedSettings": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "settings": {
+                    "type": "string"
+                },
+                "settings_name": {
+                    "type": "string"
+                },
+                "save_settings": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title",
+                "settings",
+                "settings_name",
+                "save_settings"
+            ],
+            "title": "SavedSettings"
         }
     }
 }
