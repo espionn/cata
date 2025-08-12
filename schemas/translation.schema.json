@@ -2221,12 +2221,6 @@
                 "disabled_at_start": {
                     "type": "string"
                 },
-                "custom": {
-                    "type": "string"
-                },
-                "none": {
-                    "type": "string"
-                },
                 "tank": {
                     "$ref": "#/definitions/Tank"
                 }
@@ -2238,7 +2232,7 @@
                 "target", "num_allies", "min_base_damage", "npc", "ai", "level", "mob_type",
                 "tanked_by", "swing_speed", "dual_wield", "dual_wield_penalty", "parry_haste",
                 "spell_school", "damage_spread", "suppress_dodge", "second_tank_index", "disabled_at_start",
-                "custom", "none", "tank"
+                "tank"
             ],
             "title": "Encounter"
         },
