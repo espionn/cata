@@ -2617,6 +2617,21 @@
                 "sequence": {
                     "type": "string"
                 },
+                "casting": {
+                    "type": "string"
+                },
+                "timing": {
+                    "type": "string"
+                },
+                "sequences": {
+                    "type": "string"
+                },
+                "misc": {
+                    "type": "string"
+                },
+                "guardian_druid": {
+                    "type": "string"
+                },
                 "feral_druid": {
                     "type": "string"
                 },
@@ -2674,6 +2689,7 @@
                 "aura_sets",
                 "auto",
                 "boss",
+                "casting",
                 "chi",
                 "combo_points",
                 "cooldowns",
@@ -2684,19 +2700,23 @@
                 "feral_druid",
                 "focus",
                 "gcd",
+                "guardian_druid",
                 "health",
                 "logic",
                 "mage",
                 "mana",
+                "misc",
                 "placeholders",
                 "rage",
                 "resources",
                 "runes",
                 "runic_power",
                 "sequence",
+                "sequences",
                 "shaman",
                 "spell",
                 "tank",
+                "timing",
                 "unit",
                 "warlock"
             ],

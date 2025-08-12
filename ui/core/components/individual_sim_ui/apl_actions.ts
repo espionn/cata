@@ -362,7 +362,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['multidot']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.multi_dot.label'),
-		submenu: ['Casting'],
+		submenu: ['casting'],
 		shortDescription: i18n.t('rotation.apl.actions.multi_dot.tooltip'),
 		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull,
 		newValue: () =>
@@ -391,7 +391,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['strictMultidot']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.strict_multi_dot.label'),
-		submenu: ['Casting'],
+		submenu: ['casting'],
 		shortDescription: i18n.t('rotation.apl.actions.strict_multi_dot.tooltip'),
 		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull,
 		newValue: () =>
@@ -420,7 +420,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['multishield']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.multi_shield.label'),
-		submenu: ['Casting'],
+		submenu: ['casting'],
 		shortDescription: i18n.t('rotation.apl.actions.multi_shield.tooltip'),
 		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getSpec().isHealingSpec,
 		newValue: () =>
@@ -449,7 +449,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['channelSpell']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.channel.label'),
-		submenu: ['Casting'],
+		submenu: ['casting'],
 		shortDescription: i18n.t('rotation.apl.actions.channel.tooltip'),
 		fullDescription: i18n.t('rotation.apl.actions.channel.full'),
 		newValue: () =>
@@ -475,7 +475,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['castAllStatBuffCooldowns']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.cast_all_stat_buff_cooldowns.label'),
-		submenu: ['Casting'],
+		submenu: ['casting'],
 		shortDescription: i18n.t('rotation.apl.actions.cast_all_stat_buff_cooldowns.tooltip'),
 		fullDescription: i18n.t('rotation.apl.actions.cast_all_stat_buff_cooldowns.full'),
 		newValue: () =>
@@ -488,7 +488,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['autocastOtherCooldowns']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.autocast_other_cooldowns.label'),
-		submenu: ['Casting'],
+		submenu: ['casting'],
 		shortDescription: i18n.t('rotation.apl.actions.autocast_other_cooldowns.tooltip'),
 		fullDescription: i18n.t('rotation.apl.actions.autocast_other_cooldowns.full'),
 		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull,
@@ -497,7 +497,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['wait']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.wait.label'),
-		submenu: ['Timing'],
+		submenu: ['timing'],
 		shortDescription: i18n.t('rotation.apl.actions.wait.tooltip'),
 		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull,
 		newValue: () =>
@@ -515,7 +515,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['waitUntil']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.wait_until.label'),
-		submenu: ['Timing'],
+		submenu: ['timing'],
 		shortDescription: i18n.t('rotation.apl.actions.wait_until.tooltip'),
 		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull,
 		newValue: () => APLActionWaitUntil.create(),
@@ -523,7 +523,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['schedule']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.scheduled_action.label'),
-		submenu: ['Timing'],
+		submenu: ['timing'],
 		shortDescription: i18n.t('rotation.apl.actions.scheduled_action.tooltip'),
 		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull,
 		newValue: () =>
@@ -543,7 +543,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['sequence']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.sequence.label'),
-		submenu: ['Sequences'],
+		submenu: ['sequences'],
 		shortDescription: i18n.t('rotation.apl.actions.sequence.tooltip'),
 		fullDescription: i18n.t('rotation.apl.actions.sequence.full'),
 		includeIf: (_, isPrepull: boolean) => !isPrepull,
@@ -552,7 +552,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['resetSequence']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.reset_sequence.label'),
-		submenu: ['Sequences'],
+		submenu: ['sequences'],
 		shortDescription: i18n.t('rotation.apl.actions.reset_sequence.tooltip'),
 		fullDescription: i18n.t('rotation.apl.actions.reset_sequence.full'),
 		includeIf: (_, isPrepull: boolean) => !isPrepull,
@@ -561,7 +561,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['strictSequence']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.strict_sequence.label'),
-		submenu: ['Sequences'],
+		submenu: ['sequences'],
 		shortDescription: i18n.t('rotation.apl.actions.strict_sequence.tooltip'),
 		fullDescription: i18n.t('rotation.apl.actions.strict_sequence.full'),
 		includeIf: (_, isPrepull: boolean) => !isPrepull,
@@ -570,14 +570,14 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['changeTarget']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.change_target.label'),
-		submenu: ['Misc'],
+		submenu: ['misc'],
 		shortDescription: i18n.t('rotation.apl.actions.change_target.tooltip'),
 		newValue: () => APLActionChangeTarget.create(),
 		fields: [AplHelpers.unitFieldConfig('newTarget', 'targets')],
 	}),
 	['activateAura']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.activate_aura.label'),
-		submenu: ['Misc'],
+		submenu: ['misc'],
 		shortDescription: i18n.t('rotation.apl.actions.activate_aura.tooltip'),
 		includeIf: (_, isPrepull: boolean) => isPrepull,
 		newValue: () => APLActionActivateAura.create(),
@@ -585,7 +585,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['activateAuraWithStacks']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.activate_aura_with_stacks.label'),
-		submenu: ['Misc'],
+		submenu: ['misc'],
 		shortDescription: i18n.t('rotation.apl.actions.activate_aura_with_stacks.tooltip'),
 		includeIf: (_, isPrepull: boolean) => isPrepull,
 		newValue: () =>
@@ -602,7 +602,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['activateAllStatBuffProcAuras']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.activate_all_stat_buff_proc_auras.label'),
-		submenu: ['Misc'],
+		submenu: ['misc'],
 		shortDescription: i18n.t('rotation.apl.actions.activate_all_stat_buff_proc_auras.tooltip'),
 		includeIf: (_, isPrepull: boolean) => isPrepull,
 		newValue: () =>
@@ -621,14 +621,14 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['cancelAura']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.cancel_aura.label'),
-		submenu: ['Misc'],
+		submenu: ['misc'],
 		shortDescription: i18n.t('rotation.apl.actions.cancel_aura.tooltip'),
 		newValue: () => APLActionCancelAura.create(),
 		fields: [AplHelpers.actionIdFieldConfig('auraId', 'auras')],
 	}),
 	['triggerIcd']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.trigger_icd.label'),
-		submenu: ['Misc'],
+		submenu: ['misc'],
 		shortDescription: i18n.t('rotation.apl.actions.trigger_icd.tooltip'),
 		includeIf: (_, isPrepull: boolean) => isPrepull,
 		newValue: () => APLActionTriggerICD.create(),
@@ -636,7 +636,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['itemSwap']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.item_swap.label'),
-		submenu: ['Misc'],
+		submenu: ['misc'],
 		shortDescription: i18n.t('rotation.apl.actions.item_swap.tooltip'),
 		includeIf: (player: Player<any>, _isPrepull: boolean) => itemSwapEnabledSpecs.includes(player.getSpec()),
 		newValue: () => APLActionItemSwap.create(),
@@ -644,7 +644,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['move']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.move.label'),
-		submenu: ['Misc'],
+		submenu: ['misc'],
 		shortDescription: i18n.t('rotation.apl.actions.move.tooltip'),
 		newValue: () => APLActionMove.create(),
 		fields: [
@@ -656,7 +656,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	}),
 	['moveDuration']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.move.move_duration'),
-		submenu: ['Misc'],
+		submenu: ['misc'],
 		shortDescription: i18n.t('rotation.apl.actions.move.move_duration_tooltip'),
 		newValue: () => APLActionMoveDuration.create(),
 		fields: [
@@ -678,7 +678,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	// Class/spec specific actions
 	['catOptimalRotationAction']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.optimal_rotation_action.label'),
-		submenu: ['Feral Druid'],
+		submenu: ['feral_druid'],
 		shortDescription: i18n.t('rotation.apl.actions.optimal_rotation_action.tooltip'),
 		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecFeralDruid,
 		newValue: () =>
@@ -740,7 +740,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 
 	['guardianHotwDpsRotation']: inputBuilder({
 		label: i18n.t('rotation.apl.actions.guardian_hotw_dps_rotation.label'),
-		submenu: ['Guardian Druid'],
+		submenu: ['guardian_druid'],
 		shortDescription: i18n.t('rotation.apl.actions.guardian_hotw_dps_rotation.tooltip'),
 		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecGuardianDruid,
 		newValue: () =>
