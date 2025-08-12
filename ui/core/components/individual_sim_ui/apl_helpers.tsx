@@ -1,6 +1,7 @@
 import { ref } from 'tsx-vanilla';
 
 import { CacheHandler } from '../../cache_handler';
+import i18n from '../../../i18n/config';
 import { Player, UnitMetadata } from '../../player.js';
 import { APLActionGuardianHotwDpsRotation_Strategy as HotwStrategy, APLValueEclipsePhase, APLValueRuneSlot, APLValueRuneType } from '../../proto/apl.js';
 import { ActionID, OtherAction, Stat, UnitReference, UnitReference_Type as UnitType } from '../../proto/common.js';
@@ -115,14 +116,14 @@ const actionIdSets: Record<
 				[
 					{
 						value: ActionId.fromEmpty(),
-						headerText: 'Spells',
-						submenu: ['Spells'],
+						headerText: i18n.t('rotation.apl.submenus.spell'),
+						submenu: ['spell'],
 					},
 				],
 				(spells || []).map(actionId => {
 					return {
 						value: actionId.id,
-						submenu: ['Spells'],
+						submenu: ['spell'],
 						extraCssClasses: actionId.data.prepullOnly
 							? ['apl-prepull-actions-only']
 							: actionId.data.encounterOnly
@@ -133,14 +134,14 @@ const actionIdSets: Record<
 				[
 					{
 						value: ActionId.fromEmpty(),
-						headerText: 'Cooldowns',
-						submenu: ['Cooldowns'],
+						headerText: i18n.t('rotation.apl.submenus.cooldowns'),
+						submenu: ['cooldowns'],
 					},
 				],
 				(cooldowns || []).map(actionId => {
 					return {
 						value: actionId.id,
-						submenu: ['Cooldowns'],
+						submenu: ['cooldowns'],
 						extraCssClasses: actionId.data.prepullOnly
 							? ['apl-prepull-actions-only']
 							: actionId.data.encounterOnly
@@ -151,14 +152,14 @@ const actionIdSets: Record<
 				[
 					{
 						value: ActionId.fromEmpty(),
-						headerText: 'Placeholders',
-						submenu: ['Placeholders'],
+						headerText: i18n.t('rotation.apl.submenus.placeholders'),
+						submenu: ['placeholders'],
 					},
 				],
 				placeholders.map(actionId => {
 					return {
 						value: actionId,
-						submenu: ['Placeholders'],
+						submenu: ['placeholders'],
 						tooltip: 'The Prepull Potion if CurrentTime < 0, or the Combat Potion if combat has started.',
 					};
 				}),
