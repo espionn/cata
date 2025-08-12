@@ -1765,19 +1765,58 @@
 					"update_ep": "Update EP",
 					"calculate": "Calculate",
 					"compute_weighted_ep": "Compute Weighted EP",
-					"dps_weight": "DPS Weight",
-					"dps_ep": "DPS EP",
-					"hps_weight": "HPS Weight",
-					"hps_ep": "HPS EP",
-					"tps_weight": "TPS Weight",
-					"tps_ep": "TPS EP",
-					"dtps_weight": "DTPS Weight",
-					"dtps_ep": "DTPS EP",
-					"tmi_weight": "TMI Weight",
-					"tmi_ep": "TMI EP",
-					"death_weight": "Death Weight",
-					"death_ep": "Death EP",
-					"current_ep": "Current EP",
+					"dps_weight": {
+						"label": "DPS Weight",
+						"tooltip": "Per-point increase in DPS (Damage Per Second) for each stat."
+					},
+					"dps_ep": {
+						"label": "DPS EP",
+						"tooltip": "EP (Equivalency Points) for DPS (Damage Per Second) for each stat."
+					},
+					"hps_weight": {
+						"label": "HPS Weight",
+						"tooltip": "Per-point increase in HPS (Healing Per Second) for each stat."
+					},
+					"hps_ep": {
+						"label": "HPS EP",
+						"tooltip": "EP (Equivalency Points) for HPS (Healing Per Second) for each stat."
+					},
+					"tps_weight": {
+						"label": "TPS Weight",
+						"tooltip": "Per-point increase in TPS (Threat Per Second) for each stat."
+					},
+					"tps_ep": {
+						"label": "TPS EP",
+						"tooltip": "EP (Equivalency Points) for TPS (Threat Per Second) for each stat."
+					},
+					"dtps_weight": {
+						"label": "DTPS Weight",
+						"tooltip": "Per-point increase in DTPS (Damage Taken Per Second) for each stat."
+					},
+					"dtps_ep": {
+						"label": "DTPS EP",
+						"tooltip": "EP (Equivalency Points) for DTPS (Damage Taken Per Second) for each stat."
+					},
+					"tmi_weight": {
+						"label": "TMI Weight",
+						"tooltip": "Per-point decrease in TMI (Theck-Meloree Index) for each stat."
+					},
+					"tmi_ep": {
+						"label": "TMI EP",
+						"tooltip": "EP (Equivalency Points) for TMI (Theck-Meloree Index) for each stat."
+					},
+					"death_weight": {
+						"label": "Death Weight",
+						"tooltip": "Per-point decrease in p(death) for each stat."
+					},
+					"death_ep": {
+						"label": "Death EP",
+						"tooltip": "EP (Equivalency Points) for p(death) for each stat."
+					},
+					"current_ep": {
+						"label": "Current EP",
+						"tooltip": "Current EP Weights. Used to sort the gear selector menus."
+					},
 					"not_applicable": "N/A"
 				},
 				"saved_ep_weights": {

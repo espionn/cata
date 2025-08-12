@@ -795,6 +795,9 @@
                 },
                 "unholy": {
                     "type": "string"
+                },
+                "death": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -1343,102 +1346,14 @@
                 }
             },
             "required": [
+                "gear_picker",
                 "gear_sets",
                 "gem_summary",
-                "gear_picker",
                 "reforge_success",
                 "reforge_summary",
                 "title"
             ],
             "title": "Gear"
-        },
-        "GearSets": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "gear_set": {
-                    "type": "string"
-                },
-                "gear_set_name": {
-                    "type": "string"
-                },
-                "save_gear_set": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "gear_set",
-                "gear_set_name",
-                "save_gear_set",
-                "title"
-            ],
-            "title": "GearSets"
-        },
-        "GemSummary": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "reset_gems": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "reset_gems",
-                "title"
-            ],
-            "title": "GemSummary"
-        },
-        "ReforgeSuccess": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "removed_reforge": {
-                    "type": "string"
-                },
-                "no_changes": {
-                    "type": "string"
-                },
-                "copy_to_reforge_lite": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "copy_to_reforge_lite",
-                "no_changes",
-                "removed_reforge",
-                "title"
-            ],
-            "title": "ReforgeSuccess"
-        },
-        "ReforgeSummary": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "reset_reforges": {
-                    "type": "string"
-                },
-                "copy_to_reforge_lite": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "copy_to_reforge_lite",
-                "reset_reforges",
-                "title"
-            ],
-            "title": "ReforgeSummary"
         },
         "GearPicker": {
             "type": "object",
@@ -1795,6 +1710,94 @@
             ],
             "title": "Tabs"
         },
+        "GearSets": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "gear_set": {
+                    "type": "string"
+                },
+                "gear_set_name": {
+                    "type": "string"
+                },
+                "save_gear_set": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "gear_set",
+                "gear_set_name",
+                "save_gear_set",
+                "title"
+            ],
+            "title": "GearSets"
+        },
+        "GemSummary": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "reset_gems": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "reset_gems",
+                "title"
+            ],
+            "title": "GemSummary"
+        },
+        "ReforgeSuccess": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "removed_reforge": {
+                    "type": "string"
+                },
+                "no_changes": {
+                    "type": "string"
+                },
+                "copy_to_reforge_lite": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "copy_to_reforge_lite",
+                "no_changes",
+                "removed_reforge",
+                "title"
+            ],
+            "title": "ReforgeSuccess"
+        },
+        "ReforgeSummary": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "reset_reforges": {
+                    "type": "string"
+                },
+                "copy_to_reforge_lite": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "copy_to_reforge_lite",
+                "reset_reforges",
+                "title"
+            ],
+            "title": "ReforgeSummary"
+        },
         "Info": {
             "type": "object",
             "additionalProperties": false,
@@ -2140,7 +2143,7 @@
                     "$ref": "#/definitions/ItemSwapSets"
                 },
                 "helpers": {
-                    "$ref": "#/definitions/APLHelpers"
+                    "$ref": "#/definitions/Helpers"
                 }
             },
             "required": [
@@ -2484,6 +2487,295 @@
             ],
             "title": "ExecutePhases"
         },
+        "Helpers": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "action_id_sets": {
+                    "$ref": "#/definitions/ActionIDSets"
+                },
+                "field_configs": {
+                    "$ref": "#/definitions/FieldConfigs"
+                },
+                "eclipse_types": {
+                    "$ref": "#/definitions/EclipseTypes"
+                },
+                "rune_types": {
+                    "$ref": "#/definitions/DeathKnight"
+                },
+                "rune_slots": {
+                    "$ref": "#/definitions/RuneSlots"
+                },
+                "rotation_types": {
+                    "$ref": "#/definitions/RotationTypes"
+                },
+                "hotw_strategies": {
+                    "$ref": "#/definitions/HotwStrategies"
+                },
+                "unit_labels": {
+                    "$ref": "#/definitions/UnitLabels"
+                },
+                "placeholder_tooltip": {
+                    "type": "string"
+                },
+                "buttons": {
+                    "$ref": "#/definitions/HelpersButtons"
+                }
+            },
+            "required": [
+                "action_id_sets",
+                "buttons",
+                "eclipse_types",
+                "field_configs",
+                "hotw_strategies",
+                "placeholder_tooltip",
+                "rotation_types",
+                "rune_slots",
+                "rune_types",
+                "unit_labels"
+            ],
+            "title": "Helpers"
+        },
+        "ActionIDSets": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "auras": {
+                    "type": "string"
+                },
+                "stackable_auras": {
+                    "type": "string"
+                },
+                "icd_auras": {
+                    "type": "string"
+                },
+                "exclusive_effect_auras": {
+                    "type": "string"
+                },
+                "spells": {
+                    "type": "string"
+                },
+                "castable_spells": {
+                    "type": "string"
+                },
+                "channel_spells": {
+                    "type": "string"
+                },
+                "dot_spells": {
+                    "type": "string"
+                },
+                "castable_dot_spells": {
+                    "type": "string"
+                },
+                "shield_spells": {
+                    "type": "string"
+                },
+                "non_instant_spells": {
+                    "type": "string"
+                },
+                "friendly_spells": {
+                    "type": "string"
+                },
+                "expected_dot_spells": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "auras",
+                "castable_dot_spells",
+                "castable_spells",
+                "channel_spells",
+                "dot_spells",
+                "exclusive_effect_auras",
+                "expected_dot_spells",
+                "friendly_spells",
+                "icd_auras",
+                "non_instant_spells",
+                "shield_spells",
+                "spells",
+                "stackable_auras"
+            ],
+            "title": "ActionIDSets"
+        },
+        "HelpersButtons": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "enable_action": {
+                    "type": "string"
+                },
+                "disable_action": {
+                    "type": "string"
+                },
+                "enable_disable": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "disable_action",
+                "enable_action",
+                "enable_disable"
+            ],
+            "title": "HelpersButtons"
+        },
+        "EclipseTypes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "lunar": {
+                    "type": "string"
+                },
+                "solar": {
+                    "type": "string"
+                },
+                "neutral": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "lunar",
+                "neutral",
+                "solar"
+            ],
+            "title": "EclipseTypes"
+        },
+        "FieldConfigs": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "strategy": {
+                    "type": "string"
+                },
+                "buff_type": {
+                    "type": "string"
+                },
+                "min_icd": {
+                    "type": "string"
+                },
+                "min_icd_tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "buff_type",
+                "min_icd",
+                "min_icd_tooltip",
+                "strategy",
+                "type"
+            ],
+            "title": "FieldConfigs"
+        },
+        "HotwStrategies": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "caster": {
+                    "type": "string"
+                },
+                "cat": {
+                    "type": "string"
+                },
+                "hybrid": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "caster",
+                "cat",
+                "hybrid"
+            ],
+            "title": "HotwStrategies"
+        },
+        "RotationTypes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "single_target": {
+                    "type": "string"
+                },
+                "aoe": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "aoe",
+                "single_target"
+            ],
+            "title": "RotationTypes"
+        },
+        "RuneSlots": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "blood_left": {
+                    "type": "string"
+                },
+                "blood_right": {
+                    "type": "string"
+                },
+                "frost_left": {
+                    "type": "string"
+                },
+                "frost_right": {
+                    "type": "string"
+                },
+                "unholy_left": {
+                    "type": "string"
+                },
+                "unholy_right": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "blood_left",
+                "blood_right",
+                "frost_left",
+                "frost_right",
+                "unholy_left",
+                "unholy_right"
+            ],
+            "title": "RuneSlots"
+        },
+        "UnitLabels": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "self": {
+                    "type": "string"
+                },
+                "current_target": {
+                    "type": "string"
+                },
+                "previous_target": {
+                    "type": "string"
+                },
+                "next_target": {
+                    "type": "string"
+                },
+                "player": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                },
+                "pet": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "current_target",
+                "next_target",
+                "pet",
+                "player",
+                "previous_target",
+                "self",
+                "target"
+            ],
+            "title": "UnitLabels"
+        },
         "ItemSwapSets": {
             "type": "object",
             "additionalProperties": false,
@@ -2633,10 +2925,10 @@
                 "misc": {
                     "type": "string"
                 },
-                "guardian_druid": {
+                "feral_druid": {
                     "type": "string"
                 },
-                "feral_druid": {
+                "guardian_druid": {
                     "type": "string"
                 },
                 "shaman": {
@@ -3081,7 +3373,6 @@
                 }
             },
             "required": [
-                "item_label",
                 "all_of",
                 "all_trinket_stat_procs_active",
                 "any_of",
@@ -3141,6 +3432,7 @@
                 "is_channeling",
                 "is_execute_phase",
                 "is_ready",
+                "item_label",
                 "lunar_energy",
                 "mage_current_combustion_dot_estimate",
                 "math",
@@ -3176,7 +3468,9 @@
                 "sequence_time_to_ready",
                 "shaman_fire_elemental_duration",
                 "solar_energy",
+                "spell_is_casting",
                 "spell_known",
+                "spell_time_to_ready",
                 "time_to_next_auto",
                 "time_to_next_charge",
                 "time_to_ready",
@@ -4607,43 +4901,43 @@
                     "type": "string"
                 },
                 "dps_weight": {
-                    "type": "string"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "dps_ep": {
-                    "type": "string"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "hps_weight": {
-                    "type": "string"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "hps_ep": {
-                    "type": "string"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "tps_weight": {
-                    "type": "string"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "tps_ep": {
-                    "type": "string"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "dtps_weight": {
-                    "type": "string"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "dtps_ep": {
-                    "type": "string"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "tmi_weight": {
-                    "type": "string"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "tmi_ep": {
-                    "type": "string"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "death_weight": {
-                    "type": "string"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "death_ep": {
-                    "type": "string"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "current_ep": {
-                    "type": "string"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "not_applicable": {
                     "type": "string"
@@ -5007,96 +5301,6 @@
                 "title"
             ],
             "title": "GlyphsModal"
-        },
-        "APLHelpers": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "action_id_sets": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "field_configs": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "eclipse_types": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "rune_types": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "rune_slots": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "rotation_types": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "hotw_strategies": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "unit_labels": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "placeholder_tooltip": {
-                    "type": "string"
-                },
-                "buttons": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "properties": {
-                        "enable_action": {
-                            "type": "string"
-                        },
-                        "disable_action": {
-                            "type": "string"
-                        },
-                        "enable_disable": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "enable_action",
-                        "disable_action",
-                        "enable_disable"
-                    ]
-                }
-            },
-            "required": [
-                "action_id_sets",
-                "buttons",
-                "eclipse_types",
-                "field_configs",
-                "hotw_strategies",
-                "placeholder_tooltip",
-                "rotation_types",
-                "rune_slots",
-                "rune_types",
-                "unit_labels"
-            ],
-            "title": "APLHelpers"
         }
     }
 }

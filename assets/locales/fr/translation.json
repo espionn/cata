@@ -1765,19 +1765,58 @@
 					"update_ep": "Mettre à jour PE",
 					"calculate": "Calculer",
 					"compute_weighted_ep": "Calculer PE Pondéré",
-					"dps_weight": "Poids DPS",
-					"dps_ep": "PE DPS",
-					"hps_weight": "Poids SPS",
-					"hps_ep": "PE SPS",
-					"tps_weight": "Poids TPS",
-					"tps_ep": "PE TPS",
-					"dtps_weight": "Poids DTPS",
-					"dtps_ep": "PE DTPS",
-					"tmi_weight": "Poids TMI",
-					"tmi_ep": "PE TMI",
-					"death_weight": "Poids Mort",
-					"death_ep": "PE Mort",
-					"current_ep": "PE Actuel",
+					"dps_weight": {
+						"label": "Poids DPS",
+						"tooltip": "Augmentation par point de DPS (Dégâts Par Seconde) pour chaque statistique."
+					},
+					"dps_ep": {
+						"label": "PE DPS",
+						"tooltip": "PE (Points d'Équivalence) pour DPS (Dégâts Par Seconde) pour chaque statistique."
+					},
+					"hps_weight": {
+						"label": "Poids SPS",
+						"tooltip": "Augmentation par point de SPS (Soins Par Seconde) pour chaque statistique."
+					},
+					"hps_ep": {
+						"label": "PE SPS",
+						"tooltip": "PE (Points d'Équivalence) pour SPS (Soins Par Seconde) pour chaque statistique."
+					},
+					"tps_weight": {
+						"label": "Poids TPS",
+						"tooltip": "Augmentation par point de TPS (Menace Par Seconde) pour chaque statistique."
+					},
+					"tps_ep": {
+						"label": "PE TPS",
+						"tooltip": "PE (Points d'Équivalence) pour TPS (Menace Par Seconde) pour chaque statistique."
+					},
+					"dtps_weight": {
+						"label": "Poids DTPS",
+						"tooltip": "Augmentation par point de DTPS (Dégâts Subis Par Seconde) pour chaque statistique."
+					},
+					"dtps_ep": {
+						"label": "PE DTPS",
+						"tooltip": "PE (Points d'Équivalence) pour DTPS (Dégâts Subis Par Seconde) pour chaque statistique."
+					},
+					"tmi_weight": {
+						"label": "Poids TMI",
+						"tooltip": "Diminution par point de TMI (Indice Theck-Meloree) pour chaque statistique."
+					},
+					"tmi_ep": {
+						"label": "PE TMI",
+						"tooltip": "PE (Points d'Équivalence) pour TMI (Indice Theck-Meloree) pour chaque statistique."
+					},
+					"death_weight": {
+						"label": "Poids Mort",
+						"tooltip": "Diminution par point de p(mort) pour chaque statistique."
+					},
+					"death_ep": {
+						"label": "PE Mort",
+						"tooltip": "PE (Points d'Équivalence) pour p(mort) pour chaque statistique."
+					},
+					"current_ep": {
+						"label": "PE Actuel",
+						"tooltip": "Poids PE actuels. Utilisés pour trier les menus de sélection d'équipement."
+					},
 					"not_applicable": "N/A"
 				},
 				"saved_ep_weights": {
