@@ -182,8 +182,8 @@ export class SettingsTab extends SimTab {
 		const swapSlots = this.simUI.individualConfig.itemSwapSlots || [];
 		if (settings.length > 0 || swapSlots.length > 0) {
 			const contentBlock = new ContentBlock(this.column2, 'other-settings', {
-				header: { title: 'Other' },
-			});
+			header: { title: i18n.t('settings.other.title') },
+		});
 
 			if (settings.length > 0) {
 				this.configureInputSection(contentBlock.bodyElement, this.simUI.individualConfig.otherInputs);

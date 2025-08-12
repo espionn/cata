@@ -240,6 +240,129 @@
 	},
 	"settings": {
 		"title": "Paramètres",
+		"other": {
+			"title": "Autre",
+				"challenge_mode": {
+					"label": "Mode Défi",
+					"tooltip": "Active le Mode Défi"
+				},
+				"input_delay": {
+					"label": "Délai de saisie",
+					"tooltip": "Délai de saisie du joueur, en millisecondes. Spécifie le délai maximum sur les actions qui ne peuvent pas être mises en file d'attente, comme les sorts qui attendent des gains de ressources ou l'expiration d'un temps de recharge. Utilisé également avec certaines valeurs APL (comme 'Aura Is Active With Reaction Time'). Modélise approximativement la somme du temps de réaction + la latence du serveur."
+				},
+				"channel_clip_delay": {
+					"label": "Délai de coupure de canal",
+					"tooltip": "Délai de coupure suivant les sorts canalisés, en millisecondes. Ce délai se produit après toute canalisation complète ou partielle se terminant après que le GCD devienne disponible, en raison de l'incapacité du joueur à mettre en file d'attente le sort suivant."
+				},
+				"in_front_of_target": {
+					"label": "Devant la cible",
+					"tooltip": "Se tenir devant la cible, causant l'inclusion des Blocages et Parades dans la table d'attaque."
+				},
+				"distance_from_target": {
+					"label": "Distance de la cible",
+					"tooltip": "Distance des cibles, en yards. Utilisé pour calculer le temps de trajet de certains sorts."
+				},
+				"tank_assignment": {
+					"label": "Attribution de tank",
+					"tooltip": "Détermine quels mobs seront tankés. La plupart des mobs ciblent par défaut le Tank Principal, mais dans les rencontres multi-cibles prédéfinies ce n'est pas toujours vrai.",
+					"values": {
+						"none": "Aucun",
+						"main_tank": "Tank Principal",
+						"tank_2": "Tank 2",
+						"tank_3": "Tank 3",
+						"tank_4": "Tank 4"
+					}
+				},
+				"incoming_hps": {
+					"label": "HPS entrant",
+					"tooltip": "Quantité moyenne de soins reçus par seconde. Utilisé pour calculer la chance de mort. Si défini à 0, par défaut 25% des DPS de base de la cible principale."
+				},
+				"healing_cadence": {
+					"label": "Cadence de soins",
+					"tooltip": "À quelle fréquence le soin entrant 'tique', en secondes. Généralement, les durées plus longues favorisent les Points de Vie Effectifs (EHP) pour minimiser la Chance de Mort, tandis que les durées plus courtes favorisent l'évitement. Exemple : si HPS entrant est défini à 1000 et ceci à 1s, alors toutes les 1s un soin sera reçu pour 1000. Si ceci est défini à 2s, alors toutes les 2s un soin sera reçu pour 2000. Si défini à 0, les valeurs par défaut pour la Cadence de soins et Cadence +/- sont déduites des paramètres de dégâts du boss."
+				},
+				"healing_cadence_variation": {
+					"label": "Cadence +/-",
+					"tooltip": "Ampleur de la variation aléatoire dans les intervalles de soins, en secondes. Exemple : si la Cadence de soins est définie à 1s avec 0.5s de variation, alors l'intervalle entre les soins successifs variera uniformément entre 0.5 et 1.5s. Si la variation est définie à 2s, alors 50% des intervalles de soins tomberont entre 0s et 1s, et les autres 50% tomberont entre 1s et 3s. La quantité de soins par 'tique' est automatiquement mise à l'échelle en fonction du temps aléatoire depuis le dernier tic, afin de maintenir les HPS constants."
+				},
+				"absorb_frac": {
+					"label": "Absorption %",
+					"tooltip": "% de chaque 'tique' de soin entrant à modéliser comme un bouclier d'absorption plutôt que comme un soin direct."
+				},
+				"burst_window": {
+					"label": "Fenêtre d'éclatement TMI",
+					"tooltip": "Taille en secondes entières de la fenêtre d'éclatement pour calculer le TMI. Il est important d'utiliser un paramètre cohérent lors de la comparaison de cette métrique. Par défaut est de 6 secondes. Si défini à 0, les calculs TMI sont désactivés."
+				},
+				"hp_percent_for_defensives": {
+					"label": "% PV pour CDs défensifs",
+					"tooltip": "% de Santé Maximum, en dessous duquel les cooldowns défensifs sont autorisés à être utilisés. Si défini à 0, cette restriction est désactivée."
+				},
+				"pet_uptime": {
+					"label": "Temps de présence du familier (%)",
+					"tooltip": "Pourcentage de la durée du combat pendant lequel votre familier sera en vie."
+				},
+				"glaive_toss_chance": {
+					"label": "Chance de succès Lancer de Glaive %",
+					"tooltip": "La chance que Lancer de Glaive touche les cibles secondaires en pourcentages."
+				},
+				"detonate_seed": {
+					"label": "Détoner la Graine à la sortie",
+					"tooltip": "Simule le raid faisant des dégâts aux cibles de telle sorte que la graine détonne immédiatement à la sortie."
+				},
+				"stance_snapshot": {
+					"label": "Instantané de posture",
+					"tooltip": "La capacité qui est lancée en même temps que le changement de posture bénéficiera du bonus de la posture avant le changement."
+				},
+				"assume_bleed_active": {
+					"label": "Supposer saignement toujours actif",
+					"tooltip": "Suppose que le saignement existe toujours pour les calculs de 'Déchirer et Déchiqueter'. Sinon, ne calculera que sur la base de ses propres rip/rake/lacerate."
+				},
+				"cannot_shred_target": {
+					"label": "Ne peut pas Déchiqueter la cible",
+					"tooltip": "Alternative à \"Devant la cible\" pour modéliser les boss qui ne Parade ou Bloque pas, mais que vous ne pouvez toujours pas Déchiqueter."
+				},
+				"okf_uptime": {
+					"label": "Temps de présence Frénésie de Chouettard (%)",
+					"tooltip": "Pourcentage de temps de présence du combat pour la Frénésie de Chouettard"
+				},
+				"sync_type": {
+					"label": "Réglage Sync/Échelonnement",
+					"tooltip": "Choisissez votre option de synchronisation ou d'échelonnement. Auto : Choisira automatiquement les options de sync basées sur les vitesses d'attaque de vos armes. Aucun : Pas de Sync ou d'Échelonnement, utilisé pour les vitesses d'armes non assorties. Sync Parfait : Fait que vos armes attaquent toujours en même temps, pour les vitesses d'armes assorties. Main secondaire retardée : Ajoute un léger délai aux attaques de la main secondaire tout en restant dans la fenêtre ICD de 0.5s de Flurry.",
+					"values": {
+						"automatic": "Automatique",
+						"none": "Aucun",
+						"perfect_sync": "Sync Parfait",
+						"delayed_offhand": "Main secondaire retardée"
+					}
+				},
+				"show_1h_weapons": {
+					"label": "1M",
+					"tooltip": "Afficher les armes à une main"
+				},
+				"show_2h_weapons": {
+					"label": "2M",
+					"tooltip": "Afficher les armes à deux mains"
+				},
+				"show_matching_gems": {
+					"label": "Correspondance de châsses",
+					"tooltip": "Afficher uniquement les objets avec des couleurs de châsses correspondantes"
+				},
+				"show_ep_values": {
+					"label": "Afficher EP",
+					"tooltip": "Afficher les valeurs EP (Puissance Effective)"
+				},
+				"phase_selector": {
+					"label": "Phase",
+					"tooltip": "Sélectionner la phase de jeu pour la disponibilité des objets",
+					"values": {
+						"phase_1": "Phase 1 (5.0 - T14)",
+						"phase_2": "Phase 2 (5.1)",
+						"phase_3": "Phase 3 (5.2 - T15)",
+						"phase_4": "Phase 4 (5.3)",
+						"phase_5": "Phase 5 (5.4 - T16)"
+					}
+				}
+		},
 		"consumables": {
 			"title": "Consommables",
 			"potions": {
@@ -264,6 +387,7 @@
 		"encounter": {
 			"title": "Rencontre",
 			"target_inputs": {
+				"label": "Entrée de Cible",
 				"frenzy_time": {
 					"label": "Temps de frénésie",
 					"tooltip": "Temps de simulation (en secondes) auquel désactiver les changements de tank et activer le buff de Frénésie du boss"
@@ -360,15 +484,6 @@
 			"suppress_dodge": "Supprimer l'Esquive",
 			"second_tank_index": "Index du Second Tank",
 			"disabled_at_start": "Désactivé au Début",
-			"target_input": "Entrée de Cible",
-			"frenzy_time": {
-				"label": "Temps de Frénésie",
-				"tooltip": "Temps de simulation (en secondes) auquel désactiver les changements de tank et activer le buff de Frénésie du boss"
-			},
-			"spiritual_grasp_frequency": {
-				"label": "Fréquence de Saisie Spirituelle",
-				"tooltip": "Temps moyen (en secondes) entre les coups de Saisie Spirituelle, suivant une distribution exponentielle"
-			},
 			"custom": "Personnalisé",
 			"none": "Aucun",
 			"tank": {
@@ -452,6 +567,14 @@
 	},
 	"sidebar": {
 		"iterations": "Itérations",
+		"warnings": {
+			"meta_gem_disabled": "Gemme méta désactivée ({{gemName}}) : {{description}}",
+			"profession_requirement": "{{itemName}} nécessite {{professionName}}, mais elle n'est pas sélectionnée.",
+			"too_many_jc_gems": "Seulement 2 gemmes de joaillerie sont autorisées, mais {{count}} sont équipées.",
+			"unspent_talent_points": "Points de talent non dépensés.",
+			"armor_specialization": "Équipez de l'équipement {{armorType}} dans chaque emplacement pour l'effet de spécialisation d'armure (5% de statistique primaire).",
+			"dual_wield_2h_without_titans_grip": "Manier deux armes à deux mains sans la spécialisation Poigne de Titan."
+		},
 		"buttons": {
 			"simulate": "Simuler",
 			"stat_weights": {

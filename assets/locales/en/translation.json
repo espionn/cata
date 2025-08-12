@@ -21,6 +21,13 @@
 		}
 	},
 	"common": {
+		"tank_assignment_values": {
+			"none": "None",
+			"main_tank": "Main Tank",
+			"tank_2": "Tank 2",
+			"tank_3": "Tank 3",
+			"tank_4": "Tank 4"
+		},
 		"phases": {
 			"1": "Phase 1 (T14)",
 			"2": "Phase 2 (T15)",
@@ -240,6 +247,129 @@
 	},
 	"settings": {
 		"title": "Settings",
+		"other": {
+			"title": "Other",
+			"challenge_mode": {
+				"label": "Challenge Mode",
+				"tooltip": "Enables Challenge Mode"
+			},
+			"input_delay": {
+				"label": "Input Delay",
+				"tooltip": "Player input delay, in milliseconds. Specifies the maximum delay on actions that cannot be spell queued, such as spell casts that are waiting on resource gains or waiting for a cooldown to expire. Also used with certain APL values (such as 'Aura Is Active With Reaction Time'). Roughly models the sum of reaction time + server latency."
+			},
+			"channel_clip_delay": {
+				"label": "Channel Clip Delay",
+				"tooltip": "Clip delay following channeled spells, in milliseconds. This delay occurs following any full or partial channel ending after the GCD becomes available, due to the player not being able to queue the next spell."
+			},
+			"in_front_of_target": {
+				"label": "In Front of Target",
+				"tooltip": "Stand in front of the target, causing Blocks and Parries to be included in the attack table."
+			},
+			"distance_from_target": {
+				"label": "Distance From Target",
+				"tooltip": "Distance from targets, in yards. Used to calculate travel time for certain spells."
+			},
+			"tank_assignment": {
+				"label": "Tank Assignment",
+				"tooltip": "Determines which mobs will be tanked. Most mobs default to targeting the Main Tank, but in preset multi-target encounters this is not always true.",
+				"values": {
+					"none": "None",
+					"main_tank": "Main Tank",
+					"tank_2": "Tank 2",
+					"tank_3": "Tank 3",
+					"tank_4": "Tank 4"
+				}
+			},
+			"incoming_hps": {
+				"label": "Incoming HPS",
+				"tooltip": "Average amount of healing received per second. Used for calculating chance of death. If set to 0, defaults to 25% of the primary target's base DPS."
+			},
+			"healing_cadence": {
+				"label": "Healing Cadence",
+				"tooltip": "How often the incoming heal 'ticks', in seconds. Generally, longer durations favor Effective Hit Points (EHP) for minimizing Chance of Death, while shorter durations favor avoidance. Example: if Incoming HPS is set to 1000 and this is set to 1s, then every 1s a heal will be received for 1000. If this is instead set to 2s, then every 2s a heal will be recieved for 2000. If set to 0, default values for Healing Cadence and Cadence +/- are inferred from boss damage parameters."
+			},
+			"healing_cadence_variation": {
+				"label": "Cadence +/-",
+				"tooltip": "Magnitude of random variation in healing intervals, in seconds. Example: if Healing Cadence is set to 1s with 0.5s variation, then the interval between successive heals will vary uniformly between 0.5 and 1.5s. If the variation is instead set to 2s, then 50% of healing intervals will fall between 0s and 1s, and the other 50% will fall between 1s and 3s. The amount of healing per 'tick' is automatically scaled up or down based on the randomized time since the last tick, so as to keep HPS constant."
+			},
+			"absorb_frac": {
+				"label": "Absorb %",
+				"tooltip": "% of each incoming heal 'tick' to model as an absorb shield rather than as a direct heal."
+			},
+			"burst_window": {
+				"label": "TMI Burst Window",
+				"tooltip": "Size in whole seconds of the burst window for calculating TMI. It is important to use a consistent setting when comparing this metric. Default is 6 seconds. If set to 0, TMI calculations are disabled."
+			},
+			"hp_percent_for_defensives": {
+				"label": "HP % for Defensive CDs",
+				"tooltip": "% of Maximum Health, below which defensive cooldowns are allowed to be used. If set to 0, this restriction is disabled."
+			},
+			"pet_uptime": {
+				"label": "Pet Uptime (%)",
+				"tooltip": "Percent of the fight duration for which your pet will be alive."
+			},
+			"glaive_toss_chance": {
+				"label": "Glaive Toss Success %",
+				"tooltip": "The chance that Glaive Toss hits secondary targets in percentages."
+			},
+			"detonate_seed": {
+				"label": "Detonate Seed on Cast",
+				"tooltip": "Simulates raid doing damage to targets such that seed detonates immediately on cast."
+			},
+			"stance_snapshot": {
+				"label": "Stance Snapshot",
+				"tooltip": "Ability that is cast at the same time as stance swap will benefit from the bonus of the stance before the swap."
+			},
+			"assume_bleed_active": {
+				"label": "Assume Bleed Always Active",
+				"tooltip": "Assume bleed always exists for 'Rend and Tear' calculations. Otherwise will only calculate based on own rip/rake/lacerate."
+			},
+			"cannot_shred_target": {
+				"label": "Cannot Shred Target",
+				"tooltip": "Alternative to \"In Front of Target\" for modeling bosses that do not Parry or Block, but which you still cannot Shred."
+			},
+			"okf_uptime": {
+				"label": "Owlkin Frenzy Uptime (%)",
+				"tooltip": "Percentage of fight uptime for Owlkin Frenzy"
+			},
+			"sync_type": {
+				"label": "Sync/Stagger Setting",
+				"tooltip": "Choose your sync or stagger option. Auto: Will auto pick sync options based on your weapons attack speeds. None: No Sync or Staggering, used for mismatched weapon speeds. Perfect Sync: Makes your weapons always attack at the same time, for match weapon speeds. Delayed Offhand: Adds a slight delay to the offhand attacks while staying within the 0.5s flurry ICD window.",
+				"values": {
+					"automatic": "Automatic",
+					"none": "None",
+					"perfect_sync": "Perfect Sync",
+					"delayed_offhand": "Delayed Offhand"
+				}
+			},
+			"show_1h_weapons": {
+				"label": "1H",
+				"tooltip": "Show one-handed weapons"
+			},
+			"show_2h_weapons": {
+				"label": "2H",
+				"tooltip": "Show two-handed weapons"
+			},
+			"show_matching_gems": {
+				"label": "Match Socket",
+				"tooltip": "Show only items with matching socket colors"
+			},
+			"show_ep_values": {
+				"label": "Show EP",
+				"tooltip": "Show EP (Effective Power) values"
+			},
+			"phase_selector": {
+				"label": "Phase",
+				"tooltip": "Select the game phase for item availability",
+				"values": {
+					"phase_1": "Phase 1 (5.0 - T14)",
+					"phase_2": "Phase 2 (5.1)",
+					"phase_3": "Phase 3 (5.2 - T15)",
+					"phase_4": "Phase 4 (5.3)",
+					"phase_5": "Phase 5 (5.4 - T16)"
+				}
+			}
+		},
 		"consumables": {
 			"title": "Consumables",
 			"potions": {
@@ -264,6 +394,7 @@
 		"encounter": {
 			"title": "Encounter",
 			"target_inputs": {
+				"label": "Target Input",
 				"frenzy_time": {
 					"label": "Frenzy time",
 					"tooltip": "Simulation time (in seconds) at which to disable tank swaps and enable the boss Frenzy buff"
@@ -452,6 +583,14 @@
 	},
 	"sidebar": {
 		"iterations": "Iterations",
+		"warnings": {
+			"meta_gem_disabled": "Meta gem disabled ({{gemName}}): {{description}}",
+			"profession_requirement": "{{itemName}} requires {{professionName}}, but it is not selected.",
+			"too_many_jc_gems": "Only 2 Jewelcrafting Gems are allowed, but {{count}} are equipped.",
+			"unspent_talent_points": "Unspent talent points.",
+			"armor_specialization": "Equip {{armorType}} gear in each slot for the Armor Specialization (5% primary stat) effect.",
+			"dual_wield_2h_without_titans_grip": "Dual wielding two-handed weapon(s) without Titan's Grip spec."
+		},
 		"buttons": {
 			"simulate": "Simulate",
 			"stat_weights": {

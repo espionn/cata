@@ -81,10 +81,6 @@
                 "spell_schools": {
                     "$ref": "#/definitions/SpellSchools"
                 },
-                "target_inputs": {
-                    "$ref": "#/definitions/TargetInputs"
-                },
-
                 "stats": {
                     "$ref": "#/definitions/Stats"
                 },
@@ -109,7 +105,6 @@
                 "phases",
                 "specs",
                 "spell_schools",
-                "target_inputs",
                 "stats",
                 "status",
                 "copy_button",
@@ -502,6 +497,9 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
+                "label": {
+                    "type": "string"
+                },
                 "frenzy_time": {
                     "$ref": "#/definitions/TargetInputField"
                 },
@@ -510,6 +508,7 @@
                 }
             },
             "required": [
+                "label",
                 "frenzy_time",
                 "spiritual_grasp_frequency"
             ],
@@ -988,6 +987,9 @@
                 "title": {
                     "type": "string"
                 },
+                "other": {
+                    "$ref": "#/definitions/Other"
+                },
                 "consumables": {
                     "$ref": "#/definitions/Consumables"
                 },
@@ -1006,6 +1008,7 @@
             },
             "required": [
                 "title",
+                "other",
                 "consumables",
                 "encounter",
                 "player",
@@ -1053,6 +1056,12 @@
             "properties": {
                 "title": {
                     "type": "string"
+                },
+                "prepop": {
+                    "type": "string"
+                },
+                "combat": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -1076,6 +1085,283 @@
                 "explosives"
             ],
             "title": "EngineeringCategory"
+        },
+        "Other": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "challenge_mode": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "input_delay": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "channel_clip_delay": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "in_front_of_target": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "distance_from_target": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "tank_assignment": {
+                    "$ref": "#/definitions/TankAssignmentField"
+                },
+                "incoming_hps": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "healing_cadence": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "healing_cadence_variation": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "absorb_frac": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "burst_window": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "hp_percent_for_defensives": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "pet_uptime": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "glaive_toss_chance": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "detonate_seed": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "stance_snapshot": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "assume_bleed_active": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "cannot_shred_target": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "okf_uptime": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "sync_type": {
+                    "$ref": "#/definitions/SyncTypeField"
+                },
+                "show_1h_weapons": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "show_2h_weapons": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "show_matching_gems": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "show_ep_values": {
+                    "$ref": "#/definitions/InputField"
+                },
+                "phase_selector": {
+                    "$ref": "#/definitions/PhaseSelectorField"
+                }
+            },
+            "required": [
+                "title",
+                "challenge_mode",
+                "input_delay",
+                "channel_clip_delay",
+                "in_front_of_target",
+                "distance_from_target",
+                "tank_assignment",
+                "incoming_hps",
+                "healing_cadence",
+                "healing_cadence_variation",
+                "absorb_frac",
+                "burst_window",
+                "hp_percent_for_defensives",
+                "pet_uptime",
+                "glaive_toss_chance",
+                "detonate_seed",
+                "stance_snapshot",
+                "assume_bleed_active",
+                "cannot_shred_target",
+                "okf_uptime",
+                "sync_type",
+                "show_1h_weapons",
+                "show_2h_weapons",
+                "show_matching_gems",
+                "show_ep_values",
+                "phase_selector"
+            ],
+            "title": "Other"
+        },
+
+        "InputField": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "label",
+                "tooltip"
+            ],
+            "title": "InputField"
+        },
+        "TankAssignmentField": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "values": {
+                    "$ref": "#/definitions/TankAssignmentValues"
+                }
+            },
+            "required": [
+                "label",
+                "tooltip",
+                "values"
+            ],
+            "title": "TankAssignmentField"
+        },
+        "SyncTypeField": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "values": {
+                    "$ref": "#/definitions/SyncTypeValues"
+                }
+            },
+            "required": [
+                "label",
+                "tooltip",
+                "values"
+            ],
+            "title": "SyncTypeField"
+        },
+        "SyncTypeValues": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "automatic": {
+                    "type": "string"
+                },
+                "none": {
+                    "type": "string"
+                },
+                "perfect_sync": {
+                    "type": "string"
+                },
+                "delayed_offhand": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "automatic",
+                "none",
+                "perfect_sync",
+                "delayed_offhand"
+            ],
+            "title": "SyncTypeValues"
+        },
+        "PhaseSelectorField": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "values": {
+                    "$ref": "#/definitions/PhaseSelectorValues"
+                }
+            },
+            "required": [
+                "label",
+                "tooltip",
+                "values"
+            ],
+            "title": "PhaseSelectorField"
+        },
+        "PhaseSelectorValues": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "phase_1": {
+                    "type": "string"
+                },
+                "phase_2": {
+                    "type": "string"
+                },
+                "phase_3": {
+                    "type": "string"
+                },
+                "phase_4": {
+                    "type": "string"
+                },
+                "phase_5": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "phase_1",
+                "phase_2",
+                "phase_3",
+                "phase_4",
+                "phase_5"
+            ],
+            "title": "PhaseSelectorValues"
+        },
+        "TankAssignmentValues": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "none": {
+                    "type": "string"
+                },
+                "main_tank": {
+                    "type": "string"
+                },
+                "tank_2": {
+                    "type": "string"
+                },
+                "tank_3": {
+                    "type": "string"
+                },
+                "tank_4": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "none",
+                "main_tank",
+                "tank_2",
+                "tank_3",
+                "tank_4"
+            ],
+            "title": "TankAssignmentValues"
         },
         "InfoOptions": {
             "type": "object",
@@ -1418,6 +1704,9 @@
                 "iterations": {
                     "type": "string"
                 },
+                "warnings": {
+                    "$ref": "#/definitions/SidebarWarnings"
+                },
                 "buttons": {
                     "$ref": "#/definitions/Buttons"
                 },
@@ -1432,9 +1721,43 @@
                 "buttons",
                 "character_stats",
                 "header",
-                "iterations"
+                "iterations",
+                "warnings"
             ],
             "title": "Sidebar"
+        },
+        "SidebarWarnings": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "meta_gem_disabled": {
+                    "type": "string"
+                },
+                "profession_requirement": {
+                    "type": "string"
+                },
+                "too_many_jc_gems": {
+                    "type": "string"
+                },
+                "unspent_talent_points": {
+                    "type": "string"
+                },
+                "armor_specialization": {
+                    "type": "string"
+                },
+                "dual_wield_2h_without_titans_grip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "meta_gem_disabled",
+                "profession_requirement",
+                "too_many_jc_gems",
+                "unspent_talent_points",
+                "armor_specialization",
+                "dual_wield_2h_without_titans_grip"
+            ],
+            "title": "SidebarWarnings"
         },
         "Buttons": {
             "type": "object",
@@ -1832,6 +2155,9 @@
                 "title": {
                     "type": "string"
                 },
+                "target_inputs": {
+                    "$ref": "#/definitions/TargetInputs"
+                },
                 "duration": {
                     "$ref": "#/definitions/EncounterField"
                 },
@@ -1913,18 +2239,6 @@
                 "disabled_at_start": {
                     "type": "string"
                 },
-                "target_input": {
-                    "type": "string"
-                },
-                "target_inputs": {
-                    "$ref": "#/definitions/TargetInputs"
-                },
-                "frenzy_time": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "spiritual_grasp_frequency": {
-                    "$ref": "#/definitions/EncounterField"
-                },
                 "custom": {
                     "type": "string"
                 },
@@ -1936,13 +2250,12 @@
                 }
             },
             "required": [
-                "title", "duration", "duration_variation", "execute_duration_20",
+                "title", "target_inputs", "duration", "duration_variation", "execute_duration_20",
                 "execute_duration_25", "execute_duration_35", "execute_duration_45",
                 "duration_below_high_hp", "encounter_preset", "advanced", "use_health",
                 "target", "num_allies", "min_base_damage", "npc", "ai", "level", "mob_type",
                 "tanked_by", "swing_speed", "dual_wield", "dual_wield_penalty", "parry_haste",
                 "spell_school", "damage_spread", "suppress_dodge", "second_tank_index", "disabled_at_start",
-                "target_input", "frenzy_time", "spiritual_grasp_frequency",
                 "custom", "none", "tank"
             ],
             "title": "Encounter"

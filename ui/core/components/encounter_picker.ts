@@ -1,5 +1,5 @@
 import i18n from '../../i18n/config.js';
-import { translateSpellSchool, translateStat, translateTargetInput, translateTargetInputTooltip, translateMobType } from '../../i18n/localization.js';
+import { translateSpellSchool, translateStat, translateTargetInputLabel, translateTargetInputTooltip, translateMobType } from '../../i18n/localization.js';
 import { Encounter } from '../encounter.js';
 import { IndividualSimUI } from '../individual_sim_ui.js';
 import { InputType, MobType, Spec, SpellSchool, Stat, Target, Target as TargetProto, TargetInput } from '../proto/common.js';
@@ -621,8 +621,8 @@ class TargetInputPicker extends Input<Encounter, TargetInput> {
 			this.numberPicker = new NumberPicker(this.rootElem, null, {
 				id: randomUUID(),
 				float: true,
-				label: translateTargetInput(newValue.label),
-				labelTooltip: translateTargetInputTooltip(newValue.tooltip),
+				label: translateTargetInputLabel(newValue.label),
+				labelTooltip: translateTargetInputTooltip(newValue.label, newValue.tooltip),
 				changedEvent: () => this.encounter.targetsChangeEmitter,
 				getValue: () => this.getTargetInput().numberValue,
 				setValue: (eventID: EventID, _: null, newValue: number) => {
@@ -638,8 +638,8 @@ class TargetInputPicker extends Input<Encounter, TargetInput> {
 			this.clearPickers();
 			this.boolPicker = new BooleanPicker(this.rootElem, null, {
 				id: randomUUID(),
-				label: translateTargetInput(newValue.label),
-				labelTooltip: translateTargetInputTooltip(newValue.tooltip),
+				label: translateTargetInputLabel(newValue.label),
+				labelTooltip: translateTargetInputTooltip(newValue.label, newValue.tooltip),
 				extraCssClasses: ['input-inline'],
 				changedEvent: () => this.encounter.targetsChangeEmitter,
 				getValue: () => this.getTargetInput().boolValue,
@@ -652,7 +652,7 @@ class TargetInputPicker extends Input<Encounter, TargetInput> {
 			this.clearPickers();
 			this.enumPicker = new EnumPicker<null>(this.rootElem, null, {
 				id: randomUUID(),
-				label: translateTargetInput(newValue.label),
+				label: translateTargetInputLabel(newValue.label),
 				values: newValue.enumOptions.map((option, index) => {
 					return { value: index, name: option };
 				}),
@@ -773,7 +773,7 @@ function addEncounterFieldPickers(rootElem: HTMLElement, encounter: Encounter, s
 function makeTargetInputsPicker(parent: HTMLElement, encounter: Encounter, targetIndex: number) {
 	return new ListPicker<Encounter, TargetInput>(parent, encounter, {
 		allowedActions: [],
-		itemLabel: i18n.t('settings.encounter.target_input'),
+		itemLabel: i18n.t('settings.encounter.target_inputs.label'),
 		extraCssClasses: ['mt-2'],
 		isCompact: true,
 		changedEvent: (encounter: Encounter) => encounter.targetsChangeEmitter,

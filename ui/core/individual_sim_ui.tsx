@@ -259,7 +259,10 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 				}
 
 				const metaGem = this.player.getGear().getMetaGem()!;
-				return `Meta gem disabled (${metaGem.name}): ${getMetaGemConditionDescription(metaGem)}`;
+				return i18n.t('sidebar.warnings.meta_gem_disabled', {
+					gemName: metaGem.name,
+					description: getMetaGemConditionDescription(metaGem)
+				});
 			},
 		});
 		this.addWarning({
@@ -270,7 +273,10 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 					return '';
 				}
 
-				return failedProfReqs.map(fpr => `${fpr.name} requires ${professionNames.get(fpr.requiredProfession)!}, but it is not selected.`);
+				return failedProfReqs.map(fpr => i18n.t('sidebar.warnings.profession_requirement', {
+					itemName: fpr.name,
+					professionName: professionNames.get(fpr.requiredProfession)!
+				}));
 			},
 		});
 		this.addWarning({
@@ -281,7 +287,9 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 					return '';
 				}
 
-				return `Only 2 Jewelcrafting Gems are allowed, but ${jcGems.length} are equipped.`;
+				return i18n.t('sidebar.warnings.too_many_jc_gems', {
+					count: jcGems.length
+				});
 			},
 		});
 		this.addWarning({
@@ -293,7 +301,7 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 					// Just return here, so we don't show a warning during page load.
 					return '';
 				} else if (talentPoints < 6) {
-					return 'Unspent talent points.';
+					return i18n.t('sidebar.warnings.unspent_talent_points');
 				} else {
 					return '';
 				}
@@ -307,9 +315,9 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 				}
 
 				if (this.player.hasArmorSpecializationBonus()) {
-					return `Equip ${armorTypeNames.get(
-						this.player.armorSpecializationArmorType,
-					)} gear in each slot for the Armor Specialization (5% primary stat) effect.`;
+					return i18n.t('sidebar.warnings.armor_specialization', {
+						armorType: armorTypeNames.get(this.player.armorSpecializationArmorType)
+					});
 				} else {
 					return '';
 				}
@@ -324,7 +332,7 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 						this.player.getEquippedItem(ItemSlot.ItemSlotOffHand) != null) ||
 						this.player.getEquippedItem(ItemSlot.ItemSlotOffHand)?.item.handType == HandType.HandTypeTwoHand)
 				) {
-					return "Dual wielding two-handed weapon(s) without Titan's Grip spec.";
+					return i18n.t('sidebar.warnings.dual_wield_2h_without_titans_grip');
 				} else {
 					return '';
 				}

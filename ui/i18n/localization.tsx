@@ -35,7 +35,10 @@ export const translatePseudoStat = (pseudoStat: PseudoStat): string => {
 	}
 };
 
-export const translateTargetInput = (label: string): string => {
+// Target Inputs are fetched from proto, so we need to translate the label and tooltip
+// Currently it is TBD if we will translate Golang texts, let's keep it for now
+
+export const translateTargetInputLabel = (label: string): string => {
 	try {
 		const key = getTargetInputI18nKey(label);
 		const translated = i18n.t(`settings.encounter.target_inputs.${key}.label`);
@@ -48,9 +51,9 @@ export const translateTargetInput = (label: string): string => {
 	}
 };
 
-export const translateTargetInputTooltip = (tooltip: string): string => {
+export const translateTargetInputTooltip = (label: string, tooltip: string): string => {
 	try {
-		const key = getTargetInputI18nKey(tooltip);
+		const key = getTargetInputI18nKey(label);
 		const translated = i18n.t(`settings.encounter.target_inputs.${key}.tooltip`);
 		if (translated === `settings.encounter.target_inputs.${key}.tooltip`) {
 			return tooltip;
