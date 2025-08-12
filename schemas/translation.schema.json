@@ -84,11 +84,18 @@
                 "target_inputs": {
                     "$ref": "#/definitions/TargetInputs"
                 },
+
                 "stats": {
                     "$ref": "#/definitions/Stats"
                 },
                 "copy_button": {
                     "$ref": "#/definitions/CopyButton"
+                },
+                "list_picker": {
+                    "$ref": "#/definitions/ListPicker"
+                },
+                "mob_types": {
+                    "$ref": "#/definitions/MobTypes"
                 }
             },
             "required": [
@@ -99,7 +106,9 @@
                 "target_inputs",
                 "stats",
                 "status",
-                "copy_button"
+                "copy_button",
+                "list_picker",
+                "mob_types"
             ],
             "title": "Common"
         },
@@ -486,10 +495,10 @@
             "additionalProperties": false,
             "properties": {
                 "frenzy_time": {
-                    "type": "string"
+                    "$ref": "#/definitions/TargetInputField"
                 },
                 "spiritual_grasp_frequency": {
-                    "type": "string"
+                    "$ref": "#/definitions/TargetInputField"
                 }
             },
             "required": [
@@ -497,6 +506,48 @@
                 "spiritual_grasp_frequency"
             ],
             "title": "TargetInputs"
+        },
+        "TargetInputField": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "label",
+                "tooltip"
+            ],
+            "title": "TargetInputField"
+        },
+        "Tank": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "main_tank": {
+                    "type": "string"
+                },
+                "tank_2": {
+                    "type": "string"
+                },
+                "tank_3": {
+                    "type": "string"
+                },
+                "tank_4": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "main_tank",
+                "tank_2",
+                "tank_3",
+                "tank_4"
+            ],
+            "title": "Tank"
         },
         "Stats": {
             "type": "object",
@@ -667,6 +718,92 @@
                 "copied"
             ],
             "title": "CopyButton"
+        },
+        "ListPicker": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "new_item": {
+                    "type": "string"
+                },
+                "delete_item": {
+                    "type": "string"
+                },
+                "copy_to_new": {
+                    "type": "string"
+                },
+                "move_drag_drop": {
+                    "type": "string"
+                },
+                "warnings": {
+                    "type": "string"
+                },
+                "additional_information": {
+                    "type": "string"
+                },
+                "action_has_warnings": {
+                    "type": "string"
+                },
+                "action_has_errors": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "new_item",
+                "delete_item",
+                "copy_to_new",
+                "move_drag_drop",
+                "warnings",
+                "additional_information",
+                "action_has_warnings",
+                "action_has_errors"
+            ],
+            "title": "ListPicker"
+        },
+        "MobTypes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "unknown": {
+                    "type": "string"
+                },
+                "beast": {
+                    "type": "string"
+                },
+                "demon": {
+                    "type": "string"
+                },
+                "dragonkin": {
+                    "type": "string"
+                },
+                "elemental": {
+                    "type": "string"
+                },
+                "giant": {
+                    "type": "string"
+                },
+                "humanoid": {
+                    "type": "string"
+                },
+                "mechanical": {
+                    "type": "string"
+                },
+                "undead": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "unknown",
+                "beast",
+                "demon",
+                "dragonkin",
+                "elemental",
+                "giant",
+                "humanoid",
+                "mechanical",
+                "undead"
+            ],
+            "title": "MobTypes"
         },
         "Status": {
             "type": "object",
@@ -1586,17 +1723,8 @@
                 "none": {
                     "type": "string"
                 },
-                "main_tank": {
-                    "type": "string"
-                },
-                "tank_2": {
-                    "type": "string"
-                },
-                "tank_3": {
-                    "type": "string"
-                },
-                "tank_4": {
-                    "type": "string"
+                "tank": {
+                    "$ref": "#/definitions/Tank"
                 }
             },
             "required": [
@@ -1607,7 +1735,7 @@
                 "tanked_by", "swing_speed", "dual_wield", "dual_wield_penalty", "parry_haste",
                 "spell_school", "damage_spread", "suppress_dodge", "second_tank_index", "disabled_at_start",
                 "target_input", "frenzy_time", "spiritual_grasp_frequency",
-                "custom", "none", "main_tank", "tank_2", "tank_3", "tank_4"
+                "custom", "none", "tank"
             ],
             "title": "Encounter"
         },

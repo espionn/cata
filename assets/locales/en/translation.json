@@ -103,6 +103,17 @@
 				"protection": "Protection"
 			}
 		},
+		"mob_types": {
+			"unknown": "None",
+			"beast": "Beast",
+			"demon": "Demon",
+			"dragonkin": "Dragonkin",
+			"elemental": "Elemental",
+			"giant": "Giant",
+			"humanoid": "Humanoid",
+			"mechanical": "Mechanical",
+			"undead": "Undead"
+		},
 		"spell_schools": {
 			"physical": "Physical",
 			"arcane": "Arcane",
@@ -113,8 +124,14 @@
 			"shadow": "Shadow"
 		},
 		"target_inputs": {
-			"frenzy_time": "Frenzy time",
-			"spiritual_grasp_frequency": "Spiritual Grasp frequency"
+			"frenzy_time": {
+				"label": "Frenzy time",
+				"tooltip": "Simulation time (in seconds) at which to disable tank swaps and enable the boss Frenzy buff"
+			},
+			"spiritual_grasp_frequency": {
+				"label": "Spiritual Grasp frequency",
+				"tooltip": "Average time (in seconds) between Spiritual Grasp hits, following an exponential distribution"
+			}
 		},
 		"stats": {
 			"strength": "Strength",
@@ -157,6 +174,16 @@
 		"copy_button": {
 			"default_text": "Copy to Clipboard",
 			"copied": "Copied"
+		},
+		"list_picker": {
+			"new_item": "New {itemLabel}",
+			"delete_item": "Delete {itemLabel}",
+			"copy_to_new": "Copy to New {itemLabel}",
+			"move_drag_drop": "Move (Drag+Drop)",
+			"warnings": "Warnings",
+			"additional_information": "Additional Information:",
+			"action_has_warnings": "This action has warnings, and might not behave as expected.",
+			"action_has_errors": "This action has errors, and will not behave as expected."
 		}
 	},
 	"sim": {
@@ -289,10 +316,12 @@
 			},
 			"custom": "Custom",
 			"none": "None",
-			"main_tank": "Main Tank",
-			"tank_2": "Tank 2",
-			"tank_3": "Tank 3",
-			"tank_4": "Tank 4"
+			"tank": {
+				"main_tank": "Main Tank",
+				"tank_2": "Tank 2",
+				"tank_3": "Tank 3",
+				"tank_4": "Tank 4"
+			}
 		},
 		"player": {
 			"title": "Player",

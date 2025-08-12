@@ -1,5 +1,5 @@
 import i18n from '../../i18n/config.js';
-import { translateSpellSchool, translateStat, translateTargetInput } from '../../i18n/localization.js';
+import { translateSpellSchool, translateStat, translateTargetInput, translateTargetInputTooltip, translateMobType } from '../../i18n/localization.js';
 import { Encounter } from '../encounter.js';
 import { IndividualSimUI } from '../individual_sim_ui.js';
 import { InputType, MobType, Spec, SpellSchool, Stat, Target, Target as TargetProto, TargetInput } from '../proto/common.js';
@@ -54,7 +54,7 @@ export class EncounterPicker extends Component {
 			const presetEncounters = modEncounter.sim.db.getAllPresetEncounters();
 			new EnumPicker<Encounter>(this.rootElem, modEncounter, {
 				id: 'encounter-preset-encouter',
-				label: i18n.t('settings.encounter.encounter_preset'),
+				label: i18n.t('settings.encounter.encounter_preset.label'),
 				//extraCssClasses: ['encounter-picker', 'mb-0', 'pe-2', 'order-first'],
 				extraCssClasses: ['damage-metrics', 'npc-picker'],
 				values: [{ name: 'Custom', value: -1 }].concat(
@@ -375,11 +375,11 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 			label: i18n.t('settings.encounter.tanked_by.label'),
 			labelTooltip: i18n.t('settings.encounter.tanked_by.tooltip'),
 			values: [
-				{ name: 'None', value: -1 },
-				{ name: 'Main Tank', value: 0 },
-				{ name: 'Tank 2', value: 1 },
-				{ name: 'Tank 3', value: 2 },
-				{ name: 'Tank 4', value: 3 },
+				{ name: i18n.t('settings.encounter.none'), value: -1 },
+				{ name: i18n.t('settings.encounter.tank.main_tank'), value: 0 },
+				{ name: i18n.t('settings.encounter.tank.tank_2'), value: 1 },
+				{ name: i18n.t('settings.encounter.tank.tank_3'), value: 2 },
+				{ name: i18n.t('settings.encounter.tank.tank_4'), value: 3 },
 			],
 			changedEvent: () => encounter.targetsChangeEmitter,
 			getValue: () => this.getTarget().tankIndex,
@@ -622,7 +622,7 @@ class TargetInputPicker extends Input<Encounter, TargetInput> {
 				id: randomUUID(),
 				float: true,
 				label: translateTargetInput(newValue.label),
-				labelTooltip: newValue.tooltip,
+				labelTooltip: translateTargetInputTooltip(newValue.tooltip),
 				changedEvent: () => this.encounter.targetsChangeEmitter,
 				getValue: () => this.getTargetInput().numberValue,
 				setValue: (eventID: EventID, _: null, newValue: number) => {
@@ -639,7 +639,7 @@ class TargetInputPicker extends Input<Encounter, TargetInput> {
 			this.boolPicker = new BooleanPicker(this.rootElem, null, {
 				id: randomUUID(),
 				label: translateTargetInput(newValue.label),
-				labelTooltip: newValue.tooltip,
+				labelTooltip: translateTargetInputTooltip(newValue.tooltip),
 				extraCssClasses: ['input-inline'],
 				changedEvent: () => this.encounter.targetsChangeEmitter,
 				getValue: () => this.getTargetInput().boolValue,
@@ -812,13 +812,13 @@ const ALL_TARGET_STATS: Array<{ stat: Stat; tooltip: string; extraCssClasses: Ar
 ];
 
 const mobTypeEnumValues = [
-	{ name: 'None', value: MobType.MobTypeUnknown },
-	{ name: 'Beast', value: MobType.MobTypeBeast },
-	{ name: 'Demon', value: MobType.MobTypeDemon },
-	{ name: 'Dragonkin', value: MobType.MobTypeDragonkin },
-	{ name: 'Elemental', value: MobType.MobTypeElemental },
-	{ name: 'Giant', value: MobType.MobTypeGiant },
-	{ name: 'Humanoid', value: MobType.MobTypeHumanoid },
-	{ name: 'Mechanical', value: MobType.MobTypeMechanical },
-	{ name: 'Undead', value: MobType.MobTypeUndead },
+	{ name: translateMobType(MobType.MobTypeUnknown), value: MobType.MobTypeUnknown },
+	{ name: translateMobType(MobType.MobTypeBeast), value: MobType.MobTypeBeast },
+	{ name: translateMobType(MobType.MobTypeDemon), value: MobType.MobTypeDemon },
+	{ name: translateMobType(MobType.MobTypeDragonkin), value: MobType.MobTypeDragonkin },
+	{ name: translateMobType(MobType.MobTypeElemental), value: MobType.MobTypeElemental },
+	{ name: translateMobType(MobType.MobTypeGiant), value: MobType.MobTypeGiant },
+	{ name: translateMobType(MobType.MobTypeHumanoid), value: MobType.MobTypeHumanoid },
+	{ name: translateMobType(MobType.MobTypeMechanical), value: MobType.MobTypeMechanical },
+	{ name: translateMobType(MobType.MobTypeUndead), value: MobType.MobTypeUndead },
 ];

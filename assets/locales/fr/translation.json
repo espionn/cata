@@ -103,6 +103,17 @@
 				"protection": "Protection"
 			}
 		},
+		"mob_types": {
+			"unknown": "Aucun",
+			"beast": "Bête",
+			"demon": "Démon",
+			"dragonkin": "Draconien",
+			"elemental": "Élémentaire",
+			"giant": "Géant",
+			"humanoid": "Humanoïde",
+			"mechanical": "Mécanique",
+			"undead": "Mort-vivant"
+		},
 		"spell_schools": {
 			"physical": "Physique",
 			"arcane": "Arcanique",
@@ -113,8 +124,14 @@
 			"shadow": "Ombre"
 		},
 		"target_inputs": {
-			"frenzy_time": "Temps de frénésie",
-			"spiritual_grasp_frequency": "Fréquence de prise spirituelle"
+			"frenzy_time": {
+				"label": "Temps de frénésie",
+				"tooltip": "Temps de simulation (en secondes) auquel désactiver les changements de tank et activer le buff de Frénésie du boss"
+			},
+			"spiritual_grasp_frequency": {
+				"label": "Fréquence de prise spirituelle",
+				"tooltip": "Temps moyen (en secondes) entre les coups de Saisie Spirituelle, suivant une distribution exponentielle"
+			}
 		},
 		"stats": {
 			"strength": "Force",
@@ -157,6 +174,16 @@
 		"copy_button": {
 			"default_text": "Copier dans le presse-papiers",
 			"copied": "Copié"
+		},
+		"list_picker": {
+			"new_item": "Nouveau {itemLabel}",
+			"delete_item": "Supprimer {itemLabel}",
+			"copy_to_new": "Copier vers Nouveau {itemLabel}",
+			"move_drag_drop": "Déplacer (Glisser+Déposer)",
+			"warnings": "Avertissements",
+			"additional_information": "Informations supplémentaires :",
+			"action_has_warnings": "Cette action a des avertissements et pourrait ne pas se comporter comme prévu.",
+			"action_has_errors": "Cette action a des erreurs et ne se comportera pas comme prévu."
 		}
 	},
 	"sim": {
@@ -289,10 +316,12 @@
 			},
 			"custom": "Personnalisé",
 			"none": "Aucun",
-			"main_tank": "Tank Principal",
-			"tank_2": "Tank 2",
-			"tank_3": "Tank 3",
-			"tank_4": "Tank 4"
+			"tank": {
+				"main_tank": "Tank Principal",
+				"tank_2": "Tank 2",
+				"tank_3": "Tank 3",
+				"tank_4": "Tank 4"
+			}
 		},
 		"player": {
 			"title": "Joueur",

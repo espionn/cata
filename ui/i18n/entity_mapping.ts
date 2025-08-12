@@ -1,5 +1,5 @@
 import { LaunchStatus } from '../core/launched_sims';
-import { Class, PseudoStat, Spec, Stat, SpellSchool } from '../core/proto/common';
+import { Class, MobType, PseudoStat, Spec, Stat, SpellSchool } from '../core/proto/common';
 import i18n from './config';
 
 export const statI18nKeys: Record<Stat, string> = {
@@ -138,6 +138,18 @@ export const targetInputI18nKeys: Record<string, string> = {
 	'Spiritual Grasp frequency': 'spiritual_grasp_frequency',
 };
 
+export const mobTypeI18nKeys: Record<MobType, string> = {
+	[MobType.MobTypeUnknown]: 'unknown',
+	[MobType.MobTypeBeast]: 'beast',
+	[MobType.MobTypeDemon]: 'demon',
+	[MobType.MobTypeDragonkin]: 'dragonkin',
+	[MobType.MobTypeElemental]: 'elemental',
+	[MobType.MobTypeGiant]: 'giant',
+	[MobType.MobTypeHumanoid]: 'humanoid',
+	[MobType.MobTypeMechanical]: 'mechanical',
+	[MobType.MobTypeUndead]: 'undead',
+};
+
 export const translateStat = (stat: Stat): string => {
 	const key = statI18nKeys[stat] || Stat[stat].toLowerCase();
 	return i18n.t(`common.stats.${key}`);
@@ -178,3 +190,12 @@ export function getStatusI18nKey(status: LaunchStatus): string {
 export function getTargetInputI18nKey(label: string): string {
 	return targetInputI18nKeys[label] || label.toLowerCase().replace(/\s+/g, '_');
 }
+
+export function getMobTypeI18nKey(mobType: MobType): string {
+	return mobTypeI18nKeys[mobType] || MobType[mobType].toLowerCase();
+}
+
+export const translateMobType = (mobType: MobType): string => {
+	const key = getMobTypeI18nKey(mobType);
+	return i18n.t(`common.mob_types.${key}`);
+};

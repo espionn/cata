@@ -1,8 +1,8 @@
 import { PlayerClass } from '../core/player_class';
 import { PlayerSpec } from '../core/player_spec';
-import { PseudoStat, SpellSchool, Stat } from '../core/proto/common';
+import { MobType, PseudoStat, SpellSchool, Stat } from '../core/proto/common';
 import i18n from './config';
-import { getClassI18nKey, getSpecI18nKey, getTargetInputI18nKey, pseudoStatI18nKeys, spellSchoolI18nKeys, statI18nKeys } from './entity_mapping';
+import { getClassI18nKey, getMobTypeI18nKey, getSpecI18nKey, getTargetInputI18nKey, pseudoStatI18nKeys, spellSchoolI18nKeys, statI18nKeys } from './entity_mapping';
 import { getLang, setLang, supportedLanguages } from './locale_service';
 
 /**
@@ -10,36 +10,110 @@ import { getLang, setLang, supportedLanguages } from './locale_service';
  */
 
 export const translateStat = (stat: Stat): string => {
-	const key = statI18nKeys[stat] || Stat[stat].toLowerCase();
-	return i18n.t(`common.stats.${key}`);
+	try {
+		const key = statI18nKeys[stat] || Stat[stat].toLowerCase();
+		const translated = i18n.t(`common.stats.${key}`);
+		if (translated === `common.stats.${key}`) {
+			return Stat[stat];
+		}
+		return translated;
+	} catch {
+		return Stat[stat];
+	}
 };
 
 export const translatePseudoStat = (pseudoStat: PseudoStat): string => {
-	const key = pseudoStatI18nKeys[pseudoStat] || PseudoStat[pseudoStat].toLowerCase();
-	return i18n.t(`common.stats.${key}`);
+	try {
+		const key = pseudoStatI18nKeys[pseudoStat] || PseudoStat[pseudoStat].toLowerCase();
+		const translated = i18n.t(`common.stats.${key}`);
+		if (translated === `common.stats.${key}`) {
+			return PseudoStat[pseudoStat];
+		}
+		return translated;
+	} catch {
+		return PseudoStat[pseudoStat];
+	}
 };
 
 export const translateTargetInput = (label: string): string => {
-	const key = getTargetInputI18nKey(label);
-	return i18n.t(`common.target_inputs.${key}`);
+	try {
+		const key = getTargetInputI18nKey(label);
+		const translated = i18n.t(`common.target_inputs.${key}.label`);
+		if (translated === `common.target_inputs.${key}.label`) {
+			return label;
+		}
+		return translated;
+	} catch {
+		return label;
+	}
+};
+
+export const translateTargetInputTooltip = (tooltip: string): string => {
+	try {
+		const key = getTargetInputI18nKey(tooltip);
+		const translated = i18n.t(`common.target_inputs.${key}.tooltip`);
+		if (translated === `common.target_inputs.${key}.tooltip`) {
+			return tooltip;
+		}
+		return translated;
+	} catch {
+		return tooltip;
+	}
 };
 
 export const translateSpellSchool = (spellSchool: SpellSchool): string => {
-	const key = spellSchoolI18nKeys[spellSchool] || SpellSchool[spellSchool].toLowerCase();
-	return i18n.t(`common.spell_schools.${key}`);
+	try {
+		const key = spellSchoolI18nKeys[spellSchool] || SpellSchool[spellSchool].toLowerCase();
+		const translated = i18n.t(`common.spell_schools.${key}`);
+		if (translated === `common.spell_schools.${key}`) {
+			return SpellSchool[spellSchool];
+		}
+		return translated;
+	} catch {
+		return SpellSchool[spellSchool];
+	}
+};
+
+export const translateMobType = (mobType: MobType): string => {
+	try {
+		const key = getMobTypeI18nKey(mobType);
+		const translated = i18n.t(`common.mob_types.${key}`);
+		if (translated === `common.mob_types.${key}`) {
+			return MobType[mobType];
+		}
+		return translated;
+	} catch {
+		return MobType[mobType];
+	}
 };
 
 export const translateClass = (className: string): string => {
-	const normalizedClassName = className.toLowerCase().replace(/_/g, '');
-	const i18nKey = normalizedClassName === 'deathknight' ? 'death_knight' : normalizedClassName;
-	return i18n.t(`common.classes.${i18nKey}`);
+	try {
+		const normalizedClassName = className.toLowerCase().replace(/_/g, '');
+		const i18nKey = normalizedClassName === 'deathknight' ? 'death_knight' : normalizedClassName;
+		const translated = i18n.t(`common.classes.${i18nKey}`);
+		if (translated === `common.classes.${i18nKey}`) {
+			return className;
+		}
+		return translated;
+	} catch {
+		return className;
+	}
 };
 
 export const translateSpec = (className: string, specName: string): string => {
-	const normalizedClassName = className.toLowerCase().replace(/_/g, '');
-	const classKey = normalizedClassName === 'deathknight' ? 'death_knight' : normalizedClassName;
-	const specKey = specName.toLowerCase();
-	return i18n.t(`common.specs.${classKey}.${specKey}`);
+	try {
+		const normalizedClassName = className.toLowerCase().replace(/_/g, '');
+		const classKey = normalizedClassName === 'deathknight' ? 'death_knight' : normalizedClassName;
+		const specKey = specName.toLowerCase();
+		const translated = i18n.t(`common.specs.${classKey}.${specKey}`);
+		if (translated === `common.specs.${classKey}.${specKey}`) {
+			return specName;
+		}
+		return translated;
+	} catch {
+		return specName;
+	}
 };
 
 export const translatePlayerClass = (playerClass: PlayerClass<any>): string => {
