@@ -1,8 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-06/schema#",
-    "$ref": "#/definitions/Welcome",
+    "$ref": "#/definitions/Translation",
     "definitions": {
-        "Welcome": {
+        "Translation": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -10,7 +10,7 @@
                     "$ref": "#/definitions/Landing"
                 },
                 "common": {
-                    "$ref": "#/definitions/WelcomeCommon"
+                    "$ref": "#/definitions/TranslationCommon"
                 },
                 "sim": {
                     "$ref": "#/definitions/Sim"
@@ -61,9 +61,9 @@
                 "sim",
                 "talents"
             ],
-            "title": "Welcome"
+            "title": "Translation"
         },
-        "WelcomeCommon": {
+        "TranslationCommon": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -153,7 +153,7 @@
                 "tanks",
                 "weapon_types"
             ],
-            "title": "WelcomeCommon"
+            "title": "TranslationCommon"
         },
         "ArmorTypes": {
             "type": "object",
@@ -2133,6 +2133,9 @@
                 "totem_types": {
                     "$ref": "#/definitions/TotemTypes"
                 },
+                "submenus": {
+                    "$ref": "#/definitions/Submenus"
+                },
                 "item_swap_sets": {
                     "$ref": "#/definitions/ItemSwapSets"
                 }
@@ -2144,6 +2147,7 @@
                 "operators",
                 "prepull_actions",
                 "priority_list",
+                "submenus",
                 "totem_types",
                 "values"
             ],
@@ -2573,6 +2577,131 @@
             ],
             "title": "PrepullActions"
         },
+        "Submenus": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "logic": {
+                    "type": "string"
+                },
+                "encounter": {
+                    "type": "string"
+                },
+                "boss": {
+                    "type": "string"
+                },
+                "unit": {
+                    "type": "string"
+                },
+                "resources": {
+                    "type": "string"
+                },
+                "gcd": {
+                    "type": "string"
+                },
+                "auto": {
+                    "type": "string"
+                },
+                "spell": {
+                    "type": "string"
+                },
+                "aura": {
+                    "type": "string"
+                },
+                "aura_sets": {
+                    "type": "string"
+                },
+                "dot": {
+                    "type": "string"
+                },
+                "sequence": {
+                    "type": "string"
+                },
+                "feral_druid": {
+                    "type": "string"
+                },
+                "shaman": {
+                    "type": "string"
+                },
+                "warlock": {
+                    "type": "string"
+                },
+                "mage": {
+                    "type": "string"
+                },
+                "tank": {
+                    "type": "string"
+                },
+                "health": {
+                    "type": "string"
+                },
+                "mana": {
+                    "type": "string"
+                },
+                "rage": {
+                    "type": "string"
+                },
+                "focus": {
+                    "type": "string"
+                },
+                "energy": {
+                    "type": "string"
+                },
+                "combo_points": {
+                    "type": "string"
+                },
+                "chi": {
+                    "type": "string"
+                },
+                "runic_power": {
+                    "type": "string"
+                },
+                "eclipse": {
+                    "type": "string"
+                },
+                "runes": {
+                    "type": "string"
+                },
+                "cooldowns": {
+                    "type": "string"
+                },
+                "placeholders": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "aura",
+                "aura_sets",
+                "auto",
+                "boss",
+                "chi",
+                "combo_points",
+                "cooldowns",
+                "dot",
+                "eclipse",
+                "encounter",
+                "energy",
+                "feral_druid",
+                "focus",
+                "gcd",
+                "health",
+                "logic",
+                "mage",
+                "mana",
+                "placeholders",
+                "rage",
+                "resources",
+                "runes",
+                "runic_power",
+                "sequence",
+                "shaman",
+                "spell",
+                "tank",
+                "unit",
+                "warlock"
+            ],
+            "title": "Submenus"
+        },
         "TotemTypes": {
             "type": "object",
             "additionalProperties": false,
@@ -2609,7 +2738,7 @@
                     "type": "string"
                 },
                 "const": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/Const"
                 },
                 "compare": {
                     "$ref": "#/definitions/LanguageClass"
@@ -2647,22 +2776,22 @@
                 "is_execute_phase": {
                     "$ref": "#/definitions/LanguageClass"
                 },
-                "number_of_targets": {
+                "num_targets": {
                     "$ref": "#/definitions/LanguageClass"
                 },
-                "front_of_target": {
+                "in_front_of_target": {
                     "$ref": "#/definitions/LanguageClass"
                 },
-                "spell_is_casting": {
+                "boss_cast": {
                     "$ref": "#/definitions/LanguageClass"
                 },
-                "spell_time_to_ready": {
+                "boss_cast_time_to_ready": {
                     "$ref": "#/definitions/LanguageClass"
                 },
-                "is_moving": {
+                "unit_is_moving": {
                     "$ref": "#/definitions/LanguageClass"
                 },
-                "distance": {
+                "distance_to_unit": {
                     "$ref": "#/definitions/LanguageClass"
                 },
                 "current_health": {
@@ -2907,6 +3036,15 @@
                 },
                 "protection_paladin_damage_taken_last_global": {
                     "$ref": "#/definitions/LanguageClass"
+                },
+                "aura_remaining_icd": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "aura_icd_is_ready_with_reaction_time": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "overlap": {
+                    "$ref": "#/definitions/LanguageClass"
                 }
             },
             "required": [
@@ -2917,11 +3055,15 @@
                 "any_trinket_stat_procs_active",
                 "aura_active",
                 "aura_active_with_reaction_time",
+                "aura_icd_is_ready_with_reaction_time",
                 "aura_inactive_with_reaction_time",
                 "aura_known",
                 "aura_num_stacks",
+                "aura_remaining_icd",
                 "aura_remaining_time",
                 "aura_should_refresh",
+                "boss_cast",
+                "boss_cast_time_to_ready",
                 "brewmaster_monk_current_stagger_percent",
                 "can_cast",
                 "cast_time",
@@ -2946,7 +3088,7 @@
                 "current_runic_power",
                 "current_time",
                 "current_time_percent",
-                "distance",
+                "distance_to_unit",
                 "dot_is_active",
                 "dot_is_active_on_all_targets",
                 "dot_lowest_remaining_time",
@@ -2957,14 +3099,13 @@
                 "estimated_time_to_target_energy",
                 "estimated_time_to_target_focus",
                 "focus_regen_per_second",
-                "front_of_target",
                 "gcd_is_ready",
                 "gcd_time_to_ready",
                 "generic_resource",
+                "in_front_of_target",
                 "input_delay",
                 "is_channeling",
                 "is_execute_phase",
-                "is_moving",
                 "is_ready",
                 "lunar_energy",
                 "mage_current_combustion_dot_estimate",
@@ -2986,8 +3127,9 @@
                 "num_non_death_runes",
                 "num_runes",
                 "num_stat_buff_cooldowns",
+                "num_targets",
                 "number_of_charges",
-                "number_of_targets",
+                "overlap",
                 "protection_paladin_damage_taken_last_global",
                 "remaining_time",
                 "remaining_time_percent",
@@ -3000,9 +3142,7 @@
                 "sequence_time_to_ready",
                 "shaman_fire_elemental_duration",
                 "solar_energy",
-                "spell_is_casting",
                 "spell_known",
-                "spell_time_to_ready",
                 "time_to_next_auto",
                 "time_to_next_charge",
                 "time_to_ready",
@@ -3010,10 +3150,32 @@
                 "travel_time",
                 "trinket_procs_max_remaining_icd",
                 "trinket_procs_min_remaining_time",
+                "unit_is_moving",
                 "warlock_hand_of_guldan_in_flight",
                 "warlock_haunt_in_flight"
             ],
             "title": "APLValues"
+        },
+        "Const": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "full_description": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "full_description",
+                "label",
+                "tooltip"
+            ],
+            "title": "Const"
         },
         "RotationCommon": {
             "type": "object",

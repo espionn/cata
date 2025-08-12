@@ -952,7 +952,8 @@
 				"none": "<Aucun>",
 				"const": {
 					"label": "Const",
-					"tooltip": "Une valeur fixe."
+					"tooltip": "Une valeur fixe.",
+					"full_description": "<p>Exemples :<ul><li><b>Nombre :</b> '123', '0.5', '-10'</li><li><b>Temps :</b> '100ms', '5s', '3m'</li><li><b>Pourcentage :</b> '30%'</li></ul></p>"
 				},
 				"compare": {
 					"label": "Comparer",
@@ -1002,29 +1003,29 @@
 					"label": "Est Phase d'Exécution",
 					"tooltip": "Retourne vrai si la cible est en phase d'exécution."
 				},
-				"number_of_targets": {
+				"num_targets": {
 					"label": "Nombre de Cibles",
-					"tooltip": "Nombre de cibles dans la rencontre."
+					"tooltip": "Nombre de cibles dans la rencontre"
 				},
-				"front_of_target": {
+				"in_front_of_target": {
 					"label": "Devant la Cible",
-					"tooltip": "Retourne vrai si le joueur est devant la cible."
+					"tooltip": "Vrai si nous sommes devant la cible"
 				},
-				"spell_is_casting": {
-					"label": "Le Sort Lance",
-					"tooltip": "Retourne vrai si le sort spécifié est en cours de lancement."
+				"boss_cast": {
+					"label": "Sort du Boss",
+					"tooltip": "Vrai si le boss lance le sort spécifié"
 				},
-				"spell_time_to_ready": {
-					"label": "Temps du Sort Vers Prêt",
-					"tooltip": "Temps jusqu'à ce que le sort spécifié soit prêt."
+				"boss_cast_time_to_ready": {
+					"label": "Temps jusqu'au Sort du Boss Prêt",
+					"tooltip": "Temps jusqu'à ce que le sort du boss soit prêt"
 				},
-				"is_moving": {
-					"label": "Se déplace",
-					"tooltip": "Retourne vrai si le joueur se déplace."
+				"unit_is_moving": {
+					"label": "Unité en Mouvement",
+					"tooltip": "Vrai si l'unité se déplace"
 				},
-				"distance": {
-					"label": "Distance",
-					"tooltip": "Retourne la distance vers l'unité spécifiée."
+				"distance_to_unit": {
+					"label": "Distance à l'Unité",
+					"tooltip": "Distance à l'unité"
 				},
 				"current_health": {
 					"label": "Santé Actuelle",
@@ -1358,21 +1359,9 @@
 					"label": "ICD Aura Prêt (avec Temps de Réaction)",
 					"tooltip": "Vrai si l'ICD de l'aura est actuellement prêt OU s'il a été mis en CD récemment, dans le temps de réaction du joueur (configuré dans Paramètres), sinon Faux."
 				},
-				"aura_active_with_reaction_time": {
-					"label": "Aura Active (avec Temps de Réaction)",
-					"tooltip": "Vrai si l'aura est actuellement active ET qu'elle a été active pendant au moins aussi longtemps que le temps de réaction du joueur (configuré dans Paramètres), sinon Faux."
-				},
-				"aura_inactive_with_reaction_time": {
-					"label": "Aura Inactive (avec Temps de Réaction)",
-					"tooltip": "Vrai si l'aura n'est pas actuellement active ET qu'elle a été inactive pendant au moins aussi longtemps que le temps de réaction du joueur (configuré dans Paramètres), sinon Faux."
-				},
 				"overlap": {
 					"label": "Chevauchement",
 					"tooltip": "Temps maximum avant l'expiration de l'aura où elle peut être rafraîchie."
-				},
-				"trinket_procs_min_remaining_time": {
-					"label": "Temps Restant Min Proc Objets",
-					"tooltip": "Durée restante la plus courte sur tous les procs d'objets/enchants actifs qui améliorent le(s) type(s) de stats spécifié(s), ou infini si aucun n'est actuellement actif."
 				}
 			},
 			"operators": {

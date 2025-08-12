@@ -532,16 +532,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 	const: inputBuilder({
 		label: i18n.t('rotation.apl.values.const.label'),
 		shortDescription: i18n.t('rotation.apl.values.const.tooltip'),
-		fullDescription: `
-		<p>
-			Examples:
-			<ul>
-				<li><b>Number:</b> '123', '0.5', '-10'</li>
-				<li><b>Time:</b> '100ms', '5s', '3m'</li>
-				<li><b>Percentage:</b> '30%'</li>
-			</ul>
-		</p>
-		`,
+		fullDescription: i18n.t('rotation.apl.values.const.full_description'),
 		newValue: APLValueConst.create,
 		fields: [AplHelpers.stringFieldConfig('val')],
 	}),
@@ -1033,9 +1024,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		label: i18n.t('rotation.apl.values.can_cast.label'),
 		submenu: ['spell'],
 		shortDescription: i18n.t('rotation.apl.values.can_cast.tooltip'),
-		fullDescription: `
-			<p>The <b>Cast Spell</b> action does not need to be conditioned on this, because it applies this check automatically.</p>
-		`,
+		fullDescription: i18n.t('rotation.apl.values.can_cast.full_description'),
 		newValue: APLValueSpellCanCast.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
@@ -1178,10 +1167,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		label: i18n.t('rotation.apl.values.aura_should_refresh.label'),
 		submenu: ['aura'],
 		shortDescription: i18n.t('rotation.apl.values.aura_should_refresh.tooltip'),
-		fullDescription: `
-		<p>This condition checks not only the specified aura but also any other auras on the same unit, including auras applied by other raid members, which apply the same debuff category.</p>
-		<p>For example, 'Should Refresh Debuff(Sunder Armor)' will return <b>False</b> if the unit has an active Expose Armor aura.</p>
-		`,
+		fullDescription: i18n.t('rotation.apl.values.aura_should_refresh.full_description'),
 		newValue: () =>
 			APLValueAuraShouldRefresh.create({
 				maxOverlap: {
@@ -1208,9 +1194,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		label: i18n.t('rotation.apl.values.all_trinket_stat_procs_active.label'),
 		submenu: ['aura_sets'],
 		shortDescription: i18n.t('rotation.apl.values.all_trinket_stat_procs_active.tooltip'),
-		fullDescription: `
-		<p>For stacking proc buffs, this condition also checks that the buff has been stacked to its maximum possible strength.</p>
-		`,
+		fullDescription: i18n.t('rotation.apl.values.all_trinket_stat_procs_active.full_description'),
 		newValue: () =>
 			APLValueAllTrinketStatProcsActive.create({
 				statType1: -1,
@@ -1228,9 +1212,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		label: i18n.t('rotation.apl.values.any_trinket_stat_procs_active.label'),
 		submenu: ['aura_sets'],
 		shortDescription: i18n.t('rotation.apl.values.any_trinket_stat_procs_active.tooltip'),
-		fullDescription: `
-		<p>For stacking proc buffs, this condition also checks that the buff has been stacked to its maximum possible strength.</p>
-		`,
+		fullDescription: i18n.t('rotation.apl.values.any_trinket_stat_procs_active.full_description'),
 		newValue: () =>
 			APLValueAnyTrinketStatProcsActive.create({
 				statType1: -1,
@@ -1299,9 +1281,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		label: i18n.t('rotation.apl.values.num_stat_buff_cooldowns.label'),
 		submenu: ['aura_sets'],
 		shortDescription: i18n.t('rotation.apl.values.num_stat_buff_cooldowns.tooltip'),
-		fullDescription: `
-		<p>Both manually casted cooldowns as well as cooldowns controlled by "Cast All Stat Buff Cooldowns" and "Autocast Other Cooldowns" actions are included in the total count returned by this value.</p>
-		`,
+		fullDescription: i18n.t('rotation.apl.values.num_stat_buff_cooldowns.full_description'),
 		newValue: () =>
 			APLValueNumStatBuffCooldowns.create({
 				statType1: -1,
@@ -1314,10 +1294,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		label: i18n.t('rotation.apl.values.any_stat_buff_cooldowns_active.label'),
 		submenu: ['aura_sets'],
 		shortDescription: i18n.t('rotation.apl.values.any_stat_buff_cooldowns_active.tooltip'),
-		fullDescription: `
-		<p>For stacking buffs, this condition also checks that the buff has been stacked to its maximum possible strength after the cooldown is activated.</p>
-		<p>Both manually casted cooldowns as well as cooldowns controlled by "Cast All Stat Buff Cooldowns" and "Autocast Other Cooldowns" actions are checked.</p>
-		`,
+		fullDescription: i18n.t('rotation.apl.values.any_stat_buff_cooldowns_active.full_description'),
 		newValue: () =>
 			APLValueAnyStatBuffCooldownsActive.create({
 				statType1: -1,

@@ -951,92 +951,93 @@
 				"no_condition": "No Condition",
 				"none": "<None>",
 				"const": {
-					"label": "Const",
-					"tooltip": "A fixed value."
+					"label": "Constant",
+					"tooltip": "A constant value",
+					"full_description": "<p>Examples:<ul><li><b>Number:</b> '123', '0.5', '-10'</li><li><b>Time:</b> '100ms', '5s', '3m'</li><li><b>Percentage:</b> '30%'</li></ul></p>"
 				},
 				"compare": {
 					"label": "Compare",
-					"tooltip": "Compares two values."
+					"tooltip": "Compare two values using the specified operator"
 				},
 				"math": {
 					"label": "Math",
-					"tooltip": "Do basic math on two values."
+					"tooltip": "Perform mathematical operations on two values"
 				},
 				"max": {
 					"label": "Max",
-					"tooltip": "Returns the largest value among the subvalues."
+					"tooltip": "Get the maximum value from a list of values"
 				},
 				"min": {
 					"label": "Min",
-					"tooltip": "Returns the smallest value among the subvalues."
+					"tooltip": "Get the minimum value from a list of values"
 				},
 				"all_of": {
-					"label": "All of",
-					"tooltip": "Returns True if all of the sub-values are True, otherwise False"
+					"label": "All Of",
+					"tooltip": "True if ALL of the values are true"
 				},
 				"any_of": {
-					"label": "Any of",
-					"tooltip": "Returns True if any of the sub-values are True, otherwise False"
+					"label": "Any Of",
+					"tooltip": "True if ANY of the values are true"
 				},
 				"not": {
 					"label": "Not",
-					"tooltip": "Returns the opposite of the input value."
+					"tooltip": "True if the value is false"
 				},
 				"current_time": {
 					"label": "Current Time",
-					"tooltip": "Current time in the encounter."
+					"tooltip": "Current time in seconds"
 				},
 				"current_time_percent": {
-					"label": "Current Time (%)",
-					"tooltip": "Elapsed time of the current sim iteration, as a percentage."
+					"label": "Current Time %",
+					"tooltip": "Current time as a percentage of the encounter duration"
 				},
 				"remaining_time": {
 					"label": "Remaining Time",
-					"tooltip": "Remaining time in the encounter."
+					"tooltip": "Remaining time in seconds"
 				},
 				"remaining_time_percent": {
-					"label": "Remaining Time (%)",
-					"tooltip": "Elapsed time of the remaining sim iteration, as a percentage."
+					"label": "Remaining Time %",
+					"tooltip": "Remaining time as a percentage of the encounter duration"
 				},
 				"is_execute_phase": {
 					"label": "Is Execute Phase",
-					"tooltip": "Returns true if the target is in execute phase."
+					"tooltip": "True if we are in the execute phase (target health below threshold)"
 				},
-				"number_of_targets": {
+				"num_targets": {
 					"label": "Number of Targets",
-					"tooltip": "Number of targets in the encounter."
+					"tooltip": "Number of targets in the encounter"
 				},
-				"front_of_target": {
-					"label": "Front of Target",
-					"tooltip": "Returns true if the player is in front of the target."
+				"in_front_of_target": {
+					"label": "In Front of Target",
+					"tooltip": "True if we are in front of the target"
 				},
-				"spell_is_casting": {
-					"label": "Spell is Casting",
-					"tooltip": "Returns true if the specified spell is being cast."
+				"boss_cast": {
+					"label": "Boss Cast",
+					"tooltip": "True if the boss is casting the specified spell"
 				},
-				"spell_time_to_ready": {
-					"label": "Spell Time to Ready",
-					"tooltip": "Time until the specified spell is ready."
+				"boss_cast_time_to_ready": {
+					"label": "Boss Cast Time to Ready",
+					"tooltip": "Time until the boss spell will be ready"
 				},
-				"is_moving": {
-					"label": "Is moving",
-					"tooltip": "Returns true if the player is moving."
+				"unit_is_moving": {
+					"label": "Unit Is Moving",
+					"tooltip": "True if the unit is moving"
 				},
-				"distance": {
-					"label": "Distance",
-					"tooltip": "Returns the distance to the specified unit."
+				"distance_to_unit": {
+					"label": "Distance to Unit",
+					"tooltip": "Distance to the unit"
 				},
 				"current_health": {
 					"label": "Current Health",
-					"tooltip": "Amount of currently available Health."
+					"tooltip": "Current health of the unit"
 				},
 				"current_health_percent": {
-					"label": "Current Health (%)",
-					"tooltip": "Amount of currently available Health, as a percentage."
+					"label": "Current Health %",
+					"tooltip": "Current health as a percentage of max health"
 				},
 				"max_health": {
 					"label": "Max Health",
-					"tooltip": "Amount of currently available maximum Health."
+					"tooltip": "Maximum health of the unit"
 				},
 				"current_mana": {
 					"label": "Current Mana",
@@ -1358,21 +1359,9 @@
 					"label": "Aura ICD Is Ready (with Reaction Time)",
 					"tooltip": "True if the aura's ICD is currently ready OR it was put on CD recently, within the player's reaction time (configured in Settings), otherwise False."
 				},
-				"aura_active_with_reaction_time": {
-					"label": "Aura Active (with Reaction Time)",
-					"tooltip": "True if the aura is currently active AND it has been active for at least as long as the player reaction time (configured in Settings), otherwise False."
-				},
-				"aura_inactive_with_reaction_time": {
-					"label": "Aura Inactive (with Reaction Time)",
-					"tooltip": "True if the aura is not currently active AND it has been inactive for at least as long as the player reaction time (configured in Settings), otherwise False."
-				},
 				"overlap": {
 					"label": "Overlap",
 					"tooltip": "Maximum amount of time before the aura expires when it may be refreshed."
-				},
-				"trinket_procs_min_remaining_time": {
-					"label": "Item Procs Min Remaining Time",
-					"tooltip": "Shortest remaining duration on any active item/enchant procs that buff the specified stat type(s), or infinity if none are currently active."
 				}
 			},
 			"operators": {
