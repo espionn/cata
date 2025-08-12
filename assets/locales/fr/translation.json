@@ -766,7 +766,23 @@
 			},
 			"suggest_reforges": {
 				"title": "Suggérer des Reforges",
-				"tooltip": "Modifier les paramètres de l'Optimiseur de Reforge"
+				"tooltip": "Modifier les paramètres de l'Optimiseur de Reforge",
+				"use_soft_cap_breakpoints": "Utiliser les points de rupture de plafond souple",
+				"force_matrix_apparatus_proc": "Forcer le proc Matrix/Apparatus",
+				"any": "N'importe lequel",
+				"optimize_gems_tooltip": "Optimiser les gemmes et les Reforges simultanément.",
+				"freeze_item_slots_tooltip": "Marquer un ou plusieurs emplacements d'objets comme \"gelés\", ce qui empêchera l'optimiseur de modifier la Reforge ou les gemmes dans cet emplacement de leurs paramètres actuels. Cela peut être utile pour les classes hybrides qui utilisent la même pièce d'équipement pour plusieurs rôles de raid.",
+				"edit_stat_caps": "Modifier les plafonds de statistiques",
+				"stat_caps_tooltip": "Les plafonds de statistiques sont la quantité maximale d'une statistique qui peut être obtenue par la Reforge. Si une statistique dépasse son plafond, l'optimiseur tentera de la réduire à la valeur du plafond.",
+				"reset_to_defaults": "Réinitialiser aux plafonds par défaut",
+				"stat": "Statistique",
+				"select_preset": "Sélectionner un préréglage",
+				"breakpoint_limit": "Limite de point de rupture",
+				"breakpoint_limit_tooltip": "Permet de définir une limite de point de rupture personnalisée.",
+				"no_limit_set": "Aucune limite définie",
+				"breakpoints_implemented": "Les points de rupture suivants ont été implémentés pour cette spé :",
+				"post_cap_ep": "PE post-plafond",
+				"reforge_optimization_failed": "L'optimisation de la Reforge a échoué. Veuillez réessayer ou signaler le problème s'il persiste."
 			}
 		},
 		"header": {

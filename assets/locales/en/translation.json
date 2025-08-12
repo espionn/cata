@@ -765,7 +765,23 @@
 			},
 			"suggest_reforges": {
 				"title": "Suggest Reforges",
-				"tooltip": "Change Reforge Optimizer settings"
+				"tooltip": "Change Reforge Optimizer settings",
+				"use_soft_cap_breakpoints": "Use soft cap breakpoints",
+				"force_matrix_apparatus_proc": "Force Matrix/Apparatus proc",
+				"any": "Any",
+				"optimize_gems_tooltip": "Optimize gems and Reforges simultaneously.",
+				"freeze_item_slots_tooltip": "Flag one or more item slots to be \"frozen\", which will prevent the optimizer from changing the Reforge or gems in that slot from their current settings. This can be useful for hybrid classes who use the same gear piece for multiple raid roles.",
+				"edit_stat_caps": "Edit stat caps",
+				"stat_caps_tooltip": "Stat caps are the maximum amount of a stat that can be gained from Reforging. If a stat exceeds its cap, the optimizer will attempt to reduce it to the cap value.",
+				"reset_to_defaults": "Reset to stat cap defaults",
+				"stat": "Stat",
+				"select_preset": "Select preset",
+				"breakpoint_limit": "Breakpoint limit",
+				"breakpoint_limit_tooltip": "Allows you to set a custom breakpoint limit.",
+				"no_limit_set": "No limit set",
+				"breakpoints_implemented": "The following breakpoints have been implemented for this spec:",
+				"post_cap_ep": "Post cap EP",
+				"reforge_optimization_failed": "Reforge optimization failed. Please try again, or report the issue if it persists."
 			}
 		},
 		"header": {

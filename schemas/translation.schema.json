@@ -1755,9 +1755,57 @@
 				},
 				"tooltip": {
 					"type": "string"
+				},
+				"use_soft_cap_breakpoints": {
+					"type": "string"
+				},
+				"force_matrix_apparatus_proc": {
+					"type": "string"
+				},
+				"any": {
+					"type": "string"
+				},
+				"optimize_gems_tooltip": {
+					"type": "string"
+				},
+				"freeze_item_slots_tooltip": {
+					"type": "string"
+				},
+				"edit_stat_caps": {
+					"type": "string"
+				},
+				"stat_caps_tooltip": {
+					"type": "string"
+				},
+				"reset_to_defaults": {
+					"type": "string"
+				},
+				"stat": {
+					"type": "string"
+				},
+				"select_preset": {
+					"type": "string"
+				},
+				"breakpoint_limit": {
+					"type": "string"
+				},
+				"breakpoint_limit_tooltip": {
+					"type": "string"
+				},
+				"no_limit_set": {
+					"type": "string"
+				},
+				"breakpoints_implemented": {
+					"type": "string"
+				},
+				"post_cap_ep": {
+					"type": "string"
+				},
+				"reforge_optimization_failed": {
+					"type": "string"
 				}
 			},
-			"required": ["title", "tooltip"],
+			"required": ["title", "tooltip", "use_soft_cap_breakpoints", "force_matrix_apparatus_proc", "any", "optimize_gems_tooltip", "freeze_item_slots_tooltip", "edit_stat_caps", "stat_caps_tooltip", "reset_to_defaults", "stat", "select_preset", "breakpoint_limit", "breakpoint_limit_tooltip", "no_limit_set", "breakpoints_implemented", "post_cap_ep", "reforge_optimization_failed"],
 			"title": "SuggestReforges"
 		},
 		"Home": {
