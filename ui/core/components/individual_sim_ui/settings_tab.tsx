@@ -202,11 +202,11 @@ export class SettingsTab extends SimTab {
 
 	private buildBuffsSettings() {
 		const contentBlock = new ContentBlock(this.column3, 'buffs-settings', {
-			header: { title: 'Raid Buffs', tooltip: Tooltips.BUFFS_SECTION },
+			header: { title: i18n.t('settings.raid_buffs.title'), tooltip: i18n.t('settings.raid_buffs.tooltip') },
 		});
 		contentBlock.headerElement?.appendChild(
 			<p className="fs-body">
-				All raid buffs/debuffs selected are assumed to be provided by <strong>other</strong> raid members than the simulated player.
+				{i18n.t('settings.raid_buffs.description')}
 			</p>,
 		);
 
@@ -223,7 +223,7 @@ export class SettingsTab extends SimTab {
 				this.simUI.player,
 				{
 					inputs: miscBuffOptions.map(option => option.config),
-					label: 'Misc',
+					label: i18n.t('settings.raid_buffs.misc.label'),
 				},
 				this.simUI,
 			);
@@ -234,7 +234,7 @@ export class SettingsTab extends SimTab {
 		const externalDamageCooldownOptions = relevantStatOptions(BuffDebuffInputs.RAID_BUFFS_EXTERNAL_DAMAGE_COOLDOWN, this.simUI);
 		if (externalDamageCooldownOptions.length > 0) {
 			const contentBlock = new ContentBlock(this.column3, 'buffs-settings', {
-				header: { title: 'External Damage Cooldowns', tooltip: Tooltips.EXTERNAL_DAMAGE_COOLDOWN_SECTION },
+				header: { title: i18n.t('settings.external_damage_cooldowns.title'), tooltip: i18n.t('settings.external_damage_cooldowns.tooltip') },
 			});
 
 			this.configureIconSection(
@@ -249,7 +249,7 @@ export class SettingsTab extends SimTab {
 		const externalDefensiveCooldownOptions = relevantStatOptions(BuffDebuffInputs.RAID_BUFFS_EXTERNAL_DEFENSIVE_COOLDOWN, this.simUI);
 		if (externalDefensiveCooldownOptions.length > 0) {
 			const contentBlock = new ContentBlock(this.column3, 'buffs-settings', {
-				header: { title: 'External Defensive Cooldowns', tooltip: Tooltips.EXTERNAL_DEFENSIVE_COOLDOWN_SECTION },
+				header: { title: i18n.t('settings.external_defensive_cooldowns.title'), tooltip: i18n.t('settings.external_defensive_cooldowns.tooltip') },
 			});
 
 			this.configureIconSection(
@@ -263,7 +263,7 @@ export class SettingsTab extends SimTab {
 
 	private buildDebuffsSettings() {
 		const contentBlock = new ContentBlock(this.column3, 'debuffs-settings', {
-			header: { title: 'Debuffs', tooltip: Tooltips.DEBUFFS_SECTION },
+			header: { title: i18n.t('settings.debuffs.title'), tooltip: i18n.t('settings.debuffs.tooltip') },
 		});
 
 		const debuffOptions = relevantStatOptions(BuffDebuffInputs.DEBUFFS_CONFIG, this.simUI);
@@ -279,7 +279,7 @@ export class SettingsTab extends SimTab {
 				this.simUI.player,
 				{
 					inputs: miscDebuffOptions.map(options => options.config),
-					label: 'Misc',
+					label: i18n.t('settings.debuffs.misc.label'),
 				},
 				this.simUI,
 			);

@@ -891,6 +891,18 @@
 				"title": {
 					"type": "string"
 				},
+				"raid_buffs": {
+					"$ref": "#/definitions/RaidBuffsSection"
+				},
+				"external_damage_cooldowns": {
+					"$ref": "#/definitions/InputField"
+				},
+				"external_defensive_cooldowns": {
+					"$ref": "#/definitions/InputField"
+				},
+				"debuffs": {
+					"$ref": "#/definitions/DebuffsSection"
+				},
 				"other": {
 					"$ref": "#/definitions/Other"
 				},
@@ -910,7 +922,7 @@
 					"$ref": "#/definitions/SavedSettings"
 				}
 			},
-			"required": ["title", "other", "consumables", "encounter", "player", "saved_encounters", "saved_settings"],
+			"required": ["title", "raid_buffs", "external_damage_cooldowns", "external_defensive_cooldowns", "debuffs", "other", "consumables", "encounter", "player", "saved_encounters", "saved_settings"],
 			"title": "Settings"
 		},
 		"Consumables": {
@@ -1177,6 +1189,43 @@
 			},
 			"required": ["label", "tooltip"],
 			"title": "PhaseSelectorField"
+		},
+		"RaidBuffsSection": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"tooltip": {
+					"type": "string"
+				},
+				"description": {
+					"type": "string"
+				},
+				"misc": {
+					"$ref": "#/definitions/InputField"
+				}
+			},
+			"required": ["title", "tooltip", "description", "misc"],
+			"title": "RaidBuffsSection"
+		},
+		"DebuffsSection": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"tooltip": {
+					"type": "string"
+				},
+				"misc": {
+					"$ref": "#/definitions/InputField"
+				}
+			},
+			"required": ["title", "tooltip", "misc"],
+			"title": "DebuffsSection"
 		},
 		"InfoOptions": {
 			"type": "object",

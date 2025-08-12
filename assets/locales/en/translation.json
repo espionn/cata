@@ -250,6 +250,29 @@
 	},
 	"settings": {
 		"title": "Settings",
+		"raid_buffs": {
+			"title": "Raid Buffs",
+			"tooltip": "Buffs provided by other party/raid members.",
+			"description": "All raid buffs/debuffs selected are assumed to be provided by other raid members than the simulated player.",
+			"misc": {
+				"label": "Misc"
+			}
+		},
+		"external_damage_cooldowns": {
+			"title": "External Damage Cooldowns",
+			"tooltip": "Major damage cooldowns provided by other party/raid members."
+		},
+		"external_defensive_cooldowns": {
+			"title": "External Defensive Cooldowns",
+			"tooltip": "Major defensive cooldowns provided by other party/raid members."
+		},
+		"debuffs": {
+			"title": "Debuffs",
+			"tooltip": "Debuffs applied by other raid members.",
+			"misc": {
+				"label": "Misc"
+			}
+		},
 		"other": {
 			"title": "Other",
 			"challenge_mode": {
