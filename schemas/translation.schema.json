@@ -19,7 +19,7 @@
                     "$ref": "#/definitions/Gear"
                 },
                 "settings": {
-                    "$ref": "#/definitions/Export"
+                    "$ref": "#/definitions/Settings"
                 },
                 "talents": {
                     "$ref": "#/definitions/Export"
@@ -644,6 +644,56 @@
             ],
             "title": "Export"
         },
+        "Settings": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "options": {
+                    "$ref": "#/definitions/SettingsOptions"
+                }
+            },
+            "required": [
+                "title",
+                "options"
+            ],
+            "title": "Settings"
+        },
+        "SettingsOptions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "fixed_rng_seed": {
+                    "$ref": "#/definitions/FixedRngSeed"
+                },
+                "language": {
+                    "$ref": "#/definitions/Language"
+                },
+                "feature_toggles": {
+                    "$ref": "#/definitions/FeatureToggles"
+                },
+                "use_multiple_cpu_cores": {
+                    "$ref": "#/definitions/UseMultipleCpuCores"
+                },
+                "restore_defaults": {
+                    "$ref": "#/definitions/RestoreDefaults"
+                }
+            },
+            "required": [
+                "title",
+                "fixed_rng_seed",
+                "language",
+                "feature_toggles",
+                "use_multiple_cpu_cores",
+                "restore_defaults"
+            ],
+            "title": "SettingsOptions"
+        },
         "Gear": {
             "type": "object",
             "additionalProperties": false,
@@ -1236,6 +1286,99 @@
                 "include_gems"
             ],
             "title": "EpWeightsOptions"
+        },
+        "FixedRngSeed": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "last_used": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "label",
+                "tooltip",
+                "last_used"
+            ],
+            "title": "FixedRngSeed"
+        },
+        "Language": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "label",
+                "tooltip"
+            ],
+            "title": "Language"
+        },
+        "FeatureToggles": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "show_threat_metrics": {
+                    "type": "string"
+                },
+                "show_experimental": {
+                    "type": "string"
+                },
+                "show_quick_swap": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "show_threat_metrics",
+                "show_experimental",
+                "show_quick_swap"
+            ],
+            "title": "FeatureToggles"
+        },
+        "UseMultipleCpuCores": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "label"
+            ],
+            "title": "UseMultipleCpuCores"
+        },
+        "RestoreDefaults": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "button": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "success_message": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "button",
+                "tooltip",
+                "success_message"
+            ],
+            "title": "RestoreDefaults"
         }
     }
 }

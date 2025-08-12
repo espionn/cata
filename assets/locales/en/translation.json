@@ -175,7 +175,32 @@
 		}
 	},
 	"settings": {
-		"title": "Settings"
+		"title": "Settings",
+		"options": {
+			"title": "Options",
+			"fixed_rng_seed": {
+				"label": "Fixed RNG Seed",
+				"tooltip": "Seed value for the random number generator used during sims, or 0 to use different randomness each run. Use this to share exact sim results or for debugging.",
+				"last_used": "Last used RNG seed:"
+			},
+			"language": {
+				"label": "Language",
+				"tooltip": "Controls the language for Wowhead tooltips."
+			},
+			"feature_toggles": {
+				"show_threat_metrics": "Show Threat/Tank Options",
+				"show_experimental": "Show Experimental",
+				"show_quick_swap": "Show quick swap interface"
+			},
+			"use_multiple_cpu_cores": {
+				"label": "Use Multiple CPU Cores"
+			},
+			"restore_defaults": {
+				"button": "Restore Defaults",
+				"tooltip": "Restores all default settings (gear, consumes, buffs, talents, EP weights, etc). Saved settings are preserved.",
+				"success_message": "Restored to default settings."
+			}
+		}
 	},
 	"talents": {
 		"title": "Talents"

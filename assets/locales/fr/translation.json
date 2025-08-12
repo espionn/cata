@@ -175,7 +175,32 @@
 		}
 	},
 	"settings": {
-		"title": "Paramètres"
+		"title": "Paramètres",
+		"options": {
+			"title": "Options",
+			"fixed_rng_seed": {
+				"label": "Graine RNG Fixe",
+				"tooltip": "Valeur de graine pour le générateur de nombres aléatoires utilisé pendant les simulations, ou 0 pour utiliser une aléatoire différente à chaque exécution. Utilisez ceci pour partager des résultats de simulation exacts ou pour le débogage.",
+				"last_used": "Dernière graine RNG utilisée :"
+			},
+			"language": {
+				"label": "Langue",
+				"tooltip": "Contrôle la langue pour les infobulles Wowhead."
+			},
+			"feature_toggles": {
+				"show_threat_metrics": "Afficher les Options de Menace/Tank",
+				"show_experimental": "Afficher l'Expérimental",
+				"show_quick_swap": "Afficher l'interface de changement rapide"
+			},
+			"use_multiple_cpu_cores": {
+				"label": "Utiliser Plusieurs Cœurs CPU"
+			},
+			"restore_defaults": {
+				"button": "Restaurer les Défauts",
+				"tooltip": "Restaure tous les paramètres par défaut (équipement, consommables, buffs, talents, poids PE, etc). Les paramètres sauvegardés sont préservés.",
+				"success_message": "Paramètres par défaut restaurés."
+			}
+		}
 	},
 	"talents": {
 		"title": "Talents"
