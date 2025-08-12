@@ -2755,6 +2755,9 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
+                "item_label": {
+                    "type": "string"
+                },
                 "no_condition": {
                     "type": "string"
                 },
@@ -3078,6 +3081,7 @@
                 }
             },
             "required": [
+                "item_label",
                 "all_of",
                 "all_trinket_stat_procs_active",
                 "any_of",
@@ -5058,10 +5062,31 @@
                 },
                 "placeholder_tooltip": {
                     "type": "string"
+                },
+                "buttons": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "enable_action": {
+                            "type": "string"
+                        },
+                        "disable_action": {
+                            "type": "string"
+                        },
+                        "enable_disable": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "enable_action",
+                        "disable_action",
+                        "enable_disable"
+                    ]
                 }
             },
             "required": [
                 "action_id_sets",
+                "buttons",
                 "eclipse_types",
                 "field_configs",
                 "hotw_strategies",

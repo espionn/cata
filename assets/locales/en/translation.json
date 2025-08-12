@@ -292,9 +292,9 @@
 			"copied": "Copied"
 		},
 		"list_picker": {
-			"new_item": "New {itemLabel}",
-			"delete_item": "Delete {itemLabel}",
-			"copy_to_new": "Copy to New {itemLabel}",
+			"new_item": "New {{itemLabel}}",
+			"delete_item": "Delete {{itemLabel}}",
+			"copy_to_new": "Copy to New {{itemLabel}}",
 			"move_drag_drop": "Move (Drag+Drop)",
 			"warnings": "Warnings",
 			"additional_information": "Additional Information:",
@@ -948,6 +948,7 @@
 				}
 			},
 			"values": {
+				"item_label": "Value",
 				"no_condition": "No Condition",
 				"none": "<None>",
 				"const": {
@@ -1497,7 +1498,12 @@
 					"target": "Target",
 					"pet": "Pet"
 				},
-				"placeholder_tooltip": "The Prepull Potion if CurrentTime < 0, or the Combat Potion if combat has started."
+				"placeholder_tooltip": "The Prepull Potion if CurrentTime < 0, or the Combat Potion if combat has started.",
+				"buttons": {
+					"enable_action": "Enable Action",
+					"disable_action": "Disable Action",
+					"enable_disable": "Enable/Disable"
+				}
 			}
 		},
 		"simple": {

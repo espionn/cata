@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import tippy, { Instance as TippyInstance } from 'tippy.js';
 
 import i18n from '../../../i18n/config.js';
+import { translateItemLabel } from '../../../i18n/localization';
 import { Player } from '../../player';
 import { APLValidation } from '../../proto/api';
 import { LogLevel } from '../../proto/common';
@@ -111,11 +112,11 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 				newItemButton = ListPicker.makeActionElem('link-success', 'fa-plus');
 				newButtonTooltip = tippy(newItemButton, {
 					allowHTML: false,
-					content: i18n.t('common.list_picker.new_item', { itemLabel: config.itemLabel }),
+					content: i18n.t('common.list_picker.new_item', { itemLabel: translateItemLabel(config.itemLabel) }),
 				});
 				this.addOnDisposeCallback(() => newButtonTooltip?.destroy());
 			} else {
-				newItemButton = (<button className="btn btn-primary">{i18n.t('common.list_picker.new_item', { itemLabel: config.itemLabel })}</button>) as HTMLButtonElement;
+				newItemButton = (<button className="btn btn-primary">{i18n.t('common.list_picker.new_item', { itemLabel: translateItemLabel(config.itemLabel) })}</button>) as HTMLButtonElement;
 			}
 			newItemButton.classList.add('list-picker-new-button');
 			newItemButton.addEventListener(
@@ -239,7 +240,7 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 
 				const deleteButtonTooltip = tippy(deleteButton, {
 					allowHTML: false,
-					content: i18n.t('common.list_picker.delete_item', { itemLabel: this.config.itemLabel }),
+					content: i18n.t('common.list_picker.delete_item', { itemLabel: translateItemLabel(this.config.itemLabel) }),
 				});
 
 				deleteButton.addEventListener(
@@ -263,7 +264,7 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 			popover.appendChild(copyButton);
 			const copyButtonTooltip = tippy(copyButton, {
 				allowHTML: false,
-				content: i18n.t('common.list_picker.copy_to_new', { itemLabel: this.config.itemLabel }),
+				content: i18n.t('common.list_picker.copy_to_new', { itemLabel: translateItemLabel(this.config.itemLabel) }),
 			});
 
 			copyButton.addEventListener(

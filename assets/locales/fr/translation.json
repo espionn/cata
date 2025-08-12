@@ -292,9 +292,9 @@
 			"copied": "Copié"
 		},
 		"list_picker": {
-			"new_item": "Nouveau {itemLabel}",
-			"delete_item": "Supprimer {itemLabel}",
-			"copy_to_new": "Copier vers Nouveau {itemLabel}",
+			"new_item": "Nouveau {{itemLabel}}",
+			"delete_item": "Supprimer {{itemLabel}}",
+			"copy_to_new": "Copier vers Nouveau {{itemLabel}}",
 			"move_drag_drop": "Déplacer (Glisser+Déposer)",
 			"warnings": "Avertissements",
 			"additional_information": "Informations supplémentaires :",
@@ -773,7 +773,7 @@
 			"prepull_actions": {
 				"title": "Actions de Préparation",
 				"tooltip": "Actions à effectuer avant le pull.",
-				"item_label": "Prepull Action",
+				"item_label": "Actions de Préparation",
 				"do_at": {
 					"label": "Faire À",
 					"tooltip": "Temps avant le pull pour faire l'action. Doit être négatif, et formaté comme '-1s' ou '-2500ms'."
@@ -948,6 +948,7 @@
 				}
 			},
 			"values": {
+				"item_label": "Valeur",
 				"no_condition": "Aucune Condition",
 				"none": "<Aucun>",
 				"const": {
@@ -1497,7 +1498,12 @@
 					"target": "Cible",
 					"pet": "Familier"
 				},
-				"placeholder_tooltip": "La Potion de Préparation si CurrentTime < 0, ou la Potion de Combat si le combat a commencé."
+				"placeholder_tooltip": "La Potion de Préparation si CurrentTime < 0, ou la Potion de Combat si le combat a commencé.",
+				"buttons": {
+					"enable_action": "Activer l'Action",
+					"disable_action": "Désactiver l'Action",
+					"enable_disable": "Activer/Désactiver"
+				}
 			}
 		},
 		"options": {

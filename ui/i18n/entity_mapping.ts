@@ -78,6 +78,12 @@ export const classI18nKeys: Record<Class, string> = {
 	[Class.ClassExtra6]: 'extra6',
 };
 
+export const aplItemLabelI18nKeys: Record<string, string> = {
+	'action': 'rotation.apl.priority_list.item_label',
+	'prepull-action': 'rotation.apl.prepull_actions.item_label',
+	'value': 'rotation.apl.values.item_label',
+};
+
 export const specI18nKeys: Record<Spec, string> = {
 	[Spec.SpecUnknown]: 'unknown',
 	// Death Knight

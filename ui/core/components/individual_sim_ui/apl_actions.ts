@@ -307,7 +307,7 @@ function actionListFieldConfig(field: string): AplHelpers.APLPickerBuilderFieldC
 						newValue.map(val => val || APLAction.create()),
 					);
 				},
-				itemLabel: i18n.t('rotation.apl.priority_list.item_label'),
+				itemLabel: 'action',
 				newItem: APLAction.create,
 				copyItem: (oldValue: APLAction) => (oldValue ? APLAction.clone(oldValue) : oldValue),
 				newItemPicker: (

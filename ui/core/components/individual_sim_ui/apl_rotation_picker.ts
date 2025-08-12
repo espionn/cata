@@ -21,7 +21,7 @@ export class APLRotationPicker extends Component {
 			extraCssClasses: ['apl-prepull-action-picker'],
 			title: i18n.t('rotation.apl.prepull_actions.title'),
 			titleTooltip: i18n.t('rotation.apl.prepull_actions.tooltip'),
-			itemLabel: i18n.t('rotation.apl.prepull_actions.item_label'),
+			itemLabel: 'prepull-action',
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: (player: Player<any>) => player.aplRotation.prepullActions,
 			setValue: (eventID: EventID, player: Player<any>, newValue: Array<APLPrepullAction>) => {
@@ -49,7 +49,7 @@ export class APLRotationPicker extends Component {
 			extraCssClasses: ['apl-list-item-picker'],
 			title: i18n.t('rotation.apl.priority_list.title'),
 			titleTooltip: i18n.t('rotation.apl.priority_list.tooltip'),
-			itemLabel: i18n.t('rotation.apl.priority_list.item_label'),
+			itemLabel: 'action',
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: (player: Player<any>) => player.aplRotation.priorityList,
 			setValue: (eventID: EventID, player: Player<any>, newValue: Array<APLListItem>) => {
@@ -261,7 +261,7 @@ class HidePicker extends Input<Player<any>, boolean> {
 		);
 
 		this.rootElem.appendChild(this.inputElem);
-		this.tooltip = tippy(this.inputElem, { content: 'Enable/Disable' });
+		this.tooltip = tippy(this.inputElem, { content: i18n.t('rotation.apl.helpers.buttons.enable_disable') });
 		this.addOnDisposeCallback(() => this.tooltip.destroy());
 
 		this.init();
@@ -279,11 +279,11 @@ class HidePicker extends Input<Player<any>, boolean> {
 		if (newValue) {
 			this.iconElem.classList.add('fa-eye-slash');
 			this.iconElem.classList.remove('fa-eye');
-			this.tooltip.setContent('Enable Action');
+			this.tooltip.setContent(i18n.t('rotation.apl.helpers.buttons.enable_action'));
 		} else {
 			this.iconElem.classList.add('fa-eye');
 			this.iconElem.classList.remove('fa-eye-slash');
-			this.tooltip.setContent('Disable Action');
+			this.tooltip.setContent(i18n.t('rotation.apl.helpers.buttons.disable_action'));
 		}
 	}
 }
