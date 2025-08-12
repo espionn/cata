@@ -623,16 +623,16 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [executePhaseThresholdFieldConfig('threshold')],
 	}),
 	numberTargets: inputBuilder({
-		label: i18n.t('rotation.apl.values.number_of_targets.label'),
+		label: i18n.t('rotation.apl.values.num_targets.label'),
 		submenu: ['encounter'],
-		shortDescription: i18n.t('rotation.apl.values.number_of_targets.tooltip'),
+		shortDescription: i18n.t('rotation.apl.values.num_targets.tooltip'),
 		newValue: APLValueNumberTargets.create,
 		fields: [],
 	}),
 	frontOfTarget: inputBuilder({
-		label: i18n.t('rotation.apl.values.front_of_target.label'),
+		label: i18n.t('rotation.apl.values.in_front_of_target.label'),
 		submenu: ['encounter'],
-		shortDescription: i18n.t('rotation.apl.values.front_of_target.tooltip'),
+		shortDescription: i18n.t('rotation.apl.values.in_front_of_target.tooltip'),
 		newValue: APLValueFrontOfTarget.create,
 		fields: [],
 	}),
@@ -658,16 +658,16 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 
 	// Unit
 	unitIsMoving: inputBuilder({
-		label: i18n.t('rotation.apl.values.is_moving.label'),
+		label: i18n.t('rotation.apl.values.unit_is_moving.label'),
 		submenu: ['unit'],
-		shortDescription: i18n.t('rotation.apl.values.is_moving.tooltip'),
+		shortDescription: i18n.t('rotation.apl.values.unit_is_moving.tooltip'),
 		newValue: APLValueUnitIsMoving.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources')],
 	}),
 	unitDistance: inputBuilder({
-		label: i18n.t('rotation.apl.values.distance.label'),
+		label: i18n.t('rotation.apl.values.distance_to_unit.label'),
 		submenu: ['unit'],
-		shortDescription: i18n.t('rotation.apl.values.distance.tooltip'),
+		shortDescription: i18n.t('rotation.apl.values.distance_to_unit.tooltip'),
 		newValue: APLValueUnitDistance.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources')],
 	}),

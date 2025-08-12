@@ -1007,6 +1007,14 @@
 					"label": "Number of Targets",
 					"tooltip": "Number of targets in the encounter"
 				},
+				"spell_is_casting": {
+					"label": "Spell Is Casting",
+					"tooltip": "True if the spell is currently being cast"
+				},
+				"spell_time_to_ready": {
+					"label": "Spell Time to Ready",
+					"tooltip": "Time until the spell will be ready"
+				},
 				"in_front_of_target": {
 					"label": "In Front of Target",
 					"tooltip": "True if we are in front of the target"

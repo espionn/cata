@@ -2803,6 +2803,12 @@
                 "num_targets": {
                     "$ref": "#/definitions/LanguageClass"
                 },
+                "spell_is_casting": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "spell_time_to_ready": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
                 "in_front_of_target": {
                     "$ref": "#/definitions/LanguageClass"
                 },

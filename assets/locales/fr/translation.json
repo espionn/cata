@@ -1007,6 +1007,14 @@
 					"label": "Nombre de Cibles",
 					"tooltip": "Nombre de cibles dans la rencontre"
 				},
+				"spell_is_casting": {
+					"label": "Sort en Cours de Lancement",
+					"tooltip": "Vrai si le sort est actuellement en cours de lancement"
+				},
+				"spell_time_to_ready": {
+					"label": "Temps du Sort jusqu'à Prêt",
+					"tooltip": "Temps jusqu'à ce que le sort soit prêt"
+				},
 				"in_front_of_target": {
 					"label": "Devant la Cible",
 					"tooltip": "Vrai si nous sommes devant la cible"
@@ -1392,11 +1400,11 @@
 			"submenus": {
 				"logic": "Logique",
 				"encounter": "Rencontre",
-				"boss": "Boss",
+				"boss": "Chef",
 				"unit": "Unité",
 				"resources": "Ressources",
-				"gcd": "GCD",
-				"auto": "Auto",
+				"gcd": "TdR",
+				"auto": "Automatique",
 				"spell": "Sort",
 				"aura": "Aura",
 				"aura_sets": "Ensembles d'Auras",
@@ -1422,8 +1430,8 @@
 				"runic_power": "Puissance Runique",
 				"eclipse": "Éclipse",
 				"runes": "Runes",
-				"cooldowns": "Cooldowns",
-				"placeholders": "Placeholders"
+				"cooldowns": "Temps de Recharge",
+				"placeholders": "Espaces Réservés"
 			},
 			"item_swap_sets": {
 				"main": "Principal",
