@@ -2,10 +2,10 @@ import tippy from 'tippy.js';
 import { ref } from 'tsx-vanilla';
 
 import { SortDirection } from '../../constants/other';
-import { EP_TOOLTIP } from '../../constants/tooltips';
 import { setItemQualityCssClass } from '../../css_utils';
 import { IndividualSimUI } from '../../individual_sim_ui';
 import { Player } from '../../player';
+import i18n from '../../../i18n/config';
 import { Class, GemColor, ItemLevelState, ItemQuality, ItemRandomSuffix, ItemSlot, ItemSpec } from '../../proto/common';
 import { DatabaseFilters, RepFaction, UIEnchant as Enchant, UIGem as Gem, UIItem as Item, UIItem_FactionRestriction } from '../../proto/ui';
 import { ActionId } from '../../proto_utils/action_id';
@@ -28,7 +28,7 @@ import { ItemNotice } from '../item_notice/item_notice';
 import Toast from '../toast';
 import { Clusterize } from '../virtual_scroll/clusterize';
 import { FiltersMenu } from './filters_menu';
-import { SelectorModalTabs } from './selector_modal';
+import { SelectorModalTabs, getTranslatedTabLabel } from './selector_modal';
 import { createNameDescriptionLabel } from './utils';
 
 export interface ItemData<T extends ItemListType> {
@@ -141,10 +141,10 @@ export default class ItemList<T extends ItemListType> {
 		this.tabContent = (
 			<div id={this.id} className={`selector-modal-tab-pane tab-pane fade ${selected ? 'active show' : ''}`}>
 				<div className="selector-modal-filters">
-					<input ref={searchRef} className="selector-modal-search form-control" type="text" placeholder="Search..." />
+					<input ref={searchRef} className="selector-modal-search form-control" type="text" placeholder={i18n.t('gear_picker.search_placeholder')} />
 					{label === SelectorModalTabs.Items && (
 						<button ref={filtersButtonRef} className="selector-modal-filters-button btn btn-primary">
-							Filters
+							{i18n.t('gear_picker.filters_button')}
 						</button>
 					)}
 					<div ref={phaseSelectorRef} className="selector-modal-phase-selector" />
@@ -153,24 +153,24 @@ export default class ItemList<T extends ItemListType> {
 					<div ref={matchingGemsRef} className="sim-input selector-modal-boolean-option selector-modal-show-matching-gems" />
 					{showEPOptions && <div ref={showEpValuesRef} className="sim-input selector-modal-boolean-option selector-modal-show-ep-values" />}
 					<button ref={removeButtonRef} className="selector-modal-remove-button btn btn-danger">
-						Unequip Item
+						{i18n.t('gear_picker.unequip_item')}
 					</button>
 				</div>
 				<div className="selector-modal-list-labels">
 					{(label === SelectorModalTabs.Items || label === SelectorModalTabs.Upgrades) && (
-						<h6 className="ilvl-label interactive" onclick={sortByIlvl}>ILvl</h6>
+						<h6 className="ilvl-label interactive" onclick={sortByIlvl}>{i18n.t('gear_picker.table_headers.ilvl')}</h6>
 					)}
 					<h6 className="item-label">
 						{
-							label === SelectorModalTabs.Items ? "Item" :
-							label === SelectorModalTabs.Enchants ? "Enchant" :
-							[SelectorModalTabs.Gem1, SelectorModalTabs.Gem2, SelectorModalTabs.Gem3].includes(label as SelectorModalTabs) ? "Gem" :
-							label === SelectorModalTabs.Reforging ? "Reforge" :
-							label === SelectorModalTabs.Upgrades ? "Upgrade" :
-							label === SelectorModalTabs.Tinkers ? "Tinker" : ""
+							label === SelectorModalTabs.Items ? i18n.t('gear_picker.table_headers.item') :
+							label === SelectorModalTabs.Enchants ? getTranslatedTabLabel(SelectorModalTabs.Enchants) :
+							[SelectorModalTabs.Gem1, SelectorModalTabs.Gem2, SelectorModalTabs.Gem3].includes(label as SelectorModalTabs) ? getTranslatedTabLabel(SelectorModalTabs.Gem1) :
+							label === SelectorModalTabs.Reforging ? getTranslatedTabLabel(SelectorModalTabs.Reforging) :
+							label === SelectorModalTabs.Upgrades ? getTranslatedTabLabel(SelectorModalTabs.Upgrades) :
+							label === SelectorModalTabs.Tinkers ? getTranslatedTabLabel(SelectorModalTabs.Tinkers) : ""
 						}
 					</h6>
-					{label === SelectorModalTabs.Items && <h6 className="source-label">Source</h6>}
+					{label === SelectorModalTabs.Items && <h6 className="source-label">{i18n.t('gear_picker.table_headers.source')}</h6>}
 					<h6 className="ep-label interactive" onclick={sortByEP}>
 						<span>EP</span>
 						<i className="fa-solid fa-plus-minus fa-2xs" />
@@ -204,7 +204,7 @@ export default class ItemList<T extends ItemListType> {
 			if (showEpValuesRef.value) makeShowEPValuesSelector(showEpValuesRef.value, player.sim);
 
 			tippy(epButtonRef.value!, {
-				content: EP_TOOLTIP,
+				content: i18n.t('gear_picker.ep_tooltip'),
 			});
 		}
 
@@ -261,24 +261,24 @@ export default class ItemList<T extends ItemListType> {
 
 			switch (label) {
 				case SelectorModalTabs.Enchants:
-					removeButton.textContent = 'Remove Enchant';
+					removeButton.textContent = i18n.t('gear_picker.remove_buttons.remove_enchant');
 					break;
 				case SelectorModalTabs.Tinkers:
-					removeButton.textContent = 'Remove Tinkers';
+					removeButton.textContent = i18n.t('gear_picker.remove_buttons.remove_tinkers');
 					break;
 				case SelectorModalTabs.Reforging:
-					removeButton.textContent = 'Remove Reforge';
+					removeButton.textContent = i18n.t('gear_picker.remove_buttons.remove_reforge');
 					break;
 				case SelectorModalTabs.RandomSuffixes:
-					removeButton.textContent = 'Remove Random Suffix';
+					removeButton.textContent = i18n.t('gear_picker.remove_buttons.remove_random_suffix');
 					break;
 				case SelectorModalTabs.Upgrades:
-					removeButton.textContent = 'Remove Upgrade';
+					removeButton.textContent = i18n.t('gear_picker.remove_buttons.remove_upgrade');
 					break;
 				case SelectorModalTabs.Gem1:
 				case SelectorModalTabs.Gem2:
 				case SelectorModalTabs.Gem3:
-					removeButton.textContent = 'Remove Gem';
+					removeButton.textContent = i18n.t('gear_picker.remove_buttons.remove_gem');
 					break;
 			}
 		}

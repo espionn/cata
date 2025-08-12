@@ -19,6 +19,7 @@ import { ChallengeMode } from '../inputs/other_inputs';
 import GearPicker from './gear_picker';
 import ItemList, { GearData, ItemData, ItemListType } from './item_list';
 import { createGemContainer, getEmptySlotIconUrl } from './utils';
+import i18n from '../../../i18n/config';
 
 export enum SelectorModalTabs {
 	Items = 'Items',
@@ -30,6 +31,32 @@ export enum SelectorModalTabs {
 	Gem1 = 'Gem1',
 	Gem2 = 'Gem2',
 	Gem3 = 'Gem3',
+}
+
+// Helper function to get translated tab labels
+export function getTranslatedTabLabel(tab: SelectorModalTabs): string {
+	switch (tab) {
+		case SelectorModalTabs.Items:
+			return i18n.t('gear_picker.tabs.items');
+		case SelectorModalTabs.RandomSuffixes:
+			return i18n.t('gear_picker.tabs.random_suffix');
+		case SelectorModalTabs.Enchants:
+			return i18n.t('gear_picker.tabs.enchants');
+		case SelectorModalTabs.Tinkers:
+			return i18n.t('gear_picker.tabs.tinkers');
+		case SelectorModalTabs.Reforging:
+			return i18n.t('gear_picker.tabs.reforging');
+		case SelectorModalTabs.Upgrades:
+			return i18n.t('gear_picker.tabs.upgrades');
+		case SelectorModalTabs.Gem1:
+			return i18n.t('gear_picker.tabs.gem1');
+		case SelectorModalTabs.Gem2:
+			return i18n.t('gear_picker.tabs.gem2');
+		case SelectorModalTabs.Gem3:
+			return i18n.t('gear_picker.tabs.gem3');
+		default:
+			return tab;
+	}
 }
 
 type SelectorModalOptions = {
@@ -83,11 +110,9 @@ export default class SelectorModal extends BaseModal {
 			<div className="d-flex align-items-center form-text">
 				<i className="fas fa-circle-exclamation fa-xl me-2"></i>
 				<span>
-					If gear is missing, check the selected phase and your gear filters.
+					{i18n.t('gear_picker.missing_gear_message.title')}
 					<br />
-					If the problem persists, save any un-saved data, click the
-					<i className="fas fa-cog mx-1"></i>
-					to open your sim options, then click the "Restore Defaults".
+					{i18n.t('gear_picker.missing_gear_message.description')}
 				</span>
 			</div>,
 		);
@@ -603,7 +628,7 @@ export default class SelectorModal extends BaseModal {
 		if (setTabContent) {
 			setTabContent(tabButton.value!);
 		} else {
-			tabButton.value!.textContent = label;
+			tabButton.value!.textContent = getTranslatedTabLabel(label);
 		}
 
 		const ilist = new ItemList(

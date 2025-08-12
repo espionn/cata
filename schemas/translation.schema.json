@@ -21,6 +21,9 @@
 				"settings": {
 					"$ref": "#/definitions/Settings"
 				},
+				"gear_picker": {
+					"$ref": "#/definitions/GearPicker"
+				},
 				"talents": {
 					"$ref": "#/definitions/Export"
 				},
@@ -43,7 +46,7 @@
 					"$ref": "#/definitions/Sidebar"
 				}
 			},
-			"required": ["common", "export", "gear", "import", "info", "landing", "results", "rotation", "settings", "sidebar", "sim", "talents"],
+			"required": ["common", "export", "gear", "gear_picker", "import", "info", "landing", "results", "rotation", "settings", "sidebar", "sim", "talents"],
 			"title": "Welcome"
 		},
 		"Common": {
@@ -2158,6 +2161,154 @@
 			},
 			"required": ["title", "settings", "settings_name", "save_settings"],
 			"title": "SavedSettings"
+		},
+		"GearPicker": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"tabs": { "$ref": "#/definitions/GearPickerTabs" },
+				"remove_buttons": { "$ref": "#/definitions/GearPickerRemoveButtons" },
+				"filters": { "$ref": "#/definitions/GearPickerFilters" },
+				"quick_popovers": { "$ref": "#/definitions/GearPickerQuickPopovers" },
+				"missing_gear_message": { "$ref": "#/definitions/GearPickerMissingGearMessage" },
+				"cooldowns": { "$ref": "#/definitions/GearPickerCooldowns" },
+				"ep_tooltip": { "type": "string" },
+				"search_placeholder": { "type": "string" },
+				"filters_button": { "type": "string" },
+				"unequip_item": { "type": "string" },
+				"table_headers": { "$ref": "#/definitions/GearPickerTableHeaders" },
+				"show_ep": { "type": "string" },
+				"armor_type": { "type": "string" },
+				"weapon_type": { "type": "string" },
+				"weapon_speed": { "type": "string" },
+				"min_mh_speed": { "type": "string" },
+				"max_mh_speed": { "type": "string" },
+				"min_oh_speed": { "type": "string" },
+				"max_oh_speed": { "type": "string" }
+			},
+			"required": ["tabs", "remove_buttons", "filters", "quick_popovers", "missing_gear_message", "cooldowns", "ep_tooltip", "search_placeholder", "filters_button", "unequip_item", "table_headers", "show_ep", "armor_type", "weapon_type", "weapon_speed", "min_mh_speed", "max_mh_speed", "min_oh_speed", "max_oh_speed"],
+			"title": "GearPicker"
+		},
+		"GearPickerTabs": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"items": { "type": "string" },
+				"random_suffix": { "type": "string" },
+				"enchants": { "type": "string" },
+				"tinkers": { "type": "string" },
+				"reforging": { "type": "string" },
+				"upgrades": { "type": "string" },
+				"gem1": { "type": "string" },
+				"gem2": { "type": "string" },
+				"gem3": { "type": "string" }
+			},
+			"required": ["items", "random_suffix", "enchants", "tinkers", "reforging", "upgrades", "gem1", "gem2", "gem3"],
+			"title": "GearPickerTabs"
+		},
+		"GearPickerRemoveButtons": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"remove_enchant": { "type": "string" },
+				"remove_tinkers": { "type": "string" },
+				"remove_reforge": { "type": "string" },
+				"remove_random_suffix": { "type": "string" },
+				"remove_upgrade": { "type": "string" },
+				"remove_gem": { "type": "string" }
+			},
+			"required": ["remove_enchant", "remove_tinkers", "remove_reforge", "remove_random_suffix", "remove_upgrade", "remove_gem"],
+			"title": "GearPickerRemoveButtons"
+		},
+		"GearPickerFilters": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": { "type": "string" },
+				"general": { "type": "string" },
+				"min_ilvl": { "type": "string" },
+				"max_ilvl": { "type": "string" },
+				"faction_restrictions": { "type": "string" },
+				"source": { "type": "string" },
+				"raids": { "type": "string" },
+				"faction_labels": { "$ref": "#/definitions/GearPickerFactionLabels" }
+			},
+			"required": ["title", "general", "min_ilvl", "max_ilvl", "faction_restrictions", "source", "raids", "faction_labels"],
+			"title": "GearPickerFilters"
+		},
+		"GearPickerFactionLabels": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"none": { "type": "string" },
+				"alliance_only": { "type": "string" },
+				"horde_only": { "type": "string" }
+			},
+			"required": ["none", "alliance_only", "horde_only"],
+			"title": "GearPickerFactionLabels"
+		},
+		"GearPickerQuickPopovers": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"favorite_gems": { "$ref": "#/definitions/GearPickerFavoriteGems" },
+				"favorite_enchants": { "$ref": "#/definitions/GearPickerFavoriteEnchants" }
+			},
+			"required": ["favorite_gems", "favorite_enchants"],
+			"title": "GearPickerQuickPopovers"
+		},
+		"GearPickerFavoriteGems": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": { "type": "string" },
+				"empty_message": { "type": "string" },
+				"open_gems": { "type": "string" }
+			},
+			"required": ["title", "empty_message", "open_gems"],
+			"title": "GearPickerFavoriteGems"
+		},
+		"GearPickerFavoriteEnchants": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": { "type": "string" },
+				"empty_message": { "type": "string" },
+				"open_enchants": { "type": "string" }
+			},
+			"required": ["title", "empty_message", "open_enchants"],
+			"title": "GearPickerFavoriteEnchants"
+		},
+		"GearPickerMissingGearMessage": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": { "type": "string" },
+				"description": { "type": "string" }
+			},
+			"required": ["title", "description"],
+			"title": "GearPickerMissingGearMessage"
+		},
+		"GearPickerCooldowns": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": { "type": "string" },
+				"tooltip": { "type": "string" }
+			},
+			"required": ["title", "tooltip"],
+			"title": "GearPickerCooldowns"
+		},
+		"GearPickerTableHeaders": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"ilvl": { "type": "string" },
+				"item": { "type": "string" },
+				"source": { "type": "string" }
+			},
+			"required": ["ilvl", "item", "source"],
+			"title": "GearPickerTableHeaders"
 		}
 	}
 }
