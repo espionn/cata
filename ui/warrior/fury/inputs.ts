@@ -19,8 +19,8 @@ export const SyncTypeInput = InputHelpers.makeSpecOptionsEnumInput<Spec.SpecFury
 
 export const AssumePrepullMasteryElixir = InputHelpers.makeSpecOptionsBooleanInput<Spec.SpecFuryWarrior>({
 	fieldName: 'useItemSwapBonusStats',
-	label: 'Assume Prepull Mastery Elixir',
-	labelTooltip: 'Enabling this assumes you are using a Mastery Elixir during prepull.',
+	label: i18n.t('settings.other.assume_prepull_mastery_elixir.label'),
+	labelTooltip: i18n.t('settings.other.assume_prepull_mastery_elixir.tooltip'),
 	getValue: player => player.getSpecOptions().useItemSwapBonusStats,
 	setValue: (eventID, player, newVal) => {
 		const newMessage = player.getSpecOptions();

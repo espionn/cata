@@ -357,6 +357,18 @@
 			"phase_selector": {
 				"label": "Phase",
 				"tooltip": "Sélectionner la phase de jeu pour la disponibilité des objets"
+			},
+			"enable_item_swap": {
+				"label": "Activer l'Échange d'Objets",
+				"tooltip": "Permet de configurer un Ensemble d'Échange d'Objets qui est utilisé avec l'action APL <b>Échange d'Objets</b>."
+			},
+			"item_swap": {
+				"label": "Échange d'Objets",
+				"tooltip": "Échanger avec les objets équipés"
+			},
+			"assume_prepull_mastery_elixir": {
+				"label": "Supposer Élixir de Maîtrise de Préparation",
+				"tooltip": "Activer ceci suppose que vous utilisez un Élixir de Maîtrise pendant la préparation."
 			}
 		},
 		"consumables": {

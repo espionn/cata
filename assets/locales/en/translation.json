@@ -357,6 +357,18 @@
 			"phase_selector": {
 				"label": "Phase",
 				"tooltip": "Select the game phase for item availability"
+			},
+			"enable_item_swap": {
+				"label": "Enable Item Swapping",
+				"tooltip": "Allows configuring an Item Swap Set which is used with the <b>Item Swap</b> APL action."
+			},
+			"item_swap": {
+				"label": "Item Swap",
+				"tooltip": "Swap with equipped items"
+			},
+			"assume_prepull_mastery_elixir": {
+				"label": "Assume Prepull Mastery Elixir",
+				"tooltip": "Enabling this assumes you are using a Mastery Elixir during prepull."
 			}
 		},
 		"consumables": {

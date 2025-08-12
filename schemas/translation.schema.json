@@ -1051,6 +1051,15 @@
 				},
 				"phase_selector": {
 					"$ref": "#/definitions/PhaseSelectorField"
+				},
+				"enable_item_swap": {
+					"$ref": "#/definitions/InputField"
+				},
+				"item_swap": {
+					"$ref": "#/definitions/InputField"
+				},
+				"assume_prepull_mastery_elixir": {
+					"$ref": "#/definitions/InputField"
 				}
 			},
 			"required": [
@@ -1079,7 +1088,10 @@
 				"show_2h_weapons",
 				"show_matching_gems",
 				"show_ep_values",
-				"phase_selector"
+				"phase_selector",
+				"enable_item_swap",
+				"item_swap",
+				"assume_prepull_mastery_elixir"
 			],
 			"title": "Other"
 		},
