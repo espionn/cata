@@ -14,8 +14,8 @@ export const addQuickGemPopover = (
 	openDetailTab: () => void,
 ) => {
 	return new QuickSwapList({
-		title: i18n.t('gear_picker.quick_popovers.favorite_gems.title'),
-		emptyMessage: i18n.t('gear_picker.quick_popovers.favorite_gems.empty_message'),
+		title: i18n.t('gear.gear_picker.quick_popovers.favorite_gems.title'),
+		emptyMessage: i18n.t('gear.gear_picker.quick_popovers.favorite_gems.empty_message'),
 		tippyElement: tooltipElement,
 		tippyConfig: {
 			appendTo: document.querySelector('.sim-ui')!,
@@ -38,7 +38,7 @@ export const addQuickGemPopover = (
 			player.equipItem(TypedEvent.nextEventID(), itemSlot, item.withGem(clickedItem, socketIdx));
 		},
 		footerButton: {
-			label: i18n.t('gear_picker.quick_popovers.favorite_gems.open_gems'),
+			label: i18n.t('gear.gear_picker.quick_popovers.favorite_gems.open_gems'),
 			onClick: openDetailTab,
 		},
 	});

@@ -21,9 +21,6 @@
                 "settings": {
                     "$ref": "#/definitions/Settings"
                 },
-                "gear_picker": {
-                    "$ref": "#/definitions/GearPicker"
-                },
                 "talents": {
                     "$ref": "#/definitions/Talents"
                 },
@@ -50,7 +47,6 @@
                 "common",
                 "export",
                 "gear",
-                "gear_picker",
                 "import",
                 "info",
                 "landing",
@@ -1341,11 +1337,15 @@
                 },
                 "gear_sets": {
                     "$ref": "#/definitions/GearSets"
+                },
+                "gear_picker": {
+                    "$ref": "#/definitions/GearPicker"
                 }
             },
             "required": [
                 "gear_sets",
                 "gem_summary",
+                "gear_picker",
                 "reforge_success",
                 "reforge_summary",
                 "title"

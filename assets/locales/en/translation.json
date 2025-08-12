@@ -328,6 +328,82 @@
 			"gear_set": "Gear Set",
 			"gear_set_name": "Gear Set Name",
 			"save_gear_set": "Save Gear Set"
+		},
+		"gear_picker": {
+			"tabs": {
+				"items": "Items",
+				"random_suffix": "Random Suffix",
+				"enchants": "Enchants",
+				"tinkers": "Tinkers",
+				"reforging": "Reforging",
+				"upgrades": "Upgrades",
+				"gem1": "Gem1",
+				"gem2": "Gem2",
+				"gem3": "Gem3"
+			},
+			"remove_buttons": {
+				"remove_enchant": "Remove Enchant",
+				"remove_tinkers": "Remove Tinkers",
+				"remove_reforge": "Remove Reforge",
+				"remove_random_suffix": "Remove Random Suffix",
+				"remove_upgrade": "Remove Upgrade",
+				"remove_gem": "Remove Gem"
+			},
+			"filters": {
+				"title": "Filters",
+				"general": "General",
+				"min_ilvl": "Min ILvl",
+				"max_ilvl": "Max ILvl",
+				"faction_restrictions": "Faction Restrictions",
+				"source": "Source",
+				"raids": "Raids",
+				"faction_labels": {
+					"none": "None",
+					"alliance_only": "Alliance only",
+					"horde_only": "Horde only"
+				}
+			},
+			"quick_popovers": {
+				"favorite_gems": {
+					"title": "Favorite gems",
+					"empty_message": "Add favorite gems.",
+					"open_gems": "Open Gems"
+				},
+				"favorite_enchants": {
+					"title": "Favorite Enchants",
+					"empty_message": "Add favorite Enchants",
+					"open_enchants": "Open Enchants"
+				}
+			},
+			"missing_gear_message": {
+				"title": "If gear is missing, check the selected phase and your gear filters.",
+				"description": "If the problem persists, save any un-saved data, click the gear icon to open your sim options, then click the \"Restore Defaults\"."
+			},
+			"cooldowns": {
+				"title": "Cooldowns",
+				"tooltip": "Specify cooldown timings, in seconds. Cooldowns will be used as soon as possible after their specified timings. When not specified, cooldowns will be used when ready and it is sensible to do so.<br><br>Multiple timings can be provided by separating with commas. Any cooldown usages after the last provided timing will use the default logic."
+			},
+			"ep_tooltip": "EP (Equivalence Points) is way of comparing items by multiplying the raw stats of an item with your current stat weights. More EP does not necessarily mean more DPS, as EP doesn't take into account stat caps and non-linear stat calculations.",
+			"search_placeholder": "Search...",
+			"filters_button": "Filters",
+			"unequip_item": "Unequip Item",
+			"table_headers": {
+				"ilvl": "ILvl",
+				"item": "Item",
+				"source": "Source"
+			},
+			"show_ep": "Show EP",
+			"armor_type": "Armor Type",
+			"weapon_type": "Weapon Type",
+			"weapon_speed": "Weapon Speed",
+			"min_mh_speed": "Min MH Speed",
+			"max_mh_speed": "Max MH Speed",
+			"min_oh_speed": "Min OH Speed",
+			"max_oh_speed": "Max OH Speed",
+			"ranged_weapon_type": "Ranged Weapon Type",
+			"ranged_weapon_speed": "Ranged Weapon Speed",
+			"min_ranged_speed": "Min Ranged Speed",
+			"max_ranged_speed": "Max Ranged Speed"
 		}
 	},
 	"settings": {
@@ -641,82 +717,6 @@
 			"settings_name": "Settings Name",
 			"save_settings": "Save Settings"
 		}
-	},
-	"gear_picker": {
-		"tabs": {
-			"items": "Items",
-			"random_suffix": "Random Suffix",
-			"enchants": "Enchants",
-			"tinkers": "Tinkers",
-			"reforging": "Reforging",
-			"upgrades": "Upgrades",
-			"gem1": "Gem1",
-			"gem2": "Gem2",
-			"gem3": "Gem3"
-		},
-		"remove_buttons": {
-			"remove_enchant": "Remove Enchant",
-			"remove_tinkers": "Remove Tinkers",
-			"remove_reforge": "Remove Reforge",
-			"remove_random_suffix": "Remove Random Suffix",
-			"remove_upgrade": "Remove Upgrade",
-			"remove_gem": "Remove Gem"
-		},
-		"filters": {
-			"title": "Filters",
-			"general": "General",
-			"min_ilvl": "Min ILvl",
-			"max_ilvl": "Max ILvl",
-			"faction_restrictions": "Faction Restrictions",
-			"source": "Source",
-			"raids": "Raids",
-			"faction_labels": {
-				"none": "None",
-				"alliance_only": "Alliance only",
-				"horde_only": "Horde only"
-			}
-		},
-		"quick_popovers": {
-			"favorite_gems": {
-				"title": "Favorite gems",
-				"empty_message": "Add favorite gems.",
-				"open_gems": "Open Gems"
-			},
-			"favorite_enchants": {
-				"title": "Favorite Enchants",
-				"empty_message": "Add favorite Enchants",
-				"open_enchants": "Open Enchants"
-			}
-		},
-		"missing_gear_message": {
-			"title": "If gear is missing, check the selected phase and your gear filters.",
-			"description": "If the problem persists, save any un-saved data, click the gear icon to open your sim options, then click the \"Restore Defaults\"."
-		},
-		"cooldowns": {
-			"title": "Cooldowns",
-			"tooltip": "Specify cooldown timings, in seconds. Cooldowns will be used as soon as possible after their specified timings. When not specified, cooldowns will be used when ready and it is sensible to do so.<br><br>Multiple timings can be provided by separating with commas. Any cooldown usages after the last provided timing will use the default logic."
-		},
-		"ep_tooltip": "EP (Equivalence Points) is way of comparing items by multiplying the raw stats of an item with your current stat weights. More EP does not necessarily mean more DPS, as EP doesn't take into account stat caps and non-linear stat calculations.",
-		"search_placeholder": "Search...",
-		"filters_button": "Filters",
-		"unequip_item": "Unequip Item",
-		"table_headers": {
-			"ilvl": "ILvl",
-			"item": "Item",
-			"source": "Source"
-		},
-		"show_ep": "Show EP",
-		"armor_type": "Armor Type",
-		"weapon_type": "Weapon Type",
-		"weapon_speed": "Weapon Speed",
-		"min_mh_speed": "Min MH Speed",
-		"max_mh_speed": "Max MH Speed",
-		"min_oh_speed": "Min OH Speed",
-		"max_oh_speed": "Max OH Speed",
-		"ranged_weapon_type": "Ranged Weapon Type",
-		"ranged_weapon_speed": "Ranged Weapon Speed",
-		"min_ranged_speed": "Min Ranged Speed",
-		"max_ranged_speed": "Max Ranged Speed"
 	},
 	"talents": {
 		"title": "Talents",

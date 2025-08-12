@@ -11,23 +11,23 @@ import { EnumPicker } from '../pickers/enum_picker';
 import { NumberPicker } from '../pickers/number_picker';
 
 const factionRestrictionsToLabels: Record<UIItem_FactionRestriction, string> = {
-	[UIItem_FactionRestriction.UNSPECIFIED]: i18n.t('gear_picker.filters.faction_labels.none'),
-	[UIItem_FactionRestriction.ALLIANCE_ONLY]: i18n.t('gear_picker.filters.faction_labels.alliance_only'),
-	[UIItem_FactionRestriction.HORDE_ONLY]: i18n.t('gear_picker.filters.faction_labels.horde_only'),
+			[UIItem_FactionRestriction.UNSPECIFIED]: i18n.t('gear.gear_picker.filters.faction_labels.none'),
+		[UIItem_FactionRestriction.ALLIANCE_ONLY]: i18n.t('gear.gear_picker.filters.faction_labels.alliance_only'),
+		[UIItem_FactionRestriction.HORDE_ONLY]: i18n.t('gear.gear_picker.filters.faction_labels.horde_only'),
 };
 
 export class FiltersMenu extends BaseModal {
 	constructor(rootElem: HTMLElement, player: Player<any>, slot: ItemSlot) {
-		super(rootElem, 'filters-menu', { size: 'md', title: i18n.t('gear_picker.filters.title'), disposeOnClose: false });
+		super(rootElem, 'filters-menu', { size: 'md', title: i18n.t('gear.gear_picker.filters.title'), disposeOnClose: false });
 
-		const generalSection = this.newSection(i18n.t('gear_picker.filters.general'));
+		const generalSection = this.newSection(i18n.t('gear.gear_picker.filters.general'));
 
 		const ilvlFiltersContainer = (<div className="ilvl-filters" />) as HTMLElement;
 		generalSection.appendChild(ilvlFiltersContainer);
 
 		new NumberPicker(ilvlFiltersContainer, player.sim, {
 			id: 'filters-min-ilvl',
-			label: i18n.t('gear_picker.filters.min_ilvl'),
+			label: i18n.t('gear.gear_picker.filters.min_ilvl'),
 			showZeroes: false,
 			changedEvent: sim => sim.filtersChangeEmitter,
 			getValue: (sim: Sim) => sim.getFilters().minIlvl,
@@ -42,7 +42,7 @@ export class FiltersMenu extends BaseModal {
 
 		new NumberPicker(ilvlFiltersContainer, player.sim, {
 			id: 'filters-max-ilvl',
-			label: i18n.t('gear_picker.filters.max_ilvl'),
+			label: i18n.t('gear.gear_picker.filters.max_ilvl'),
 			showZeroes: false,
 			changedEvent: sim => sim.filtersChangeEmitter,
 			getValue: (sim: Sim) => sim.getFilters().maxIlvl,
@@ -55,7 +55,7 @@ export class FiltersMenu extends BaseModal {
 
 		new EnumPicker(generalSection, player.sim, {
 			id: 'filters-faction-restriction',
-			label: i18n.t('gear_picker.filters.faction_restrictions'),
+			label: i18n.t('gear.gear_picker.filters.faction_restrictions'),
 			values: [UIItem_FactionRestriction.UNSPECIFIED, UIItem_FactionRestriction.ALLIANCE_ONLY, UIItem_FactionRestriction.HORDE_ONLY].map(restriction => {
 				return {
 					name: factionRestrictionsToLabels[restriction],
@@ -71,7 +71,7 @@ export class FiltersMenu extends BaseModal {
 			},
 		});
 
-		const sourceSection = this.newSection(i18n.t('gear_picker.filters.source'));
+		const sourceSection = this.newSection(i18n.t('gear.gear_picker.filters.source'));
 		sourceSection.classList.add('filters-menu-section-bool-list');
 		Sim.ALL_SOURCES.forEach(source => {
 			new BooleanPicker<Sim>(sourceSection, player.sim, {
@@ -92,7 +92,7 @@ export class FiltersMenu extends BaseModal {
 			});
 		});
 
-		const raidsSection = this.newSection(i18n.t('gear_picker.filters.raids'));
+		const raidsSection = this.newSection(i18n.t('gear.gear_picker.filters.raids'));
 		raidsSection.classList.add('filters-menu-section-bool-list');
 		Sim.ALL_RAIDS.forEach(raid => {
 			new BooleanPicker<Sim>(raidsSection, player.sim, {
@@ -117,7 +117,7 @@ export class FiltersMenu extends BaseModal {
 			const armorTypes = player.getPlayerClass().armorTypes;
 
 			if (armorTypes.length > 1) {
-				const armorTypesSection = this.newSection(i18n.t('gear_picker.armor_type'));
+				const armorTypesSection = this.newSection(i18n.t('gear.gear_picker.armor_type'));
 				armorTypesSection.classList.add('filters-menu-section-bool-list');
 
 				armorTypes.forEach(armorType => {
@@ -141,7 +141,7 @@ export class FiltersMenu extends BaseModal {
 			}
 		} else if (Player.WEAPON_SLOTS.includes(slot)) {
 			if (player.getPlayerClass().weaponTypes.length > 0) {
-				const weaponTypeSection = this.newSection(i18n.t('gear_picker.weapon_type'));
+				const weaponTypeSection = this.newSection(i18n.t('gear.gear_picker.weapon_type'));
 				weaponTypeSection.classList.add('filters-menu-section-bool-list');
 				const weaponTypes = player.getPlayerClass().weaponTypes.map(ewt => ewt.weaponType);
 
@@ -164,11 +164,11 @@ export class FiltersMenu extends BaseModal {
 					});
 				});
 
-				const weaponSpeedSection = this.newSection(i18n.t('gear_picker.weapon_speed'));
+				const weaponSpeedSection = this.newSection(i18n.t('gear.gear_picker.weapon_speed'));
 				weaponSpeedSection.classList.add('filters-menu-section-number-list');
 				new NumberPicker<Sim>(weaponSpeedSection, player.sim, {
 					id: 'filters-min-weapon-speed',
-					label: i18n.t('gear_picker.min_mh_speed'),
+					label: i18n.t('gear.gear_picker.min_mh_speed'),
 					//labelTooltip: 'Maximum speed for the mainhand weapon. If 0, no maximum value is applied.',
 					float: true,
 					positive: true,
@@ -182,7 +182,7 @@ export class FiltersMenu extends BaseModal {
 				});
 				new NumberPicker<Sim>(weaponSpeedSection, player.sim, {
 					id: 'filters-max-weapon-speed',
-					label: i18n.t('gear_picker.max_mh_speed'),
+					label: i18n.t('gear.gear_picker.max_mh_speed'),
 					//labelTooltip: 'Maximum speed for the mainhand weapon. If 0, no maximum value is applied.',
 					float: true,
 					positive: true,
@@ -198,7 +198,7 @@ export class FiltersMenu extends BaseModal {
 				if (player.getPlayerSpec().canDualWield) {
 					new NumberPicker<Sim>(weaponSpeedSection, player.sim, {
 						id: 'filters-min-oh-weapon-speed',
-						label: i18n.t('gear_picker.min_oh_speed'),
+						label: i18n.t('gear.gear_picker.min_oh_speed'),
 						//labelTooltip: 'Minimum speed for the offhand weapon. If 0, no minimum value is applied.',
 						float: true,
 						positive: true,
@@ -212,7 +212,7 @@ export class FiltersMenu extends BaseModal {
 					});
 							new NumberPicker<Sim>(weaponSpeedSection, player.sim, {
 			id: 'filters-max-oh-weapon-speed',
-			label: i18n.t('gear_picker.max_oh_speed'),
+			label: i18n.t('gear.gear_picker.max_oh_speed'),
 						//labelTooltip: 'Maximum speed for the offhand weapon. If 0, no maximum value is applied.',
 						float: true,
 						positive: true,
@@ -231,7 +231,7 @@ export class FiltersMenu extends BaseModal {
 			if (rangedweapontypes.length < 1) {
 				return;
 			}
-			const rangedWeaponTypeSection = this.newSection(i18n.t('gear_picker.filters.ranged_weapon_type'));
+			const rangedWeaponTypeSection = this.newSection(i18n.t('gear.gear_picker.filters.ranged_weapon_type'));
 			rangedWeaponTypeSection.classList.add('filters-menu-section-bool-list');
 
 			rangedweapontypes.forEach(rangedWeaponType => {
@@ -253,11 +253,11 @@ export class FiltersMenu extends BaseModal {
 				});
 			});
 
-			const rangedWeaponSpeedSection = this.newSection(i18n.t('gear_picker.filters.ranged_weapon_speed'));
+			const rangedWeaponSpeedSection = this.newSection(i18n.t('gear.gear_picker.filters.ranged_weapon_speed'));
 			rangedWeaponSpeedSection.classList.add('filters-menu-section-number-list');
 			new NumberPicker<Sim>(rangedWeaponSpeedSection, player.sim, {
 				id: 'filters-min-ranged-weapon-speed',
-				label: i18n.t('gear_picker.filters.min_ranged_speed'),
+				label: i18n.t('gear.gear_picker.filters.min_ranged_speed'),
 				//labelTooltip: 'Maximum speed for the ranged weapon. If 0, no maximum value is applied.',
 				float: true,
 				positive: true,
@@ -271,7 +271,7 @@ export class FiltersMenu extends BaseModal {
 			});
 			new NumberPicker<Sim>(rangedWeaponSpeedSection, player.sim, {
 				id: 'filters-max-ranged-weapon-speed',
-				label: i18n.t('gear_picker.filters.max_ranged_speed'),
+				label: i18n.t('gear.gear_picker.filters.max_ranged_speed'),
 				//labelTooltip: 'Maximum speed for the ranged weapon. If 0, no maximum value is applied.',
 				float: true,
 				positive: true,

@@ -328,6 +328,82 @@
 			"gear_set": "Ensemble d'Équipement",
 			"gear_set_name": "Nom de l'Ensemble",
 			"save_gear_set": "Sauvegarder l'Ensemble"
+		},
+		"gear_picker": {
+			"tabs": {
+				"items": "Objets",
+				"random_suffix": "Suffixe Aléatoire",
+				"enchants": "Enchantements",
+				"tinkers": "Bricolages",
+				"reforging": "Reforge",
+				"upgrades": "Améliorations",
+				"gem1": "Gemme1",
+				"gem2": "Gemme2",
+				"gem3": "Gemme3"
+			},
+			"remove_buttons": {
+				"remove_enchant": "Retirer l'Enchantement",
+				"remove_tinkers": "Retirer les Bricolages",
+				"remove_reforge": "Retirer la Reforge",
+				"remove_random_suffix": "Retirer le Suffixe Aléatoire",
+				"remove_upgrade": "Retirer l'Amélioration",
+				"remove_gem": "Retirer la Gemme"
+			},
+			"filters": {
+				"title": "Filtres",
+				"general": "Général",
+				"min_ilvl": "ILvl Min",
+				"max_ilvl": "ILvl Max",
+				"faction_restrictions": "Restrictions de Faction",
+				"source": "Source",
+				"raids": "Raids",
+				"faction_labels": {
+					"none": "Aucune",
+					"alliance_only": "Alliance uniquement",
+					"horde_only": "Horde uniquement"
+				}
+			},
+			"quick_popovers": {
+				"favorite_gems": {
+					"title": "Gemmes favorites",
+					"empty_message": "Ajouter des gemmes favorites.",
+					"open_gems": "Ouvrir les Gemmes"
+				},
+				"favorite_enchants": {
+					"title": "Enchantements Favoris",
+					"empty_message": "Ajouter des Enchantements favoris",
+					"open_enchants": "Ouvrir les Enchantements"
+				}
+			},
+			"missing_gear_message": {
+				"title": "Si l'équipement manque, vérifiez la phase sélectionnée et vos filtres d'équipement.",
+				"description": "Si le problème persiste, sauvegardez toutes les données non sauvegardées, cliquez sur l'icône d'équipement pour ouvrir vos options de simulation, puis cliquez sur \"Restaurer les paramètres par défaut\"."
+			},
+			"cooldowns": {
+				"title": "Cooldowns",
+				"tooltip": "Spécifiez les timings de cooldown, en secondes. Les cooldowns seront utilisés dès que possible après leurs timings spécifiés. Quand non spécifié, les cooldowns seront utilisés quand prêts et qu'il est raisonnable de le faire.<br><br>Plusieurs timings peuvent être fournis en séparant par des virgules. Toute utilisation de cooldown après le dernier timing fourni utilisera la logique par défaut."
+			},
+			"ep_tooltip": "EP (Points d'Équivalence) est une façon de comparer les objets en multipliant les stats brutes d'un objet avec vos poids de stats actuels. Plus d'EP ne signifie pas nécessairement plus de DPS, car EP ne prend pas en compte les plafonds de stats et les calculs de stats non linéaires.",
+			"search_placeholder": "Rechercher...",
+			"filters_button": "Filtres",
+			"unequip_item": "Déséquiper l'Objet",
+			"table_headers": {
+				"ilvl": "ILvl",
+				"item": "Objet",
+				"source": "Source"
+			},
+			"show_ep": "Afficher EP",
+			"armor_type": "Type d'Armure",
+			"weapon_type": "Type d'Armes",
+			"weapon_speed": "Vitesse d'Armes",
+			"min_mh_speed": "Vitesse MH Min",
+			"max_mh_speed": "Vitesse MH Max",
+			"min_oh_speed": "Vitesse OH Min",
+			"max_oh_speed": "Vitesse OH Max",
+			"ranged_weapon_type": "Type d'Armes à Distance",
+			"ranged_weapon_speed": "Vitesse d'Armes à Distance",
+			"min_ranged_speed": "Vitesse à Distance Min",
+			"max_ranged_speed": "Vitesse à Distance Max"
 		}
 	},
 	"settings": {
@@ -641,82 +717,6 @@
 			"settings_name": "Nom des Paramètres",
 			"save_settings": "Sauvegarder les Paramètres"
 		}
-	},
-	"gear_picker": {
-		"tabs": {
-			"items": "Objets",
-			"random_suffix": "Suffixe aléatoire",
-			"enchants": "Enchantements",
-			"tinkers": "Bricolages",
-			"reforging": "Refonte",
-			"upgrades": "Améliorations",
-			"gem1": "Gemme1",
-			"gem2": "Gemme2",
-			"gem3": "Gemme3"
-		},
-		"remove_buttons": {
-			"remove_enchant": "Retirer l'enchantement",
-			"remove_tinkers": "Retirer les bricolages",
-			"remove_reforge": "Retirer la refonte",
-			"remove_random_suffix": "Retirer le suffixe aléatoire",
-			"remove_upgrade": "Retirer l'amélioration",
-			"remove_gem": "Retirer la gemme"
-		},
-		"filters": {
-			"title": "Filtres",
-			"general": "Général",
-			"min_ilvl": "Niveau d'objet min",
-			"max_ilvl": "Niveau d'objet max",
-			"faction_restrictions": "Restrictions de faction",
-			"source": "Source",
-			"raids": "Raids",
-			"faction_labels": {
-				"none": "Aucune",
-				"alliance_only": "Alliance uniquement",
-				"horde_only": "Horde uniquement"
-			}
-		},
-		"quick_popovers": {
-			"favorite_gems": {
-				"title": "Gemmes favorites",
-				"empty_message": "Ajouter des gemmes favorites.",
-				"open_gems": "Ouvrir les gemmes"
-			},
-			"favorite_enchants": {
-				"title": "Enchantements favoris",
-				"empty_message": "Ajouter des enchantements favoris",
-				"open_enchants": "Ouvrir les enchantements"
-			}
-		},
-		"missing_gear_message": {
-			"title": "Si l'équipement manque, vérifiez la phase sélectionnée et vos filtres d'équipement.",
-			"description": "Si le problème persiste, sauvegardez toutes les données non sauvegardées, cliquez sur l'icône d'engrenage pour ouvrir vos options de simulation, puis cliquez sur \"Restaurer les valeurs par défaut\"."
-		},
-		"cooldowns": {
-			"title": "Temps de recharge",
-			"tooltip": "Spécifiez les timings des temps de recharge, en secondes. Les temps de recharge seront utilisés dès que possible après leurs timings spécifiés. Lorsqu'ils ne sont pas spécifiés, les temps de recharge seront utilisés quand ils sont prêts et qu'il est logique de le faire.<br><br>Plusieurs timings peuvent être fournis en les séparant par des virgules. Toute utilisation de temps de recharge après le dernier timing fourni utilisera la logique par défaut."
-		},
-		"ep_tooltip": "EP (Points d'équivalence) est une façon de comparer les objets en multipliant les statistiques brutes d'un objet avec vos poids de statistiques actuels. Plus d'EP ne signifie pas nécessairement plus de DPS, car l'EP ne prend pas en compte les plafonds de statistiques et les calculs de statistiques non linéaires.",
-		"search_placeholder": "Rechercher...",
-		"filters_button": "Filtres",
-		"unequip_item": "Déséquiper l'objet",
-		"table_headers": {
-			"ilvl": "NivObj",
-			"item": "Objet",
-			"source": "Source"
-		},
-		"show_ep": "Afficher EP",
-		"armor_type": "Type d'armure",
-		"weapon_type": "Type d'arme",
-		"weapon_speed": "Vitesse d'arme",
-		"min_mh_speed": "Vitesse MG min",
-		"max_mh_speed": "Vitesse MG max",
-		"min_oh_speed": "Vitesse MO min",
-		"max_oh_speed": "Vitesse MO max",
-		"ranged_weapon_type": "Type d'arme à distance",
-		"ranged_weapon_speed": "Vitesse d'arme à distance",
-		"min_ranged_speed": "Vitesse à distance min",
-		"max_ranged_speed": "Vitesse à distance max"
 	},
 	"talents": {
 		"title": "Talents",

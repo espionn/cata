@@ -141,10 +141,10 @@ export default class ItemList<T extends ItemListType> {
 		this.tabContent = (
 			<div id={this.id} className={`selector-modal-tab-pane tab-pane fade ${selected ? 'active show' : ''}`}>
 				<div className="selector-modal-filters">
-					<input ref={searchRef} className="selector-modal-search form-control" type="text" placeholder={i18n.t('gear_picker.search_placeholder')} />
+					<input ref={searchRef} className="selector-modal-search form-control" type="text" placeholder={i18n.t('gear.gear_picker.search_placeholder')} />
 					{label === SelectorModalTabs.Items && (
 						<button ref={filtersButtonRef} className="selector-modal-filters-button btn btn-primary">
-							{i18n.t('gear_picker.filters_button')}
+							{i18n.t('gear.gear_picker.filters_button')}
 						</button>
 					)}
 					<div ref={phaseSelectorRef} className="selector-modal-phase-selector" />
@@ -153,16 +153,16 @@ export default class ItemList<T extends ItemListType> {
 					<div ref={matchingGemsRef} className="sim-input selector-modal-boolean-option selector-modal-show-matching-gems" />
 					{showEPOptions && <div ref={showEpValuesRef} className="sim-input selector-modal-boolean-option selector-modal-show-ep-values" />}
 					<button ref={removeButtonRef} className="selector-modal-remove-button btn btn-danger">
-						{i18n.t('gear_picker.unequip_item')}
+						{i18n.t('gear.gear_picker.unequip_item')}
 					</button>
 				</div>
 				<div className="selector-modal-list-labels">
 					{(label === SelectorModalTabs.Items || label === SelectorModalTabs.Upgrades) && (
-						<h6 className="ilvl-label interactive" onclick={sortByIlvl}>{i18n.t('gear_picker.table_headers.ilvl')}</h6>
+						<h6 className="ilvl-label interactive" onclick={sortByIlvl}>{i18n.t('gear.gear_picker.table_headers.ilvl')}</h6>
 					)}
 					<h6 className="item-label">
 						{
-							label === SelectorModalTabs.Items ? i18n.t('gear_picker.table_headers.item') :
+							label === SelectorModalTabs.Items ? i18n.t('gear.gear_picker.table_headers.item') :
 							label === SelectorModalTabs.Enchants ? getTranslatedTabLabel(SelectorModalTabs.Enchants) :
 							[SelectorModalTabs.Gem1, SelectorModalTabs.Gem2, SelectorModalTabs.Gem3].includes(label as SelectorModalTabs) ? getTranslatedTabLabel(SelectorModalTabs.Gem1) :
 							label === SelectorModalTabs.Reforging ? getTranslatedTabLabel(SelectorModalTabs.Reforging) :
@@ -170,7 +170,7 @@ export default class ItemList<T extends ItemListType> {
 							label === SelectorModalTabs.Tinkers ? getTranslatedTabLabel(SelectorModalTabs.Tinkers) : ""
 						}
 					</h6>
-					{label === SelectorModalTabs.Items && <h6 className="source-label">{i18n.t('gear_picker.table_headers.source')}</h6>}
+					{label === SelectorModalTabs.Items && <h6 className="source-label">{i18n.t('gear.gear_picker.table_headers.source')}</h6>}
 					<h6 className="ep-label interactive" onclick={sortByEP}>
 						<span>EP</span>
 						<i className="fa-solid fa-plus-minus fa-2xs" />
@@ -204,7 +204,7 @@ export default class ItemList<T extends ItemListType> {
 			if (showEpValuesRef.value) makeShowEPValuesSelector(showEpValuesRef.value, player.sim);
 
 			tippy(epButtonRef.value!, {
-				content: i18n.t('gear_picker.ep_tooltip'),
+				content: i18n.t('gear.gear_picker.ep_tooltip'),
 			});
 		}
 
@@ -261,24 +261,24 @@ export default class ItemList<T extends ItemListType> {
 
 			switch (label) {
 				case SelectorModalTabs.Enchants:
-					removeButton.textContent = i18n.t('gear_picker.remove_buttons.remove_enchant');
+					removeButton.textContent = i18n.t('gear.gear_picker.remove_buttons.remove_enchant');
 					break;
 				case SelectorModalTabs.Tinkers:
-					removeButton.textContent = i18n.t('gear_picker.remove_buttons.remove_tinkers');
+					removeButton.textContent = i18n.t('gear.gear_picker.remove_buttons.remove_tinkers');
 					break;
 				case SelectorModalTabs.Reforging:
-					removeButton.textContent = i18n.t('gear_picker.remove_buttons.remove_reforge');
+					removeButton.textContent = i18n.t('gear.gear_picker.remove_buttons.remove_reforge');
 					break;
 				case SelectorModalTabs.RandomSuffixes:
-					removeButton.textContent = i18n.t('gear_picker.remove_buttons.remove_random_suffix');
+					removeButton.textContent = i18n.t('gear.gear_picker.remove_buttons.remove_random_suffix');
 					break;
 				case SelectorModalTabs.Upgrades:
-					removeButton.textContent = i18n.t('gear_picker.remove_buttons.remove_upgrade');
+					removeButton.textContent = i18n.t('gear.gear_picker.remove_buttons.remove_upgrade');
 					break;
 				case SelectorModalTabs.Gem1:
 				case SelectorModalTabs.Gem2:
 				case SelectorModalTabs.Gem3:
-					removeButton.textContent = i18n.t('gear_picker.remove_buttons.remove_gem');
+					removeButton.textContent = i18n.t('gear.gear_picker.remove_buttons.remove_gem');
 					break;
 			}
 		}
