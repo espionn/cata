@@ -10,7 +10,7 @@
                     "$ref": "#/definitions/Landing"
                 },
                 "common": {
-                    "$ref": "#/definitions/Common"
+                    "$ref": "#/definitions/WelcomeCommon"
                 },
                 "sim": {
                     "$ref": "#/definitions/Sim"
@@ -63,7 +63,7 @@
             ],
             "title": "Welcome"
         },
-        "Common": {
+        "WelcomeCommon": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -125,7 +125,7 @@
                     "$ref": "#/definitions/MasterySpellNames"
                 },
                 "copy_button": {
-                    "$ref": "#/definitions/CopyButton"
+                    "$ref": "#/definitions/CommonCopyButton"
                 },
                 "list_picker": {
                     "$ref": "#/definitions/ListPicker"
@@ -137,6 +137,7 @@
                 "copy_button",
                 "custom",
                 "list_picker",
+                "mastery_spell_names",
                 "mob_types",
                 "none",
                 "phases",
@@ -150,10 +151,9 @@
                 "stats",
                 "status",
                 "tanks",
-                "weapon_types",
-                "mastery_spell_names"
+                "weapon_types"
             ],
-            "title": "Common"
+            "title": "WelcomeCommon"
         },
         "ArmorTypes": {
             "type": "object",
@@ -237,7 +237,7 @@
             ],
             "title": "Classes"
         },
-        "CopyButton": {
+        "CommonCopyButton": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -252,7 +252,7 @@
                 "copied",
                 "default_text"
             ],
-            "title": "CopyButton"
+            "title": "CommonCopyButton"
         },
         "ListPicker": {
             "type": "object",
@@ -294,6 +294,155 @@
                 "warnings"
             ],
             "title": "ListPicker"
+        },
+        "MasterySpellNames": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "unknown": {
+                    "type": "string"
+                },
+                "potent_poisons": {
+                    "type": "string"
+                },
+                "main_gauche": {
+                    "type": "string"
+                },
+                "executioner": {
+                    "type": "string"
+                },
+                "blood_shield": {
+                    "type": "string"
+                },
+                "frozen_heart": {
+                    "type": "string"
+                },
+                "dreadblade": {
+                    "type": "string"
+                },
+                "total_eclipse": {
+                    "type": "string"
+                },
+                "razor_claws": {
+                    "type": "string"
+                },
+                "natures_guardian": {
+                    "type": "string"
+                },
+                "harmony": {
+                    "type": "string"
+                },
+                "illuminated_healing": {
+                    "type": "string"
+                },
+                "divine_bulwark": {
+                    "type": "string"
+                },
+                "hand_of_light": {
+                    "type": "string"
+                },
+                "elemental_overload": {
+                    "type": "string"
+                },
+                "enhanced_elements": {
+                    "type": "string"
+                },
+                "deep_healing": {
+                    "type": "string"
+                },
+                "master_of_beasts": {
+                    "type": "string"
+                },
+                "wild_quiver": {
+                    "type": "string"
+                },
+                "essence_of_the_viper": {
+                    "type": "string"
+                },
+                "strikes_of_opportunity": {
+                    "type": "string"
+                },
+                "unshackled_fury": {
+                    "type": "string"
+                },
+                "critical_block": {
+                    "type": "string"
+                },
+                "mana_adept": {
+                    "type": "string"
+                },
+                "flashburn": {
+                    "type": "string"
+                },
+                "icicles": {
+                    "type": "string"
+                },
+                "shield_discipline": {
+                    "type": "string"
+                },
+                "echo_of_light": {
+                    "type": "string"
+                },
+                "shadow_orb_power": {
+                    "type": "string"
+                },
+                "potent_afflictions": {
+                    "type": "string"
+                },
+                "master_demonologist": {
+                    "type": "string"
+                },
+                "emberstorm": {
+                    "type": "string"
+                },
+                "elusive_brawler": {
+                    "type": "string"
+                },
+                "gift_of_the_serpent": {
+                    "type": "string"
+                },
+                "bottled_fury": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "blood_shield",
+                "bottled_fury",
+                "critical_block",
+                "deep_healing",
+                "divine_bulwark",
+                "dreadblade",
+                "echo_of_light",
+                "elemental_overload",
+                "elusive_brawler",
+                "emberstorm",
+                "enhanced_elements",
+                "essence_of_the_viper",
+                "executioner",
+                "flashburn",
+                "frozen_heart",
+                "gift_of_the_serpent",
+                "hand_of_light",
+                "harmony",
+                "icicles",
+                "illuminated_healing",
+                "main_gauche",
+                "mana_adept",
+                "master_demonologist",
+                "master_of_beasts",
+                "natures_guardian",
+                "potent_afflictions",
+                "potent_poisons",
+                "razor_claws",
+                "shadow_orb_power",
+                "shield_discipline",
+                "strikes_of_opportunity",
+                "total_eclipse",
+                "unknown",
+                "unshackled_fury",
+                "wild_quiver"
+            ],
+            "title": "MasterySpellNames"
         },
         "MobTypes": {
             "type": "object",
@@ -593,10 +742,10 @@
                     "$ref": "#/definitions/DeathKnight"
                 },
                 "druid": {
-                    "$ref": "#/definitions/Druid"
+                    "$ref": "#/definitions/SpecsDruid"
                 },
                 "hunter": {
-                    "$ref": "#/definitions/Hunter"
+                    "$ref": "#/definitions/SpecsHunter"
                 },
                 "mage": {
                     "$ref": "#/definitions/Mage"
@@ -611,10 +760,10 @@
                     "$ref": "#/definitions/Priest"
                 },
                 "rogue": {
-                    "$ref": "#/definitions/Rogue"
+                    "$ref": "#/definitions/SpecsRogue"
                 },
                 "shaman": {
-                    "$ref": "#/definitions/Shaman"
+                    "$ref": "#/definitions/SpecsShaman"
                 },
                 "warlock": {
                     "$ref": "#/definitions/Warlock"
@@ -659,7 +808,7 @@
             ],
             "title": "DeathKnight"
         },
-        "Druid": {
+        "SpecsDruid": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -682,9 +831,9 @@
                 "guardian",
                 "restoration"
             ],
-            "title": "Druid"
+            "title": "SpecsDruid"
         },
-        "Hunter": {
+        "SpecsHunter": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -703,7 +852,7 @@
                 "marksmanship",
                 "survival"
             ],
-            "title": "Hunter"
+            "title": "SpecsHunter"
         },
         "Mage": {
             "type": "object",
@@ -789,7 +938,7 @@
             ],
             "title": "Priest"
         },
-        "Rogue": {
+        "SpecsRogue": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -808,9 +957,9 @@
                 "combat",
                 "subtlety"
             ],
-            "title": "Rogue"
+            "title": "SpecsRogue"
         },
-        "Shaman": {
+        "SpecsShaman": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -829,7 +978,7 @@
                 "enhancement",
                 "restoration"
             ],
-            "title": "Shaman"
+            "title": "SpecsShaman"
         },
         "Warlock": {
             "type": "object",
@@ -1063,155 +1212,6 @@
             ],
             "title": "Stats"
         },
-        "MasterySpellNames": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "unknown": {
-                    "type": "string"
-                },
-                "potent_poisons": {
-                    "type": "string"
-                },
-                "main_gauche": {
-                    "type": "string"
-                },
-                "executioner": {
-                    "type": "string"
-                },
-                "blood_shield": {
-                    "type": "string"
-                },
-                "frozen_heart": {
-                    "type": "string"
-                },
-                "dreadblade": {
-                    "type": "string"
-                },
-                "total_eclipse": {
-                    "type": "string"
-                },
-                "razor_claws": {
-                    "type": "string"
-                },
-                "natures_guardian": {
-                    "type": "string"
-                },
-                "harmony": {
-                    "type": "string"
-                },
-                "illuminated_healing": {
-                    "type": "string"
-                },
-                "divine_bulwark": {
-                    "type": "string"
-                },
-                "hand_of_light": {
-                    "type": "string"
-                },
-                "elemental_overload": {
-                    "type": "string"
-                },
-                "enhanced_elements": {
-                    "type": "string"
-                },
-                "deep_healing": {
-                    "type": "string"
-                },
-                "master_of_beasts": {
-                    "type": "string"
-                },
-                "wild_quiver": {
-                    "type": "string"
-                },
-                "essence_of_the_viper": {
-                    "type": "string"
-                },
-                "strikes_of_opportunity": {
-                    "type": "string"
-                },
-                "unshackled_fury": {
-                    "type": "string"
-                },
-                "critical_block": {
-                    "type": "string"
-                },
-                "mana_adept": {
-                    "type": "string"
-                },
-                "flashburn": {
-                    "type": "string"
-                },
-                "icicles": {
-                    "type": "string"
-                },
-                "shield_discipline": {
-                    "type": "string"
-                },
-                "echo_of_light": {
-                    "type": "string"
-                },
-                "shadow_orb_power": {
-                    "type": "string"
-                },
-                "potent_afflictions": {
-                    "type": "string"
-                },
-                "master_demonologist": {
-                    "type": "string"
-                },
-                "emberstorm": {
-                    "type": "string"
-                },
-                "elusive_brawler": {
-                    "type": "string"
-                },
-                "gift_of_the_serpent": {
-                    "type": "string"
-                },
-                "bottled_fury": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "unknown",
-                "potent_poisons",
-                "main_gauche",
-                "executioner",
-                "blood_shield",
-                "frozen_heart",
-                "dreadblade",
-                "total_eclipse",
-                "razor_claws",
-                "natures_guardian",
-                "harmony",
-                "illuminated_healing",
-                "divine_bulwark",
-                "hand_of_light",
-                "elemental_overload",
-                "enhanced_elements",
-                "deep_healing",
-                "master_of_beasts",
-                "wild_quiver",
-                "essence_of_the_viper",
-                "strikes_of_opportunity",
-                "unshackled_fury",
-                "critical_block",
-                "mana_adept",
-                "flashburn",
-                "icicles",
-                "shield_discipline",
-                "echo_of_light",
-                "shadow_orb_power",
-                "potent_afflictions",
-                "master_demonologist",
-                "emberstorm",
-                "elusive_brawler",
-                "gift_of_the_serpent",
-                "bottled_fury"
-            ],
-            "title": "MasterySpellNames"
-        },
         "Status": {
             "type": "object",
             "additionalProperties": false,
@@ -1322,35 +1322,6 @@
                 "title"
             ],
             "title": "Export"
-        },
-        "Talents": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "copy_button": {
-                    "$ref": "#/definitions/CopyButton"
-                },
-                "reset_button": {
-                    "$ref": "#/definitions/ResetButton"
-                },
-                "glyphs": {
-                    "$ref": "#/definitions/Glyphs"
-                },
-                "saved_talents": {
-                    "$ref": "#/definitions/SavedTalents"
-                }
-            },
-            "required": [
-                "title",
-                "copy_button",
-                "reset_button",
-                "glyphs",
-                "saved_talents"
-            ],
-            "title": "Talents"
         },
         "Gear": {
             "type": "object",
@@ -1469,338 +1440,6 @@
             ],
             "title": "ReforgeSummary"
         },
-        "CopyButton": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "label": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "label",
-                "tooltip"
-            ],
-            "title": "CopyButton"
-        },
-        "ResetButton": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "tooltip": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "tooltip"
-            ],
-            "title": "ResetButton"
-        },
-        "Glyphs": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "major": {
-                    "type": "string"
-                },
-                "minor": {
-                    "type": "string"
-                },
-                "modal": {
-                    "$ref": "#/definitions/GlyphModal"
-                },
-                "empty": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "major",
-                "minor",
-                "modal",
-                "empty"
-            ],
-            "title": "Glyphs"
-        },
-        "GlyphModal": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "search_placeholder": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "title",
-                "search_placeholder"
-            ],
-            "title": "GlyphModal"
-        },
-        "SavedTalents": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "label": {
-                    "type": "string"
-                },
-                "name_label": {
-                    "type": "string"
-                },
-                "save_button": {
-                    "type": "string"
-                },
-                "delete": {
-                    "$ref": "#/definitions/SavedTalentsDelete"
-                },
-                "alerts": {
-                    "$ref": "#/definitions/SavedTalentsAlerts"
-                }
-            },
-            "required": [
-                "title",
-                "label",
-                "name_label",
-                "save_button",
-                "delete",
-                "alerts"
-            ],
-            "title": "SavedTalents"
-        },
-        "SavedTalentsDelete": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "confirm": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "confirm",
-                "tooltip"
-            ],
-            "title": "SavedTalentsDelete"
-        },
-        "SavedTalentsAlerts": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "choose_name": {
-                    "type": "string"
-                },
-                "name_exists": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "choose_name",
-                "name_exists"
-            ],
-            "title": "SavedTalentsAlerts"
-        },
-        "Rotation": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "header": {
-                    "$ref": "#/definitions/RotationHeader"
-                },
-                "simple": {
-                    "$ref": "#/definitions/RotationSimple"
-                },
-                "cooldowns": {
-                    "$ref": "#/definitions/RotationCooldowns"
-                },
-                "saved_rotations": {
-                    "$ref": "#/definitions/SavedRotations"
-                }
-            },
-            "required": [
-                "title",
-                "header",
-                "simple",
-                "cooldowns",
-                "saved_rotations"
-            ],
-            "title": "Rotation"
-        },
-        "RotationHeader": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "rotation_type": {
-                    "$ref": "#/definitions/RotationType"
-                },
-                "reset_button": {
-                    "$ref": "#/definitions/ResetButton"
-                }
-            },
-            "required": [
-                "rotation_type",
-                "reset_button"
-            ],
-            "title": "RotationHeader"
-        },
-        "RotationType": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "label": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "type": "string"
-                },
-                "values": {
-                    "$ref": "#/definitions/RotationTypeValues"
-                }
-            },
-            "required": [
-                "label",
-                "tooltip",
-                "values"
-            ],
-            "title": "RotationType"
-        },
-        "RotationTypeValues": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "auto": {
-                    "type": "string"
-                },
-                "simple": {
-                    "type": "string"
-                },
-                "apl": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "auto",
-                "simple",
-                "apl"
-            ],
-            "title": "RotationTypeValues"
-        },
-        "RotationSimple": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "title"
-            ],
-            "title": "RotationSimple"
-        },
-        "RotationCooldowns": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "type": "string"
-                },
-                "delete_tooltip": {
-                    "type": "string"
-                },
-                "timings_placeholder": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "title",
-                "tooltip",
-                "delete_tooltip",
-                "timings_placeholder"
-            ],
-            "title": "RotationCooldowns"
-        },
-        "SavedRotations": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "label": {
-                    "type": "string"
-                },
-                "name_label": {
-                    "type": "string"
-                },
-                "save_button": {
-                    "type": "string"
-                },
-                "delete": {
-                    "$ref": "#/definitions/SavedRotationsDelete"
-                },
-                "alerts": {
-                    "$ref": "#/definitions/SavedRotationsAlerts"
-                }
-            },
-            "required": [
-                "title",
-                "label",
-                "name_label",
-                "save_button",
-                "delete",
-                "alerts"
-            ],
-            "title": "SavedRotations"
-        },
-        "SavedRotationsDelete": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "confirm": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "confirm",
-                "tooltip"
-            ],
-            "title": "SavedRotationsDelete"
-        },
-        "SavedRotationsAlerts": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "choose_name": {
-                    "type": "string"
-                },
-                "name_exists": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "choose_name",
-                "name_exists"
-            ],
-            "title": "SavedRotationsAlerts"
-        },
         "GearPicker": {
             "type": "object",
             "additionalProperties": false,
@@ -1821,7 +1460,7 @@
                     "$ref": "#/definitions/Sim"
                 },
                 "cooldowns": {
-                    "$ref": "#/definitions/Cooldowns"
+                    "$ref": "#/definitions/GearPickerCooldowns"
                 },
                 "ep_tooltip": {
                     "type": "string"
@@ -1902,7 +1541,7 @@
             ],
             "title": "GearPicker"
         },
-        "Cooldowns": {
+        "GearPickerCooldowns": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -1917,7 +1556,7 @@
                 "title",
                 "tooltip"
             ],
-            "title": "Cooldowns"
+            "title": "GearPickerCooldowns"
         },
         "Filters": {
             "type": "object",
@@ -2208,7 +1847,7 @@
                     "$ref": "#/definitions/FixedRngSeed"
                 },
                 "language": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "feature_toggles": {
                     "$ref": "#/definitions/FeatureToggles"
@@ -2272,7 +1911,7 @@
             ],
             "title": "FixedRngSeed"
         },
-        "Language": {
+        "LanguageClass": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -2287,7 +1926,7 @@
                 "label",
                 "tooltip"
             ],
-            "title": "Language"
+            "title": "LanguageClass"
         },
         "RestoreDefaults": {
             "type": "object",
@@ -2428,6 +2067,1458 @@
             ],
             "title": "Simulations"
         },
+        "Rotation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "common": {
+                    "$ref": "#/definitions/RotationCommon"
+                },
+                "header": {
+                    "$ref": "#/definitions/RotationHeader"
+                },
+                "apl": {
+                    "$ref": "#/definitions/APL"
+                },
+                "simple": {
+                    "$ref": "#/definitions/Export"
+                },
+                "cooldowns": {
+                    "$ref": "#/definitions/RotationCooldowns"
+                },
+                "saved_rotations": {
+                    "$ref": "#/definitions/Saved"
+                },
+                "options": {
+                    "$ref": "#/definitions/RotationOptions"
+                }
+            },
+            "required": [
+                "apl",
+                "common",
+                "cooldowns",
+                "header",
+                "options",
+                "saved_rotations",
+                "simple",
+                "title"
+            ],
+            "title": "Rotation"
+        },
+        "APL": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "prepull_actions": {
+                    "$ref": "#/definitions/PrepullActions"
+                },
+                "priority_list": {
+                    "$ref": "#/definitions/PrepullActions"
+                },
+                "actions": {
+                    "$ref": "#/definitions/Actions"
+                },
+                "values": {
+                    "$ref": "#/definitions/APLValues"
+                },
+                "operators": {
+                    "$ref": "#/definitions/Operators"
+                },
+                "execute_phases": {
+                    "$ref": "#/definitions/ExecutePhases"
+                },
+                "totem_types": {
+                    "$ref": "#/definitions/TotemTypes"
+                },
+                "item_swap_sets": {
+                    "$ref": "#/definitions/ItemSwapSets"
+                }
+            },
+            "required": [
+                "actions",
+                "execute_phases",
+                "item_swap_sets",
+                "operators",
+                "prepull_actions",
+                "priority_list",
+                "totem_types",
+                "values"
+            ],
+            "title": "APL"
+        },
+        "Actions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "cast": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "cast_at_player": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "multi_dot": {
+                    "$ref": "#/definitions/MultiDot"
+                },
+                "strict_multi_dot": {
+                    "$ref": "#/definitions/MultiDot"
+                },
+                "multi_shield": {
+                    "$ref": "#/definitions/MultiDot"
+                },
+                "channel": {
+                    "$ref": "#/definitions/Channel"
+                },
+                "cast_all_stat_buff_cooldowns": {
+                    "$ref": "#/definitions/AutocastOtherCooldowns"
+                },
+                "autocast_other_cooldowns": {
+                    "$ref": "#/definitions/AutocastOtherCooldowns"
+                },
+                "wait": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "wait_until": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "scheduled_action": {
+                    "$ref": "#/definitions/ScheduledAction"
+                },
+                "do_at": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "sequence": {
+                    "$ref": "#/definitions/AutocastOtherCooldowns"
+                },
+                "reset_sequence": {
+                    "$ref": "#/definitions/AutocastOtherCooldowns"
+                },
+                "strict_sequence": {
+                    "$ref": "#/definitions/AutocastOtherCooldowns"
+                },
+                "change_target": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "activate_aura": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "activate_aura_with_stacks": {
+                    "$ref": "#/definitions/ActivateAuraWithStacks"
+                },
+                "activate_all_stat_buff_proc_auras": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "cancel_aura": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "trigger_icd": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "item_swap": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "move": {
+                    "$ref": "#/definitions/Move"
+                },
+                "custom_rotation": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "optimal_rotation_action": {
+                    "$ref": "#/definitions/OptimalRotationAction"
+                },
+                "guardian_hotw_dps_rotation": {
+                    "$ref": "#/definitions/LanguageClass"
+                }
+            },
+            "required": [
+                "activate_all_stat_buff_proc_auras",
+                "activate_aura",
+                "activate_aura_with_stacks",
+                "autocast_other_cooldowns",
+                "cancel_aura",
+                "cast",
+                "cast_all_stat_buff_cooldowns",
+                "cast_at_player",
+                "change_target",
+                "channel",
+                "custom_rotation",
+                "do_at",
+                "guardian_hotw_dps_rotation",
+                "item_swap",
+                "move",
+                "multi_dot",
+                "multi_shield",
+                "optimal_rotation_action",
+                "reset_sequence",
+                "scheduled_action",
+                "sequence",
+                "strict_multi_dot",
+                "strict_sequence",
+                "trigger_icd",
+                "wait",
+                "wait_until"
+            ],
+            "title": "Actions"
+        },
+        "ActivateAuraWithStacks": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "stacks": {
+                    "type": "string"
+                },
+                "stacks_tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "label",
+                "stacks",
+                "stacks_tooltip",
+                "tooltip"
+            ],
+            "title": "ActivateAuraWithStacks"
+        },
+        "AutocastOtherCooldowns": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "full": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "full",
+                "label",
+                "tooltip"
+            ],
+            "title": "AutocastOtherCooldowns"
+        },
+        "Channel": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "full": {
+                    "type": "string"
+                },
+                "interrupt_if": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "recast": {
+                    "$ref": "#/definitions/LanguageClass"
+                }
+            },
+            "required": [
+                "full",
+                "interrupt_if",
+                "label",
+                "recast",
+                "tooltip"
+            ],
+            "title": "Channel"
+        },
+        "Move": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "to_range": {
+                    "type": "string"
+                },
+                "to_range_tooltip": {
+                    "type": "string"
+                },
+                "move_duration": {
+                    "type": "string"
+                },
+                "duration": {
+                    "type": "string"
+                },
+                "duration_tooltip": {
+                    "type": "string"
+                },
+                "move_duration_tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "duration",
+                "duration_tooltip",
+                "label",
+                "move_duration",
+                "move_duration_tooltip",
+                "to_range",
+                "to_range_tooltip",
+                "tooltip"
+            ],
+            "title": "Move"
+        },
+        "MultiDot": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "max_dots": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "overlap": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "max_shields": {
+                    "$ref": "#/definitions/LanguageClass"
+                }
+            },
+            "required": [
+                "label",
+                "overlap",
+                "tooltip"
+            ],
+            "title": "MultiDot"
+        },
+        "OptimalRotationAction": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "wrath_weave": {
+                    "$ref": "#/definitions/LanguageClass"
+                }
+            },
+            "required": [
+                "label",
+                "tooltip",
+                "wrath_weave"
+            ],
+            "title": "OptimalRotationAction"
+        },
+        "ScheduledAction": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "do_at": {
+                    "$ref": "#/definitions/LanguageClass"
+                }
+            },
+            "required": [
+                "do_at",
+                "label",
+                "tooltip"
+            ],
+            "title": "ScheduledAction"
+        },
+        "ExecutePhases": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "e20": {
+                    "type": "string"
+                },
+                "e25": {
+                    "type": "string"
+                },
+                "e35": {
+                    "type": "string"
+                },
+                "e45": {
+                    "type": "string"
+                },
+                "e90": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "e20",
+                "e25",
+                "e35",
+                "e45",
+                "e90"
+            ],
+            "title": "ExecutePhases"
+        },
+        "ItemSwapSets": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "main": {
+                    "type": "string"
+                },
+                "swapped": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "main",
+                "swapped"
+            ],
+            "title": "ItemSwapSets"
+        },
+        "Operators": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "equals": {
+                    "type": "string"
+                },
+                "not_equals": {
+                    "type": "string"
+                },
+                "greater_than_or_equal": {
+                    "type": "string"
+                },
+                "greater_than": {
+                    "type": "string"
+                },
+                "less_than_or_equal": {
+                    "type": "string"
+                },
+                "less_than": {
+                    "type": "string"
+                },
+                "add": {
+                    "type": "string"
+                },
+                "subtract": {
+                    "type": "string"
+                },
+                "multiply": {
+                    "type": "string"
+                },
+                "divide": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "add",
+                "divide",
+                "equals",
+                "greater_than",
+                "greater_than_or_equal",
+                "less_than",
+                "less_than_or_equal",
+                "multiply",
+                "not_equals",
+                "subtract"
+            ],
+            "title": "Operators"
+        },
+        "PrepullActions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "item_label": {
+                    "type": "string"
+                },
+                "do_at": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "new_action": {
+                    "type": "string"
+                },
+                "if_label": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "item_label",
+                "new_action",
+                "title",
+                "tooltip"
+            ],
+            "title": "PrepullActions"
+        },
+        "TotemTypes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "earth": {
+                    "type": "string"
+                },
+                "air": {
+                    "type": "string"
+                },
+                "fire": {
+                    "type": "string"
+                },
+                "water": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "air",
+                "earth",
+                "fire",
+                "water"
+            ],
+            "title": "TotemTypes"
+        },
+        "APLValues": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "no_condition": {
+                    "type": "string"
+                },
+                "none": {
+                    "type": "string"
+                },
+                "const": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "compare": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "math": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "max": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "min": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "all_of": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "any_of": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "not": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "current_time": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "current_time_percent": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "remaining_time": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "remaining_time_percent": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "is_execute_phase": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "number_of_targets": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "front_of_target": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "spell_is_casting": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "spell_time_to_ready": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "is_moving": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "distance": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "current_health": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "current_health_percent": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "max_health": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "current_mana": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "current_mana_percent": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "current_rage": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "max_rage": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "current_focus": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "max_focus": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "focus_regen_per_second": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "estimated_time_to_target_focus": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "current_energy": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "max_energy": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "energy_regen_per_second": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "estimated_time_to_target_energy": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "current_combo_points": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "max_combo_points": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "current_chi": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "max_chi": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "current_runic_power": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "max_runic_power": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "solar_energy": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "lunar_energy": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "current_eclipse_phase": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "generic_resource": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "num_runes": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "num_non_death_runes": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "rune_is_ready": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "rune_is_death": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "rune_cooldown": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "next_rune_cooldown": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "rune_slot_cooldown": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "gcd_is_ready": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "gcd_time_to_ready": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "time_to_next_auto": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "spell_known": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "current_cost": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "can_cast": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "is_ready": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "time_to_ready": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "cast_time": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "travel_time": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "cpm": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "is_channeling": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "channeled_ticks": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "number_of_charges": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "time_to_next_charge": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "channel_clip_delay": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "input_delay": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "aura_known": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "aura_active": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "aura_active_with_reaction_time": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "aura_inactive_with_reaction_time": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "aura_remaining_time": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "aura_num_stacks": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "aura_should_refresh": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "all_trinket_stat_procs_active": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "any_trinket_stat_procs_active": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "trinket_procs_min_remaining_time": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "trinket_procs_max_remaining_icd": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "num_equipped_stat_proc_trinkets": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "num_stat_buff_cooldowns": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "any_stat_buff_cooldowns_active": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "dot_is_active": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "dot_is_active_on_all_targets": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "dot_remaining_time": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "dot_lowest_remaining_time": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "dot_tick_frequency": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "dot_percent_increase": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "sequence_is_complete": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "sequence_is_ready": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "sequence_time_to_ready": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "totem_remaining_time": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "shaman_fire_elemental_duration": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "cat_excess_energy": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "cat_new_savage_roar_duration": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "warlock_hand_of_guldan_in_flight": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "warlock_haunt_in_flight": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "mage_current_combustion_dot_estimate": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "brewmaster_monk_current_stagger_percent": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "protection_paladin_damage_taken_last_global": {
+                    "$ref": "#/definitions/LanguageClass"
+                }
+            },
+            "required": [
+                "all_of",
+                "all_trinket_stat_procs_active",
+                "any_of",
+                "any_stat_buff_cooldowns_active",
+                "any_trinket_stat_procs_active",
+                "aura_active",
+                "aura_active_with_reaction_time",
+                "aura_inactive_with_reaction_time",
+                "aura_known",
+                "aura_num_stacks",
+                "aura_remaining_time",
+                "aura_should_refresh",
+                "brewmaster_monk_current_stagger_percent",
+                "can_cast",
+                "cast_time",
+                "cat_excess_energy",
+                "cat_new_savage_roar_duration",
+                "channel_clip_delay",
+                "channeled_ticks",
+                "compare",
+                "const",
+                "cpm",
+                "current_chi",
+                "current_combo_points",
+                "current_cost",
+                "current_eclipse_phase",
+                "current_energy",
+                "current_focus",
+                "current_health",
+                "current_health_percent",
+                "current_mana",
+                "current_mana_percent",
+                "current_rage",
+                "current_runic_power",
+                "current_time",
+                "current_time_percent",
+                "distance",
+                "dot_is_active",
+                "dot_is_active_on_all_targets",
+                "dot_lowest_remaining_time",
+                "dot_percent_increase",
+                "dot_remaining_time",
+                "dot_tick_frequency",
+                "energy_regen_per_second",
+                "estimated_time_to_target_energy",
+                "estimated_time_to_target_focus",
+                "focus_regen_per_second",
+                "front_of_target",
+                "gcd_is_ready",
+                "gcd_time_to_ready",
+                "generic_resource",
+                "input_delay",
+                "is_channeling",
+                "is_execute_phase",
+                "is_moving",
+                "is_ready",
+                "lunar_energy",
+                "mage_current_combustion_dot_estimate",
+                "math",
+                "max",
+                "max_chi",
+                "max_combo_points",
+                "max_energy",
+                "max_focus",
+                "max_health",
+                "max_rage",
+                "max_runic_power",
+                "min",
+                "next_rune_cooldown",
+                "no_condition",
+                "none",
+                "not",
+                "num_equipped_stat_proc_trinkets",
+                "num_non_death_runes",
+                "num_runes",
+                "num_stat_buff_cooldowns",
+                "number_of_charges",
+                "number_of_targets",
+                "protection_paladin_damage_taken_last_global",
+                "remaining_time",
+                "remaining_time_percent",
+                "rune_cooldown",
+                "rune_is_death",
+                "rune_is_ready",
+                "rune_slot_cooldown",
+                "sequence_is_complete",
+                "sequence_is_ready",
+                "sequence_time_to_ready",
+                "shaman_fire_elemental_duration",
+                "solar_energy",
+                "spell_is_casting",
+                "spell_known",
+                "spell_time_to_ready",
+                "time_to_next_auto",
+                "time_to_next_charge",
+                "time_to_ready",
+                "totem_remaining_time",
+                "travel_time",
+                "trinket_procs_max_remaining_icd",
+                "trinket_procs_min_remaining_time",
+                "warlock_hand_of_guldan_in_flight",
+                "warlock_haunt_in_flight"
+            ],
+            "title": "APLValues"
+        },
+        "RotationCommon": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "rotation_type": {
+                    "$ref": "#/definitions/RotationType"
+                }
+            },
+            "required": [
+                "rotation_type"
+            ],
+            "title": "RotationCommon"
+        },
+        "RotationType": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "auto": {
+                    "type": "string"
+                },
+                "simple": {
+                    "type": "string"
+                },
+                "apl": {
+                    "type": "string"
+                },
+                "single_target": {
+                    "type": "string"
+                },
+                "aoe": {
+                    "type": "string"
+                },
+                "custom": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "aoe",
+                "apl",
+                "auto",
+                "custom",
+                "label",
+                "simple",
+                "single_target"
+            ],
+            "title": "RotationType"
+        },
+        "RotationCooldowns": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "delete_tooltip": {
+                    "type": "string"
+                },
+                "timings_placeholder": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "delete_tooltip",
+                "timings_placeholder",
+                "title",
+                "tooltip"
+            ],
+            "title": "RotationCooldowns"
+        },
+        "RotationHeader": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "reset_button": {
+                    "$ref": "#/definitions/ResetButton"
+                }
+            },
+            "required": [
+                "reset_button"
+            ],
+            "title": "RotationHeader"
+        },
+        "ResetButton": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "tooltip"
+            ],
+            "title": "ResetButton"
+        },
+        "RotationOptions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "druid": {
+                    "$ref": "#/definitions/OptionsDruid"
+                },
+                "guardian": {
+                    "$ref": "#/definitions/Guardian"
+                },
+                "rogue": {
+                    "$ref": "#/definitions/OptionsRogue"
+                },
+                "shaman": {
+                    "$ref": "#/definitions/OptionsShaman"
+                },
+                "hunter": {
+                    "$ref": "#/definitions/OptionsHunter"
+                }
+            },
+            "required": [
+                "druid",
+                "guardian",
+                "hunter",
+                "rogue",
+                "shaman"
+            ],
+            "title": "RotationOptions"
+        },
+        "OptionsDruid": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "feral": {
+                    "$ref": "#/definitions/Feral"
+                }
+            },
+            "required": [
+                "feral"
+            ],
+            "title": "OptionsDruid"
+        },
+        "Feral": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "target_type": {
+                    "$ref": "#/definitions/TargetType"
+                },
+                "bear_weave": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "snek_weave": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "use_ns": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "manual_params": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "hotw_strategy": {
+                    "$ref": "#/definitions/HotwStrategy"
+                },
+                "allow_aoe_berserk": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "roar_offset": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "rip_leeway": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "bite_during_rotation": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "bite_time": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "berserk_bite_time": {
+                    "$ref": "#/definitions/LanguageClass"
+                }
+            },
+            "required": [
+                "allow_aoe_berserk",
+                "bear_weave",
+                "berserk_bite_time",
+                "bite_during_rotation",
+                "bite_time",
+                "hotw_strategy",
+                "manual_params",
+                "rip_leeway",
+                "roar_offset",
+                "snek_weave",
+                "target_type",
+                "use_ns"
+            ],
+            "title": "Feral"
+        },
+        "HotwStrategy": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "values": {
+                    "$ref": "#/definitions/HotwStrategyValues"
+                }
+            },
+            "required": [
+                "label",
+                "tooltip",
+                "values"
+            ],
+            "title": "HotwStrategy"
+        },
+        "HotwStrategyValues": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "passives_only": {
+                    "type": "string"
+                },
+                "enhanced_bear_weaving": {
+                    "type": "string"
+                },
+                "wrath_weaving": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "enhanced_bear_weaving",
+                "passives_only",
+                "wrath_weaving"
+            ],
+            "title": "HotwStrategyValues"
+        },
+        "TargetType": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "single_target": {
+                    "type": "string"
+                },
+                "aoe": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "aoe",
+                "label",
+                "single_target"
+            ],
+            "title": "TargetType"
+        },
+        "Guardian": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "maintain_faerie_fire": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "maintain_demo_roar": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "demo_roar_refresh_leeway": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "pulverize_refresh_leeway": {
+                    "$ref": "#/definitions/LanguageClass"
+                }
+            },
+            "required": [
+                "demo_roar_refresh_leeway",
+                "maintain_demo_roar",
+                "maintain_faerie_fire",
+                "pulverize_refresh_leeway"
+            ],
+            "title": "Guardian"
+        },
+        "OptionsHunter": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "beast_mastery": {
+                    "$ref": "#/definitions/BeastMastery"
+                },
+                "marksmanship": {
+                    "$ref": "#/definitions/BeastMastery"
+                },
+                "survival": {
+                    "$ref": "#/definitions/Survival"
+                }
+            },
+            "required": [
+                "beast_mastery",
+                "marksmanship",
+                "survival"
+            ],
+            "title": "OptionsHunter"
+        },
+        "BeastMastery": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "sting": {
+                    "$ref": "#/definitions/Sting"
+                },
+                "trap_weave": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "multi_dot_serpent_sting": {
+                    "$ref": "#/definitions/LanguageClass"
+                }
+            },
+            "required": [
+                "multi_dot_serpent_sting",
+                "sting",
+                "trap_weave"
+            ],
+            "title": "BeastMastery"
+        },
+        "Sting": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "values": {
+                    "$ref": "#/definitions/StingValues"
+                }
+            },
+            "required": [
+                "label",
+                "tooltip",
+                "values"
+            ],
+            "title": "Sting"
+        },
+        "StingValues": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "none": {
+                    "type": "string"
+                },
+                "serpent_sting": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "none",
+                "serpent_sting"
+            ],
+            "title": "StingValues"
+        },
+        "Survival": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "multi_dot_serpent_sting": {
+                    "$ref": "#/definitions/LanguageClass"
+                }
+            },
+            "required": [
+                "multi_dot_serpent_sting"
+            ],
+            "title": "Survival"
+        },
+        "OptionsRogue": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "apply_poisons_manually": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "subtlety": {
+                    "$ref": "#/definitions/Subtlety"
+                }
+            },
+            "required": [
+                "apply_poisons_manually",
+                "subtlety"
+            ],
+            "title": "OptionsRogue"
+        },
+        "Subtlety": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "honor_of_thieves_crit_rate": {
+                    "$ref": "#/definitions/LanguageClass"
+                }
+            },
+            "required": [
+                "honor_of_thieves_crit_rate"
+            ],
+            "title": "Subtlety"
+        },
+        "OptionsShaman": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "elemental": {
+                    "$ref": "#/definitions/Elemental"
+                }
+            },
+            "required": [
+                "elemental"
+            ],
+            "title": "OptionsShaman"
+        },
+        "Elemental": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "thunderstorm_in_range": {
+                    "$ref": "#/definitions/LanguageClass"
+                }
+            },
+            "required": [
+                "thunderstorm_in_range"
+            ],
+            "title": "Elemental"
+        },
+        "Saved": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "name_label": {
+                    "type": "string"
+                },
+                "save_button": {
+                    "type": "string"
+                },
+                "delete": {
+                    "$ref": "#/definitions/Delete"
+                },
+                "alerts": {
+                    "$ref": "#/definitions/Alerts"
+                }
+            },
+            "required": [
+                "alerts",
+                "delete",
+                "label",
+                "name_label",
+                "save_button",
+                "title"
+            ],
+            "title": "Saved"
+        },
+        "Alerts": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "choose_name": {
+                    "type": "string"
+                },
+                "name_exists": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "choose_name",
+                "name_exists"
+            ],
+            "title": "Alerts"
+        },
+        "Delete": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "confirm": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "confirm",
+                "tooltip"
+            ],
+            "title": "Delete"
+        },
         "Settings": {
             "type": "object",
             "additionalProperties": false,
@@ -2563,7 +3654,7 @@
                     "type": "string"
                 },
                 "misc": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "armor_reduction": {
                     "type": "string"
@@ -2604,49 +3695,49 @@
                     "$ref": "#/definitions/TargetInputs"
                 },
                 "duration": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "duration_variation": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "execute_duration_20": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "execute_duration_25": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "execute_duration_35": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "execute_duration_45": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "duration_below_high_hp": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "encounter_preset": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "advanced": {
                     "type": "string"
                 },
                 "use_health": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "target": {
                     "type": "string"
                 },
                 "num_allies": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "min_base_damage": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "npc": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "ai": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "level": {
                     "type": "string"
@@ -2655,25 +3746,25 @@
                     "type": "string"
                 },
                 "tanked_by": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "swing_speed": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "dual_wield": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "dual_wield_penalty": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "parry_haste": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "spell_school": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "damage_spread": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "suppress_dodge": {
                     "type": "string"
@@ -2726,10 +3817,10 @@
                     "type": "string"
                 },
                 "frenzy_time": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "spiritual_grasp_frequency": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 }
             },
             "required": [
@@ -2821,88 +3912,88 @@
                     "type": "string"
                 },
                 "challenge_mode": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "input_delay": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "channel_clip_delay": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "in_front_of_target": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "distance_from_target": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "tank_assignment": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "incoming_hps": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "healing_cadence": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "healing_cadence_variation": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "absorb_frac": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "burst_window": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "hp_percent_for_defensives": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "pet_uptime": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "glaive_toss_chance": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "detonate_seed": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "stance_snapshot": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "assume_bleed_active": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "cannot_shred_target": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "okf_uptime": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "sync_type": {
                     "$ref": "#/definitions/SyncType"
                 },
                 "show_1h_weapons": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "show_2h_weapons": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "show_matching_gems": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "show_ep_values": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "phase_selector": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "enable_item_swap": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "item_swap": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "assume_prepull_mastery_elixir": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 }
             },
             "required": [
@@ -2949,7 +4040,7 @@
                     "type": "string"
                 },
                 "values": {
-                    "$ref": "#/definitions/Values"
+                    "$ref": "#/definitions/SyncTypeValues"
                 }
             },
             "required": [
@@ -2959,7 +4050,7 @@
             ],
             "title": "SyncType"
         },
-        "Values": {
+        "SyncTypeValues": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -2982,7 +4073,7 @@
                 "none",
                 "perfect_sync"
             ],
-            "title": "Values"
+            "title": "SyncTypeValues"
         },
         "Player": {
             "type": "object",
@@ -3023,7 +4114,7 @@
                     "type": "string"
                 },
                 "misc": {
-                    "$ref": "#/definitions/Language"
+                    "$ref": "#/definitions/LanguageClass"
                 },
                 "stats": {
                     "type": "string"
@@ -3177,7 +4268,7 @@
                     "$ref": "#/definitions/EpWeights"
                 },
                 "modal": {
-                    "$ref": "#/definitions/Modal"
+                    "$ref": "#/definitions/StatWeightsModal"
                 },
                 "saved_ep_weights": {
                     "$ref": "#/definitions/Export"
@@ -3267,7 +4358,7 @@
             ],
             "title": "EpWeightsOptions"
         },
-        "Modal": {
+        "StatWeightsModal": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -3394,7 +4485,7 @@
                 "update_ep",
                 "weights"
             ],
-            "title": "Modal"
+            "title": "StatWeightsModal"
         },
         "SuggestReforges": {
             "type": "object",
@@ -3649,6 +4740,77 @@
                 "unspent_talent_points"
             ],
             "title": "Warnings"
+        },
+        "Talents": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "copy_button": {
+                    "$ref": "#/definitions/LanguageClass"
+                },
+                "reset_button": {
+                    "$ref": "#/definitions/ResetButton"
+                },
+                "glyphs": {
+                    "$ref": "#/definitions/Glyphs"
+                },
+                "saved_talents": {
+                    "$ref": "#/definitions/Saved"
+                }
+            },
+            "required": [
+                "copy_button",
+                "glyphs",
+                "reset_button",
+                "saved_talents",
+                "title"
+            ],
+            "title": "Talents"
+        },
+        "Glyphs": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "major": {
+                    "type": "string"
+                },
+                "minor": {
+                    "type": "string"
+                },
+                "modal": {
+                    "$ref": "#/definitions/GlyphsModal"
+                },
+                "empty": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "empty",
+                "major",
+                "minor",
+                "modal"
+            ],
+            "title": "Glyphs"
+        },
+        "GlyphsModal": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "search_placeholder": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "search_placeholder",
+                "title"
+            ],
+            "title": "GlyphsModal"
         }
     }
 }

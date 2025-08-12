@@ -212,7 +212,6 @@
 			"nature": "Nature",
 			"shadow": "Shadow"
 		},
-
 		"stats": {
 			"strength": "Strength",
 			"agility": "Agility",
@@ -754,18 +753,632 @@
 	},
 	"rotation": {
 		"title": "Rotation",
-		"header": {
+		"common": {
 			"rotation_type": {
-				"label": "Rotation Type",
-				"tooltip": "Which set of options to use for specifying the rotation.",
-				"values": {
-					"auto": "Auto",
-					"simple": "Simple",
-					"apl": "APL"
-				}
-			},
+				"label": "Type",
+				"auto": "Auto",
+				"simple": "Simple",
+				"apl": "APL",
+				"single_target": "Single Target",
+				"aoe": "AoE",
+				"custom": "Custom"
+			}
+		},
+		"header": {
 			"reset_button": {
 				"tooltip": "Reset APL"
+			}
+		},
+		"apl": {
+			"prepull_actions": {
+				"title": "Prepull Actions",
+				"tooltip": "Actions to perform before the pull.",
+				"item_label": "Prepull Action",
+				"do_at": {
+					"label": "Do At",
+					"tooltip": "Time before pull to do the action. Should be negative, and formatted like, '-1s' or '-2500ms'."
+				},
+				"new_action": "New Action"
+			},
+			"priority_list": {
+				"title": "Priority List",
+				"tooltip": "At each decision point, the simulation will perform the first valid action from this list.",
+				"item_label": "Action",
+				"if_label": "If:",
+				"new_action": "New Action"
+			},
+			"actions": {
+				"cast": {
+					"label": "Cast",
+					"tooltip": "Casts the spell if possible, i.e. resource/cooldown/GCD/etc requirements are all met."
+				},
+				"cast_at_player": {
+					"label": "Cast at Player",
+					"tooltip": "Casts a friendly spell if possible, i.e. resource/cooldown/GCD/etc requirements are all met."
+				},
+				"multi_dot": {
+					"label": "Multi Dot",
+					"tooltip": "Keeps a DoT active on multiple targets by casting the specified spell.",
+					"max_dots": {
+						"label": "Max Dots",
+						"tooltip": "Maximum number of DoTs to simultaneously apply."
+					},
+					"overlap": {
+						"label": "Overlap",
+						"tooltip": "Maximum amount of time before a DoT expires when it may be refreshed."
+					}
+				},
+				"strict_multi_dot": {
+					"label": "Strict Multi Dot",
+					"tooltip": "Keeps a DoT active on multiple targets by casting the specified spell. Will not refresh DoTs that are not about to expire.",
+					"max_dots": {
+						"label": "Max Dots",
+						"tooltip": "Maximum number of DoTs to simultaneously apply."
+					},
+					"overlap": {
+						"label": "Overlap",
+						"tooltip": "Maximum amount of time before a DoT expires when it may be refreshed."
+					}
+				},
+				"multi_shield": {
+					"label": "Multi Shield",
+					"tooltip": "Keeps a shield active on multiple targets by casting the specified spell.",
+					"max_shields": {
+						"label": "Max Shields",
+						"tooltip": "Maximum number of shields to simultaneously apply."
+					},
+					"overlap": {
+						"label": "Overlap",
+						"tooltip": "Maximum amount of time before a shield expires when it may be refreshed."
+					}
+				},
+				"channel": {
+					"label": "Channel",
+					"tooltip": "Channels the spell if possible.",
+					"full": "\n\t\t\t<p>The difference between channeling a spell vs casting the spell is that channels can be interrupted. If the <b>Interrupt If</b> parameter is empty, this action is equivalent to <b>Cast</b>.</p>\n\t\t\t<p>The channel will be interrupted only if all of the following are true:</p>\n\t\t\t<ul>\n\t\t\t\t<li>Immediately following a tick of the channel</li>\n\t\t\t\t<li>The <b>Interrupt If</b> condition evaluates to <b>True</b></li>\n\t\t\t\t<li>Another action in the APL list is available</li>\n\t\t\t</ul>\n\t\t\t<p>Note that if you simply want to allow other actions to interrupt the channel, set <b>Interrupt If</b> to <b>True</b>.</p>\n\t\t\t",
+					"interrupt_if": {
+						"label": "Interrupt If",
+						"tooltip": "Interrupt the channel if the condition is true."
+					},
+					"recast": {
+						"label": "Recast",
+						"tooltip": "If checked, interrupts of this channel will recast the spell."
+					}
+				},
+				"cast_all_stat_buff_cooldowns": {
+					"label": "Cast All Stat Buff Cooldowns",
+					"tooltip": "Casts all available stat buff cooldowns.",
+					"full": "\n\t\t\t<ul>\n\t\t\t\t<li>Does not cast cooldowns which are already controlled by other actions in the priority list.</li>\n\t\t\t\t<li>By default, this action will cast such cooldowns greedily as they become available. However, when embedded in a sequence, the action will only fire when ALL cooldowns matching the specified buff type(s) are ready.</li>\n\t\t\t</ul>\n\t\t\t"
+				},
+				"autocast_other_cooldowns": {
+					"label": "Autocast Other Cooldowns",
+					"tooltip": "Automatically casts other cooldowns when available.",
+					"full": "\n\t\t\t<ul>\n\t\t\t\t<li>Does not auto-cast cooldowns which are already controlled by other actions in the priority list.</li>\n\t\t\t\t<li>Cooldowns are usually cast immediately upon becoming ready, but there are some basic smart checks in place, e.g. don't use Mana CDs when near full mana.</li>\n\t\t\t</ul>\n\t\t\t"
+				},
+				"wait": {
+					"label": "Wait",
+					"tooltip": "Waits for the specified amount of time."
+				},
+				"wait_until": {
+					"label": "Wait Until",
+					"tooltip": "Waits until the specified condition is true."
+				},
+				"scheduled_action": {
+					"label": "Scheduled Action",
+					"tooltip": "Performs an action at a scheduled time.",
+					"do_at": {
+						"label": "Do At",
+						"tooltip": "Comma-separated list of timings. The inner action will be performed once at each timing."
+					}
+				},
+				"do_at": {
+					"label": "Do At",
+					"tooltip": "Performs an action at a specific time."
+				},
+				"sequence": {
+					"label": "Sequence",
+					"tooltip": "A list of sub-actions to execute in the specified order.",
+					"full": "\n\t\t\t<p>Once one of the sub-actions has been performed, the next sub-action will not necessarily be immediately executed next. The system will restart at the beginning of the whole actions list (not the sequence). If the sequence is executed again, it will perform the next sub-action.</p>\n\t\t\t<p>When all actions have been performed, the sequence does NOT automatically reset; instead, it will be skipped from now on. Use the <b>Reset Sequence</b> action to reset it, if desired.</p>\n\t\t\t"
+				},
+				"reset_sequence": {
+					"label": "Reset Sequence",
+					"tooltip": "Restarts a sequence, so that the next time it executes it will perform its first sub-action.",
+					"full": "\n\t\t\t<p>Use the <b>name</b> field to refer to the sequence to be reset. The desired sequence must have the same (non-empty) value for its <b>name</b>.</p>\n\t\t\t"
+				},
+				"strict_sequence": {
+					"label": "Strict Sequence",
+					"tooltip": "Like a regular Sequence, except all sub-actions are executed immediately after each other and the sequence resets automatically upon completion.",
+					"full": "\n\t\t\t<p>Strict Sequences do not begin unless ALL sub-actions are ready.</p>\n\t\t\t"
+				},
+				"change_target": {
+					"label": "Change Target",
+					"tooltip": "Sets the current target, which is the target of auto attacks and most casts by default."
+				},
+				"activate_aura": {
+					"label": "Activate Aura",
+					"tooltip": "Activates an aura"
+				},
+				"activate_aura_with_stacks": {
+					"label": "Activate Aura With Stacks",
+					"tooltip": "Activates the specified aura with the given number of stacks.",
+					"stacks": "stacks",
+					"stacks_tooltip": "Desired number of initial aura stacks."
+				},
+				"activate_all_stat_buff_proc_auras": {
+					"label": "Activate All Stat Buff Proc Auras",
+					"tooltip": "Activates all item/enchant proc auras that buff the specified stat type(s) using the specified item set."
+				},
+				"cancel_aura": {
+					"label": "Cancel Aura",
+					"tooltip": "Deactivates an aura, equivalent to /cancelaura."
+				},
+				"trigger_icd": {
+					"label": "Trigger ICD",
+					"tooltip": "Triggers the specified internal cooldown."
+				},
+				"item_swap": {
+					"label": "Item Swap",
+					"tooltip": "Swaps items, using the swap set specified in Settings."
+				},
+				"move": {
+					"label": "Move",
+					"tooltip": "Starts a move to the desired range from target.",
+					"to_range": "to Range",
+					"to_range_tooltip": "Desired range from target.",
+					"move_duration": "Move duration",
+					"duration": "Duration",
+					"duration_tooltip": "Amount of time the character should move.",
+					"move_duration_tooltip": "The characters moves for the given duration."
+				},
+				"custom_rotation": {
+					"label": "Custom Rotation",
+					"tooltip": "INTERNAL ONLY"
+				},
+				"optimal_rotation_action": {
+					"label": "Optimal Rotation Action",
+					"tooltip": "Executes optimized Feral DPS rotation using hardcoded algorithm.",
+					"wrath_weave": {
+						"label": "Enable Wrath-weaving",
+						"tooltip": "Cast Wrath when possible during the Heart of the Wild DPS window. Ignored if HotW is not talented."
+					}
+				},
+				"guardian_hotw_dps_rotation": {
+					"label": "HotW DPS Rotation",
+					"tooltip": "Executes optimized HotW DPS rotation using hardcoded algorithm."
+				}
+			},
+			"values": {
+				"no_condition": "No Condition",
+				"none": "<None>",
+				"const": {
+					"label": "Const",
+					"tooltip": "A fixed value."
+				},
+				"compare": {
+					"label": "Compare",
+					"tooltip": "Compares two values."
+				},
+				"math": {
+					"label": "Math",
+					"tooltip": "Do basic math on two values."
+				},
+				"max": {
+					"label": "Max",
+					"tooltip": "Returns the largest value among the subvalues."
+				},
+				"min": {
+					"label": "Min",
+					"tooltip": "Returns the smallest value among the subvalues."
+				},
+				"all_of": {
+					"label": "All of",
+					"tooltip": "Returns True if all of the sub-values are True, otherwise False"
+				},
+				"any_of": {
+					"label": "Any of",
+					"tooltip": "Returns True if any of the sub-values are True, otherwise False"
+				},
+				"not": {
+					"label": "Not",
+					"tooltip": "Returns the opposite of the input value."
+				},
+				"current_time": {
+					"label": "Current Time",
+					"tooltip": "Current time in the encounter."
+				},
+				"current_time_percent": {
+					"label": "Current Time (%)",
+					"tooltip": "Elapsed time of the current sim iteration, as a percentage."
+				},
+				"remaining_time": {
+					"label": "Remaining Time",
+					"tooltip": "Remaining time in the encounter."
+				},
+				"remaining_time_percent": {
+					"label": "Remaining Time (%)",
+					"tooltip": "Elapsed time of the remaining sim iteration, as a percentage."
+				},
+				"is_execute_phase": {
+					"label": "Is Execute Phase",
+					"tooltip": "Returns true if the target is in execute phase."
+				},
+				"number_of_targets": {
+					"label": "Number of Targets",
+					"tooltip": "Number of targets in the encounter."
+				},
+				"front_of_target": {
+					"label": "Front of Target",
+					"tooltip": "Returns true if the player is in front of the target."
+				},
+				"spell_is_casting": {
+					"label": "Spell is Casting",
+					"tooltip": "Returns true if the specified spell is being cast."
+				},
+				"spell_time_to_ready": {
+					"label": "Spell Time to Ready",
+					"tooltip": "Time until the specified spell is ready."
+				},
+				"is_moving": {
+					"label": "Is moving",
+					"tooltip": "Returns true if the player is moving."
+				},
+				"distance": {
+					"label": "Distance",
+					"tooltip": "Returns the distance to the specified unit."
+				},
+				"current_health": {
+					"label": "Current Health",
+					"tooltip": "Amount of currently available Health."
+				},
+				"current_health_percent": {
+					"label": "Current Health (%)",
+					"tooltip": "Amount of currently available Health, as a percentage."
+				},
+				"max_health": {
+					"label": "Max Health",
+					"tooltip": "Amount of currently available maximum Health."
+				},
+				"current_mana": {
+					"label": "Current Mana",
+					"tooltip": "Amount of currently available Mana."
+				},
+				"current_mana_percent": {
+					"label": "Current Mana (%)",
+					"tooltip": "Amount of currently available Mana, as a percentage."
+				},
+				"current_rage": {
+					"label": "Current Rage",
+					"tooltip": "Amount of currently available Rage."
+				},
+				"max_rage": {
+					"label": "Max Rage",
+					"tooltip": "Amount of maximum available Rage."
+				},
+				"current_focus": {
+					"label": "Current Focus",
+					"tooltip": "Amount of currently available Focus."
+				},
+				"max_focus": {
+					"label": "Max Focus",
+					"tooltip": "Amount of maximum available Focus."
+				},
+				"focus_regen_per_second": {
+					"label": "Focus Regen Per Second",
+					"tooltip": "Focus regen per second."
+				},
+				"estimated_time_to_target_focus": {
+					"label": "Estimated Time To Target Focus",
+					"tooltip": "Estimated time until target Focus is reached, will return 0 if at or above target."
+				},
+				"current_energy": {
+					"label": "Current Energy",
+					"tooltip": "Amount of currently available Energy."
+				},
+				"max_energy": {
+					"label": "Max Energy",
+					"tooltip": "Amount of maximum available Energy."
+				},
+				"energy_regen_per_second": {
+					"label": "Energy Regen Per Second",
+					"tooltip": "Energy regen per second."
+				},
+				"estimated_time_to_target_energy": {
+					"label": "Estimated Time To Target Energy",
+					"tooltip": "Estimated time until target Energy is reached, will return 0 if at or above target."
+				},
+				"current_combo_points": {
+					"label": "Current Combo Points",
+					"tooltip": "Amount of currently available Combo Points."
+				},
+				"max_combo_points": {
+					"label": "Max Combo Points",
+					"tooltip": "Amount of maximum available Combo Points."
+				},
+				"current_chi": {
+					"label": "Current Chi",
+					"tooltip": "Amount of currently available Chi."
+				},
+				"max_chi": {
+					"label": "Max Chi",
+					"tooltip": "Amount of maximum available Chi."
+				},
+				"current_runic_power": {
+					"label": "Current Runic Power",
+					"tooltip": "Amount of currently available Runic Power."
+				},
+				"max_runic_power": {
+					"label": "Max Runic Power",
+					"tooltip": "Amount of maximum available Runic Power."
+				},
+				"solar_energy": {
+					"label": "Solar Energy",
+					"tooltip": "Amount of currently available Solar Energy."
+				},
+				"lunar_energy": {
+					"label": "Lunar Energy",
+					"tooltip": "Amount of currently available Lunar Energy"
+				},
+				"current_eclipse_phase": {
+					"label": "Current Eclipse Phase",
+					"tooltip": "The eclipse phase the druid currently is in."
+				},
+				"generic_resource": {
+					"label": "{GENERIC_RESOURCE}",
+					"tooltip": "Amount of currently available {GENERIC_RESOURCE}."
+				},
+				"num_runes": {
+					"label": "Num Runes",
+					"tooltip": "Amount of currently available Runes of certain type including Death."
+				},
+				"num_non_death_runes": {
+					"label": "Num Non Death Runes",
+					"tooltip": "Amount of currently available Runes of certain type ignoring Death"
+				},
+				"rune_is_ready": {
+					"label": "Rune Is Ready",
+					"tooltip": "Is the rune of a certain slot currently available."
+				},
+				"rune_is_death": {
+					"label": "Rune Is Death",
+					"tooltip": "Is the rune of a certain slot currently converted to Death."
+				},
+				"rune_cooldown": {
+					"label": "Rune Cooldown",
+					"tooltip": "Amount of time until a rune of certain type is ready to use.<br><b>NOTE:</b> Returns 0 if there is a rune available"
+				},
+				"next_rune_cooldown": {
+					"label": "Next Rune Cooldown",
+					"tooltip": "Amount of time until a 2nd rune of certain type is ready to use.<br><b>NOTE:</b> Returns 0 if there are 2 runes available"
+				},
+				"rune_slot_cooldown": {
+					"label": "Rune Slot Cooldown",
+					"tooltip": "Amount of time until a rune of certain slot is ready to use.<br><b>NOTE:</b> Returns 0 if rune is ready"
+				},
+				"gcd_is_ready": {
+					"label": "GCD Is Ready",
+					"tooltip": "<b>True</b> if the GCD is not on cooldown, otherwise <b>False</b>."
+				},
+				"gcd_time_to_ready": {
+					"label": "GCD Time To Ready",
+					"tooltip": "Amount of time remaining before the GCD comes off cooldown, or <b>0</b> if it is not on cooldown."
+				},
+				"time_to_next_auto": {
+					"label": "Time To Next Auto",
+					"tooltip": "Amount of time remaining before the next Main-hand or Off-hand melee attack, or <b>0</b> if autoattacks are not engaged."
+				},
+				"spell_known": {
+					"label": "Spell Known",
+					"tooltip": "<b>True</b> if the spell is currently known, otherwise <b>False</b>."
+				},
+				"current_cost": {
+					"label": "Current Cost",
+					"tooltip": "Returns current resource cost of spell"
+				},
+				"can_cast": {
+					"label": "Can Cast",
+					"tooltip": "<b>True</b> if all requirements for casting the spell are currently met, otherwise <b>False</b>."
+				},
+				"is_ready": {
+					"label": "Is Ready",
+					"tooltip": "<b>True</b> if the spell is not on cooldown, otherwise <b>False</b>."
+				},
+				"time_to_ready": {
+					"label": "Time To Ready",
+					"tooltip": "Amount of time remaining before the spell comes off cooldown, or <b>0</b> if it is not on cooldown."
+				},
+				"cast_time": {
+					"label": "Cast Time",
+					"tooltip": "Amount of time to cast the spell including any haste and spell cast time adjustments."
+				},
+				"travel_time": {
+					"label": "Travel Time",
+					"tooltip": "Amount of time for the spell to travel to the target."
+				},
+				"cpm": {
+					"label": "CPM",
+					"tooltip": "Casts Per Minute for the spell so far in the current iteration."
+				},
+				"is_channeling": {
+					"label": "Is Channeling",
+					"tooltip": "<b>True</b> if this spell is currently being channeled, otherwise <b>False</b>."
+				},
+				"channeled_ticks": {
+					"label": "Channeled Ticks",
+					"tooltip": "The number of completed ticks in the current channel of this spell, or <b>0</b> if the spell is not being channeled."
+				},
+				"number_of_charges": {
+					"label": "Number of Charges",
+					"tooltip": "The number of charges that are currently available for the spell."
+				},
+				"time_to_next_charge": {
+					"label": "Time to next Charge",
+					"tooltip": "The time until the next charge is available. 0 if spell has all charges avaialable."
+				},
+				"channel_clip_delay": {
+					"label": "Channel Clip Delay",
+					"tooltip": "The amount of time specified by the <b>Channel Clip Delay</b> setting."
+				},
+				"input_delay": {
+					"label": "Input Delay",
+					"tooltip": "The amount of time specified by the <b>Input Dleay</b> setting."
+				},
+				"aura_known": {
+					"label": "Aura Known",
+					"tooltip": "<b>True</b> if the aura is currently known, otherwise <b>False</b>."
+				},
+				"aura_active": {
+					"label": "Aura Active",
+					"tooltip": "<b>True</b> if the aura is currently active, otherwise <b>False</b>."
+				},
+				"aura_active_with_reaction_time": {
+					"label": "Aura Active (with Reaction Time)",
+					"tooltip": "Returns true if the specified aura is active, accounting for reaction time."
+				},
+				"aura_inactive_with_reaction_time": {
+					"label": "Aura Inactive (with Reaction Time)",
+					"tooltip": "Returns true if the specified aura is inactive, accounting for reaction time."
+				},
+				"aura_remaining_time": {
+					"label": "Aura Remaining Time",
+					"tooltip": "Time remaining before this aura will expire, or 0 if the aura is not currently active."
+				},
+				"aura_num_stacks": {
+					"label": "Aura Num Stacks",
+					"tooltip": "Number of stacks of the aura."
+				},
+				"aura_should_refresh": {
+					"label": "Aura Should Refresh",
+					"tooltip": "Whether this aura should be refreshed, e.g. for the purpose of maintaining a debuff."
+				},
+				"all_trinket_stat_procs_active": {
+					"label": "All Item Proc Buffs Active",
+					"tooltip": "<b>True</b> if all item/enchant procs that buff the specified stat type(s) are currently active, otherwise <b>False</b>."
+				},
+				"any_trinket_stat_procs_active": {
+					"label": "Any Item Proc Buff Active",
+					"tooltip": "<b>True</b> if any item/enchant procs that buff the specified stat type(s) are currently active, otherwise <b>False</b>."
+				},
+				"trinket_procs_min_remaining_time": {
+					"label": "Item Procs Min Remaining Time",
+					"tooltip": "Shortest remaining duration on any active item/enchant procs that buff the specified stat type(s), or infinity if none are currently active."
+				},
+				"trinket_procs_max_remaining_icd": {
+					"label": "Item Procs Max Remaining ICD",
+					"tooltip": "Longest remaining ICD on any inactive item/enchant procs that buff the specified stat type(s), or 0 if all are currently active."
+				},
+				"num_equipped_stat_proc_trinkets": {
+					"label": "Num Equipped Stat Proc Effects",
+					"tooltip": "Number of equipped passive item/enchant effects that buff the specified stat type(s) when they proc."
+				},
+				"num_stat_buff_cooldowns": {
+					"label": "Num Stat Buff Cooldowns",
+					"tooltip": "Number of registered Major Cooldowns that buff the specified stat type(s) when they are cast."
+				},
+				"any_stat_buff_cooldowns_active": {
+					"label": "Any Stat Buff Cooldowns Active",
+					"tooltip": "<b>True</b> if any registered Major Cooldowns that buff the specified stat type(s) are currently active, otherwise <b>False</b>."
+				},
+				"dot_is_active": {
+					"label": "Dot Is Active",
+					"tooltip": "<b>True</b> if the specified dot is currently ticking, otherwise <b>False</b>."
+				},
+				"dot_is_active_on_all_targets": {
+					"label": "Dot Is Active On All Targets",
+					"tooltip": "<b>True</b> if the specified dot is currently ticking on all targets, otherwise <b>False</b>."
+				},
+				"dot_remaining_time": {
+					"label": "Dot Remaining Time",
+					"tooltip": "Time remaining before the last tick of this DoT will occur, or 0 if the DoT is not currently ticking."
+				},
+				"dot_lowest_remaining_time": {
+					"label": "Dot Lowest Remaining Time",
+					"tooltip": "Time remaining before the last tick of this DoT on any target will occur, or 0 if the DoT is not currently ticking."
+				},
+				"dot_tick_frequency": {
+					"label": "Dot Tick Frequency",
+					"tooltip": "The time between each tick."
+				},
+				"dot_percent_increase": {
+					"label": "Dot Damage Increase %",
+					"tooltip": "How much stronger a new DoT would be compared to the old."
+				},
+				"sequence_is_complete": {
+					"label": "Sequence Is Complete",
+					"tooltip": "<b>True</b> if there are no more subactions left to execute in the sequence, otherwise <b>False</b>."
+				},
+				"sequence_is_ready": {
+					"label": "Sequence Is Ready",
+					"tooltip": "<b>True</b> if the next subaction in the sequence is ready to be executed, otherwise <b>False</b>."
+				},
+				"sequence_time_to_ready": {
+					"label": "Sequence Time To Ready",
+					"tooltip": "Returns the amount of time remaining until the next subaction in the sequence will be ready."
+				},
+				"totem_remaining_time": {
+					"label": "Totem Remaining Time",
+					"tooltip": "Returns the amount of time remaining until the totem will expire."
+				},
+				"shaman_fire_elemental_duration": {
+					"label": "Fire Elemental Total Duration",
+					"tooltip": "Returns the total duration of Fire Elemental Totem"
+				},
+				"cat_excess_energy": {
+					"label": "Excess Energy",
+					"tooltip": "Returns the amount of excess energy available, after subtracting energy that will be needed to maintain DoTs."
+				},
+				"cat_new_savage_roar_duration": {
+					"label": "New Savage Roar Duration",
+					"tooltip": "Returns duration of savage roar based on current combo points"
+				},
+				"warlock_hand_of_guldan_in_flight": {
+					"label": "Hand of Guldan in Flight",
+					"tooltip": "Returns <b>True</b> if the impact of Hand of Guldan currenty is in flight."
+				},
+				"warlock_haunt_in_flight": {
+					"label": "Haunt In Flight",
+					"tooltip": "Returns <b>True</b> if Haunt currently is in flight."
+				},
+				"mage_current_combustion_dot_estimate": {
+					"label": "Combustion Dot Value",
+					"tooltip": "Returns the current estimated size of your Combustion Dot."
+				},
+				"brewmaster_monk_current_stagger_percent": {
+					"label": "Current Stagger (%)",
+					"tooltip": "Amount of current Stagger, as a percentage."
+				},
+				"protection_paladin_damage_taken_last_global": {
+					"label": "Damage Taken Last Global",
+					"tooltip": "Amount of damage taken in the last 1.5s."
+				}
+			},
+			"operators": {
+				"equals": "==",
+				"not_equals": "!=",
+				"greater_than_or_equal": ">=",
+				"greater_than": ">",
+				"less_than_or_equal": "<=",
+				"less_than": "<",
+				"add": "+",
+				"subtract": "-",
+				"multiply": "*",
+				"divide": "/"
+			},
+			"execute_phases": {
+				"e20": "20%",
+				"e25": "25%",
+				"e35": "35%",
+				"e45": "45%",
+				"e90": "90%"
+			},
+			"totem_types": {
+				"earth": "Earth",
+				"air": "Air",
+				"fire": "Fire",
+				"water": "Water"
+			},
+			"item_swap_sets": {
+				"main": "Main",
+				"swapped": "Swapped"
 			}
 		},
 		"simple": {
@@ -789,6 +1402,148 @@
 			"alerts": {
 				"choose_name": "Choose a label for your saved rotation!",
 				"name_exists": "Rotation with name {{name}} already exists."
+			}
+		},
+		"options": {
+			"druid": {
+				"feral": {
+					"target_type": {
+						"label": "Target Type",
+						"single_target": "Single Target",
+						"aoe": "AoE"
+					},
+					"bear_weave": {
+						"label": "Enable bear-weaving",
+						"tooltip": "Weave into Bear Form while pooling Energy"
+					},
+					"snek_weave": {
+						"label": "Use Albino Snake",
+						"tooltip": "Reset swing timer at the end of bear-weaves using Albino Snake pet"
+					},
+					"use_ns": {
+						"label": "Use Nature's Swiftness",
+						"tooltip": "Use Nature's Swiftness to fill gaps in Predatory Swiftness uptime"
+					},
+					"manual_params": {
+						"label": "Manual Advanced Parameters",
+						"tooltip": "Manually specify advanced parameters, otherwise will use preset defaults"
+					},
+					"hotw_strategy": {
+						"label": "Heart of the Wild usage",
+						"tooltip": "How to use Heart of the Wild",
+						"values": {
+							"passives_only": "Passives only",
+							"enhanced_bear_weaving": "Enhanced bear-weaving",
+							"wrath_weaving": "Wrath-weaving"
+						}
+					},
+					"allow_aoe_berserk": {
+						"label": "Allow AoE Berserk",
+						"tooltip": "Allow Berserk usage in AoE rotation"
+					},
+					"roar_offset": {
+						"label": "Roar Offset",
+						"tooltip": "Minimum offset gained between current Rip and new Roar to allow a Roar clip"
+					},
+					"rip_leeway": {
+						"label": "Rip Leeway",
+						"tooltip": "Minimum tolerated gap between current Rip and current Roar expiration times before kicking in emergency measures"
+					},
+					"bite_during_rotation": {
+						"label": "Bite during rotation",
+						"tooltip": "Use Bite during rotation rather than just for Rip maintenance during Execute"
+					},
+					"bite_time": {
+						"label": "Bite Time",
+						"tooltip": "Minimum seconds remaining before Rip or Roar should ideally be refreshed (including planned early clips) to allow a Bite"
+					},
+					"berserk_bite_time": {
+						"label": "Bite Time during Berserk",
+						"tooltip": "More aggressive threshold when Berserk is active"
+					}
+				}
+			},
+			"guardian": {
+				"maintain_faerie_fire": {
+					"label": "Maintain Faerie Fire",
+					"tooltip": "Maintain Faerie Fire debuff. Overwrites any external Sunder effects specified in settings."
+				},
+				"maintain_demo_roar": {
+					"label": "Maintain Demo Roar",
+					"tooltip": "Keep Demoralizing Roar active on the primary target. If a stronger debuff is active, will not cast."
+				},
+				"demo_roar_refresh_leeway": {
+					"label": "Demo Roar refresh leeway",
+					"tooltip": "Refresh Demoralizing Roar when remaining duration is less than this value (in seconds). Larger values provide safety buffer against misses, but at the cost of lower DPS."
+				},
+				"pulverize_refresh_leeway": {
+					"label": "Pulverize refresh leeway",
+					"tooltip": "Refresh Pulverize when remaining duration is less than this value (in seconds). Note that Mangle, Thrash, and Faerie Fire usage on cooldown takes priority over this rule, unless Lacerate itself is about to fall off."
+				}
+			},
+			"rogue": {
+				"apply_poisons_manually": {
+					"label": "Configure poisons manually",
+					"tooltip": "Prevent automatic poison configuration that is based on equipped weapons."
+				},
+				"subtlety": {
+					"honor_of_thieves_crit_rate": {
+						"label": "Honor of Thieves Crit Rate",
+						"tooltip": "Number of crits other group members generate within 100 seconds"
+					}
+				}
+			},
+			"shaman": {
+				"elemental": {
+					"thunderstorm_in_range": {
+						"label": "Thunderstorm In Range",
+						"tooltip": "When set to true, thunderstorm casts will cause damage."
+					}
+				}
+			},
+			"hunter": {
+				"beast_mastery": {
+					"sting": {
+						"label": "Sting",
+						"tooltip": "Maintains the selected Sting on the primary target",
+						"values": {
+							"none": "None",
+							"serpent_sting": "Serpent Sting"
+						}
+					},
+					"trap_weave": {
+						"label": "Trap Weave",
+						"tooltip": "Uses Explosive Trap at appropriate times. Note that selecting this will disable Black Arrow because they share a CD"
+					},
+					"multi_dot_serpent_sting": {
+						"label": "Multi-Dot Serpent Sting",
+						"tooltip": "Casts Serpent Sting on multiple targets"
+					}
+				},
+				"marksmanship": {
+					"sting": {
+						"label": "Sting",
+						"tooltip": "Maintains the selected Sting on the primary target",
+						"values": {
+							"none": "None",
+							"serpent_sting": "Serpent Sting"
+						}
+					},
+					"trap_weave": {
+						"label": "Trap Weave",
+						"tooltip": "Uses Explosive Trap at appropriate times. Note that selecting this will disable Black Arrow because they share a CD"
+					},
+					"multi_dot_serpent_sting": {
+						"label": "Multi-Dot Serpent Sting",
+						"tooltip": "Casts Serpent Sting on multiple targets"
+					}
+				},
+				"survival": {
+					"multi_dot_serpent_sting": {
+						"label": "Multi-Dot Serpent Sting",
+						"tooltip": "Casts Serpent Sting on multiple targets"
+					}
+				}
 			}
 		}
 	},

@@ -11,6 +11,7 @@ import { ListItemPickerConfig, ListPicker } from '../pickers/list_picker';
 import { AdaptiveStringPicker } from '../pickers/string_picker';
 import { APLActionPicker } from './apl_actions';
 import { APLValueImplStruct } from './apl_values';
+import i18n from '../../../i18n/config';
 
 export class APLRotationPicker extends Component {
 	constructor(parent: HTMLElement, simUI: SimUI, modPlayer: Player<any>) {
@@ -18,9 +19,9 @@ export class APLRotationPicker extends Component {
 
 		new ListPicker<Player<any>, APLPrepullAction>(this.rootElem, modPlayer, {
 			extraCssClasses: ['apl-prepull-action-picker'],
-			title: 'Prepull Actions',
-			titleTooltip: 'Actions to perform before the pull.',
-			itemLabel: 'Prepull Action',
+			title: i18n.t('rotation.apl.prepull_actions.title'),
+			titleTooltip: i18n.t('rotation.apl.prepull_actions.tooltip'),
+			itemLabel: i18n.t('rotation.apl.prepull_actions.item_label'),
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: (player: Player<any>) => player.aplRotation.prepullActions,
 			setValue: (eventID: EventID, player: Player<any>, newValue: Array<APLPrepullAction>) => {
@@ -46,9 +47,9 @@ export class APLRotationPicker extends Component {
 
 		new ListPicker<Player<any>, APLListItem>(this.rootElem, modPlayer, {
 			extraCssClasses: ['apl-list-item-picker'],
-			title: 'Priority List',
-			titleTooltip: 'At each decision point, the simulation will perform the first valid action from this list.',
-			itemLabel: 'Action',
+			title: i18n.t('rotation.apl.priority_list.title'),
+			titleTooltip: i18n.t('rotation.apl.priority_list.tooltip'),
+			itemLabel: i18n.t('rotation.apl.priority_list.item_label'),
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: (player: Player<any>) => player.aplRotation.priorityList,
 			setValue: (eventID: EventID, player: Player<any>, newValue: Array<APLListItem>) => {
@@ -108,8 +109,8 @@ class APLPrepullActionPicker extends Input<Player<any>, APLPrepullAction> {
 
 		this.doAtPicker = new AdaptiveStringPicker(this.rootElem, this.player, {
 			id: randomUUID(),
-			label: 'Do At',
-			labelTooltip: "Time before pull to do the action. Should be negative, and formatted like, '-1s' or '-2500ms'.",
+			label: i18n.t('rotation.apl.prepull_actions.do_at.label'),
+			labelTooltip: i18n.t('rotation.apl.prepull_actions.do_at.tooltip'),
 			extraCssClasses: ['apl-prepull-actions-doat'],
 			changedEvent: () => this.player.rotationChangeEmitter,
 			getValue: () => (this.getItem().doAtValue?.value as APLValueImplStruct<'const'> | undefined)?.const.val || '',

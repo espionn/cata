@@ -104,18 +104,18 @@ export class RotationTab extends SimTab {
 		new EnumPicker(rotationTypeSelectRef.value!, this.simUI.player, {
 			extraCssClasses: ['w-auto'],
 			id: 'rotation-tab-rotation-type',
-			label: i18n.t('rotation.header.rotation_type.label'),
-			labelTooltip: i18n.t('rotation.header.rotation_type.tooltip'),
+			label: i18n.t('rotation.common.rotation_type.label'),
+			labelTooltip: i18n.t('rotation.common.rotation_type.label'),
 			inline: true,
 			values: this.simUI.player.hasSimpleRotationGenerator()
 				? [
-						{ value: APLRotationType.TypeAuto, name: i18n.t('rotation.header.rotation_type.values.auto') },
-						{ value: APLRotationType.TypeSimple, name: i18n.t('rotation.header.rotation_type.values.simple') },
-						{ value: APLRotationType.TypeAPL, name: i18n.t('rotation.header.rotation_type.values.apl') },
+						{ value: APLRotationType.TypeAuto, name: i18n.t('rotation.common.rotation_type.auto') },
+						{ value: APLRotationType.TypeSimple, name: i18n.t('rotation.common.rotation_type.simple') },
+						{ value: APLRotationType.TypeAPL, name: i18n.t('rotation.common.rotation_type.apl') },
 					]
 				: [
-						{ value: APLRotationType.TypeAuto, name: i18n.t('rotation.header.rotation_type.values.auto') },
-						{ value: APLRotationType.TypeAPL, name: i18n.t('rotation.header.rotation_type.values.apl') },
+						{ value: APLRotationType.TypeAuto, name: i18n.t('rotation.common.rotation_type.auto') },
+						{ value: APLRotationType.TypeAPL, name: i18n.t('rotation.common.rotation_type.apl') },
 					],
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: (player: Player<any>) => player.getRotationType(),

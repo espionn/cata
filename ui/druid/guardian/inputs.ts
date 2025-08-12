@@ -1,6 +1,7 @@
 import * as InputHelpers from '../../core/components/input_helpers.js';
 import { Player } from '../../core/player.js';
 import { Spec } from '../../core/proto/common.js';
+import i18n from '../../i18n/config.js';
 
 // Configuration for spec-specific UI elements on the settings tab.
 // These don't need to be in a separate file but it keeps things cleaner.
@@ -9,26 +10,24 @@ export const GuardianDruidRotationConfig = {
 	inputs: [
 		InputHelpers.makeRotationBooleanInput<Spec.SpecGuardianDruid>({
 			fieldName: 'maintainFaerieFire',
-			label: 'Maintain Faerie Fire',
-			labelTooltip: 'Maintain Faerie Fire debuff. Overwrites any external Sunder effects specified in settings.',
+			label: i18n.t('rotation.options.druid.guardian.maintain_faerie_fire.label'),
+			labelTooltip: i18n.t('rotation.options.druid.guardian.maintain_faerie_fire.tooltip'),
 		}),
 		InputHelpers.makeRotationBooleanInput<Spec.SpecGuardianDruid>({
 			fieldName: 'maintainDemoralizingRoar',
-			label: 'Maintain Demo Roar',
-			labelTooltip: 'Keep Demoralizing Roar active on the primary target. If a stronger debuff is active, will not cast.',
+			label: i18n.t('rotation.options.druid.guardian.maintain_demo_roar.label'),
+			labelTooltip: i18n.t('rotation.options.druid.guardian.maintain_demo_roar.tooltip'),
 		}),
 		InputHelpers.makeRotationNumberInput<Spec.SpecGuardianDruid>({
 			fieldName: 'demoTime',
-			label: 'Demo Roar refresh leeway',
-			labelTooltip:
-				'Refresh Demoralizing Roar when remaining duration is less than this value (in seconds). Larger values provide safety buffer against misses, but at the cost of lower DPS.',
+			label: i18n.t('rotation.options.druid.guardian.demo_roar_refresh_leeway.label'),
+			labelTooltip: i18n.t('rotation.options.druid.guardian.demo_roar_refresh_leeway.tooltip'),
 			showWhen: (player: Player<Spec.SpecGuardianDruid>) => player.getSimpleRotation().maintainDemoralizingRoar,
 		}),
 		InputHelpers.makeRotationNumberInput<Spec.SpecGuardianDruid>({
 			fieldName: 'pulverizeTime',
-			label: 'Pulverize refresh leeway',
-			labelTooltip:
-				'Refresh Pulverize when remaining duration is less than this value (in seconds). Note that Mangle, Thrash, and Faerie Fire usage on cooldown takes priority over this rule, unless Lacerate itself is about to fall off.',
+			label: i18n.t('rotation.options.druid.guardian.pulverize_refresh_leeway.label'),
+			labelTooltip: i18n.t('rotation.options.druid.guardian.pulverize_refresh_leeway.tooltip'),
 		}),
 		// InputHelpers.makeRotationBooleanInput<Spec.SpecGuardianDruid>({
 		// 	fieldName: 'prepullStampede',
