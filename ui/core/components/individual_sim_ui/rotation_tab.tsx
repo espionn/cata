@@ -87,7 +87,7 @@ export class RotationTab extends SimTab {
 				<div ref={rotationTypeSelectRef} />
 				<button ref={resetButtonRef} className="btn btn-sm btn-link btn-reset summary-table-reset-button">
 					<i className="fas fa-times me-1"></i>
-					Reset APL
+					{i18n.t('rotation.header.reset_button.tooltip')}
 				</button>
 			</div>,
 		);
@@ -104,19 +104,19 @@ export class RotationTab extends SimTab {
 		new EnumPicker(rotationTypeSelectRef.value!, this.simUI.player, {
 			extraCssClasses: ['w-auto'],
 			id: 'rotation-tab-rotation-type',
-			label: 'Rotation Type',
-			labelTooltip: 'Which set of options to use for specifying the rotation.',
+			label: i18n.t('rotation.header.rotation_type.label'),
+			labelTooltip: i18n.t('rotation.header.rotation_type.tooltip'),
 			inline: true,
 			values: this.simUI.player.hasSimpleRotationGenerator()
 				? [
-						{ value: APLRotationType.TypeAuto, name: 'Auto' },
-						{ value: APLRotationType.TypeSimple, name: 'Simple' },
-						{ value: APLRotationType.TypeAPL, name: 'APL' },
-				  ]
+						{ value: APLRotationType.TypeAuto, name: i18n.t('rotation.header.rotation_type.values.auto') },
+						{ value: APLRotationType.TypeSimple, name: i18n.t('rotation.header.rotation_type.values.simple') },
+						{ value: APLRotationType.TypeAPL, name: i18n.t('rotation.header.rotation_type.values.apl') },
+					]
 				: [
-						{ value: APLRotationType.TypeAuto, name: 'Auto' },
-						{ value: APLRotationType.TypeAPL, name: 'APL' },
-				  ],
+						{ value: APLRotationType.TypeAuto, name: i18n.t('rotation.header.rotation_type.values.auto') },
+						{ value: APLRotationType.TypeAPL, name: i18n.t('rotation.header.rotation_type.values.apl') },
+					],
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: (player: Player<any>) => player.getRotationType(),
 			setValue: (eventID: EventID, player: Player<any>, newValue: number) => {
@@ -144,7 +144,7 @@ export class RotationTab extends SimTab {
 		const cssClass = 'rotation-tab-simple';
 
 		const contentBlock = new ContentBlock(this.leftCol, 'rotation-settings', {
-			header: { title: 'Rotation' },
+			header: { title: i18n.t('rotation.simple.title') },
 		});
 		contentBlock.rootElem.classList.add(cssClass);
 
@@ -162,7 +162,7 @@ export class RotationTab extends SimTab {
 
 		this.configureInputSection(contentBlock.bodyElement, this.simUI.individualConfig.rotationInputs);
 		const cooldownsContentBlock = new ContentBlock(this.leftCol, 'cooldown-settings', {
-			header: { title: 'Cooldowns', tooltip: Tooltips.COOLDOWNS_SECTION },
+			header: { title: i18n.t('rotation.cooldowns.title'), tooltip: i18n.t('rotation.cooldowns.tooltip') },
 		});
 		cooldownsContentBlock.rootElem.classList.add(cssClass);
 
@@ -200,8 +200,8 @@ export class RotationTab extends SimTab {
 
 	private buildSavedDataPickers() {
 		const savedRotationsManager = new SavedDataManager<Player<any>, SavedRotation>(this.rightPanel, this.simUI.player, {
-			label: 'Rotation',
-			header: { title: 'Saved Rotations' },
+			label: i18n.t('rotation.saved_rotations.label'),
+			header: { title: i18n.t('rotation.saved_rotations.title') },
 			storageKey: this.simUI.getSavedRotationStorageKey(),
 			getData: (player: Player<any>) =>
 				SavedRotation.create({
@@ -219,6 +219,12 @@ export class RotationTab extends SimTab {
 			},
 			toJson: (a: SavedRotation) => SavedRotation.toJson(a),
 			fromJson: (obj: any) => omitDeep(SavedRotation.fromJson(obj), ['uuid']),
+			nameLabel: i18n.t('rotation.saved_rotations.name_label'),
+			saveButtonText: i18n.t('rotation.saved_rotations.save_button'),
+			deleteTooltip: i18n.t('rotation.saved_rotations.delete.tooltip'),
+			deleteConfirmMessage: i18n.t('rotation.saved_rotations.delete.confirm'),
+			chooseNameAlert: i18n.t('rotation.saved_rotations.alerts.choose_name'),
+			nameExistsAlert: i18n.t('rotation.saved_rotations.alerts.name_exists'),
 		});
 
 		this.simUI.sim.waitForInit().then(() => {

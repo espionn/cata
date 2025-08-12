@@ -753,7 +753,44 @@
 		}
 	},
 	"rotation": {
-		"title": "Rotation"
+		"title": "Rotation",
+		"header": {
+			"rotation_type": {
+				"label": "Rotation Type",
+				"tooltip": "Which set of options to use for specifying the rotation.",
+				"values": {
+					"auto": "Auto",
+					"simple": "Simple",
+					"apl": "APL"
+				}
+			},
+			"reset_button": {
+				"tooltip": "Reset APL"
+			}
+		},
+		"simple": {
+			"title": "Rotation"
+		},
+		"cooldowns": {
+			"title": "Cooldowns",
+			"tooltip": "Specify cooldown timings, in seconds. Cooldowns will be used as soon as possible after their specified timings. When not specified, cooldowns will be used when ready and it is sensible to do so.<br><br>Multiple timings can be provided by separating with commas. Any cooldown usages after the last provided timing will use the default logic.",
+			"delete_tooltip": "Delete Cooldown",
+			"timings_placeholder": "20, 40, ..."
+		},
+		"saved_rotations": {
+			"title": "Saved Rotations",
+			"label": "Rotation",
+			"name_label": "Rotation Name",
+			"save_button": "Save Rotation",
+			"delete": {
+				"confirm": "Delete saved rotation '{{name}}'?",
+				"tooltip": "Delete saved rotation"
+			},
+			"alerts": {
+				"choose_name": "Choose a label for your saved rotation!",
+				"name_exists": "Rotation with name {{name}} already exists."
+			}
+		}
 	},
 	"results": {
 		"title": "Results"

@@ -28,7 +28,7 @@
                     "$ref": "#/definitions/Talents"
                 },
                 "rotation": {
-                    "$ref": "#/definitions/Export"
+                    "$ref": "#/definitions/Rotation"
                 },
                 "results": {
                     "$ref": "#/definitions/Export"
@@ -1607,6 +1607,199 @@
                 "name_exists"
             ],
             "title": "SavedTalentsAlerts"
+        },
+        "Rotation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "header": {
+                    "$ref": "#/definitions/RotationHeader"
+                },
+                "simple": {
+                    "$ref": "#/definitions/RotationSimple"
+                },
+                "cooldowns": {
+                    "$ref": "#/definitions/RotationCooldowns"
+                },
+                "saved_rotations": {
+                    "$ref": "#/definitions/SavedRotations"
+                }
+            },
+            "required": [
+                "title",
+                "header",
+                "simple",
+                "cooldowns",
+                "saved_rotations"
+            ],
+            "title": "Rotation"
+        },
+        "RotationHeader": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "rotation_type": {
+                    "$ref": "#/definitions/RotationType"
+                },
+                "reset_button": {
+                    "$ref": "#/definitions/ResetButton"
+                }
+            },
+            "required": [
+                "rotation_type",
+                "reset_button"
+            ],
+            "title": "RotationHeader"
+        },
+        "RotationType": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "values": {
+                    "$ref": "#/definitions/RotationTypeValues"
+                }
+            },
+            "required": [
+                "label",
+                "tooltip",
+                "values"
+            ],
+            "title": "RotationType"
+        },
+        "RotationTypeValues": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "auto": {
+                    "type": "string"
+                },
+                "simple": {
+                    "type": "string"
+                },
+                "apl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "auto",
+                "simple",
+                "apl"
+            ],
+            "title": "RotationTypeValues"
+        },
+        "RotationSimple": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title"
+            ],
+            "title": "RotationSimple"
+        },
+        "RotationCooldowns": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                },
+                "delete_tooltip": {
+                    "type": "string"
+                },
+                "timings_placeholder": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title",
+                "tooltip",
+                "delete_tooltip",
+                "timings_placeholder"
+            ],
+            "title": "RotationCooldowns"
+        },
+        "SavedRotations": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "name_label": {
+                    "type": "string"
+                },
+                "save_button": {
+                    "type": "string"
+                },
+                "delete": {
+                    "$ref": "#/definitions/SavedRotationsDelete"
+                },
+                "alerts": {
+                    "$ref": "#/definitions/SavedRotationsAlerts"
+                }
+            },
+            "required": [
+                "title",
+                "label",
+                "name_label",
+                "save_button",
+                "delete",
+                "alerts"
+            ],
+            "title": "SavedRotations"
+        },
+        "SavedRotationsDelete": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "confirm": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "confirm",
+                "tooltip"
+            ],
+            "title": "SavedRotationsDelete"
+        },
+        "SavedRotationsAlerts": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "choose_name": {
+                    "type": "string"
+                },
+                "name_exists": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "choose_name",
+                "name_exists"
+            ],
+            "title": "SavedRotationsAlerts"
         },
         "GearPicker": {
             "type": "object",

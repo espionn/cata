@@ -754,7 +754,44 @@
 		}
 	},
 	"rotation": {
-		"title": "Rotation"
+		"title": "Rotation",
+		"header": {
+			"rotation_type": {
+				"label": "Type de Rotation",
+				"tooltip": "Quel ensemble d'options utiliser pour spécifier la rotation.",
+				"values": {
+					"auto": "Auto",
+					"simple": "Simple",
+					"apl": "APL"
+				}
+			},
+			"reset_button": {
+				"tooltip": "Réinitialiser APL"
+			}
+		},
+		"simple": {
+			"title": "Rotation"
+		},
+		"cooldowns": {
+			"title": "Temps de Recharge",
+			"tooltip": "Spécifiez les timings des temps de recharge, en secondes. Les temps de recharge seront utilisés dès que possible après leurs timings spécifiés. Quand non spécifiés, les temps de recharge seront utilisés quand ils sont prêts et qu'il est raisonnable de le faire.<br><br>Plusieurs timings peuvent être fournis en les séparant par des virgules. Toute utilisation de temps de recharge après le dernier timing fourni utilisera la logique par défaut.",
+			"delete_tooltip": "Supprimer le Temps de Recharge",
+			"timings_placeholder": "20, 40, ..."
+		},
+		"saved_rotations": {
+			"title": "Rotations Sauvegardées",
+			"label": "Rotation",
+			"name_label": "Nom de la Rotation",
+			"save_button": "Sauvegarder la Rotation",
+			"delete": {
+				"confirm": "Supprimer la rotation sauvegardée '{{name}}' ?",
+				"tooltip": "Supprimer la rotation sauvegardée"
+			},
+			"alerts": {
+				"choose_name": "Choisissez un nom pour votre rotation sauvegardée !",
+				"name_exists": "Une rotation avec le nom {{name}} existe déjà."
+			}
+		}
 	},
 	"results": {
 		"title": "Résultats"
