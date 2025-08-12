@@ -1428,6 +1428,68 @@
 			"item_swap_sets": {
 				"main": "Main",
 				"swapped": "Swapped"
+			},
+			"helpers": {
+				"action_id_sets": {
+					"auras": "Aura",
+					"stackable_auras": "Aura",
+					"icd_auras": "Aura",
+					"exclusive_effect_auras": "Aura",
+					"spells": "Spell",
+					"castable_spells": "Spell",
+					"channel_spells": "Channeled Spell",
+					"dot_spells": "DoT Spell",
+					"castable_dot_spells": "DoT Spell",
+					"shield_spells": "Shield Spell",
+					"non_instant_spells": "Non-instant Spell",
+					"friendly_spells": "Friendly Spell",
+					"expected_dot_spells": "DoT Spell"
+				},
+				"field_configs": {
+					"type": "Type",
+					"strategy": "Strategy",
+					"buff_type": "Buff Type",
+					"min_icd": "Min ICD",
+					"min_icd_tooltip": "If non-zero, filter out any procs that either lack an ICD or for which the ICD is smaller than the specified value (in seconds). This can be useful for certain snapshotting checks, since procs with low ICDs are often too weak to snapshot."
+				},
+				"eclipse_types": {
+					"lunar": "Lunar",
+					"solar": "Solar",
+					"neutral": "Neutral"
+				},
+				"rune_types": {
+					"blood": "Blood",
+					"frost": "Frost",
+					"unholy": "Unholy",
+					"death": "Death"
+				},
+				"rune_slots": {
+					"blood_left": "Blood Left",
+					"blood_right": "Blood Right",
+					"frost_left": "Frost Left",
+					"frost_right": "Frost Right",
+					"unholy_left": "Unholy Left",
+					"unholy_right": "Unholy Right"
+				},
+				"rotation_types": {
+					"single_target": "Single Target",
+					"aoe": "AOE"
+				},
+				"hotw_strategies": {
+					"caster": "Caster",
+					"cat": "Cat",
+					"hybrid": "Hybrid"
+				},
+				"unit_labels": {
+					"self": "Self",
+					"current_target": "Current Target",
+					"previous_target": "Previous Target",
+					"next_target": "Next Target",
+					"player": "Player",
+					"target": "Target",
+					"pet": "Pet"
+				},
+				"placeholder_tooltip": "The Prepull Potion if CurrentTime < 0, or the Combat Potion if combat has started."
 			}
 		},
 		"simple": {

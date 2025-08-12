@@ -8,6 +8,7 @@ import { ActionID, OtherAction, Stat, UnitReference, UnitReference_Type as UnitT
 import { FeralDruid_Rotation_AplType } from '../../proto/druid.js';
 import { ActionId, defaultTargetIcon, getPetIconFromName } from '../../proto_utils/action_id.js';
 import { getStatName } from '../../proto_utils/names.js';
+import { translateStat } from '../../../i18n/localization.js';
 import { EventID } from '../../typed_event.js';
 import { bucket, getEnumValues, randomUUID } from '../../utils.js';
 import { Input, InputConfig } from '../input.jsx';
@@ -40,7 +41,7 @@ const actionIdSets: Record<
 	}
 > = {
 	auras: {
-		defaultLabel: 'Aura',
+		defaultLabel: i18n.t('rotation.apl.helpers.action_id_sets.auras'),
 		getActionIDs: async metadata => {
 			return metadata.getAuras().map(actionId => {
 				return {
@@ -50,7 +51,7 @@ const actionIdSets: Record<
 		},
 	},
 	stackable_auras: {
-		defaultLabel: 'Aura',
+		defaultLabel: i18n.t('rotation.apl.helpers.action_id_sets.stackable_auras'),
 		getActionIDs: async metadata => {
 			return metadata
 				.getAuras()
@@ -63,7 +64,7 @@ const actionIdSets: Record<
 		},
 	},
 	icd_auras: {
-		defaultLabel: 'Aura',
+		defaultLabel: i18n.t('rotation.apl.helpers.action_id_sets.icd_auras'),
 		getActionIDs: async metadata => {
 			return metadata
 				.getAuras()
@@ -76,7 +77,7 @@ const actionIdSets: Record<
 		},
 	},
 	exclusive_effect_auras: {
-		defaultLabel: 'Aura',
+		defaultLabel: i18n.t('rotation.apl.helpers.action_id_sets.exclusive_effect_auras'),
 		getActionIDs: async metadata => {
 			return metadata
 				.getAuras()
@@ -90,7 +91,7 @@ const actionIdSets: Record<
 	},
 	// Used for non categorized lists
 	spells: {
-		defaultLabel: 'Spell',
+		defaultLabel: i18n.t('rotation.apl.helpers.action_id_sets.spells'),
 		getActionIDs: async metadata => {
 			return metadata
 				.getSpells()
@@ -103,7 +104,7 @@ const actionIdSets: Record<
 		},
 	},
 	castable_spells: {
-		defaultLabel: 'Spell',
+		defaultLabel: i18n.t('rotation.apl.helpers.action_id_sets.castable_spells'),
 		getActionIDs: async metadata => {
 			const castableSpells = metadata.getSpells().filter(spell => spell.data.isCastable);
 
@@ -160,14 +161,14 @@ const actionIdSets: Record<
 					return {
 						value: actionId,
 						submenu: ['placeholders'],
-						tooltip: 'The Prepull Potion if CurrentTime < 0, or the Combat Potion if combat has started.',
+						tooltip: i18n.t('rotation.apl.helpers.placeholder_tooltip'),
 					};
 				}),
 			].flat();
 		},
 	},
 	non_instant_spells: {
-		defaultLabel: 'Non-instant Spell',
+		defaultLabel: i18n.t('rotation.apl.helpers.action_id_sets.non_instant_spells'),
 		getActionIDs: async metadata => {
 			return metadata
 				.getSpells()
@@ -180,7 +181,7 @@ const actionIdSets: Record<
 		},
 	},
 	friendly_spells: {
-		defaultLabel: 'Friendly Spell',
+		defaultLabel: i18n.t('rotation.apl.helpers.action_id_sets.friendly_spells'),
 		getActionIDs: async metadata => {
 			return metadata
 				.getSpells()
@@ -193,7 +194,7 @@ const actionIdSets: Record<
 		},
 	},
 	channel_spells: {
-		defaultLabel: 'Channeled Spell',
+		defaultLabel: i18n.t('rotation.apl.helpers.action_id_sets.channel_spells'),
 		getActionIDs: async metadata => {
 			return metadata
 				.getSpells()
@@ -206,7 +207,7 @@ const actionIdSets: Record<
 		},
 	},
 	dot_spells: {
-		defaultLabel: 'DoT Spell',
+		defaultLabel: i18n.t('rotation.apl.helpers.action_id_sets.dot_spells'),
 		getActionIDs: async metadata => {
 			return (
 				metadata
@@ -223,7 +224,7 @@ const actionIdSets: Record<
 		},
 	},
 	castable_dot_spells: {
-		defaultLabel: 'DoT Spell',
+		defaultLabel: i18n.t('rotation.apl.helpers.action_id_sets.castable_dot_spells'),
 		getActionIDs: async metadata => {
 			return metadata
 				.getSpells()
@@ -236,7 +237,7 @@ const actionIdSets: Record<
 		},
 	},
 	expected_dot_spells: {
-		defaultLabel: 'DoT Spell',
+		defaultLabel: i18n.t('rotation.apl.helpers.action_id_sets.expected_dot_spells'),
 		getActionIDs: async metadata => {
 			return (
 				metadata
@@ -253,7 +254,7 @@ const actionIdSets: Record<
 		},
 	},
 	shield_spells: {
-		defaultLabel: 'Shield Spell',
+		defaultLabel: i18n.t('rotation.apl.helpers.action_id_sets.shield_spells'),
 		getActionIDs: async metadata => {
 			return metadata
 				.getSpells()
@@ -451,31 +452,31 @@ export class APLUnitPicker extends UnitPicker<Player<any>> {
 			return {
 				value: ref,
 				iconUrl: targetUI ? 'fa-bullseye' : 'fa-user',
-				text: targetUI ? 'Current Target' : 'Self',
+				text: targetUI ? i18n.t('rotation.apl.helpers.unit_labels.current_target') : i18n.t('rotation.apl.helpers.unit_labels.self'),
 			};
 		} else if (ref.type == UnitType.Self) {
 			return {
 				value: ref,
 				iconUrl: 'fa-user',
-				text: 'Self',
+				text: i18n.t('rotation.apl.helpers.unit_labels.self'),
 			};
 		} else if (ref.type == UnitType.CurrentTarget) {
 			return {
 				value: ref,
 				iconUrl: 'fa-bullseye',
-				text: 'Current Target',
+				text: i18n.t('rotation.apl.helpers.unit_labels.current_target'),
 			};
 		} else if (ref.type == UnitType.PreviousTarget) {
 			return {
 				value: ref,
 				iconUrl: 'fa-arrow-left',
-				text: 'Previous Target',
+				text: i18n.t('rotation.apl.helpers.unit_labels.previous_target'),
 			};
 		} else if (ref.type == UnitType.NextTarget) {
 			return {
 				value: ref,
 				iconUrl: 'fa-arrow-right',
-				text: 'Next Target',
+				text: i18n.t('rotation.apl.helpers.unit_labels.next_target'),
 			};
 		} else if (ref.type == UnitType.Player) {
 			const player = thisPlayer.sim.raid.getPlayer(ref.index);
@@ -483,7 +484,7 @@ export class APLUnitPicker extends UnitPicker<Player<any>> {
 				return {
 					value: ref,
 					iconUrl: player.getSpecIcon(),
-					text: `Player ${ref.index + 1}`,
+					text: `${i18n.t('rotation.apl.helpers.unit_labels.player')} ${ref.index + 1}`,
 				};
 			}
 		} else if (ref.type == UnitType.Target) {
@@ -492,12 +493,12 @@ export class APLUnitPicker extends UnitPicker<Player<any>> {
 				return {
 					value: ref,
 					iconUrl: defaultTargetIcon,
-					text: `Target ${ref.index + 1}`,
+					text: `${i18n.t('rotation.apl.helpers.unit_labels.target')} ${ref.index + 1}`,
 				};
 			}
 		} else if (ref.type == UnitType.Pet) {
 			const petMetadata = thisPlayer.sim.getUnitMetadata(ref, thisPlayer, UnitReference.create({ type: UnitType.Self }));
-			let name = `Pet ${ref.index + 1}`;
+			let name = `${i18n.t('rotation.apl.helpers.unit_labels.pet')} ${ref.index + 1}`;
 			let icon: string | ActionId = 'fa-paw';
 			if (petMetadata) {
 				const petName = petMetadata.getName();
@@ -725,9 +726,9 @@ export function stringFieldConfig(field: string, options?: Partial<APLPickerBuil
 
 export function eclipseTypeFieldConfig(field: string): APLPickerBuilderFieldConfig<any, any> {
 	const values = [
-		{ value: APLValueEclipsePhase.LunarPhase, label: 'Lunar' },
-		{ value: APLValueEclipsePhase.SolarPhase, label: 'Solar' },
-		{ value: APLValueEclipsePhase.NeutralPhase, label: 'Neutral' },
+		{ value: APLValueEclipsePhase.LunarPhase, label: i18n.t('rotation.apl.helpers.eclipse_types.lunar') },
+		{ value: APLValueEclipsePhase.SolarPhase, label: i18n.t('rotation.apl.helpers.eclipse_types.solar') },
+		{ value: APLValueEclipsePhase.NeutralPhase, label: i18n.t('rotation.apl.helpers.eclipse_types.neutral') },
 	];
 
 	return {
@@ -737,7 +738,7 @@ export function eclipseTypeFieldConfig(field: string): APLPickerBuilderFieldConf
 			new TextDropdownPicker(parent, player, {
 				id: randomUUID(),
 				...config,
-				defaultLabel: 'Lunar',
+				defaultLabel: i18n.t('rotation.apl.helpers.eclipse_types.lunar'),
 				equals: (a, b) => a == b,
 				values: values,
 			}),
@@ -746,13 +747,13 @@ export function eclipseTypeFieldConfig(field: string): APLPickerBuilderFieldConf
 
 export function runeTypeFieldConfig(field: string, includeDeath: boolean): APLPickerBuilderFieldConfig<any, any> {
 	const values = [
-		{ value: APLValueRuneType.RuneBlood, label: 'Blood' },
-		{ value: APLValueRuneType.RuneFrost, label: 'Frost' },
-		{ value: APLValueRuneType.RuneUnholy, label: 'Unholy' },
+		{ value: APLValueRuneType.RuneBlood, label: i18n.t('rotation.apl.helpers.rune_types.blood') },
+		{ value: APLValueRuneType.RuneFrost, label: i18n.t('rotation.apl.helpers.rune_types.frost') },
+		{ value: APLValueRuneType.RuneUnholy, label: i18n.t('rotation.apl.helpers.rune_types.unholy') },
 	];
 
 	if (includeDeath) {
-		values.push({ value: APLValueRuneType.RuneDeath, label: 'Death' });
+		values.push({ value: APLValueRuneType.RuneDeath, label: i18n.t('rotation.apl.helpers.rune_types.death') });
 	}
 
 	return {
@@ -762,7 +763,7 @@ export function runeTypeFieldConfig(field: string, includeDeath: boolean): APLPi
 			new TextDropdownPicker(parent, player, {
 				id: randomUUID(),
 				...config,
-				defaultLabel: 'None',
+				defaultLabel: i18n.t('common.none'),
 				equals: (a, b) => a == b,
 				values: values,
 			}),
@@ -777,15 +778,15 @@ export function runeSlotFieldConfig(field: string): APLPickerBuilderFieldConfig<
 			new TextDropdownPicker(parent, player, {
 				id: randomUUID(),
 				...config,
-				defaultLabel: 'None',
+				defaultLabel: i18n.t('common.none'),
 				equals: (a, b) => a == b,
 				values: [
-					{ value: APLValueRuneSlot.SlotLeftBlood, label: 'Blood Left' },
-					{ value: APLValueRuneSlot.SlotRightBlood, label: 'Blood Right' },
-					{ value: APLValueRuneSlot.SlotLeftFrost, label: 'Frost Left' },
-					{ value: APLValueRuneSlot.SlotRightFrost, label: 'Frost Right' },
-					{ value: APLValueRuneSlot.SlotLeftUnholy, label: 'Unholy Left' },
-					{ value: APLValueRuneSlot.SlotRightUnholy, label: 'Unholy Right' },
+					{ value: APLValueRuneSlot.SlotLeftBlood, label: i18n.t('rotation.apl.helpers.rune_slots.blood_left') },
+					{ value: APLValueRuneSlot.SlotRightBlood, label: i18n.t('rotation.apl.helpers.rune_slots.blood_right') },
+					{ value: APLValueRuneSlot.SlotLeftFrost, label: i18n.t('rotation.apl.helpers.rune_slots.frost_left') },
+					{ value: APLValueRuneSlot.SlotRightFrost, label: i18n.t('rotation.apl.helpers.rune_slots.frost_right') },
+					{ value: APLValueRuneSlot.SlotLeftUnholy, label: i18n.t('rotation.apl.helpers.rune_slots.unholy_left') },
+					{ value: APLValueRuneSlot.SlotRightUnholy, label: i18n.t('rotation.apl.helpers.rune_slots.unholy_right') },
 				],
 			}),
 	};
@@ -793,19 +794,19 @@ export function runeSlotFieldConfig(field: string): APLPickerBuilderFieldConfig<
 
 export function rotationTypeFieldConfig(field: string): APLPickerBuilderFieldConfig<any, any> {
 	const values = [
-		{ value: FeralDruid_Rotation_AplType.SingleTarget, label: 'Single Target' },
-		{ value: FeralDruid_Rotation_AplType.Aoe, label: 'AOE' },
+		{ value: FeralDruid_Rotation_AplType.SingleTarget, label: i18n.t('rotation.apl.helpers.rotation_types.single_target') },
+		{ value: FeralDruid_Rotation_AplType.Aoe, label: i18n.t('rotation.apl.helpers.rotation_types.aoe') },
 	];
 
 	return {
 		field: field,
-		label: 'Type',
+		label: i18n.t('rotation.apl.helpers.field_configs.type'),
 		newValue: () => FeralDruid_Rotation_AplType.SingleTarget,
 		factory: (parent, player, config) =>
 			new TextDropdownPicker(parent, player, {
 				id: randomUUID(),
 				...config,
-				defaultLabel: 'Single Target',
+				defaultLabel: i18n.t('rotation.apl.helpers.rotation_types.single_target'),
 				equals: (a, b) => a == b,
 				values: values,
 			}),
@@ -814,20 +815,20 @@ export function rotationTypeFieldConfig(field: string): APLPickerBuilderFieldCon
 
 export function hotwStrategyFieldConfig(field: string): APLPickerBuilderFieldConfig<any, any> {
 	const values = [
-		{ value: HotwStrategy.Caster, label: 'Caster' },
-		{ value: HotwStrategy.Cat, label: 'Cat' },
-		{ value: HotwStrategy.Hybrid, label: 'Hybrid' },
+		{ value: HotwStrategy.Caster, label: i18n.t('rotation.apl.helpers.hotw_strategies.caster') },
+		{ value: HotwStrategy.Cat, label: i18n.t('rotation.apl.helpers.hotw_strategies.cat') },
+		{ value: HotwStrategy.Hybrid, label: i18n.t('rotation.apl.helpers.hotw_strategies.hybrid') },
 	];
 
 	return {
 		field: field,
-		label: 'Strategy',
+		label: i18n.t('rotation.apl.helpers.field_configs.strategy'),
 		newValue: () => HotwStrategy.Caster,
 		factory: (parent, player, config) =>
 			new TextDropdownPicker(parent, player, {
 				id: randomUUID(),
 				...config,
-				defaultLabel: 'Caster',
+				defaultLabel: i18n.t('rotation.apl.helpers.hotw_strategies.caster'),
 				equals: (a, b) => a == b,
 				values: values,
 			}),
@@ -836,21 +837,21 @@ export function hotwStrategyFieldConfig(field: string): APLPickerBuilderFieldCon
 
 export function statTypeFieldConfig(field: string): APLPickerBuilderFieldConfig<any, any> {
 	const allStats = getEnumValues(Stat) as Array<Stat>;
-	const values = [{ value: -1, label: 'None' }].concat(
+	const values = [{ value: -1, label: i18n.t('common.none') }].concat(
 		allStats.map(stat => {
-			return { value: stat, label: getStatName(stat) };
+			return { value: stat, label: translateStat(stat) };
 		}),
 	);
 
 	return {
 		field: field,
-		label: 'Buff Type',
+		label: i18n.t('rotation.apl.helpers.field_configs.buff_type'),
 		newValue: () => 0,
 		factory: (parent, player, config) =>
 			new TextDropdownPicker(parent, player, {
 				id: randomUUID(),
 				...config,
-				defaultLabel: 'None',
+				defaultLabel: i18n.t('common.none'),
 				equals: (a, b) => a == b,
 				values: values,
 			}),
@@ -858,9 +859,8 @@ export function statTypeFieldConfig(field: string): APLPickerBuilderFieldConfig<
 }
 
 export const minIcdInput = numberFieldConfig('minIcdSeconds', false, {
-	label: 'Min ICD',
-	labelTooltip:
-		'If non-zero, filter out any procs that either lack an ICD or for which the ICD is smaller than the specified value (in seconds). This can be useful for certain snapshotting checks, since procs with low ICDs are often too weak to snapshot.',
+	label: i18n.t('rotation.apl.helpers.field_configs.min_icd'),
+	labelTooltip: i18n.t('rotation.apl.helpers.field_configs.min_icd_tooltip'),
 });
 
 export function aplInputBuilder<T>(

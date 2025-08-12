@@ -1428,6 +1428,68 @@
 			"item_swap_sets": {
 				"main": "Principal",
 				"swapped": "Échangé"
+			},
+			"helpers": {
+				"action_id_sets": {
+					"auras": "Aura",
+					"stackable_auras": "Aura",
+					"icd_auras": "Aura",
+					"exclusive_effect_auras": "Aura",
+					"spells": "Sort",
+					"castable_spells": "Sort",
+					"channel_spells": "Sort Canalisé",
+					"dot_spells": "Sort DoT",
+					"castable_dot_spells": "Sort DoT",
+					"shield_spells": "Sort Bouclier",
+					"non_instant_spells": "Sort Non-instantané",
+					"friendly_spells": "Sort Amical",
+					"expected_dot_spells": "Sort DoT"
+				},
+				"field_configs": {
+					"type": "Type",
+					"strategy": "Stratégie",
+					"buff_type": "Type de Buff",
+					"min_icd": "ICD Min",
+					"min_icd_tooltip": "Si non-zéro, filtre tous les procs qui n'ont pas d'ICD ou dont l'ICD est inférieur à la valeur spécifiée (en secondes). Cela peut être utile pour certaines vérifications de snapshot, car les procs avec des ICD faibles sont souvent trop faibles pour snapshot."
+				},
+				"eclipse_types": {
+					"lunar": "Lunaire",
+					"solar": "Solaire",
+					"neutral": "Neutre"
+				},
+				"rune_types": {
+					"blood": "Sang",
+					"frost": "Givre",
+					"unholy": "Impie",
+					"death": "Mort"
+				},
+				"rune_slots": {
+					"blood_left": "Sang Gauche",
+					"blood_right": "Sang Droite",
+					"frost_left": "Givre Gauche",
+					"frost_right": "Givre Droite",
+					"unholy_left": "Impie Gauche",
+					"unholy_right": "Impie Droite"
+				},
+				"rotation_types": {
+					"single_target": "Cible Unique",
+					"aoe": "AoE"
+				},
+				"hotw_strategies": {
+					"caster": "Lanceur de Sorts",
+					"cat": "Chat",
+					"hybrid": "Hybride"
+				},
+				"unit_labels": {
+					"self": "Soi",
+					"current_target": "Cible Actuelle",
+					"previous_target": "Cible Précédente",
+					"next_target": "Cible Suivante",
+					"player": "Joueur",
+					"target": "Cible",
+					"pet": "Familier"
+				},
+				"placeholder_tooltip": "La Potion de Préparation si CurrentTime < 0, ou la Potion de Combat si le combat a commencé."
 			}
 		},
 		"options": {

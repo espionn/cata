@@ -2138,11 +2138,15 @@
                 },
                 "item_swap_sets": {
                     "$ref": "#/definitions/ItemSwapSets"
+                },
+                "helpers": {
+                    "$ref": "#/definitions/APLHelpers"
                 }
             },
             "required": [
                 "actions",
                 "execute_phases",
+                "helpers",
                 "item_swap_sets",
                 "operators",
                 "prepull_actions",
@@ -4993,6 +4997,75 @@
                 "title"
             ],
             "title": "GlyphsModal"
+        },
+        "APLHelpers": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "action_id_sets": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "field_configs": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "eclipse_types": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "rune_types": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "rune_slots": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "rotation_types": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "hotw_strategies": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "unit_labels": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "placeholder_tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "action_id_sets",
+                "eclipse_types",
+                "field_configs",
+                "hotw_strategies",
+                "placeholder_tooltip",
+                "rotation_types",
+                "rune_slots",
+                "rune_types",
+                "unit_labels"
+            ],
+            "title": "APLHelpers"
         }
     }
 }
