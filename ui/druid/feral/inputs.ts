@@ -4,21 +4,22 @@ import { APLRotation_Type } from '../../core/proto/apl.js';
 import { Spec } from '../../core/proto/common.js';
 import { FeralDruid_Rotation_AplType as AplType, FeralDruid_Rotation_HotwStrategy as HotwType } from '../../core/proto/druid.js';
 import { TypedEvent } from '../../core/typed_event.js';
+import i18n from '../../i18n/config.js';
 
 // Configuration for spec-specific UI elements on the settings tab.
 // These don't need to be in a separate file but it keeps things cleaner.
 
 export const AssumeBleedActive = InputHelpers.makeSpecOptionsBooleanInput<Spec.SpecFeralDruid>({
 	fieldName: 'assumeBleedActive',
-	label: 'Assume Bleed Always Active',
-	labelTooltip: "Assume bleed always exists for 'Rend and Tear' calculations. Otherwise will only calculate based on own rip/rake/lacerate.",
+	label: i18n.t('settings.other.assume_bleed_active.label'),
+	labelTooltip: i18n.t('settings.other.assume_bleed_active.tooltip'),
 	extraCssClasses: ['within-raid-sim-hide'],
 });
 
 export const CannotShredTarget = InputHelpers.makeSpecOptionsBooleanInput<Spec.SpecFeralDruid>({
 	fieldName: 'cannotShredTarget',
-	label: 'Cannot Shred Target',
-	labelTooltip: 'Alternative to "In Front of Target" for modeling bosses that do not Parry or Block, but which you still cannot Shred.',
+	label: i18n.t('settings.other.cannot_shred_target.label'),
+	labelTooltip: i18n.t('settings.other.cannot_shred_target.tooltip'),
 });
 
 function ShouldShowAdvParamST(player: Player<Spec.SpecFeralDruid>): boolean {

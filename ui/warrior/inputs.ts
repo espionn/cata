@@ -1,5 +1,6 @@
 import * as InputHelpers from '../core/components/input_helpers';
 import { Spec } from '../core/proto/common';
+import i18n from '../i18n/config.js';
 
 // Configuration for class-specific UI elements on the settings tab.
 // These don't need to be in a separate file but it keeps things cleaner.
@@ -9,7 +10,7 @@ import { Spec } from '../core/proto/common';
 export const StanceSnapshot = <SpecType extends Spec.SpecArmsWarrior | Spec.SpecFuryWarrior>() =>
 	InputHelpers.makeSpecOptionsBooleanInput<SpecType>({
 		fieldName: 'stanceSnapshot',
-		label: 'Stance Snapshot',
-		labelTooltip: 'Ability that is cast at the same time as stance swap will benefit from the bonus of the stance before the swap.',
+		label: i18n.t('settings.other.stance_snapshot.label'),
+		labelTooltip: i18n.t('settings.other.stance_snapshot.tooltip'),
 	});
 
