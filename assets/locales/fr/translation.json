@@ -252,6 +252,43 @@
 			"melee_haste": "Hâte de mêlée",
 			"ranged_haste": "Hâte à distance"
 		},
+		"mastery_spell_names": {
+			"unknown": "Inconnu",
+			"potent_poisons": "Poisons Puissants",
+			"main_gauche": "Main Gauche",
+			"executioner": "Bourreau",
+			"blood_shield": "Bouclier de Sang",
+			"frozen_heart": "Cœur Gelé",
+			"dreadblade": "Lame de Terreur",
+			"total_eclipse": "Éclipse Totale",
+			"razor_claws": "Griffes Acérées",
+			"natures_guardian": "Gardien de la Nature",
+			"harmony": "Harmonie",
+			"illuminated_healing": "Soins Illuminés",
+			"divine_bulwark": "Rempart Divin",
+			"hand_of_light": "Main de Lumière",
+			"elemental_overload": "Surcharge Élémentaire",
+			"enhanced_elements": "Éléments Améliorés",
+			"deep_healing": "Soins Profonds",
+			"master_of_beasts": "Maître des Bêtes",
+			"wild_quiver": "Carquois Sauvage",
+			"essence_of_the_viper": "Essence de la Vipère",
+			"strikes_of_opportunity": "Frappes d'Opportunité",
+			"unshackled_fury": "Fureur Déchaînée",
+			"critical_block": "Blocage Critique",
+			"mana_adept": "Adepte du Mana",
+			"flashburn": "Brûlure Éclair",
+			"icicles": "Stalactites",
+			"shield_discipline": "Discipline du Bouclier",
+			"echo_of_light": "Écho de Lumière",
+			"shadow_orb_power": "Puissance de l'Orbe d'Ombre",
+			"potent_afflictions": "Afflictions Puissantes",
+			"master_demonologist": "Maître Démonologue",
+			"emberstorm": "Tempête de Braises",
+			"elusive_brawler": "Bagarreur Insaisissable",
+			"gift_of_the_serpent": "Don du Serpent",
+			"bottled_fury": "Fureur en Bouteille"
+		},
 		"copy_button": {
 			"default_text": "Copier dans le presse-papiers",
 			"copied": "Copié"
@@ -684,7 +721,37 @@
 		"max_ranged_speed": "Vitesse à distance max"
 	},
 	"talents": {
-		"title": "Talents"
+		"title": "Talents",
+		"copy_button": {
+			"label": "Copier",
+			"tooltip": "Copier la chaîne de talents"
+		},
+		"reset_button": {
+			"tooltip": "Réinitialiser les points de talent"
+		},
+		"glyphs": {
+			"major": "Glyphes Majeurs",
+			"minor": "Glyphes Mineurs",
+			"modal": {
+				"title": "Glyphes",
+				"search_placeholder": "Rechercher..."
+			},
+			"empty": "Vide"
+		},
+		"saved_talents": {
+			"title": "Talents Sauvegardés",
+			"label": "Talents",
+			"name_label": "Nom",
+			"save_button": "Sauvegarder les Talents",
+			"delete": {
+				"confirm": "Supprimer les talents sauvegardés '{{name}}' ?",
+				"tooltip": "Supprimer les talents sauvegardés"
+			},
+			"alerts": {
+				"choose_name": "Choisissez un nom pour vos talents sauvegardés !",
+				"name_exists": "Des talents avec le nom {{name}} existent déjà."
+			}
+		}
 	},
 	"rotation": {
 		"title": "Rotation"

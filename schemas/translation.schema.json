@@ -25,7 +25,7 @@
                     "$ref": "#/definitions/GearPicker"
                 },
                 "talents": {
-                    "$ref": "#/definitions/Export"
+                    "$ref": "#/definitions/Talents"
                 },
                 "rotation": {
                     "$ref": "#/definitions/Export"
@@ -121,6 +121,9 @@
                 "stats": {
                     "$ref": "#/definitions/Stats"
                 },
+                "mastery_spell_names": {
+                    "$ref": "#/definitions/MasterySpellNames"
+                },
                 "copy_button": {
                     "$ref": "#/definitions/CopyButton"
                 },
@@ -147,7 +150,8 @@
                 "stats",
                 "status",
                 "tanks",
-                "weapon_types"
+                "weapon_types",
+                "mastery_spell_names"
             ],
             "title": "Common"
         },
@@ -1059,6 +1063,155 @@
             ],
             "title": "Stats"
         },
+        "MasterySpellNames": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "unknown": {
+                    "type": "string"
+                },
+                "potent_poisons": {
+                    "type": "string"
+                },
+                "main_gauche": {
+                    "type": "string"
+                },
+                "executioner": {
+                    "type": "string"
+                },
+                "blood_shield": {
+                    "type": "string"
+                },
+                "frozen_heart": {
+                    "type": "string"
+                },
+                "dreadblade": {
+                    "type": "string"
+                },
+                "total_eclipse": {
+                    "type": "string"
+                },
+                "razor_claws": {
+                    "type": "string"
+                },
+                "natures_guardian": {
+                    "type": "string"
+                },
+                "harmony": {
+                    "type": "string"
+                },
+                "illuminated_healing": {
+                    "type": "string"
+                },
+                "divine_bulwark": {
+                    "type": "string"
+                },
+                "hand_of_light": {
+                    "type": "string"
+                },
+                "elemental_overload": {
+                    "type": "string"
+                },
+                "enhanced_elements": {
+                    "type": "string"
+                },
+                "deep_healing": {
+                    "type": "string"
+                },
+                "master_of_beasts": {
+                    "type": "string"
+                },
+                "wild_quiver": {
+                    "type": "string"
+                },
+                "essence_of_the_viper": {
+                    "type": "string"
+                },
+                "strikes_of_opportunity": {
+                    "type": "string"
+                },
+                "unshackled_fury": {
+                    "type": "string"
+                },
+                "critical_block": {
+                    "type": "string"
+                },
+                "mana_adept": {
+                    "type": "string"
+                },
+                "flashburn": {
+                    "type": "string"
+                },
+                "icicles": {
+                    "type": "string"
+                },
+                "shield_discipline": {
+                    "type": "string"
+                },
+                "echo_of_light": {
+                    "type": "string"
+                },
+                "shadow_orb_power": {
+                    "type": "string"
+                },
+                "potent_afflictions": {
+                    "type": "string"
+                },
+                "master_demonologist": {
+                    "type": "string"
+                },
+                "emberstorm": {
+                    "type": "string"
+                },
+                "elusive_brawler": {
+                    "type": "string"
+                },
+                "gift_of_the_serpent": {
+                    "type": "string"
+                },
+                "bottled_fury": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "unknown",
+                "potent_poisons",
+                "main_gauche",
+                "executioner",
+                "blood_shield",
+                "frozen_heart",
+                "dreadblade",
+                "total_eclipse",
+                "razor_claws",
+                "natures_guardian",
+                "harmony",
+                "illuminated_healing",
+                "divine_bulwark",
+                "hand_of_light",
+                "elemental_overload",
+                "enhanced_elements",
+                "deep_healing",
+                "master_of_beasts",
+                "wild_quiver",
+                "essence_of_the_viper",
+                "strikes_of_opportunity",
+                "unshackled_fury",
+                "critical_block",
+                "mana_adept",
+                "flashburn",
+                "icicles",
+                "shield_discipline",
+                "echo_of_light",
+                "shadow_orb_power",
+                "potent_afflictions",
+                "master_demonologist",
+                "emberstorm",
+                "elusive_brawler",
+                "gift_of_the_serpent",
+                "bottled_fury"
+            ],
+            "title": "MasterySpellNames"
+        },
         "Status": {
             "type": "object",
             "additionalProperties": false,
@@ -1169,6 +1322,35 @@
                 "title"
             ],
             "title": "Export"
+        },
+        "Talents": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "copy_button": {
+                    "$ref": "#/definitions/CopyButton"
+                },
+                "reset_button": {
+                    "$ref": "#/definitions/ResetButton"
+                },
+                "glyphs": {
+                    "$ref": "#/definitions/Glyphs"
+                },
+                "saved_talents": {
+                    "$ref": "#/definitions/SavedTalents"
+                }
+            },
+            "required": [
+                "title",
+                "copy_button",
+                "reset_button",
+                "glyphs",
+                "saved_talents"
+            ],
+            "title": "Talents"
         },
         "Gear": {
             "type": "object",
@@ -1286,6 +1468,145 @@
                 "title"
             ],
             "title": "ReforgeSummary"
+        },
+        "CopyButton": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "label",
+                "tooltip"
+            ],
+            "title": "CopyButton"
+        },
+        "ResetButton": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "tooltip"
+            ],
+            "title": "ResetButton"
+        },
+        "Glyphs": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "major": {
+                    "type": "string"
+                },
+                "minor": {
+                    "type": "string"
+                },
+                "modal": {
+                    "$ref": "#/definitions/GlyphModal"
+                },
+                "empty": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "major",
+                "minor",
+                "modal",
+                "empty"
+            ],
+            "title": "Glyphs"
+        },
+        "GlyphModal": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "search_placeholder": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title",
+                "search_placeholder"
+            ],
+            "title": "GlyphModal"
+        },
+        "SavedTalents": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "name_label": {
+                    "type": "string"
+                },
+                "save_button": {
+                    "type": "string"
+                },
+                "delete": {
+                    "$ref": "#/definitions/SavedTalentsDelete"
+                },
+                "alerts": {
+                    "$ref": "#/definitions/SavedTalentsAlerts"
+                }
+            },
+            "required": [
+                "title",
+                "label",
+                "name_label",
+                "save_button",
+                "delete",
+                "alerts"
+            ],
+            "title": "SavedTalents"
+        },
+        "SavedTalentsDelete": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "confirm": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "confirm",
+                "tooltip"
+            ],
+            "title": "SavedTalentsDelete"
+        },
+        "SavedTalentsAlerts": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "choose_name": {
+                    "type": "string"
+                },
+                "name_exists": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "choose_name",
+                "name_exists"
+            ],
+            "title": "SavedTalentsAlerts"
         },
         "GearPicker": {
             "type": "object",

@@ -1,5 +1,6 @@
 import { ref } from 'tsx-vanilla';
 
+import i18n from '../../i18n/config';
 import { BaseModal } from '../components/base_modal.js';
 import { Component } from '../components/component.js';
 import { ContentBlock } from '../components/content_block.js';
@@ -34,7 +35,7 @@ interface GlyphData {
 
 const emptyGlyphData: GlyphData = {
 	id: 0,
-	name: 'Empty',
+	name: i18n.t('talents.glyphs.empty'),
 	description: '',
 	iconUrl: 'https://wow.zamimg.com/images/wow/icons/medium/inventoryslot_empty.jpg',
 	quality: null,
@@ -57,11 +58,11 @@ export class GlyphsPicker extends Component {
 		const minorGlyphs = Object.keys(glyphsConfig.minorGlyphs).map(idStr => Number(idStr));
 
 		const majorGlyphsBlock = new ContentBlock(this.rootElem, 'major-glyphs', {
-			header: { title: 'Major Glyphs', extraCssClasses: ['border-0'] },
+			header: { title: i18n.t('talents.glyphs.major'), extraCssClasses: ['border-0'] },
 		});
 
 		const minorGlyphsBlock = new ContentBlock(this.rootElem, 'minor-glyphs', {
-			header: { title: 'Minor Glyphs', extraCssClasses: ['border-0'] },
+			header: { title: i18n.t('talents.glyphs.minor'), extraCssClasses: ['border-0'] },
 		});
 		this.selectorModal = new GlyphSelectorModal(this.rootElem.closest('.individual-sim-ui')!);
 
@@ -227,7 +228,7 @@ class GlyphSelectorModal extends BaseModal {
 	glyphOptions: GlyphData[] = [];
 	glyphPicker: GlyphPicker | null = null;
 	constructor(parent: HTMLElement) {
-		super(parent, 'glyph-modal', { title: 'Glyphs', disposeOnClose: false });
+		super(parent, 'glyph-modal', { title: i18n.t('talents.glyphs.modal.title'), disposeOnClose: false });
 
 		const list = ref<HTMLUListElement>();
 		const search = ref<HTMLInputElement>();
@@ -235,7 +236,7 @@ class GlyphSelectorModal extends BaseModal {
 		this.body.appendChild(
 			<>
 				<div className="input-root">
-					<input ref={search} className="selector-modal-search form-control" type="text" placeholder="Search..." />
+					<input ref={search} className="selector-modal-search form-control" type="text" placeholder={i18n.t('talents.glyphs.modal.search_placeholder')} />
 				</div>
 				<ul ref={list} className="selector-modal-list"></ul>
 			</>,

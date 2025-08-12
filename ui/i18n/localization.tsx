@@ -1,9 +1,9 @@
 import { PlayerClass } from '../core/player_class';
 import { PlayerSpec } from '../core/player_spec';
-import { ArmorType, MobType, PseudoStat, Race, Profession, SpellSchool, Stat, WeaponType, RangedWeaponType } from '../core/proto/common';
+import { ArmorType, MobType, PseudoStat, Race, Profession, SpellSchool, Stat, WeaponType, RangedWeaponType, Spec } from '../core/proto/common';
 import { RaidFilterOption, SourceFilterOption } from '../core/proto/ui';
 import i18n from './config';
-import { getClassI18nKey, getMobTypeI18nKey, getRaceI18nKey, getProfessionI18nKey, getSpecI18nKey, getTargetInputI18nKey, pseudoStatI18nKeys, spellSchoolI18nKeys, statI18nKeys, getSourceFilterI18nKey, getRaidFilterI18nKey, getArmorTypeI18nKey, getWeaponTypeI18nKey, getRangedWeaponTypeI18nKey } from './entity_mapping';
+import { getClassI18nKey, getMobTypeI18nKey, getRaceI18nKey, getProfessionI18nKey, getSpecI18nKey, getTargetInputI18nKey, pseudoStatI18nKeys, spellSchoolI18nKeys, statI18nKeys, getSourceFilterI18nKey, getRaidFilterI18nKey, getArmorTypeI18nKey, getWeaponTypeI18nKey, getRangedWeaponTypeI18nKey, getMasterySpellNameI18nKey } from './entity_mapping';
 import { getLang, setLang, supportedLanguages } from './locale_service';
 
 /**
@@ -179,6 +179,19 @@ export const translateRangedWeaponType = (rangedWeaponType: RangedWeaponType): s
 		return translated;
 	} catch {
 		return RangedWeaponType[rangedWeaponType];
+	}
+};
+
+export const translateMasterySpellName = (spec: Spec): string => {
+	try {
+		const key = getMasterySpellNameI18nKey(spec);
+		const translated = i18n.t(`common.mastery_spell_names.${key}`);
+		if (translated === `common.mastery_spell_names.${key}`) {
+			return Spec[spec];
+		}
+		return translated;
+	} catch {
+		return Spec[spec];
 	}
 };
 

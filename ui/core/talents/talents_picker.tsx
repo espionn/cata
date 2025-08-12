@@ -1,6 +1,7 @@
 import tippy from 'tippy.js';
 import { ref } from 'tsx-vanilla';
 
+import i18n from '../../i18n/config';
 import { Component } from '../components/component.js';
 import { CopyButton } from '../components/copy_button.js';
 import { Input, InputConfig } from '../components/input.js';
@@ -50,8 +51,8 @@ export class TalentsPicker<ModObject extends Player<any>, TalentsProto> extends 
 		new CopyButton(actionsContainerRef.value!, {
 			extraCssClasses: ['btn-sm', 'btn-outline-primary', 'copy-talents'],
 			getContent: () => modObject.getTalentsString(),
-			text: 'Copy',
-			tooltip: 'Copy talent string',
+			text: i18n.t('talents.copy_button.label'),
+			tooltip: i18n.t('talents.copy_button.tooltip'),
 		});
 
 		this.tree = new TalentTreePicker(talentsListContainer, this.config.tree, this, config.playerSpec);
@@ -120,7 +121,7 @@ class TalentTreePicker<TalentsProto> extends Component {
 		);
 
 		const resetBtn = resetButton.value!;
-		tippy(resetBtn, { content: 'Reset talent points' });
+		tippy(resetBtn, { content: i18n.t('talents.reset_button.tooltip') });
 		resetBtn.addEventListener('click', _event => this.resetPoints());
 	}
 

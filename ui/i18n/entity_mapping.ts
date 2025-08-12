@@ -237,6 +237,44 @@ export const rangedWeaponTypeI18nKeys: Record<RangedWeaponType, string> = {
 	[RangedWeaponType.RangedWeaponTypeWand]: 'wand',
 };
 
+export const masterySpellNamesI18nKeys: Record<Spec, string> = {
+	[Spec.SpecUnknown]: 'unknown',
+	[Spec.SpecAssassinationRogue]: 'potent_poisons',
+	[Spec.SpecCombatRogue]: 'main_gauche',
+	[Spec.SpecSubtletyRogue]: 'executioner',
+	[Spec.SpecBloodDeathKnight]: 'blood_shield',
+	[Spec.SpecFrostDeathKnight]: 'frozen_heart',
+	[Spec.SpecUnholyDeathKnight]: 'dreadblade',
+	[Spec.SpecBalanceDruid]: 'total_eclipse',
+	[Spec.SpecFeralDruid]: 'razor_claws',
+	[Spec.SpecGuardianDruid]: 'natures_guardian',
+	[Spec.SpecRestorationDruid]: 'harmony',
+	[Spec.SpecHolyPaladin]: 'illuminated_healing',
+	[Spec.SpecProtectionPaladin]: 'divine_bulwark',
+	[Spec.SpecRetributionPaladin]: 'hand_of_light',
+	[Spec.SpecElementalShaman]: 'elemental_overload',
+	[Spec.SpecEnhancementShaman]: 'enhanced_elements',
+	[Spec.SpecRestorationShaman]: 'deep_healing',
+	[Spec.SpecBeastMasteryHunter]: 'master_of_beasts',
+	[Spec.SpecMarksmanshipHunter]: 'wild_quiver',
+	[Spec.SpecSurvivalHunter]: 'essence_of_the_viper',
+	[Spec.SpecArmsWarrior]: 'strikes_of_opportunity',
+	[Spec.SpecFuryWarrior]: 'unshackled_fury',
+	[Spec.SpecProtectionWarrior]: 'critical_block',
+	[Spec.SpecArcaneMage]: 'mana_adept',
+	[Spec.SpecFireMage]: 'flashburn',
+	[Spec.SpecFrostMage]: 'icicles',
+	[Spec.SpecDisciplinePriest]: 'shield_discipline',
+	[Spec.SpecHolyPriest]: 'echo_of_light',
+	[Spec.SpecShadowPriest]: 'shadow_orb_power',
+	[Spec.SpecAfflictionWarlock]: 'potent_afflictions',
+	[Spec.SpecDemonologyWarlock]: 'master_demonologist',
+	[Spec.SpecDestructionWarlock]: 'emberstorm',
+	[Spec.SpecBrewmasterMonk]: 'elusive_brawler',
+	[Spec.SpecMistweaverMonk]: 'gift_of_the_serpent',
+	[Spec.SpecWindwalkerMonk]: 'bottled_fury',
+};
+
 export const translateStat = (stat: Stat): string => {
 	const key = statI18nKeys[stat] || Stat[stat].toLowerCase();
 	return i18n.t(`common.stats.${key}`);
@@ -348,4 +386,13 @@ export function getRangedWeaponTypeI18nKey(rangedWeaponType: RangedWeaponType): 
 export const translateRangedWeaponType = (rangedWeaponType: RangedWeaponType): string => {
 	const key = getRangedWeaponTypeI18nKey(rangedWeaponType);
 	return i18n.t(`common.ranged_weapon_types.${key}`);
+};
+
+export function getMasterySpellNameI18nKey(spec: Spec): string {
+	return masterySpellNamesI18nKeys[spec] || Spec[spec].toLowerCase();
+}
+
+export const translateMasterySpellName = (spec: Spec): string => {
+	const key = getMasterySpellNameI18nKey(spec);
+	return i18n.t(`common.mastery_spell_names.${key}`);
 };

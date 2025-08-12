@@ -251,6 +251,43 @@
 			"melee_haste": "Melee Haste",
 			"ranged_haste": "Ranged Haste"
 		},
+		"mastery_spell_names": {
+			"unknown": "Unknown",
+			"potent_poisons": "Potent Poisons",
+			"main_gauche": "Main Gauche",
+			"executioner": "Executioner",
+			"blood_shield": "Blood Shield",
+			"frozen_heart": "Frozen Heart",
+			"dreadblade": "Dreadblade",
+			"total_eclipse": "Total Eclipse",
+			"razor_claws": "Razor Claws",
+			"natures_guardian": "Nature's Guardian",
+			"harmony": "Harmony",
+			"illuminated_healing": "Illuminated Healing",
+			"divine_bulwark": "Divine Bulwark",
+			"hand_of_light": "Hand of Light",
+			"elemental_overload": "Elemental Overload",
+			"enhanced_elements": "Enhanced Elements",
+			"deep_healing": "Deep Healing",
+			"master_of_beasts": "Master of Beasts",
+			"wild_quiver": "Wild Quiver",
+			"essence_of_the_viper": "Essence of the Viper",
+			"strikes_of_opportunity": "Strikes of Opportunity",
+			"unshackled_fury": "Unshackled Fury",
+			"critical_block": "Critical Block",
+			"mana_adept": "Mana Adept",
+			"flashburn": "Flashburn",
+			"icicles": "Icicles",
+			"shield_discipline": "Shield Discipline",
+			"echo_of_light": "Echo of Light",
+			"shadow_orb_power": "Shadow Orb Power",
+			"potent_afflictions": "Potent Afflictions",
+			"master_demonologist": "Master Demonologist",
+			"emberstorm": "Emberstorm",
+			"elusive_brawler": "Elusive Brawler",
+			"gift_of_the_serpent": "Gift of the Serpent",
+			"bottled_fury": "Bottled Fury"
+		},
 		"copy_button": {
 			"default_text": "Copy to Clipboard",
 			"copied": "Copied"
@@ -683,7 +720,37 @@
 		"max_ranged_speed": "Max Ranged Speed"
 	},
 	"talents": {
-		"title": "Talents"
+		"title": "Talents",
+		"copy_button": {
+			"label": "Copy",
+			"tooltip": "Copy talent string"
+		},
+		"reset_button": {
+			"tooltip": "Reset talent points"
+		},
+		"glyphs": {
+			"major": "Major Glyphs",
+			"minor": "Minor Glyphs",
+			"modal": {
+				"title": "Glyphs",
+				"search_placeholder": "Search..."
+			},
+			"empty": "Empty"
+		},
+		"saved_talents": {
+			"title": "Saved Talents",
+			"label": "Talents",
+			"name_label": "Name",
+			"save_button": "Save Talents",
+			"delete": {
+				"confirm": "Delete saved talents '{{name}}'?",
+				"tooltip": "Delete saved talents"
+			},
+			"alerts": {
+				"choose_name": "Choose a label for your saved talents!",
+				"name_exists": "Talents with name {{name}} already exists."
+			}
+		}
 	},
 	"rotation": {
 		"title": "Rotation"

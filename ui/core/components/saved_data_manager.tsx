@@ -1,6 +1,7 @@
 import tippy from 'tippy.js';
 import { ref } from 'tsx-vanilla';
 
+import i18n from '../../i18n/config';
 import { EventID, TypedEvent } from '../typed_event';
 import { Component } from './component';
 import { ContentBlock, ContentBlockHeaderConfig } from './content_block';
@@ -20,6 +21,10 @@ export type SavedDataManagerConfig<ModObject, T> = {
 	fromJson: (obj: any) => T;
 	nameLabel?: string;
 	saveButtonText?: string;
+	deleteTooltip?: string;
+	deleteConfirmMessage?: string;
+	chooseNameAlert?: string;
+	nameExistsAlert?: string;
 };
 
 export type SavedDataConfig<ModObject, T> = {
@@ -125,10 +130,10 @@ export class SavedDataManager<ModObject, T> extends Component {
 		});
 
 		if (!this.config.loadOnly && !config.isPreset && deleteButtonRef.value) {
-			const tooltip = tippy(deleteButtonRef.value, { content: `Delete saved ${this.config.label}` });
+			const tooltip = tippy(deleteButtonRef.value, { content: this.config.deleteTooltip || `Delete saved ${this.config.label}` });
 			deleteButtonRef.value.addEventListener('click', event => {
 				event.stopPropagation();
-				const shouldDelete = confirm(`Delete saved ${this.config.label} '${config.name}'?`);
+				const shouldDelete = confirm(this.config.deleteConfirmMessage ? this.config.deleteConfirmMessage.replace('{{name}}', config.name) : `Delete saved ${this.config.label} '${config.name}'?`);
 				if (!shouldDelete) return;
 
 				tooltip.destroy();
@@ -241,12 +246,12 @@ export class SavedDataManager<ModObject, T> extends Component {
 
 			const newName = this.saveInput?.value;
 			if (!newName) {
-				alert(`Choose a label for your saved ${this.config.label}!`);
+				alert(this.config.chooseNameAlert || `Choose a label for your saved ${this.config.label}!`);
 				return;
 			}
 
 			if (newName in this.presets) {
-				alert(`${this.config.label} with name ${newName} already exists.`);
+				alert(this.config.nameExistsAlert ? this.config.nameExistsAlert.replace('{{name}}', newName) : `${this.config.label} with name ${newName} already exists.`);
 				return;
 			}
 			this.addSavedData({

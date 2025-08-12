@@ -10,12 +10,12 @@ import { IndividualSimUI } from '../individual_sim_ui';
 import { Player } from '../player.js';
 import { HandType, ItemSlot, PseudoStat, Race, RangedWeaponType, Spec, Stat, WeaponType } from '../proto/common.js';
 import { ActionId } from '../proto_utils/action_id';
-import { getStatName, masterySpellIDs, masterySpellNames } from '../proto_utils/names.js';
+import { getStatName, masterySpellIDs } from '../proto_utils/names.js';
 import { Stats, UnitStat } from '../proto_utils/stats.js';
-import { SimUI } from '../sim_ui';
 import { EventID, TypedEvent } from '../typed_event.js';
 import { Component } from './component.js';
 import { NumberPicker } from './pickers/number_picker.js';
+import { translateMasterySpellName } from '../../i18n/localization.js';
 
 export type StatMods = { base?: Stats; gear?: Stats; talents?: Stats; buffs?: Stats; consumes?: Stats; final?: Stats; stats?: Array<Stat> };
 export type StatWrites = { base: Stats; gear: Stats; talents: Stats; buffs: Stats; consumes: Stats; final: Stats; stats: Array<Stat> };
@@ -142,10 +142,10 @@ export class CharacterStats extends Component {
 						<td className="character-stats-table-label">
 							{statName}
 							{unitStat.equalsStat(Stat.StatMasteryRating) && (
-								<>
+								<div>
 									<br />
-									{masterySpellNames.get(this.player.getSpec())}
-								</>
+									{translateMasterySpellName(this.player.getSpec())}
+								</div>
 							)}
 						</td>
 						<td ref={valueRef} className="character-stats-table-value">
