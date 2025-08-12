@@ -1,8 +1,8 @@
 import { PlayerClass } from '../core/player_class';
 import { PlayerSpec } from '../core/player_spec';
-import { PseudoStat, Stat } from '../core/proto/common';
+import { PseudoStat, SpellSchool, Stat } from '../core/proto/common';
 import i18n from './config';
-import { getClassI18nKey, getSpecI18nKey, pseudoStatI18nKeys, statI18nKeys } from './entity_mapping';
+import { getClassI18nKey, getSpecI18nKey, getTargetInputI18nKey, pseudoStatI18nKeys, spellSchoolI18nKeys, statI18nKeys } from './entity_mapping';
 import { getLang, setLang, supportedLanguages } from './locale_service';
 
 /**
@@ -17,6 +17,16 @@ export const translateStat = (stat: Stat): string => {
 export const translatePseudoStat = (pseudoStat: PseudoStat): string => {
 	const key = pseudoStatI18nKeys[pseudoStat] || PseudoStat[pseudoStat].toLowerCase();
 	return i18n.t(`common.stats.${key}`);
+};
+
+export const translateTargetInput = (label: string): string => {
+	const key = getTargetInputI18nKey(label);
+	return i18n.t(`common.target_inputs.${key}`);
+};
+
+export const translateSpellSchool = (spellSchool: SpellSchool): string => {
+	const key = spellSchoolI18nKeys[spellSchool] || SpellSchool[spellSchool].toLowerCase();
+	return i18n.t(`common.spell_schools.${key}`);
 };
 
 export const translateClass = (className: string): string => {

@@ -87,7 +87,7 @@ export class SettingsTab extends SimTab {
 
 	private buildEncounterSettings() {
 		const contentBlock = new ContentBlock(this.column1, 'encounter-settings', {
-			header: { title: 'Encounter' },
+			header: { title: i18n.t('settings.encounter.title') },
 		});
 
 		new EncounterPicker(contentBlock.bodyElement, this.simUI.sim.encounter, this.simUI.individualConfig.encounterPicker, this.simUI);
@@ -96,7 +96,7 @@ export class SettingsTab extends SimTab {
 	private buildPlayerSettings() {
 		const column = this.column1;
 		const contentBlock = new ContentBlock(column, 'player-settings', {
-			header: { title: 'Player' },
+			header: { title: i18n.t('settings.player.title') },
 		});
 
 		const playerIconGroup = Input.newGroupContainer();
@@ -112,7 +112,7 @@ export class SettingsTab extends SimTab {
 		const races = this.simUI.player.getPlayerClass().races;
 		const _racePicker = new EnumPicker(contentBlock.bodyElement, this.simUI.player, {
 			id: 'simui-race',
-			label: 'Race',
+			label: i18n.t('settings.player.race'),
 			values: races.map(race => {
 				return {
 					name: raceNames.get(race)!,
@@ -134,7 +134,7 @@ export class SettingsTab extends SimTab {
 		const professions = getEnumValues(Profession).filter(proff => proff != Profession.Archeology) as Array<Profession>;
 		const _profession1Picker = new EnumPicker(professionGroup, this.simUI.player, {
 			id: 'simui-profession1',
-			label: 'Profession 1',
+			label: i18n.t('settings.player.profession_1'),
 			values: professions.map(p => {
 				return {
 					name: professionNames.get(p)!,
@@ -148,7 +148,7 @@ export class SettingsTab extends SimTab {
 
 		const _profession2Picker = new EnumPicker(professionGroup, this.simUI.player, {
 			id: 'simui-profession2',
-			label: 'Profession 2',
+			label: i18n.t('settings.player.profession_2'),
 			values: professions.map(p => {
 				return {
 					name: professionNames.get(p)!,

@@ -103,6 +103,19 @@
 				"protection": "Protection"
 			}
 		},
+		"spell_schools": {
+			"physical": "Physique",
+			"arcane": "Arcanique",
+			"fire": "Feu",
+			"frost": "Givre",
+			"holy": "Sacré",
+			"nature": "Nature",
+			"shadow": "Ombre"
+		},
+		"target_inputs": {
+			"frenzy_time": "Temps de frénésie",
+			"spiritual_grasp_frequency": "Fréquence de prise spirituelle"
+		},
 		"stats": {
 			"strength": "Force",
 			"agility": "Agilité",
@@ -127,7 +140,7 @@
 			"mana": "Mana",
 			"mp5": "MP5",
 			"main_hand_dps": "DPS main principale",
-			"off_hand_dps": "DPS main gauche",
+			"off_hand_dps": "DPS main secondaire",
 			"ranged_dps": "DPS à distance",
 			"block": "Blocage",
 			"melee_speed_multiplier": "Multiplicateur de vitesse de mêlée",
@@ -142,7 +155,7 @@
 			"ranged_haste": "Hâte à distance"
 		},
 		"copy_button": {
-			"default_text": "Copier dans le Presse-papiers",
+			"default_text": "Copier dans le presse-papiers",
 			"copied": "Copié"
 		}
 	},
@@ -176,6 +189,117 @@
 	},
 	"settings": {
 		"title": "Paramètres",
+		"encounter": {
+			"title": "Rencontre",
+			"duration": {
+				"label": "Durée",
+				"tooltip": "La durée du combat pour chaque itération de simulation, en secondes."
+			},
+			"duration_variation": {
+				"label": "Durée +/-",
+				"tooltip": "Ajoute une quantité aléatoire de temps, en secondes, entre [valeur, -1 * valeur] à chaque itération de simulation. Par exemple, régler la Durée à 180 et Durée +/- à 10 donnera des durées aléatoires entre 170s et 190s."
+			},
+			"execute_duration_20": {
+				"label": "Durée d'Exécution 20 (%)",
+				"tooltip": "Pourcentage de la durée totale de la rencontre, pour laquelle les cibles seront considérées en phase d'exécution (< 20% PV) pour les effets comme Exécution du Guerrier ou Fureur Fondue du Mage."
+			},
+			"execute_duration_25": {
+				"label": "Durée d'Exécution 25 (%)",
+				"tooltip": "Pourcentage de la durée totale de la rencontre, pour laquelle les cibles seront considérées en phase d'exécution (< 25% PV) pour les effets comme Drain d'Âme du Démoniste."
+			},
+			"execute_duration_35": {
+				"label": "Durée d'Exécution 35 (%)",
+				"tooltip": "Pourcentage de la durée totale de la rencontre, pour laquelle les cibles seront considérées en phase d'exécution (< 35% PV) pour les effets comme Faucheur d'Âme du Chevalier de la Mort."
+			},
+			"execute_duration_45": {
+				"label": "Durée d'Exécution 45 (%)",
+				"tooltip": "Pourcentage de la durée totale de la rencontre, pour laquelle les cibles seront considérées en phase d'exécution (< 45% PV) pour les effets comme Faucheur d'Âme du Chevalier de la Mort avec 4pc DPS T15."
+			},
+			"duration_below_high_hp": {
+				"label": "Durée passée sous le régime HP élevé (%)",
+				"tooltip": "Pourcentage de la durée totale de la rencontre, pour laquelle les cibles sont considérées hors de portée pour les effets comme Visée Précise du Chasseur (<90% PV) ou Coups Prédateurs du Druide (<80% PV)."
+			},
+			"encounter_preset": {
+				"label": "Rencontre",
+				"tooltip": "Sélectionne une configuration de rencontre prédéfinie."
+			},
+			"advanced": "Avancé",
+			"use_health": {
+				"label": "Utiliser la Santé",
+				"tooltip": "Utilise une limite de dégâts au lieu d'une limite de durée. La limite de dégâts est égale à la somme de la santé de toutes les cibles."
+			},
+			"target": "Cible",
+			"num_allies": {
+				"label": "Nombre d'Alliés",
+				"tooltip": "Nombre de joueurs alliés dans le raid."
+			},
+			"min_base_damage": {
+				"label": "Dégâts de Base Min",
+				"tooltip": "Dégâts de base pour les attaques automatiques, c'est-à-dire le jet le plus bas avec 0 PA contre un Joueur à 0 armure."
+			},
+			"npc": {
+				"label": "PNJ",
+				"tooltip": "Sélectionne une configuration PNJ prédéfinie."
+			},
+			"ai": {
+				"label": "IA",
+				"tooltip": "Détermine la rotation de capacités de la cible. Notez que la plupart des rotations ne sont pas encore implémentées."
+			},
+			"level": "Niveau",
+			"mob_type": "Type de Créature",
+			"tanked_by": {
+				"label": "Tanké Par",
+				"tooltip": "Détermine quel joueur du raid cette cible ennemie attaquera. Si aucun joueur n'est assigné à l'emplacement de tank spécifié, cette cible n'attaquera pas."
+			},
+			"swing_speed": {
+				"label": "Vitesse d'Attaque",
+				"tooltip": "Temps en secondes entre les attaques automatiques. Réglez à 0 pour désactiver les attaques automatiques."
+			},
+			"dual_wield": {
+				"label": "Combat à Deux Mains",
+				"tooltip": "Utilise 2 armes séparées pour attaquer."
+			},
+			"dual_wield_penalty": {
+				"label": "Pénalité Combat à Deux Mains",
+				"tooltip": "Active la Pénalité d'Échec de Combat à Deux Mains (+19% de chance d'échec) si vous combattez à deux mains. Les boss dans Hyjal/BT/SWP ont généralement ceci désactivé pour empêcher les tanks d'empiler l'évitement."
+			},
+			"parry_haste": {
+				"label": "Hâte de Parade",
+				"tooltip": "Si cet ennemi gagnera la hâte de parade en parant les attaques."
+			},
+			"spell_school": {
+				"label": "École de Sort",
+				"tooltip": "Type de dégâts causés par les attaques automatiques. Ceci est généralement Physique, mais certains ennemis ont des attaques élémentaires."
+			},
+			"damage_spread": {
+				"label": "Écart de Dégâts",
+				"tooltip": "Écart fractionnel entre les dégâts minimum et maximum d'attaque automatique de cet ennemi à 0 Puissance d'Attaque."
+			},
+			"suppress_dodge": "Supprimer l'Esquive",
+			"second_tank_index": "Index du Second Tank",
+			"disabled_at_start": "Désactivé au Début",
+			"target_input": "Entrée de Cible",
+			"frenzy_time": {
+				"label": "Temps de Frénésie",
+				"tooltip": "Temps de simulation (en secondes) auquel désactiver les changements de tank et activer le buff de Frénésie du boss"
+			},
+			"spiritual_grasp_frequency": {
+				"label": "Fréquence de Saisie Spirituelle",
+				"tooltip": "Temps moyen (en secondes) entre les coups de Saisie Spirituelle, suivant une distribution exponentielle"
+			},
+			"custom": "Personnalisé",
+			"none": "Aucun",
+			"main_tank": "Tank Principal",
+			"tank_2": "Tank 2",
+			"tank_3": "Tank 3",
+			"tank_4": "Tank 4"
+		},
+		"player": {
+			"title": "Joueur",
+			"race": "Race",
+			"profession_1": "Profession 1",
+			"profession_2": "Profession 2"
+		},
 		"saved_encounters": {
 			"title": "Rencontres Sauvegardées",
 			"encounter": "Rencontre",

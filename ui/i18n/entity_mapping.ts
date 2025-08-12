@@ -1,5 +1,5 @@
 import { LaunchStatus } from '../core/launched_sims';
-import { Class, PseudoStat, Spec, Stat } from '../core/proto/common';
+import { Class, PseudoStat, Spec, Stat, SpellSchool } from '../core/proto/common';
 import i18n from './config';
 
 export const statI18nKeys: Record<Stat, string> = {
@@ -44,6 +44,16 @@ export const pseudoStatI18nKeys: Record<PseudoStat, string> = {
 	[PseudoStat.PseudoStatSpellHitPercent]: 'spell_hit',
 	[PseudoStat.PseudoStatPhysicalCritPercent]: 'melee_crit',
 	[PseudoStat.PseudoStatSpellCritPercent]: 'spell_crit',
+};
+
+export const spellSchoolI18nKeys: Record<SpellSchool, string> = {
+	[SpellSchool.SpellSchoolPhysical]: 'physical',
+	[SpellSchool.SpellSchoolArcane]: 'arcane',
+	[SpellSchool.SpellSchoolFire]: 'fire',
+	[SpellSchool.SpellSchoolFrost]: 'frost',
+	[SpellSchool.SpellSchoolHoly]: 'holy',
+	[SpellSchool.SpellSchoolNature]: 'nature',
+	[SpellSchool.SpellSchoolShadow]: 'shadow',
 };
 
 export const classI18nKeys: Record<Class, string> = {
@@ -123,6 +133,11 @@ export const statusI18nKeys: Record<LaunchStatus, string> = {
 	[LaunchStatus.Launched]: 'launched',
 };
 
+export const targetInputI18nKeys: Record<string, string> = {
+	'Frenzy time': 'frenzy_time',
+	'Spiritual Grasp frequency': 'spiritual_grasp_frequency',
+};
+
 export const translateStat = (stat: Stat): string => {
 	const key = statI18nKeys[stat] || Stat[stat].toLowerCase();
 	return i18n.t(`common.stats.${key}`);
@@ -158,4 +173,8 @@ export function getSpecI18nKey(specID: Spec): string {
 
 export function getStatusI18nKey(status: LaunchStatus): string {
 	return statusI18nKeys[status] || LaunchStatus[status].toLowerCase();
+}
+
+export function getTargetInputI18nKey(label: string): string {
+	return targetInputI18nKeys[label] || label.toLowerCase().replace(/\s+/g, '_');
 }

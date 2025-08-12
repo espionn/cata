@@ -1,7 +1,8 @@
+import i18n from '../../i18n/config.js';
+import { translateSpellSchool, translateStat, translateTargetInput } from '../../i18n/localization.js';
 import { Encounter } from '../encounter.js';
 import { IndividualSimUI } from '../individual_sim_ui.js';
 import { InputType, MobType, Spec, SpellSchool, Stat, Target, Target as TargetProto, TargetInput } from '../proto/common.js';
-import { getStatName } from '../proto_utils/names.js';
 import { Stats } from '../proto_utils/stats.js';
 import { Raid } from '../raid.js';
 import { SimUI } from '../sim_ui.js';
@@ -53,7 +54,7 @@ export class EncounterPicker extends Component {
 			const presetEncounters = modEncounter.sim.db.getAllPresetEncounters();
 			new EnumPicker<Encounter>(this.rootElem, modEncounter, {
 				id: 'encounter-preset-encouter',
-				label: 'Encounter',
+				label: i18n.t('settings.encounter.encounter_preset'),
 				//extraCssClasses: ['encounter-picker', 'mb-0', 'pe-2', 'order-first'],
 				extraCssClasses: ['damage-metrics', 'npc-picker'],
 				values: [{ name: 'Custom', value: -1 }].concat(
@@ -117,8 +118,8 @@ export class EncounterPicker extends Component {
 				const player = (simUI as IndividualSimUI<any>).player;
 				new NumberPicker(this.rootElem, simUI.sim.raid, {
 					id: 'encounter-num-allies',
-					label: 'Num Allies',
-					labelTooltip: 'Number of allied players in the raid.',
+					label: i18n.t('settings.encounter.num_allies.label'),
+					labelTooltip: i18n.t('settings.encounter.num_allies.tooltip'),
 					changedEvent: (raid: Raid) => TypedEvent.onAny([raid.targetDummiesChangeEmitter, player.itemSwapSettings.changeEmitter]),
 					getValue: (raid: Raid) => raid.getTargetDummies(),
 					setValue: (eventID: EventID, raid: Raid, newValue: number) => {
@@ -142,8 +143,8 @@ export class EncounterPicker extends Component {
 			if (simUI.isIndividualSim() && (simUI as IndividualSimUI<any>).player.getPlayerSpec().isTankSpec) {
 				new NumberPicker(this.rootElem, modEncounter, {
 					id: 'encounter-min-base-damage',
-					label: 'Min Base Damage',
-					labelTooltip: 'Base damage for auto attacks, i.e. lowest roll with 0 AP against a 0-armor Player.',
+					label: i18n.t('settings.encounter.min_base_damage.label'),
+					labelTooltip: i18n.t('settings.encounter.min_base_damage.tooltip'),
 					changedEvent: (encounter: Encounter) => encounter.changeEmitter,
 					getValue: (encounter: Encounter) => encounter.primaryTarget.minBaseDamage,
 					setValue: (eventID: EventID, encounter: Encounter, newValue: number) => {
@@ -169,7 +170,7 @@ export class EncounterPicker extends Component {
 			const advancedModal = new AdvancedEncounterModal(simUI.rootElem, simUI, modEncounter);
 			const advancedButton = document.createElement('button');
 			advancedButton.classList.add('advanced-button', 'btn', 'btn-primary');
-			advancedButton.textContent = 'Advanced';
+			advancedButton.textContent = i18n.t('settings.encounter.advanced');
 			advancedButton.addEventListener('click', () => advancedModal.open());
 			this.rootElem.appendChild(advancedButton);
 		});
@@ -196,9 +197,9 @@ class AdvancedEncounterModal extends BaseModal {
 		addEncounterFieldPickers(header, this.encounter, true);
 		if (!simUI.isIndividualSim()) {
 			new BooleanPicker<Encounter>(header, encounter, {
-				id: 'aem-use-health',
-				label: 'Use Health',
-				labelTooltip: 'Uses a damage limit in place of a duration limit. Damage limit is equal to sum of all targets health.',
+			id: 'aem-use-health',
+			label: i18n.t('settings.encounter.use_health.label'),
+				labelTooltip: i18n.t('settings.encounter.use_health.tooltip'),
 				inline: true,
 				changedEvent: (encounter: Encounter) => encounter.changeEmitter,
 				getValue: (encounter: Encounter) => encounter.getUseHealth(),
@@ -209,7 +210,7 @@ class AdvancedEncounterModal extends BaseModal {
 		}
 		new ListPicker<Encounter, TargetProto>(targetsElem, this.encounter, {
 			extraCssClasses: ['targets-picker', 'mb-0'],
-			itemLabel: 'Target',
+			itemLabel: i18n.t('settings.encounter.target'),
 			changedEvent: (encounter: Encounter) => encounter.targetsChangeEmitter,
 			getValue: (encounter: Encounter) => encounter.targets,
 			setValue: (eventID: EventID, encounter: Encounter, newValue: Array<TargetProto>) => {
@@ -233,7 +234,7 @@ class AdvancedEncounterModal extends BaseModal {
 
 		new EnumPicker<Encounter>(this.header as HTMLElement, this.encounter, {
 			id: 'aem-encounter-picker',
-			label: 'Encounter',
+			label: i18n.t('settings.encounter.encounter_preset.label'),
 			extraCssClasses: ['encounter-picker', 'mb-0', 'pe-2', 'order-first'],
 			values: [{ name: 'Custom', value: -1 }].concat(
 				presetEncounters.map((pe, i) => {
@@ -294,8 +295,8 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 		new EnumPicker<null>(section1, null, {
 			id: 'target-picker-npc',
 			extraCssClasses: ['npc-picker'],
-			label: 'NPC',
-			labelTooltip: 'Selects a preset NPC configuration.',
+			label: i18n.t('settings.encounter.npc.label'),
+			labelTooltip: i18n.t('settings.encounter.npc.tooltip'),
 			values: [{ name: 'Custom', value: -1 }].concat(
 				presetTargets.map((pe, i) => {
 					return {
@@ -317,12 +318,9 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 		this.aiPicker = new EnumPicker<null>(section1, null, {
 			id: 'target-picker-ai',
 			extraCssClasses: ['ai-picker'],
-			label: 'AI',
-			labelTooltip: `
-				<p>Determines the target\'s ability rotation.</p>
-				<p>Note that most rotations are not yet implemented.</p>
-			`,
-			values: [{ name: 'None', value: 0 }].concat(
+			label: i18n.t('settings.encounter.ai.label'),
+			labelTooltip: i18n.t('settings.encounter.ai.tooltip'),
+			values: [{ name: i18n.t('settings.encounter.none'), value: 0 }].concat(
 				presetTargets.map(pe => {
 					return {
 						name: pe.path,
@@ -345,7 +343,7 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 
 		this.levelPicker = new EnumPicker<null>(section1, null, {
 			id: 'target-picker-level',
-			label: 'Level',
+			label: i18n.t('settings.encounter.level'),
 			values: [
 				{ name: '93', value: 93 },
 				{ name: '92', value: 92 },
@@ -362,7 +360,7 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 		});
 		this.mobTypePicker = new EnumPicker(section1, null, {
 			id: 'target-picker-mob-type',
-			label: 'Mob Type',
+			label: i18n.t('settings.encounter.mob_type'),
 			values: mobTypeEnumValues,
 			changedEvent: () => encounter.targetsChangeEmitter,
 			getValue: () => this.getTarget().mobType,
@@ -374,9 +372,8 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 		this.tankIndexPicker = new EnumPicker<null>(section1, null, {
 			id: 'target-picker-tanked-by',
 			extraCssClasses: ['threat-metrics'],
-			label: 'Tanked By',
-			labelTooltip:
-				'Determines which player in the raid this enemy will attack. If no player is assigned to the specified tank slot, this enemy will not attack.',
+			label: i18n.t('settings.encounter.tanked_by.label'),
+			labelTooltip: i18n.t('settings.encounter.tanked_by.tooltip'),
 			values: [
 				{ name: 'None', value: -1 },
 				{ name: 'Main Tank', value: 0 },
@@ -400,7 +397,7 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 				id: `target-${this.targetIndex}-picker-stats-${statData.stat}`,
 				inline: true,
 				extraCssClasses: statData.extraCssClasses,
-				label: getStatName(stat),
+				label: translateStat(stat),
 				labelTooltip: statData.tooltip,
 				changedEvent: () => encounter.targetsChangeEmitter,
 				getValue: () => this.getTarget().stats[stat],
@@ -413,8 +410,8 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 
 		this.swingSpeedPicker = new NumberPicker(section3, null, {
 			id: `target-${this.targetIndex}-picker-swing-speed`,
-			label: 'Swing Speed',
-			labelTooltip: 'Time in seconds between auto attacks. Set to 0 to disable auto attacks.',
+			label: i18n.t('settings.encounter.swing_speed.label'),
+			labelTooltip: i18n.t('settings.encounter.swing_speed.tooltip'),
 			float: true,
 			changedEvent: () => encounter.targetsChangeEmitter,
 			getValue: () => this.getTarget().swingSpeed,
@@ -425,8 +422,8 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 		});
 		this.minBaseDamagePicker = new NumberPicker(section3, null, {
 			id: `target-${this.targetIndex}-picker-min-base-damage`,
-			label: 'Min Base Damage',
-			labelTooltip: 'Base damage for auto attacks, i.e. lowest roll with 0 AP against a 0-armor Player.',
+			label: i18n.t('settings.encounter.min_base_damage.label'),
+			labelTooltip: i18n.t('settings.encounter.min_base_damage.tooltip'),
 			changedEvent: () => encounter.targetsChangeEmitter,
 			getValue: () => this.getTarget().minBaseDamage,
 			setValue: (eventID: EventID, _: null, newValue: number) => {
@@ -436,8 +433,8 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 		});
 		this.damageSpreadPicker = new NumberPicker(section3, null, {
 			id: `target-${this.targetIndex}-picker-damage-spread`,
-			label: 'Damage Spread',
-			labelTooltip: 'Fractional spread between the minimum and maximum auto-attack damage from this enemy at 0 Attack Power.',
+			label: i18n.t('settings.encounter.damage_spread.label'),
+			labelTooltip: i18n.t('settings.encounter.damage_spread.tooltip'),
 			float: true,
 			changedEvent: () => encounter.targetsChangeEmitter,
 			getValue: () => this.getTarget().damageSpread,
@@ -448,8 +445,8 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 		});
 		this.dualWieldPicker = new BooleanPicker(section3, null, {
 			id: `target-${this.targetIndex}-picker-dual-wield`,
-			label: 'Dual Wield',
-			labelTooltip: 'Uses 2 separate weapons to attack.',
+			label: i18n.t('settings.encounter.dual_wield.label'),
+			labelTooltip: i18n.t('settings.encounter.dual_wield.tooltip'),
 			inline: true,
 			reverse: true,
 			changedEvent: () => encounter.targetsChangeEmitter,
@@ -461,9 +458,8 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 		});
 		this.dwMissPenaltyPicker = new BooleanPicker(section3, null, {
 			id: `target-${this.targetIndex}-picker-dw-miss-penalty`,
-			label: 'DW Miss Penalty',
-			labelTooltip:
-				'Enables the Dual Wield Miss Penalty (+19% chance to miss) if dual wielding. Bosses in Hyjal/BT/SWP usually have this disabled to stop tanks from avoidance stacking.',
+			label: i18n.t('settings.encounter.dual_wield_penalty.label'),
+			labelTooltip: i18n.t('settings.encounter.dual_wield_penalty.tooltip'),
 			inline: true,
 			reverse: true,
 			changedEvent: () => encounter.targetsChangeEmitter,
@@ -476,8 +472,8 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 		});
 		this.parryHastePicker = new BooleanPicker(section3, null, {
 			id: `target-${this.targetIndex}-picker-parry-haste`,
-			label: 'Parry Haste',
-			labelTooltip: 'Whether this enemy will gain parry haste when parrying attacks.',
+			label: i18n.t('settings.encounter.parry_haste.label'),
+			labelTooltip: i18n.t('settings.encounter.parry_haste.tooltip'),
 			inline: true,
 			reverse: true,
 			changedEvent: () => encounter.targetsChangeEmitter,
@@ -489,16 +485,16 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 		});
 		this.spellSchoolPicker = new EnumPicker<null>(section3, null, {
 			id: `target-${this.targetIndex}-picker-spell-school`,
-			label: 'Spell School',
-			labelTooltip: 'Type of damage caused by auto attacks. This is usually Physical, but some enemies have elemental attacks.',
+			label: i18n.t('settings.encounter.spell_school.label'),
+			labelTooltip: i18n.t('settings.encounter.spell_school.tooltip'),
 			values: [
-				{ name: 'Physical', value: SpellSchool.SpellSchoolPhysical },
-				{ name: 'Arcane', value: SpellSchool.SpellSchoolArcane },
-				{ name: 'Fire', value: SpellSchool.SpellSchoolFire },
-				{ name: 'Frost', value: SpellSchool.SpellSchoolFrost },
-				{ name: 'Holy', value: SpellSchool.SpellSchoolHoly },
-				{ name: 'Nature', value: SpellSchool.SpellSchoolNature },
-				{ name: 'Shadow', value: SpellSchool.SpellSchoolShadow },
+				{ name: translateSpellSchool(SpellSchool.SpellSchoolPhysical), value: SpellSchool.SpellSchoolPhysical },
+				{ name: translateSpellSchool(SpellSchool.SpellSchoolArcane), value: SpellSchool.SpellSchoolArcane },
+				{ name: translateSpellSchool(SpellSchool.SpellSchoolFire), value: SpellSchool.SpellSchoolFire },
+				{ name: translateSpellSchool(SpellSchool.SpellSchoolFrost), value: SpellSchool.SpellSchoolFrost },
+				{ name: translateSpellSchool(SpellSchool.SpellSchoolHoly), value: SpellSchool.SpellSchoolHoly },
+				{ name: translateSpellSchool(SpellSchool.SpellSchoolNature), value: SpellSchool.SpellSchoolNature },
+				{ name: translateSpellSchool(SpellSchool.SpellSchoolShadow), value: SpellSchool.SpellSchoolShadow },
 			],
 			changedEvent: () => encounter.targetsChangeEmitter,
 			getValue: () => this.getTarget().spellSchool,
@@ -625,7 +621,7 @@ class TargetInputPicker extends Input<Encounter, TargetInput> {
 			this.numberPicker = new NumberPicker(this.rootElem, null, {
 				id: randomUUID(),
 				float: true,
-				label: newValue.label,
+				label: translateTargetInput(newValue.label),
 				labelTooltip: newValue.tooltip,
 				changedEvent: () => this.encounter.targetsChangeEmitter,
 				getValue: () => this.getTargetInput().numberValue,
@@ -642,7 +638,7 @@ class TargetInputPicker extends Input<Encounter, TargetInput> {
 			this.clearPickers();
 			this.boolPicker = new BooleanPicker(this.rootElem, null, {
 				id: randomUUID(),
-				label: newValue.label,
+				label: translateTargetInput(newValue.label),
 				labelTooltip: newValue.tooltip,
 				extraCssClasses: ['input-inline'],
 				changedEvent: () => this.encounter.targetsChangeEmitter,
@@ -656,7 +652,7 @@ class TargetInputPicker extends Input<Encounter, TargetInput> {
 			this.clearPickers();
 			this.enumPicker = new EnumPicker<null>(this.rootElem, null, {
 				id: randomUUID(),
-				label: newValue.label,
+				label: translateTargetInput(newValue.label),
 				values: newValue.enumOptions.map((option, index) => {
 					return { value: index, name: option };
 				}),
@@ -674,11 +670,10 @@ class TargetInputPicker extends Input<Encounter, TargetInput> {
 function addEncounterFieldPickers(rootElem: HTMLElement, encounter: Encounter, showExecuteProportion: boolean) {
 	const durationGroup = Input.newGroupContainer();
 	rootElem.appendChild(durationGroup);
-
-	new NumberPicker(durationGroup, encounter, {
+		new NumberPicker(durationGroup, encounter, {
 		id: 'encounter-duration',
-		label: 'Duration',
-		labelTooltip: 'The fight length for each sim iteration, in seconds.',
+		label: i18n.t('settings.encounter.duration.label'),
+		labelTooltip: i18n.t('settings.encounter.duration.tooltip'),
 		changedEvent: (encounter: Encounter) => encounter.changeEmitter,
 		getValue: (encounter: Encounter) => encounter.getDuration(),
 		setValue: (eventID: EventID, encounter: Encounter, newValue: number) => {
@@ -690,9 +685,8 @@ function addEncounterFieldPickers(rootElem: HTMLElement, encounter: Encounter, s
 	});
 	new NumberPicker(durationGroup, encounter, {
 		id: 'encounter-duration-variation',
-		label: 'Duration +/-',
-		labelTooltip:
-			'Adds a random amount of time, in seconds, between [value, -1 * value] to each sim iteration. For example, setting Duration to 180 and Duration +/- to 10 will result in random durations between 170s and 190s.',
+		label: i18n.t('settings.encounter.duration_variation.label'),
+		labelTooltip: i18n.t('settings.encounter.duration_variation.tooltip'),
 		changedEvent: (encounter: Encounter) => encounter.changeEmitter,
 		getValue: (encounter: Encounter) => encounter.getDurationVariation(),
 		setValue: (eventID: EventID, encounter: Encounter, newValue: number) => {
@@ -710,9 +704,8 @@ function addEncounterFieldPickers(rootElem: HTMLElement, encounter: Encounter, s
 
 		new NumberPicker(executeGroup, encounter, {
 			id: 'encounter-execute-proportion',
-			label: 'Execute Duration 20 (%)',
-			labelTooltip:
-				'Percentage of the total encounter duration, for which the targets will be considered to be in execute range (< 20% HP) for the purpose of effects like Warrior Execute or Mage Molten Fury.',
+			label: i18n.t('settings.encounter.execute_duration_20.label'),
+			labelTooltip: i18n.t('settings.encounter.execute_duration_20.tooltip'),
 			changedEvent: (encounter: Encounter) => encounter.changeEmitter,
 			getValue: (encounter: Encounter) => encounter.getExecuteProportion20() * 100,
 			setValue: (eventID: EventID, encounter: Encounter, newValue: number) => {
@@ -724,9 +717,8 @@ function addEncounterFieldPickers(rootElem: HTMLElement, encounter: Encounter, s
 		});
 		new NumberPicker(executeGroup, encounter, {
 			id: 'encounter-execute-proportion-25',
-			label: 'Execute Duration 25 (%)',
-			labelTooltip:
-				"Percentage of the total encounter duration, for which the targets will be considered to be in execute range (< 25% HP) for the purpose of effects like Warlock's Drain Soul.",
+			label: i18n.t('settings.encounter.execute_duration_25.label'),
+			labelTooltip: i18n.t('settings.encounter.execute_duration_25.tooltip'),
 			changedEvent: (encounter: Encounter) => encounter.changeEmitter,
 			getValue: (encounter: Encounter) => encounter.getExecuteProportion25() * 100,
 			setValue: (eventID: EventID, encounter: Encounter, newValue: number) => {
@@ -738,9 +730,8 @@ function addEncounterFieldPickers(rootElem: HTMLElement, encounter: Encounter, s
 		});
 		new NumberPicker(executeGroup, encounter, {
 			id: 'encounter-execute-proportion-35',
-			label: 'Execute Duration 35 (%)',
-			labelTooltip:
-				'Percentage of the total encounter duration, for which the targets will be considered to be in execute range (< 35% HP) for the purpose of effects like Death Knight Soul Reaper.',
+			label: i18n.t('settings.encounter.execute_duration_35.label'),
+			labelTooltip: i18n.t('settings.encounter.execute_duration_35.tooltip'),
 			changedEvent: (encounter: Encounter) => encounter.changeEmitter,
 			getValue: (encounter: Encounter) => encounter.getExecuteProportion35() * 100,
 			setValue: (eventID: EventID, encounter: Encounter, newValue: number) => {
@@ -752,9 +743,8 @@ function addEncounterFieldPickers(rootElem: HTMLElement, encounter: Encounter, s
 		});
 		new NumberPicker(executeGroup, encounter, {
 			id: 'encounter-execute-proportion-45',
-			label: 'Execute Duration 45 (%)',
-			labelTooltip:
-				'Percentage of the total encounter duration, for which the targets will be considered to be in execute range (< 45% HP) for the purpose of effects like Death Knight Soul Reaper with T15 DPS 4pc.',
+			label: i18n.t('settings.encounter.execute_duration_45.label'),
+			labelTooltip: i18n.t('settings.encounter.execute_duration_45.tooltip'),
 			changedEvent: (encounter: Encounter) => encounter.changeEmitter,
 			getValue: (encounter: Encounter) => encounter.getExecuteProportion45() * 100,
 			setValue: (eventID: EventID, encounter: Encounter, newValue: number) => {
@@ -766,9 +756,8 @@ function addEncounterFieldPickers(rootElem: HTMLElement, encounter: Encounter, s
 		});
 		new NumberPicker(executeGroup, encounter, {
 			id: 'encounter-execute-proportion-90',
-			label: 'Duration spent below high-HP regime (%)',
-			labelTooltip:
-				'Percentage of the total encounter duration, for which the targets are considered out of range for effects like Hunter Careful Aim (<90% HP) or Druid Predatory Strikes (<80% HP).',
+			label: i18n.t('settings.encounter.duration_below_high_hp.label'),
+			labelTooltip: i18n.t('settings.encounter.duration_below_high_hp.tooltip'),
 			changedEvent: (encounter: Encounter) => encounter.changeEmitter,
 			getValue: (encounter: Encounter) => encounter.getExecuteProportion90() * 100,
 			setValue: (eventID: EventID, encounter: Encounter, newValue: number) => {
@@ -784,7 +773,7 @@ function addEncounterFieldPickers(rootElem: HTMLElement, encounter: Encounter, s
 function makeTargetInputsPicker(parent: HTMLElement, encounter: Encounter, targetIndex: number) {
 	return new ListPicker<Encounter, TargetInput>(parent, encounter, {
 		allowedActions: [],
-		itemLabel: 'Target Input',
+		itemLabel: i18n.t('settings.encounter.target_input'),
 		extraCssClasses: ['mt-2'],
 		isCompact: true,
 		changedEvent: (encounter: Encounter) => encounter.targetsChangeEmitter,

@@ -103,6 +103,19 @@
 				"protection": "Protection"
 			}
 		},
+		"spell_schools": {
+			"physical": "Physical",
+			"arcane": "Arcane",
+			"fire": "Fire",
+			"frost": "Frost",
+			"holy": "Holy",
+			"nature": "Nature",
+			"shadow": "Shadow"
+		},
+		"target_inputs": {
+			"frenzy_time": "Frenzy time",
+			"spiritual_grasp_frequency": "Spiritual Grasp frequency"
+		},
 		"stats": {
 			"strength": "Strength",
 			"agility": "Agility",
@@ -176,6 +189,117 @@
 	},
 	"settings": {
 		"title": "Settings",
+		"encounter": {
+			"title": "Encounter",
+			"duration": {
+				"label": "Duration",
+				"tooltip": "The fight length for each sim iteration, in seconds."
+			},
+			"duration_variation": {
+				"label": "Duration +/-",
+				"tooltip": "Adds a random amount of time, in seconds, between [value, -1 * value] to each sim iteration. For example, setting Duration to 180 and Duration +/- to 10 will result in random durations between 170s and 190s."
+			},
+			"execute_duration_20": {
+				"label": "Execute Duration 20 (%)",
+				"tooltip": "Percentage of the total encounter duration, for which the targets will be considered to be in execute range (< 20% HP) for the purpose of effects like Warrior Execute or Mage Molten Fury."
+			},
+			"execute_duration_25": {
+				"label": "Execute Duration 25 (%)",
+				"tooltip": "Percentage of the total encounter duration, for which the targets will be considered to be in execute range (< 25% HP) for the purpose of effects like Warlock's Drain Soul."
+			},
+			"execute_duration_35": {
+				"label": "Execute Duration 35 (%)",
+				"tooltip": "Percentage of the total encounter duration, for which the targets will be considered to be in execute range (< 35% HP) for the purpose of effects like Death Knight Soul Reaper."
+			},
+			"execute_duration_45": {
+				"label": "Execute Duration 45 (%)",
+				"tooltip": "Percentage of the total encounter duration, for which the targets will be considered to be in execute range (< 45% HP) for the purpose of effects like Death Knight Soul Reaper with T15 DPS 4pc."
+			},
+			"duration_below_high_hp": {
+				"label": "Duration spent below high-HP regime (%)",
+				"tooltip": "Percentage of the total encounter duration, for which the targets are considered out of range for effects like Hunter Careful Aim (<90% HP) or Druid Predatory Strikes (<80% HP)."
+			},
+			"encounter_preset": {
+				"label": "Encounter",
+				"tooltip": "Selects a preset encounter configuration."
+			},
+			"advanced": "Advanced",
+			"use_health": {
+				"label": "Use Health",
+				"tooltip": "Uses a damage limit in place of a duration limit. Damage limit is equal to sum of all targets health."
+			},
+			"target": "Target",
+			"num_allies": {
+				"label": "Num Allies",
+				"tooltip": "Number of allied players in the raid."
+			},
+			"min_base_damage": {
+				"label": "Min Base Damage",
+				"tooltip": "Base damage for auto attacks, i.e. lowest roll with 0 AP against a 0-armor Player."
+			},
+			"npc": {
+				"label": "NPC",
+				"tooltip": "Selects a preset NPC configuration."
+			},
+			"ai": {
+				"label": "AI",
+				"tooltip": "Determines the target's ability rotation. Note that most rotations are not yet implemented."
+			},
+			"level": "Level",
+			"mob_type": "Mob Type",
+			"tanked_by": {
+				"label": "Tanked By",
+				"tooltip": "Determines which player in the raid this enemy will attack. If no player is assigned to the specified tank slot, this enemy will not attack."
+			},
+			"swing_speed": {
+				"label": "Swing Speed",
+				"tooltip": "Time in seconds between auto attacks. Set to 0 to disable auto attacks."
+			},
+			"dual_wield": {
+				"label": "Dual Wield",
+				"tooltip": "Uses 2 separate weapons to attack."
+			},
+			"dual_wield_penalty": {
+				"label": "Dual Wield Penalty",
+				"tooltip": "Enables the Dual Wield Miss Penalty (+19% chance to miss) if dual wielding. Bosses in Hyjal/BT/SWP usually have this disabled to stop tanks from avoidance stacking."
+			},
+			"parry_haste": {
+				"label": "Parry Haste",
+				"tooltip": "Whether this enemy will gain parry haste when parrying attacks."
+			},
+			"spell_school": {
+				"label": "Spell School",
+				"tooltip": "Type of damage caused by auto attacks. This is usually Physical, but some enemies have elemental attacks."
+			},
+			"damage_spread": {
+				"label": "Damage Spread",
+				"tooltip": "Fractional spread between the minimum and maximum auto-attack damage from this enemy at 0 Attack Power."
+			},
+			"suppress_dodge": "Suppress Dodge",
+			"second_tank_index": "Second Tank Index",
+			"disabled_at_start": "Disabled at Start",
+			"target_input": "Target Input",
+			"frenzy_time": {
+				"label": "Frenzy time",
+				"tooltip": "Simulation time (in seconds) at which to disable tank swaps and enable the boss Frenzy buff"
+			},
+			"spiritual_grasp_frequency": {
+				"label": "Spiritual Grasp frequency",
+				"tooltip": "Average time (in seconds) between Spiritual Grasp hits, following an exponential distribution"
+			},
+			"custom": "Custom",
+			"none": "None",
+			"main_tank": "Main Tank",
+			"tank_2": "Tank 2",
+			"tank_3": "Tank 3",
+			"tank_4": "Tank 4"
+		},
+		"player": {
+			"title": "Player",
+			"race": "Race",
+			"profession_1": "Profession 1",
+			"profession_2": "Profession 2"
+		},
 		"saved_encounters": {
 			"title": "Saved Encounters",
 			"encounter": "Encounter",
