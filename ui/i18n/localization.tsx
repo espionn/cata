@@ -38,8 +38,8 @@ export const translatePseudoStat = (pseudoStat: PseudoStat): string => {
 export const translateTargetInput = (label: string): string => {
 	try {
 		const key = getTargetInputI18nKey(label);
-		const translated = i18n.t(`common.target_inputs.${key}.label`);
-		if (translated === `common.target_inputs.${key}.label`) {
+		const translated = i18n.t(`settings.encounter.target_inputs.${key}.label`);
+		if (translated === `settings.encounter.target_inputs.${key}.label`) {
 			return label;
 		}
 		return translated;
@@ -51,8 +51,8 @@ export const translateTargetInput = (label: string): string => {
 export const translateTargetInputTooltip = (tooltip: string): string => {
 	try {
 		const key = getTargetInputI18nKey(tooltip);
-		const translated = i18n.t(`common.target_inputs.${key}.tooltip`);
-		if (translated === `common.target_inputs.${key}.tooltip`) {
+		const translated = i18n.t(`settings.encounter.target_inputs.${key}.tooltip`);
+		if (translated === `settings.encounter.target_inputs.${key}.tooltip`) {
 			return tooltip;
 		}
 		return translated;

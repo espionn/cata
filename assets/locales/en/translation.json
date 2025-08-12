@@ -146,6 +146,7 @@
 			"tailoring": "Tailoring",
 			"archeology": "Archeology"
 		},
+
 		"spell_schools": {
 			"physical": "Physical",
 			"arcane": "Arcane",
@@ -155,16 +156,7 @@
 			"nature": "Nature",
 			"shadow": "Shadow"
 		},
-		"target_inputs": {
-			"frenzy_time": {
-				"label": "Frenzy time",
-				"tooltip": "Simulation time (in seconds) at which to disable tank swaps and enable the boss Frenzy buff"
-			},
-			"spiritual_grasp_frequency": {
-				"label": "Spiritual Grasp frequency",
-				"tooltip": "Average time (in seconds) between Spiritual Grasp hits, following an exponential distribution"
-			}
-		},
+
 		"stats": {
 			"strength": "Strength",
 			"agility": "Agility",
@@ -248,8 +240,39 @@
 	},
 	"settings": {
 		"title": "Settings",
+		"consumables": {
+			"title": "Consumables",
+			"potions": {
+				"title": "Potions",
+				"prepop": "Prepop Potion",
+				"combat": "Combat Potion"
+			},
+			"elixirs": {
+				"title": "Elixirs"
+			},
+			"food": {
+				"title": "Food"
+			},
+			"engineering": {
+				"title": "Engineering",
+				"explosives": "Explosives"
+			},
+			"pet": {
+				"title": "Pet"
+			}
+		},
 		"encounter": {
 			"title": "Encounter",
+			"target_inputs": {
+				"frenzy_time": {
+					"label": "Frenzy time",
+					"tooltip": "Simulation time (in seconds) at which to disable tank swaps and enable the boss Frenzy buff"
+				},
+				"spiritual_grasp_frequency": {
+					"label": "Spiritual Grasp frequency",
+					"tooltip": "Average time (in seconds) between Spiritual Grasp hits, following an exponential distribution"
+				}
+			},
 			"duration": {
 				"label": "Duration",
 				"tooltip": "The fight length for each sim iteration, in seconds."

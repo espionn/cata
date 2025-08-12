@@ -171,7 +171,7 @@ export class SettingsTab extends SimTab {
 	private buildConsumesSection() {
 		const column = this.simUI.isWithinRaidSim ? this.column3 : this.column2;
 		const contentBlock = new ContentBlock(column, 'consumes-settings', {
-			header: { title: 'Consumables' },
+			header: { title: i18n.t('settings.consumables.title') },
 		});
 		ConsumesPicker.create(contentBlock.bodyElement, this, this.simUI);
 	}

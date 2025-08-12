@@ -146,6 +146,7 @@
 			"tailoring": "Couture",
 			"archeology": "Archéologie"
 		},
+
 		"spell_schools": {
 			"physical": "Physique",
 			"arcane": "Arcanique",
@@ -155,16 +156,7 @@
 			"nature": "Nature",
 			"shadow": "Ombre"
 		},
-		"target_inputs": {
-			"frenzy_time": {
-				"label": "Temps de frénésie",
-				"tooltip": "Temps de simulation (en secondes) auquel désactiver les changements de tank et activer le buff de Frénésie du boss"
-			},
-			"spiritual_grasp_frequency": {
-				"label": "Fréquence de prise spirituelle",
-				"tooltip": "Temps moyen (en secondes) entre les coups de Saisie Spirituelle, suivant une distribution exponentielle"
-			}
-		},
+
 		"stats": {
 			"strength": "Force",
 			"agility": "Agilité",
@@ -248,8 +240,39 @@
 	},
 	"settings": {
 		"title": "Paramètres",
+		"consumables": {
+			"title": "Consommables",
+			"potions": {
+				"title": "Potions",
+				"prepop": "Potion de préparation",
+				"combat": "Potion de combat"
+			},
+			"elixirs": {
+				"title": "Élixirs"
+			},
+			"food": {
+				"title": "Nourriture"
+			},
+			"engineering": {
+				"title": "Ingénierie",
+				"explosives": "Explosifs"
+			},
+			"pet": {
+				"title": "Familier"
+			}
+		},
 		"encounter": {
 			"title": "Rencontre",
+			"target_inputs": {
+				"frenzy_time": {
+					"label": "Temps de frénésie",
+					"tooltip": "Temps de simulation (en secondes) auquel désactiver les changements de tank et activer le buff de Frénésie du boss"
+				},
+				"spiritual_grasp_frequency": {
+					"label": "Fréquence de prise spirituelle",
+					"tooltip": "Temps moyen (en secondes) entre les coups de Saisie Spirituelle, suivant une distribution exponentielle"
+				}
+			},
 			"duration": {
 				"label": "Durée",
 				"tooltip": "La durée du combat pour chaque itération de simulation, en secondes."

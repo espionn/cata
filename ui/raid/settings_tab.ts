@@ -14,6 +14,7 @@ import { AssignmentsPicker } from './assignments_picker';
 import { BlessingsPicker } from './blessings_picker';
 import { RaidSimUI } from './raid_sim_ui';
 import { TanksPicker } from './tanks_picker';
+import i18n from '../i18n/config';
 
 export class SettingsTab extends SimTab {
 	protected simUI: RaidSimUI;
@@ -67,7 +68,7 @@ export class SettingsTab extends SimTab {
 
 	private buildConsumesSettings() {
 		const contentBlock = new ContentBlock(this.column1, 'consumes-settings', {
-			header: { title: 'Consumables' },
+			header: { title: i18n.t('settings.consumables.title') },
 		});
 
 		const container = document.createElement('div');

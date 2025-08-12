@@ -988,6 +988,9 @@
                 "title": {
                     "type": "string"
                 },
+                "consumables": {
+                    "$ref": "#/definitions/Consumables"
+                },
                 "encounter": {
                     "$ref": "#/definitions/Encounter"
                 },
@@ -1003,12 +1006,76 @@
             },
             "required": [
                 "title",
+                "consumables",
                 "encounter",
                 "player",
                 "saved_encounters",
                 "saved_settings"
             ],
             "title": "Settings"
+        },
+        "Consumables": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "potions": {
+                    "$ref": "#/definitions/ConsumableCategory"
+                },
+                "elixirs": {
+                    "$ref": "#/definitions/ConsumableCategory"
+                },
+                "food": {
+                    "$ref": "#/definitions/ConsumableCategory"
+                },
+                "engineering": {
+                    "$ref": "#/definitions/EngineeringCategory"
+                },
+                "pet": {
+                    "$ref": "#/definitions/ConsumableCategory"
+                }
+            },
+            "required": [
+                "title",
+                "potions",
+                "elixirs",
+                "food",
+                "engineering",
+                "pet"
+            ],
+            "title": "Consumables"
+        },
+        "ConsumableCategory": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title"
+            ],
+            "title": "ConsumableCategory"
+        },
+        "EngineeringCategory": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "explosives": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title",
+                "explosives"
+            ],
+            "title": "EngineeringCategory"
         },
         "InfoOptions": {
             "type": "object",
@@ -1848,6 +1915,9 @@
                 },
                 "target_input": {
                     "type": "string"
+                },
+                "target_inputs": {
+                    "$ref": "#/definitions/TargetInputs"
                 },
                 "frenzy_time": {
                     "$ref": "#/definitions/EncounterField"
