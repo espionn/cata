@@ -1,8 +1,8 @@
 import { Player } from '../../player';
 import i18n from '../../../i18n/config';
 import { ItemSlot } from '../../proto/common';
-import { RaidFilterOption, SourceFilterOption, UIItem_FactionRestriction } from '../../proto/ui';
-import { armorTypeNames, raidNames, rangedWeaponTypeNames, sourceNames, weaponTypeNames } from '../../proto_utils/names';
+import { UIItem_FactionRestriction } from '../../proto/ui';
+import { translateSourceFilter, translateRaidFilter, translateArmorType, translateWeaponType, translateRangedWeaponType } from '../../../i18n/localization';
 import { Sim } from '../../sim';
 import { EventID } from '../../typed_event';
 import { BaseModal } from '../base_modal';
@@ -76,7 +76,7 @@ export class FiltersMenu extends BaseModal {
 		Sim.ALL_SOURCES.forEach(source => {
 			new BooleanPicker<Sim>(sourceSection, player.sim, {
 				id: `filters-source-${source}`,
-				label: sourceNames.get(source),
+				label: translateSourceFilter(source),
 				inline: true,
 				changedEvent: (sim: Sim) => sim.filtersChangeEmitter,
 				getValue: (sim: Sim) => sim.getFilters().sources.includes(source),
@@ -97,7 +97,7 @@ export class FiltersMenu extends BaseModal {
 		Sim.ALL_RAIDS.forEach(raid => {
 			new BooleanPicker<Sim>(raidsSection, player.sim, {
 				id: `filters-raid-${raid}`,
-				label: raidNames.get(raid),
+				label: translateRaidFilter(raid),
 				inline: true,
 				changedEvent: (sim: Sim) => sim.filtersChangeEmitter,
 				getValue: (sim: Sim) => sim.getFilters().raids.includes(raid),
@@ -123,7 +123,7 @@ export class FiltersMenu extends BaseModal {
 				armorTypes.forEach(armorType => {
 					new BooleanPicker<Sim>(armorTypesSection, player.sim, {
 						id: `filters-armor-type-${armorType}`,
-						label: armorTypeNames.get(armorType),
+						label: translateArmorType(armorType),
 						inline: true,
 						changedEvent: (sim: Sim) => sim.filtersChangeEmitter,
 						getValue: (sim: Sim) => sim.getFilters().armorTypes.includes(armorType),
@@ -148,7 +148,7 @@ export class FiltersMenu extends BaseModal {
 				weaponTypes.forEach(weaponType => {
 					new BooleanPicker<Sim>(weaponTypeSection, player.sim, {
 						id: `filters-weapon-type-${weaponType}`,
-						label: weaponTypeNames.get(weaponType),
+						label: translateWeaponType(weaponType),
 						inline: true,
 						changedEvent: (sim: Sim) => sim.filtersChangeEmitter,
 						getValue: (sim: Sim) => sim.getFilters().weaponTypes.includes(weaponType),
@@ -231,13 +231,13 @@ export class FiltersMenu extends BaseModal {
 			if (rangedweapontypes.length < 1) {
 				return;
 			}
-			const rangedWeaponTypeSection = this.newSection('Ranged Weapon Type');
+			const rangedWeaponTypeSection = this.newSection(i18n.t('gear_picker.filters.ranged_weapon_type'));
 			rangedWeaponTypeSection.classList.add('filters-menu-section-bool-list');
 
 			rangedweapontypes.forEach(rangedWeaponType => {
 				new BooleanPicker<Sim>(rangedWeaponTypeSection, player.sim, {
 					id: `filter-ranged-weapon-type-${rangedWeaponType}`,
-					label: rangedWeaponTypeNames.get(rangedWeaponType),
+					label: translateRangedWeaponType(rangedWeaponType),
 					inline: true,
 					changedEvent: (sim: Sim) => sim.filtersChangeEmitter,
 					getValue: (sim: Sim) => sim.getFilters().rangedWeaponTypes.includes(rangedWeaponType),
@@ -253,11 +253,11 @@ export class FiltersMenu extends BaseModal {
 				});
 			});
 
-			const rangedWeaponSpeedSection = this.newSection('Ranged Weapon Speed');
+			const rangedWeaponSpeedSection = this.newSection(i18n.t('gear_picker.filters.ranged_weapon_speed'));
 			rangedWeaponSpeedSection.classList.add('filters-menu-section-number-list');
 			new NumberPicker<Sim>(rangedWeaponSpeedSection, player.sim, {
 				id: 'filters-min-ranged-weapon-speed',
-				label: 'Min Ranged Speed',
+				label: i18n.t('gear_picker.filters.min_ranged_speed'),
 				//labelTooltip: 'Maximum speed for the ranged weapon. If 0, no maximum value is applied.',
 				float: true,
 				positive: true,
@@ -271,7 +271,7 @@ export class FiltersMenu extends BaseModal {
 			});
 			new NumberPicker<Sim>(rangedWeaponSpeedSection, player.sim, {
 				id: 'filters-max-ranged-weapon-speed',
-				label: 'Max Ranged Speed',
+				label: i18n.t('gear_picker.filters.max_ranged_speed'),
 				//labelTooltip: 'Maximum speed for the ranged weapon. If 0, no maximum value is applied.',
 				float: true,
 				positive: true,

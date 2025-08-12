@@ -1,8 +1,9 @@
 import { PlayerClass } from '../core/player_class';
 import { PlayerSpec } from '../core/player_spec';
-import { MobType, PseudoStat, Race, Profession, SpellSchool, Stat } from '../core/proto/common';
+import { ArmorType, MobType, PseudoStat, Race, Profession, SpellSchool, Stat, WeaponType, RangedWeaponType } from '../core/proto/common';
+import { RaidFilterOption, SourceFilterOption } from '../core/proto/ui';
 import i18n from './config';
-import { getClassI18nKey, getMobTypeI18nKey, getRaceI18nKey, getProfessionI18nKey, getSpecI18nKey, getTargetInputI18nKey, pseudoStatI18nKeys, spellSchoolI18nKeys, statI18nKeys } from './entity_mapping';
+import { getClassI18nKey, getMobTypeI18nKey, getRaceI18nKey, getProfessionI18nKey, getSpecI18nKey, getTargetInputI18nKey, pseudoStatI18nKeys, spellSchoolI18nKeys, statI18nKeys, getSourceFilterI18nKey, getRaidFilterI18nKey, getArmorTypeI18nKey, getWeaponTypeI18nKey, getRangedWeaponTypeI18nKey } from './entity_mapping';
 import { getLang, setLang, supportedLanguages } from './locale_service';
 
 /**
@@ -113,6 +114,71 @@ export const translateProfession = (profession: Profession): string => {
 		return translated;
 	} catch {
 		return Profession[profession];
+	}
+};
+
+export const translateSourceFilter = (source: SourceFilterOption): string => {
+	try {
+		const key = getSourceFilterI18nKey(source);
+		const translated = i18n.t(`common.sources.${key}`);
+		if (translated === `common.sources.${key}`) {
+			return SourceFilterOption[source];
+		}
+		return translated;
+	} catch {
+		return SourceFilterOption[source];
+	}
+};
+
+export const translateRaidFilter = (raid: RaidFilterOption): string => {
+	try {
+		const key = getRaidFilterI18nKey(raid);
+		const translated = i18n.t(`common.raids.${key}`);
+		if (translated === `common.raids.${key}`) {
+			return RaidFilterOption[raid];
+		}
+		return translated;
+	} catch {
+		return RaidFilterOption[raid];
+	}
+};
+
+export const translateArmorType = (armorType: ArmorType): string => {
+	try {
+		const key = getArmorTypeI18nKey(armorType);
+		const translated = i18n.t(`common.armor_types.${key}`);
+		if (translated === `common.armor_types.${key}`) {
+			return ArmorType[armorType];
+		}
+		return translated;
+	} catch {
+		return ArmorType[armorType];
+	}
+};
+
+export const translateWeaponType = (weaponType: WeaponType): string => {
+	try {
+		const key = getWeaponTypeI18nKey(weaponType);
+		const translated = i18n.t(`common.weapon_types.${key}`);
+		if (translated === `common.weapon_types.${key}`) {
+			return WeaponType[weaponType];
+		}
+		return translated;
+	} catch {
+		return WeaponType[weaponType];
+	}
+};
+
+export const translateRangedWeaponType = (rangedWeaponType: RangedWeaponType): string => {
+	try {
+		const key = getRangedWeaponTypeI18nKey(rangedWeaponType);
+		const translated = i18n.t(`common.ranged_weapon_types.${key}`);
+		if (translated === `common.ranged_weapon_types.${key}`) {
+			return RangedWeaponType[rangedWeaponType];
+		}
+		return translated;
+	} catch {
+		return RangedWeaponType[rangedWeaponType];
 	}
 };
 

@@ -156,7 +156,53 @@
 			"tailoring": "Tailoring",
 			"archeology": "Archeology"
 		},
-
+		"sources": {
+			"unknown": "Unknown",
+			"crafting": "Crafting",
+			"quest": "Quest",
+			"reputation": "Reputation",
+			"pvp": "PVP",
+			"dungeon": "Dungeon",
+			"dungeon_h": "Dungeon (H)",
+			"raid": "Raid",
+			"raid_h": "Raid (H)",
+			"raid_rf": "Raid (RF)"
+		},
+		"raids": {
+			"unknown": "Unknown",
+			"mogushan_vaults": "Mogu'shan Vaults",
+			"heart_of_fear": "Heart of Fear",
+			"terrace_of_endless_spring": "Terrace of Endless Spring",
+			"throne_of_thunder": "Throne of Thunder",
+			"siege_of_orgrimmar": "Siege of Orgrimmar"
+		},
+		"armor_types": {
+			"unknown": "Unknown",
+			"cloth": "Cloth",
+			"leather": "Leather",
+			"mail": "Mail",
+			"plate": "Plate"
+		},
+		"weapon_types": {
+			"unknown": "Unknown",
+			"axe": "Axe",
+			"dagger": "Dagger",
+			"fist": "Fist",
+			"mace": "Mace",
+			"off_hand": "Off Hand",
+			"polearm": "Polearm",
+			"shield": "Shield",
+			"staff": "Staff",
+			"sword": "Sword"
+		},
+		"ranged_weapon_types": {
+			"unknown": "Unknown",
+			"bow": "Bow",
+			"crossbow": "Crossbow",
+			"gun": "Gun",
+			"thrown": "Thrown",
+			"wand": "Wand"
+		},
 		"spell_schools": {
 			"physical": "Physical",
 			"arcane": "Arcane",
@@ -628,7 +674,11 @@
 		"min_mh_speed": "Min MH Speed",
 		"max_mh_speed": "Max MH Speed",
 		"min_oh_speed": "Min OH Speed",
-		"max_oh_speed": "Max OH Speed"
+		"max_oh_speed": "Max OH Speed",
+		"ranged_weapon_type": "Ranged Weapon Type",
+		"ranged_weapon_speed": "Ranged Weapon Speed",
+		"min_ranged_speed": "Min Ranged Speed",
+		"max_ranged_speed": "Max Ranged Speed"
 	},
 	"talents": {
 		"title": "Talents"

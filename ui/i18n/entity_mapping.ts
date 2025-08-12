@@ -1,5 +1,6 @@
 import { LaunchStatus } from '../core/launched_sims';
-import { Class, MobType, PseudoStat, Race, Profession, Spec, Stat, SpellSchool } from '../core/proto/common';
+import { ArmorType, Class, MobType, PseudoStat, Race, Profession, Spec, Stat, SpellSchool, WeaponType, RangedWeaponType } from '../core/proto/common';
+import { RaidFilterOption, SourceFilterOption } from '../core/proto/ui';
 import i18n from './config';
 
 export const statI18nKeys: Record<Stat, string> = {
@@ -184,6 +185,58 @@ export const professionI18nKeys: Record<Profession, string> = {
 	[Profession.Archeology]: 'archeology',
 };
 
+export const sourceFilterI18nKeys: Record<SourceFilterOption, string> = {
+	[SourceFilterOption.SourceUnknown]: 'unknown',
+	[SourceFilterOption.SourceCrafting]: 'crafting',
+	[SourceFilterOption.SourceQuest]: 'quest',
+	[SourceFilterOption.SourceReputation]: 'reputation',
+	[SourceFilterOption.SourcePvp]: 'pvp',
+	[SourceFilterOption.SourceDungeon]: 'dungeon',
+	[SourceFilterOption.SourceDungeonH]: 'dungeon_h',
+	[SourceFilterOption.SourceRaid]: 'raid',
+	[SourceFilterOption.SourceRaidH]: 'raid_h',
+	[SourceFilterOption.SourceRaidRF]: 'raid_rf',
+};
+
+export const raidFilterI18nKeys: Record<RaidFilterOption, string> = {
+	[RaidFilterOption.RaidUnknown]: 'unknown',
+	[RaidFilterOption.RaidMogushanVaults]: 'mogushan_vaults',
+	[RaidFilterOption.RaidHeartOfFear]: 'heart_of_fear',
+	[RaidFilterOption.RaidTerraceOfEndlessSpring]: 'terrace_of_endless_spring',
+	[RaidFilterOption.RaidThroneOfThunder]: 'throne_of_thunder',
+	[RaidFilterOption.RaidSiegeOfOrgrimmar]: 'siege_of_orgrimmar',
+};
+
+export const armorTypeI18nKeys: Record<ArmorType, string> = {
+	[ArmorType.ArmorTypeUnknown]: 'unknown',
+	[ArmorType.ArmorTypeCloth]: 'cloth',
+	[ArmorType.ArmorTypeLeather]: 'leather',
+	[ArmorType.ArmorTypeMail]: 'mail',
+	[ArmorType.ArmorTypePlate]: 'plate',
+};
+
+export const weaponTypeI18nKeys: Record<WeaponType, string> = {
+	[WeaponType.WeaponTypeUnknown]: 'unknown',
+	[WeaponType.WeaponTypeAxe]: 'axe',
+	[WeaponType.WeaponTypeDagger]: 'dagger',
+	[WeaponType.WeaponTypeFist]: 'fist',
+	[WeaponType.WeaponTypeMace]: 'mace',
+	[WeaponType.WeaponTypeOffHand]: 'off_hand',
+	[WeaponType.WeaponTypePolearm]: 'polearm',
+	[WeaponType.WeaponTypeShield]: 'shield',
+	[WeaponType.WeaponTypeStaff]: 'staff',
+	[WeaponType.WeaponTypeSword]: 'sword',
+};
+
+export const rangedWeaponTypeI18nKeys: Record<RangedWeaponType, string> = {
+	[RangedWeaponType.RangedWeaponTypeUnknown]: 'unknown',
+	[RangedWeaponType.RangedWeaponTypeBow]: 'bow',
+	[RangedWeaponType.RangedWeaponTypeCrossbow]: 'crossbow',
+	[RangedWeaponType.RangedWeaponTypeGun]: 'gun',
+	[RangedWeaponType.RangedWeaponTypeThrown]: 'thrown',
+	[RangedWeaponType.RangedWeaponTypeWand]: 'wand',
+};
+
 export const translateStat = (stat: Stat): string => {
 	const key = statI18nKeys[stat] || Stat[stat].toLowerCase();
 	return i18n.t(`common.stats.${key}`);
@@ -250,4 +303,49 @@ export function getProfessionI18nKey(profession: Profession): string {
 export const translateProfession = (profession: Profession): string => {
 	const key = getProfessionI18nKey(profession);
 	return i18n.t(`common.professions.${key}`);
+};
+
+export function getSourceFilterI18nKey(source: SourceFilterOption): string {
+	return sourceFilterI18nKeys[source] || SourceFilterOption[source].toLowerCase();
+}
+
+export const translateSourceFilter = (source: SourceFilterOption): string => {
+	const key = getSourceFilterI18nKey(source);
+	return i18n.t(`common.sources.${key}`);
+};
+
+export function getRaidFilterI18nKey(raid: RaidFilterOption): string {
+	return raidFilterI18nKeys[raid] || RaidFilterOption[raid].toLowerCase();
+}
+
+export const translateRaidFilter = (raid: RaidFilterOption): string => {
+	const key = getRaidFilterI18nKey(raid);
+	return i18n.t(`common.raids.${key}`);
+};
+
+export function getArmorTypeI18nKey(armorType: ArmorType): string {
+	return armorTypeI18nKeys[armorType] || ArmorType[armorType].toLowerCase();
+}
+
+export const translateArmorType = (armorType: ArmorType): string => {
+	const key = getArmorTypeI18nKey(armorType);
+	return i18n.t(`common.armor_types.${key}`);
+};
+
+export function getWeaponTypeI18nKey(weaponType: WeaponType): string {
+	return weaponTypeI18nKeys[weaponType] || WeaponType[weaponType].toLowerCase();
+}
+
+export const translateWeaponType = (weaponType: WeaponType): string => {
+	const key = getWeaponTypeI18nKey(weaponType);
+	return i18n.t(`common.weapon_types.${key}`);
+};
+
+export function getRangedWeaponTypeI18nKey(rangedWeaponType: RangedWeaponType): string {
+	return rangedWeaponTypeI18nKeys[rangedWeaponType] || RangedWeaponType[rangedWeaponType].toLowerCase();
+}
+
+export const translateRangedWeaponType = (rangedWeaponType: RangedWeaponType): string => {
+	const key = getRangedWeaponTypeI18nKey(rangedWeaponType);
+	return i18n.t(`common.ranged_weapon_types.${key}`);
 };

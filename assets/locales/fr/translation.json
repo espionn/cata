@@ -156,6 +156,53 @@
 			"tailoring": "Couture",
 			"archeology": "Archéologie"
 		},
+		"sources": {
+			"unknown": "Inconnu",
+			"crafting": "Artisanat",
+			"quest": "Quête",
+			"reputation": "Réputation",
+			"pvp": "JcJ",
+			"dungeon": "Donjon",
+			"dungeon_h": "Donjon (H)",
+			"raid": "Raid",
+			"raid_h": "Raid (H)",
+			"raid_rf": "Raid (RF)"
+		},
+		"raids": {
+			"unknown": "Inconnu",
+			"mogushan_vaults": "Caveaux de Mogu'shan",
+			"heart_of_fear": "Cœur de la Peur",
+			"terrace_of_endless_spring": "Terrasse du Printemps Éternel",
+			"throne_of_thunder": "Trône du Tonnerre",
+			"siege_of_orgrimmar": "Siège d'Orgrimmar"
+		},
+		"armor_types": {
+			"unknown": "Inconnu",
+			"cloth": "Tissu",
+			"leather": "Cuir",
+			"mail": "Maille",
+			"plate": "Plaques"
+		},
+		"weapon_types": {
+			"unknown": "Inconnu",
+			"axe": "Hache",
+			"dagger": "Dague",
+			"fist": "Poing",
+			"mace": "Masse",
+			"off_hand": "Main gauche",
+			"polearm": "Arme d'hast",
+			"shield": "Bouclier",
+			"staff": "Bâton",
+			"sword": "Épée"
+		},
+		"ranged_weapon_types": {
+			"unknown": "Inconnu",
+			"bow": "Arc",
+			"crossbow": "Arbalète",
+			"gun": "Arme à feu",
+			"thrown": "Lancé",
+			"wand": "Baguette"
+		},
 
 		"spell_schools": {
 			"physical": "Physique",
@@ -628,7 +675,11 @@
 		"min_mh_speed": "Vitesse MG min",
 		"max_mh_speed": "Vitesse MG max",
 		"min_oh_speed": "Vitesse MO min",
-		"max_oh_speed": "Vitesse MO max"
+		"max_oh_speed": "Vitesse MO max",
+		"ranged_weapon_type": "Type d'arme à distance",
+		"ranged_weapon_speed": "Vitesse d'arme à distance",
+		"min_ranged_speed": "Vitesse à distance min",
+		"max_ranged_speed": "Vitesse à distance max"
 	},
 	"talents": {
 		"title": "Talents"

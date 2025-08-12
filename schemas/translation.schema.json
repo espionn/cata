@@ -129,6 +129,21 @@
 				},
 				"professions": {
 					"$ref": "#/definitions/Professions"
+				},
+				"sources": {
+					"$ref": "#/definitions/Sources"
+				},
+				"raids": {
+					"$ref": "#/definitions/Raids"
+				},
+				"armor_types": {
+					"$ref": "#/definitions/ArmorTypes"
+				},
+				"weapon_types": {
+					"$ref": "#/definitions/WeaponTypes"
+				},
+				"ranged_weapon_types": {
+					"$ref": "#/definitions/RangedWeaponTypes"
 				}
 			},
 			"required": [
@@ -144,7 +159,12 @@
 				"list_picker",
 				"mob_types",
 				"races",
-				"professions"
+				"professions",
+				"sources",
+				"raids",
+				"armor_types",
+				"weapon_types",
+				"ranged_weapon_types"
 			],
 			"title": "Common"
 		},
@@ -855,6 +875,199 @@
 				"archeology"
 			],
 			"title": "Professions"
+		},
+		"Sources": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"unknown": {
+					"type": "string"
+				},
+				"crafting": {
+					"type": "string"
+				},
+				"quest": {
+					"type": "string"
+				},
+				"reputation": {
+					"type": "string"
+				},
+				"pvp": {
+					"type": "string"
+				},
+				"dungeon": {
+					"type": "string"
+				},
+				"dungeon_h": {
+					"type": "string"
+				},
+				"raid": {
+					"type": "string"
+				},
+				"raid_h": {
+					"type": "string"
+				},
+				"raid_rf": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"unknown",
+				"crafting",
+				"quest",
+				"reputation",
+				"pvp",
+				"dungeon",
+				"dungeon_h",
+				"raid",
+				"raid_h",
+				"raid_rf"
+			],
+			"title": "Sources"
+		},
+		"Raids": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"unknown": {
+					"type": "string"
+				},
+				"mogushan_vaults": {
+					"type": "string"
+				},
+				"heart_of_fear": {
+					"type": "string"
+				},
+				"terrace_of_endless_spring": {
+					"type": "string"
+				},
+				"throne_of_thunder": {
+					"type": "string"
+				},
+				"siege_of_orgrimmar": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"unknown",
+				"mogushan_vaults",
+				"heart_of_fear",
+				"terrace_of_endless_spring",
+				"throne_of_thunder",
+				"siege_of_orgrimmar"
+			],
+			"title": "Raids"
+		},
+		"ArmorTypes": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"unknown": {
+					"type": "string"
+				},
+				"cloth": {
+					"type": "string"
+				},
+				"leather": {
+					"type": "string"
+				},
+				"mail": {
+					"type": "string"
+				},
+				"plate": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"unknown",
+				"cloth",
+				"leather",
+				"mail",
+				"plate"
+			],
+			"title": "ArmorTypes"
+		},
+		"WeaponTypes": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"unknown": {
+					"type": "string"
+				},
+				"axe": {
+					"type": "string"
+				},
+				"dagger": {
+					"type": "string"
+				},
+				"fist": {
+					"type": "string"
+				},
+				"mace": {
+					"type": "string"
+				},
+				"off_hand": {
+					"type": "string"
+				},
+				"polearm": {
+					"type": "string"
+				},
+				"shield": {
+					"type": "string"
+				},
+				"staff": {
+					"type": "string"
+				},
+				"sword": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"unknown",
+				"axe",
+				"dagger",
+				"fist",
+				"mace",
+				"off_hand",
+				"polearm",
+				"shield",
+				"staff",
+				"sword"
+			],
+			"title": "WeaponTypes"
+		},
+		"RangedWeaponTypes": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"unknown": {
+					"type": "string"
+				},
+				"bow": {
+					"type": "string"
+				},
+				"crossbow": {
+					"type": "string"
+				},
+				"gun": {
+					"type": "string"
+				},
+				"thrown": {
+					"type": "string"
+				},
+				"wand": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"unknown",
+				"bow",
+				"crossbow",
+				"gun",
+				"thrown",
+				"wand"
+			],
+			"title": "RangedWeaponTypes"
 		},
 		"Status": {
 			"type": "object",
@@ -2184,9 +2397,13 @@
 				"min_mh_speed": { "type": "string" },
 				"max_mh_speed": { "type": "string" },
 				"min_oh_speed": { "type": "string" },
-				"max_oh_speed": { "type": "string" }
+				"max_oh_speed": { "type": "string" },
+				"ranged_weapon_type": { "type": "string" },
+				"ranged_weapon_speed": { "type": "string" },
+				"min_ranged_speed": { "type": "string" },
+				"max_ranged_speed": { "type": "string" }
 			},
-			"required": ["tabs", "remove_buttons", "filters", "quick_popovers", "missing_gear_message", "cooldowns", "ep_tooltip", "search_placeholder", "filters_button", "unequip_item", "table_headers", "show_ep", "armor_type", "weapon_type", "weapon_speed", "min_mh_speed", "max_mh_speed", "min_oh_speed", "max_oh_speed"],
+			"required": ["tabs", "remove_buttons", "filters", "quick_popovers", "missing_gear_message", "cooldowns", "ep_tooltip", "search_placeholder", "filters_button", "unequip_item", "table_headers", "show_ep", "armor_type", "weapon_type", "weapon_speed", "min_mh_speed", "max_mh_speed", "min_oh_speed", "max_oh_speed", "ranged_weapon_type", "ranged_weapon_speed", "min_ranged_speed", "max_ranged_speed"],
 			"title": "GearPicker"
 		},
 		"GearPickerTabs": {
