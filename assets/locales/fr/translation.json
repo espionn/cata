@@ -24,9 +24,17 @@
 		"none": "Aucun",
 		"custom": "Personnalisé",
 		"phases": {
-			"1": "Phase 1 (T14)",
-			"2": "Phase 2 (T15)",
-			"3": "Phase 3 (T16)"
+			"1": "Phase 1 (5.0 - T14)",
+			"2": "Phase 2 (5.1)",
+			"3": "Phase 3 (5.2 - T15)",
+			"4": "Phase 4 (5.3)",
+			"5": "Phase 5 (5.4 - T16)"
+		},
+		"tanks": {
+			"main_tank": "Tank Principal",
+			"tank_2": "Tank 2",
+			"tank_3": "Tank 3",
+			"tank_4": "Tank 4"
 		},
 		"status": {
 			"unlaunched": "Pas Encore Supporté",
@@ -266,13 +274,7 @@
 			},
 			"tank_assignment": {
 				"label": "Attribution de tank",
-				"tooltip": "Détermine quels mobs seront tankés. La plupart des mobs ciblent par défaut le Tank Principal, mais dans les rencontres multi-cibles prédéfinies ce n'est pas toujours vrai.",
-				"values": {
-					"main_tank": "Tank Principal",
-					"tank_2": "Tank 2",
-					"tank_3": "Tank 3",
-					"tank_4": "Tank 4"
-				}
+				"tooltip": "Détermine quels mobs seront tankés. La plupart des mobs ciblent par défaut le Tank Principal, mais dans les rencontres multi-cibles prédéfinies ce n'est pas toujours vrai."
 			},
 			"incoming_hps": {
 				"label": "HPS entrant",
@@ -354,14 +356,7 @@
 			},
 			"phase_selector": {
 				"label": "Phase",
-				"tooltip": "Sélectionner la phase de jeu pour la disponibilité des objets",
-				"values": {
-					"phase_1": "Phase 1 (5.0 - T14)",
-					"phase_2": "Phase 2 (5.1)",
-					"phase_3": "Phase 3 (5.2 - T15)",
-					"phase_4": "Phase 4 (5.3)",
-					"phase_5": "Phase 5 (5.4 - T16)"
-				}
+				"tooltip": "Sélectionner la phase de jeu pour la disponibilité des objets"
 			}
 		},
 		"consumables": {
@@ -484,13 +479,7 @@
 			},
 			"suppress_dodge": "Supprimer l'Esquive",
 			"second_tank_index": "Index du Second Tank",
-			"disabled_at_start": "Désactivé au Début",
-			"tank": {
-				"main_tank": "Tank Principal",
-				"tank_2": "Tank 2",
-				"tank_3": "Tank 3",
-				"tank_4": "Tank 4"
-			}
+			"disabled_at_start": "Désactivé au Début"
 		},
 		"player": {
 			"title": "Joueur",

@@ -1,2299 +1,2005 @@
 {
-    "$schema": "http://json-schema.org/draft-06/schema#",
-    "$ref": "#/definitions/Welcome",
-    "definitions": {
-        "Welcome": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "landing": {
-                    "$ref": "#/definitions/Landing"
-                },
-                "common": {
-                    "$ref": "#/definitions/Common"
-                },
-                "sim": {
-                    "$ref": "#/definitions/Sim"
-                },
-                "gear": {
-                    "$ref": "#/definitions/Gear"
-                },
-                "settings": {
-                    "$ref": "#/definitions/Settings"
-                },
-                "talents": {
-                    "$ref": "#/definitions/Export"
-                },
-                "rotation": {
-                    "$ref": "#/definitions/Export"
-                },
-                "results": {
-                    "$ref": "#/definitions/Export"
-                },
-                "import": {
-                    "$ref": "#/definitions/Export"
-                },
-                "export": {
-                    "$ref": "#/definitions/Export"
-                },
-                "info": {
-                    "$ref": "#/definitions/Info"
-                },
-                "sidebar": {
-                    "$ref": "#/definitions/Sidebar"
-                }
-            },
-            "required": [
-                "common",
-                "export",
-                "gear",
-                "import",
-                "info",
-                "landing",
-                "results",
-                "rotation",
-                "settings",
-                "sidebar",
-                "sim",
-                "talents"
-            ],
-            "title": "Welcome"
-        },
-        "Common": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "none": {
-                    "type": "string"
-                },
-                "custom": {
-                    "type": "string"
-                },
-                "phases": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "status": {
-                    "$ref": "#/definitions/Status"
-                },
-                "classes": {
-                    "$ref": "#/definitions/Classes"
-                },
-                "specs": {
-                    "$ref": "#/definitions/Specs"
-                },
-                "spell_schools": {
-                    "$ref": "#/definitions/SpellSchools"
-                },
-                "stats": {
-                    "$ref": "#/definitions/Stats"
-                },
-                "copy_button": {
-                    "$ref": "#/definitions/CopyButton"
-                },
-                "list_picker": {
-                    "$ref": "#/definitions/ListPicker"
-                },
-                "mob_types": {
-                    "$ref": "#/definitions/MobTypes"
-                },
-                "races": {
-                    "$ref": "#/definitions/Races"
-                },
-                "professions": {
-                    "$ref": "#/definitions/Professions"
-                }
-            },
-            "required": [
-                "none",
-                "custom",
-                "classes",
-                "phases",
-                "specs",
-                "spell_schools",
-                "stats",
-                "status",
-                "copy_button",
-                "list_picker",
-                "mob_types",
-                "races",
-                "professions"
-            ],
-            "title": "Common"
-        },
-        "Classes": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "death_knight": {
-                    "type": "string"
-                },
-                "druid": {
-                    "type": "string"
-                },
-                "hunter": {
-                    "type": "string"
-                },
-                "mage": {
-                    "type": "string"
-                },
-                "monk": {
-                    "type": "string"
-                },
-                "paladin": {
-                    "type": "string"
-                },
-                "priest": {
-                    "type": "string"
-                },
-                "rogue": {
-                    "type": "string"
-                },
-                "shaman": {
-                    "type": "string"
-                },
-                "warlock": {
-                    "type": "string"
-                },
-                "warrior": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "death_knight",
-                "druid",
-                "hunter",
-                "mage",
-                "monk",
-                "paladin",
-                "priest",
-                "rogue",
-                "shaman",
-                "warlock",
-                "warrior"
-            ],
-            "title": "Classes"
-        },
-        "Specs": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "death_knight": {
-                    "$ref": "#/definitions/DeathKnight"
-                },
-                "druid": {
-                    "$ref": "#/definitions/Druid"
-                },
-                "hunter": {
-                    "$ref": "#/definitions/Hunter"
-                },
-                "mage": {
-                    "$ref": "#/definitions/Mage"
-                },
-                "monk": {
-                    "$ref": "#/definitions/Monk"
-                },
-                "paladin": {
-                    "$ref": "#/definitions/Paladin"
-                },
-                "priest": {
-                    "$ref": "#/definitions/Priest"
-                },
-                "rogue": {
-                    "$ref": "#/definitions/Rogue"
-                },
-                "shaman": {
-                    "$ref": "#/definitions/Shaman"
-                },
-                "warlock": {
-                    "$ref": "#/definitions/Warlock"
-                },
-                "warrior": {
-                    "$ref": "#/definitions/Warrior"
-                }
-            },
-            "required": [
-                "death_knight",
-                "druid",
-                "hunter",
-                "mage",
-                "monk",
-                "paladin",
-                "priest",
-                "rogue",
-                "shaman",
-                "warlock",
-                "warrior"
-            ],
-            "title": "Specs"
-        },
-        "DeathKnight": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "blood": {
-                    "type": "string"
-                },
-                "frost": {
-                    "type": "string"
-                },
-                "unholy": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "blood",
-                "frost",
-                "unholy"
-            ],
-            "title": "DeathKnight"
-        },
-        "Druid": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "balance": {
-                    "type": "string"
-                },
-                "feral": {
-                    "type": "string"
-                },
-                "guardian": {
-                    "type": "string"
-                },
-                "restoration": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "balance",
-                "feral",
-                "guardian",
-                "restoration"
-            ],
-            "title": "Druid"
-        },
-        "Hunter": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "beast_mastery": {
-                    "type": "string"
-                },
-                "marksmanship": {
-                    "type": "string"
-                },
-                "survival": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "beast_mastery",
-                "marksmanship",
-                "survival"
-            ],
-            "title": "Hunter"
-        },
-        "Mage": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "arcane": {
-                    "type": "string"
-                },
-                "fire": {
-                    "type": "string"
-                },
-                "frost": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "arcane",
-                "fire",
-                "frost"
-            ],
-            "title": "Mage"
-        },
-        "Monk": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "brewmaster": {
-                    "type": "string"
-                },
-                "mistweaver": {
-                    "type": "string"
-                },
-                "windwalker": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "brewmaster",
-                "mistweaver",
-                "windwalker"
-            ],
-            "title": "Monk"
-        },
-        "Paladin": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "holy": {
-                    "type": "string"
-                },
-                "protection": {
-                    "type": "string"
-                },
-                "retribution": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "holy",
-                "protection",
-                "retribution"
-            ],
-            "title": "Paladin"
-        },
-        "Priest": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "discipline": {
-                    "type": "string"
-                },
-                "holy": {
-                    "type": "string"
-                },
-                "shadow": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "discipline",
-                "holy",
-                "shadow"
-            ],
-            "title": "Priest"
-        },
-        "Rogue": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "assassination": {
-                    "type": "string"
-                },
-                "combat": {
-                    "type": "string"
-                },
-                "subtlety": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "assassination",
-                "combat",
-                "subtlety"
-            ],
-            "title": "Rogue"
-        },
-        "Shaman": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "elemental": {
-                    "type": "string"
-                },
-                "enhancement": {
-                    "type": "string"
-                },
-                "restoration": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "elemental",
-                "enhancement",
-                "restoration"
-            ],
-            "title": "Shaman"
-        },
-        "Warlock": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "affliction": {
-                    "type": "string"
-                },
-                "demonology": {
-                    "type": "string"
-                },
-                "destruction": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "affliction",
-                "demonology",
-                "destruction"
-            ],
-            "title": "Warlock"
-        },
-        "Warrior": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "arms": {
-                    "type": "string"
-                },
-                "fury": {
-                    "type": "string"
-                },
-                "protection": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "arms",
-                "fury",
-                "protection"
-            ],
-            "title": "Warrior"
-        },
-        "SpellSchools": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "physical": {
-                    "type": "string"
-                },
-                "arcane": {
-                    "type": "string"
-                },
-                "fire": {
-                    "type": "string"
-                },
-                "frost": {
-                    "type": "string"
-                },
-                "holy": {
-                    "type": "string"
-                },
-                "nature": {
-                    "type": "string"
-                },
-                "shadow": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "physical",
-                "arcane",
-                "fire",
-                "frost",
-                "holy",
-                "nature",
-                "shadow"
-            ],
-            "title": "SpellSchools"
-        },
-        "TargetInputs": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "label": {
-                    "type": "string"
-                },
-                "frenzy_time": {
-                    "$ref": "#/definitions/TargetInputField"
-                },
-                "spiritual_grasp_frequency": {
-                    "$ref": "#/definitions/TargetInputField"
-                }
-            },
-            "required": [
-                "label",
-                "frenzy_time",
-                "spiritual_grasp_frequency"
-            ],
-            "title": "TargetInputs"
-        },
-        "TargetInputField": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "label": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "label",
-                "tooltip"
-            ],
-            "title": "TargetInputField"
-        },
-        "Tank": {
-            "$ref": "#/definitions/TankAssignmentValues"
-        },
-        "Stats": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "strength": {
-                    "type": "string"
-                },
-                "agility": {
-                    "type": "string"
-                },
-                "stamina": {
-                    "type": "string"
-                },
-                "intellect": {
-                    "type": "string"
-                },
-                "spirit": {
-                    "type": "string"
-                },
-                "hit": {
-                    "type": "string"
-                },
-                "crit": {
-                    "type": "string"
-                },
-                "haste": {
-                    "type": "string"
-                },
-                "expertise": {
-                    "type": "string"
-                },
-                "dodge": {
-                    "type": "string"
-                },
-                "parry": {
-                    "type": "string"
-                },
-                "mastery": {
-                    "type": "string"
-                },
-                "attack_power": {
-                    "type": "string"
-                },
-                "ranged_attack_power": {
-                    "type": "string"
-                },
-                "spell_power": {
-                    "type": "string"
-                },
-                "pvp_resilience": {
-                    "type": "string"
-                },
-                "pvp_power": {
-                    "type": "string"
-                },
-                "armor": {
-                    "type": "string"
-                },
-                "bonus_armor": {
-                    "type": "string"
-                },
-                "health": {
-                    "type": "string"
-                },
-                "mana": {
-                    "type": "string"
-                },
-                "mp5": {
-                    "type": "string"
-                },
-                "main_hand_dps": {
-                    "type": "string"
-                },
-                "off_hand_dps": {
-                    "type": "string"
-                },
-                "ranged_dps": {
-                    "type": "string"
-                },
-                "block": {
-                    "type": "string"
-                },
-                "melee_speed_multiplier": {
-                    "type": "string"
-                },
-                "ranged_speed_multiplier": {
-                    "type": "string"
-                },
-                "cast_speed_multiplier": {
-                    "type": "string"
-                },
-                "spell_hit": {
-                    "type": "string"
-                },
-                "spell_crit": {
-                    "type": "string"
-                },
-                "spell_haste": {
-                    "type": "string"
-                },
-                "melee_hit": {
-                    "type": "string"
-                },
-                "melee_crit": {
-                    "type": "string"
-                },
-                "melee_haste": {
-                    "type": "string"
-                },
-                "ranged_haste": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "agility",
-                "armor",
-                "attack_power",
-                "block",
-                "bonus_armor",
-                "cast_speed_multiplier",
-                "crit",
-                "dodge",
-                "expertise",
-                "haste",
-                "health",
-                "hit",
-                "intellect",
-                "main_hand_dps",
-                "mana",
-                "mastery",
-                "melee_crit",
-                "melee_haste",
-                "melee_hit",
-                "melee_speed_multiplier",
-                "mp5",
-                "off_hand_dps",
-                "parry",
-                "pvp_power",
-                "pvp_resilience",
-                "ranged_attack_power",
-                "ranged_dps",
-                "ranged_haste",
-                "ranged_speed_multiplier",
-                "spell_crit",
-                "spell_haste",
-                "spell_hit",
-                "spell_power",
-                "spirit",
-                "stamina",
-                "strength"
-            ],
-            "title": "Stats"
-        },
-        "CopyButton": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "default_text": {
-                    "type": "string"
-                },
-                "copied": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "default_text",
-                "copied"
-            ],
-            "title": "CopyButton"
-        },
-        "ListPicker": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "new_item": {
-                    "type": "string"
-                },
-                "delete_item": {
-                    "type": "string"
-                },
-                "copy_to_new": {
-                    "type": "string"
-                },
-                "move_drag_drop": {
-                    "type": "string"
-                },
-                "warnings": {
-                    "type": "string"
-                },
-                "additional_information": {
-                    "type": "string"
-                },
-                "action_has_warnings": {
-                    "type": "string"
-                },
-                "action_has_errors": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "new_item",
-                "delete_item",
-                "copy_to_new",
-                "move_drag_drop",
-                "warnings",
-                "additional_information",
-                "action_has_warnings",
-                "action_has_errors"
-            ],
-            "title": "ListPicker"
-        },
-        "MobTypes": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "unknown": {
-                    "type": "string"
-                },
-                "beast": {
-                    "type": "string"
-                },
-                "demon": {
-                    "type": "string"
-                },
-                "dragonkin": {
-                    "type": "string"
-                },
-                "elemental": {
-                    "type": "string"
-                },
-                "giant": {
-                    "type": "string"
-                },
-                "humanoid": {
-                    "type": "string"
-                },
-                "mechanical": {
-                    "type": "string"
-                },
-                "undead": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "unknown",
-                "beast",
-                "demon",
-                "dragonkin",
-                "elemental",
-                "giant",
-                "humanoid",
-                "mechanical",
-                "undead"
-            ],
-            "title": "MobTypes"
-        },
-        "Races": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "unknown": {
-                    "type": "string"
-                },
-                "blood_elf": {
-                    "type": "string"
-                },
-                "draenei": {
-                    "type": "string"
-                },
-                "dwarf": {
-                    "type": "string"
-                },
-                "gnome": {
-                    "type": "string"
-                },
-                "goblin": {
-                    "type": "string"
-                },
-                "human": {
-                    "type": "string"
-                },
-                "night_elf": {
-                    "type": "string"
-                },
-                "orc": {
-                    "type": "string"
-                },
-                "alliance_pandaren": {
-                    "type": "string"
-                },
-                "horde_pandaren": {
-                    "type": "string"
-                },
-                "tauren": {
-                    "type": "string"
-                },
-                "troll": {
-                    "type": "string"
-                },
-                "undead": {
-                    "type": "string"
-                },
-                "worgen": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "unknown",
-                "blood_elf",
-                "draenei",
-                "dwarf",
-                "gnome",
-                "goblin",
-                "human",
-                "night_elf",
-                "orc",
-                "alliance_pandaren",
-                "horde_pandaren",
-                "tauren",
-                "troll",
-                "undead",
-                "worgen"
-            ],
-            "title": "Races"
-        },
-        "Professions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "unknown": {
-                    "type": "string"
-                },
-                "alchemy": {
-                    "type": "string"
-                },
-                "blacksmithing": {
-                    "type": "string"
-                },
-                "enchanting": {
-                    "type": "string"
-                },
-                "engineering": {
-                    "type": "string"
-                },
-                "herbalism": {
-                    "type": "string"
-                },
-                "inscription": {
-                    "type": "string"
-                },
-                "jewelcrafting": {
-                    "type": "string"
-                },
-                "leatherworking": {
-                    "type": "string"
-                },
-                "mining": {
-                    "type": "string"
-                },
-                "skinning": {
-                    "type": "string"
-                },
-                "tailoring": {
-                    "type": "string"
-                },
-                "archeology": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "unknown",
-                "alchemy",
-                "blacksmithing",
-                "enchanting",
-                "engineering",
-                "herbalism",
-                "inscription",
-                "jewelcrafting",
-                "leatherworking",
-                "mining",
-                "skinning",
-                "tailoring",
-                "archeology"
-            ],
-            "title": "Professions"
-        },
-        "Status": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "unlaunched": {
-                    "type": "string"
-                },
-                "alpha": {
-                    "type": "string"
-                },
-                "beta": {
-                    "type": "string"
-                },
-                "launched": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "alpha",
-                "beta",
-                "launched",
-                "unlaunched"
-            ],
-            "title": "Status"
-        },
-        "Export": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "title"
-            ],
-            "title": "Export"
-        },
-        "Settings": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "other": {
-                    "$ref": "#/definitions/Other"
-                },
-                "consumables": {
-                    "$ref": "#/definitions/Consumables"
-                },
-                "encounter": {
-                    "$ref": "#/definitions/Encounter"
-                },
-                "player": {
-                    "$ref": "#/definitions/Player"
-                },
-                "saved_encounters": {
-                    "$ref": "#/definitions/SavedEncounters"
-                },
-                "saved_settings": {
-                    "$ref": "#/definitions/SavedSettings"
-                }
-            },
-            "required": [
-                "title",
-                "other",
-                "consumables",
-                "encounter",
-                "player",
-                "saved_encounters",
-                "saved_settings"
-            ],
-            "title": "Settings"
-        },
-        "Consumables": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "potions": {
-                    "$ref": "#/definitions/ConsumableCategory"
-                },
-                "elixirs": {
-                    "$ref": "#/definitions/ConsumableCategory"
-                },
-                "food": {
-                    "$ref": "#/definitions/ConsumableCategory"
-                },
-                "engineering": {
-                    "$ref": "#/definitions/EngineeringCategory"
-                },
-                "pet": {
-                    "$ref": "#/definitions/ConsumableCategory"
-                }
-            },
-            "required": [
-                "title",
-                "potions",
-                "elixirs",
-                "food",
-                "engineering",
-                "pet"
-            ],
-            "title": "Consumables"
-        },
-        "ConsumableCategory": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "prepop": {
-                    "type": "string"
-                },
-                "combat": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "title"
-            ],
-            "title": "ConsumableCategory"
-        },
-        "EngineeringCategory": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "explosives": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "title",
-                "explosives"
-            ],
-            "title": "EngineeringCategory"
-        },
-        "Other": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "challenge_mode": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "input_delay": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "channel_clip_delay": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "in_front_of_target": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "distance_from_target": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "tank_assignment": {
-                    "$ref": "#/definitions/TankAssignmentField"
-                },
-                "incoming_hps": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "healing_cadence": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "healing_cadence_variation": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "absorb_frac": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "burst_window": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "hp_percent_for_defensives": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "pet_uptime": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "glaive_toss_chance": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "detonate_seed": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "stance_snapshot": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "assume_bleed_active": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "cannot_shred_target": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "okf_uptime": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "sync_type": {
-                    "$ref": "#/definitions/SyncTypeField"
-                },
-                "show_1h_weapons": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "show_2h_weapons": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "show_matching_gems": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "show_ep_values": {
-                    "$ref": "#/definitions/InputField"
-                },
-                "phase_selector": {
-                    "$ref": "#/definitions/PhaseSelectorField"
-                }
-            },
-            "required": [
-                "title",
-                "challenge_mode",
-                "input_delay",
-                "channel_clip_delay",
-                "in_front_of_target",
-                "distance_from_target",
-                "tank_assignment",
-                "incoming_hps",
-                "healing_cadence",
-                "healing_cadence_variation",
-                "absorb_frac",
-                "burst_window",
-                "hp_percent_for_defensives",
-                "pet_uptime",
-                "glaive_toss_chance",
-                "detonate_seed",
-                "stance_snapshot",
-                "assume_bleed_active",
-                "cannot_shred_target",
-                "okf_uptime",
-                "sync_type",
-                "show_1h_weapons",
-                "show_2h_weapons",
-                "show_matching_gems",
-                "show_ep_values",
-                "phase_selector"
-            ],
-            "title": "Other"
-        },
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"$ref": "#/definitions/Welcome",
+	"definitions": {
+		"Welcome": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"landing": {
+					"$ref": "#/definitions/Landing"
+				},
+				"common": {
+					"$ref": "#/definitions/Common"
+				},
+				"sim": {
+					"$ref": "#/definitions/Sim"
+				},
+				"gear": {
+					"$ref": "#/definitions/Gear"
+				},
+				"settings": {
+					"$ref": "#/definitions/Settings"
+				},
+				"talents": {
+					"$ref": "#/definitions/Export"
+				},
+				"rotation": {
+					"$ref": "#/definitions/Export"
+				},
+				"results": {
+					"$ref": "#/definitions/Export"
+				},
+				"import": {
+					"$ref": "#/definitions/Export"
+				},
+				"export": {
+					"$ref": "#/definitions/Export"
+				},
+				"info": {
+					"$ref": "#/definitions/Info"
+				},
+				"sidebar": {
+					"$ref": "#/definitions/Sidebar"
+				}
+			},
+			"required": ["common", "export", "gear", "import", "info", "landing", "results", "rotation", "settings", "sidebar", "sim", "talents"],
+			"title": "Welcome"
+		},
+		"Common": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"none": {
+					"type": "string"
+				},
+				"custom": {
+					"type": "string"
+				},
+				"phases": {
+					"type": "object",
+					"additionalProperties": false,
+					"properties": {
+						"1": {
+							"type": "string"
+						},
+						"2": {
+							"type": "string"
+						},
+						"3": {
+							"type": "string"
+						},
+						"4": {
+							"type": "string"
+						},
+						"5": {
+							"type": "string"
+						}
+					},
+					"required": ["1", "2", "3", "4", "5"]
+				},
+				"tanks": {
+					"type": "object",
+					"additionalProperties": false,
+					"properties": {
+						"main_tank": {
+							"type": "string"
+						},
+						"tank_2": {
+							"type": "string"
+						},
+						"tank_3": {
+							"type": "string"
+						},
+						"tank_4": {
+							"type": "string"
+						}
+					},
+					"required": ["main_tank", "tank_2", "tank_3", "tank_4"]
+				},
+				"status": {
+					"$ref": "#/definitions/Status"
+				},
+				"classes": {
+					"$ref": "#/definitions/Classes"
+				},
+				"specs": {
+					"$ref": "#/definitions/Specs"
+				},
+				"spell_schools": {
+					"$ref": "#/definitions/SpellSchools"
+				},
+				"stats": {
+					"$ref": "#/definitions/Stats"
+				},
+				"copy_button": {
+					"$ref": "#/definitions/CopyButton"
+				},
+				"list_picker": {
+					"$ref": "#/definitions/ListPicker"
+				},
+				"mob_types": {
+					"$ref": "#/definitions/MobTypes"
+				},
+				"races": {
+					"$ref": "#/definitions/Races"
+				},
+				"professions": {
+					"$ref": "#/definitions/Professions"
+				}
+			},
+			"required": [
+				"none",
+				"custom",
+				"classes",
+				"phases",
+				"specs",
+				"spell_schools",
+				"stats",
+				"status",
+				"copy_button",
+				"list_picker",
+				"mob_types",
+				"races",
+				"professions"
+			],
+			"title": "Common"
+		},
+		"Classes": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"death_knight": {
+					"type": "string"
+				},
+				"druid": {
+					"type": "string"
+				},
+				"hunter": {
+					"type": "string"
+				},
+				"mage": {
+					"type": "string"
+				},
+				"monk": {
+					"type": "string"
+				},
+				"paladin": {
+					"type": "string"
+				},
+				"priest": {
+					"type": "string"
+				},
+				"rogue": {
+					"type": "string"
+				},
+				"shaman": {
+					"type": "string"
+				},
+				"warlock": {
+					"type": "string"
+				},
+				"warrior": {
+					"type": "string"
+				}
+			},
+			"required": ["death_knight", "druid", "hunter", "mage", "monk", "paladin", "priest", "rogue", "shaman", "warlock", "warrior"],
+			"title": "Classes"
+		},
+		"Specs": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"death_knight": {
+					"$ref": "#/definitions/DeathKnight"
+				},
+				"druid": {
+					"$ref": "#/definitions/Druid"
+				},
+				"hunter": {
+					"$ref": "#/definitions/Hunter"
+				},
+				"mage": {
+					"$ref": "#/definitions/Mage"
+				},
+				"monk": {
+					"$ref": "#/definitions/Monk"
+				},
+				"paladin": {
+					"$ref": "#/definitions/Paladin"
+				},
+				"priest": {
+					"$ref": "#/definitions/Priest"
+				},
+				"rogue": {
+					"$ref": "#/definitions/Rogue"
+				},
+				"shaman": {
+					"$ref": "#/definitions/Shaman"
+				},
+				"warlock": {
+					"$ref": "#/definitions/Warlock"
+				},
+				"warrior": {
+					"$ref": "#/definitions/Warrior"
+				}
+			},
+			"required": ["death_knight", "druid", "hunter", "mage", "monk", "paladin", "priest", "rogue", "shaman", "warlock", "warrior"],
+			"title": "Specs"
+		},
+		"DeathKnight": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"blood": {
+					"type": "string"
+				},
+				"frost": {
+					"type": "string"
+				},
+				"unholy": {
+					"type": "string"
+				}
+			},
+			"required": ["blood", "frost", "unholy"],
+			"title": "DeathKnight"
+		},
+		"Druid": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"balance": {
+					"type": "string"
+				},
+				"feral": {
+					"type": "string"
+				},
+				"guardian": {
+					"type": "string"
+				},
+				"restoration": {
+					"type": "string"
+				}
+			},
+			"required": ["balance", "feral", "guardian", "restoration"],
+			"title": "Druid"
+		},
+		"Hunter": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"beast_mastery": {
+					"type": "string"
+				},
+				"marksmanship": {
+					"type": "string"
+				},
+				"survival": {
+					"type": "string"
+				}
+			},
+			"required": ["beast_mastery", "marksmanship", "survival"],
+			"title": "Hunter"
+		},
+		"Mage": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"arcane": {
+					"type": "string"
+				},
+				"fire": {
+					"type": "string"
+				},
+				"frost": {
+					"type": "string"
+				}
+			},
+			"required": ["arcane", "fire", "frost"],
+			"title": "Mage"
+		},
+		"Monk": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"brewmaster": {
+					"type": "string"
+				},
+				"mistweaver": {
+					"type": "string"
+				},
+				"windwalker": {
+					"type": "string"
+				}
+			},
+			"required": ["brewmaster", "mistweaver", "windwalker"],
+			"title": "Monk"
+		},
+		"Paladin": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"holy": {
+					"type": "string"
+				},
+				"protection": {
+					"type": "string"
+				},
+				"retribution": {
+					"type": "string"
+				}
+			},
+			"required": ["holy", "protection", "retribution"],
+			"title": "Paladin"
+		},
+		"Priest": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"discipline": {
+					"type": "string"
+				},
+				"holy": {
+					"type": "string"
+				},
+				"shadow": {
+					"type": "string"
+				}
+			},
+			"required": ["discipline", "holy", "shadow"],
+			"title": "Priest"
+		},
+		"Rogue": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"assassination": {
+					"type": "string"
+				},
+				"combat": {
+					"type": "string"
+				},
+				"subtlety": {
+					"type": "string"
+				}
+			},
+			"required": ["assassination", "combat", "subtlety"],
+			"title": "Rogue"
+		},
+		"Shaman": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"elemental": {
+					"type": "string"
+				},
+				"enhancement": {
+					"type": "string"
+				},
+				"restoration": {
+					"type": "string"
+				}
+			},
+			"required": ["elemental", "enhancement", "restoration"],
+			"title": "Shaman"
+		},
+		"Warlock": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"affliction": {
+					"type": "string"
+				},
+				"demonology": {
+					"type": "string"
+				},
+				"destruction": {
+					"type": "string"
+				}
+			},
+			"required": ["affliction", "demonology", "destruction"],
+			"title": "Warlock"
+		},
+		"Warrior": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"arms": {
+					"type": "string"
+				},
+				"fury": {
+					"type": "string"
+				},
+				"protection": {
+					"type": "string"
+				}
+			},
+			"required": ["arms", "fury", "protection"],
+			"title": "Warrior"
+		},
+		"SpellSchools": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"physical": {
+					"type": "string"
+				},
+				"arcane": {
+					"type": "string"
+				},
+				"fire": {
+					"type": "string"
+				},
+				"frost": {
+					"type": "string"
+				},
+				"holy": {
+					"type": "string"
+				},
+				"nature": {
+					"type": "string"
+				},
+				"shadow": {
+					"type": "string"
+				}
+			},
+			"required": ["physical", "arcane", "fire", "frost", "holy", "nature", "shadow"],
+			"title": "SpellSchools"
+		},
+		"TargetInputs": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"label": {
+					"type": "string"
+				},
+				"frenzy_time": {
+					"$ref": "#/definitions/TargetInputField"
+				},
+				"spiritual_grasp_frequency": {
+					"$ref": "#/definitions/TargetInputField"
+				}
+			},
+			"required": ["label", "frenzy_time", "spiritual_grasp_frequency"],
+			"title": "TargetInputs"
+		},
+		"TargetInputField": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"label": {
+					"type": "string"
+				},
+				"tooltip": {
+					"type": "string"
+				}
+			},
+			"required": ["label", "tooltip"],
+			"title": "TargetInputField"
+		},
+		"Tank": {
+			"$ref": "#/definitions/Common/properties/tanks"
+		},
+		"Stats": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"strength": {
+					"type": "string"
+				},
+				"agility": {
+					"type": "string"
+				},
+				"stamina": {
+					"type": "string"
+				},
+				"intellect": {
+					"type": "string"
+				},
+				"spirit": {
+					"type": "string"
+				},
+				"hit": {
+					"type": "string"
+				},
+				"crit": {
+					"type": "string"
+				},
+				"haste": {
+					"type": "string"
+				},
+				"expertise": {
+					"type": "string"
+				},
+				"dodge": {
+					"type": "string"
+				},
+				"parry": {
+					"type": "string"
+				},
+				"mastery": {
+					"type": "string"
+				},
+				"attack_power": {
+					"type": "string"
+				},
+				"ranged_attack_power": {
+					"type": "string"
+				},
+				"spell_power": {
+					"type": "string"
+				},
+				"pvp_resilience": {
+					"type": "string"
+				},
+				"pvp_power": {
+					"type": "string"
+				},
+				"armor": {
+					"type": "string"
+				},
+				"bonus_armor": {
+					"type": "string"
+				},
+				"health": {
+					"type": "string"
+				},
+				"mana": {
+					"type": "string"
+				},
+				"mp5": {
+					"type": "string"
+				},
+				"main_hand_dps": {
+					"type": "string"
+				},
+				"off_hand_dps": {
+					"type": "string"
+				},
+				"ranged_dps": {
+					"type": "string"
+				},
+				"block": {
+					"type": "string"
+				},
+				"melee_speed_multiplier": {
+					"type": "string"
+				},
+				"ranged_speed_multiplier": {
+					"type": "string"
+				},
+				"cast_speed_multiplier": {
+					"type": "string"
+				},
+				"spell_hit": {
+					"type": "string"
+				},
+				"spell_crit": {
+					"type": "string"
+				},
+				"spell_haste": {
+					"type": "string"
+				},
+				"melee_hit": {
+					"type": "string"
+				},
+				"melee_crit": {
+					"type": "string"
+				},
+				"melee_haste": {
+					"type": "string"
+				},
+				"ranged_haste": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"agility",
+				"armor",
+				"attack_power",
+				"block",
+				"bonus_armor",
+				"cast_speed_multiplier",
+				"crit",
+				"dodge",
+				"expertise",
+				"haste",
+				"health",
+				"hit",
+				"intellect",
+				"main_hand_dps",
+				"mana",
+				"mastery",
+				"melee_crit",
+				"melee_haste",
+				"melee_hit",
+				"melee_speed_multiplier",
+				"mp5",
+				"off_hand_dps",
+				"parry",
+				"pvp_power",
+				"pvp_resilience",
+				"ranged_attack_power",
+				"ranged_dps",
+				"ranged_haste",
+				"ranged_speed_multiplier",
+				"spell_crit",
+				"spell_haste",
+				"spell_hit",
+				"spell_power",
+				"spirit",
+				"stamina",
+				"strength"
+			],
+			"title": "Stats"
+		},
+		"CopyButton": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"default_text": {
+					"type": "string"
+				},
+				"copied": {
+					"type": "string"
+				}
+			},
+			"required": ["default_text", "copied"],
+			"title": "CopyButton"
+		},
+		"ListPicker": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"new_item": {
+					"type": "string"
+				},
+				"delete_item": {
+					"type": "string"
+				},
+				"copy_to_new": {
+					"type": "string"
+				},
+				"move_drag_drop": {
+					"type": "string"
+				},
+				"warnings": {
+					"type": "string"
+				},
+				"additional_information": {
+					"type": "string"
+				},
+				"action_has_warnings": {
+					"type": "string"
+				},
+				"action_has_errors": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"new_item",
+				"delete_item",
+				"copy_to_new",
+				"move_drag_drop",
+				"warnings",
+				"additional_information",
+				"action_has_warnings",
+				"action_has_errors"
+			],
+			"title": "ListPicker"
+		},
+		"MobTypes": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"unknown": {
+					"type": "string"
+				},
+				"beast": {
+					"type": "string"
+				},
+				"demon": {
+					"type": "string"
+				},
+				"dragonkin": {
+					"type": "string"
+				},
+				"elemental": {
+					"type": "string"
+				},
+				"giant": {
+					"type": "string"
+				},
+				"humanoid": {
+					"type": "string"
+				},
+				"mechanical": {
+					"type": "string"
+				},
+				"undead": {
+					"type": "string"
+				}
+			},
+			"required": ["unknown", "beast", "demon", "dragonkin", "elemental", "giant", "humanoid", "mechanical", "undead"],
+			"title": "MobTypes"
+		},
+		"Races": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"unknown": {
+					"type": "string"
+				},
+				"blood_elf": {
+					"type": "string"
+				},
+				"draenei": {
+					"type": "string"
+				},
+				"dwarf": {
+					"type": "string"
+				},
+				"gnome": {
+					"type": "string"
+				},
+				"goblin": {
+					"type": "string"
+				},
+				"human": {
+					"type": "string"
+				},
+				"night_elf": {
+					"type": "string"
+				},
+				"orc": {
+					"type": "string"
+				},
+				"alliance_pandaren": {
+					"type": "string"
+				},
+				"horde_pandaren": {
+					"type": "string"
+				},
+				"tauren": {
+					"type": "string"
+				},
+				"troll": {
+					"type": "string"
+				},
+				"undead": {
+					"type": "string"
+				},
+				"worgen": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"unknown",
+				"blood_elf",
+				"draenei",
+				"dwarf",
+				"gnome",
+				"goblin",
+				"human",
+				"night_elf",
+				"orc",
+				"alliance_pandaren",
+				"horde_pandaren",
+				"tauren",
+				"troll",
+				"undead",
+				"worgen"
+			],
+			"title": "Races"
+		},
+		"Professions": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"unknown": {
+					"type": "string"
+				},
+				"alchemy": {
+					"type": "string"
+				},
+				"blacksmithing": {
+					"type": "string"
+				},
+				"enchanting": {
+					"type": "string"
+				},
+				"engineering": {
+					"type": "string"
+				},
+				"herbalism": {
+					"type": "string"
+				},
+				"inscription": {
+					"type": "string"
+				},
+				"jewelcrafting": {
+					"type": "string"
+				},
+				"leatherworking": {
+					"type": "string"
+				},
+				"mining": {
+					"type": "string"
+				},
+				"skinning": {
+					"type": "string"
+				},
+				"tailoring": {
+					"type": "string"
+				},
+				"archeology": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"unknown",
+				"alchemy",
+				"blacksmithing",
+				"enchanting",
+				"engineering",
+				"herbalism",
+				"inscription",
+				"jewelcrafting",
+				"leatherworking",
+				"mining",
+				"skinning",
+				"tailoring",
+				"archeology"
+			],
+			"title": "Professions"
+		},
+		"Status": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"unlaunched": {
+					"type": "string"
+				},
+				"alpha": {
+					"type": "string"
+				},
+				"beta": {
+					"type": "string"
+				},
+				"launched": {
+					"type": "string"
+				}
+			},
+			"required": ["alpha", "beta", "launched", "unlaunched"],
+			"title": "Status"
+		},
+		"Export": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				}
+			},
+			"required": ["title"],
+			"title": "Export"
+		},
+		"Settings": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"other": {
+					"$ref": "#/definitions/Other"
+				},
+				"consumables": {
+					"$ref": "#/definitions/Consumables"
+				},
+				"encounter": {
+					"$ref": "#/definitions/Encounter"
+				},
+				"player": {
+					"$ref": "#/definitions/Player"
+				},
+				"saved_encounters": {
+					"$ref": "#/definitions/SavedEncounters"
+				},
+				"saved_settings": {
+					"$ref": "#/definitions/SavedSettings"
+				}
+			},
+			"required": ["title", "other", "consumables", "encounter", "player", "saved_encounters", "saved_settings"],
+			"title": "Settings"
+		},
+		"Consumables": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"potions": {
+					"$ref": "#/definitions/ConsumableCategory"
+				},
+				"elixirs": {
+					"$ref": "#/definitions/ConsumableCategory"
+				},
+				"food": {
+					"$ref": "#/definitions/ConsumableCategory"
+				},
+				"engineering": {
+					"$ref": "#/definitions/EngineeringCategory"
+				},
+				"pet": {
+					"$ref": "#/definitions/ConsumableCategory"
+				}
+			},
+			"required": ["title", "potions", "elixirs", "food", "engineering", "pet"],
+			"title": "Consumables"
+		},
+		"ConsumableCategory": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"prepop": {
+					"type": "string"
+				},
+				"combat": {
+					"type": "string"
+				}
+			},
+			"required": ["title"],
+			"title": "ConsumableCategory"
+		},
+		"EngineeringCategory": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"explosives": {
+					"type": "string"
+				}
+			},
+			"required": ["title", "explosives"],
+			"title": "EngineeringCategory"
+		},
+		"Other": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"challenge_mode": {
+					"$ref": "#/definitions/InputField"
+				},
+				"input_delay": {
+					"$ref": "#/definitions/InputField"
+				},
+				"channel_clip_delay": {
+					"$ref": "#/definitions/InputField"
+				},
+				"in_front_of_target": {
+					"$ref": "#/definitions/InputField"
+				},
+				"distance_from_target": {
+					"$ref": "#/definitions/InputField"
+				},
+				"tank_assignment": {
+					"$ref": "#/definitions/TankAssignmentField"
+				},
+				"incoming_hps": {
+					"$ref": "#/definitions/InputField"
+				},
+				"healing_cadence": {
+					"$ref": "#/definitions/InputField"
+				},
+				"healing_cadence_variation": {
+					"$ref": "#/definitions/InputField"
+				},
+				"absorb_frac": {
+					"$ref": "#/definitions/InputField"
+				},
+				"burst_window": {
+					"$ref": "#/definitions/InputField"
+				},
+				"hp_percent_for_defensives": {
+					"$ref": "#/definitions/InputField"
+				},
+				"pet_uptime": {
+					"$ref": "#/definitions/InputField"
+				},
+				"glaive_toss_chance": {
+					"$ref": "#/definitions/InputField"
+				},
+				"detonate_seed": {
+					"$ref": "#/definitions/InputField"
+				},
+				"stance_snapshot": {
+					"$ref": "#/definitions/InputField"
+				},
+				"assume_bleed_active": {
+					"$ref": "#/definitions/InputField"
+				},
+				"cannot_shred_target": {
+					"$ref": "#/definitions/InputField"
+				},
+				"okf_uptime": {
+					"$ref": "#/definitions/InputField"
+				},
+				"sync_type": {
+					"$ref": "#/definitions/SyncTypeField"
+				},
+				"show_1h_weapons": {
+					"$ref": "#/definitions/InputField"
+				},
+				"show_2h_weapons": {
+					"$ref": "#/definitions/InputField"
+				},
+				"show_matching_gems": {
+					"$ref": "#/definitions/InputField"
+				},
+				"show_ep_values": {
+					"$ref": "#/definitions/InputField"
+				},
+				"phase_selector": {
+					"$ref": "#/definitions/PhaseSelectorField"
+				}
+			},
+			"required": [
+				"title",
+				"challenge_mode",
+				"input_delay",
+				"channel_clip_delay",
+				"in_front_of_target",
+				"distance_from_target",
+				"tank_assignment",
+				"incoming_hps",
+				"healing_cadence",
+				"healing_cadence_variation",
+				"absorb_frac",
+				"burst_window",
+				"hp_percent_for_defensives",
+				"pet_uptime",
+				"glaive_toss_chance",
+				"detonate_seed",
+				"stance_snapshot",
+				"assume_bleed_active",
+				"cannot_shred_target",
+				"okf_uptime",
+				"sync_type",
+				"show_1h_weapons",
+				"show_2h_weapons",
+				"show_matching_gems",
+				"show_ep_values",
+				"phase_selector"
+			],
+			"title": "Other"
+		},
 
-        "InputField": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "label": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "label",
-                "tooltip"
-            ],
-            "title": "InputField"
-        },
-        "TankAssignmentField": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "label": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "type": "string"
-                },
-                "values": {
-                    "$ref": "#/definitions/TankAssignmentValues"
-                }
-            },
-            "required": [
-                "label",
-                "tooltip",
-                "values"
-            ],
-            "title": "TankAssignmentField"
-        },
-        "SyncTypeField": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "label": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "type": "string"
-                },
-                "values": {
-                    "$ref": "#/definitions/SyncTypeValues"
-                }
-            },
-            "required": [
-                "label",
-                "tooltip",
-                "values"
-            ],
-            "title": "SyncTypeField"
-        },
-        "SyncTypeValues": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "automatic": {
-                    "type": "string"
-                },
-                "none": {
-                    "type": "string"
-                },
-                "perfect_sync": {
-                    "type": "string"
-                },
-                "delayed_offhand": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "automatic",
-                "none",
-                "perfect_sync",
-                "delayed_offhand"
-            ],
-            "title": "SyncTypeValues"
-        },
-        "PhaseSelectorField": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "label": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "type": "string"
-                },
-                "values": {
-                    "$ref": "#/definitions/PhaseSelectorValues"
-                }
-            },
-            "required": [
-                "label",
-                "tooltip",
-                "values"
-            ],
-            "title": "PhaseSelectorField"
-        },
-        "PhaseSelectorValues": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "phase_1": {
-                    "type": "string"
-                },
-                "phase_2": {
-                    "type": "string"
-                },
-                "phase_3": {
-                    "type": "string"
-                },
-                "phase_4": {
-                    "type": "string"
-                },
-                "phase_5": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "phase_1",
-                "phase_2",
-                "phase_3",
-                "phase_4",
-                "phase_5"
-            ],
-            "title": "PhaseSelectorValues"
-        },
-        "TankAssignmentValues": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "main_tank": {
-                    "type": "string"
-                },
-                "tank_2": {
-                    "type": "string"
-                },
-                "tank_3": {
-                    "type": "string"
-                },
-                "tank_4": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "main_tank",
-                "tank_2",
-                "tank_3",
-                "tank_4"
-            ],
-            "title": "TankAssignmentValues"
-        },
-        "InfoOptions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "fixed_rng_seed": {
-                    "$ref": "#/definitions/FixedRngSeed"
-                },
-                "language": {
-                    "$ref": "#/definitions/Language"
-                },
-                "feature_toggles": {
-                    "$ref": "#/definitions/FeatureToggles"
-                },
-                "use_multiple_cpu_cores": {
-                    "$ref": "#/definitions/UseMultipleCpuCores"
-                },
-                "restore_defaults": {
-                    "$ref": "#/definitions/RestoreDefaults"
-                }
-            },
-            "required": [
-                "title",
-                "fixed_rng_seed",
-                "language",
-                "feature_toggles",
-                "use_multiple_cpu_cores",
-                "restore_defaults"
-            ],
-            "title": "InfoOptions"
-        },
-        "Gear": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "gem_summary": {
-                    "$ref": "#/definitions/GemSummary"
-                },
-                "reforge_summary": {
-                    "$ref": "#/definitions/ReforgeSummary"
-                },
-                "reforge_success": {
-                    "$ref": "#/definitions/ReforgeSuccess"
-                },
-                "gear_sets": {
-                    "$ref": "#/definitions/GearSets"
-                }
-            },
-            "required": [
-                "title",
-                "gem_summary",
-                "reforge_summary",
-                "reforge_success",
-                "gear_sets"
-            ],
-            "title": "Gear"
-        },
-        "GemSummary": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "reset_gems": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "title",
-                "reset_gems"
-            ],
-            "title": "GemSummary"
-        },
-        "ReforgeSummary": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "reset_reforges": {
-                    "type": "string"
-                },
-                "copy_to_reforge_lite": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "title",
-                "reset_reforges",
-                "copy_to_reforge_lite"
-            ],
-            "title": "ReforgeSummary"
-        },
-        "ReforgeSuccess": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "removed_reforge": {
-                    "type": "string"
-                },
-                "no_changes": {
-                    "type": "string"
-                },
-                "copy_to_reforge_lite": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "title",
-                "removed_reforge",
-                "no_changes",
-                "copy_to_reforge_lite"
-            ],
-            "title": "ReforgeSuccess"
-        },
-        "GearSets": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "gear_set": {
-                    "type": "string"
-                },
-                "gear_set_name": {
-                    "type": "string"
-                },
-                "save_gear_set": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "title",
-                "gear_set",
-                "gear_set_name",
-                "save_gear_set"
-            ],
-            "title": "GearSets"
-        },
-        "Landing": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "navigation": {
-                    "$ref": "#/definitions/Navigation"
-                },
-                "simulations": {
-                    "$ref": "#/definitions/Simulations"
-                },
-                "home": {
-                    "$ref": "#/definitions/Home"
-                },
-                "header": {
-                    "$ref": "#/definitions/LandingHeader"
-                }
-            },
-            "required": [
-                "header",
-                "home",
-                "navigation",
-                "simulations"
-            ],
-            "title": "Landing"
-        },
-        "LandingHeader": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "wowsims": {
-                    "type": "string"
-                },
-                "expansion": {
-                    "type": "string"
-                },
-                "supportDevs": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "expansion",
-                "supportDevs",
-                "wowsims"
-            ],
-            "title": "LandingHeader"
-        },
-        "Info": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "known_issues": {
-                    "type": "string"
-                },
-                "bug_report": {
-                    "type": "string"
-                },
-                "sim_options": {
-                    "type": "string"
-                },
-                "discord": {
-                    "type": "string"
-                },
-                "patreon": {
-                    "type": "string"
-                },
-                "github": {
-                    "type": "string"
-                },
-                "status": {
-                    "$ref": "#/definitions/InfoStatus"
-                },
-                "options": {
-                    "$ref": "#/definitions/InfoOptions"
-                }
-            },
-            "required": [
-                "bug_report",
-                "discord",
-                "github",
-                "known_issues",
-                "patreon",
-                "sim_options",
-                "status",
-                "options"
-            ],
-            "title": "Info"
-        },
-        "InfoStatus": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "unlaunched": {
-                    "type": "string"
-                },
-                "alpha": {
-                    "type": "string"
-                },
-                "beta": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "alpha",
-                "beta",
-                "unlaunched"
-            ],
-            "title": "InfoStatus"
-        },
-        "SuggestReforges": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "title",
-                "tooltip"
-            ],
-            "title": "SuggestReforges"
-        },
-        "Home": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "welcomeDescription": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "description",
-                "title",
-                "welcomeDescription"
-            ],
-            "title": "Home"
-        },
-        "Navigation": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "home": {
-                    "type": "string"
-                },
-                "simulations": {
-                    "type": "string"
-                },
-                "about": {
-                    "type": "string"
-                },
-                "toggle": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "about",
-                "home",
-                "simulations",
-                "toggle"
-            ],
-            "title": "Navigation"
-        },
-        "Simulations": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "full_raid": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "full_raid"
-            ],
-            "title": "Simulations"
-        },
-        "Sidebar": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "iterations": {
-                    "type": "string"
-                },
-                "warnings": {
-                    "$ref": "#/definitions/SidebarWarnings"
-                },
-                "buttons": {
-                    "$ref": "#/definitions/Buttons"
-                },
-                "header": {
-                    "$ref": "#/definitions/SidebarHeader"
-                },
-                "character_stats": {
-                    "$ref": "#/definitions/CharacterStats"
-                }
-            },
-            "required": [
-                "buttons",
-                "character_stats",
-                "header",
-                "iterations",
-                "warnings"
-            ],
-            "title": "Sidebar"
-        },
-        "SidebarWarnings": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "meta_gem_disabled": {
-                    "type": "string"
-                },
-                "profession_requirement": {
-                    "type": "string"
-                },
-                "too_many_jc_gems": {
-                    "type": "string"
-                },
-                "unspent_talent_points": {
-                    "type": "string"
-                },
-                "armor_specialization": {
-                    "type": "string"
-                },
-                "dual_wield_2h_without_titans_grip": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "meta_gem_disabled",
-                "profession_requirement",
-                "too_many_jc_gems",
-                "unspent_talent_points",
-                "armor_specialization",
-                "dual_wield_2h_without_titans_grip"
-            ],
-            "title": "SidebarWarnings"
-        },
-        "Buttons": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "simulate": {
-                    "type": "string"
-                },
-                "stat_weights": {
-                    "$ref": "#/definitions/StatWeights"
-                },
-                "suggest_reforges": {
-                    "$ref": "#/definitions/SuggestReforges"
-                }
-            },
-            "required": [
-                "simulate",
-                "stat_weights",
-                "suggest_reforges"
-            ],
-            "title": "Buttons"
-        },
-        "CharacterStats": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "melee_crit_cap": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "$ref": "#/definitions/Tooltip"
-                },
-                "crit_cap": {
-                    "$ref": "#/definitions/CritCap"
-                },
-                "bonus_prefix": {
-                    "type": "string"
-                },
-                "points_suffix": {
-                    "type": "string"
-                },
-                "percent_suffix": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "bonus_prefix",
-                "crit_cap",
-                "melee_crit_cap",
-                "percent_suffix",
-                "points_suffix",
-                "title",
-                "tooltip"
-            ],
-            "title": "CharacterStats"
-        },
-        "CritCap": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "exact": {
-                    "type": "string"
-                },
-                "over_by": {
-                    "type": "string"
-                },
-                "under_by": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "exact",
-                "over_by",
-                "under_by"
-            ],
-            "title": "CritCap"
-        },
-        "Tooltip": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "base": {
-                    "type": "string"
-                },
-                "gear": {
-                    "type": "string"
-                },
-                "talents": {
-                    "type": "string"
-                },
-                "buffs": {
-                    "type": "string"
-                },
-                "consumes": {
-                    "type": "string"
-                },
-                "bonus": {
-                    "type": "string"
-                },
-                "total": {
-                    "type": "string"
-                },
-                "glancing": {
-                    "type": "string"
-                },
-                "suppression": {
-                    "type": "string"
-                },
-                "to_hit_cap": {
-                    "type": "string"
-                },
-                "to_exp_cap": {
-                    "type": "string"
-                },
-                "spec_offsets": {
-                    "type": "string"
-                },
-                "final_crit_cap": {
-                    "type": "string"
-                },
-                "can_raise_by": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "base",
-                "bonus",
-                "buffs",
-                "can_raise_by",
-                "consumes",
-                "final_crit_cap",
-                "gear",
-                "glancing",
-                "spec_offsets",
-                "suppression",
-                "talents",
-                "to_exp_cap",
-                "to_hit_cap",
-                "total"
-            ],
-            "title": "Tooltip"
-        },
-        "SidebarHeader": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "phase": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "phase",
-                "title"
-            ],
-            "title": "SidebarHeader"
-        },
-        "Sim": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "description",
-                "title"
-            ],
-            "title": "Sim"
-        },
-        "StatWeights": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "ep_weights": {
-                    "$ref": "#/definitions/EpWeights"
-                }
-            },
-            "required": [
-                "ep_weights",
-                "title"
-            ],
-            "title": "StatWeights"
-        },
-        "EpWeights": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "use_custom": {
-                    "type": "string"
-                },
-                "description": {
-                    "$ref": "#/definitions/EpWeightsDescription"
-                },
-                "buttons": {
-                    "$ref": "#/definitions/EpWeightsButtons"
-                },
-                "options": {
-                    "$ref": "#/definitions/EpWeightsOptions"
-                }
-            },
-            "required": [
-                "buttons",
-                "description",
-                "options",
-                "use_custom"
-            ],
-            "title": "EpWeights"
-        },
-        "EpWeightsDescription": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "enable_modification": {
-                    "type": "string"
-                },
-                "modify_in_editor": {
-                    "type": "string"
-                },
-                "hard_cap_info": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "enable_modification",
-                "hard_cap_info",
-                "modify_in_editor"
-            ],
-            "title": "EpWeightsDescription"
-        },
-        "EpWeightsButtons": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "edit_weights": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "edit_weights"
-            ],
-            "title": "EpWeightsButtons"
-        },
-        "EpWeightsOptions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "include_gems": {
-                    "type": "string"
-                },
-                "freeze_item_slots": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "freeze_item_slots",
-                "include_gems"
-            ],
-            "title": "EpWeightsOptions"
-        },
-        "FixedRngSeed": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "label": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "type": "string"
-                },
-                "last_used": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "label",
-                "tooltip",
-                "last_used"
-            ],
-            "title": "FixedRngSeed"
-        },
-        "Language": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "label": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "label",
-                "tooltip"
-            ],
-            "title": "Language"
-        },
-        "FeatureToggles": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "show_threat_metrics": {
-                    "type": "string"
-                },
-                "show_experimental": {
-                    "type": "string"
-                },
-                "show_quick_swap": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "show_threat_metrics",
-                "show_experimental",
-                "show_quick_swap"
-            ],
-            "title": "FeatureToggles"
-        },
-        "UseMultipleCpuCores": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "label": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "label"
-            ],
-            "title": "UseMultipleCpuCores"
-        },
-        "RestoreDefaults": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "button": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "type": "string"
-                },
-                "success_message": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "button",
-                "tooltip",
-                "success_message"
-            ],
-            "title": "RestoreDefaults"
-        },
-        "SavedEncounters": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "encounter": {
-                    "type": "string"
-                },
-                "encounter_name": {
-                    "type": "string"
-                },
-                "save_encounter": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "title",
-                "encounter",
-                "encounter_name",
-                "save_encounter"
-            ],
-            "title": "SavedEncounters"
-        },
-        "Encounter": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "target_inputs": {
-                    "$ref": "#/definitions/TargetInputs"
-                },
-                "duration": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "duration_variation": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "execute_duration_20": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "execute_duration_25": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "execute_duration_35": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "execute_duration_45": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "duration_below_high_hp": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "encounter_preset": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "advanced": {
-                    "type": "string"
-                },
-                "use_health": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "target": {
-                    "type": "string"
-                },
-                "num_allies": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "min_base_damage": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "npc": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "ai": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "level": {
-                    "type": "string"
-                },
-                "mob_type": {
-                    "type": "string"
-                },
-                "tanked_by": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "swing_speed": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "dual_wield": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "dual_wield_penalty": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "parry_haste": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "spell_school": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "damage_spread": {
-                    "$ref": "#/definitions/EncounterField"
-                },
-                "suppress_dodge": {
-                    "type": "string"
-                },
-                "second_tank_index": {
-                    "type": "string"
-                },
-                "disabled_at_start": {
-                    "type": "string"
-                },
-                "tank": {
-                    "$ref": "#/definitions/Tank"
-                }
-            },
-            "required": [
-                "title", "target_inputs", "duration", "duration_variation", "execute_duration_20",
-                "execute_duration_25", "execute_duration_35", "execute_duration_45",
-                "duration_below_high_hp", "encounter_preset", "advanced", "use_health",
-                "target", "num_allies", "min_base_damage", "npc", "ai", "level", "mob_type",
-                "tanked_by", "swing_speed", "dual_wield", "dual_wield_penalty", "parry_haste",
-                "spell_school", "damage_spread", "suppress_dodge", "second_tank_index", "disabled_at_start",
-                "tank"
-            ],
-            "title": "Encounter"
-        },
-        "Player": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "race": {
-                    "type": "string"
-                },
-                "profession_1": {
-                    "type": "string"
-                },
-                "profession_2": {
-                    "type": "string"
-                }
-            },
-            "required": ["title", "race", "profession_1", "profession_2"],
-            "title": "Player"
-        },
-        "EncounterField": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "label": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "type": "string"
-                }
-            },
-            "required": ["label", "tooltip"],
-            "title": "EncounterField"
-        },
-        "SavedSettings": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "settings": {
-                    "type": "string"
-                },
-                "settings_name": {
-                    "type": "string"
-                },
-                "save_settings": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "title",
-                "settings",
-                "settings_name",
-                "save_settings"
-            ],
-            "title": "SavedSettings"
-        }
-    }
+		"InputField": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"label": {
+					"type": "string"
+				},
+				"tooltip": {
+					"type": "string"
+				}
+			},
+			"required": ["label", "tooltip"],
+			"title": "InputField"
+		},
+		"TankAssignmentField": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"label": {
+					"type": "string"
+				},
+				"tooltip": {
+					"type": "string"
+				},
+				"values": {
+					"$ref": "#/definitions/TankAssignmentValues"
+				}
+			},
+			"required": ["label", "tooltip", "values"],
+			"title": "TankAssignmentField"
+		},
+		"SyncTypeField": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"label": {
+					"type": "string"
+				},
+				"tooltip": {
+					"type": "string"
+				},
+				"values": {
+					"$ref": "#/definitions/SyncTypeValues"
+				}
+			},
+			"required": ["label", "tooltip", "values"],
+			"title": "SyncTypeField"
+		},
+		"SyncTypeValues": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"automatic": {
+					"type": "string"
+				},
+				"none": {
+					"type": "string"
+				},
+				"perfect_sync": {
+					"type": "string"
+				},
+				"delayed_offhand": {
+					"type": "string"
+				}
+			},
+			"required": ["automatic", "none", "perfect_sync", "delayed_offhand"],
+			"title": "SyncTypeValues"
+		},
+		"PhaseSelectorField": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"label": {
+					"type": "string"
+				},
+				"tooltip": {
+					"type": "string"
+				}
+			},
+			"required": ["label", "tooltip"],
+			"title": "PhaseSelectorField"
+		},
+		"InfoOptions": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"fixed_rng_seed": {
+					"$ref": "#/definitions/FixedRngSeed"
+				},
+				"language": {
+					"$ref": "#/definitions/Language"
+				},
+				"feature_toggles": {
+					"$ref": "#/definitions/FeatureToggles"
+				},
+				"use_multiple_cpu_cores": {
+					"$ref": "#/definitions/UseMultipleCpuCores"
+				},
+				"restore_defaults": {
+					"$ref": "#/definitions/RestoreDefaults"
+				}
+			},
+			"required": ["title", "fixed_rng_seed", "language", "feature_toggles", "use_multiple_cpu_cores", "restore_defaults"],
+			"title": "InfoOptions"
+		},
+		"Gear": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"gem_summary": {
+					"$ref": "#/definitions/GemSummary"
+				},
+				"reforge_summary": {
+					"$ref": "#/definitions/ReforgeSummary"
+				},
+				"reforge_success": {
+					"$ref": "#/definitions/ReforgeSuccess"
+				},
+				"gear_sets": {
+					"$ref": "#/definitions/GearSets"
+				}
+			},
+			"required": ["title", "gem_summary", "reforge_summary", "reforge_success", "gear_sets"],
+			"title": "Gear"
+		},
+		"GemSummary": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"reset_gems": {
+					"type": "string"
+				}
+			},
+			"required": ["title", "reset_gems"],
+			"title": "GemSummary"
+		},
+		"ReforgeSummary": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"reset_reforges": {
+					"type": "string"
+				},
+				"copy_to_reforge_lite": {
+					"type": "string"
+				}
+			},
+			"required": ["title", "reset_reforges", "copy_to_reforge_lite"],
+			"title": "ReforgeSummary"
+		},
+		"ReforgeSuccess": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"removed_reforge": {
+					"type": "string"
+				},
+				"no_changes": {
+					"type": "string"
+				},
+				"copy_to_reforge_lite": {
+					"type": "string"
+				}
+			},
+			"required": ["title", "removed_reforge", "no_changes", "copy_to_reforge_lite"],
+			"title": "ReforgeSuccess"
+		},
+		"GearSets": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"gear_set": {
+					"type": "string"
+				},
+				"gear_set_name": {
+					"type": "string"
+				},
+				"save_gear_set": {
+					"type": "string"
+				}
+			},
+			"required": ["title", "gear_set", "gear_set_name", "save_gear_set"],
+			"title": "GearSets"
+		},
+		"Landing": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"navigation": {
+					"$ref": "#/definitions/Navigation"
+				},
+				"simulations": {
+					"$ref": "#/definitions/Simulations"
+				},
+				"home": {
+					"$ref": "#/definitions/Home"
+				},
+				"header": {
+					"$ref": "#/definitions/LandingHeader"
+				}
+			},
+			"required": ["header", "home", "navigation", "simulations"],
+			"title": "Landing"
+		},
+		"LandingHeader": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"wowsims": {
+					"type": "string"
+				},
+				"expansion": {
+					"type": "string"
+				},
+				"supportDevs": {
+					"type": "string"
+				}
+			},
+			"required": ["expansion", "supportDevs", "wowsims"],
+			"title": "LandingHeader"
+		},
+		"Info": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"known_issues": {
+					"type": "string"
+				},
+				"bug_report": {
+					"type": "string"
+				},
+				"sim_options": {
+					"type": "string"
+				},
+				"discord": {
+					"type": "string"
+				},
+				"patreon": {
+					"type": "string"
+				},
+				"github": {
+					"type": "string"
+				},
+				"status": {
+					"$ref": "#/definitions/InfoStatus"
+				},
+				"options": {
+					"$ref": "#/definitions/InfoOptions"
+				}
+			},
+			"required": ["bug_report", "discord", "github", "known_issues", "patreon", "sim_options", "status", "options"],
+			"title": "Info"
+		},
+		"InfoStatus": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"unlaunched": {
+					"type": "string"
+				},
+				"alpha": {
+					"type": "string"
+				},
+				"beta": {
+					"type": "string"
+				}
+			},
+			"required": ["alpha", "beta", "unlaunched"],
+			"title": "InfoStatus"
+		},
+		"SuggestReforges": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"tooltip": {
+					"type": "string"
+				}
+			},
+			"required": ["title", "tooltip"],
+			"title": "SuggestReforges"
+		},
+		"Home": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"description": {
+					"type": "string"
+				},
+				"welcomeDescription": {
+					"type": "string"
+				}
+			},
+			"required": ["description", "title", "welcomeDescription"],
+			"title": "Home"
+		},
+		"Navigation": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"home": {
+					"type": "string"
+				},
+				"simulations": {
+					"type": "string"
+				},
+				"about": {
+					"type": "string"
+				},
+				"toggle": {
+					"type": "string"
+				}
+			},
+			"required": ["about", "home", "simulations", "toggle"],
+			"title": "Navigation"
+		},
+		"Simulations": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"full_raid": {
+					"type": "string"
+				}
+			},
+			"required": ["full_raid"],
+			"title": "Simulations"
+		},
+		"Sidebar": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"iterations": {
+					"type": "string"
+				},
+				"warnings": {
+					"$ref": "#/definitions/SidebarWarnings"
+				},
+				"buttons": {
+					"$ref": "#/definitions/Buttons"
+				},
+				"header": {
+					"$ref": "#/definitions/SidebarHeader"
+				},
+				"character_stats": {
+					"$ref": "#/definitions/CharacterStats"
+				}
+			},
+			"required": ["buttons", "character_stats", "header", "iterations", "warnings"],
+			"title": "Sidebar"
+		},
+		"SidebarWarnings": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"meta_gem_disabled": {
+					"type": "string"
+				},
+				"profession_requirement": {
+					"type": "string"
+				},
+				"too_many_jc_gems": {
+					"type": "string"
+				},
+				"unspent_talent_points": {
+					"type": "string"
+				},
+				"armor_specialization": {
+					"type": "string"
+				},
+				"dual_wield_2h_without_titans_grip": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"meta_gem_disabled",
+				"profession_requirement",
+				"too_many_jc_gems",
+				"unspent_talent_points",
+				"armor_specialization",
+				"dual_wield_2h_without_titans_grip"
+			],
+			"title": "SidebarWarnings"
+		},
+		"Buttons": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"simulate": {
+					"type": "string"
+				},
+				"stat_weights": {
+					"$ref": "#/definitions/StatWeights"
+				},
+				"suggest_reforges": {
+					"$ref": "#/definitions/SuggestReforges"
+				}
+			},
+			"required": ["simulate", "stat_weights", "suggest_reforges"],
+			"title": "Buttons"
+		},
+		"CharacterStats": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"melee_crit_cap": {
+					"type": "string"
+				},
+				"tooltip": {
+					"$ref": "#/definitions/Tooltip"
+				},
+				"crit_cap": {
+					"$ref": "#/definitions/CritCap"
+				},
+				"bonus_prefix": {
+					"type": "string"
+				},
+				"points_suffix": {
+					"type": "string"
+				},
+				"percent_suffix": {
+					"type": "string"
+				}
+			},
+			"required": ["bonus_prefix", "crit_cap", "melee_crit_cap", "percent_suffix", "points_suffix", "title", "tooltip"],
+			"title": "CharacterStats"
+		},
+		"CritCap": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"exact": {
+					"type": "string"
+				},
+				"over_by": {
+					"type": "string"
+				},
+				"under_by": {
+					"type": "string"
+				}
+			},
+			"required": ["exact", "over_by", "under_by"],
+			"title": "CritCap"
+		},
+		"Tooltip": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"base": {
+					"type": "string"
+				},
+				"gear": {
+					"type": "string"
+				},
+				"talents": {
+					"type": "string"
+				},
+				"buffs": {
+					"type": "string"
+				},
+				"consumes": {
+					"type": "string"
+				},
+				"bonus": {
+					"type": "string"
+				},
+				"total": {
+					"type": "string"
+				},
+				"glancing": {
+					"type": "string"
+				},
+				"suppression": {
+					"type": "string"
+				},
+				"to_hit_cap": {
+					"type": "string"
+				},
+				"to_exp_cap": {
+					"type": "string"
+				},
+				"spec_offsets": {
+					"type": "string"
+				},
+				"final_crit_cap": {
+					"type": "string"
+				},
+				"can_raise_by": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"base",
+				"bonus",
+				"buffs",
+				"can_raise_by",
+				"consumes",
+				"final_crit_cap",
+				"gear",
+				"glancing",
+				"spec_offsets",
+				"suppression",
+				"talents",
+				"to_exp_cap",
+				"to_hit_cap",
+				"total"
+			],
+			"title": "Tooltip"
+		},
+		"SidebarHeader": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"phase": {
+					"type": "string"
+				}
+			},
+			"required": ["phase", "title"],
+			"title": "SidebarHeader"
+		},
+		"Sim": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"description": {
+					"type": "string"
+				}
+			},
+			"required": ["description", "title"],
+			"title": "Sim"
+		},
+		"StatWeights": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"ep_weights": {
+					"$ref": "#/definitions/EpWeights"
+				}
+			},
+			"required": ["ep_weights", "title"],
+			"title": "StatWeights"
+		},
+		"EpWeights": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"use_custom": {
+					"type": "string"
+				},
+				"description": {
+					"$ref": "#/definitions/EpWeightsDescription"
+				},
+				"buttons": {
+					"$ref": "#/definitions/EpWeightsButtons"
+				},
+				"options": {
+					"$ref": "#/definitions/EpWeightsOptions"
+				}
+			},
+			"required": ["buttons", "description", "options", "use_custom"],
+			"title": "EpWeights"
+		},
+		"EpWeightsDescription": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"enable_modification": {
+					"type": "string"
+				},
+				"modify_in_editor": {
+					"type": "string"
+				},
+				"hard_cap_info": {
+					"type": "string"
+				}
+			},
+			"required": ["enable_modification", "hard_cap_info", "modify_in_editor"],
+			"title": "EpWeightsDescription"
+		},
+		"EpWeightsButtons": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"edit_weights": {
+					"type": "string"
+				}
+			},
+			"required": ["edit_weights"],
+			"title": "EpWeightsButtons"
+		},
+		"EpWeightsOptions": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"include_gems": {
+					"type": "string"
+				},
+				"freeze_item_slots": {
+					"type": "string"
+				}
+			},
+			"required": ["freeze_item_slots", "include_gems"],
+			"title": "EpWeightsOptions"
+		},
+		"FixedRngSeed": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"label": {
+					"type": "string"
+				},
+				"tooltip": {
+					"type": "string"
+				},
+				"last_used": {
+					"type": "string"
+				}
+			},
+			"required": ["label", "tooltip", "last_used"],
+			"title": "FixedRngSeed"
+		},
+		"Language": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"label": {
+					"type": "string"
+				},
+				"tooltip": {
+					"type": "string"
+				}
+			},
+			"required": ["label", "tooltip"],
+			"title": "Language"
+		},
+		"FeatureToggles": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"show_threat_metrics": {
+					"type": "string"
+				},
+				"show_experimental": {
+					"type": "string"
+				},
+				"show_quick_swap": {
+					"type": "string"
+				}
+			},
+			"required": ["show_threat_metrics", "show_experimental", "show_quick_swap"],
+			"title": "FeatureToggles"
+		},
+		"UseMultipleCpuCores": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"label": {
+					"type": "string"
+				}
+			},
+			"required": ["label"],
+			"title": "UseMultipleCpuCores"
+		},
+		"RestoreDefaults": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"button": {
+					"type": "string"
+				},
+				"tooltip": {
+					"type": "string"
+				},
+				"success_message": {
+					"type": "string"
+				}
+			},
+			"required": ["button", "tooltip", "success_message"],
+			"title": "RestoreDefaults"
+		},
+		"SavedEncounters": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"encounter": {
+					"type": "string"
+				},
+				"encounter_name": {
+					"type": "string"
+				},
+				"save_encounter": {
+					"type": "string"
+				}
+			},
+			"required": ["title", "encounter", "encounter_name", "save_encounter"],
+			"title": "SavedEncounters"
+		},
+		"Encounter": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"target_inputs": {
+					"$ref": "#/definitions/TargetInputs"
+				},
+				"duration": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"duration_variation": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"execute_duration_20": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"execute_duration_25": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"execute_duration_35": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"execute_duration_45": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"duration_below_high_hp": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"encounter_preset": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"advanced": {
+					"type": "string"
+				},
+				"use_health": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"target": {
+					"type": "string"
+				},
+				"num_allies": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"min_base_damage": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"npc": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"ai": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"level": {
+					"type": "string"
+				},
+				"mob_type": {
+					"type": "string"
+				},
+				"tanked_by": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"swing_speed": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"dual_wield": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"dual_wield_penalty": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"parry_haste": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"spell_school": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"damage_spread": {
+					"$ref": "#/definitions/EncounterField"
+				},
+				"suppress_dodge": {
+					"type": "string"
+				},
+				"second_tank_index": {
+					"type": "string"
+				},
+				"disabled_at_start": {
+					"type": "string"
+				},
+				"tank": {
+					"$ref": "#/definitions/Tank"
+				}
+			},
+			"required": [
+				"title",
+				"target_inputs",
+				"duration",
+				"duration_variation",
+				"execute_duration_20",
+				"execute_duration_25",
+				"execute_duration_35",
+				"execute_duration_45",
+				"duration_below_high_hp",
+				"encounter_preset",
+				"advanced",
+				"use_health",
+				"target",
+				"num_allies",
+				"min_base_damage",
+				"npc",
+				"ai",
+				"level",
+				"mob_type",
+				"tanked_by",
+				"swing_speed",
+				"dual_wield",
+				"dual_wield_penalty",
+				"parry_haste",
+				"spell_school",
+				"damage_spread",
+				"suppress_dodge",
+				"second_tank_index",
+				"disabled_at_start",
+				"tank"
+			],
+			"title": "Encounter"
+		},
+		"Player": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"race": {
+					"type": "string"
+				},
+				"profession_1": {
+					"type": "string"
+				},
+				"profession_2": {
+					"type": "string"
+				}
+			},
+			"required": ["title", "race", "profession_1", "profession_2"],
+			"title": "Player"
+		},
+		"EncounterField": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"label": {
+					"type": "string"
+				},
+				"tooltip": {
+					"type": "string"
+				}
+			},
+			"required": ["label", "tooltip"],
+			"title": "EncounterField"
+		},
+		"SavedSettings": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"settings": {
+					"type": "string"
+				},
+				"settings_name": {
+					"type": "string"
+				},
+				"save_settings": {
+					"type": "string"
+				}
+			},
+			"required": ["title", "settings", "settings_name", "save_settings"],
+			"title": "SavedSettings"
+		}
+	}
 }
