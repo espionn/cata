@@ -1349,6 +1349,30 @@
 				"protection_paladin_damage_taken_last_global": {
 					"label": "Damage Taken Last Global",
 					"tooltip": "Amount of damage taken in the last 1.5s."
+				},
+				"aura_remaining_icd": {
+					"label": "Aura Remaining ICD",
+					"tooltip": "Time remaining before this aura's internal cooldown will be ready, or 0 if the ICD is ready now."
+				},
+				"aura_icd_is_ready_with_reaction_time": {
+					"label": "Aura ICD Is Ready (with Reaction Time)",
+					"tooltip": "True if the aura's ICD is currently ready OR it was put on CD recently, within the player's reaction time (configured in Settings), otherwise False."
+				},
+				"aura_active_with_reaction_time": {
+					"label": "Aura Active (with Reaction Time)",
+					"tooltip": "True if the aura is currently active AND it has been active for at least as long as the player reaction time (configured in Settings), otherwise False."
+				},
+				"aura_inactive_with_reaction_time": {
+					"label": "Aura Inactive (with Reaction Time)",
+					"tooltip": "True if the aura is not currently active AND it has been inactive for at least as long as the player reaction time (configured in Settings), otherwise False."
+				},
+				"overlap": {
+					"label": "Overlap",
+					"tooltip": "Maximum amount of time before the aura expires when it may be refreshed."
+				},
+				"trinket_procs_min_remaining_time": {
+					"label": "Item Procs Min Remaining Time",
+					"tooltip": "Shortest remaining duration on any active item/enchant procs that buff the specified stat type(s), or infinity if none are currently active."
 				}
 			},
 			"operators": {

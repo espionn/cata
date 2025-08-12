@@ -604,7 +604,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	currentTimePercent: inputBuilder({
-		label: 'Current Time (%)',
+		label: i18n.t('rotation.apl.values.current_time_percent.label'),
 		submenu: ['Encounter'],
 		shortDescription: i18n.t('rotation.apl.values.current_time_percent.tooltip'),
 		newValue: APLValueCurrentTimePercent.create,
@@ -618,7 +618,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	remainingTimePercent: inputBuilder({
-		label: 'Remaining Time (%)',
+		label: i18n.t('rotation.apl.values.remaining_time_percent.label'),
 		submenu: ['Encounter'],
 		shortDescription: i18n.t('rotation.apl.values.remaining_time_percent.tooltip'),
 		newValue: APLValueRemainingTimePercent.create,
@@ -648,9 +648,9 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 
 	// Boss
 	bossSpellIsCasting: inputBuilder({
-		label: 'Spell is Casting',
+		label: i18n.t('rotation.apl.values.spell_is_casting.label'),
 		submenu: ['Boss'],
-		shortDescription: '',
+		shortDescription: i18n.t('rotation.apl.values.spell_is_casting.tooltip'),
 		newValue: APLValueBossSpellIsCasting.create,
 		fields: [
 			AplHelpers.unitFieldConfig('targetUnit', 'targets'),
@@ -658,23 +658,23 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		],
 	}),
 	bossSpellTimeToReady: inputBuilder({
-		label: 'Spell Time to Ready',
+		label: i18n.t('rotation.apl.values.spell_time_to_ready.label'),
 		submenu: ['Boss'],
-		shortDescription: '',
+		shortDescription: i18n.t('rotation.apl.values.spell_time_to_ready.tooltip'),
 		newValue: APLValueBossSpellTimeToReady.create,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'spells', 'targetUnit', 'currentTarget')],
 	}),
 
 	// Unit
 	unitIsMoving: inputBuilder({
-		label: 'Is moving',
+		label: i18n.t('rotation.apl.values.is_moving.label'),
 		submenu: ['Unit'],
-		shortDescription: '',
+		shortDescription: i18n.t('rotation.apl.values.is_moving.tooltip'),
 		newValue: APLValueUnitIsMoving.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources')],
 	}),
 	unitDistance: inputBuilder({
-		label: 'Distance',
+		label: i18n.t('rotation.apl.values.distance.label'),
 		submenu: ['Unit'],
 		shortDescription: i18n.t('rotation.apl.values.distance.tooltip'),
 		newValue: APLValueUnitDistance.create,
@@ -683,28 +683,28 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 
 	// Resources
 	currentHealth: inputBuilder({
-		label: 'Current Health',
+		label: i18n.t('rotation.apl.values.current_health.label'),
 		submenu: ['Resources', 'Health'],
 		shortDescription: i18n.t('rotation.apl.values.current_health.tooltip'),
 		newValue: APLValueCurrentHealth.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources')],
 	}),
 	currentHealthPercent: inputBuilder({
-		label: 'Current Health (%)',
+		label: i18n.t('rotation.apl.values.current_health_percent.label'),
 		submenu: ['Resources', 'Health'],
 		shortDescription: i18n.t('rotation.apl.values.current_health_percent.tooltip'),
 		newValue: APLValueCurrentHealthPercent.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources')],
 	}),
 	maxHealth: inputBuilder({
-		label: 'Max Health',
+		label: i18n.t('rotation.apl.values.max_health.label'),
 		submenu: ['Resources', 'Health'],
 		shortDescription: i18n.t('rotation.apl.values.max_health.tooltip'),
 		newValue: APLValueMaxHealth.create,
 		fields: [],
 	}),
 	currentMana: inputBuilder({
-		label: 'Current Mana',
+		label: i18n.t('rotation.apl.values.current_mana.label'),
 		submenu: ['Resources', 'Mana'],
 		shortDescription: i18n.t('rotation.apl.values.current_mana.tooltip'),
 		newValue: APLValueCurrentMana.create,
@@ -715,7 +715,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	currentManaPercent: inputBuilder({
-		label: 'Current Mana (%)',
+		label: i18n.t('rotation.apl.values.current_mana_percent.label'),
 		submenu: ['Resources', 'Mana'],
 		shortDescription: i18n.t('rotation.apl.values.current_mana_percent.tooltip'),
 		newValue: APLValueCurrentManaPercent.create,
@@ -726,7 +726,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	currentRage: inputBuilder({
-		label: 'Current Rage',
+		label: i18n.t('rotation.apl.values.current_rage.label'),
 		submenu: ['Resources', 'Rage'],
 		shortDescription: i18n.t('rotation.apl.values.current_rage.tooltip'),
 		newValue: APLValueCurrentRage.create,
@@ -738,7 +738,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	maxRage: inputBuilder({
-		label: 'Max Rage',
+		label: i18n.t('rotation.apl.values.max_rage.label'),
 		submenu: ['Resources', 'Rage'],
 		shortDescription: i18n.t('rotation.apl.values.max_rage.tooltip'),
 		newValue: APLValueMaxRage.create,
@@ -750,7 +750,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	currentFocus: inputBuilder({
-		label: 'Current Focus',
+		label: i18n.t('rotation.apl.values.current_focus.label'),
 		submenu: ['Resources', 'Focus'],
 		shortDescription: i18n.t('rotation.apl.values.current_focus.tooltip'),
 		newValue: APLValueCurrentFocus.create,
@@ -758,7 +758,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	maxFocus: inputBuilder({
-		label: 'Max Focus',
+		label: i18n.t('rotation.apl.values.max_focus.label'),
 		submenu: ['Resources', 'Focus'],
 		shortDescription: i18n.t('rotation.apl.values.max_focus.tooltip'),
 		newValue: APLValueMaxFocus.create,
@@ -766,7 +766,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	focusRegenPerSecond: inputBuilder({
-		label: 'Focus Regen Per Second',
+		label: i18n.t('rotation.apl.values.focus_regen_per_second.label'),
 		submenu: ['Resources', 'Focus'],
 		shortDescription: i18n.t('rotation.apl.values.focus_regen_per_second.tooltip'),
 		newValue: APLValueFocusRegenPerSecond.create,
@@ -774,7 +774,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	focusTimeToTarget: inputBuilder({
-		label: 'Estimated Time To Target Focus',
+		label: i18n.t('rotation.apl.values.estimated_time_to_target_focus.label'),
 		submenu: ['Resources', 'Focus'],
 		shortDescription: i18n.t('rotation.apl.values.estimated_time_to_target_focus.tooltip'),
 		newValue: APLValueFocusTimeToTarget.create,
@@ -782,7 +782,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [valueFieldConfig('targetFocus')],
 	}),
 	currentEnergy: inputBuilder({
-		label: 'Current Energy',
+		label: i18n.t('rotation.apl.values.current_energy.label'),
 		submenu: ['Resources', 'Energy'],
 		shortDescription: i18n.t('rotation.apl.values.current_energy.tooltip'),
 		newValue: APLValueCurrentEnergy.create,
@@ -794,7 +794,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	maxEnergy: inputBuilder({
-		label: 'Max Energy',
+		label: i18n.t('rotation.apl.values.max_energy.label'),
 		submenu: ['Resources', 'Energy'],
 		shortDescription: i18n.t('rotation.apl.values.max_energy.tooltip'),
 		newValue: APLValueMaxEnergy.create,
@@ -806,7 +806,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	energyRegenPerSecond: inputBuilder({
-		label: 'Energy Regen Per Second',
+		label: i18n.t('rotation.apl.values.energy_regen_per_second.label'),
 		submenu: ['Resources', 'Energy'],
 		shortDescription: i18n.t('rotation.apl.values.energy_regen_per_second.tooltip'),
 		newValue: APLValueEnergyRegenPerSecond.create,
@@ -818,7 +818,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	energyTimeToTarget: inputBuilder({
-		label: 'Estimated Time To Target Energy',
+		label: i18n.t('rotation.apl.values.estimated_time_to_target_energy.label'),
 		submenu: ['Resources', 'Energy'],
 		shortDescription: i18n.t('rotation.apl.values.estimated_time_to_target_energy.tooltip'),
 		newValue: APLValueEnergyTimeToTarget.create,
@@ -830,7 +830,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [valueFieldConfig('targetEnergy')],
 	}),
 	currentComboPoints: inputBuilder({
-		label: 'Current Combo Points',
+		label: i18n.t('rotation.apl.values.current_combo_points.label'),
 		submenu: ['Resources', 'Combo Points'],
 		shortDescription: i18n.t('rotation.apl.values.current_combo_points.tooltip'),
 		newValue: APLValueCurrentComboPoints.create,
@@ -842,7 +842,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	maxComboPoints: inputBuilder({
-		label: 'Max Combo Points',
+		label: i18n.t('rotation.apl.values.max_combo_points.label'),
 		submenu: ['Resources', 'Combo Points'],
 		shortDescription: i18n.t('rotation.apl.values.max_combo_points.tooltip'),
 		newValue: APLValueMaxComboPoints.create,
@@ -854,7 +854,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	monkCurrentChi: inputBuilder({
-		label: 'Current Chi',
+		label: i18n.t('rotation.apl.values.current_chi.label'),
 		submenu: ['Resources', 'Chi'],
 		shortDescription: i18n.t('rotation.apl.values.current_chi.tooltip'),
 		newValue: APLValueMonkCurrentChi.create,
@@ -862,7 +862,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	monkMaxChi: inputBuilder({
-		label: 'Max Chi',
+		label: i18n.t('rotation.apl.values.max_chi.label'),
 		submenu: ['Resources', 'Chi'],
 		shortDescription: i18n.t('rotation.apl.values.max_chi.tooltip'),
 		newValue: APLValueMonkMaxChi.create,
@@ -870,7 +870,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	currentRunicPower: inputBuilder({
-		label: 'Current Runic Power',
+		label: i18n.t('rotation.apl.values.current_runic_power.label'),
 		submenu: ['Resources', 'Runic Power'],
 		shortDescription: i18n.t('rotation.apl.values.current_runic_power.tooltip'),
 		newValue: APLValueCurrentRunicPower.create,
@@ -878,7 +878,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	maxRunicPower: inputBuilder({
-		label: 'Max Runic Power',
+		label: i18n.t('rotation.apl.values.max_runic_power.label'),
 		submenu: ['Resources', 'Runic Power'],
 		shortDescription: i18n.t('rotation.apl.values.max_runic_power.tooltip'),
 		newValue: APLValueMaxRunicPower.create,
@@ -886,7 +886,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	currentSolarEnergy: inputBuilder({
-		label: 'Solar Energy',
+		label: i18n.t('rotation.apl.values.solar_energy.label'),
 		submenu: ['Resources', 'Eclipse'],
 		shortDescription: i18n.t('rotation.apl.values.solar_energy.tooltip'),
 		newValue: APLValueCurrentSolarEnergy.create,
@@ -894,7 +894,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	currentLunarEnergy: inputBuilder({
-		label: 'Lunar Energy',
+		label: i18n.t('rotation.apl.values.lunar_energy.label'),
 		submenu: ['Resources', 'Eclipse'],
 		shortDescription: i18n.t('rotation.apl.values.lunar_energy.tooltip'),
 		newValue: APLValueCurrentLunarEnergy.create,
@@ -902,7 +902,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	druidCurrentEclipsePhase: inputBuilder({
-		label: 'Current Eclipse Phase',
+		label: i18n.t('rotation.apl.values.current_eclipse_phase.label'),
 		submenu: ['Resources', 'Eclipse'],
 		shortDescription: i18n.t('rotation.apl.values.current_eclipse_phase.tooltip'),
 		newValue: APLValueCurrentEclipsePhase.create,
@@ -910,7 +910,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [AplHelpers.eclipseTypeFieldConfig('eclipsePhase')],
 	}),
 	currentGenericResource: inputBuilder({
-		label: '{GENERIC_RESOURCE}',
+		label: i18n.t('rotation.apl.values.generic_resource.label'),
 		submenu: ['Resources'],
 		shortDescription: i18n.t('rotation.apl.values.generic_resource.tooltip'),
 		newValue: APLValueCurrentGenericResource.create,
@@ -921,7 +921,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 
 	// Resources Rune
 	currentRuneCount: inputBuilder({
-		label: 'Num Runes',
+		label: i18n.t('rotation.apl.values.num_runes.label'),
 		submenu: ['Resources', 'Runes'],
 		shortDescription: i18n.t('rotation.apl.values.num_runes.tooltip'),
 		newValue: APLValueCurrentRuneCount.create,
@@ -929,7 +929,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [AplHelpers.runeTypeFieldConfig('runeType', true)],
 	}),
 	currentNonDeathRuneCount: inputBuilder({
-		label: 'Num Non Death Runes',
+		label: i18n.t('rotation.apl.values.num_non_death_runes.label'),
 		submenu: ['Resources', 'Runes'],
 		shortDescription: i18n.t('rotation.apl.values.num_non_death_runes.tooltip'),
 		newValue: APLValueCurrentNonDeathRuneCount.create,
@@ -937,7 +937,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [AplHelpers.runeTypeFieldConfig('runeType', false)],
 	}),
 	currentRuneActive: inputBuilder({
-		label: 'Rune Is Ready',
+		label: i18n.t('rotation.apl.values.rune_is_ready.label'),
 		submenu: ['Resources', 'Runes'],
 		shortDescription: i18n.t('rotation.apl.values.rune_is_ready.tooltip'),
 		newValue: APLValueCurrentRuneActive.create,
@@ -945,7 +945,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [AplHelpers.runeSlotFieldConfig('runeSlot')],
 	}),
 	currentRuneDeath: inputBuilder({
-		label: 'Rune Is Death',
+		label: i18n.t('rotation.apl.values.rune_is_death.label'),
 		submenu: ['Resources', 'Runes'],
 		shortDescription: i18n.t('rotation.apl.values.rune_is_death.tooltip'),
 		newValue: APLValueCurrentRuneDeath.create,
@@ -953,7 +953,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [AplHelpers.runeSlotFieldConfig('runeSlot')],
 	}),
 	runeCooldown: inputBuilder({
-		label: 'Rune Cooldown',
+		label: i18n.t('rotation.apl.values.rune_cooldown.label'),
 		submenu: ['Resources', 'Runes'],
 		shortDescription: i18n.t('rotation.apl.values.rune_cooldown.tooltip'),
 		newValue: APLValueRuneCooldown.create,
@@ -961,7 +961,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [AplHelpers.runeTypeFieldConfig('runeType', false)],
 	}),
 	nextRuneCooldown: inputBuilder({
-		label: 'Next Rune Cooldown',
+		label: i18n.t('rotation.apl.values.next_rune_cooldown.label'),
 		submenu: ['Resources', 'Runes'],
 		shortDescription: i18n.t('rotation.apl.values.next_rune_cooldown.tooltip'),
 		newValue: APLValueNextRuneCooldown.create,
@@ -969,7 +969,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [AplHelpers.runeTypeFieldConfig('runeType', false)],
 	}),
 	runeSlotCooldown: inputBuilder({
-		label: 'Rune Slot Cooldown',
+		label: i18n.t('rotation.apl.values.rune_slot_cooldown.label'),
 		submenu: ['Resources', 'Runes'],
 		shortDescription: i18n.t('rotation.apl.values.rune_slot_cooldown.tooltip'),
 		newValue: APLValueRuneSlotCooldown.create,
@@ -979,14 +979,14 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 
 	// GCD
 	gcdIsReady: inputBuilder({
-		label: 'GCD Is Ready',
+		label: i18n.t('rotation.apl.values.gcd_is_ready.label'),
 		submenu: ['GCD'],
 		shortDescription: i18n.t('rotation.apl.values.gcd_is_ready.tooltip'),
 		newValue: APLValueGCDIsReady.create,
 		fields: [],
 	}),
 	gcdTimeToReady: inputBuilder({
-		label: 'GCD Time To Ready',
+		label: i18n.t('rotation.apl.values.gcd_time_to_ready.label'),
 		submenu: ['GCD'],
 		shortDescription: i18n.t('rotation.apl.values.gcd_time_to_ready.tooltip'),
 		newValue: APLValueGCDTimeToReady.create,
@@ -995,7 +995,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 
 	// Auto attacks
 	autoTimeToNext: inputBuilder({
-		label: 'Time To Next Auto',
+		label: i18n.t('rotation.apl.values.time_to_next_auto.label'),
 		submenu: ['Auto'],
 		shortDescription: i18n.t('rotation.apl.values.time_to_next_auto.tooltip'),
 		newValue: APLValueAutoTimeToNext.create,
@@ -1016,21 +1016,21 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 
 	// Spells
 	spellIsKnown: inputBuilder({
-		label: 'Spell Known',
+		label: i18n.t('rotation.apl.values.spell_known.label'),
 		submenu: ['Spell'],
 		shortDescription: i18n.t('rotation.apl.values.spell_known.tooltip'),
 		newValue: APLValueSpellIsKnown.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellCurrentCost: inputBuilder({
-		label: 'Current Cost',
+		label: i18n.t('rotation.apl.values.current_cost.label'),
 		submenu: ['Spell'],
 		shortDescription: i18n.t('rotation.apl.values.current_cost.tooltip'),
 		newValue: APLValueSpellCurrentCost.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellCanCast: inputBuilder({
-		label: 'Can Cast',
+		label: i18n.t('rotation.apl.values.can_cast.label'),
 		submenu: ['Spell'],
 		shortDescription: i18n.t('rotation.apl.values.can_cast.tooltip'),
 		fullDescription: `
@@ -1040,77 +1040,77 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellIsReady: inputBuilder({
-		label: 'Is Ready',
+		label: i18n.t('rotation.apl.values.is_ready.label'),
 		submenu: ['Spell'],
 		shortDescription: i18n.t('rotation.apl.values.is_ready.tooltip'),
 		newValue: APLValueSpellIsReady.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellTimeToReady: inputBuilder({
-		label: 'Time To Ready',
+		label: i18n.t('rotation.apl.values.time_to_ready.label'),
 		submenu: ['Spell'],
 		shortDescription: i18n.t('rotation.apl.values.time_to_ready.tooltip'),
 		newValue: APLValueSpellTimeToReady.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellCastTime: inputBuilder({
-		label: 'Cast Time',
+		label: i18n.t('rotation.apl.values.cast_time.label'),
 		submenu: ['Spell'],
 		shortDescription: i18n.t('rotation.apl.values.cast_time.tooltip'),
 		newValue: APLValueSpellCastTime.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellTravelTime: inputBuilder({
-		label: 'Travel Time',
+		label: i18n.t('rotation.apl.values.travel_time.label'),
 		submenu: ['Spell'],
 		shortDescription: i18n.t('rotation.apl.values.travel_time.tooltip'),
 		newValue: APLValueSpellTravelTime.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellCpm: inputBuilder({
-		label: 'CPM',
+		label: i18n.t('rotation.apl.values.cpm.label'),
 		submenu: ['Spell'],
 		shortDescription: i18n.t('rotation.apl.values.cpm.tooltip'),
 		newValue: APLValueSpellCPM.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellIsChanneling: inputBuilder({
-		label: 'Is Channeling',
+		label: i18n.t('rotation.apl.values.is_channeling.label'),
 		submenu: ['Spell'],
 		shortDescription: i18n.t('rotation.apl.values.is_channeling.tooltip'),
 		newValue: APLValueSpellIsChanneling.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'channel_spells', '')],
 	}),
 	spellChanneledTicks: inputBuilder({
-		label: 'Channeled Ticks',
+		label: i18n.t('rotation.apl.values.channeled_ticks.label'),
 		submenu: ['Spell'],
 		shortDescription: i18n.t('rotation.apl.values.channeled_ticks.tooltip'),
 		newValue: APLValueSpellChanneledTicks.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'channel_spells', '')],
 	}),
 	spellNumCharges: inputBuilder({
-		label: 'Number of Charges',
+		label: i18n.t('rotation.apl.values.number_of_charges.label'),
 		submenu: ['Spell'],
 		shortDescription: i18n.t('rotation.apl.values.number_of_charges.tooltip'),
 		newValue: APLValueSpellNumCharges.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellTimeToCharge: inputBuilder({
-		label: 'Time to next Charge',
+		label: i18n.t('rotation.apl.values.time_to_next_charge.label'),
 		submenu: ['Spell'],
 		shortDescription: i18n.t('rotation.apl.values.time_to_next_charge.tooltip'),
 		newValue: APLValueSpellTimeToCharge.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	channelClipDelay: inputBuilder({
-		label: 'Channel Clip Delay',
+		label: i18n.t('rotation.apl.values.channel_clip_delay.label'),
 		submenu: ['Spell'],
 		shortDescription: i18n.t('rotation.apl.values.channel_clip_delay.tooltip'),
 		newValue: APLValueChannelClipDelay.create,
 		fields: [],
 	}),
 	inputDelay: inputBuilder({
-		label: 'Input Delay',
+		label: i18n.t('rotation.apl.values.input_delay.label'),
 		submenu: ['Spell'],
 		shortDescription: i18n.t('rotation.apl.values.input_delay.tooltip'),
 		newValue: APLValueInputDelay.create,
@@ -1119,66 +1119,63 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 
 	// Auras
 	auraIsKnown: inputBuilder({
-		label: 'Aura Known',
+		label: i18n.t('rotation.apl.values.aura_known.label'),
 		submenu: ['Aura'],
 		shortDescription: i18n.t('rotation.apl.values.aura_known.tooltip'),
 		newValue: APLValueAuraIsKnown.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
 	}),
 	auraIsActive: inputBuilder({
-		label: 'Aura Active',
+		label: i18n.t('rotation.apl.values.aura_active.label'),
 		submenu: ['Aura'],
 		shortDescription: i18n.t('rotation.apl.values.aura_active.tooltip'),
 		newValue: APLValueAuraIsActive.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
 	}),
 	auraIsActiveWithReactionTime: inputBuilder({
-		label: 'Aura Active (with Reaction Time)',
+		label: i18n.t('rotation.apl.values.aura_active_with_reaction_time.label'),
 		submenu: ['Aura'],
-		shortDescription:
-			'<b>True</b> if the aura is currently active AND it has been active for at least as long as the player reaction time (configured in Settings), otherwise <b>False</b>.',
+		shortDescription: i18n.t('rotation.apl.values.aura_active_with_reaction_time.tooltip'),
 		newValue: APLValueAuraIsActiveWithReactionTime.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
 	}),
 	auraIsInactiveWithReactionTime: inputBuilder({
-		label: 'Aura Inactive (with Reaction Time)',
+		label: i18n.t('rotation.apl.values.aura_inactive_with_reaction_time.label'),
 		submenu: ['Aura'],
-		shortDescription:
-			'<b>True</b> if the aura is not currently active AND it has been inactive for at least as long as the player reaction time (configured in Settings), otherwise <b>False</b>.',
+		shortDescription: i18n.t('rotation.apl.values.aura_inactive_with_reaction_time.tooltip'),
 		newValue: APLValueAuraIsInactiveWithReactionTime.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
 	}),
 	auraRemainingTime: inputBuilder({
-		label: 'Aura Remaining Time',
+		label: i18n.t('rotation.apl.values.aura_remaining_time.label'),
 		submenu: ['Aura'],
 		shortDescription: i18n.t('rotation.apl.values.aura_remaining_time.tooltip'),
 		newValue: APLValueAuraRemainingTime.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
 	}),
 	auraNumStacks: inputBuilder({
-		label: 'Aura Num Stacks',
+		label: i18n.t('rotation.apl.values.aura_num_stacks.label'),
 		submenu: ['Aura'],
 		shortDescription: i18n.t('rotation.apl.values.aura_num_stacks.tooltip'),
 		newValue: APLValueAuraNumStacks.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'stackable_auras', 'sourceUnit')],
 	}),
 	auraInternalCooldown: inputBuilder({
-		label: 'Aura Remaining ICD',
+		label: i18n.t('rotation.apl.values.aura_remaining_icd.label'),
 		submenu: ['Aura'],
-		shortDescription: "Time remaining before this aura's internal cooldown will be ready, or <b>0</b> if the ICD is ready now.",
+		shortDescription: i18n.t('rotation.apl.values.aura_remaining_icd.tooltip'),
 		newValue: APLValueAuraInternalCooldown.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'icd_auras', 'sourceUnit')],
 	}),
 	auraIcdIsReadyWithReactionTime: inputBuilder({
-		label: 'Aura ICD Is Ready (with Reaction Time)',
+		label: i18n.t('rotation.apl.values.aura_icd_is_ready_with_reaction_time.label'),
 		submenu: ['Aura'],
-		shortDescription:
-			"<b>True</b> if the aura's ICD is currently ready OR it was put on CD recently, within the player's reaction time (configured in Settings), otherwise <b>False</b>.",
+		shortDescription: i18n.t('rotation.apl.values.aura_icd_is_ready_with_reaction_time.tooltip'),
 		newValue: APLValueAuraICDIsReadyWithReactionTime.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'icd_auras', 'sourceUnit')],
 	}),
 	auraShouldRefresh: inputBuilder({
-		label: 'Should Refresh Aura',
+		label: i18n.t('rotation.apl.values.aura_should_refresh.label'),
 		submenu: ['Aura'],
 		shortDescription: i18n.t('rotation.apl.values.aura_should_refresh.tooltip'),
 		fullDescription: `
@@ -1200,15 +1197,15 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources_targets_first'),
 			AplHelpers.actionIdFieldConfig('auraId', 'exclusive_effect_auras', 'sourceUnit', 'currentTarget'),
 			valueFieldConfig('maxOverlap', {
-				label: 'Overlap',
-				labelTooltip: 'Maximum amount of time before the aura expires when it may be refreshed.',
+				label: i18n.t('rotation.apl.values.overlap.label'),
+				labelTooltip: i18n.t('rotation.apl.values.overlap.tooltip'),
 			}),
 		],
 	}),
 
 	// Aura Sets
 	allTrinketStatProcsActive: inputBuilder({
-		label: 'All Item Proc Buffs Active',
+		label: i18n.t('rotation.apl.values.all_trinket_stat_procs_active.label'),
 		submenu: ['Aura Sets'],
 		shortDescription: i18n.t('rotation.apl.values.all_trinket_stat_procs_active.tooltip'),
 		fullDescription: `
@@ -1228,7 +1225,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		],
 	}),
 	anyTrinketStatProcsActive: inputBuilder({
-		label: 'Any Item Proc Buff Active',
+		label: i18n.t('rotation.apl.values.any_trinket_stat_procs_active.label'),
 		submenu: ['Aura Sets'],
 		shortDescription: i18n.t('rotation.apl.values.any_trinket_stat_procs_active.tooltip'),
 		fullDescription: `
@@ -1248,10 +1245,9 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		],
 	}),
 	trinketProcsMinRemainingTime: inputBuilder({
-		label: 'Item Procs Min Remaining Time',
+		label: i18n.t('rotation.apl.values.trinket_procs_min_remaining_time.label'),
 		submenu: ['Aura Sets'],
-		shortDescription:
-			'Shortest remaining duration on any active item/enchant procs that buff the specified stat type(s), or infinity if none are currently active.',
+		shortDescription: i18n.t('rotation.apl.values.trinket_procs_min_remaining_time.tooltip'),
 		newValue: () =>
 			APLValueTrinketProcsMinRemainingTime.create({
 				statType1: -1,
@@ -1266,7 +1262,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		],
 	}),
 	trinketProcsMaxRemainingIcd: inputBuilder({
-		label: 'Item Procs Max Remaining ICD',
+		label: i18n.t('rotation.apl.values.trinket_procs_max_remaining_icd.label'),
 		submenu: ['Aura Sets'],
 		shortDescription: i18n.t('rotation.apl.values.trinket_procs_max_remaining_icd.tooltip'),
 		newValue: () =>
@@ -1283,7 +1279,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		],
 	}),
 	numEquippedStatProcTrinkets: inputBuilder({
-		label: 'Num Equipped Stat Proc Effects',
+		label: i18n.t('rotation.apl.values.num_equipped_stat_proc_trinkets.label'),
 		submenu: ['Aura Sets'],
 		shortDescription: i18n.t('rotation.apl.values.num_equipped_stat_proc_trinkets.tooltip'),
 		newValue: () =>
@@ -1300,7 +1296,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		],
 	}),
 	numStatBuffCooldowns: inputBuilder({
-		label: 'Num Stat Buff Cooldowns',
+		label: i18n.t('rotation.apl.values.num_stat_buff_cooldowns.label'),
 		submenu: ['Aura Sets'],
 		shortDescription: i18n.t('rotation.apl.values.num_stat_buff_cooldowns.tooltip'),
 		fullDescription: `
@@ -1315,7 +1311,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [AplHelpers.statTypeFieldConfig('statType1'), AplHelpers.statTypeFieldConfig('statType2'), AplHelpers.statTypeFieldConfig('statType3')],
 	}),
 	anyStatBuffCooldownsActive: inputBuilder({
-		label: 'Any Stat Buff Cooldowns Active',
+		label: i18n.t('rotation.apl.values.any_stat_buff_cooldowns_active.label'),
 		submenu: ['Aura Sets'],
 		shortDescription: i18n.t('rotation.apl.values.any_stat_buff_cooldowns_active.tooltip'),
 		fullDescription: `
@@ -1333,63 +1329,63 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 
 	// DoT
 	dotIsActive: inputBuilder({
-		label: 'Dot Is Active',
+		label: i18n.t('rotation.apl.values.dot_is_active.label'),
 		submenu: ['DoT'],
 		shortDescription: i18n.t('rotation.apl.values.dot_is_active.tooltip'),
 		newValue: APLValueDotIsActive.create,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
 	}),
 	dotIsActiveOnAllTargets: inputBuilder({
-		label: 'Dot Is Active On All Targets',
+		label: i18n.t('rotation.apl.values.dot_is_active_on_all_targets.label'),
 		submenu: ['DoT'],
 		shortDescription: i18n.t('rotation.apl.values.dot_is_active_on_all_targets.tooltip'),
 		newValue: APLValueDotIsActiveOnAllTargets.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'dot_spells')],
 	}),
 	dotRemainingTime: inputBuilder({
-		label: 'Dot Remaining Time',
+		label: i18n.t('rotation.apl.values.dot_remaining_time.label'),
 		submenu: ['DoT'],
 		shortDescription: i18n.t('rotation.apl.values.dot_remaining_time.tooltip'),
 		newValue: APLValueDotRemainingTime.create,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
 	}),
 	dotLowestRemainingTime: inputBuilder({
-		label: 'Dot Lowest Remaining Time',
+		label: i18n.t('rotation.apl.values.dot_lowest_remaining_time.label'),
 		submenu: ['DoT'],
 		shortDescription: i18n.t('rotation.apl.values.dot_lowest_remaining_time.tooltip'),
 		newValue: APLValueDotLowestRemainingTime.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
 	}),
 	dotTickFrequency: inputBuilder({
-		label: 'Dot Tick Frequency',
+		label: i18n.t('rotation.apl.values.dot_tick_frequency.label'),
 		submenu: ['DoT'],
 		shortDescription: i18n.t('rotation.apl.values.dot_tick_frequency.tooltip'),
 		newValue: APLValueDotTickFrequency.create,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
 	}),
 	dotPercentIncrease: inputBuilder({
-		label: 'Dot Damage Increase %',
+		label: i18n.t('rotation.apl.values.dot_percent_increase.label'),
 		submenu: ['DoT'],
 		shortDescription: i18n.t('rotation.apl.values.dot_percent_increase.tooltip'),
 		newValue: APLValueDotPercentIncrease.create,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', '')],
 	}),
 	sequenceIsComplete: inputBuilder({
-		label: 'Sequence Is Complete',
+		label: i18n.t('rotation.apl.values.sequence_is_complete.label'),
 		submenu: ['Sequence'],
 		shortDescription: i18n.t('rotation.apl.values.sequence_is_complete.tooltip'),
 		newValue: APLValueSequenceIsComplete.create,
 		fields: [AplHelpers.stringFieldConfig('sequenceName')],
 	}),
 	sequenceIsReady: inputBuilder({
-		label: 'Sequence Is Ready',
+		label: i18n.t('rotation.apl.values.sequence_is_ready.label'),
 		submenu: ['Sequence'],
 		shortDescription: i18n.t('rotation.apl.values.sequence_is_ready.tooltip'),
 		newValue: APLValueSequenceIsReady.create,
 		fields: [AplHelpers.stringFieldConfig('sequenceName')],
 	}),
 	sequenceTimeToReady: inputBuilder({
-		label: 'Sequence Time To Ready',
+		label: i18n.t('rotation.apl.values.sequence_time_to_ready.label'),
 		submenu: ['Sequence'],
 		shortDescription: i18n.t('rotation.apl.values.sequence_time_to_ready.tooltip'),
 		newValue: APLValueSequenceTimeToReady.create,
@@ -1398,7 +1394,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 
 	// Class/spec specific values
 	totemRemainingTime: inputBuilder({
-		label: 'Totem Remaining Time',
+		label: i18n.t('rotation.apl.values.totem_remaining_time.label'),
 		submenu: ['Shaman'],
 		shortDescription: i18n.t('rotation.apl.values.totem_remaining_time.tooltip'),
 		newValue: APLValueTotemRemainingTime.create,
@@ -1406,7 +1402,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [totemTypeFieldConfig('totemType')],
 	}),
 	shamanFireElementalDuration: inputBuilder({
-		label: 'Fire Elemental Total Duration',
+		label: i18n.t('rotation.apl.values.shaman_fire_elemental_duration.label'),
 		submenu: ['Shaman'],
 		shortDescription: i18n.t('rotation.apl.values.shaman_fire_elemental_duration.tooltip'),
 		newValue: APLValueShamanFireElementalDuration.create,
@@ -1414,7 +1410,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	catExcessEnergy: inputBuilder({
-		label: 'Excess Energy',
+		label: i18n.t('rotation.apl.values.cat_excess_energy.label'),
 		submenu: ['Feral Druid'],
 		shortDescription: i18n.t('rotation.apl.values.cat_excess_energy.tooltip'),
 		newValue: APLValueCatExcessEnergy.create,
@@ -1422,7 +1418,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	catNewSavageRoarDuration: inputBuilder({
-		label: 'New Savage Roar Duration',
+		label: i18n.t('rotation.apl.values.cat_new_savage_roar_duration.label'),
 		submenu: ['Feral Druid'],
 		shortDescription: i18n.t('rotation.apl.values.cat_new_savage_roar_duration.tooltip'),
 		newValue: APLValueCatNewSavageRoarDuration.create,
@@ -1430,7 +1426,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	warlockHandOfGuldanInFlight: inputBuilder({
-		label: 'Hand of Guldan in Flight',
+		label: i18n.t('rotation.apl.values.warlock_hand_of_guldan_in_flight.label'),
 		submenu: ['Warlock'],
 		shortDescription: i18n.t('rotation.apl.values.warlock_hand_of_guldan_in_flight.tooltip'),
 		newValue: APLValueWarlockHandOfGuldanInFlight.create,
@@ -1438,7 +1434,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	warlockHauntInFlight: inputBuilder({
-		label: 'Haunt In Flight',
+		label: i18n.t('rotation.apl.values.warlock_haunt_in_flight.label'),
 		submenu: ['Warlock'],
 		shortDescription: i18n.t('rotation.apl.values.warlock_haunt_in_flight.tooltip'),
 		newValue: APLValueWarlockHauntInFlight.create,
@@ -1446,7 +1442,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	mageCurrentCombustionDotEstimate: inputBuilder({
-		label: 'Combustion Dot Value',
+		label: i18n.t('rotation.apl.values.mage_current_combustion_dot_estimate.label'),
 		submenu: ['Mage'],
 		shortDescription: i18n.t('rotation.apl.values.mage_current_combustion_dot_estimate.tooltip'),
 		newValue: APLValueMageCurrentCombustionDotEstimate.create,
@@ -1454,7 +1450,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	brewmasterMonkCurrentStaggerPercent: inputBuilder({
-		label: 'Current Stagger (%)',
+		label: i18n.t('rotation.apl.values.brewmaster_monk_current_stagger_percent.label'),
 		submenu: ['Tank'],
 		shortDescription: i18n.t('rotation.apl.values.brewmaster_monk_current_stagger_percent.tooltip'),
 		newValue: APLValueMonkCurrentChi.create,
@@ -1462,7 +1458,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [],
 	}),
 	protectionPaladinDamageTakenLastGlobal: inputBuilder({
-		label: 'Damage Taken Last Global',
+		label: i18n.t('rotation.apl.values.protection_paladin_damage_taken_last_global.label'),
 		submenu: ['Tank'],
 		shortDescription: i18n.t('rotation.apl.values.protection_paladin_damage_taken_last_global.tooltip'),
 		newValue: APLValueProtectionPaladinDamageTakenLastGlobal.create,

@@ -773,7 +773,7 @@
 			"prepull_actions": {
 				"title": "Actions de Préparation",
 				"tooltip": "Actions à effectuer avant le pull.",
-				"item_label": "Action de Préparation",
+				"item_label": "Prepull Action",
 				"do_at": {
 					"label": "Faire À",
 					"tooltip": "Temps avant le pull pour faire l'action. Doit être négatif, et formaté comme '-1s' ou '-2500ms'."
@@ -1349,6 +1349,30 @@
 				"protection_paladin_damage_taken_last_global": {
 					"label": "Dégâts Reçus Dernier Global",
 					"tooltip": "Quantité de dégâts reçus dans les dernières 1.5s."
+				},
+				"aura_remaining_icd": {
+					"label": "Temps Restant ICD Aura",
+					"tooltip": "Temps restant avant que le temps de recharge interne de cette aura soit prêt, ou 0 si l'ICD est prêt maintenant."
+				},
+				"aura_icd_is_ready_with_reaction_time": {
+					"label": "ICD Aura Prêt (avec Temps de Réaction)",
+					"tooltip": "Vrai si l'ICD de l'aura est actuellement prêt OU s'il a été mis en CD récemment, dans le temps de réaction du joueur (configuré dans Paramètres), sinon Faux."
+				},
+				"aura_active_with_reaction_time": {
+					"label": "Aura Active (avec Temps de Réaction)",
+					"tooltip": "Vrai si l'aura est actuellement active ET qu'elle a été active pendant au moins aussi longtemps que le temps de réaction du joueur (configuré dans Paramètres), sinon Faux."
+				},
+				"aura_inactive_with_reaction_time": {
+					"label": "Aura Inactive (avec Temps de Réaction)",
+					"tooltip": "Vrai si l'aura n'est pas actuellement active ET qu'elle a été inactive pendant au moins aussi longtemps que le temps de réaction du joueur (configuré dans Paramètres), sinon Faux."
+				},
+				"overlap": {
+					"label": "Chevauchement",
+					"tooltip": "Temps maximum avant l'expiration de l'aura où elle peut être rafraîchie."
+				},
+				"trinket_procs_min_remaining_time": {
+					"label": "Temps Restant Min Proc Objets",
+					"tooltip": "Durée restante la plus courte sur tous les procs d'objets/enchants actifs qui améliorent le(s) type(s) de stats spécifié(s), ou infini si aucun n'est actuellement actif."
 				}
 			},
 			"operators": {
