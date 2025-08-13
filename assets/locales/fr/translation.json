@@ -227,6 +227,33 @@
 			"demonic_fury": "Fureur Démoniaque",
 			"burning_embers": "Braises Ardentes"
 		},
+		"timeline": {
+			"disclaimer": "Les données de chronologie visualisent seulement 1 itération de simulation.",
+			"note": "Note : Vous pouvez déplacer la chronologie en maintenant Majuscule tout en faisant défiler, ou en cliquant et en faisant glisser.",
+			"chart_types": {
+				"rotation": "Rotation",
+				"dps": "DPS",
+				"threat": "Menace"
+			},
+			"chart_options": {
+				"time_axis": "Temps (s)",
+				"waiting_for_data": "En attente de données..."
+			},
+			"tooltips": {
+				"dps": "DPS",
+				"before": "Avant",
+				"after": "Après",
+				"threat": "Menace",
+				"active_auras": "Auras Actives"
+			}
+		},
+		"logs": {
+			"filter_placeholder": "Filtrer les logs",
+			"top_button": "Haut",
+			"time_column": "Temps",
+			"event_column": "Événement",
+			"show_debug": "Afficher les Déclarations de Débogage"
+		},
 		"stats": {
 			"strength": "Force",
 			"agility": "Agilité",
