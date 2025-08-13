@@ -1,5 +1,6 @@
 import { TOOLTIP_METRIC_LABELS } from '../../constants/tooltips';
 import { ActionMetrics } from '../../proto_utils/sim_result';
+import i18n from '../../../i18n/config';
 import { bucket, formatToCompactNumber, formatToNumber, formatToPercent } from '../../utils';
 import { MetricsCombinedTooltipTable } from './metrics_table/metrics_combined_tooltip_table';
 import { ColumnSortType, MetricsTable } from './metrics_table/metrics_table';
@@ -27,7 +28,7 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 				};
 			}),
 			{
-				name: 'Damage done',
+				name: i18n.t('results.details.columns.damage_done'),
 				headerCellClass: 'text-center metrics-table-cell--primary-metric',
 				columnClass: 'metrics-table-cell--primary-metric',
 				getValue: (metric: ActionMetrics) => metric.avgDamage,
@@ -101,7 +102,7 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 				},
 			},
 			{
-				name: 'Casts',
+				name: i18n.t('results.details.columns.casts'),
 				getValue: (metric: ActionMetrics) => metric.casts,
 				fillCell: (metric: ActionMetrics, cellElem: HTMLElement) => {
 					cellElem.appendChild(<>{formatToNumber(metric.casts, { fallbackString: '-' })}</>);
@@ -146,7 +147,7 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 				},
 			},
 			{
-				name: 'Avg Cast',
+				name: i18n.t('results.details.columns.avg_cast'),
 				tooltip: TOOLTIP_METRIC_LABELS['Damage Avg Cast'],
 				getValue: (metric: ActionMetrics) => {
 					if (metric.isPassiveAction) return 0;
@@ -199,7 +200,7 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 				},
 			},
 			{
-				name: 'Hits',
+				name: i18n.t('results.details.columns.hits'),
 				getValue: (metric: ActionMetrics) => metric.landedHits || metric.landedTicks,
 				fillCell: (metric: ActionMetrics, cellElem: HTMLElement) => {
 					cellElem.appendChild(
@@ -283,7 +284,7 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 				},
 			},
 			{
-				name: 'Avg Hit',
+				name: i18n.t('results.details.columns.avg_hit'),
 				getValue: (metric: ActionMetrics) => metric.avgHit || metric.avgTick,
 				fillCell: (metric: ActionMetrics, cellElem: HTMLElement) => {
 					cellElem.appendChild(
@@ -324,7 +325,7 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 				},
 			},
 			{
-				name: 'Crit %',
+				name: i18n.t('results.details.columns.crit_percent'),
 				getValue: (metric: ActionMetrics) => (metric.critPercent + metric.critBlockPercent) || metric.critTickPercent,
 				getDisplayString: (metric: ActionMetrics) =>
 					`${formatToPercent(metric.critPercent + metric.critBlockPercent || metric.critTickPercent, { fallbackString: '-' })}${
@@ -332,7 +333,7 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 					}`,
 			},
 			{
-				name: 'Miss %',
+				name: i18n.t('results.details.columns.miss_percent'),
 				getValue: (metric: ActionMetrics) => metric.totalMissesPercent,
 				fillCell: (metric: ActionMetrics, cellElem: HTMLElement) => {
 					cellElem.appendChild(<>{formatToPercent(metric.totalMissesPercent, { fallbackString: '-' })}</>);
@@ -370,12 +371,12 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 				},
 			},
 			{
-				name: 'DPET',
+				name: i18n.t('results.details.columns.dpet'),
 				getValue: (metric: ActionMetrics) => metric.damageThroughput,
 				getDisplayString: (metric: ActionMetrics) => formatToCompactNumber(metric.damageThroughput, { fallbackString: '-' }),
 			},
 			{
-				name: 'DPS',
+				name: i18n.t('results.details.columns.dps'),
 				headerCellClass: 'text-body',
 				columnClass: 'text-success',
 				sort: ColumnSortType.Descending,

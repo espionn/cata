@@ -1674,13 +1674,16 @@
 	},
 	"results": {
 		"title": "Résultats",
-		"detailed": {
+		"details": {
 			"no_results": "Lancez une simulation pour voir les résultats",
 			"view_in_separate_tab": "Voir dans un onglet séparé",
 			"sim_1_iteration": "Sim 1 itération",
 			"all_targets": "Toutes les cibles",
 			"all_players": "Tous les joueurs",
 			"target_number": "Cible {{number}}",
+			"damage": {
+				"dps_histogram": "Histogramme DPS"
+			},
 			"tabs": {
 				"damage": "Dégâts",
 				"healing": "Soins",

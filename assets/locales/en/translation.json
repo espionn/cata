@@ -1674,13 +1674,16 @@
 	},
 	"results": {
 		"title": "Results",
-		"detailed": {
+		"details": {
 			"no_results": "Run a simulation to view results",
 			"view_in_separate_tab": "View in Separate Tab",
 			"sim_1_iteration": "Sim 1 Iteration",
 			"all_targets": "All Targets",
 			"all_players": "All Players",
 			"target_number": "Target {{number}}",
+			"damage": {
+				"dps_histogram": "DPS Histogram"
+			},
 			"tabs": {
 				"damage": "Damage",
 				"healing": "Healing",

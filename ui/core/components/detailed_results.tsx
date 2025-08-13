@@ -34,42 +34,42 @@ const tabs: Tab[] = [
 	{
 		isActive: true,
 		targetId: 'damageTab',
-		label: i18n.t('results.detailed.tabs.damage'),
+		label: i18n.t('results.details.tabs.damage'),
 		classes: ['damage-metrics-tab'],
 	},
 	{
 		targetId: 'healingTab',
-		label: i18n.t('results.detailed.tabs.healing'),
+		label: i18n.t('results.details.tabs.healing'),
 		classes: ['healing-metrics-tab'],
 	},
 	{
 		targetId: 'damageTakenTab',
-		label: i18n.t('results.detailed.tabs.damage_taken'),
+		label: i18n.t('results.details.tabs.damage_taken'),
 		classes: ['threat-metrics-tab'],
 	},
 	{
 		targetId: 'buffsTab',
-		label: i18n.t('results.detailed.tabs.buffs'),
+		label: i18n.t('results.details.tabs.buffs'),
 	},
 	{
 		targetId: 'debuffsTab',
-		label: i18n.t('results.detailed.tabs.debuffs'),
+		label: i18n.t('results.details.tabs.debuffs'),
 	},
 	{
 		targetId: 'castsTab',
-		label: i18n.t('results.detailed.tabs.casts'),
+		label: i18n.t('results.details.tabs.casts'),
 	},
 	{
 		targetId: 'resourcesTab',
-		label: i18n.t('results.detailed.tabs.resources'),
+		label: i18n.t('results.details.tabs.resources'),
 	},
 	{
 		targetId: 'timelineTab',
-		label: i18n.t('results.detailed.tabs.timeline'),
+		label: i18n.t('results.details.tabs.timeline'),
 	},
 	{
 		targetId: 'logTab',
-		label: i18n.t('results.detailed.tabs.log'),
+		label: i18n.t('results.details.tabs.log'),
 	},
 ];
 
@@ -114,7 +114,7 @@ export abstract class DetailedResults extends Component {
 				</div>
 				<div className="tab-content">
 					<div id="noResultsTab" className="tab-pane dr-tab-content fade active show">
-						{i18n.t('results.detailed.no_results')}
+						{i18n.t('results.details.no_results')}
 					</div>
 					<div id="damageTab" className="tab-pane dr-tab-content damage-content fade active show">
 						<div className="dr-row topline-results" />
@@ -391,21 +391,13 @@ export class EmbeddedDetailedResults extends DetailedResults {
 
 		this.rootElem.prepend(
 			<div className="detailed-results-controls-div">
-				<button
-					className="detailed-results-new-tab-button btn btn-primary"
-					ref={newTabButtonRef}
-					disabled={simUI.disabled}
-				>
-					{i18n.t('results.detailed.view_in_separate_tab')}
+				<button className="detailed-results-new-tab-button btn btn-primary" ref={newTabButtonRef} disabled={simUI.disabled}>
+					{i18n.t('results.details.view_in_separate_tab')}
 				</button>
-				<button
-					className="detailed-results-1-iteration-button btn btn-primary"
-					ref={simButtonRef}
-					disabled={simUI.disabled}
-				>
-					{i18n.t('results.detailed.sim_1_iteration')}
+				<button className="detailed-results-1-iteration-button btn btn-primary" ref={simButtonRef} disabled={simUI.disabled}>
+					{i18n.t('results.details.sim_1_iteration')}
 				</button>
-			</div>
+			</div>,
 		);
 
 		const url = new URL(`${window.location.protocol}//${window.location.host}/${REPO_NAME}/results/detailed/index.html`);
