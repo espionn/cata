@@ -99,16 +99,14 @@ export class ResultsFilter extends ResultComponent {
 				ref.type == UnitType.Player
 					? simResult.result.getPlayerWithRaidIndex(ref.index)
 					: ref.type == UnitType.Target
-					? simResult.result.getTargetWithEncounterIndex(ref.index)
-					: null;
+						? simResult.result.getTargetWithEncounterIndex(ref.index)
+						: null;
 
 			if (unit) {
 				let displayText = unit.label;
-				// If this is a target with the default "Raid Target" name, use localized target name
-				if (ref.type == UnitType.Target && unit.name === 'Raid Target') {
+				if (ref.type == UnitType.Target) {
 					displayText = i18n.t('results.detailed.target_number', { number: ref.index + 1 });
 				}
-
 				return {
 					iconUrl: unit.iconUrl || '',
 					text: displayText,
