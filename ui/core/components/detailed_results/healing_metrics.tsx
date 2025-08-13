@@ -53,13 +53,13 @@ export class HealingMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: i18n.t('results.details.hit_mechanics.hit'),
+											name: i18n.t('results.details.attack_types.hit'),
 											value: metric.avgHealing - metric.avgCritHealing,
 											percentage: metric.healingPercent,
 											average: (metric.avgHealing - metric.avgCritHealing) / (metric.hits || metric.ticks),
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.critical_hit'),
+											name: i18n.t('results.details.attack_types.critical_hit'),
 											value: metric.avgCritHealing,
 											percentage: metric.healingCritPercent,
 											average: metric.avgCritHealing / (metric.crits || metric.critTicks),
@@ -111,7 +111,7 @@ export class HealingMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: i18n.t('results.details.hit_mechanics.threat'),
+											name: i18n.t('results.details.attack_types.threat'),
 											value: metric.avgCastThreat,
 											percentage: 100,
 										},
@@ -154,27 +154,27 @@ export class HealingMetricsTable extends MetricsTable<ActionMetrics> {
 									name: 'Hits',
 									data: [
 										{
-											name: i18n.t('results.details.hit_mechanics.hit'),
+											name: i18n.t('results.details.attack_types.hit'),
 											value: metric.hits,
 											percentage: relativeHitPercent,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.critical_hit'),
+											name: i18n.t('results.details.attack_types.critical_hit'),
 											value: metric.crits,
 											percentage: relativeCritPercent,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.glancing_blow'),
+											name: i18n.t('results.details.attack_types.glancing_blow'),
 											value: metric.glances,
 											percentage: relativeGlancePercent,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.blocked_hit'),
+											name: i18n.t('results.details.attack_types.blocked_hit'),
 											value: metric.blocks,
 											percentage: relativeBlockPercent,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.blocked_critical_hit'),
+											name: i18n.t('results.details.attack_types.blocked_critical_hit'),
 											value: metric.critBlocks,
 											percentage: relativeCritBlockPercent,
 										},
@@ -187,12 +187,12 @@ export class HealingMetricsTable extends MetricsTable<ActionMetrics> {
 									name: 'Ticks',
 									data: [
 										{
-											name: i18n.t('results.details.hit_mechanics.tick'),
+											name: i18n.t('results.details.attack_types.tick'),
 											value: metric.ticks,
 											percentage: relativeTickPercent,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.critical_tick'),
+											name: i18n.t('results.details.attack_types.critical_tick'),
 											value: metric.critTicks,
 											percentage: relativeCritTickPercent,
 										},
@@ -228,7 +228,7 @@ export class HealingMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: i18n.t('results.details.hit_mechanics.threat'),
+											name: i18n.t('results.details.attack_types.threat'),
 											value: metric.avgHitThreat,
 											percentage: 100,
 										},
@@ -281,7 +281,7 @@ export class HealingMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: i18n.t('results.details.hit_mechanics.threat'),
+											name: i18n.t('results.details.attack_types.threat'),
 											value: metric.tps,
 											percentage: 100,
 										},

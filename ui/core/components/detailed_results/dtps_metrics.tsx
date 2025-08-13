@@ -62,35 +62,35 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: i18n.t('results.details.hit_mechanics.hit'),
+											name: i18n.t('results.details.attack_types.hit'),
 											...hitValues,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.critical_hit'),
+											name: i18n.t('results.details.attack_types.critical_hit'),
 											...critHitValues,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.tick'),
+											name: i18n.t('results.details.attack_types.tick'),
 											...tickValues,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.critical_tick'),
+											name: i18n.t('results.details.attack_types.critical_tick'),
 											...critTickValues,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.glancing_blow'),
+											name: i18n.t('results.details.attack_types.glancing_blow'),
 											...glanceValues,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.blocked_glancing_blow'),
+											name: i18n.t('results.details.attack_types.blocked_glancing_blow'),
 											...glanceBlockValues,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.blocked_hit'),
+											name: i18n.t('results.details.attack_types.blocked_hit'),
 											...blockValues,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.blocked_critical_hit'),
+											name: i18n.t('results.details.attack_types.blocked_critical_hit'),
 											...critBlockValues,
 										},
 									],
@@ -118,22 +118,22 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: i18n.t('results.details.hit_mechanics.hit') + 's',
+											name: i18n.t('results.details.attack_types.hit') + 's',
 											value: metric.landedHits || metric.casts - metric.totalMisses,
 											percentage: relativeHitPercent,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.miss'),
+											name: i18n.t('results.details.attack_types.miss'),
 											value: metric.misses,
 											percentage: metric.missPercent,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.parry'),
+											name: i18n.t('results.details.attack_types.parry'),
 											value: metric.parries,
 											percentage: metric.parryPercent,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.dodge'),
+											name: i18n.t('results.details.attack_types.dodge'),
 											value: metric.dodges,
 											percentage: metric.dodgePercent,
 										},
@@ -191,32 +191,32 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: i18n.t('results.details.hit_mechanics.hit'),
+											name: i18n.t('results.details.attack_types.hit'),
 											value: metric.hits,
 											percentage: relativeHitPercent,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.critical_hit'),
+											name: i18n.t('results.details.attack_types.critical_hit'),
 											value: metric.crits,
 											percentage: relativeCritPercent,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.glancing_blow'),
+											name: i18n.t('results.details.attack_types.glancing_blow'),
 											value: metric.glances,
 											percentage: relativeGlancePercent,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.blocked_glancing_blow'),
+											name: i18n.t('results.details.attack_types.blocked_glancing_blow'),
 											value: metric.glanceBlocks,
 											percentage: relativeGlanceBlockPercent,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.blocked_hit'),
+											name: i18n.t('results.details.attack_types.blocked_hit'),
 											value: metric.blocks,
 											percentage: relativeBlockPercent,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.blocked_critical_hit'),
+											name: i18n.t('results.details.attack_types.blocked_critical_hit'),
 											value: metric.critBlocks,
 											percentage: relativeCritBlockPercent,
 										},
@@ -228,12 +228,12 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: i18n.t('results.details.hit_mechanics.tick'),
+											name: i18n.t('results.details.attack_types.tick'),
 											value: metric.ticks,
 											percentage: relativeTickPercent,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.critical_tick'),
+											name: i18n.t('results.details.attack_types.critical_tick'),
 											value: metric.critTicks,
 											percentage: relativeCritTickPercent,
 										},
@@ -274,17 +274,17 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: metric.totalMissesPercent,
 									data: [
 										{
-											name: i18n.t('results.details.hit_mechanics.miss'),
+											name: i18n.t('results.details.attack_types.miss'),
 											value: metric.misses,
 											percentage: metric.missPercent,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.parry'),
+											name: i18n.t('results.details.attack_types.parry'),
 											value: metric.parries,
 											percentage: metric.parryPercent,
 										},
 										{
-											name: i18n.t('results.details.hit_mechanics.dodge'),
+											name: i18n.t('results.details.attack_types.dodge'),
 											value: metric.dodges,
 											percentage: metric.dodgePercent,
 										},
