@@ -1714,6 +1714,7 @@
 				"dtps": "DTPS",
 				"avg_heal": "Soin Moyen",
 				"hps": "SPS",
+				"damage_taken": "Dégâts Subis",
 				"overhealing": "Sur-soins",
 				"name": "Nom",
 				"duration": "Durée",
@@ -1750,14 +1751,16 @@
 				"damage_avg_cast": "Dégâts moyens par lancer",
 				"player_damage": "Dégâts du Joueur / Dégâts du Raid",
 				"player_damage_taken": "Dégâts Subis par le Joueur / Dégâts Subis par le Raid",
-				"damage_per_encounter": "Dégâts / Durée de l'Affrontement",
 				"damage_taken_per_encounter": "Dégâts Subis / Durée de l'Affrontement",
 				"healing_per_encounter": "Soins / Durée de l'Affrontement",
 				"threat_per_encounter": "Menace / Durée de l'Affrontement",
+				"damage_taken": "Dégâts Subis",
+				"damage_per_encounter": "Dégâts / Durée de l'Affrontement",
 				"damage_avg_cast_tooltip": "Dégâts / Lancers et/ou Dégâts / Tics",
 				"healing_avg_cast_tooltip": "Soins / Lancers",
 				"healing_avg_hit_tooltip": "Soins / Coups et/ou Soins / (Tics + Tics Critiques)",
-				"healing_hits_tooltip": "Soins / (Coups + Crits + Glissants + Bloqués) et/ou Soins / Tics + Tics Critiques"
+				"healing_hits_tooltip": "Soins / (Coups + Crits + Glissants + Bloqués) et/ou Soins / Tics + Tics Critiques",
+				"hit_miss_percent_tooltip": "Rates / (Coups + Crits + Glissants + Bloqués)"
 			},
 			"attack_types": {
 				"hit": "Coup",

@@ -1714,6 +1714,7 @@
 				"dtps": "DTPS",
 				"avg_heal": "Avg Heal",
 				"hps": "HPS",
+				"damage_taken": "Damage Taken",
 				"overhealing": "Overhealing",
 				"name": "Name",
 				"duration": "Duration",
@@ -1758,7 +1759,8 @@
 				"damage_avg_cast_tooltip": "Damage / Casts and/or Damage / Ticks",
 				"healing_avg_cast_tooltip": "Healing / Casts",
 				"healing_avg_hit_tooltip": "Healing / Hits and/or Healing / (Ticks + Critical Ticks)",
-				"healing_hits_tooltip": "Healing / (Hits + Crits + Glances + Blocks) and/or Healing / Ticks + Critical Ticks"
+				"healing_hits_tooltip": "Healing / (Hits + Crits + Glances + Blocks) and/or Healing / Ticks + Critical Ticks",
+				"hit_miss_percent_tooltip": "Misses / (Hits + Crits + Glances + Blocks)"
 			},
 			"attack_types": {
 				"hit": "Hit",
