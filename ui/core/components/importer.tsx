@@ -37,16 +37,14 @@ export abstract class Importer extends BaseModal {
 		);
 
 		this.footer!.appendChild(
-			<div>
+			<div className="d-flex gap-2">
 				{this.allowFileUpload && (
-					<div>
-						<label htmlFor={uploadInputId} className="importer-button btn btn-primary upload-button me-2">
-							<i className="fas fa-file-arrow-up me-1"></i>
-							{i18n.t('import.json.upload_button')}
-						</label>
-						<input ref={uploadInputRef} type="file" id={uploadInputId} className="importer-upload-input d-none" hidden />
-					</div>
+					<label htmlFor={uploadInputId} className="importer-button btn btn-primary upload-button">
+						<i className="fas fa-file-arrow-up me-1"></i>
+						{i18n.t('import.json.upload_button')}
+					</label>
 				)}
+				<input ref={uploadInputRef} type="file" id={uploadInputId} className="importer-upload-input d-none" hidden />
 				<button ref={importButtonRef} className="importer-button btn btn-primary import-button">
 					<i className="fa fa-download me-1"></i>
 					{i18n.t('import.json.import_button')}

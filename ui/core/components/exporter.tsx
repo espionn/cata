@@ -25,7 +25,7 @@ export abstract class Exporter extends BaseModal {
 		this.body.append(this.textElem);
 
 		new CopyButton(this.footer!, {
-			extraCssClasses: ['btn-primary', 'me-2'],
+			extraCssClasses: ['btn-primary'],
 			getContent: () => this.textElem.innerHTML,
 			text: i18n.t('export.json.copy_button'),
 			tooltip: i18n.t('export.json.copy_tooltip'),
@@ -34,7 +34,7 @@ export abstract class Exporter extends BaseModal {
 		if (options.allowDownload) {
 			const downloadBtnRef = ref<HTMLButtonElement>();
 			this.footer!.appendChild(
-				<button className="exporter-button btn btn-primary download-button" ref={downloadBtnRef}>
+				<button className="exporter-button btn btn-primary download-button ms-2" ref={downloadBtnRef}>
 					<i className="fa fa-download me-1"></i>
 					{i18n.t('export.json.download_button')}
 				</button>
