@@ -3,6 +3,7 @@ import { ref } from 'tsx-vanilla';
 import { SimUI } from '../sim_ui';
 import { BaseModal } from './base_modal';
 import Toast from './toast';
+import i18n from '../../i18n/config';
 
 export interface ImporterOptions {
 	title: string;
@@ -29,28 +30,28 @@ export abstract class Importer extends BaseModal {
 		const uploadInputRef = ref<HTMLInputElement>();
 
 		this.body.replaceChildren(
-			<>
+			<div>
 				<div ref={descriptionElemRef} className="import-description"></div>
 				<textarea ref={textElemRef} className="importer-textarea form-control" attributes={{ spellcheck: false }}></textarea>
-			</>,
+			</div>
 		);
 
 		this.footer!.appendChild(
-			<>
+			<div>
 				{this.allowFileUpload && (
-					<>
+					<div>
 						<label htmlFor={uploadInputId} className="importer-button btn btn-primary upload-button me-2">
 							<i className="fas fa-file-arrow-up me-1"></i>
-							Upload File
+							{i18n.t('import.json.upload_button')}
 						</label>
 						<input ref={uploadInputRef} type="file" id={uploadInputId} className="importer-upload-input d-none" hidden />
-					</>
+					</div>
 				)}
 				<button ref={importButtonRef} className="importer-button btn btn-primary import-button">
 					<i className="fa fa-download me-1"></i>
-					Import
+					{i18n.t('import.json.import_button')}
 				</button>
-			</>,
+			</div>
 		);
 
 		this.descriptionElem = descriptionElemRef.value!;

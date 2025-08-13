@@ -1851,7 +1851,31 @@
 		}
 	},
 	"import": {
-		"title": "Importer"
+		"title": "Importer",
+		"json": {
+			"title": "Import JSON",
+			"description": "Importer les paramètres depuis un fichier JSON, qui peut être créé en utilisant la fonctionnalité d'export JSON.",
+			"instructions": "Pour importer, téléchargez le fichier ou collez le texte ci-dessous, puis cliquez sur 'Importer'.",
+			"upload_button": "Télécharger le fichier",
+			"import_button": "Importer",
+			"error_invalid_json": "Veuillez utiliser un objet JSON valide."
+		},
+		"wowhead": {
+			"title": "Import Wowhead",
+			"description": "Importer les paramètres depuis",
+			"gear_planner_link": "le Planificateur d'Équipement Wowhead",
+			"feature_description": "Cette fonctionnalité importe l'équipement, la race et (optionnellement) les talents. Elle n'importe PAS les buffs, debuffs, consommables, rotation ou stats personnalisées.",
+			"instructions": "Pour importer, collez le lien du planificateur d'équipement ci-dessous et cliquez sur 'Importer'.",
+			"upload_button": "Télécharger le fichier",
+			"import_button": "Importer",
+			"tinker_warning": {
+				"title": "Problèmes de bricolage",
+				"message": "Il y a des problèmes connus lors de l'importation des bricolages depuis Wowhead. Assurez-vous toujours de vérifier vos bricolages après l'importation."
+			},
+			"error_invalid_url": "URL WCL invalide {url}, doit ressembler à \"https://www.wowhead.com/mop-classic/gear-planner/CLASS/RACE/XXXX\"",
+			"error_cannot_parse_class": "Impossible de parser la classe : {classId}",
+			"error_cannot_parse_race": "Impossible de parser la race : {raceId}"
+		}
 	},
 	"export": {
 		"title": "Exporter"
