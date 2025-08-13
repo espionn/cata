@@ -6193,15 +6193,27 @@
                 },
                 "crash_modal": {
                     "$ref": "#/definitions/CrashModal"
+                },
+                "unlaunched": {
+                    "$ref": "#/definitions/Unlaunched"
+                },
+                "notifications": {
+                    "$ref": "#/definitions/Notifications"
+                },
+                "crash_report": {
+                    "$ref": "#/definitions/CrashReport"
                 }
             },
             "required": [
                 "basic_bis_disclaimer",
                 "crash_modal",
+                "crash_report",
                 "description",
                 "healing_sim_disclaimer",
                 "notice_local_download",
-                "title"
+                "notifications",
+                "title",
+                "unlaunched"
             ],
             "title": "Sim"
         },
@@ -6221,6 +6233,27 @@
                 "title"
             ],
             "title": "CrashModal"
+        },
+        "CrashReport": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "confirm_title": {
+                    "type": "string"
+                },
+                "confirm_message": {
+                    "type": "string"
+                },
+                "report_title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "confirm_message",
+                "confirm_title",
+                "report_title"
+            ],
+            "title": "CrashReport"
         },
         "NoticeLocalDownload": {
             "type": "object",
@@ -6242,6 +6275,56 @@
                 "title"
             ],
             "title": "NoticeLocalDownload"
+        },
+        "Notifications": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "raid_sim_cancelled": {
+                    "type": "string"
+                },
+                "simulation_failed": {
+                    "type": "string"
+                },
+                "failed_to_file_report": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "failed_to_file_report",
+                "raid_sim_cancelled",
+                "simulation_failed"
+            ],
+            "title": "Notifications"
+        },
+        "Unlaunched": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "contribute_message": {
+                    "type": "string"
+                },
+                "discord_message": {
+                    "type": "string"
+                },
+                "healing_message": {
+                    "type": "string"
+                },
+                "qe_live_message": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "contribute_message",
+                "discord_message",
+                "healing_message",
+                "qe_live_message",
+                "title"
+            ],
+            "title": "Unlaunched"
         },
         "Talents": {
             "type": "object",

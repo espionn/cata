@@ -331,6 +331,23 @@
 		"crash_modal": {
 			"title": "Extra Crash Information",
 			"header": "Please append the following complete link to the issue you just created. This will simplify debugging the issue."
+		},
+		"unlaunched": {
+			"title": "This sim is currently not supported.",
+			"contribute_message": "Want to contribute?",
+			"discord_message": "Make sure to join our Discord!",
+			"healing_message": "Looking for healing simulations?",
+			"qe_live_message": "Check out QE Live!"
+		},
+		"notifications": {
+			"raid_sim_cancelled": "Raid sim cancelled.",
+			"simulation_failed": "The Simulation failed. Generated an error report.",
+			"failed_to_file_report": "Failed to file report... try again another time:"
+		},
+		"crash_report": {
+			"confirm_title": "Simulation Failure:",
+			"confirm_message": "Press Ok to file crash report",
+			"report_title": "Crash Report"
 		}
 	},
 	"gear": {

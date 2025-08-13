@@ -331,6 +331,23 @@
 		"crash_modal": {
 			"title": "Informations Supplémentaires sur le Plantage",
 			"header": "Veuillez ajouter le lien complet suivant au problème que vous venez de créer. Cela simplifiera le débogage du problème."
+		},
+		"unlaunched": {
+			"title": "Ce simulateur n'est actuellement pas pris en charge.",
+			"contribute_message": "Vous voulez contribuer ?",
+			"discord_message": "Assurez-vous de rejoindre notre Discord !",
+			"healing_message": "Vous cherchez des simulations de soins ?",
+			"qe_live_message": "Consultez QE Live !"
+		},
+		"notifications": {
+			"raid_sim_cancelled": "Simulation de raid annulée.",
+			"simulation_failed": "La simulation a échoué. Un rapport d'erreur a été généré.",
+			"failed_to_file_report": "Échec du rapport... réessayez une autre fois :"
+		},
+		"crash_report": {
+			"confirm_title": "Échec de la simulation :",
+			"confirm_message": "Appuyez sur Ok pour signaler le crash",
+			"report_title": "Rapport de crash"
 		}
 	},
 	"gear": {
