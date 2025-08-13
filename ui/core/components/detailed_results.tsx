@@ -21,6 +21,7 @@ import { ResultsFilter } from './detailed_results/results_filter';
 import { Timeline } from './detailed_results/timeline';
 import { ToplineResults } from './detailed_results/topline_results';
 import { RaidSimResultsManager } from './raid_sim_action';
+import i18n from '../../i18n/config';
 
 type Tab = {
 	isActive?: boolean;
@@ -33,42 +34,42 @@ const tabs: Tab[] = [
 	{
 		isActive: true,
 		targetId: 'damageTab',
-		label: 'Damage',
+		label: i18n.t('results.detailed.tabs.damage'),
 		classes: ['damage-metrics-tab'],
 	},
 	{
 		targetId: 'healingTab',
-		label: 'Healing',
+		label: i18n.t('results.detailed.tabs.healing'),
 		classes: ['healing-metrics-tab'],
 	},
 	{
 		targetId: 'damageTakenTab',
-		label: 'Damage Taken',
+		label: i18n.t('results.detailed.tabs.damage_taken'),
 		classes: ['threat-metrics-tab'],
 	},
 	{
 		targetId: 'buffsTab',
-		label: 'Buffs',
+		label: i18n.t('results.detailed.tabs.buffs'),
 	},
 	{
 		targetId: 'debuffsTab',
-		label: 'Debuffs',
+		label: i18n.t('results.detailed.tabs.debuffs'),
 	},
 	{
 		targetId: 'castsTab',
-		label: 'Casts',
+		label: i18n.t('results.detailed.tabs.casts'),
 	},
 	{
 		targetId: 'resourcesTab',
-		label: 'Resources',
+		label: i18n.t('results.detailed.tabs.resources'),
 	},
 	{
 		targetId: 'timelineTab',
-		label: 'Timeline',
+		label: i18n.t('results.detailed.tabs.timeline'),
 	},
 	{
 		targetId: 'logTab',
-		label: 'Log',
+		label: i18n.t('results.detailed.tabs.log'),
 	},
 ];
 
@@ -113,7 +114,7 @@ export abstract class DetailedResults extends Component {
 				</div>
 				<div className="tab-content">
 					<div id="noResultsTab" className="tab-pane dr-tab-content fade active show">
-						Run a simulation to view results
+						{i18n.t('results.detailed.no_results')}
 					</div>
 					<div id="damageTab" className="tab-pane dr-tab-content damage-content fade active show">
 						<div className="dr-row topline-results" />
@@ -395,19 +396,19 @@ export class EmbeddedDetailedResults extends DetailedResults {
 					ref={newTabButtonRef}
 					disabled={simUI.disabled}
 				>
-					View in Separate Tab
+					{i18n.t('results.detailed.view_in_separate_tab')}
 				</button>
 				<button
 					className="detailed-results-1-iteration-button btn btn-primary"
 					ref={simButtonRef}
 					disabled={simUI.disabled}
 				>
-					Sim 1 Iteration
+					{i18n.t('results.detailed.sim_1_iteration')}
 				</button>
 			</div>
 		);
 
-		const url = new URL(`${window.location.protocol}//${window.location.host}/${REPO_NAME}/detailed_results/index.html`);
+		const url = new URL(`${window.location.protocol}//${window.location.host}/${REPO_NAME}/results/detailed/index.html`);
 		url.searchParams.append('cssClass', simUI.config.cssClass);
 
 		if (simUI.isIndividualSim()) {
