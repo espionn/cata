@@ -1,6 +1,6 @@
+import i18n from '../i18n/config';
 import { IndividualLinkImporter } from './components/individual_sim_ui/importers';
 import Toast, { ToastOptions } from './components/toast';
-import * as Tooltips from './constants/tooltips.js';
 import { Encounter } from './encounter';
 import { Player } from './player';
 import { Player as PlayerProto } from './proto/api.js';
@@ -122,7 +122,7 @@ const makePresetGearHelper = (name: string, gear: EquipmentSpec, options: Preset
 
 	return {
 		name,
-		tooltip: options.tooltip || Tooltips.BASIC_BIS_DISCLAIMER,
+		tooltip: options.tooltip || i18n.t('sim.basic_bis_disclaimer'),
 		gear,
 		enableWhen: !!conditions.length ? (player: Player<any>) => conditions.every(cond => cond(player)) : undefined,
 		onLoad: options?.onLoad,

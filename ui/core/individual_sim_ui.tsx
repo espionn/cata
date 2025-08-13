@@ -32,7 +32,7 @@ import { addRaidSimAction, RaidSimResultsManager } from './components/raid_sim_a
 import { SavedDataConfig } from './components/saved_data_manager';
 import { addStatWeightsAction, EpWeightsMenu, StatWeightActionSettings } from './components/stat_weights_action';
 import { SimSettingCategories } from './constants/sim_settings';
-import * as Tooltips from './constants/tooltips';
+import i18n from '../i18n/config';
 import { getSpecLaunchStatus, LaunchStatus, simLaunchStatuses } from './launched_sims';
 import { Player, PlayerConfig, registerSpecConfig as registerPlayerConfig } from './player';
 import { PlayerSpecs } from './player_specs';
@@ -348,7 +348,7 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 				this.loadSettings();
 
 				if (this.player.getPlayerSpec().isHealingSpec && !isDevMode()) {
-					alert(Tooltips.HEALING_SIM_DISCLAIMER);
+					alert(i18n.t('sim.healing_sim_disclaimer'));
 				}
 			});
 		}

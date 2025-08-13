@@ -227,37 +227,6 @@
 			"demonic_fury": "Fureur Démoniaque",
 			"burning_embers": "Braises Ardentes"
 		},
-		"timeline": {
-			"disclaimer": "Les données de chronologie visualisent seulement 1 itération de simulation.",
-			"note": "Note : Vous pouvez déplacer la chronologie en maintenant Majuscule tout en faisant défiler, ou en cliquant et en faisant glisser.",
-			"chart_types": {
-				"rotation": "Rotation",
-				"dps": "DPS",
-				"threat": "Menace"
-			},
-			"chart_options": {
-				"time_axis": "Temps (s)",
-				"waiting_for_data": "En attente de données..."
-			},
-			"tooltips": {
-				"dps": "DPS",
-				"dtps": "DTPS",
-				"amount": "Montant",
-				"player_damage": "Dégâts du Joueur / Dégâts du Raid",
-				"player_damage_taken": "Dégâts Subis par le Joueur / Dégâts Subis par le Raid",
-				"before": "Avant",
-				"after": "Après",
-				"threat": "Menace",
-				"active_auras": "Auras Actives"
-			}
-		},
-		"logs": {
-			"filter_placeholder": "Filtrer les logs",
-			"top_button": "Haut",
-			"time_column": "Temps",
-			"event_column": "Événement",
-			"show_debug": "Afficher les Déclarations de Débogage"
-		},
 		"stats": {
 			"strength": "Force",
 			"agility": "Agilité",
@@ -350,7 +319,9 @@
 	},
 	"sim": {
 		"title": "Simulateur {spec} {class} - Mists of Pandaria",
-		"description": "Simulations {spec} {class} pour World of Warcraft® Mists of Pandaria Classic."
+		"description": "Simulations {spec} {class} pour World of Warcraft® Mists of Pandaria Classic.",
+		"basic_bis_disclaimer": "<p>Les listes d'équipement prédéfinies sont destinées à être des approximations approximatives du BIS, et ne seront souvent pas la configuration DPS absolument la plus élevée pour vous. Votre configuration d'équipement optimale dépendra de nombreux facteurs ; c'est pourquoi nous avons un simulateur !</p><p>Les objets peuvent également être omis des préréglages s'ils sont très contestés et clairement mieux utilisés sur d'autres classes, pour encourager un équipement équitable pour le raid dans son ensemble.</p>",
+		"healing_sim_disclaimer": "*** AVERTISSEMENT - UTILISEZ À VOS PROPRES RISQUES ***\n\nLe concept entier d'un simulateur de soins est EXPÉRIMENTAL. Tous les résultats doivent être pris avec un grain de sel EXTREMEMENT important.\n\nCet outil est actuellement plus similaire à une feuille de calcul qu'à un véritable simulateur. Les options pour spécifier les profils de dégâts entrants afin d'avoir des rotations réactives appropriées n'ont pas encore été ajoutées."
 	},
 	"gear": {
 		"title": "Équipement",
@@ -1729,6 +1700,37 @@
 			"target_number": "Cible {{number}}",
 			"damage": {
 				"dps_histogram": "Histogramme DPS"
+			},
+			"timeline": {
+				"disclaimer": "Les données de chronologie visualisent seulement 1 itération de simulation.",
+				"note": "Note : Vous pouvez déplacer la chronologie en maintenant Majuscule tout en faisant défiler, ou en cliquant et en faisant glisser.",
+				"chart_types": {
+					"rotation": "Rotation",
+					"dps": "DPS",
+					"threat": "Menace"
+				},
+				"chart_options": {
+					"time_axis": "Temps (s)",
+					"waiting_for_data": "En attente de données..."
+				},
+				"tooltips": {
+					"dps": "DPS",
+					"dtps": "DTPS",
+					"amount": "Montant",
+					"player_damage": "Dégâts du Joueur / Dégâts du Raid",
+					"player_damage_taken": "Dégâts Subis par le Joueur / Dégâts Subis par le Raid",
+					"before": "Avant",
+					"after": "Après",
+					"threat": "Menace",
+					"active_auras": "Auras Actives"
+				}
+			},
+			"logs": {
+				"filter_placeholder": "Filtrer les logs",
+				"top_button": "Haut",
+				"time_column": "Temps",
+				"event_column": "Événement",
+				"show_debug": "Afficher les Déclarations de Débogage"
 			},
 			"tabs": {
 				"damage": "Dégâts",

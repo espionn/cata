@@ -114,6 +114,9 @@
                 "spell_schools": {
                     "$ref": "#/definitions/SpellSchools"
                 },
+                "resource_types": {
+                    "$ref": "#/definitions/ResourceTypes"
+                },
                 "stats": {
                     "$ref": "#/definitions/Stats"
                 },
@@ -141,6 +144,7 @@
                 "races",
                 "raids",
                 "ranged_weapon_types",
+                "resource_types",
                 "sources",
                 "specs",
                 "spell_schools",
@@ -680,6 +684,67 @@
                 "wand"
             ],
             "title": "RangedWeaponTypes"
+        },
+        "ResourceTypes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "health": {
+                    "type": "string"
+                },
+                "mana": {
+                    "type": "string"
+                },
+                "energy": {
+                    "type": "string"
+                },
+                "rage": {
+                    "type": "string"
+                },
+                "focus": {
+                    "type": "string"
+                },
+                "runic_power": {
+                    "type": "string"
+                },
+                "chi": {
+                    "type": "string"
+                },
+                "holy_power": {
+                    "type": "string"
+                },
+                "shadow_orbs": {
+                    "type": "string"
+                },
+                "combo_points": {
+                    "type": "string"
+                },
+                "maelstrom": {
+                    "type": "string"
+                },
+                "demonic_fury": {
+                    "type": "string"
+                },
+                "burning_embers": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "burning_embers",
+                "chi",
+                "combo_points",
+                "demonic_fury",
+                "energy",
+                "focus",
+                "health",
+                "holy_power",
+                "maelstrom",
+                "mana",
+                "rage",
+                "runic_power",
+                "shadow_orbs"
+            ],
+            "title": "ResourceTypes"
         },
         "Sources": {
             "type": "object",
@@ -1372,7 +1437,7 @@
                     "$ref": "#/definitions/QuickPopovers"
                 },
                 "missing_gear_message": {
-                    "$ref": "#/definitions/Sim"
+                    "$ref": "#/definitions/MissingGearMessage"
                 },
                 "cooldowns": {
                     "$ref": "#/definitions/GearPickerCooldowns"
@@ -1535,7 +1600,7 @@
             ],
             "title": "FactionLabels"
         },
-        "Sim": {
+        "MissingGearMessage": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -1550,7 +1615,7 @@
                 "description",
                 "title"
             ],
-            "title": "Sim"
+            "title": "MissingGearMessage"
         },
         "QuickPopovers": {
             "type": "object",
@@ -2112,6 +2177,12 @@
                 "damage": {
                     "$ref": "#/definitions/Damage"
                 },
+                "timeline": {
+                    "$ref": "#/definitions/Timeline"
+                },
+                "logs": {
+                    "$ref": "#/definitions/Logs"
+                },
                 "tabs": {
                     "$ref": "#/definitions/DetailsTabs"
                 },
@@ -2122,7 +2193,7 @@
                     }
                 },
                 "tooltips": {
-                    "$ref": "#/definitions/Tooltips"
+                    "$ref": "#/definitions/DetailsTooltips"
                 },
                 "attack_types": {
                     "$ref": "#/definitions/AttackTypes"
@@ -2137,10 +2208,12 @@
                 "attack_types",
                 "columns",
                 "damage",
+                "logs",
                 "no_results",
                 "sim_1_iteration",
                 "tabs",
                 "target_number",
+                "timeline",
                 "tooltip_table",
                 "tooltips",
                 "view_in_separate_tab"
@@ -2217,6 +2290,35 @@
             ],
             "title": "Damage"
         },
+        "Logs": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "filter_placeholder": {
+                    "type": "string"
+                },
+                "top_button": {
+                    "type": "string"
+                },
+                "time_column": {
+                    "type": "string"
+                },
+                "event_column": {
+                    "type": "string"
+                },
+                "show_debug": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "event_column",
+                "filter_placeholder",
+                "show_debug",
+                "time_column",
+                "top_button"
+            ],
+            "title": "Logs"
+        },
         "DetailsTabs": {
             "type": "object",
             "additionalProperties": false,
@@ -2262,6 +2364,118 @@
             ],
             "title": "DetailsTabs"
         },
+        "Timeline": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "disclaimer": {
+                    "type": "string"
+                },
+                "note": {
+                    "type": "string"
+                },
+                "chart_types": {
+                    "$ref": "#/definitions/ChartTypes"
+                },
+                "chart_options": {
+                    "$ref": "#/definitions/ChartOptions"
+                },
+                "tooltips": {
+                    "$ref": "#/definitions/TimelineTooltips"
+                }
+            },
+            "required": [
+                "chart_options",
+                "chart_types",
+                "disclaimer",
+                "note",
+                "tooltips"
+            ],
+            "title": "Timeline"
+        },
+        "ChartOptions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "time_axis": {
+                    "type": "string"
+                },
+                "waiting_for_data": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "time_axis",
+                "waiting_for_data"
+            ],
+            "title": "ChartOptions"
+        },
+        "ChartTypes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "rotation": {
+                    "type": "string"
+                },
+                "dps": {
+                    "type": "string"
+                },
+                "threat": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dps",
+                "rotation",
+                "threat"
+            ],
+            "title": "ChartTypes"
+        },
+        "TimelineTooltips": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "dps": {
+                    "type": "string"
+                },
+                "dtps": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "string"
+                },
+                "player_damage": {
+                    "type": "string"
+                },
+                "player_damage_taken": {
+                    "type": "string"
+                },
+                "before": {
+                    "type": "string"
+                },
+                "after": {
+                    "type": "string"
+                },
+                "threat": {
+                    "type": "string"
+                },
+                "active_auras": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "active_auras",
+                "after",
+                "amount",
+                "before",
+                "dps",
+                "dtps",
+                "player_damage",
+                "player_damage_taken",
+                "threat"
+            ],
+            "title": "TimelineTooltips"
+        },
         "TooltipTable": {
             "type": "object",
             "additionalProperties": false,
@@ -2287,7 +2501,7 @@
             ],
             "title": "TooltipTable"
         },
-        "Tooltips": {
+        "DetailsTooltips": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -2346,7 +2560,7 @@
                 "player_damage_taken",
                 "threat_per_encounter"
             ],
-            "title": "Tooltips"
+            "title": "DetailsTooltips"
         },
         "Rotation": {
             "type": "object",
@@ -2364,6 +2578,9 @@
                 "apl": {
                     "$ref": "#/definitions/APL"
                 },
+                "options": {
+                    "$ref": "#/definitions/RotationOptions"
+                },
                 "simple": {
                     "$ref": "#/definitions/Export"
                 },
@@ -2372,9 +2589,6 @@
                 },
                 "saved_rotations": {
                     "$ref": "#/definitions/Saved"
-                },
-                "options": {
-                    "$ref": "#/definitions/RotationOptions"
                 }
             },
             "required": [
@@ -5670,6 +5884,31 @@
                 "unspent_talent_points"
             ],
             "title": "Warnings"
+        },
+        "Sim": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "basic_bis_disclaimer": {
+                    "type": "string"
+                },
+                "healing_sim_disclaimer": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "basic_bis_disclaimer",
+                "description",
+                "healing_sim_disclaimer",
+                "title"
+            ],
+            "title": "Sim"
         },
         "Talents": {
             "type": "object",
