@@ -241,6 +241,10 @@
 			},
 			"tooltips": {
 				"dps": "DPS",
+				"dtps": "DTPS",
+				"amount": "Amount",
+				"player_damage": "Player Damage / Raid Damage",
+				"player_damage_taken": "Player Damage Taken / Raid Damage Taken",
 				"before": "Before",
 				"after": "After",
 				"threat": "Threat",

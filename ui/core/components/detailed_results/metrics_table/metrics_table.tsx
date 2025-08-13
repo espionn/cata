@@ -1,8 +1,6 @@
 import tippy from 'tippy.js';
 import { ref } from 'tsx-vanilla';
-
 import { CacheHandler } from '../../../cache_handler';
-import { TOOLTIP_METRIC_LABELS } from '../../../constants/tooltips';
 import { ActionId } from '../../../proto_utils/action_id';
 import i18n from '../../../../i18n/config';
 import { ActionMetrics, AuraMetrics, ResourceMetrics, UnitMetrics } from '../../../proto_utils/sim_result';
@@ -60,7 +58,7 @@ export abstract class MetricsTable<T extends ActionMetrics | AuraMetrics | UnitM
 		const headerRowElem = this.rootElem.querySelector<HTMLTableRowElement>('.metrics-table-header-row')!;
 		this.columnConfigs.forEach(columnConfig => {
 			const headerCell = document.createElement('th');
-			const tooltipContent = columnConfig.tooltip || TOOLTIP_METRIC_LABELS[columnConfig.name as keyof typeof TOOLTIP_METRIC_LABELS];
+			const tooltipContent = columnConfig.tooltip;
 			headerCell.classList.add('metrics-table-header-cell');
 			if (columnConfig.columnClass) {
 				headerCell.classList.add(...columnConfig.columnClass.split(' '));

@@ -1,4 +1,3 @@
-import { TOOLTIP_METRIC_LABELS } from '../../constants/tooltips';
 import { ActionMetrics } from '../../proto_utils/sim_result';
 import i18n from '../../../i18n/config';
 import { bucket, formatToCompactNumber, formatToNumber, formatToPercent } from '../../utils';

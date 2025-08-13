@@ -1,6 +1,5 @@
 import { ref } from 'tsx-vanilla';
 
-import * as Tooltips from '../../constants/tooltips';
 import i18n from '../../../i18n/config';
 import { IndividualSimUI, InputSection } from '../../individual_sim_ui';
 import { Player } from '../../player';

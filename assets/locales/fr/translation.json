@@ -241,6 +241,10 @@
 			},
 			"tooltips": {
 				"dps": "DPS",
+				"dtps": "DTPS",
+				"amount": "Montant",
+				"player_damage": "Dégâts du Joueur / Dégâts du Raid",
+				"player_damage_taken": "Dégâts Subis par le Joueur / Dégâts Subis par le Raid",
 				"before": "Avant",
 				"after": "Après",
 				"threat": "Menace",
