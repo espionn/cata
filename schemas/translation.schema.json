@@ -6190,16 +6190,37 @@
                 },
                 "notice_local_download": {
                     "$ref": "#/definitions/NoticeLocalDownload"
+                },
+                "crash_modal": {
+                    "$ref": "#/definitions/CrashModal"
                 }
             },
             "required": [
                 "basic_bis_disclaimer",
+                "crash_modal",
                 "description",
                 "healing_sim_disclaimer",
                 "notice_local_download",
                 "title"
             ],
             "title": "Sim"
+        },
+        "CrashModal": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "header": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "header",
+                "title"
+            ],
+            "title": "CrashModal"
         },
         "NoticeLocalDownload": {
             "type": "object",

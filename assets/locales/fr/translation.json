@@ -327,6 +327,10 @@
 			"title": "Le saviez-vous ?",
 			"message": "Vous pouvez télécharger notre simulateur local pour accélérer considérablement vos simulations ?",
 			"download_button": "Télécharger"
+		},
+		"crash_modal": {
+			"title": "Informations Supplémentaires sur le Plantage",
+			"header": "Veuillez ajouter le lien complet suivant au problème que vous venez de créer. Cela simplifiera le débogage du problème."
 		}
 	},
 	"gear": {

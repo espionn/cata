@@ -435,14 +435,14 @@ export abstract class SimUI extends Component {
 
 class CrashModal extends BaseModal {
 	constructor(parent: HTMLElement, link: string) {
-		super(parent, 'crash', { title: 'Extra Crash Information' });
+		super(parent, 'crash', { title: i18n.t('sim.crash_modal.title') });
 		this.body.appendChild(
 			<div className="sim-crash-report">
 				<h3 className="sim-crash-report-header">
-					Please append the following complete link to the issue you just created. This will simplify debugging the issue.
+					{i18n.t('sim.crash_modal.header')}
 				</h3>
 				<textarea className="sim-crash-report-text form-control">{link}</textarea>
-			</div>,
+			</div>
 		);
 	}
 }

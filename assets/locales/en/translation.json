@@ -327,6 +327,10 @@
 			"title": "Did you know?",
 			"message": "You can download our local sim to speed up your simulations significantly?",
 			"download_button": "Download"
+		},
+		"crash_modal": {
+			"title": "Extra Crash Information",
+			"header": "Please append the following complete link to the issue you just created. This will simplify debugging the issue."
 		}
 	},
 	"gear": {
