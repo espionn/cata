@@ -1,5 +1,6 @@
 import { LaunchStatus } from '../core/launched_sims';
 import { ArmorType, Class, MobType, PseudoStat, Race, Profession, Spec, Stat, SpellSchool, WeaponType, RangedWeaponType } from '../core/proto/common';
+import { ResourceType } from '../core/proto/spell';
 import { RaidFilterOption, SourceFilterOption } from '../core/proto/ui';
 import i18n from './config';
 
@@ -82,6 +83,25 @@ export const aplItemLabelI18nKeys: Record<string, string> = {
 	'action': 'rotation.apl.priority_list.item_label',
 	'prepull-action': 'rotation.apl.prepull_actions.item_label',
 	'value': 'rotation.apl.values.item_label',
+};
+
+export const resourceTypeI18nKeys: Record<ResourceType, string> = {
+	[ResourceType.ResourceTypeNone]: 'none',
+	[ResourceType.ResourceTypeHealth]: 'health',
+	[ResourceType.ResourceTypeMana]: 'mana',
+	[ResourceType.ResourceTypeEnergy]: 'energy',
+	[ResourceType.ResourceTypeRage]: 'rage',
+	[ResourceType.ResourceTypeChi]: 'chi',
+	[ResourceType.ResourceTypeComboPoints]: 'combo_points',
+	[ResourceType.ResourceTypeFocus]: 'focus',
+	[ResourceType.ResourceTypeRunicPower]: 'runic_power',
+	[ResourceType.ResourceTypeBloodRune]: 'blood_rune',
+	[ResourceType.ResourceTypeFrostRune]: 'frost_rune',
+	[ResourceType.ResourceTypeUnholyRune]: 'unholy_rune',
+	[ResourceType.ResourceTypeDeathRune]: 'death_rune',
+	[ResourceType.ResourceTypeSolarEnergy]: 'solar_energy',
+	[ResourceType.ResourceTypeLunarEnergy]: 'lunar_energy',
+	[ResourceType.ResourceTypeGenericResource]: 'generic_resource',
 };
 
 // standardize keys regardless they are from backend or frontend

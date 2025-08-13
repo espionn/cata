@@ -212,6 +212,21 @@
 			"nature": "Nature",
 			"shadow": "Ombre"
 		},
+		"resource_types": {
+			"health": "Santé",
+			"mana": "Mana",
+			"energy": "Énergie",
+			"rage": "Rage",
+			"focus": "Concentration",
+			"runic_power": "Puissance Runique",
+			"chi": "Chi",
+			"holy_power": "Puissance Sacrée",
+			"shadow_orbs": "Orbes d'Ombre",
+			"combo_points": "Points de Combo",
+			"maelstrom": "Maelström",
+			"demonic_fury": "Fureur Démoniaque",
+			"burning_embers": "Braises Ardentes"
+		},
 		"stats": {
 			"strength": "Force",
 			"agility": "Agilité",
@@ -1745,7 +1760,11 @@
 				"demonic_fury_gain": "Gain de Fureur Démoniaque",
 				"demonic_fury_cost": "Coût de Fureur Démoniaque",
 				"burning_embers_gain": "Gain de Braises Ardentes",
-				"burning_embers_cost": "Coût de Braises Ardentes"
+				"burning_embers_cost": "Coût de Braises Ardentes",
+				"gain": "Gain",
+				"gain_per_second": "Gain / s",
+				"avg_gain": "Gain Moyen",
+				"wasted_gain": "Gain Perdu"
 			},
 			"tooltips": {
 				"damage_avg_cast": "Dégâts moyens par lancer",

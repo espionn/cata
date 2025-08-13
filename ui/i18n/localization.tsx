@@ -1,9 +1,29 @@
 import { PlayerClass } from '../core/player_class';
 import { PlayerSpec } from '../core/player_spec';
 import { ArmorType, MobType, PseudoStat, Race, Profession, SpellSchool, Stat, WeaponType, RangedWeaponType, Spec } from '../core/proto/common';
+import { ResourceType } from '../core/proto/spell';
 import { RaidFilterOption, SourceFilterOption } from '../core/proto/ui';
 import i18n from './config';
-import { getClassI18nKey, getMobTypeI18nKey, getRaceI18nKey, getProfessionI18nKey, getSpecI18nKey, getTargetInputI18nKey, pseudoStatI18nKeys, spellSchoolI18nKeys, statI18nKeys, getSourceFilterI18nKey, getRaidFilterI18nKey, getArmorTypeI18nKey, getWeaponTypeI18nKey, getRangedWeaponTypeI18nKey, getMasterySpellNameI18nKey, aplItemLabelI18nKeys, backendMetricI18nKeys as resultMetricI18nKeys } from './entity_mapping';
+import {
+	getClassI18nKey,
+	getMobTypeI18nKey,
+	getRaceI18nKey,
+	getProfessionI18nKey,
+	getSpecI18nKey,
+	getTargetInputI18nKey,
+	pseudoStatI18nKeys,
+	spellSchoolI18nKeys,
+	statI18nKeys,
+	getSourceFilterI18nKey,
+	getRaidFilterI18nKey,
+	getArmorTypeI18nKey,
+	getWeaponTypeI18nKey,
+	getRangedWeaponTypeI18nKey,
+	getMasterySpellNameI18nKey,
+	aplItemLabelI18nKeys,
+	backendMetricI18nKeys as resultMetricI18nKeys,
+	resourceTypeI18nKeys,
+} from './entity_mapping';
 import { getLang, setLang, supportedLanguages } from './locale_service';
 
 /**
@@ -182,6 +202,19 @@ export const translateRangedWeaponType = (rangedWeaponType: RangedWeaponType): s
 	}
 };
 
+export const translateResourceType = (resourceType: ResourceType): string => {
+	try {
+		const key = resourceTypeI18nKeys[resourceType] || ResourceType[resourceType].toLowerCase();
+		const translated = i18n.t(`common.resource_types.${key}`);
+		if (translated === `common.resource_types.${key}`) {
+			return ResourceType[resourceType];
+		}
+		return translated;
+	} catch {
+		return ResourceType[resourceType];
+	}
+};
+
 export const translateMasterySpellName = (spec: Spec): string => {
 	try {
 		const key = getMasterySpellNameI18nKey(spec);
@@ -244,7 +277,7 @@ export const extractClassAndSpecFromLink = (link: HTMLAnchorElement): { classNam
 	if (parts.length >= 2) {
 		return {
 			className: parts[1],
-			specName: parts[2]
+			specName: parts[2],
 		};
 	}
 	return {};
@@ -285,14 +318,9 @@ export const updateLanguageDropdown = (): void => {
 			window.location.reload();
 		};
 
-				const languageItem = (
+		const languageItem = (
 			<li>
-				<a
-					className={`dropdown-item ${code === currentLang ? 'active' : ''}`}
-					href="#"
-					data-lang={code}
-					onclick={handleClick}
-				>
+				<a className={`dropdown-item ${code === currentLang ? 'active' : ''}`} href="#" data-lang={code} onclick={handleClick}>
 					{name}
 				</a>
 			</li>
@@ -323,17 +351,13 @@ export const updateSimPageMetadata = (): void => {
 	const titleElement = document.querySelector('title');
 	if (titleElement) {
 		const titleTemplate = i18n.t('sim.title');
-		titleElement.textContent = titleTemplate
-			.replace('{class}', translatedClass)
-			.replace('{spec}', translatedSpec);
+		titleElement.textContent = titleTemplate.replace('{class}', translatedClass).replace('{spec}', translatedSpec);
 	}
 
 	const metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
 	if (metaDescription) {
 		const descriptionTemplate = i18n.t('sim.description');
-		metaDescription.content = descriptionTemplate
-			.replace('{class}', translatedClass)
-			.replace('{spec}', translatedSpec);
+		metaDescription.content = descriptionTemplate.replace('{class}', translatedClass).replace('{spec}', translatedSpec);
 	}
 };
 
@@ -388,7 +412,7 @@ export const translateResultMetricTooltip = (metricName: string): string => {
 	const key = resultMetricI18nKeys[cleanName] || resultMetricI18nKeys[metricName];
 	if (!key) return metricName;
 
-	const tooltipKey = (key === 'tmi' || key === 'cod') ? `${key}.tooltip.title` : `${key}.tooltip`;
+	const tooltipKey = key === 'tmi' || key === 'cod' ? `${key}.tooltip.title` : `${key}.tooltip`;
 	const translated = i18n.t(`sidebar.results.metrics.${tooltipKey}`);
 	return translated === `sidebar.results.metrics.${tooltipKey}` ? metricName : translated;
 };
@@ -421,11 +445,11 @@ export const updateTranslations = (options: LocalizationOptions = {}): void => {
 };
 
 export const initLocalization = (options?: LocalizationOptions): void => {
-	const finalOptions = options || (
-		document.querySelector('title[data-class]') || document.querySelector('meta[data-class]')
+	const finalOptions =
+		options ||
+		(document.querySelector('title[data-class]') || document.querySelector('meta[data-class]')
 			? { updateSimMetadata: true }
-			: { updateSimLinks: true, updateLanguageDropdown: true }
-	);
+			: { updateSimLinks: true, updateLanguageDropdown: true });
 
 	const initialize = () => {
 		if (!i18n.isInitialized) {

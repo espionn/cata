@@ -212,6 +212,21 @@
 			"nature": "Nature",
 			"shadow": "Shadow"
 		},
+		"resource_types": {
+			"health": "Health",
+			"mana": "Mana",
+			"energy": "Energy",
+			"rage": "Rage",
+			"focus": "Focus",
+			"runic_power": "Runic Power",
+			"chi": "Chi",
+			"holy_power": "Holy Power",
+			"shadow_orbs": "Shadow Orbs",
+			"combo_points": "Combo Points",
+			"maelstrom": "Maelstrom",
+			"demonic_fury": "Demonic Fury",
+			"burning_embers": "Burning Embers"
+		},
 		"stats": {
 			"strength": "Strength",
 			"agility": "Agility",
@@ -1745,7 +1760,11 @@
 				"demonic_fury_gain": "Demonic Fury Gain",
 				"demonic_fury_cost": "Demonic Fury Cost",
 				"burning_embers_gain": "Burning Embers Gain",
-				"burning_embers_cost": "Burning Embers Cost"
+				"burning_embers_cost": "Burning Embers Cost",
+				"gain": "Gain",
+				"gain_per_second": "Gain / s",
+				"avg_gain": "Avg Gain",
+				"wasted_gain": "Wasted Gain"
 			},
 			"tooltips": {
 				"damage_avg_cast": "Average damage per cast",
