@@ -1,6 +1,6 @@
 // @ts-expect-error
 import debounce from 'lodash/debounce';
-import { ref, fragment } from 'tsx-vanilla';
+import { ref } from 'tsx-vanilla';
 
 import { SimLog } from '../../proto_utils/logs_parser';
 import { TypedEvent } from '../../typed_event.js';
