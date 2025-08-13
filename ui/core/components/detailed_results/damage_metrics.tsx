@@ -55,7 +55,7 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 					cellElem.appendChild(
 						<MetricsCombinedTooltipTable
 							tooltipElement={cellElem}
-							headerValues={[, 'Amount']}
+							headerValues={[, i18n.t('results.details.tooltip_table.amount')]}
 							groups={[
 								{
 									spellSchool: metric.spellSchool,
@@ -63,35 +63,35 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: 'Hit',
+											name: i18n.t('results.details.attack_typess.hit'),
 											...hitValues,
 										},
 										{
-											name: `Critical Hit`,
+											name: i18n.t('results.details.attack_typess.critical_hit'),
 											...critHitValues,
 										},
 										{
-											name: 'Tick',
+											name: i18n.t('results.details.attack_typess.tick'),
 											...tickValues,
 										},
 										{
-											name: `Critical Tick`,
+											name: i18n.t('results.details.attack_typess.critical_tick'),
 											...critTickValues,
 										},
 										{
-											name: 'Glancing Blow',
+											name: i18n.t('results.details.attack_typess.glancing_blow'),
 											...glanceValues,
 										},
 										{
-											name: 'Blocked Glancing Blow',
+											name: i18n.t('results.details.attack_typess.blocked_glancing_blow'),
 											...glanceBlockValues,
 										},
 										{
-											name: 'Blocked Hit',
+											name: i18n.t('results.details.attack_typess.blocked_hit'),
 											...blockValues,
 										},
 										{
-											name: 'Blocked Critical Hit',
+											name: i18n.t('results.details.attack_typess.blocked_critical_hit'),
 											...critBlockValues,
 										},
 									],
@@ -120,22 +120,22 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: 'Hits',
+											name: i18n.t('results.details.attack_typess.hit') + 's',
 											value: metric.landedHits || metric.casts - metric.totalMisses,
 											percentage: relativeHitPercent,
 										},
 										{
-											name: 'Miss',
+											name: i18n.t('results.details.attack_typess.miss'),
 											value: metric.misses,
 											percentage: metric.missPercent,
 										},
 										{
-											name: 'Parry',
+											name: i18n.t('results.details.attack_typess.parry'),
 											value: metric.parries,
 											percentage: metric.parryPercent,
 										},
 										{
-											name: 'Dodge',
+											name: i18n.t('results.details.attack_typess.dodge'),
 											value: metric.dodges,
 											percentage: metric.dodgePercent,
 										},
@@ -180,7 +180,7 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 									if (hideThreatMetrics) return false;
 								},
 							}}
-							headerValues={[, 'Amount']}
+							headerValues={[, i18n.t('results.details.tooltip_table.amount')]}
 							groups={[
 								{
 									spellSchool: metric.spellSchool,
@@ -188,7 +188,7 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: 'Threat',
+											name: i18n.t('results.details.attack_typess.threat'),
 											value: metric.avgCastThreat,
 											percentage: 100,
 										},
@@ -230,32 +230,32 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: 'Hit',
+											name: i18n.t('results.details.attack_typess.hit'),
 											value: metric.hits,
 											percentage: relativeHitPercent,
 										},
 										{
-											name: `Critical Hit`,
+											name: i18n.t('results.details.attack_typess.critical_hit'),
 											value: metric.crits,
 											percentage: relativeCritPercent,
 										},
 										{
-											name: 'Glancing Blow',
+											name: i18n.t('results.details.attack_typess.glancing_blow'),
 											value: metric.glances,
 											percentage: relativeGlancePercent,
 										},
 										{
-											name: 'Blocked Glancing Blow',
+											name: i18n.t('results.details.attack_typess.blocked_glancing_blow'),
 											value: metric.glanceBlocks,
 											percentage: relativeGlanceBlockPercent,
 										},
 										{
-											name: 'Blocked Hit',
+											name: i18n.t('results.details.attack_typess.blocked_hit'),
 											value: metric.blocks,
 											percentage: relativeBlockPercent,
 										},
 										{
-											name: 'Blocked Critical Hit',
+											name: i18n.t('results.details.attack_typess.blocked_critical_hit'),
 											value: metric.critBlocks,
 											percentage: relativeCritBlockPercent,
 										},
@@ -267,12 +267,12 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: 'Tick',
+											name: i18n.t('results.details.attack_typess.tick'),
 											value: metric.ticks,
 											percentage: relativeTickPercent,
 										},
 										{
-											name: `Critical Tick`,
+											name: i18n.t('results.details.attack_typess.critical_tick'),
 											value: metric.critTicks,
 											percentage: relativeCritTickPercent,
 										},
@@ -305,7 +305,7 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 									if (hideThreatMetrics) return false;
 								},
 							}}
-							headerValues={[, 'Amount']}
+							headerValues={[, i18n.t('results.details.tooltip_table.amount')]}
 							groups={[
 								{
 									spellSchool: metric.spellSchool,
@@ -313,7 +313,7 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: 'Threat',
+											name: i18n.t('results.details.attack_typess.threat'),
 											value: metric.avgHitThreat,
 											percentage: 100,
 										},
@@ -326,10 +326,12 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 			},
 			{
 				name: i18n.t('results.details.columns.crit_percent'),
-				getValue: (metric: ActionMetrics) => (metric.critPercent + metric.critBlockPercent) || metric.critTickPercent,
+				getValue: (metric: ActionMetrics) => metric.critPercent + metric.critBlockPercent || metric.critTickPercent,
 				getDisplayString: (metric: ActionMetrics) =>
 					`${formatToPercent(metric.critPercent + metric.critBlockPercent || metric.critTickPercent, { fallbackString: '-' })}${
-						metric.critPercent + metric.critBlockPercent && metric.critTickPercent ? ` (${formatToPercent(metric.critTickPercent, { fallbackString: '-' })})` : ''
+						metric.critPercent + metric.critBlockPercent && metric.critTickPercent
+							? ` (${formatToPercent(metric.critTickPercent, { fallbackString: '-' })})`
+							: ''
 					}`,
 			},
 			{
@@ -349,17 +351,17 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: metric.totalMissesPercent,
 									data: [
 										{
-											name: 'Miss',
+											name: i18n.t('results.details.attack_typess.miss'),
 											value: metric.misses,
 											percentage: metric.missPercent,
 										},
 										{
-											name: 'Parry',
+											name: i18n.t('results.details.attack_typess.parry'),
 											value: metric.parries,
 											percentage: metric.parryPercent,
 										},
 										{
-											name: 'Dodge',
+											name: i18n.t('results.details.attack_typess.dodge'),
 											value: metric.dodges,
 											percentage: metric.dodgePercent,
 										},
@@ -394,7 +396,7 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 									if (hideThreatMetrics) return false;
 								},
 							}}
-							headerValues={[, 'Amount']}
+							headerValues={[, i18n.t('results.details.tooltip_table.amount')]}
 							groups={[
 								{
 									spellSchool: metric.spellSchool,
@@ -402,7 +404,7 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: 'Threat',
+											name: i18n.t('results.details.attack_typess.threat'),
 											value: metric.tps,
 											percentage: 100,
 										},

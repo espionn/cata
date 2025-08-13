@@ -1752,7 +1752,7 @@
 				"threat_per_encounter": "Menace / Durée de l'Affrontement",
 				"damage_avg_cast_tooltip": "Dégâts / Lancers et/ou Dégâts / Tics"
 			},
-			"damage_types": {
+			"attack_types": {
 				"hit": "Coup",
 				"critical_hit": "Coup Critique",
 				"tick": "Tic",
@@ -1765,6 +1765,12 @@
 				"parry": "Parade",
 				"dodge": "Esquive",
 				"threat": "Menace"
+			},
+			"tooltip_table": {
+				"type": "Type",
+				"count": "Compte",
+				"average": "Moyenne",
+				"amount": "Montant"
 			}
 		}
 	},
