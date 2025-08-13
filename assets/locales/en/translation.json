@@ -31,6 +31,7 @@
 			"5": "Phase 5 (5.4 - T16)"
 		},
 		"tanks": {
+			"title": "Tanks",
 			"main_tank": "Main Tank",
 			"tank_2": "Tank 2",
 			"tank_3": "Tank 3",
@@ -592,6 +593,10 @@
 			"assume_prepull_mastery_elixir": {
 				"label": "Assume Prepull Mastery Elixir",
 				"tooltip": "Enabling this assumes you are using a Mastery Elixir during prepull."
+			},
+			"blessings": {
+				"title": "Blessings",
+				"tooltip": "Specify Paladin Blessings for each role, in order of priority. Blessings in the 1st column will be used if there is at least 1 Paladin in the raid, 2nd column if at least 2, etc."
 			}
 		},
 		"consumables": {
@@ -733,6 +738,10 @@
 			"settings": "Settings",
 			"settings_name": "Settings Name",
 			"save_settings": "Save Settings"
+		},
+		"external_buffs": {
+			"title": "External Buffs",
+			"tooltip": "Buffs provided by <strong>other</strong> party/raid members."
 		}
 	},
 	"talents": {

@@ -1304,6 +1304,9 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
+                "title": {
+                    "type": "string"
+                },
                 "main_tank": {
                     "type": "string"
                 },
@@ -1321,7 +1324,8 @@
                 "main_tank",
                 "tank_2",
                 "tank_3",
-                "tank_4"
+                "tank_4",
+                "title"
             ],
             "title": "Tanks"
         },
@@ -1440,7 +1444,7 @@
                     "$ref": "#/definitions/MissingGearMessage"
                 },
                 "cooldowns": {
-                    "$ref": "#/definitions/GearPickerCooldowns"
+                    "$ref": "#/definitions/ExternalBuffs"
                 },
                 "ep_tooltip": {
                     "type": "string"
@@ -1521,7 +1525,7 @@
             ],
             "title": "GearPicker"
         },
-        "GearPickerCooldowns": {
+        "ExternalBuffs": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -1536,7 +1540,7 @@
                 "title",
                 "tooltip"
             ],
-            "title": "GearPickerCooldowns"
+            "title": "ExternalBuffs"
         },
         "Filters": {
             "type": "object",
@@ -2578,17 +2582,17 @@
                 "apl": {
                     "$ref": "#/definitions/APL"
                 },
-                "options": {
-                    "$ref": "#/definitions/RotationOptions"
-                },
                 "simple": {
                     "$ref": "#/definitions/Export"
                 },
                 "cooldowns": {
-                    "$ref": "#/definitions/RotationCooldowns"
+                    "$ref": "#/definitions/Cooldowns"
                 },
                 "saved_rotations": {
                     "$ref": "#/definitions/Saved"
+                },
+                "options": {
+                    "$ref": "#/definitions/RotationOptions"
                 }
             },
             "required": [
@@ -4047,7 +4051,7 @@
             ],
             "title": "RotationType"
         },
-        "RotationCooldowns": {
+        "Cooldowns": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -4070,7 +4074,7 @@
                 "title",
                 "tooltip"
             ],
-            "title": "RotationCooldowns"
+            "title": "Cooldowns"
         },
         "RotationHeader": {
             "type": "object",
@@ -4537,12 +4541,16 @@
                 },
                 "saved_settings": {
                     "$ref": "#/definitions/SavedSettings"
+                },
+                "external_buffs": {
+                    "$ref": "#/definitions/ExternalBuffs"
                 }
             },
             "required": [
                 "consumables",
                 "debuffs",
                 "encounter",
+                "external_buffs",
                 "external_damage_cooldowns",
                 "external_defensive_cooldowns",
                 "other",
@@ -4976,12 +4984,16 @@
                 },
                 "assume_prepull_mastery_elixir": {
                     "$ref": "#/definitions/LanguageClass"
+                },
+                "blessings": {
+                    "$ref": "#/definitions/ExternalBuffs"
                 }
             },
             "required": [
                 "absorb_frac",
                 "assume_bleed_active",
                 "assume_prepull_mastery_elixir",
+                "blessings",
                 "burst_window",
                 "cannot_shred_target",
                 "challenge_mode",

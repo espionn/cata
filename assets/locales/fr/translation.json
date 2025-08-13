@@ -31,6 +31,7 @@
 			"5": "Phase 5 (5.4 - T16)"
 		},
 		"tanks": {
+			"title": "Tanks",
 			"main_tank": "Tank Principal",
 			"tank_2": "Tank 2",
 			"tank_3": "Tank 3",
@@ -592,6 +593,10 @@
 			"assume_prepull_mastery_elixir": {
 				"label": "Supposer Élixir de Maîtrise de Préparation",
 				"tooltip": "Activer ceci suppose que vous utilisez un Élixir de Maîtrise pendant la préparation."
+			},
+			"blessings": {
+				"title": "Bénédictions",
+				"tooltip": "Spécifiez les Bénédictions de Paladin pour chaque rôle, par ordre de priorité. Les Bénédictions dans la 1ère colonne seront utilisées s'il y a au moins 1 Paladin dans le raid, 2ème colonne s'il y en a au moins 2, etc."
 			}
 		},
 		"consumables": {
@@ -733,6 +738,10 @@
 			"settings": "Paramètres",
 			"settings_name": "Nom des Paramètres",
 			"save_settings": "Sauvegarder les Paramètres"
+		},
+		"external_buffs": {
+			"title": "Buffs Externes",
+			"tooltip": "Buffs fournis par <strong>d'autres</strong> membres du groupe/raid."
 		}
 	},
 	"talents": {
