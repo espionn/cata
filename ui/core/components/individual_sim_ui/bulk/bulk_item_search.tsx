@@ -3,6 +3,7 @@ import { ref } from 'tsx-vanilla';
 
 import { setItemQualityCssClass } from '../../../css_utils';
 import { IndividualSimUI } from '../../../individual_sim_ui';
+import i18n from '../../../../i18n/config';
 import { ItemLevelState, ItemSpec } from '../../../proto/common';
 import { UIItem, UIItem_FactionRestriction } from '../../../proto/ui';
 import { ActionId } from '../../../proto_utils/action_id';
@@ -39,7 +40,7 @@ export default class BulkItemSearch extends ContentBlock {
 	private maxIlvl = 0;
 
 	constructor(parent: HTMLElement, simUI: IndividualSimUI<any>, bulkUI: BulkTab) {
-		super(parent, 'bulk-item-search-root', { header: { title: 'Item Search' } });
+		super(parent, 'bulk-item-search-root', { header: { title: i18n.t('sim.bulk.search.title') } });
 
 		this.simUI = simUI;
 		this.bulkUI = bulkUI;
@@ -55,10 +56,10 @@ export default class BulkItemSearch extends ContentBlock {
 			<div className="bulk-gear-search-container" ref={searchContainerRef}>
 				<div className="d-flex flex-column">
 					<label className="form-label" htmlFor="bulkGearSearch">
-						Name
+						{i18n.t('sim.bulk.search.name_label')}
 					</label>
 					<div className="input-group">
-						<input id="bulkGearSearch" className="form-control" type="text" placeholder="Search..." ref={searchInputRef} />
+						<input id="bulkGearSearch" className="form-control" type="text" placeholder={i18n.t('sim.bulk.search.placeholder')} ref={searchInputRef} />
 						<button className="btn btn-link cancel-bulk-gear-search-btn hide" ref={cancelSearchElemRef} type="button">
 							<i className="fas fa-times" />
 						</button>
@@ -73,14 +74,14 @@ export default class BulkItemSearch extends ContentBlock {
 		this.cancelSearchElem = cancelSearchElemRef.value!;
 		this.searchResultElem = searchResultsRef.value!;
 
-		tippy(this.cancelSearchElem, { content: 'Clear search' });
+		tippy(this.cancelSearchElem, { content: i18n.t('sim.bulk.search.clear_search') });
 		this.cancelSearchElem.addEventListener('click', () => {
 			this.searchString = '';
 		});
 
 		new NumberPicker(ilvlFiltersContainerRef.value!, this, {
 			id: 'bulkGearSearchMinIlvl',
-			label: 'Min ILvl',
+			label: i18n.t('sim.bulk.search.min_ilvl'),
 			showZeroes: false,
 			changedEvent: _ => this.filtersChangeEmitter,
 			getValue: _ => this.minIlvl,
@@ -94,7 +95,7 @@ export default class BulkItemSearch extends ContentBlock {
 
 		new NumberPicker(ilvlFiltersContainerRef.value!, this, {
 			id: 'bulkGearSearchMaxIlvl',
-			label: 'Max ILvl',
+			label: i18n.t('sim.bulk.search.max_ilvl'),
 			showZeroes: false,
 			changedEvent: _ => this.filtersChangeEmitter,
 			getValue: _ => this.maxIlvl,
@@ -210,7 +211,7 @@ export default class BulkItemSearch extends ContentBlock {
 							variant: 'success',
 							body: (
 								<>
-									<strong>{item.name}</strong> was added to the batch.
+									<strong>{item.name}</strong> {i18n.t('sim.bulk.search.item_added', { itemName: item.name })}
 								</>
 							),
 						});
@@ -225,10 +226,10 @@ export default class BulkItemSearch extends ContentBlock {
 				{items}
 				{matchCount > MAX_SEARCH_RESULTS && (
 					<li className="bulk-item-search-item bulk-item-search-results-note">
-						Showing {MAX_SEARCH_RESULTS} of {matchCount} total results.
+						{i18n.t('sim.bulk.search.showing_results', { max: MAX_SEARCH_RESULTS, total: matchCount })}
 					</li>
 				)}
-				{matchCount === 0 && <li className="bulk-item-search-item bulk-item-search-results-note">No results found.</li>}
+				{matchCount === 0 && <li className="bulk-item-search-item bulk-item-search-results-note">{i18n.t('sim.bulk.search.no_results')}</li>}
 			</>,
 		);
 

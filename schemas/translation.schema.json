@@ -19,7 +19,7 @@
                     "$ref": "#/definitions/Gear"
                 },
                 "settings": {
-                    "$ref": "#/definitions/Settings"
+                    "$ref": "#/definitions/TranslationSettings"
                 },
                 "talents": {
                     "$ref": "#/definitions/Talents"
@@ -2880,7 +2880,7 @@
                     "$ref": "#/definitions/PrepullActions"
                 },
                 "actions": {
-                    "$ref": "#/definitions/Actions"
+                    "$ref": "#/definitions/APLActions"
                 },
                 "values": {
                     "$ref": "#/definitions/APLValues"
@@ -2918,7 +2918,7 @@
             ],
             "title": "APL"
         },
-        "Actions": {
+        "APLActions": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -3029,7 +3029,7 @@
                 "wait",
                 "wait_until"
             ],
-            "title": "Actions"
+            "title": "APLActions"
         },
         "ActivateAuraWithStacks": {
             "type": "object",
@@ -4780,7 +4780,7 @@
             ],
             "title": "Simple"
         },
-        "Settings": {
+        "TranslationSettings": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -4835,7 +4835,7 @@
                 "saved_settings",
                 "title"
             ],
-            "title": "Settings"
+            "title": "TranslationSettings"
         },
         "Consumables": {
             "type": "object",
@@ -5986,7 +5986,7 @@
             "additionalProperties": false,
             "properties": {
                 "progress": {
-                    "$ref": "#/definitions/Progress"
+                    "$ref": "#/definitions/ResultsProgress"
                 },
                 "reference": {
                     "$ref": "#/definitions/Reference"
@@ -6085,7 +6085,7 @@
             ],
             "title": "CodTooltip"
         },
-        "Progress": {
+        "ResultsProgress": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -6100,7 +6100,7 @@
                 "iterations_complete",
                 "presim_running"
             ],
-            "title": "Progress"
+            "title": "ResultsProgress"
         },
         "Reference": {
             "type": "object",
@@ -6198,14 +6198,18 @@
                     "$ref": "#/definitions/Unlaunched"
                 },
                 "notifications": {
-                    "$ref": "#/definitions/Notifications"
+                    "$ref": "#/definitions/SimNotifications"
                 },
                 "crash_report": {
                     "$ref": "#/definitions/CrashReport"
+                },
+                "bulk": {
+                    "$ref": "#/definitions/Bulk"
                 }
             },
             "required": [
                 "basic_bis_disclaimer",
+                "bulk",
                 "crash_modal",
                 "crash_report",
                 "description",
@@ -6216,6 +6220,267 @@
                 "unlaunched"
             ],
             "title": "Sim"
+        },
+        "Bulk": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "download_local": {
+                    "type": "string"
+                },
+                "tabs": {
+                    "$ref": "#/definitions/BulkTabs"
+                },
+                "actions": {
+                    "$ref": "#/definitions/BulkActions"
+                },
+                "search": {
+                    "$ref": "#/definitions/Search"
+                },
+                "settings": {
+                    "$ref": "#/definitions/BulkSettings"
+                },
+                "progress": {
+                    "$ref": "#/definitions/BulkProgress"
+                },
+                "notifications": {
+                    "$ref": "#/definitions/BulkNotifications"
+                },
+                "warning": {
+                    "$ref": "#/definitions/WarningClass"
+                },
+                "results": {
+                    "$ref": "#/definitions/BulkResults"
+                }
+            },
+            "required": [
+                "actions",
+                "description",
+                "download_local",
+                "notifications",
+                "progress",
+                "results",
+                "search",
+                "settings",
+                "tabs",
+                "title",
+                "warning"
+            ],
+            "title": "Bulk"
+        },
+        "BulkActions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "import_bags": {
+                    "type": "string"
+                },
+                "import_favorites": {
+                    "type": "string"
+                },
+                "clear_items": {
+                    "type": "string"
+                },
+                "simulate_batch": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "clear_items",
+                "import_bags",
+                "import_favorites",
+                "simulate_batch"
+            ],
+            "title": "BulkActions"
+        },
+        "BulkNotifications": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "bulk_sim_cancelled": {
+                    "type": "string"
+                },
+                "failed_to_remove_item": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "bulk_sim_cancelled",
+                "failed_to_remove_item"
+            ],
+            "title": "BulkNotifications"
+        },
+        "BulkProgress": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "total_combinations": {
+                    "type": "string"
+                },
+                "refining_rounds": {
+                    "type": "string"
+                },
+                "simulations_complete": {
+                    "type": "string"
+                },
+                "iterations_complete": {
+                    "type": "string"
+                },
+                "seconds_remaining": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "iterations_complete",
+                "refining_rounds",
+                "seconds_remaining",
+                "simulations_complete",
+                "total_combinations"
+            ],
+            "title": "BulkProgress"
+        },
+        "BulkResults": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "run_simulation": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "run_simulation"
+            ],
+            "title": "BulkResults"
+        },
+        "Search": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "name_label": {
+                    "type": "string"
+                },
+                "placeholder": {
+                    "type": "string"
+                },
+                "clear_search": {
+                    "type": "string"
+                },
+                "min_ilvl": {
+                    "type": "string"
+                },
+                "max_ilvl": {
+                    "type": "string"
+                },
+                "no_results": {
+                    "type": "string"
+                },
+                "showing_results": {
+                    "type": "string"
+                },
+                "item_added": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "clear_search",
+                "item_added",
+                "max_ilvl",
+                "min_ilvl",
+                "name_label",
+                "no_results",
+                "placeholder",
+                "showing_results",
+                "title"
+            ],
+            "title": "Search"
+        },
+        "BulkSettings": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "combinations_count": {
+                    "type": "string"
+                },
+                "combination_singular": {
+                    "type": "string"
+                },
+                "iterations": {
+                    "type": "string"
+                },
+                "fast_mode": {
+                    "$ref": "#/definitions/ConsumesClass"
+                },
+                "combinations": {
+                    "$ref": "#/definitions/ConsumesClass"
+                },
+                "auto_enchant": {
+                    "$ref": "#/definitions/ConsumesClass"
+                },
+                "auto_gem": {
+                    "$ref": "#/definitions/ConsumesClass"
+                },
+                "sim_talents": {
+                    "$ref": "#/definitions/ConsumesClass"
+                },
+                "default_gems": {
+                    "type": "string"
+                },
+                "talents_to_sim": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "auto_enchant",
+                "auto_gem",
+                "combination_singular",
+                "combinations",
+                "combinations_count",
+                "default_gems",
+                "fast_mode",
+                "iterations",
+                "sim_talents",
+                "talents_to_sim"
+            ],
+            "title": "BulkSettings"
+        },
+        "BulkTabs": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "setup": {
+                    "type": "string"
+                },
+                "results": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "results",
+                "setup"
+            ],
+            "title": "BulkTabs"
+        },
+        "WarningClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "iterations_limit": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "iterations_limit"
+            ],
+            "title": "WarningClass"
         },
         "CrashModal": {
             "type": "object",
@@ -6276,7 +6541,7 @@
             ],
             "title": "NoticeLocalDownload"
         },
-        "Notifications": {
+        "SimNotifications": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -6295,7 +6560,7 @@
                 "raid_sim_cancelled",
                 "simulation_failed"
             ],
-            "title": "Notifications"
+            "title": "SimNotifications"
         },
         "Unlaunched": {
             "type": "object",

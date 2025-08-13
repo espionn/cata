@@ -348,6 +348,76 @@
 			"confirm_title": "Échec de la simulation :",
 			"confirm_message": "Appuyez sur Ok pour signaler le crash",
 			"report_title": "Rapport de crash"
+		},
+		"bulk": {
+			"title": "Lot (<span class=\"text-success\">Nouveau</span>)",
+			"description": "<span className=\"bold\">Simulation par lot</span> est une nouvelle fonctionnalité similaire à la simulation <span className=\"bold\">Top Gear</span> sur <a href=\"https://raidbots.com\" target=\"_blank\">Raidbots.com</a> qui vous permet de sélectionner plusieurs objets et de les simuler pour trouver les meilleures combinaisons.<br />C'est une fonctionnalité <span className=\"text-brand\">Alpha</span>, donc si vous avez des commentaires ou trouvez un bug, veuillez le signaler !",
+			"download_local": "Téléchargez le simulateur local pour des résultats plus rapides.",
+			"tabs": {
+				"setup": "Configuration",
+				"results": "Résultats"
+			},
+			"actions": {
+				"import_bags": "Importer depuis les sacs",
+				"import_favorites": "Importer les favoris",
+				"clear_items": "Effacer les objets",
+				"simulate_batch": "Simuler le lot"
+			},
+			"search": {
+				"title": "Recherche d'objets",
+				"name_label": "Nom",
+				"placeholder": "Rechercher...",
+				"clear_search": "Effacer la recherche",
+				"min_ilvl": "ILvl min",
+				"max_ilvl": "ILvl max",
+				"no_results": "Aucun résultat trouvé.",
+				"showing_results": "Affichage de {max} sur {total} résultats totaux.",
+				"item_added": "{itemName} a été ajouté au lot."
+			},
+			"settings": {
+				"combinations_count": "{count} Combinaisons",
+				"combination_singular": "1 Combinaison",
+				"iterations": "Itérations",
+				"fast_mode": {
+					"label": "Mode rapide",
+					"tooltip": "Le mode rapide réduit la précision mais s'exécute plus rapidement."
+				},
+				"combinations": {
+					"label": "Combinaisons",
+					"tooltip": "Lorsqu'il est coché, le simulateur par lot créera toutes les combinaisons possibles des objets. Lorsqu'il est désactivé, les trinkets et anneaux exécuteront toujours toutes les combinaisons car chacun a deux emplacements à remplir."
+				},
+				"auto_enchant": {
+					"label": "Enchantement automatique",
+					"tooltip": "Lorsqu'il est coché, le simulateur par lot appliquera l'enchantement actuel d'un emplacement à chaque objet de remplacement qu'il peut."
+				},
+				"auto_gem": {
+					"label": "Gemme automatique",
+					"tooltip": "Lorsqu'il est coché, le simulateur par lot remplira tous les châsses de gemmes non remplis avec des gemmes par défaut."
+				},
+				"sim_talents": {
+					"label": "Simuler les talents",
+					"tooltip": "Lorsqu'il est coché, le simulateur par lot simulera les configurations de talents choisies. Attention, cela pourrait faire durer la simulation par lot beaucoup plus longtemps"
+				},
+				"default_gems": "Gemmes par défaut",
+				"talents_to_sim": "Talents à simuler"
+			},
+			"progress": {
+				"total_combinations": "{count} combinaisons totales.",
+				"refining_rounds": "{current} / {total} tours d'affinage",
+				"simulations_complete": "{completed} / {total}<br />simulations terminées",
+				"iterations_complete": "{completed} / {total}<br />itérations terminées",
+				"seconds_remaining": "{seconds} secondes restantes."
+			},
+			"notifications": {
+				"bulk_sim_cancelled": "Simulation par lot annulée.",
+				"failed_to_remove_item": "Échec de la suppression de l'objet, veuillez signaler ce problème."
+			},
+			"warning": {
+				"iterations_limit": "Simuler plus de {limit} itérations dans le simulateur web prendra beaucoup de temps ou ne fonctionnera peut-être pas du tout. Pour les simulations par lot plus importantes, nous recommandons d'utiliser le mode rapide ou de télécharger l'exécutable et de l'exécuter sur votre machine."
+			},
+			"results": {
+				"run_simulation": "Exécutez une simulation pour voir les résultats"
+			}
 		}
 	},
 	"gear": {
