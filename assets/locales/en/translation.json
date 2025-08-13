@@ -1875,10 +1875,89 @@
 			"error_invalid_url": "Invalid WCL URL {url}, must look like \"https://www.wowhead.com/mop-classic/gear-planner/CLASS/RACE/XXXX\"",
 			"error_cannot_parse_class": "Could not parse Class: {classId}",
 			"error_cannot_parse_race": "Could not parse Race: {raceId}"
+		},
+		"addon": {
+			"title": "Addon Import",
+			"description": "Import settings from the",
+			"addon_link": "WoWSims Exporter In-Game Addon",
+			"feature_description": "This feature imports gear, race, talents, glyphs, and professions. It does NOT import buffs, debuffs, consumes, rotation, or custom stats.",
+			"instructions": "To import, paste the output from the addon below and click, 'Import'.",
+			"upload_button": "Upload File",
+			"import_button": "Import",
+			"reforge_warning": {
+				"title": "Reforging issues",
+				"message": "There are known issues with Reforging when using the WSE addon. Always make sure to double check your reforges after importing."
+			}
 		}
 	},
 	"export": {
-		"title": "Export"
+		"title": "Export",
+		"link": {
+			"title": "Link Export",
+			"description": "Export settings as a shareable link.",
+			"instructions": "Copy the link below to share your settings with others.",
+			"copy_button": "Copy",
+			"copy_tooltip": "Copy to clipboard"
+		},
+		"json": {
+			"title": "JSON Export",
+			"description": "Export settings as a JSON file.",
+			"instructions": "Download the JSON file or copy the content below.",
+			"copy_button": "Copy",
+			"copy_tooltip": "Copy to clipboard",
+			"download_button": "Download"
+		},
+		"wowhead": {
+			"title": "WoWHead Export",
+			"description": "Export settings to WoWHead Gear Planner.",
+			"instructions": "Copy the link below to open your gear setup in WoWHead.",
+			"copy_button": "Copy",
+			"copy_tooltip": "Copy to clipboard"
+		},
+		"pawn_ep": {
+			"title": "Pawn EP Export",
+			"description": "Export EP weights for Pawn addon.",
+			"instructions": "Copy the Pawn string below and import it into your Pawn addon.",
+			"copy_button": "Copy",
+			"copy_tooltip": "Copy to clipboard"
+		},
+		"cli": {
+			"title": "CLI Export",
+			"description": "Export settings for command line simulation.",
+			"instructions": "Copy the command below to run simulations from the command line.",
+			"copy_button": "Copy",
+			"copy_tooltip": "Copy to clipboard"
+		},
+		"categories": {
+			"gear": {
+				"label": "Gear",
+				"tooltip": "Also includes bonus stats and weapon swaps."
+			},
+			"talents": {
+				"label": "Talents",
+				"tooltip": "Talents and Glyphs."
+			},
+			"rotation": {
+				"label": "Rotation",
+				"tooltip": "Includes everything found in the Rotation tab."
+			},
+			"consumes": {
+				"label": "Consumes",
+				"tooltip": "Flask, pots, food, etc."
+			},
+			"external": {
+				"label": "Buffs & Debuffs",
+				"tooltip": "All settings which are applied by other raid members."
+			},
+			"miscellaneous": {
+				"label": "Misc",
+				"tooltip": "Spec-specific settings, front/back of target, distance from target, etc."
+			},
+			"encounter": {
+				"label": "Encounter",
+				"tooltip": "Fight-related settings."
+			}
+		}
 	},
 	"info": {
 		"known_issues": "Known Issues",

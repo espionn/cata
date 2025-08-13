@@ -5,6 +5,7 @@ import { TypedEvent } from '../typed_event';
 import { downloadString } from '../utils';
 import { BaseModal } from './base_modal';
 import { CopyButton } from './copy_button';
+import i18n from '../../i18n/config';
 
 export interface ExporterOptions {
 	title: string;
@@ -26,8 +27,8 @@ export abstract class Exporter extends BaseModal {
 		new CopyButton(this.footer!, {
 			extraCssClasses: ['btn-primary', 'me-2'],
 			getContent: () => this.textElem.innerHTML,
-			text: 'Copy',
-			tooltip: 'Copy to clipboard',
+			text: i18n.t('export.json.copy_button'),
+			tooltip: i18n.t('export.json.copy_tooltip'),
 		});
 
 		if (options.allowDownload) {
@@ -35,8 +36,8 @@ export abstract class Exporter extends BaseModal {
 			this.footer!.appendChild(
 				<button className="exporter-button btn btn-primary download-button" ref={downloadBtnRef}>
 					<i className="fa fa-download me-1"></i>
-					Download
-				</button>,
+					{i18n.t('export.json.download_button')}
+				</button>
 			);
 
 			const downloadButton = downloadBtnRef.value!;

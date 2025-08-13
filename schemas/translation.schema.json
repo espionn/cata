@@ -31,7 +31,7 @@
                     "$ref": "#/definitions/TranslationResults"
                 },
                 "import": {
-                    "$ref": "#/definitions/Export"
+                    "$ref": "#/definitions/Import"
                 },
                 "export": {
                     "$ref": "#/definitions/Export"
@@ -1384,12 +1384,122 @@
             "properties": {
                 "title": {
                     "type": "string"
+                },
+                "link": {
+                    "$ref": "#/definitions/CLI"
+                },
+                "json": {
+                    "$ref": "#/definitions/CLI"
+                },
+                "wowhead": {
+                    "$ref": "#/definitions/CLI"
+                },
+                "pawn_ep": {
+                    "$ref": "#/definitions/CLI"
+                },
+                "cli": {
+                    "$ref": "#/definitions/CLI"
+                },
+                "categories": {
+                    "$ref": "#/definitions/Categories"
                 }
             },
             "required": [
-                "title"
+                "categories",
+                "cli",
+                "json",
+                "link",
+                "pawn_ep",
+                "title",
+                "wowhead"
             ],
             "title": "Export"
+        },
+        "Categories": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "gear": {
+                    "$ref": "#/definitions/ConsumesClass"
+                },
+                "talents": {
+                    "$ref": "#/definitions/ConsumesClass"
+                },
+                "rotation": {
+                    "$ref": "#/definitions/ConsumesClass"
+                },
+                "consumes": {
+                    "$ref": "#/definitions/ConsumesClass"
+                },
+                "external": {
+                    "$ref": "#/definitions/ConsumesClass"
+                },
+                "miscellaneous": {
+                    "$ref": "#/definitions/ConsumesClass"
+                },
+                "encounter": {
+                    "$ref": "#/definitions/ConsumesClass"
+                }
+            },
+            "required": [
+                "consumes",
+                "encounter",
+                "external",
+                "gear",
+                "miscellaneous",
+                "rotation",
+                "talents"
+            ],
+            "title": "Categories"
+        },
+        "ConsumesClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "label",
+                "tooltip"
+            ],
+            "title": "ConsumesClass"
+        },
+        "CLI": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "instructions": {
+                    "type": "string"
+                },
+                "copy_button": {
+                    "type": "string"
+                },
+                "copy_tooltip": {
+                    "type": "string"
+                },
+                "download_button": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "copy_button",
+                "copy_tooltip",
+                "description",
+                "instructions",
+                "title"
+            ],
+            "title": "CLI"
         },
         "Gear": {
             "type": "object",
@@ -1867,6 +1977,175 @@
             ],
             "title": "ReforgeSummary"
         },
+        "Import": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "json": {
+                    "$ref": "#/definitions/JSON"
+                },
+                "wowhead": {
+                    "$ref": "#/definitions/Wowhead"
+                },
+                "addon": {
+                    "$ref": "#/definitions/Addon"
+                }
+            },
+            "required": [
+                "addon",
+                "json",
+                "title",
+                "wowhead"
+            ],
+            "title": "Import"
+        },
+        "Addon": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "addon_link": {
+                    "type": "string"
+                },
+                "feature_description": {
+                    "type": "string"
+                },
+                "instructions": {
+                    "type": "string"
+                },
+                "upload_button": {
+                    "type": "string"
+                },
+                "import_button": {
+                    "type": "string"
+                },
+                "reforge_warning": {
+                    "$ref": "#/definitions/Warning"
+                }
+            },
+            "required": [
+                "addon_link",
+                "description",
+                "feature_description",
+                "import_button",
+                "instructions",
+                "reforge_warning",
+                "title",
+                "upload_button"
+            ],
+            "title": "Addon"
+        },
+        "Warning": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "message",
+                "title"
+            ],
+            "title": "Warning"
+        },
+        "JSON": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "instructions": {
+                    "type": "string"
+                },
+                "upload_button": {
+                    "type": "string"
+                },
+                "import_button": {
+                    "type": "string"
+                },
+                "error_invalid_json": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description",
+                "error_invalid_json",
+                "import_button",
+                "instructions",
+                "title",
+                "upload_button"
+            ],
+            "title": "JSON"
+        },
+        "Wowhead": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "gear_planner_link": {
+                    "type": "string"
+                },
+                "feature_description": {
+                    "type": "string"
+                },
+                "instructions": {
+                    "type": "string"
+                },
+                "upload_button": {
+                    "type": "string"
+                },
+                "import_button": {
+                    "type": "string"
+                },
+                "tinker_warning": {
+                    "$ref": "#/definitions/Warning"
+                },
+                "error_invalid_url": {
+                    "type": "string"
+                },
+                "error_cannot_parse_class": {
+                    "type": "string"
+                },
+                "error_cannot_parse_race": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description",
+                "error_cannot_parse_class",
+                "error_cannot_parse_race",
+                "error_invalid_url",
+                "feature_description",
+                "gear_planner_link",
+                "import_button",
+                "instructions",
+                "tinker_warning",
+                "title",
+                "upload_button"
+            ],
+            "title": "Wowhead"
+        },
         "Info": {
             "type": "object",
             "additionalProperties": false,
@@ -1919,7 +2198,7 @@
                     "$ref": "#/definitions/FixedRngSeed"
                 },
                 "language": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "feature_toggles": {
                     "$ref": "#/definitions/FeatureToggles"
@@ -1982,23 +2261,6 @@
                 "tooltip"
             ],
             "title": "FixedRngSeed"
-        },
-        "LanguageClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "label": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "label",
-                "tooltip"
-            ],
-            "title": "LanguageClass"
         },
         "RestoreDefaults": {
             "type": "object",
@@ -2583,7 +2845,7 @@
                     "$ref": "#/definitions/APL"
                 },
                 "simple": {
-                    "$ref": "#/definitions/Export"
+                    "$ref": "#/definitions/Simple"
                 },
                 "cooldowns": {
                     "$ref": "#/definitions/Cooldowns"
@@ -2661,10 +2923,10 @@
             "additionalProperties": false,
             "properties": {
                 "cast": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "cast_at_player": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "multi_dot": {
                     "$ref": "#/definitions/MultiDot"
@@ -2685,16 +2947,16 @@
                     "$ref": "#/definitions/AutocastOtherCooldowns"
                 },
                 "wait": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "wait_until": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "scheduled_action": {
                     "$ref": "#/definitions/ScheduledAction"
                 },
                 "do_at": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "sequence": {
                     "$ref": "#/definitions/AutocastOtherCooldowns"
@@ -2706,37 +2968,37 @@
                     "$ref": "#/definitions/AutocastOtherCooldowns"
                 },
                 "change_target": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "activate_aura": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "activate_aura_with_stacks": {
                     "$ref": "#/definitions/ActivateAuraWithStacks"
                 },
                 "activate_all_stat_buff_proc_auras": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "cancel_aura": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "trigger_icd": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "item_swap": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "move": {
                     "$ref": "#/definitions/Move"
                 },
                 "custom_rotation": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "optimal_rotation_action": {
                     "$ref": "#/definitions/OptimalRotationAction"
                 },
                 "guardian_hotw_dps_rotation": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 }
             },
             "required": [
@@ -2829,10 +3091,10 @@
                     "type": "string"
                 },
                 "interrupt_if": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "recast": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 }
             },
             "required": [
@@ -2896,13 +3158,13 @@
                     "type": "string"
                 },
                 "max_dots": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "overlap": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "max_shields": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 }
             },
             "required": [
@@ -2923,7 +3185,7 @@
                     "type": "string"
                 },
                 "wrath_weave": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 }
             },
             "required": [
@@ -2944,7 +3206,7 @@
                     "type": "string"
                 },
                 "do_at": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 }
             },
             "required": [
@@ -3352,7 +3614,7 @@
                     "type": "string"
                 },
                 "do_at": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "new_action": {
                     "type": "string"
@@ -3556,316 +3818,316 @@
                     "$ref": "#/definitions/Const"
                 },
                 "compare": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "math": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "max": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "min": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "all_of": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "any_of": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "not": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "current_time": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "current_time_percent": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "remaining_time": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "remaining_time_percent": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "is_execute_phase": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "num_targets": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "spell_is_casting": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "spell_time_to_ready": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "in_front_of_target": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "boss_cast": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "boss_cast_time_to_ready": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "unit_is_moving": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "distance_to_unit": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "current_health": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "current_health_percent": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "max_health": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "current_mana": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "current_mana_percent": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "current_rage": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "max_rage": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "current_focus": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "max_focus": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "focus_regen_per_second": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "estimated_time_to_target_focus": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "current_energy": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "max_energy": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "energy_regen_per_second": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "estimated_time_to_target_energy": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "current_combo_points": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "max_combo_points": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "current_chi": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "max_chi": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "current_runic_power": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "max_runic_power": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "solar_energy": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "lunar_energy": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "current_eclipse_phase": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "generic_resource": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "num_runes": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "num_non_death_runes": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "rune_is_ready": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "rune_is_death": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "rune_cooldown": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "next_rune_cooldown": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "rune_slot_cooldown": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "gcd_is_ready": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "gcd_time_to_ready": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "time_to_next_auto": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "spell_known": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "current_cost": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "can_cast": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "is_ready": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "time_to_ready": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "cast_time": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "travel_time": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "cpm": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "is_channeling": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "channeled_ticks": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "number_of_charges": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "time_to_next_charge": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "channel_clip_delay": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "input_delay": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "aura_known": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "aura_active": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "aura_active_with_reaction_time": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "aura_inactive_with_reaction_time": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "aura_remaining_time": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "aura_num_stacks": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "aura_should_refresh": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "all_trinket_stat_procs_active": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "any_trinket_stat_procs_active": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "trinket_procs_min_remaining_time": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "trinket_procs_max_remaining_icd": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "num_equipped_stat_proc_trinkets": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "num_stat_buff_cooldowns": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "any_stat_buff_cooldowns_active": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "dot_is_active": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "dot_is_active_on_all_targets": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "dot_remaining_time": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "dot_lowest_remaining_time": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "dot_tick_frequency": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "dot_percent_increase": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "sequence_is_complete": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "sequence_is_ready": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "sequence_time_to_ready": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "totem_remaining_time": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "shaman_fire_elemental_duration": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "cat_excess_energy": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "cat_new_savage_roar_duration": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "warlock_hand_of_guldan_in_flight": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "warlock_haunt_in_flight": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "mage_current_combustion_dot_estimate": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "brewmaster_monk_current_stagger_percent": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "protection_paladin_damage_taken_last_global": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "aura_remaining_icd": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "aura_icd_is_ready_with_reaction_time": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "overlap": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 }
             },
             "required": [
@@ -4152,37 +4414,37 @@
                     "$ref": "#/definitions/TargetType"
                 },
                 "bear_weave": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "snek_weave": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "use_ns": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "manual_params": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "hotw_strategy": {
                     "$ref": "#/definitions/HotwStrategy"
                 },
                 "allow_aoe_berserk": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "roar_offset": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "rip_leeway": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "bite_during_rotation": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "bite_time": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "berserk_bite_time": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 }
             },
             "required": [
@@ -4269,16 +4531,16 @@
             "additionalProperties": false,
             "properties": {
                 "maintain_faerie_fire": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "maintain_demo_roar": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "demo_roar_refresh_leeway": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "pulverize_refresh_leeway": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 }
             },
             "required": [
@@ -4318,10 +4580,10 @@
                     "$ref": "#/definitions/Sting"
                 },
                 "trap_weave": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "multi_dot_serpent_sting": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 }
             },
             "required": [
@@ -4374,7 +4636,7 @@
             "additionalProperties": false,
             "properties": {
                 "multi_dot_serpent_sting": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 }
             },
             "required": [
@@ -4387,7 +4649,7 @@
             "additionalProperties": false,
             "properties": {
                 "apply_poisons_manually": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "subtlety": {
                     "$ref": "#/definitions/Subtlety"
@@ -4404,7 +4666,7 @@
             "additionalProperties": false,
             "properties": {
                 "honor_of_thieves_crit_rate": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 }
             },
             "required": [
@@ -4430,7 +4692,7 @@
             "additionalProperties": false,
             "properties": {
                 "thunderstorm_in_range": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 }
             },
             "required": [
@@ -4505,6 +4767,19 @@
             ],
             "title": "Delete"
         },
+        "Simple": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title"
+            ],
+            "title": "Simple"
+        },
         "Settings": {
             "type": "object",
             "additionalProperties": false,
@@ -4573,16 +4848,16 @@
                     "$ref": "#/definitions/Potions"
                 },
                 "elixirs": {
-                    "$ref": "#/definitions/Export"
+                    "$ref": "#/definitions/Simple"
                 },
                 "food": {
-                    "$ref": "#/definitions/Export"
+                    "$ref": "#/definitions/Simple"
                 },
                 "engineering": {
                     "$ref": "#/definitions/Engineering"
                 },
                 "pet": {
-                    "$ref": "#/definitions/Export"
+                    "$ref": "#/definitions/Simple"
                 }
             },
             "required": [
@@ -4644,7 +4919,7 @@
                     "type": "string"
                 },
                 "misc": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "armor_reduction": {
                     "type": "string"
@@ -4685,49 +4960,49 @@
                     "$ref": "#/definitions/TargetInputs"
                 },
                 "duration": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "duration_variation": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "execute_duration_20": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "execute_duration_25": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "execute_duration_35": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "execute_duration_45": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "duration_below_high_hp": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "encounter_preset": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "advanced": {
                     "type": "string"
                 },
                 "use_health": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "target": {
                     "type": "string"
                 },
                 "num_allies": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "min_base_damage": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "npc": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "ai": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "level": {
                     "type": "string"
@@ -4736,25 +5011,25 @@
                     "type": "string"
                 },
                 "tanked_by": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "swing_speed": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "dual_wield": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "dual_wield_penalty": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "parry_haste": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "spell_school": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "damage_spread": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "suppress_dodge": {
                     "type": "string"
@@ -4807,10 +5082,10 @@
                     "type": "string"
                 },
                 "frenzy_time": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "spiritual_grasp_frequency": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 }
             },
             "required": [
@@ -4902,88 +5177,88 @@
                     "type": "string"
                 },
                 "challenge_mode": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "input_delay": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "channel_clip_delay": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "in_front_of_target": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "distance_from_target": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "tank_assignment": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "incoming_hps": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "healing_cadence": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "healing_cadence_variation": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "absorb_frac": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "burst_window": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "hp_percent_for_defensives": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "pet_uptime": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "glaive_toss_chance": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "detonate_seed": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "stance_snapshot": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "assume_bleed_active": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "cannot_shred_target": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "okf_uptime": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "sync_type": {
                     "$ref": "#/definitions/SyncType"
                 },
                 "show_1h_weapons": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "show_2h_weapons": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "show_matching_gems": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "show_ep_values": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "phase_selector": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "enable_item_swap": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "item_swap": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "assume_prepull_mastery_elixir": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "blessings": {
                     "$ref": "#/definitions/ExternalBuffs"
@@ -5108,7 +5383,7 @@
                     "type": "string"
                 },
                 "misc": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "stats": {
                     "type": "string"
@@ -5269,7 +5544,7 @@
                     "$ref": "#/definitions/StatWeightsModal"
                 },
                 "saved_ep_weights": {
-                    "$ref": "#/definitions/Export"
+                    "$ref": "#/definitions/Simple"
                 }
             },
             "required": [
@@ -5409,43 +5684,43 @@
                     "type": "string"
                 },
                 "dps_weight": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "dps_ep": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "hps_weight": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "hps_ep": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "tps_weight": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "tps_ep": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "dtps_weight": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "dtps_ep": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "tmi_weight": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "tmi_ep": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "death_weight": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "death_ep": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "current_ep": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "not_applicable": {
                     "type": "string"
@@ -5732,16 +6007,16 @@
             "additionalProperties": false,
             "properties": {
                 "dps": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "hps": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "tps": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "dtps": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "tmi": {
                     "$ref": "#/definitions/Cod"
@@ -5750,13 +6025,13 @@
                     "$ref": "#/definitions/Cod"
                 },
                 "dur": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "tto": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "oom": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 }
             },
             "required": [
@@ -5912,15 +6187,40 @@
                 },
                 "healing_sim_disclaimer": {
                     "type": "string"
+                },
+                "notice_local_download": {
+                    "$ref": "#/definitions/NoticeLocalDownload"
                 }
             },
             "required": [
                 "basic_bis_disclaimer",
                 "description",
                 "healing_sim_disclaimer",
+                "notice_local_download",
                 "title"
             ],
             "title": "Sim"
+        },
+        "NoticeLocalDownload": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "download_button": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "download_button",
+                "message",
+                "title"
+            ],
+            "title": "NoticeLocalDownload"
         },
         "Talents": {
             "type": "object",
@@ -5930,7 +6230,7 @@
                     "type": "string"
                 },
                 "copy_button": {
-                    "$ref": "#/definitions/LanguageClass"
+                    "$ref": "#/definitions/ConsumesClass"
                 },
                 "reset_button": {
                     "$ref": "#/definitions/ResetButton"

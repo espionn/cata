@@ -1875,10 +1875,89 @@
 			"error_invalid_url": "URL WCL invalide {url}, doit ressembler à \"https://www.wowhead.com/mop-classic/gear-planner/CLASS/RACE/XXXX\"",
 			"error_cannot_parse_class": "Impossible de parser la classe : {classId}",
 			"error_cannot_parse_race": "Impossible de parser la race : {raceId}"
+		},
+		"addon": {
+			"title": "Import Addon",
+			"description": "Importer les paramètres depuis l'",
+			"addon_link": "Addon WoWSims Exporter In-Game",
+			"feature_description": "Cette fonctionnalité importe l'équipement, la race, les talents, les glyphes et les professions. Elle n'importe PAS les buffs, debuffs, consommables, rotation ou stats personnalisées.",
+			"instructions": "Pour importer, collez la sortie de l'addon ci-dessous et cliquez sur 'Importer'.",
+			"upload_button": "Télécharger le fichier",
+			"import_button": "Importer",
+			"reforge_warning": {
+				"title": "Problèmes de reforge",
+				"message": "Il y a des problèmes connus avec la Reforge lors de l'utilisation de l'addon WSE. Assurez-vous toujours de vérifier vos reforges après l'importation."
+			}
 		}
 	},
 	"export": {
-		"title": "Exporter"
+		"title": "Exporter",
+		"link": {
+			"title": "Export de Lien",
+			"description": "Exporter les paramètres sous forme de lien partageable.",
+			"instructions": "Copiez le lien ci-dessous pour partager vos paramètres avec d'autres.",
+			"copy_button": "Copier",
+			"copy_tooltip": "Copier dans le presse-papiers"
+		},
+		"json": {
+			"title": "Export JSON",
+			"description": "Exporter les paramètres sous forme de fichier JSON.",
+			"instructions": "Téléchargez le fichier JSON ou copiez le contenu ci-dessous.",
+			"copy_button": "Copier",
+			"copy_tooltip": "Copier dans le presse-papiers",
+			"download_button": "Télécharger"
+		},
+		"wowhead": {
+			"title": "Export WoWHead",
+			"description": "Exporter les paramètres vers le Planificateur d'Équipement WoWHead.",
+			"instructions": "Copiez le lien ci-dessous pour ouvrir votre configuration d'équipement dans WoWHead.",
+			"copy_button": "Copier",
+			"copy_tooltip": "Copier dans le presse-papiers"
+		},
+		"pawn_ep": {
+			"title": "Export PE Pawn",
+			"description": "Exporter les poids PE pour l'addon Pawn.",
+			"instructions": "Copiez la chaîne Pawn ci-dessous et importez-la dans votre addon Pawn.",
+			"copy_button": "Copier",
+			"copy_tooltip": "Copier dans le presse-papiers"
+		},
+		"cli": {
+			"title": "Export CLI",
+			"description": "Exporter les paramètres pour la simulation en ligne de commande.",
+			"instructions": "Copiez la commande ci-dessous pour exécuter des simulations depuis la ligne de commande.",
+			"copy_button": "Copier",
+			"copy_tooltip": "Copier dans le presse-papiers"
+		},
+		"categories": {
+			"gear": {
+				"label": "Équipement",
+				"tooltip": "Inclut également les stats bonus et les changements d'armes."
+			},
+			"talents": {
+				"label": "Talents",
+				"tooltip": "Talents et Glyphes."
+			},
+			"rotation": {
+				"label": "Rotation",
+				"tooltip": "Inclut tout ce qui se trouve dans l'onglet Rotation."
+			},
+			"consumes": {
+				"label": "Consommables",
+				"tooltip": "Flacons, potions, nourriture, etc."
+			},
+			"external": {
+				"label": "Buffs & Debuffs",
+				"tooltip": "Tous les paramètres qui sont appliqués par d'autres membres du raid."
+			},
+			"miscellaneous": {
+				"label": "Divers",
+				"tooltip": "Paramètres spécifiques à la spécialisation, devant/derrière la cible, distance de la cible, etc."
+			},
+			"encounter": {
+				"label": "Rencontre",
+				"tooltip": "Paramètres liés au combat."
+			}
+		}
 	},
 	"info": {
 		"known_issues": "Problèmes Connus",
