@@ -304,6 +304,8 @@ export class RaidSimResultsManager {
 		this.updateReference();
 	}
 
+
+
 	private updateReference() {
 		if (!this.referenceData || !this.currentData) {
 			// Remove references
@@ -698,9 +700,15 @@ export class RaidSimResultsManager {
 			<>
 				{data.map(column => {
 					const errorDecimals = column.unit === 'percentage' ? 2 : 0;
+					const label = translateResultMetricLabel(column.name) || column.name;
+					const prefix = (column.name === 'tmi' || column.name === 'cod') ? '% ' : ' ';
+
 					return (
 						<div className={`results-metric ${column.classes}`}>
-							<span className="topline-result-avg">{column.average.toFixed(2)}</span>
+							<span className="topline-result-avg">
+								{column.average.toFixed(2)}
+								<span className="metric-label">{prefix}{label}</span>
+							</span>
 							{column.stdev && (
 								<span className="topline-result-stdev">
 									(<i className="fas fa-plus-minus fa-xs"></i>
