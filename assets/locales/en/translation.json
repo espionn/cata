@@ -1705,9 +1705,13 @@
 				"miss_percent": "Miss %",
 				"dpet": "DPET",
 				"dps": "DPS",
+				"healing_done": "Healing done",
+				"cpm": "CPM",
+				"cast_time": "Cast Time",
+				"hpm": "HPM",
+				"hpet": "HPET",
 				"amount": "Amount",
 				"dtps": "DTPS",
-				"healing_done": "Healing done",
 				"avg_heal": "Avg Heal",
 				"hps": "HPS",
 				"overhealing": "Overhealing",
@@ -1751,7 +1755,10 @@
 				"threat_per_encounter": "Threat / Encounter Duration",
 				"damage_taken": "Damage Taken",
 				"damage_per_encounter": "Damage / Encounter Duration",
-				"damage_avg_cast_tooltip": "Damage / Casts and/or Damage / Ticks"
+				"damage_avg_cast_tooltip": "Damage / Casts and/or Damage / Ticks",
+				"healing_avg_cast_tooltip": "Healing / Casts",
+				"healing_avg_hit_tooltip": "Healing / Hits and/or Healing / (Ticks + Critical Ticks)",
+				"healing_hits_tooltip": "Healing / (Hits + Crits + Glances + Blocks) and/or Healing / Ticks + Critical Ticks"
 			},
 			"attack_types": {
 				"hit": "Hit",

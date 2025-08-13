@@ -1705,9 +1705,13 @@
 				"miss_percent": "Rate %",
 				"dpet": "DPET",
 				"dps": "DPS",
+				"healing_done": "Soins prodigués",
+				"cpm": "CPM",
+				"cast_time": "Temps de lancer",
+				"hpm": "SPS",
+				"hpet": "SPET",
 				"amount": "Montant",
 				"dtps": "DTPS",
-				"healing_done": "Soins prodigués",
 				"avg_heal": "Soin Moyen",
 				"hps": "SPS",
 				"overhealing": "Sur-soins",
@@ -1750,7 +1754,10 @@
 				"damage_taken_per_encounter": "Dégâts Subis / Durée de l'Affrontement",
 				"healing_per_encounter": "Soins / Durée de l'Affrontement",
 				"threat_per_encounter": "Menace / Durée de l'Affrontement",
-				"damage_avg_cast_tooltip": "Dégâts / Lancers et/ou Dégâts / Tics"
+				"damage_avg_cast_tooltip": "Dégâts / Lancers et/ou Dégâts / Tics",
+				"healing_avg_cast_tooltip": "Soins / Lancers",
+				"healing_avg_hit_tooltip": "Soins / Coups et/ou Soins / (Tics + Tics Critiques)",
+				"healing_hits_tooltip": "Soins / (Coups + Crits + Glissants + Bloqués) et/ou Soins / Tics + Tics Critiques"
 			},
 			"attack_types": {
 				"hit": "Coup",
