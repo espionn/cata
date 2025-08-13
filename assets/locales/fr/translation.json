@@ -1749,7 +1749,8 @@
 				"damage_per_encounter": "Dégâts / Durée de l'Affrontement",
 				"damage_taken_per_encounter": "Dégâts Subis / Durée de l'Affrontement",
 				"healing_per_encounter": "Soins / Durée de l'Affrontement",
-				"threat_per_encounter": "Menace / Durée de l'Affrontement"
+				"threat_per_encounter": "Menace / Durée de l'Affrontement",
+				"damage_avg_cast_tooltip": "Dégâts / Lancers et/ou Dégâts / Tics"
 			},
 			"damage_types": {
 				"hit": "Coup",

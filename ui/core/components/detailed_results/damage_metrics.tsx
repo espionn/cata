@@ -148,7 +148,7 @@ export class DamageMetricsTable extends MetricsTable<ActionMetrics> {
 			},
 			{
 				name: i18n.t('results.details.columns.avg_cast'),
-				tooltip: TOOLTIP_METRIC_LABELS['Damage Avg Cast'],
+				tooltip: i18n.t('results.details.tooltips.damage_avg_cast_tooltip'),
 				getValue: (metric: ActionMetrics) => {
 					if (metric.isPassiveAction) return 0;
 					return metric.avgCastHit || metric.avgCastTick;

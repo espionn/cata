@@ -1751,7 +1751,8 @@
 				"healing_per_encounter": "Healing / Encounter Duration",
 				"threat_per_encounter": "Threat / Encounter Duration",
 				"damage_taken": "Damage Taken",
-				"damage_per_encounter": "Damage / Encounter Duration"
+				"damage_per_encounter": "Damage / Encounter Duration",
+				"damage_avg_cast_tooltip": "Damage / Casts and/or Damage / Ticks"
 			},
 			"damage_types": {
 				"hit": "Hit",

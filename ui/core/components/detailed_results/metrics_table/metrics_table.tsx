@@ -4,6 +4,7 @@ import { ref } from 'tsx-vanilla';
 import { CacheHandler } from '../../../cache_handler';
 import { TOOLTIP_METRIC_LABELS } from '../../../constants/tooltips';
 import { ActionId } from '../../../proto_utils/action_id';
+import i18n from '../../../../i18n/config';
 import { ActionMetrics, AuraMetrics, ResourceMetrics, UnitMetrics } from '../../../proto_utils/sim_result';
 import { TypedEvent } from '../../../typed_event';
 import { ResultComponent, ResultComponentConfig, SimResultData } from '../result_component';
@@ -211,7 +212,7 @@ export abstract class MetricsTable<T extends ActionMetrics | AuraMetrics | UnitM
 		} & Pick<MetricsColumnConfig<T>, 'columnClass' | 'headerCellClass'>,
 	): MetricsColumnConfig<T> {
 		return {
-			name: 'Name',
+			name: i18n.t('results.details.columns.name'),
 			fillCell: (metric: T, cellElem: HTMLElement, rowElem: HTMLElement) => {
 				const data = getData(metric);
 				const actionIdAsString = data.actionId.toString();
@@ -238,7 +239,7 @@ export abstract class MetricsTable<T extends ActionMetrics | AuraMetrics | UnitM
 
 	static playerNameCellConfig(): MetricsColumnConfig<UnitMetrics> {
 		return {
-			name: 'Name',
+			name: i18n.t('results.details.columns.name'),
 			columnClass: 'name-cell',
 			fillCell: (player: UnitMetrics, cellElem: HTMLElement, rowElem: HTMLElement) => {
 				cellElem.appendChild(
