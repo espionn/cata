@@ -158,17 +158,24 @@ export default class ItemList<T extends ItemListType> {
 				</div>
 				<div className="selector-modal-list-labels">
 					{(label === SelectorModalTabs.Items || label === SelectorModalTabs.Upgrades) && (
-						<h6 className="ilvl-label interactive" onclick={sortByIlvl}>{i18n.t('gear.gear_picker.table_headers.ilvl')}</h6>
+						<h6 className="ilvl-label interactive" onclick={sortByIlvl}>
+							{i18n.t('gear.gear_picker.table_headers.ilvl')}
+						</h6>
 					)}
 					<h6 className="item-label">
-						{
-							label === SelectorModalTabs.Items ? i18n.t('gear.gear_picker.table_headers.item') :
-							label === SelectorModalTabs.Enchants ? getTranslatedTabLabel(SelectorModalTabs.Enchants) :
-							[SelectorModalTabs.Gem1, SelectorModalTabs.Gem2, SelectorModalTabs.Gem3].includes(label as SelectorModalTabs) ? getTranslatedTabLabel(SelectorModalTabs.Gem1) :
-							label === SelectorModalTabs.Reforging ? getTranslatedTabLabel(SelectorModalTabs.Reforging) :
-							label === SelectorModalTabs.Upgrades ? getTranslatedTabLabel(SelectorModalTabs.Upgrades) :
-							label === SelectorModalTabs.Tinkers ? getTranslatedTabLabel(SelectorModalTabs.Tinkers) : ""
-						}
+						{label === SelectorModalTabs.Items
+							? getTranslatedTabLabel(SelectorModalTabs.Items)
+							: label === SelectorModalTabs.Enchants
+								? getTranslatedTabLabel(SelectorModalTabs.Enchants)
+								: [SelectorModalTabs.Gem1, SelectorModalTabs.Gem2, SelectorModalTabs.Gem3].includes(label as SelectorModalTabs)
+									? getTranslatedTabLabel(SelectorModalTabs.Gem1)
+									: label === SelectorModalTabs.Reforging
+										? getTranslatedTabLabel(SelectorModalTabs.Reforging)
+										: label === SelectorModalTabs.Upgrades
+											? getTranslatedTabLabel(SelectorModalTabs.Upgrades)
+											: label === SelectorModalTabs.Tinkers
+												? getTranslatedTabLabel(SelectorModalTabs.Tinkers)
+												: ''}
 					</h6>
 					{label === SelectorModalTabs.Items && <h6 className="source-label">{i18n.t('gear.gear_picker.table_headers.source')}</h6>}
 					<h6 className="ep-label interactive" onclick={sortByEP}>

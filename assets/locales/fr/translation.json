@@ -463,15 +463,15 @@
 		},
 		"gear_picker": {
 			"tabs": {
-				"items": "Objets",
+				"items": "Objet",
 				"random_suffix": "Suffixe Aléatoire",
 				"enchants": "Enchantements",
 				"tinkers": "Bricolages",
 				"reforging": "Reforge",
 				"upgrades": "Améliorations",
-				"gem1": "Gemme1",
-				"gem2": "Gemme2",
-				"gem3": "Gemme3"
+				"gem1": "Gemme",
+				"gem2": "Gemme",
+				"gem3": "Gemme"
 			},
 			"remove_buttons": {
 				"remove_enchant": "Retirer l'Enchantement",
