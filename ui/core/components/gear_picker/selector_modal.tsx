@@ -19,7 +19,6 @@ import GearPicker from './gear_picker';
 import ItemList, { GearData, ItemData, ItemListType } from './item_list';
 import { createGemContainer, getEmptySlotIconUrl } from './utils';
 import i18n from '../../../i18n/config';
-import { getSlotNameI18nKey } from '../../../i18n/entity_mapping';
 
 export enum SelectorModalTabs {
 	Items = 'Items',
@@ -119,7 +118,7 @@ export default class SelectorModal extends BaseModal {
 	}
 
 	openTab(selectedSlot: ItemSlot, selectedTab: SelectorModalTabs, gearData: GearData) {
-		this.titleElem.textContent = getSlotNameI18nKey(selectedSlot) ?? '';
+		this.titleElem.textContent = translateSlotName(selectedSlot) ?? '';
 		this.setData(selectedSlot, selectedTab, gearData);
 		this.setActiveItemSlotTab(selectedSlot);
 		this.open();
