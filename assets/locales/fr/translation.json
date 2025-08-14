@@ -2192,6 +2192,16 @@
 						"update": "Mettre à jour",
 						"ep_ratio": "Ratio PE",
 						"update_ep_button": "Mettre à jour PE"
+					},
+					"tooltips": {
+						"normalized_by": "Normalisé par {refStatName}.",
+						"copy_to_current_ep": "Copier vers PE Actuel",
+						"restore_default_ep": "Restaurer PE par Défaut",
+						"compute_weighted_ep": "Calculer PE Pondéré"
+					},
+					"progress": {
+						"simulations_complete": "simulations terminées",
+						"iterations_complete": "itérations terminées"
 					}
 				},
 				"saved_ep_weights": {

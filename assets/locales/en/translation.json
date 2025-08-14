@@ -2192,6 +2192,16 @@
 						"update": "Update",
 						"ep_ratio": "EP Ratio",
 						"update_ep_button": "Update EP"
+					},
+					"tooltips": {
+						"normalized_by": "Normalized by {refStatName}.",
+						"copy_to_current_ep": "Copy to Current EP",
+						"restore_default_ep": "Restore Default EP",
+						"compute_weighted_ep": "Compute Weighted EP"
+					},
+					"progress": {
+						"simulations_complete": "simulations complete",
+						"iterations_complete": "iterations complete"
 					}
 				},
 				"saved_ep_weights": {

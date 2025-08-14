@@ -5727,6 +5727,12 @@
                 },
                 "column_headers": {
                     "$ref": "#/definitions/ColumnHeaders"
+                },
+                "tooltips": {
+                    "$ref": "#/definitions/StatWeightsModalTooltips"
+                },
+                "progress": {
+                    "$ref": "#/definitions/StatWeightsModalProgress"
                 }
             },
             "required": [
@@ -5760,7 +5766,9 @@
                 "tps_weight",
                 "update",
                 "update_ep",
-                "weights"
+                "weights",
+                "tooltips",
+                "progress"
             ],
             "title": "StatWeightsModal"
         },
@@ -5788,6 +5796,49 @@
                 "update_ep_button"
             ],
             "title": "ColumnHeaders"
+        },
+        "StatWeightsModalTooltips": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "normalized_by": {
+                    "type": "string"
+                },
+                "copy_to_current_ep": {
+                    "type": "string"
+                },
+                "restore_default_ep": {
+                    "type": "string"
+                },
+                "compute_weighted_ep": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "normalized_by",
+                "copy_to_current_ep",
+                "restore_default_ep",
+                "compute_weighted_ep"
+            ],
+            "title": "StatWeightsModalTooltips"
+        },
+
+        "StatWeightsModalProgress": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "simulations_complete": {
+                    "type": "string"
+                },
+                "iterations_complete": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "simulations_complete",
+                "iterations_complete"
+            ],
+            "title": "StatWeightsModalProgress"
         },
         "SuggestReforges": {
             "type": "object",

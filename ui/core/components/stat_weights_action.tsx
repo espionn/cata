@@ -295,7 +295,7 @@ export class EpWeightsMenu extends BaseModal {
 			<>
 				<button ref={calcWeightsButtonRef} className="btn btn-primary calc-weights">
 					<i className="fas fa-calculator me-1" />
-					Calculate
+					{i18n.t('sidebar.buttons.stat_weights.modal.calculate')}
 				</button>
 			</>,
 		);
@@ -436,7 +436,7 @@ export class EpWeightsMenu extends BaseModal {
 				if (!epRefStat) return labelTooltip;
 
 				const refStatName = getNameFromStat(epRefStat());
-				return `${labelTooltip} Normalized by ${refStatName}.`;
+				return `${labelTooltip} ${i18n.t('sidebar.buttons.stat_weights.modal.tooltips.normalized_by', { refStatName })}`;
 			};
 
 			tippy(label, {
@@ -491,7 +491,7 @@ export class EpWeightsMenu extends BaseModal {
 
 		const updateButton = computeEpRef.value!;
 		tippy(updateButton, {
-			content: 'Compute Weighted EP',
+			content: i18n.t('sidebar.buttons.stat_weights.modal.tooltips.compute_weighted_ep'),
 		});
 
 		updateButton.addEventListener('click', () => {
@@ -559,12 +559,12 @@ export class EpWeightsMenu extends BaseModal {
 				<div>
 					{progress.completedSims} / {progress.totalSims}
 					<br />
-					simulations complete
+					{i18n.t('sidebar.buttons.stat_weights.modal.progress.simulations_complete')}
 				</div>
 				<div>
 					{progress.completedIterations} / {progress.totalIterations}
 					<br />
-					iterations complete
+					{i18n.t('sidebar.buttons.stat_weights.modal.progress.iterations_complete')}
 				</div>
 			</div>,
 		);
@@ -799,7 +799,7 @@ export class EpWeightsMenu extends BaseModal {
 	}
 
 	private buildStatsTable(): StatsTableEntry[] {
-		const copyToCurrentEpText = 'Copy to Current EP';
+		const copyToCurrentEpText = i18n.t('sidebar.buttons.stat_weights.modal.tooltips.copy_to_current_ep');
 		const createRefs = () => ({
 			metricRef: ref<HTMLButtonElement>(),
 			ratioRef: ref<HTMLTableCellElement>(),
@@ -923,7 +923,7 @@ export class EpWeightsMenu extends BaseModal {
 				type: 'action',
 				label: i18n.t('sidebar.buttons.stat_weights.modal.current_ep.label'),
 				labelTooltip: i18n.t('sidebar.buttons.stat_weights.modal.current_ep.tooltip'),
-				actionTooltip: 'Restore Default EP',
+				actionTooltip: i18n.t('sidebar.buttons.stat_weights.modal.tooltips.restore_default_ep'),
 				getWeights: () => this.simUI.individualConfig.defaults.epWeights.toProto(),
 				...createRefs(),
 			},
