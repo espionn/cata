@@ -2186,7 +2186,13 @@
 						"label": "PE Actuel",
 						"tooltip": "Poids PE actuels. Utilisés pour trier les menus de sélection d'équipement."
 					},
-					"not_applicable": "N/A"
+					"not_applicable": "N/A",
+					"column_headers": {
+						"stat": "Statistique",
+						"update": "Mettre à jour",
+						"ep_ratio": "Ratio PE",
+						"update_ep_button": "Mettre à jour PE"
+					}
 				},
 				"saved_ep_weights": {
 					"title": "Poids PE Sauvegardés"

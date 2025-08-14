@@ -5724,10 +5724,14 @@
                 },
                 "not_applicable": {
                     "type": "string"
+                },
+                "column_headers": {
+                    "$ref": "#/definitions/ColumnHeaders"
                 }
             },
             "required": [
                 "calculate",
+                "column_headers",
                 "compute_weighted_ep",
                 "copy_icon_description",
                 "current_ep",
@@ -5759,6 +5763,31 @@
                 "weights"
             ],
             "title": "StatWeightsModal"
+        },
+        "ColumnHeaders": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "stat": {
+                    "type": "string"
+                },
+                "update": {
+                    "type": "string"
+                },
+                "ep_ratio": {
+                    "type": "string"
+                },
+                "update_ep_button": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ep_ratio",
+                "stat",
+                "update",
+                "update_ep_button"
+            ],
+            "title": "ColumnHeaders"
         },
         "SuggestReforges": {
             "type": "object",

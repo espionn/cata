@@ -253,8 +253,8 @@ export class EpWeightsMenu extends BaseModal {
 						<table ref={tableRef} className="results-ep-table">
 							<thead>
 								<tr>
-									<th>Stat</th>
-									<th>Update</th>
+									<th>{i18n.t('sidebar.buttons.stat_weights.modal.column_headers.stat')}</th>
+									<th>{i18n.t('sidebar.buttons.stat_weights.modal.column_headers.update')}</th>
 									{statsTable.map(({ metric, type, label, metricRef }) => {
 										const isAction = type === 'action';
 										return (
@@ -268,7 +268,7 @@ export class EpWeightsMenu extends BaseModal {
 									})}
 								</tr>
 								<tr className="ep-ratios">
-									<td>EP Ratio</td>
+									<td>{i18n.t('sidebar.buttons.stat_weights.modal.column_headers.ep_ratio')}</td>
 									<td></td>
 									{statsTable
 										.filter(({ type }) => type !== 'action')
@@ -278,7 +278,7 @@ export class EpWeightsMenu extends BaseModal {
 									<td className="text-center align-middle">
 										<button ref={computeEpRef} className="btn btn-primary compute-ep">
 											<i className="fas fa-calculator" />
-											<span className="not-tiny">Update </span>EP
+											<span className="not-tiny">{i18n.t('sidebar.buttons.stat_weights.modal.column_headers.update_ep_button')}</span>
 										</button>
 									</td>
 								</tr>

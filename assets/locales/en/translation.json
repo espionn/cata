@@ -2186,7 +2186,13 @@
 						"label": "Current EP",
 						"tooltip": "Current EP Weights. Used to sort the gear selector menus."
 					},
-					"not_applicable": "N/A"
+					"not_applicable": "N/A",
+					"column_headers": {
+						"stat": "Stat",
+						"update": "Update",
+						"ep_ratio": "EP Ratio",
+						"update_ep_button": "Update EP"
+					}
 				},
 				"saved_ep_weights": {
 					"title": "Saved EP weights"
