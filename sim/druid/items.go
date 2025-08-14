@@ -28,6 +28,27 @@ var ItemSetRegaliaOfTheEternalBloosom = core.NewItemSet(core.ItemSet{
 	},
 })
 
+// T14 Feral
+var ItemSetBattlegearOfTheEternalBlossom = core.NewItemSet(core.ItemSet{
+	Name:                    "Battlegear of the Eternal Blossom",
+	DisabledInChallengeMode: true,
+	Bonuses: map[int32]core.ApplySetBonus{
+		2: func(_ core.Agent, setBonusAura *core.Aura) {
+			// Your Shred and Mangle (Cat) abilities deal 5% additional damage.
+			setBonusAura.AttachSpellMod(core.SpellModConfig{
+				Kind:       core.SpellMod_DamageDone_Pct,
+				ClassMask:  DruidSpellMangleCat | DruidSpellShred,
+				FloatValue: 0.05,
+			})
+		},
+		4: func(_ core.Agent, setBonusAura *core.Aura) {
+			// Increases the duration of your Rip by 4 sec.
+			// Could not change it here because of Bloodletting
+			// See changes in druid.go, rip.go, rotation_helpers.go and ferocious_bite.go
+		},
+	},
+})
+
 // T15 Balance
 var ItemSetRegaliaOfTheHauntedForest = core.NewItemSet(core.ItemSet{
 	Name:                    "Regalia of the Haunted Forest",
