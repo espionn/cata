@@ -13,6 +13,7 @@ export const renderSavedEPWeights = (
 ) => {
 	const savedEPWeightsManager = new SavedDataManager<Player<any>, SavedEPWeights>(container, simUI.player, {
 		label: i18n.t('sidebar.buttons.stat_weights.modal.ep'),
+		nameLabel: i18n.t('sidebar.buttons.stat_weights.title'),
 		header: { title: i18n.t('sidebar.buttons.stat_weights.saved_ep_weights.title') },
 		storageKey: simUI.getSavedEPWeightsStorageKey(),
 		getData: player =>

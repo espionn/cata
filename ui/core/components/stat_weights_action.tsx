@@ -9,7 +9,7 @@ import { Player } from '../player.js';
 import { ProgressMetrics, StatWeightsResult, StatWeightValues } from '../proto/api';
 import { PseudoStat, Stat, UnitStats } from '../proto/common.js';
 import { SavedStatWeightSettings } from '../proto/ui';
-import { getStatName } from '../proto_utils/names.js';
+import { translateStat } from '../../i18n/localization';
 import { Stats, UnitStat } from '../proto_utils/stats.js';
 import { RequestTypes } from '../sim_signal_manager';
 import { SimUI } from '../sim_ui';
@@ -201,7 +201,7 @@ export class EpWeightsMenu extends BaseModal {
 		const calcWeightsButtonRef = ref<HTMLButtonElement>();
 		const allStatsContainerRef = ref<HTMLDivElement>();
 
-		const getNameFromStat = (stat: Stat | undefined) => (stat !== undefined ? getStatName(stat) : '??');
+		const getNameFromStat = (stat: Stat | undefined) => (stat !== undefined ? translateStat(stat) : '??');
 		const getStatFromName = (value: string) => Object.values(this.epStats).find(stat => getNameFromStat(stat) === value);
 		const epRefSelectOptions = (
 			<>
