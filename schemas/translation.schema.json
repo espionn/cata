@@ -1610,6 +1610,9 @@
                 },
                 "max_ranged_speed": {
                     "type": "string"
+                },
+                "reforge_text": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -1628,6 +1631,7 @@
                 "quick_popovers",
                 "ranged_weapon_speed",
                 "ranged_weapon_type",
+                "reforge_text",
                 "remove_buttons",
                 "search_placeholder",
                 "show_ep",

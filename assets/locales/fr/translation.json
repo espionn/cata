@@ -535,7 +535,8 @@
 			"ranged_weapon_type": "Type d'Armes à Distance",
 			"ranged_weapon_speed": "Vitesse d'Armes à Distance",
 			"min_ranged_speed": "Vitesse à Distance Min",
-			"max_ranged_speed": "Vitesse à Distance Max"
+			"max_ranged_speed": "Vitesse à Distance Max",
+			"reforge_text": "Reforgé {fromAmount} {fromStat} → {toAmount} {toStat}"
 		}
 	},
 	"settings": {

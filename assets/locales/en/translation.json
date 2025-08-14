@@ -535,7 +535,8 @@
 			"ranged_weapon_type": "Ranged Weapon Type",
 			"ranged_weapon_speed": "Ranged Weapon Speed",
 			"min_ranged_speed": "Min Ranged Speed",
-			"max_ranged_speed": "Max Ranged Speed"
+			"max_ranged_speed": "Max Ranged Speed",
+			"reforge_text": "Reforged {fromAmount} {fromStat} → {toAmount} {toStat}"
 		}
 	},
 	"settings": {

@@ -9,6 +9,7 @@ import { ActionId } from '../../proto_utils/action_id';
 import { getEnchantDescription } from '../../proto_utils/enchants';
 import { EquippedItem } from '../../proto_utils/equipped_item';
 import { translateSlotName, translateStat } from '../../../i18n/localization';
+import i18n from '../../../i18n/config';
 import { SimUI } from '../../sim_ui';
 import { EventID } from '../../typed_event';
 import { Component } from '../component';
@@ -191,7 +192,12 @@ export class ItemRenderer extends Component {
 		if (reforgeData) {
 			const fromText = translateStat(reforgeData.reforge?.fromStat);
 			const toText = translateStat(reforgeData.reforge?.toStat);
-			this.reforgeElem.innerText = `Reforged ${Math.abs(reforgeData.fromAmount)} ${fromText} → ${reforgeData.toAmount} ${toText}`;
+			this.reforgeElem.innerText = i18n.t('gear.gear_picker.reforge_text', {
+				fromAmount: Math.abs(reforgeData.fromAmount),
+				fromStat: fromText,
+				toAmount: reforgeData.toAmount,
+				toStat: toText
+			});
 			this.reforgeElem.classList.remove('hide');
 		} else {
 			this.reforgeElem.innerText = '';
