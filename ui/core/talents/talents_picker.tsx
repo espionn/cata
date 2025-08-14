@@ -3,6 +3,7 @@ import { ref } from 'tsx-vanilla';
 
 import i18n from '../../i18n/config';
 import { translatePlayerSpec } from '../../i18n/localization';
+import { getClassI18nKey } from '../../i18n/entity_mapping';
 import { Component } from '../components/component.js';
 import { CopyButton } from '../components/copy_button.js';
 import { Input, InputConfig } from '../components/input.js';
@@ -179,7 +180,7 @@ class TalentPicker<TalentsProto> extends Component {
 			<>
 				<div ref={iconRef} className="talent-picker-icon"></div>
 				<div className="talent-picker-label" dataset={{ whtticon: false }}>
-					{i18n.t(`talents.tree.${this.tree.picker.modObject.getClass().toLowerCase()}.${String(config.fieldName)}`) || config.fancyName}
+					{i18n.t(`talents.tree.${getClassI18nKey(this.tree.picker.modObject.getClass())}.${String(config.fieldName)}`) || config.fancyName}
 				</div>
 			</>,
 		);
