@@ -416,34 +416,34 @@ export class CharacterStats extends Component {
 				const critCapTooltipContent = (
 					<div>
 						<div className="character-stats-tooltip-row">
-							<span>Glancing:</span>
+							<span>{i18n.t('sidebar.character_stats.attack_table.glancing')}</span>
 							<span>{`${meleeCritCapInfo.glancing.toFixed(2)}%`}</span>
 						</div>
 						<div className="character-stats-tooltip-row">
-							<span>Suppression:</span>
+							<span>{i18n.t('sidebar.character_stats.attack_table.suppression')}</span>
 							<span>{`${meleeCritCapInfo.suppression.toFixed(2)}%`}</span>
 						</div>
 						<div className="character-stats-tooltip-row">
-							<span>To Hit Cap:</span>
+							<span>{i18n.t('sidebar.character_stats.attack_table.to_hit_cap')}</span>
 							<span>{`${meleeCritCapInfo.remainingMeleeHitCap.toFixed(2)}%`}</span>
 						</div>
 						<div className="character-stats-tooltip-row">
-							<span>To Exp Cap:</span>
+							<span>{i18n.t('sidebar.character_stats.attack_table.to_exp_cap')}</span>
 							<span>{`${meleeCritCapInfo.remainingExpertiseCap.toFixed(2)}%`}</span>
 						</div>
 						{meleeCritCapInfo.specSpecificOffset != 0 && (
 							<div className="character-stats-tooltip-row">
-								<span>Spec Offsets:</span>
+								<span>{i18n.t('sidebar.character_stats.attack_table.spec_offsets')}</span>
 								<span>{`${meleeCritCapInfo.specSpecificOffset.toFixed(2)}%`}</span>
 							</div>
 						)}
 						<div className="character-stats-tooltip-row">
-							<span>Final Crit Cap:</span>
+							<span>{i18n.t('sidebar.character_stats.attack_table.final_crit_cap')}</span>
 							<span>{`${meleeCritCapInfo.baseCritCap.toFixed(2)}%`}</span>
 						</div>
 						<hr />
 						<div className="character-stats-tooltip-row">
-							<span>Can Raise By:</span>
+							<span>{i18n.t('sidebar.character_stats.attack_table.can_raise_by')}</span>
 							<span>{`${(meleeCritCapInfo.remainingExpertiseCap + meleeCritCapInfo.remainingMeleeHitCap).toFixed(2)}%`}</span>
 						</div>
 					</div>

@@ -2297,6 +2297,15 @@
 				"final_crit_cap": "Plafond de Critique Final :",
 				"can_raise_by": "Peut Augmenter de :"
 			},
+			"attack_table": {
+				"glancing": "Éraflement :",
+				"suppression": "Suppression :",
+				"to_hit_cap": "Vers le cap de précision :",
+				"to_exp_cap": "Vers le cap d'expertise :",
+				"spec_offsets": "Compensations de spé :",
+				"final_crit_cap": "Cap de critique final :",
+				"can_raise_by": "Peut augmenter de :"
+			},
 			"crit_cap": {
 				"exact": "Exact",
 				"over_by": "Au-dessus de",

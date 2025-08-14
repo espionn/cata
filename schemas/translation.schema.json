@@ -5854,6 +5854,9 @@
                 "tooltip": {
                     "$ref": "#/definitions/CharacterStatsTooltip"
                 },
+                "attack_table": {
+                    "$ref": "#/definitions/AttackTable"
+                },
                 "crit_cap": {
                     "$ref": "#/definitions/CritCap"
                 },
@@ -5868,6 +5871,7 @@
                 }
             },
             "required": [
+                "attack_table",
                 "bonus_prefix",
                 "crit_cap",
                 "melee_crit_cap",
@@ -5877,6 +5881,43 @@
                 "tooltip"
             ],
             "title": "CharacterStats"
+        },
+        "AttackTable": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "glancing": {
+                    "type": "string"
+                },
+                "suppression": {
+                    "type": "string"
+                },
+                "to_hit_cap": {
+                    "type": "string"
+                },
+                "to_exp_cap": {
+                    "type": "string"
+                },
+                "spec_offsets": {
+                    "type": "string"
+                },
+                "final_crit_cap": {
+                    "type": "string"
+                },
+                "can_raise_by": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "can_raise_by",
+                "final_crit_cap",
+                "glancing",
+                "spec_offsets",
+                "suppression",
+                "to_exp_cap",
+                "to_hit_cap"
+            ],
+            "title": "AttackTable"
         },
         "CritCap": {
             "type": "object",
