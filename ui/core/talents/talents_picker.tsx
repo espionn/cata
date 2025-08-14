@@ -179,7 +179,7 @@ class TalentPicker<TalentsProto> extends Component {
 			<>
 				<div ref={iconRef} className="talent-picker-icon"></div>
 				<div className="talent-picker-label" dataset={{ whtticon: false }}>
-					{config.fancyName}
+					{i18n.t(`talents.tree.${this.tree.picker.modObject.getClass().toLowerCase()}.${String(config.fieldName)}`) || config.fancyName}
 				</div>
 			</>,
 		);

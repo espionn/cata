@@ -800,7 +800,7 @@
             "additionalProperties": false,
             "properties": {
                 "death_knight": {
-                    "$ref": "#/definitions/DeathKnight"
+                    "$ref": "#/definitions/RuneTypesClass"
                 },
                 "druid": {
                     "$ref": "#/definitions/SpecsDruid"
@@ -809,16 +809,16 @@
                     "$ref": "#/definitions/SpecsHunter"
                 },
                 "mage": {
-                    "$ref": "#/definitions/Mage"
+                    "$ref": "#/definitions/SpecsMage"
                 },
                 "monk": {
-                    "$ref": "#/definitions/Monk"
+                    "$ref": "#/definitions/SpecsMonk"
                 },
                 "paladin": {
-                    "$ref": "#/definitions/Paladin"
+                    "$ref": "#/definitions/SpecsPaladin"
                 },
                 "priest": {
-                    "$ref": "#/definitions/Priest"
+                    "$ref": "#/definitions/SpecsPriest"
                 },
                 "rogue": {
                     "$ref": "#/definitions/SpecsRogue"
@@ -827,10 +827,10 @@
                     "$ref": "#/definitions/SpecsShaman"
                 },
                 "warlock": {
-                    "$ref": "#/definitions/Warlock"
+                    "$ref": "#/definitions/SpecsWarlock"
                 },
                 "warrior": {
-                    "$ref": "#/definitions/Warrior"
+                    "$ref": "#/definitions/SpecsWarrior"
                 }
             },
             "required": [
@@ -848,7 +848,7 @@
             ],
             "title": "Specs"
         },
-        "DeathKnight": {
+        "RuneTypesClass": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -870,7 +870,7 @@
                 "frost",
                 "unholy"
             ],
-            "title": "DeathKnight"
+            "title": "RuneTypesClass"
         },
         "SpecsDruid": {
             "type": "object",
@@ -918,7 +918,7 @@
             ],
             "title": "SpecsHunter"
         },
-        "Mage": {
+        "SpecsMage": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -937,9 +937,9 @@
                 "fire",
                 "frost"
             ],
-            "title": "Mage"
+            "title": "SpecsMage"
         },
-        "Monk": {
+        "SpecsMonk": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -958,9 +958,9 @@
                 "mistweaver",
                 "windwalker"
             ],
-            "title": "Monk"
+            "title": "SpecsMonk"
         },
-        "Paladin": {
+        "SpecsPaladin": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -979,9 +979,9 @@
                 "protection",
                 "retribution"
             ],
-            "title": "Paladin"
+            "title": "SpecsPaladin"
         },
-        "Priest": {
+        "SpecsPriest": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -1000,7 +1000,7 @@
                 "holy",
                 "shadow"
             ],
-            "title": "Priest"
+            "title": "SpecsPriest"
         },
         "SpecsRogue": {
             "type": "object",
@@ -1044,7 +1044,7 @@
             ],
             "title": "SpecsShaman"
         },
-        "Warlock": {
+        "SpecsWarlock": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -1063,9 +1063,9 @@
                 "demonology",
                 "destruction"
             ],
-            "title": "Warlock"
+            "title": "SpecsWarlock"
         },
-        "Warrior": {
+        "SpecsWarrior": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -1084,7 +1084,7 @@
                 "fury",
                 "protection"
             ],
-            "title": "Warrior"
+            "title": "SpecsWarrior"
         },
         "SpellSchools": {
             "type": "object",
@@ -3259,7 +3259,7 @@
                     "$ref": "#/definitions/EclipseTypes"
                 },
                 "rune_types": {
-                    "$ref": "#/definitions/DeathKnight"
+                    "$ref": "#/definitions/RuneTypesClass"
                 },
                 "rune_slots": {
                     "$ref": "#/definitions/RuneSlots"
@@ -5729,10 +5729,10 @@
                     "$ref": "#/definitions/ColumnHeaders"
                 },
                 "tooltips": {
-                    "$ref": "#/definitions/StatWeightsModalTooltips"
+                    "$ref": "#/definitions/ModalTooltips"
                 },
                 "progress": {
-                    "$ref": "#/definitions/StatWeightsModalProgress"
+                    "$ref": "#/definitions/ModalProgress"
                 }
             },
             "required": [
@@ -5756,19 +5756,19 @@
                 "hps_weight",
                 "mitigation_reference",
                 "not_applicable",
+                "progress",
                 "reference_description",
                 "show_all_stats",
                 "stat",
                 "title",
                 "tmi_ep",
                 "tmi_weight",
+                "tooltips",
                 "tps_ep",
                 "tps_weight",
                 "update",
                 "update_ep",
-                "weights",
-                "tooltips",
-                "progress"
+                "weights"
             ],
             "title": "StatWeightsModal"
         },
@@ -5797,7 +5797,24 @@
             ],
             "title": "ColumnHeaders"
         },
-        "StatWeightsModalTooltips": {
+        "ModalProgress": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "simulations_complete": {
+                    "type": "string"
+                },
+                "iterations_complete": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "iterations_complete",
+                "simulations_complete"
+            ],
+            "title": "ModalProgress"
+        },
+        "ModalTooltips": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -5815,30 +5832,12 @@
                 }
             },
             "required": [
-                "normalized_by",
+                "compute_weighted_ep",
                 "copy_to_current_ep",
-                "restore_default_ep",
-                "compute_weighted_ep"
+                "normalized_by",
+                "restore_default_ep"
             ],
-            "title": "StatWeightsModalTooltips"
-        },
-
-        "StatWeightsModalProgress": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "simulations_complete": {
-                    "type": "string"
-                },
-                "iterations_complete": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "simulations_complete",
-                "iterations_complete"
-            ],
-            "title": "StatWeightsModalProgress"
+            "title": "ModalTooltips"
         },
         "SuggestReforges": {
             "type": "object",
@@ -6730,6 +6729,9 @@
                 },
                 "saved_talents": {
                     "$ref": "#/definitions/Saved"
+                },
+                "tree": {
+                    "$ref": "#/definitions/Tree"
                 }
             },
             "required": [
@@ -6737,7 +6739,8 @@
                 "glyphs",
                 "reset_button",
                 "saved_talents",
-                "title"
+                "title",
+                "tree"
             ],
             "title": "Talents"
         },
@@ -6782,6 +6785,942 @@
                 "title"
             ],
             "title": "GlyphsModal"
+        },
+        "Tree": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "mage": {
+                    "$ref": "#/definitions/TreeMage"
+                },
+                "druid": {
+                    "$ref": "#/definitions/TreeDruid"
+                },
+                "warrior": {
+                    "$ref": "#/definitions/TreeWarrior"
+                },
+                "hunter": {
+                    "$ref": "#/definitions/TreeHunter"
+                },
+                "rogue": {
+                    "$ref": "#/definitions/TreeRogue"
+                },
+                "priest": {
+                    "$ref": "#/definitions/TreePriest"
+                },
+                "paladin": {
+                    "$ref": "#/definitions/TreePaladin"
+                },
+                "death_knight": {
+                    "$ref": "#/definitions/TreeDeathKnight"
+                },
+                "monk": {
+                    "$ref": "#/definitions/TreeMonk"
+                },
+                "shaman": {
+                    "$ref": "#/definitions/TreeShaman"
+                },
+                "warlock": {
+                    "$ref": "#/definitions/TreeWarlock"
+                }
+            },
+            "required": [
+                "death_knight",
+                "druid",
+                "hunter",
+                "mage",
+                "monk",
+                "paladin",
+                "priest",
+                "rogue",
+                "shaman",
+                "warlock",
+                "warrior"
+            ],
+            "title": "Tree"
+        },
+        "TreeDeathKnight": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "roilingBlood": {
+                    "type": "string"
+                },
+                "plagueLeech": {
+                    "type": "string"
+                },
+                "unholyBlight": {
+                    "type": "string"
+                },
+                "lichborne": {
+                    "type": "string"
+                },
+                "antimagicZone": {
+                    "type": "string"
+                },
+                "purgatory": {
+                    "type": "string"
+                },
+                "deathsAdvance": {
+                    "type": "string"
+                },
+                "chilblains": {
+                    "type": "string"
+                },
+                "asphyxiate": {
+                    "type": "string"
+                },
+                "deathPact": {
+                    "type": "string"
+                },
+                "deathSiphon": {
+                    "type": "string"
+                },
+                "conversion": {
+                    "type": "string"
+                },
+                "bloodTap": {
+                    "type": "string"
+                },
+                "runicEmpowerment": {
+                    "type": "string"
+                },
+                "runicCorruption": {
+                    "type": "string"
+                },
+                "gorefiendsGrasp": {
+                    "type": "string"
+                },
+                "remorselessWinter": {
+                    "type": "string"
+                },
+                "desecratedGround": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "antimagicZone",
+                "asphyxiate",
+                "bloodTap",
+                "chilblains",
+                "conversion",
+                "deathPact",
+                "deathSiphon",
+                "deathsAdvance",
+                "desecratedGround",
+                "gorefiendsGrasp",
+                "lichborne",
+                "plagueLeech",
+                "purgatory",
+                "remorselessWinter",
+                "roilingBlood",
+                "runicCorruption",
+                "runicEmpowerment",
+                "unholyBlight"
+            ],
+            "title": "TreeDeathKnight"
+        },
+        "TreeDruid": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "felineSwiftness": {
+                    "type": "string"
+                },
+                "displacerBeast": {
+                    "type": "string"
+                },
+                "wildCharge": {
+                    "type": "string"
+                },
+                "yserasGift": {
+                    "type": "string"
+                },
+                "renewal": {
+                    "type": "string"
+                },
+                "cenarionWard": {
+                    "type": "string"
+                },
+                "faerieSwarm": {
+                    "type": "string"
+                },
+                "massEntanglement": {
+                    "type": "string"
+                },
+                "typhoon": {
+                    "type": "string"
+                },
+                "soulOfTheForest": {
+                    "type": "string"
+                },
+                "incarnation": {
+                    "type": "string"
+                },
+                "forceOfNature": {
+                    "type": "string"
+                },
+                "disorientingRoar": {
+                    "type": "string"
+                },
+                "ursolsVortex": {
+                    "type": "string"
+                },
+                "mightyBash": {
+                    "type": "string"
+                },
+                "heartOfTheWild": {
+                    "type": "string"
+                },
+                "dreamOfCenarius": {
+                    "type": "string"
+                },
+                "naturesVigil": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "cenarionWard",
+                "disorientingRoar",
+                "displacerBeast",
+                "dreamOfCenarius",
+                "faerieSwarm",
+                "felineSwiftness",
+                "forceOfNature",
+                "heartOfTheWild",
+                "incarnation",
+                "massEntanglement",
+                "mightyBash",
+                "naturesVigil",
+                "renewal",
+                "soulOfTheForest",
+                "typhoon",
+                "ursolsVortex",
+                "wildCharge",
+                "yserasGift"
+            ],
+            "title": "TreeDruid"
+        },
+        "TreeHunter": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "posthaste": {
+                    "type": "string"
+                },
+                "narrowEscape": {
+                    "type": "string"
+                },
+                "crouchingTigerHiddenChimera": {
+                    "type": "string"
+                },
+                "bindingShot": {
+                    "type": "string"
+                },
+                "wyvernSting": {
+                    "type": "string"
+                },
+                "intimidation": {
+                    "type": "string"
+                },
+                "exhilaration": {
+                    "type": "string"
+                },
+                "aspectOfTheIronHawk": {
+                    "type": "string"
+                },
+                "spiritBond": {
+                    "type": "string"
+                },
+                "fervor": {
+                    "type": "string"
+                },
+                "direBeast": {
+                    "type": "string"
+                },
+                "thrillOfTheHunt": {
+                    "type": "string"
+                },
+                "aMurderOfCrows": {
+                    "type": "string"
+                },
+                "blinkStrikes": {
+                    "type": "string"
+                },
+                "lynxRush": {
+                    "type": "string"
+                },
+                "glaiveToss": {
+                    "type": "string"
+                },
+                "powershot": {
+                    "type": "string"
+                },
+                "barrage": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "aMurderOfCrows",
+                "aspectOfTheIronHawk",
+                "barrage",
+                "bindingShot",
+                "blinkStrikes",
+                "crouchingTigerHiddenChimera",
+                "direBeast",
+                "exhilaration",
+                "fervor",
+                "glaiveToss",
+                "intimidation",
+                "lynxRush",
+                "narrowEscape",
+                "posthaste",
+                "powershot",
+                "spiritBond",
+                "thrillOfTheHunt",
+                "wyvernSting"
+            ],
+            "title": "TreeHunter"
+        },
+        "TreeMage": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "presenceOfMind": {
+                    "type": "string"
+                },
+                "blazingSpeed": {
+                    "type": "string"
+                },
+                "iceFloes": {
+                    "type": "string"
+                },
+                "temporalShield": {
+                    "type": "string"
+                },
+                "flameglow": {
+                    "type": "string"
+                },
+                "iceBarrier": {
+                    "type": "string"
+                },
+                "ringOfFrost": {
+                    "type": "string"
+                },
+                "iceWard": {
+                    "type": "string"
+                },
+                "frostjaw": {
+                    "type": "string"
+                },
+                "greaterInvisibility": {
+                    "type": "string"
+                },
+                "cauterize": {
+                    "type": "string"
+                },
+                "coldSnap": {
+                    "type": "string"
+                },
+                "netherTempest": {
+                    "type": "string"
+                },
+                "livingBomb": {
+                    "type": "string"
+                },
+                "frostBomb": {
+                    "type": "string"
+                },
+                "invocation": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "blazingSpeed",
+                "cauterize",
+                "coldSnap",
+                "flameglow",
+                "frostBomb",
+                "frostjaw",
+                "greaterInvisibility",
+                "iceBarrier",
+                "iceFloes",
+                "iceWard",
+                "invocation",
+                "livingBomb",
+                "netherTempest",
+                "presenceOfMind",
+                "ringOfFrost",
+                "temporalShield"
+            ],
+            "title": "TreeMage"
+        },
+        "TreeMonk": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "celerity": {
+                    "type": "string"
+                },
+                "tigersLust": {
+                    "type": "string"
+                },
+                "momentum": {
+                    "type": "string"
+                },
+                "chiWave": {
+                    "type": "string"
+                },
+                "zenSphere": {
+                    "type": "string"
+                },
+                "chiBurst": {
+                    "type": "string"
+                },
+                "powerStrikes": {
+                    "type": "string"
+                },
+                "ascension": {
+                    "type": "string"
+                },
+                "chiBrew": {
+                    "type": "string"
+                },
+                "ringOfPeace": {
+                    "type": "string"
+                },
+                "chargingOxWave": {
+                    "type": "string"
+                },
+                "legSweep": {
+                    "type": "string"
+                },
+                "healingElixirs": {
+                    "type": "string"
+                },
+                "dampenHarm": {
+                    "type": "string"
+                },
+                "diffuseMagic": {
+                    "type": "string"
+                },
+                "rushingJadeWind": {
+                    "type": "string"
+                },
+                "invokeXuenTheWhiteTiger": {
+                    "type": "string"
+                },
+                "chiTorpedo": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ascension",
+                "celerity",
+                "chargingOxWave",
+                "chiBrew",
+                "chiBurst",
+                "chiTorpedo",
+                "chiWave",
+                "dampenHarm",
+                "diffuseMagic",
+                "healingElixirs",
+                "invokeXuenTheWhiteTiger",
+                "legSweep",
+                "momentum",
+                "powerStrikes",
+                "ringOfPeace",
+                "rushingJadeWind",
+                "tigersLust",
+                "zenSphere"
+            ],
+            "title": "TreeMonk"
+        },
+        "TreePaladin": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "speedOfLight": {
+                    "type": "string"
+                },
+                "longArmOfTheLaw": {
+                    "type": "string"
+                },
+                "pursuitOfJustice": {
+                    "type": "string"
+                },
+                "fistOfJustice": {
+                    "type": "string"
+                },
+                "repentance": {
+                    "type": "string"
+                },
+                "evilIsAPointOfView": {
+                    "type": "string"
+                },
+                "selflessHealer": {
+                    "type": "string"
+                },
+                "eternalFlame": {
+                    "type": "string"
+                },
+                "sacredShield": {
+                    "type": "string"
+                },
+                "handOfPurity": {
+                    "type": "string"
+                },
+                "unbreakableSpirit": {
+                    "type": "string"
+                },
+                "clemency": {
+                    "type": "string"
+                },
+                "holyAvenger": {
+                    "type": "string"
+                },
+                "sanctifiedWrath": {
+                    "type": "string"
+                },
+                "divinePurpose": {
+                    "type": "string"
+                },
+                "holyPrism": {
+                    "type": "string"
+                },
+                "lightsHammer": {
+                    "type": "string"
+                },
+                "executionSentence": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "clemency",
+                "divinePurpose",
+                "eternalFlame",
+                "evilIsAPointOfView",
+                "executionSentence",
+                "fistOfJustice",
+                "handOfPurity",
+                "holyAvenger",
+                "holyPrism",
+                "lightsHammer",
+                "longArmOfTheLaw",
+                "pursuitOfJustice",
+                "repentance",
+                "sacredShield",
+                "sanctifiedWrath",
+                "selflessHealer",
+                "speedOfLight",
+                "unbreakableSpirit"
+            ],
+            "title": "TreePaladin"
+        },
+        "TreePriest": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "voidTendrils": {
+                    "type": "string"
+                },
+                "psyfiend": {
+                    "type": "string"
+                },
+                "dominateMind": {
+                    "type": "string"
+                },
+                "bodyAndSoul": {
+                    "type": "string"
+                },
+                "angelicFeather": {
+                    "type": "string"
+                },
+                "phantasm": {
+                    "type": "string"
+                },
+                "fromDarknessComesLight": {
+                    "type": "string"
+                },
+                "mindbender": {
+                    "type": "string"
+                },
+                "solaceAndInsanity": {
+                    "type": "string"
+                },
+                "desperatePrayer": {
+                    "type": "string"
+                },
+                "spectralGuise": {
+                    "type": "string"
+                },
+                "angelicBulwark": {
+                    "type": "string"
+                },
+                "twistOfFate": {
+                    "type": "string"
+                },
+                "powerInfusion": {
+                    "type": "string"
+                },
+                "divineInsight": {
+                    "type": "string"
+                },
+                "cascade": {
+                    "type": "string"
+                },
+                "divineStar": {
+                    "type": "string"
+                },
+                "halo": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "angelicBulwark",
+                "angelicFeather",
+                "bodyAndSoul",
+                "cascade",
+                "desperatePrayer",
+                "divineInsight",
+                "divineStar",
+                "dominateMind",
+                "fromDarknessComesLight",
+                "halo",
+                "mindbender",
+                "phantasm",
+                "powerInfusion",
+                "psyfiend",
+                "solaceAndInsanity",
+                "spectralGuise",
+                "twistOfFate",
+                "voidTendrils"
+            ],
+            "title": "TreePriest"
+        },
+        "TreeRogue": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "nightstalker": {
+                    "type": "string"
+                },
+                "subterfuge": {
+                    "type": "string"
+                },
+                "shadowFocus": {
+                    "type": "string"
+                },
+                "deadlyThrow": {
+                    "type": "string"
+                },
+                "nerveStrike": {
+                    "type": "string"
+                },
+                "combatReadiness": {
+                    "type": "string"
+                },
+                "cheatDeath": {
+                    "type": "string"
+                },
+                "leechingPoison": {
+                    "type": "string"
+                },
+                "elusiveness": {
+                    "type": "string"
+                },
+                "cloakAndDagger": {
+                    "type": "string"
+                },
+                "shadowstep": {
+                    "type": "string"
+                },
+                "burstOfSpeed": {
+                    "type": "string"
+                },
+                "preyOnTheWeak": {
+                    "type": "string"
+                },
+                "paralyticPoison": {
+                    "type": "string"
+                },
+                "dirtyTricks": {
+                    "type": "string"
+                },
+                "shurikenToss": {
+                    "type": "string"
+                },
+                "markedForDeath": {
+                    "type": "string"
+                },
+                "anticipation": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "anticipation",
+                "burstOfSpeed",
+                "cheatDeath",
+                "cloakAndDagger",
+                "combatReadiness",
+                "deadlyThrow",
+                "dirtyTricks",
+                "elusiveness",
+                "leechingPoison",
+                "markedForDeath",
+                "nerveStrike",
+                "nightstalker",
+                "paralyticPoison",
+                "preyOnTheWeak",
+                "shadowFocus",
+                "shadowstep",
+                "shurikenToss",
+                "subterfuge"
+            ],
+            "title": "TreeRogue"
+        },
+        "TreeShaman": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "naturesGuardian": {
+                    "type": "string"
+                },
+                "stoneBulwarkTotem": {
+                    "type": "string"
+                },
+                "astralShift": {
+                    "type": "string"
+                },
+                "frozenPower": {
+                    "type": "string"
+                },
+                "earthgrabTotem": {
+                    "type": "string"
+                },
+                "windwalkTotem": {
+                    "type": "string"
+                },
+                "callOfTheElements": {
+                    "type": "string"
+                },
+                "totemicPersistence": {
+                    "type": "string"
+                },
+                "totemicProjection": {
+                    "type": "string"
+                },
+                "elementalMastery": {
+                    "type": "string"
+                },
+                "ancestralSwiftness": {
+                    "type": "string"
+                },
+                "echoOfTheElements": {
+                    "type": "string"
+                },
+                "rushingStreams": {
+                    "type": "string"
+                },
+                "ancestralGuidance": {
+                    "type": "string"
+                },
+                "conductivity": {
+                    "type": "string"
+                },
+                "unleashedFury": {
+                    "type": "string"
+                },
+                "primalElementalist": {
+                    "type": "string"
+                },
+                "elementalBlast": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ancestralGuidance",
+                "ancestralSwiftness",
+                "astralShift",
+                "callOfTheElements",
+                "conductivity",
+                "earthgrabTotem",
+                "echoOfTheElements",
+                "elementalBlast",
+                "elementalMastery",
+                "frozenPower",
+                "naturesGuardian",
+                "primalElementalist",
+                "rushingStreams",
+                "stoneBulwarkTotem",
+                "totemicPersistence",
+                "totemicProjection",
+                "unleashedFury",
+                "windwalkTotem"
+            ],
+            "title": "TreeShaman"
+        },
+        "TreeWarlock": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "darkRegeneration": {
+                    "type": "string"
+                },
+                "soulLeech": {
+                    "type": "string"
+                },
+                "harvestLife": {
+                    "type": "string"
+                },
+                "demonicBreath": {
+                    "type": "string"
+                },
+                "mortalCoil": {
+                    "type": "string"
+                },
+                "shadowfury": {
+                    "type": "string"
+                },
+                "soulLink": {
+                    "type": "string"
+                },
+                "sacrificialPact": {
+                    "type": "string"
+                },
+                "darkBargain": {
+                    "type": "string"
+                },
+                "bloodHorror": {
+                    "type": "string"
+                },
+                "burningRush": {
+                    "type": "string"
+                },
+                "unboundWill": {
+                    "type": "string"
+                },
+                "grimoireOfSupremacy": {
+                    "type": "string"
+                },
+                "grimoireOfService": {
+                    "type": "string"
+                },
+                "grimoireOfSacrifice": {
+                    "type": "string"
+                },
+                "archimondesDarkness": {
+                    "type": "string"
+                },
+                "kiljaedensCunning": {
+                    "type": "string"
+                },
+                "mannorothsFury": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "archimondesDarkness",
+                "bloodHorror",
+                "burningRush",
+                "darkBargain",
+                "darkRegeneration",
+                "demonicBreath",
+                "grimoireOfSacrifice",
+                "grimoireOfService",
+                "grimoireOfSupremacy",
+                "harvestLife",
+                "kiljaedensCunning",
+                "mannorothsFury",
+                "mortalCoil",
+                "sacrificialPact",
+                "shadowfury",
+                "soulLeech",
+                "soulLink",
+                "unboundWill"
+            ],
+            "title": "TreeWarlock"
+        },
+        "TreeWarrior": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "juggernaut": {
+                    "type": "string"
+                },
+                "doubleTime": {
+                    "type": "string"
+                },
+                "warbringer": {
+                    "type": "string"
+                },
+                "enragedRegeneration": {
+                    "type": "string"
+                },
+                "secondWind": {
+                    "type": "string"
+                },
+                "impendingVictory": {
+                    "type": "string"
+                },
+                "staggeringShout": {
+                    "type": "string"
+                },
+                "piercingHowl": {
+                    "type": "string"
+                },
+                "disruptingShout": {
+                    "type": "string"
+                },
+                "bladestorm": {
+                    "type": "string"
+                },
+                "shockwave": {
+                    "type": "string"
+                },
+                "dragonRoar": {
+                    "type": "string"
+                },
+                "massSpellReflection": {
+                    "type": "string"
+                },
+                "safeguard": {
+                    "type": "string"
+                },
+                "vigilance": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "type": "string"
+                },
+                "bloodbath": {
+                    "type": "string"
+                },
+                "stormBolt": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "avatar",
+                "bladestorm",
+                "bloodbath",
+                "disruptingShout",
+                "doubleTime",
+                "dragonRoar",
+                "enragedRegeneration",
+                "impendingVictory",
+                "juggernaut",
+                "massSpellReflection",
+                "piercingHowl",
+                "safeguard",
+                "secondWind",
+                "shockwave",
+                "staggeringShout",
+                "stormBolt",
+                "vigilance",
+                "warbringer"
+            ],
+            "title": "TreeWarrior"
         }
     }
 }
