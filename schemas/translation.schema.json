@@ -6759,15 +6759,62 @@
                 },
                 "empty": {
                     "type": "string"
+                },
+                "details": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/Detail"
+                    }
                 }
             },
             "required": [
+                "details",
                 "empty",
                 "major",
                 "minor",
                 "modal"
             ],
             "title": "Glyphs"
+        },
+        "Detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "major": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/Major"
+                    }
+                },
+                "minor": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/Major"
+                    }
+                }
+            },
+            "required": [
+                "major",
+                "minor"
+            ],
+            "title": "Detail"
+        },
+        "Major": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description",
+                "name"
+            ],
+            "title": "Major"
         },
         "GlyphsModal": {
             "type": "object",

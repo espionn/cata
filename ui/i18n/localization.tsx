@@ -1,8 +1,9 @@
 import { PlayerClass } from '../core/player_class';
 import { PlayerSpec } from '../core/player_spec';
-import { ArmorType, MobType, PseudoStat, Race, Profession, SpellSchool, Stat, WeaponType, RangedWeaponType, Spec } from '../core/proto/common';
+import { ArmorType, Class, MobType, PseudoStat, Race, Profession, SpellSchool, Stat, WeaponType, RangedWeaponType, Spec } from '../core/proto/common';
 import { ResourceType } from '../core/proto/spell';
 import { RaidFilterOption, SourceFilterOption } from '../core/proto/ui';
+import { LaunchStatus } from '../core/launched_sims';
 import i18n from './config';
 import {
 	getClassI18nKey,
@@ -23,6 +24,7 @@ import {
 	aplItemLabelI18nKeys,
 	backendMetricI18nKeys as resultMetricI18nKeys,
 	resourceTypeI18nKeys,
+	getStatusI18nKey,
 } from './entity_mapping';
 import { getLang, setLang, supportedLanguages } from './locale_service';
 
@@ -225,6 +227,19 @@ export const translateMasterySpellName = (spec: Spec): string => {
 		return translated;
 	} catch {
 		return Spec[spec];
+	}
+};
+
+export const translateStatus = (status: LaunchStatus): string => {
+	try {
+		const key = getStatusI18nKey(status);
+		const translated = i18n.t(`common.status.${key}`);
+		if (translated === `common.status.${key}`) {
+			return LaunchStatus[status];
+		}
+		return translated;
+	} catch {
+		return LaunchStatus[status];
 	}
 };
 

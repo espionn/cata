@@ -12,6 +12,7 @@ import { ActionId } from '../proto_utils/action_id.js';
 import { Database } from '../proto_utils/database.js';
 import { EventID, TypedEvent } from '../typed_event.js';
 import { stringComparator } from '../utils.js';
+import { getClassI18nKey } from '../../i18n/entity_mapping';
 
 export type GlyphConfig = {
 	name: string;
@@ -100,12 +101,19 @@ export class GlyphsPicker extends Component {
 	// In case we ever want to parse description from tooltip HTML.
 	//static descriptionRegex = /<a href=\\"\/wotlk.*>(.*)<\/a>/g;
 	getGlyphData(glyph: number, db: Database): GlyphData {
-		const glyphConfig = this.glyphsConfig.majorGlyphs[glyph] || this.glyphsConfig.minorGlyphs[glyph];
+		const glyphType = this.glyphsConfig.majorGlyphs[glyph] ? 'major' : 'minor';
+		const glyphConfig = glyphType === 'major' ? this.glyphsConfig.majorGlyphs[glyph] : this.glyphsConfig.minorGlyphs[glyph];
+		const translationKey =
+			`talents.glyphs.details.${getClassI18nKey(this.player.getClass())}.${glyphType}.` +
+			glyphConfig.name
+				.toLowerCase()
+				.replace(/[':]/g, '')
+				.replace(/[\s-]+/g, '_');
 
 		return {
 			id: glyph,
-			name: glyphConfig.name,
-			description: glyphConfig.description,
+			name: i18n.t(`${translationKey}.name`),
+			description: i18n.t(`${translationKey}.description`),
 			iconUrl: glyphConfig.iconUrl,
 			quality: ItemQuality.ItemQualityCommon,
 			spellId: db.glyphItemToSpellId(glyph),
@@ -206,7 +214,7 @@ class GlyphPicker extends Input<Player<any>, number> {
 			}
 
 			this.iconElem.src = this.selectedGlyph.iconUrl;
-			this.nameElem.textContent = this.selectedGlyph.name.replace(/Glyph of /, '');
+			this.nameElem.textContent = this.selectedGlyph.name;
 		} else {
 			this.clear();
 		}
@@ -236,7 +244,12 @@ class GlyphSelectorModal extends BaseModal {
 		this.body.appendChild(
 			<>
 				<div className="input-root">
-					<input ref={search} className="selector-modal-search form-control" type="text" placeholder={i18n.t('talents.glyphs.modal.search_placeholder')} />
+					<input
+						ref={search}
+						className="selector-modal-search form-control"
+						type="text"
+						placeholder={i18n.t('talents.glyphs.modal.search_placeholder')}
+					/>
 				</div>
 				<ul ref={list} className="selector-modal-list"></ul>
 			</>,

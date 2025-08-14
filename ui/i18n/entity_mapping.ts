@@ -2,7 +2,6 @@ import { LaunchStatus } from '../core/launched_sims';
 import { ArmorType, Class, MobType, PseudoStat, Race, Profession, Spec, Stat, SpellSchool, WeaponType, RangedWeaponType } from '../core/proto/common';
 import { ResourceType } from '../core/proto/spell';
 import { RaidFilterOption, SourceFilterOption } from '../core/proto/ui';
-import i18n from './config';
 
 export const statI18nKeys: Record<Stat, string> = {
 	[Stat.StatStrength]: 'strength',
@@ -80,9 +79,9 @@ export const classI18nKeys: Record<Class, string> = {
 };
 
 export const aplItemLabelI18nKeys: Record<string, string> = {
-	'action': 'rotation.apl.priority_list.item_label',
+	action: 'rotation.apl.priority_list.item_label',
 	'prepull-action': 'rotation.apl.prepull_actions.item_label',
-	'value': 'rotation.apl.values.item_label',
+	value: 'rotation.apl.values.item_label',
 };
 
 export const resourceTypeI18nKeys: Record<ResourceType, string> = {
@@ -107,14 +106,14 @@ export const resourceTypeI18nKeys: Record<ResourceType, string> = {
 // standardize keys regardless they are from backend or frontend
 export const backendMetricI18nKeys: Record<string, string> = {
 	'Chance of Death': 'cod',
-	'DTPS': 'dtps',
-	'TMI': 'tmi',
-	'DPS': 'dps',
-	'HPS': 'hps',
-	'TPS': 'tps',
-	'DUR': 'dur',
-	'TTO': 'tto',
-	'OOM': 'oom',
+	DTPS: 'dtps',
+	TMI: 'tmi',
+	DPS: 'dps',
+	HPS: 'hps',
+	TPS: 'tps',
+	DUR: 'dur',
+	TTO: 'tto',
+	OOM: 'oom',
 };
 
 export const specI18nKeys: Record<Spec, string> = {
@@ -314,124 +313,28 @@ export const masterySpellNamesI18nKeys: Record<Spec, string> = {
 	[Spec.SpecWindwalkerMonk]: 'bottled_fury',
 };
 
-export const translateStat = (stat: Stat): string => {
-	const key = statI18nKeys[stat] || Stat[stat].toLowerCase();
-	return i18n.t(`common.stats.${key}`);
-};
+export const getClassI18nKey = (classID: Class): string => classI18nKeys[classID] || Class[classID].toLowerCase();
 
-export const translatePseudoStat = (pseudoStat: PseudoStat): string => {
-	const key = pseudoStatI18nKeys[pseudoStat] || PseudoStat[pseudoStat].toLowerCase();
-	return i18n.t(`common.stats.${key}`);
-};
+export const getSpecI18nKey = (specID: Spec): string => specI18nKeys[specID] || Spec[specID].toLowerCase();
 
-export const translateClassEnum = (classID: Class): string => {
-	const key = getClassI18nKey(classID);
-	return i18n.t(`common.classes.${key}`);
-};
+export const getStatusI18nKey = (status: LaunchStatus): string => statusI18nKeys[status] || LaunchStatus[status].toLowerCase();
 
-export const translateSpecEnum = (specID: Spec): string => {
-	const key = getSpecI18nKey(specID);
-	return i18n.t(`common.specs.${key}`);
-};
+export const getTargetInputI18nKey = (label: string): string => targetInputI18nKeys[label] || label.toLowerCase().replace(/\s+/g, '_');
 
-export const translateStatus = (status: LaunchStatus): string => {
-	const key = getStatusI18nKey(status);
-	return i18n.t(`common.status.${key}`);
-};
+export const getMobTypeI18nKey = (mobType: MobType): string => mobTypeI18nKeys[mobType] || MobType[mobType].toLowerCase();
 
-export function getClassI18nKey(classID: Class): string {
-	return classI18nKeys[classID] || Class[classID].toLowerCase();
-}
+export const getRaceI18nKey = (race: Race): string => raceI18nKeys[race] || Race[race].toLowerCase();
 
-export function getSpecI18nKey(specID: Spec): string {
-	return specI18nKeys[specID] || Spec[specID].toLowerCase();
-}
+export const getProfessionI18nKey = (profession: Profession): string => professionI18nKeys[profession] || Profession[profession].toLowerCase();
 
-export function getStatusI18nKey(status: LaunchStatus): string {
-	return statusI18nKeys[status] || LaunchStatus[status].toLowerCase();
-}
+export const getSourceFilterI18nKey = (source: SourceFilterOption): string => sourceFilterI18nKeys[source] || SourceFilterOption[source].toLowerCase();
 
-export function getTargetInputI18nKey(label: string): string {
-	return targetInputI18nKeys[label] || label.toLowerCase().replace(/\s+/g, '_');
-}
+export const getRaidFilterI18nKey = (raid: RaidFilterOption): string => raidFilterI18nKeys[raid] || RaidFilterOption[raid].toLowerCase();
 
-export function getMobTypeI18nKey(mobType: MobType): string {
-	return mobTypeI18nKeys[mobType] || MobType[mobType].toLowerCase();
-}
+export const getArmorTypeI18nKey = (armorType: ArmorType): string => armorTypeI18nKeys[armorType] || ArmorType[armorType].toLowerCase();
 
-export const translateMobType = (mobType: MobType): string => {
-	const key = getMobTypeI18nKey(mobType);
-	return i18n.t(`common.mob_types.${key}`);
-};
+export const getWeaponTypeI18nKey = (weaponType: WeaponType): string => weaponTypeI18nKeys[weaponType] || WeaponType[weaponType].toLowerCase();
 
-export function getRaceI18nKey(race: Race): string {
-	return raceI18nKeys[race] || Race[race].toLowerCase();
-}
+export const getRangedWeaponTypeI18nKey = (rangedWeaponType: RangedWeaponType): string => rangedWeaponTypeI18nKeys[rangedWeaponType] || RangedWeaponType[rangedWeaponType].toLowerCase();
 
-export const translateRace = (race: Race): string => {
-	const key = getRaceI18nKey(race);
-	return i18n.t(`common.races.${key}`);
-};
-
-export function getProfessionI18nKey(profession: Profession): string {
-	return professionI18nKeys[profession] || Profession[profession].toLowerCase();
-}
-
-export const translateProfession = (profession: Profession): string => {
-	const key = getProfessionI18nKey(profession);
-	return i18n.t(`common.professions.${key}`);
-};
-
-export function getSourceFilterI18nKey(source: SourceFilterOption): string {
-	return sourceFilterI18nKeys[source] || SourceFilterOption[source].toLowerCase();
-}
-
-export const translateSourceFilter = (source: SourceFilterOption): string => {
-	const key = getSourceFilterI18nKey(source);
-	return i18n.t(`common.sources.${key}`);
-};
-
-export function getRaidFilterI18nKey(raid: RaidFilterOption): string {
-	return raidFilterI18nKeys[raid] || RaidFilterOption[raid].toLowerCase();
-}
-
-export const translateRaidFilter = (raid: RaidFilterOption): string => {
-	const key = getRaidFilterI18nKey(raid);
-	return i18n.t(`common.raids.${key}`);
-};
-
-export function getArmorTypeI18nKey(armorType: ArmorType): string {
-	return armorTypeI18nKeys[armorType] || ArmorType[armorType].toLowerCase();
-}
-
-export const translateArmorType = (armorType: ArmorType): string => {
-	const key = getArmorTypeI18nKey(armorType);
-	return i18n.t(`common.armor_types.${key}`);
-};
-
-export function getWeaponTypeI18nKey(weaponType: WeaponType): string {
-	return weaponTypeI18nKeys[weaponType] || WeaponType[weaponType].toLowerCase();
-}
-
-export const translateWeaponType = (weaponType: WeaponType): string => {
-	const key = getWeaponTypeI18nKey(weaponType);
-	return i18n.t(`common.weapon_types.${key}`);
-};
-
-export function getRangedWeaponTypeI18nKey(rangedWeaponType: RangedWeaponType): string {
-	return rangedWeaponTypeI18nKeys[rangedWeaponType] || RangedWeaponType[rangedWeaponType].toLowerCase();
-}
-
-export const translateRangedWeaponType = (rangedWeaponType: RangedWeaponType): string => {
-	const key = getRangedWeaponTypeI18nKey(rangedWeaponType);
-	return i18n.t(`common.ranged_weapon_types.${key}`);
-};
-
-export function getMasterySpellNameI18nKey(spec: Spec): string {
-	return masterySpellNamesI18nKeys[spec] || Spec[spec].toLowerCase();
-}
-
-export const translateMasterySpellName = (spec: Spec): string => {
-	const key = getMasterySpellNameI18nKey(spec);
-	return i18n.t(`common.mastery_spell_names.${key}`);
-};
+export const getMasterySpellNameI18nKey = (spec: Spec): string => masterySpellNamesI18nKeys[spec] || Spec[spec].toLowerCase();
