@@ -1,6 +1,6 @@
-import { ArmorType, Class, ItemSlot, Profession, PseudoStat, Race, RangedWeaponType, Spec, Stat, WeaponType } from '../proto/common';
+import { ArmorType, Class, Profession, Race, Spec, Stat } from '../proto/common';
 import { ResourceType, SecondaryResourceType } from '../proto/spell';
-import { DungeonDifficulty, RaidFilterOption, RepFaction, RepLevel, SourceFilterOption, StatCapType } from '../proto/ui';
+import { DungeonDifficulty, RepFaction, RepLevel, StatCapType } from '../proto/ui';
 
 export const armorTypeNames: Map<ArmorType, string> = new Map([
 	[ArmorType.ArmorTypeUnknown, 'Unknown'],
@@ -8,28 +8,6 @@ export const armorTypeNames: Map<ArmorType, string> = new Map([
 	[ArmorType.ArmorTypeLeather, 'Leather'],
 	[ArmorType.ArmorTypeMail, 'Mail'],
 	[ArmorType.ArmorTypePlate, 'Plate'],
-]);
-
-export const weaponTypeNames: Map<WeaponType, string> = new Map([
-	[WeaponType.WeaponTypeUnknown, 'Unknown'],
-	[WeaponType.WeaponTypeAxe, 'Axe'],
-	[WeaponType.WeaponTypeDagger, 'Dagger'],
-	[WeaponType.WeaponTypeFist, 'Fist'],
-	[WeaponType.WeaponTypeMace, 'Mace'],
-	[WeaponType.WeaponTypeOffHand, 'Misc'],
-	[WeaponType.WeaponTypePolearm, 'Polearm'],
-	[WeaponType.WeaponTypeShield, 'Shield'],
-	[WeaponType.WeaponTypeStaff, 'Staff'],
-	[WeaponType.WeaponTypeSword, 'Sword'],
-]);
-
-export const rangedWeaponTypeNames: Map<RangedWeaponType, string> = new Map([
-	[RangedWeaponType.RangedWeaponTypeUnknown, 'Unknown'],
-	[RangedWeaponType.RangedWeaponTypeBow, 'Bow'],
-	[RangedWeaponType.RangedWeaponTypeCrossbow, 'Crossbow'],
-	[RangedWeaponType.RangedWeaponTypeGun, 'Gun'],
-	[RangedWeaponType.RangedWeaponTypeThrown, 'Thrown'],
-	[RangedWeaponType.RangedWeaponTypeWand, 'Wand'],
 ]);
 
 export const raceNames: Map<Race, string> = new Map([
@@ -152,36 +130,6 @@ export const spellSchoolNames: Map<number, string> = new Map([
 	[SpellSchool.Fire + SpellSchool.Nature, 'Firestorm'],
 ]);
 
-export const shortSecondaryStatNames: Map<Stat, string> = new Map([
-	[Stat.StatSpirit, 'Spirit'],
-	[Stat.StatHitRating, 'Hit'],
-	[Stat.StatCritRating, 'Crit'],
-	[Stat.StatHasteRating, 'Haste'],
-	[Stat.StatExpertiseRating, 'Expertise'],
-	[Stat.StatMasteryRating, 'Mastery'],
-	[Stat.StatDodgeRating, 'Dodge'],
-	[Stat.StatParryRating, 'Parry'],
-]);
-
-export const slotNames: Map<ItemSlot, string> = new Map([
-	[ItemSlot.ItemSlotHead, 'Head'],
-	[ItemSlot.ItemSlotNeck, 'Neck'],
-	[ItemSlot.ItemSlotShoulder, 'Shoulders'],
-	[ItemSlot.ItemSlotBack, 'Back'],
-	[ItemSlot.ItemSlotChest, 'Chest'],
-	[ItemSlot.ItemSlotWrist, 'Wrist'],
-	[ItemSlot.ItemSlotHands, 'Hands'],
-	[ItemSlot.ItemSlotWaist, 'Waist'],
-	[ItemSlot.ItemSlotLegs, 'Legs'],
-	[ItemSlot.ItemSlotFeet, 'Feet'],
-	[ItemSlot.ItemSlotFinger1, 'Finger 1'],
-	[ItemSlot.ItemSlotFinger2, 'Finger 2'],
-	[ItemSlot.ItemSlotTrinket1, 'Trinket 1'],
-	[ItemSlot.ItemSlotTrinket2, 'Trinket 2'],
-	[ItemSlot.ItemSlotMainHand, 'Main Hand'],
-	[ItemSlot.ItemSlotOffHand, 'Off Hand'],
-]);
-
 export const resourceNames: Map<ResourceType, string> = new Map([
 	[ResourceType.ResourceTypeNone, 'None'],
 	[ResourceType.ResourceTypeHealth, 'Health'],
@@ -236,26 +184,6 @@ export function stringToResourceType(str: string): [ResourceType, SecondaryResou
 	return [ResourceType.ResourceTypeNone, undefined];
 }
 
-export const sourceNames: Map<SourceFilterOption, string> = new Map([
-	[SourceFilterOption.SourceUnknown, 'Unknown'],
-	[SourceFilterOption.SourceCrafting, 'Crafting'],
-	[SourceFilterOption.SourceQuest, 'Quest'],
-	[SourceFilterOption.SourceReputation, 'Reputation'],
-	[SourceFilterOption.SourcePvp, 'PVP'],
-	[SourceFilterOption.SourceDungeon, 'Dungeon'],
-	[SourceFilterOption.SourceDungeonH, 'Dungeon (H)'],
-	[SourceFilterOption.SourceRaid, 'Raid'],
-	[SourceFilterOption.SourceRaidH, 'Raid (H)'],
-	[SourceFilterOption.SourceRaidRF, 'Raid (RF)'],
-]);
-export const raidNames: Map<RaidFilterOption, string> = new Map([
-	[RaidFilterOption.RaidUnknown, 'Unknown'],
-	[RaidFilterOption.RaidMogushanVaults, 'Mogu\'shan Vaults'],
-	[RaidFilterOption.RaidHeartOfFear, 'Heart of Fear'],
-	[RaidFilterOption.RaidTerraceOfEndlessSpring, 'Terrace of Endless Spring'],
-	[RaidFilterOption.RaidThroneOfThunder, 'Throne of Thunder'],
-	[RaidFilterOption.RaidSiegeOfOrgrimmar, 'Siege of Orgrimmar'],
-]);
 
 export const difficultyNames: Map<DungeonDifficulty, string> = new Map([
 	[DungeonDifficulty.DifficultyUnknown, 'Unknown'],
@@ -349,43 +277,6 @@ export const REP_FACTION_QUARTERMASTERS: Record<RepFaction, number> = {
 	[RepFaction.RepFactionHozen]: 0,
 	[RepFaction.RepFactionOperationShieldwall]: 69059,
 };
-
-export const masterySpellNames: Map<Spec, string> = new Map([
-	[Spec.SpecAssassinationRogue, 'Potent Poisons'],
-	[Spec.SpecCombatRogue, 'Main Gauche'],
-	[Spec.SpecSubtletyRogue, 'Executioner'],
-	[Spec.SpecBloodDeathKnight, 'Blood Shield'],
-	[Spec.SpecFrostDeathKnight, 'Frozen Heart'],
-	[Spec.SpecUnholyDeathKnight, 'Dreadblade'],
-	[Spec.SpecBalanceDruid, 'Total Eclipse'],
-	[Spec.SpecFeralDruid, 'Razor Claws'],
-	[Spec.SpecGuardianDruid, "Nature's Guardian"],
-	[Spec.SpecRestorationDruid, 'Harmony'],
-	[Spec.SpecHolyPaladin, 'Illuminated Healing'],
-	[Spec.SpecProtectionPaladin, 'Divine Bulwark'],
-	[Spec.SpecRetributionPaladin, 'Hand of Light'],
-	[Spec.SpecElementalShaman, 'Elemental Overload'],
-	[Spec.SpecEnhancementShaman, 'Enhanced Elements'],
-	[Spec.SpecRestorationShaman, 'Deep Healing'],
-	[Spec.SpecBeastMasteryHunter, 'Master of Beasts'],
-	[Spec.SpecMarksmanshipHunter, 'Wild Quiver'],
-	[Spec.SpecSurvivalHunter, 'Essence of the Viper'],
-	[Spec.SpecArmsWarrior, 'Strikes of Opportunity'],
-	[Spec.SpecFuryWarrior, 'Unshackled Fury'],
-	[Spec.SpecProtectionWarrior, 'Critical Block'],
-	[Spec.SpecArcaneMage, 'Mana Adept'],
-	[Spec.SpecFireMage, 'Flashburn'],
-	[Spec.SpecFrostMage, 'Icicles'],
-	[Spec.SpecDisciplinePriest, 'Shield Discipline'],
-	[Spec.SpecHolyPriest, 'Echo of Light'],
-	[Spec.SpecShadowPriest, 'Shadow Orb Power'],
-	[Spec.SpecAfflictionWarlock, 'Potent Afflictions'],
-	[Spec.SpecDemonologyWarlock, 'Master Demonologist'],
-	[Spec.SpecDestructionWarlock, 'Emberstorm'],
-	[Spec.SpecBrewmasterMonk, 'Elusive Brawler'],
-	[Spec.SpecMistweaverMonk, 'Gift of the Serpent'],
-	[Spec.SpecWindwalkerMonk, 'Bottled Fury'],
-]);
 
 export const masterySpellIDs: Map<Spec, number> = new Map([
 	[Spec.SpecAssassinationRogue, 76803],
