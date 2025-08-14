@@ -8,8 +8,7 @@ import { UIEnchant as Enchant, UIGem as Gem, UIItem as Item } from '../../proto/
 import { ActionId } from '../../proto_utils/action_id';
 import { EquippedItem, ReforgeData } from '../../proto_utils/equipped_item';
 import { gemMatchesSocket, getEmptyGemSocketIconUrl } from '../../proto_utils/gems';
-import { slotNames } from '../../proto_utils/names';
-import { translateStat } from '../../../i18n/localization';
+import { translateSlotName, translateStat } from '../../../i18n/localization';
 import { Stats } from '../../proto_utils/stats';
 import { SimUI } from '../../sim_ui';
 import { EventID, TypedEvent } from '../../typed_event';
@@ -20,6 +19,7 @@ import GearPicker from './gear_picker';
 import ItemList, { GearData, ItemData, ItemListType } from './item_list';
 import { createGemContainer, getEmptySlotIconUrl } from './utils';
 import i18n from '../../../i18n/config';
+import { getSlotNameI18nKey } from '../../../i18n/entity_mapping';
 
 export enum SelectorModalTabs {
 	Items = 'Items',
@@ -119,7 +119,7 @@ export default class SelectorModal extends BaseModal {
 	}
 
 	openTab(selectedSlot: ItemSlot, selectedTab: SelectorModalTabs, gearData: GearData) {
-		this.titleElem.textContent = slotNames.get(selectedSlot) ?? '';
+		this.titleElem.textContent = getSlotNameI18nKey(selectedSlot) ?? '';
 		this.setData(selectedSlot, selectedTab, gearData);
 		this.setActiveItemSlotTab(selectedSlot);
 		this.open();
@@ -323,7 +323,7 @@ export default class SelectorModal extends BaseModal {
 					setItemData();
 					picker.onUpdate(() => setItemData());
 					tippy(anchorRef.value!, {
-						content: `Edit ${slotNames.get(picker.slot)}`,
+						content: `Edit ${translateSlotName(picker.slot)}`,
 						placement: 'left',
 					});
 					this.itemSlotTabElems.push(wrapper);

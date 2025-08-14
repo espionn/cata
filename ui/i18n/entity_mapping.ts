@@ -1,5 +1,5 @@
 import { LaunchStatus } from '../core/launched_sims';
-import { ArmorType, Class, MobType, PseudoStat, Race, Profession, Spec, Stat, SpellSchool, WeaponType, RangedWeaponType } from '../core/proto/common';
+import { ArmorType, Class, MobType, PseudoStat, Race, Profession, Spec, Stat, SpellSchool, WeaponType, RangedWeaponType, ItemSlot } from '../core/proto/common';
 import { ResourceType } from '../core/proto/spell';
 import { RaidFilterOption, SourceFilterOption } from '../core/proto/ui';
 
@@ -313,6 +313,25 @@ export const masterySpellNamesI18nKeys: Record<Spec, string> = {
 	[Spec.SpecWindwalkerMonk]: 'bottled_fury',
 };
 
+export const slotNamesI18nKeys: Record<ItemSlot, string> = {
+	[ItemSlot.ItemSlotHead]: 'head',
+	[ItemSlot.ItemSlotNeck]: 'neck',
+	[ItemSlot.ItemSlotShoulder]: 'shoulder',
+	[ItemSlot.ItemSlotBack]: 'back',
+	[ItemSlot.ItemSlotChest]: 'chest',
+	[ItemSlot.ItemSlotWrist]: 'Wrist',
+	[ItemSlot.ItemSlotHands]: 'Hands',
+	[ItemSlot.ItemSlotWaist]: 'waist',
+	[ItemSlot.ItemSlotLegs]: 'legs',
+	[ItemSlot.ItemSlotFeet]: 'feet',
+	[ItemSlot.ItemSlotFinger1]: 'finger_1',
+	[ItemSlot.ItemSlotFinger2]: 'finger_2',
+	[ItemSlot.ItemSlotTrinket1]: 'trinket_1',
+	[ItemSlot.ItemSlotTrinket2]: 'trinket_2',
+	[ItemSlot.ItemSlotMainHand]: 'main_hand',
+	[ItemSlot.ItemSlotOffHand]: 'off_hand',
+};
+
 export const getClassI18nKey = (classID: Class): string => classI18nKeys[classID] || Class[classID].toLowerCase();
 
 export const getSpecI18nKey = (specID: Spec): string => specI18nKeys[specID] || Spec[specID].toLowerCase();
@@ -338,3 +357,5 @@ export const getWeaponTypeI18nKey = (weaponType: WeaponType): string => weaponTy
 export const getRangedWeaponTypeI18nKey = (rangedWeaponType: RangedWeaponType): string => rangedWeaponTypeI18nKeys[rangedWeaponType] || RangedWeaponType[rangedWeaponType].toLowerCase();
 
 export const getMasterySpellNameI18nKey = (spec: Spec): string => masterySpellNamesI18nKeys[spec] || Spec[spec].toLowerCase();
+
+export const getSlotNameI18nKey = (slot: ItemSlot): string => slotNamesI18nKeys[slot] || ItemSlot[slot].toLowerCase();

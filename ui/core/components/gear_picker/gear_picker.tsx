@@ -8,8 +8,7 @@ import { UIEnchant as Enchant, UIGem as Gem } from '../../proto/ui';
 import { ActionId } from '../../proto_utils/action_id';
 import { getEnchantDescription } from '../../proto_utils/enchants';
 import { EquippedItem } from '../../proto_utils/equipped_item';
-import { slotNames } from '../../proto_utils/names';
-import { translateStat } from '../../../i18n/localization';
+import { translateSlotName, translateStat } from '../../../i18n/localization';
 import { SimUI } from '../../sim_ui';
 import { EventID } from '../../typed_event';
 import { Component } from '../component';
@@ -369,7 +368,7 @@ export class ItemPicker extends Component {
 		this.itemElem.clear(this.slot);
 		// Clear quick swap gems array since gem sockets are rerendered every time
 		this.quickSwapGemPopover = [];
-		this.itemElem.nameElem.textContent = slotNames.get(this.slot) ?? '';
+		this.itemElem.nameElem.textContent = translateSlotName(this.slot);
 		setItemQualityCssClass(this.itemElem.nameElem, null);
 
 		if (!!newItem) {

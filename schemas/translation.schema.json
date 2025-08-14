@@ -1508,6 +1508,9 @@
                 "title": {
                     "type": "string"
                 },
+                "slots": {
+                    "$ref": "#/definitions/Slots"
+                },
                 "gem_summary": {
                     "$ref": "#/definitions/GemSummary"
                 },
@@ -1530,6 +1533,7 @@
                 "gem_summary",
                 "reforge_success",
                 "reforge_summary",
+                "slots",
                 "title"
             ],
             "title": "Gear"
@@ -1976,6 +1980,79 @@
                 "title"
             ],
             "title": "ReforgeSummary"
+        },
+        "Slots": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "head": {
+                    "type": "string"
+                },
+                "neck": {
+                    "type": "string"
+                },
+                "shoulder": {
+                    "type": "string"
+                },
+                "back": {
+                    "type": "string"
+                },
+                "chest": {
+                    "type": "string"
+                },
+                "wrist": {
+                    "type": "string"
+                },
+                "hands": {
+                    "type": "string"
+                },
+                "waist": {
+                    "type": "string"
+                },
+                "legs": {
+                    "type": "string"
+                },
+                "feet": {
+                    "type": "string"
+                },
+                "finger_1": {
+                    "type": "string"
+                },
+                "finger_2": {
+                    "type": "string"
+                },
+                "trinket_1": {
+                    "type": "string"
+                },
+                "trinket_2": {
+                    "type": "string"
+                },
+                "main_hand": {
+                    "type": "string"
+                },
+                "off_hand": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "back",
+                "chest",
+                "feet",
+                "finger_1",
+                "finger_2",
+                "hands",
+                "head",
+                "legs",
+                "main_hand",
+                "neck",
+                "off_hand",
+                "shoulder",
+                "trinket_1",
+                "trinket_2",
+                "waist",
+                "wrist"
+            ],
+            "title": "Slots"
         },
         "Import": {
             "type": "object",

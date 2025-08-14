@@ -12,8 +12,8 @@ import { UIGem as Gem, IndividualSimSettings, StatCapType } from '../proto/ui';
 import { ReforgeData } from '../proto_utils/equipped_item';
 import { Gear } from '../proto_utils/gear';
 import { gemMatchesSocket } from '../proto_utils/gems';
-import { slotNames, statCapTypeNames } from '../proto_utils/names';
-import { translateStat } from '../../i18n/localization';
+import { statCapTypeNames } from '../proto_utils/names';
+import { translateSlotName, translateStat } from '../../i18n/localization';
 import { pseudoStatIsCapped, StatCap, statIsCapped, Stats, UnitStat, UnitStatPresets } from '../proto_utils/stats';
 import { Sim } from '../sim';
 import { ActionGroupItem } from '../sim_ui';
@@ -605,7 +605,7 @@ export class ReforgeOptimizer {
 							{slots.map(slot => {
 								const picker = new BooleanPicker(null, this.player, {
 									id: 'reforge-optimizer-freeze-' + ItemSlot[slot],
-									label: slotNames.get(slot),
+									label: translateSlotName(slot),
 									inline: true,
 									changedEvent: () => this.freezeItemSlotsChangeEmitter,
 									getValue: () => this.frozenItemSlots.get(slot) || false,
@@ -1529,7 +1529,7 @@ export class ReforgeOptimizer {
 				<ul>
 					{[...changedSlots].map(([slot, reforge]) => {
 						if (reforge) {
-							const slotName = slotNames.get(slot);
+							const slotName = translateSlotName(slot);
 							const { fromStat, toStat } = reforge;
 							const fromText = translateStat(fromStat);
 							const toText = translateStat(toStat);
@@ -1539,7 +1539,7 @@ export class ReforgeOptimizer {
 								</li>
 							);
 						} else {
-							return <li>{slotNames.get(slot)}: {i18n.t('gear.reforge_success.removed_reforge')}</li>;
+							return <li>{translateSlotName(slot)}: {i18n.t('gear.reforge_success.removed_reforge')}</li>;
 						}
 					})}
 				</ul>

@@ -422,6 +422,24 @@
 	},
 	"gear": {
 		"title": "Équipement",
+		"slots": {
+			"head": "Tête",
+			"neck": "Cou",
+			"shoulder": "Épaule",
+			"back": "Dos",
+			"chest": "Poitrine",
+			"wrist": "Poignet",
+			"hands": "Mains",
+			"waist": "Taille",
+			"legs": "Jambes",
+			"feet": "Pieds",
+			"finger_1": "Doigt 1",
+			"finger_2": "Doigt 2",
+			"trinket_1": "Trinket 1",
+			"trinket_2": "Trinket 2",
+			"main_hand": "Main",
+			"off_hand": "Off Hand"
+		},
 		"gem_summary": {
 			"title": "Résumé des Gemmes",
 			"reset_gems": "Réinitialiser les gemmes"

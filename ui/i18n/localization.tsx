@@ -1,6 +1,6 @@
 import { PlayerClass } from '../core/player_class';
 import { PlayerSpec } from '../core/player_spec';
-import { ArmorType, Class, MobType, PseudoStat, Race, Profession, SpellSchool, Stat, WeaponType, RangedWeaponType, Spec } from '../core/proto/common';
+import { ArmorType, Class, MobType, PseudoStat, Race, Profession, SpellSchool, Stat, WeaponType, RangedWeaponType, Spec, ItemSlot } from '../core/proto/common';
 import { ResourceType } from '../core/proto/spell';
 import { RaidFilterOption, SourceFilterOption } from '../core/proto/ui';
 import { LaunchStatus } from '../core/launched_sims';
@@ -25,6 +25,7 @@ import {
 	backendMetricI18nKeys as resultMetricI18nKeys,
 	resourceTypeI18nKeys,
 	getStatusI18nKey,
+	getSlotNameI18nKey,
 } from './entity_mapping';
 import { getLang, setLang, supportedLanguages } from './locale_service';
 
@@ -430,6 +431,11 @@ export const translateResultMetricTooltip = (metricName: string): string => {
 	const tooltipKey = key === 'tmi' || key === 'cod' ? `${key}.tooltip.title` : `${key}.tooltip`;
 	const translated = i18n.t(`sidebar.results.metrics.${tooltipKey}`);
 	return translated === `sidebar.results.metrics.${tooltipKey}` ? metricName : translated;
+};
+
+export const translateSlotName = (slot: ItemSlot): string => {
+	const key = getSlotNameI18nKey(slot);
+	return i18n.t(`gear.slots.${key}`);
 };
 
 /**
