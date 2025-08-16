@@ -30,6 +30,7 @@ func (bear *GuardianDruid) registerSavageDefenseSpell() {
 		Charges:         3,
 		RechargeTime:    time.Second * 9,
 		RelatedSelfBuff: bear.SavageDefenseAura,
+		ClassSpellMask:  druid.DruidSpellSavageDefense,
 
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
