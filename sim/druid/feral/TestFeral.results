@@ -95,6 +95,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFeral-AllItems-BattlegearoftheEternalBlossom"
+ value: {
+  dps: 105358.25325
+  tps: 169081.10932
+  hps: 8756.44549
+ }
+}
+dps_results: {
  key: "TestFeral-AllItems-BlossomofPureSnow-89081"
  value: {
   dps: 98450.75426

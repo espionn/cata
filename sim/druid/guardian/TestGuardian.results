@@ -103,6 +103,15 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestGuardian-AllItems-BattlegearoftheEternalBlossom"
+ value: {
+  dps: 1.18547862978e+06
+  tps: 8.29855608111e+06
+  dtps: 279931.71385
+  hps: 267322.06262
+ }
+}
+dps_results: {
  key: "TestGuardian-AllItems-BlossomofPureSnow-89081"
  value: {
   dps: 1.2569638542e+06
