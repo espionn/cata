@@ -39,6 +39,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBalance-AllItems-ArmoroftheEternalBlossom"
+ value: {
+  dps: 68038.83312
+  tps: 69589.9536
+  hps: 13166.60613
+ }
+}
+dps_results: {
  key: "TestBalance-AllItems-AssuranceofConsequence-105472"
  value: {
   dps: 86810.35389

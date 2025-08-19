@@ -58,6 +58,15 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestGuardian-AllItems-ArmoroftheEternalBlossom"
+ value: {
+  dps: 1.18154098748e+06
+  tps: 8.27098941825e+06
+  dtps: 252073.1481
+  hps: 245864.03293
+ }
+}
+dps_results: {
  key: "TestGuardian-AllItems-ArrowflightMedallion-93258"
  value: {
   dps: 1.27066544617e+06
