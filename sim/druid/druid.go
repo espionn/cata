@@ -87,16 +87,19 @@ const (
 	DruidSpellAstralStorm
 	DruidSpellAstralCommunion
 	DruidSpellFerociousBite
+	DruidSpellFrenziedRegeneration
 	DruidSpellInnervate
 	DruidSpellLacerate
 	DruidSpellMangleBear
 	DruidSpellMangleCat
 	DruidSpellMaul
+	DruidSpellMightOfUrsoc
 	DruidSpellMoonfire
 	DruidSpellMoonfireDoT
 	DruidSpellRake
 	DruidSpellRavage
 	DruidSpellRip
+	DruidSpellSavageDefense
 	DruidSpellSavageRoar
 	DruidSpellShred
 	DruidSpellStarfall
@@ -111,9 +114,6 @@ const (
 	DruidSpellWildMushroom
 	DruidSpellWildMushroomDetonate
 	DruidSpellWrath
-	DruidSpellMightOfUrsoc
-	DruidSpellSavageDefense
-	DruidSpellFrenziedRegeneration
 
 	DruidSpellHealingTouch
 	DruidSpellRegrowth
