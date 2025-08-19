@@ -12,11 +12,6 @@ func (druid *Druid) registerRipSpell() {
 	const resourceCoefficient = 0.29199999571
 	const attackPowerCoeff = 0.0484
 
-	druid.RipBaseNumTicks = 8 +
-		core.TernaryInt32(druid.CouldHaveSetBonus(ItemSetBattlegearOfTheEternalBlossom, 4), 2, 0)
-
-	druid.RipMaxNumTicks = druid.RipBaseNumTicks + 3
-
 	// Scaled parameters for spell code
 	baseDamage := coefficient * druid.ClassSpellScaling              // 112.7582
 	comboPointCoeff := resourceCoefficient * druid.ClassSpellScaling // 319.664

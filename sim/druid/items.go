@@ -41,10 +41,19 @@ var ItemSetBattlegearOfTheEternalBlossom = core.NewItemSet(core.ItemSet{
 				FloatValue: 0.05,
 			})
 		},
-		4: func(_ core.Agent, setBonusAura *core.Aura) {
+		4: func(agent core.Agent, setBonusAura *core.Aura) {
 			// Increases the duration of your Rip by 4 sec.
-			// Could not change it here because of Bloodletting
-			// See changes in druid.go, rip.go, rotation_helpers.go and ferocious_bite.go
+			druid := agent.(DruidAgent).GetDruid()
+
+			setBonusAura.ApplyOnGain(func(_ *core.Aura, _ *core.Simulation) {
+				druid.RipBaseNumTicks += 2
+				druid.RipMaxNumTicks += 2
+			})
+
+			setBonusAura.ApplyOnExpire(func(_ *core.Aura, _ *core.Simulation) {
+				druid.RipBaseNumTicks -= 2
+				druid.RipMaxNumTicks -= 2
+			})
 		},
 	},
 })
