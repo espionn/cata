@@ -48,7 +48,7 @@ export const DEFAULT_EP_PRESET = PresetUtils.makePresetEpWeights(
 		[Stat.StatSpellPower]: 1.0,
 		[Stat.StatHitRating]: 1.21,
 		[Stat.StatCritRating]: 0.94,
-		[Stat.StatHasteRating]: 0.63,
+		[Stat.StatHasteRating]: 0.95,
 		[Stat.StatMasteryRating]: 0.59,
 	}),
 );
