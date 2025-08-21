@@ -5,11 +5,8 @@ import {
 	APLValueAnd,
 	APLValueAnyStatBuffCooldownsActive,
 	APLValueAnyTrinketStatProcsActive,
-	APLValueAuraICDIsReadyWithReactionTime,
 	APLValueAuraInternalCooldown,
 	APLValueAuraIsActive,
-	APLValueAuraIsActiveWithReactionTime,
-	APLValueAuraIsInactiveWithReactionTime,
 	APLValueAuraIsKnown,
 	APLValueAuraNumStacks,
 	APLValueAuraRemainingTime,
@@ -105,6 +102,8 @@ import {
 	APLValueUnitIsMoving,
 	APLValueWarlockHandOfGuldanInFlight,
 	APLValueWarlockHauntInFlight,
+	APLValueAuraIsInactive,
+	APLValueAuraICDIsReady,
 } from '../../proto/apl.js';
 import { Class, Spec } from '../../proto/common.js';
 import { ShamanTotems_TotemType as TotemType } from '../../proto/shaman.js';
@@ -1129,38 +1128,62 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		label: 'Aura Active',
 		submenu: ['Aura'],
 		shortDescription: '<b>True</b> if the aura is currently active, otherwise <b>False</b>.',
-		newValue: APLValueAuraIsActive.create,
-		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
+		newValue: () => APLValueAuraIsActive.create({ includeReactionTime: true }),
+		fields: [
+			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
+			AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit'),
+			AplHelpers.booleanFieldConfig('includeReactionTime', 'Include Reaction Time', {
+				labelTooltip: 'If checked, will use the configured reaction time.',
+			}),
+		],
 	}),
 	auraIsActiveWithReactionTime: inputBuilder({
-		label: 'Aura Active (with Reaction Time)',
+		label: '[DEPRECATED] Aura Active (With Reaction Time)',
 		submenu: ['Aura'],
-		shortDescription:
-			'<b>True</b> if the aura is currently active AND it has been active for at least as long as the player reaction time (configured in Settings), otherwise <b>False</b>.',
-		newValue: APLValueAuraIsActiveWithReactionTime.create,
+		shortDescription: 'All Aura checks now contain Reaction Time logic, so this is no longer needed. Use <b Aura Active</b> instead.',
+		newValue: () => APLValueAuraIsActive.create({ includeReactionTime: true }),
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
 	}),
-	auraIsInactiveWithReactionTime: inputBuilder({
-		label: 'Aura Inactive (with Reaction Time)',
+	auraIsInactive: inputBuilder({
+		label: 'Aura Inactive',
 		submenu: ['Aura'],
 		shortDescription:
 			'<b>True</b> if the aura is not currently active AND it has been inactive for at least as long as the player reaction time (configured in Settings), otherwise <b>False</b>.',
-		newValue: APLValueAuraIsInactiveWithReactionTime.create,
+		newValue: () => APLValueAuraIsInactive.create({ includeReactionTime: true }),
+		fields: [
+			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
+			AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit'),
+			AplHelpers.booleanFieldConfig('includeReactionTime', 'Include Reaction Time', {
+				labelTooltip: 'If checked, will use the configured reaction time.',
+			}),
+		],
+	}),
+	auraIsInactiveWithReactionTime: inputBuilder({
+		label: '[DEPRECATED] Aura Inactive (With Reaction Time)',
+		submenu: ['Aura'],
+		shortDescription: 'All Aura checks now contain Reaction Time logic, so this is no longer needed. Use <b Aura Inactive</b> instead.',
+		newValue: () => APLValueAuraIsInactive.create({ includeReactionTime: true }),
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
 	}),
 	auraRemainingTime: inputBuilder({
 		label: 'Aura Remaining Time',
 		submenu: ['Aura'],
 		shortDescription: 'Time remaining before this aura will expire, or 0 if the aura is not currently active.',
-		newValue: APLValueAuraRemainingTime.create,
+		newValue: () => APLValueAuraRemainingTime.create({ includeReactionTime: true }),
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
 	}),
 	auraNumStacks: inputBuilder({
 		label: 'Aura Num Stacks',
 		submenu: ['Aura'],
 		shortDescription: 'Number of stacks of the aura.',
-		newValue: APLValueAuraNumStacks.create,
-		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'stackable_auras', 'sourceUnit')],
+		newValue: () => APLValueAuraNumStacks.create({ includeReactionTime: true }),
+		fields: [
+			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
+			AplHelpers.actionIdFieldConfig('auraId', 'stackable_auras', 'sourceUnit'),
+			AplHelpers.booleanFieldConfig('includeReactionTime', 'Include Reaction Time', {
+				labelTooltip: 'If checked, will use the configured reaction time.',
+			}),
+		],
 	}),
 	auraInternalCooldown: inputBuilder({
 		label: 'Aura Remaining ICD',
@@ -1169,12 +1192,25 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		newValue: APLValueAuraInternalCooldown.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'icd_auras', 'sourceUnit')],
 	}),
-	auraIcdIsReadyWithReactionTime: inputBuilder({
-		label: 'Aura ICD Is Ready (with Reaction Time)',
+	auraIcdIsReady: inputBuilder({
+		label: 'Aura ICD Is Ready',
 		submenu: ['Aura'],
 		shortDescription:
 			"<b>True</b> if the aura's ICD is currently ready OR it was put on CD recently, within the player's reaction time (configured in Settings), otherwise <b>False</b>.",
-		newValue: APLValueAuraICDIsReadyWithReactionTime.create,
+		newValue: () => APLValueAuraICDIsReady.create({ includeReactionTime: true }),
+		fields: [
+			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
+			AplHelpers.actionIdFieldConfig('auraId', 'icd_auras', 'sourceUnit'),
+			AplHelpers.booleanFieldConfig('includeReactionTime', 'Include Reaction Time', {
+				labelTooltip: 'If checked, will use the configured reaction time.',
+			}),
+		],
+	}),
+	auraIcdIsReadyWithReactionTime: inputBuilder({
+		label: '[DEPRECATED] Aura ICD Is Ready (With Reaction Time)',
+		submenu: ['Aura'],
+		shortDescription: "All Aura checks now contain Reaction Time logic, so this is no longer needed. Use <b>Aura ICD Is Ready</b> instead.',",
+		newValue: () => APLValueAuraICDIsReady.create({ includeReactionTime: true }),
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'icd_auras', 'sourceUnit')],
 	}),
 	auraShouldRefresh: inputBuilder({
@@ -1328,11 +1364,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 				statType2: -1,
 				statType3: -1,
 			}),
-		fields: [
-			AplHelpers.statTypeFieldConfig('statType1'),
-			AplHelpers.statTypeFieldConfig('statType2'),
-			AplHelpers.statTypeFieldConfig('statType3'),
-		],
+		fields: [AplHelpers.statTypeFieldConfig('statType1'), AplHelpers.statTypeFieldConfig('statType2'), AplHelpers.statTypeFieldConfig('statType3')],
 	}),
 
 	// DoT
