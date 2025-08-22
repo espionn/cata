@@ -28,7 +28,7 @@ func (fire *FireMage) registerPyromaniac() {
 }
 
 func (fire *FireMage) pyromaniacDDBCHandler(sim *core.Simulation, spell *core.Spell, attackTable *core.AttackTable) float64 {
-	if spell.Matches(mage.FireSpellIgnitable ^ mage.MageSpellScorch) {
+	if spell.Matches(mage.MageSpellFireball | mage.MageSpellFrostfireBolt | mage.MageSpellInfernoBlast | mage.MageSpellPyroblast | mage.MageSpellPyroblastDot) {
 		return 1.1
 	}
 	return 1.0

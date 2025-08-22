@@ -72,7 +72,7 @@ func (druid *Druid) registerFerociousBiteSpell() {
 				ripDot := druid.Rip.Dot(target)
 
 				if sim.IsExecutePhase25() && ripDot.IsActive() {
-					ripDot.BaseTickCount = RipBaseNumTicks
+					ripDot.BaseTickCount = druid.RipBaseNumTicks
 					ripDot.ApplyRollover(sim)
 				}
 			} else {

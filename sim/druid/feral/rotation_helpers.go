@@ -25,7 +25,7 @@ func (rotation *FeralDruidRotation) WaitUntil(sim *core.Simulation, nextEvaluati
 
 func (cat *FeralDruid) calcTfEnergyThresh() float64 {
 	delayTime := cat.ReactionTime + core.TernaryDuration(cat.ClearcastingAura.IsActive(), time.Second, 0)
-	return 40.0 - delayTime.Seconds() * cat.EnergyRegenPerSecond()
+	return 40.0 - delayTime.Seconds()*cat.EnergyRegenPerSecond()
 }
 
 func (rotation *FeralDruidRotation) TryTigersFury(sim *core.Simulation) {
@@ -40,7 +40,7 @@ func (rotation *FeralDruidRotation) TryTigersFury(sim *core.Simulation) {
 
 	if tfNow {
 		cat.TigersFury.Cast(sim, nil)
-		rotation.WaitUntil(sim, sim.CurrentTime + cat.ReactionTime)
+		rotation.WaitUntil(sim, sim.CurrentTime+cat.ReactionTime)
 	}
 }
 
@@ -51,13 +51,13 @@ func (rotation *FeralDruidRotation) TryBerserk(sim *core.Simulation) {
 	cat := rotation.agent
 	simTimeRemain := sim.GetRemainingDuration()
 	tfCdRemain := cat.TigersFury.TimeToReady(sim)
-	waitForTf := !cat.TigersFuryAura.IsActive() && (tfCdRemain + cat.ReactionTime < simTimeRemain - cat.BerserkCatAura.Duration)
+	waitForTf := !cat.TigersFuryAura.IsActive() && (tfCdRemain+cat.ReactionTime < simTimeRemain-cat.BerserkCatAura.Duration)
 	berserkNow := rotation.UseBerserk && cat.Berserk.IsReady(sim) && !waitForTf && !cat.ClearcastingAura.IsActive() && (cat.CurrentEnergy() > 60)
 
-	if berserkNow && (simTimeRemain / cat.Berserk.CD.Duration == 0) && !sim.IsExecutePhase25() {
+	if berserkNow && (simTimeRemain/cat.Berserk.CD.Duration == 0) && !sim.IsExecutePhase25() {
 		projectedExecuteStart := core.DurationFromSeconds((1.0 - sim.Encounter.ExecuteProportion_25) * sim.Duration.Seconds())
 
-		if (sim.CurrentTime + tfCdRemain < projectedExecuteStart) && (tfCdRemain + cat.ReactionTime < simTimeRemain - cat.BerserkCatAura.Duration) {
+		if (sim.CurrentTime+tfCdRemain < projectedExecuteStart) && (tfCdRemain+cat.ReactionTime < simTimeRemain-cat.BerserkCatAura.Duration) {
 			allProcsReady := true
 
 			for _, aura := range rotation.itemProcAuras {
@@ -76,12 +76,12 @@ func (rotation *FeralDruidRotation) TryBerserk(sim *core.Simulation) {
 	if berserkNow {
 		cat.Berserk.Cast(sim, nil)
 
-		if (cat.Incarnation != nil) && cat.Incarnation.IsReady(sim) && !cat.ClearcastingAura.IsActive() && (cat.CurrentEnergy() + cat.EnergyRegenPerSecond() < 100) {
+		if (cat.Incarnation != nil) && cat.Incarnation.IsReady(sim) && !cat.ClearcastingAura.IsActive() && (cat.CurrentEnergy()+cat.EnergyRegenPerSecond() < 100) {
 			cat.Incarnation.Cast(sim, nil)
 		}
 
 		cat.UpdateMajorCooldowns()
-		rotation.WaitUntil(sim, sim.CurrentTime + cat.ReactionTime)
+		rotation.WaitUntil(sim, sim.CurrentTime+cat.ReactionTime)
 	}
 }
 
@@ -96,7 +96,7 @@ func (rotation *FeralDruidRotation) ShiftBearCat(sim *core.Simulation) {
 		cat.CatForm.Cast(sim, nil)
 
 		// Reset swing timer with Albino Snake when advantageous
-		if rotation.SnekWeave && (cat.AutoAttacks.NextAttackAt() - sim.CurrentTime > cat.AutoAttacks.MainhandSwingSpeed()) {
+		if rotation.SnekWeave && (cat.AutoAttacks.NextAttackAt()-sim.CurrentTime > cat.AutoAttacks.MainhandSwingSpeed()) {
 			cat.AutoAttacks.StopMeleeUntil(sim, sim.CurrentTime)
 		}
 	}
@@ -108,7 +108,7 @@ func (cat *FeralDruid) calcBleedRefreshTime(sim *core.Simulation, bleedSpell *dr
 	}
 
 	// DoC takes priority over other logic.
-	if cat.DreamOfCenariusAura.IsActive() && (bleedSpell.NewSnapshotPower > bleedSpell.CurrentSnapshotPower + 0.001) {
+	if cat.DreamOfCenariusAura.IsActive() && (bleedSpell.NewSnapshotPower > bleedSpell.CurrentSnapshotPower+0.001) {
 		return sim.CurrentTime - cat.ReactionTime
 	}
 
@@ -132,7 +132,7 @@ func (cat *FeralDruid) calcBleedRefreshTime(sim *core.Simulation, bleedSpell *dr
 	// duration, project "buffEnd" forward in time such that we block clips if we are
 	// already maxing out the number of full durations we can snapshot.
 	buffRemains := cat.tempSnapshotAura.RemainingDuration(sim)
-	maxTickCount := core.TernaryInt32(isRip, druid.RipMaxNumTicks, bleedDot.BaseTickCount)
+	maxTickCount := core.TernaryInt32(isRip, cat.RipMaxNumTicks, bleedDot.BaseTickCount)
 	maxBleedDur := bleedDot.BaseTickLength * time.Duration(maxTickCount)
 	numCastsCovered := buffRemains / maxBleedDur
 	buffEnd := cat.tempSnapshotAura.ExpiresAt() - numCastsCovered*maxBleedDur
@@ -163,13 +163,13 @@ func (cat *FeralDruid) calcBleedRefreshTime(sim *core.Simulation, bleedSpell *dr
 	energyEquivalent := expectedDamageGain / shredDpc * cat.Shred.DefaultCast.Cost
 
 	// Finally, discount the effective Energy cost of the clip based on the number of clipped ticks.
-	discountedRefreshCost := core.TernaryFloat64(isRip, float64(numClippedTicks) / float64(maxTickCount), 1.0) * bleedSpell.DefaultCast.Cost
+	discountedRefreshCost := core.TernaryFloat64(isRip, float64(numClippedTicks)/float64(maxTickCount), 1.0) * bleedSpell.DefaultCast.Cost
 
 	if sim.Log != nil {
 		cat.Log(sim, "%s buff snapshot is worth %.1f Energy, discounted refresh cost is %.1f Energy.", bleedSpell.ShortName, energyEquivalent, discountedRefreshCost)
 	}
 
-	if cat.BerserkCatAura.IsActive() && (cat.BerserkCatAura.ExpiresAt() > targetClipTime + cat.ReactionTime) {
+	if cat.BerserkCatAura.IsActive() && (cat.BerserkCatAura.ExpiresAt() > targetClipTime+cat.ReactionTime) {
 		return core.TernaryDuration(expectedDamageGain > shredDpc, targetClipTime, standardRefreshTime)
 	} else {
 		return core.TernaryDuration(energyEquivalent > discountedRefreshCost, targetClipTime, standardRefreshTime)
@@ -184,11 +184,11 @@ func (cat *FeralDruid) shouldDelayBleedRefreshForTf(sim *core.Simulation, bleedD
 	}
 
 	finalTickLeeway := core.TernaryDuration(bleedDot.IsActive(), bleedDot.TimeUntilNextTick(sim), 0)
-	maxTickCount := core.TernaryInt32(isRip, druid.RipMaxNumTicks, bleedDot.BaseTickCount)
-	buffedTickCount := min(maxTickCount, int32((sim.GetRemainingDuration() - finalTickLeeway) / bleedDot.BaseTickLength))
-	delayBreakpoint := finalTickLeeway + core.DurationFromSeconds(0.15 * float64(buffedTickCount) * bleedDot.BaseTickLength.Seconds())
+	maxTickCount := core.TernaryInt32(isRip, cat.RipMaxNumTicks, bleedDot.BaseTickCount)
+	buffedTickCount := min(maxTickCount, int32((sim.GetRemainingDuration()-finalTickLeeway)/bleedDot.BaseTickLength))
+	delayBreakpoint := finalTickLeeway + core.DurationFromSeconds(0.15*float64(buffedTickCount)*bleedDot.BaseTickLength.Seconds())
 
-	if !cat.tfExpectedBefore(sim, sim.CurrentTime + delayBreakpoint) {
+	if !cat.tfExpectedBefore(sim, sim.CurrentTime+delayBreakpoint) {
 		return false
 	}
 
@@ -197,7 +197,7 @@ func (cat *FeralDruid) shouldDelayBleedRefreshForTf(sim *core.Simulation, bleedD
 	}
 
 	delaySeconds := delayBreakpoint.Seconds()
-	energyToDump := cat.CurrentEnergy() + delaySeconds * cat.EnergyRegenPerSecond() - cat.calcTfEnergyThresh()
+	energyToDump := cat.CurrentEnergy() + delaySeconds*cat.EnergyRegenPerSecond() - cat.calcTfEnergyThresh()
 	secondsToDump := math.Ceil(energyToDump / cat.Shred.DefaultCast.Cost)
 	return secondsToDump < delaySeconds
 }
@@ -214,7 +214,7 @@ func (cat *FeralDruid) calcRoarRefreshTime(sim *core.Simulation, ripRefreshTime 
 	// tick refresh window, unless there is a Rip conflict.
 	roarEnd := roarBuff.ExpiresAt()
 
-	if !ripDot.IsActive() || (ripRefreshTime < roarEnd + cat.ReactionTime) {
+	if !ripDot.IsActive() || (ripRefreshTime < roarEnd+cat.ReactionTime) {
 		return roarEnd
 	}
 
@@ -222,11 +222,11 @@ func (cat *FeralDruid) calcRoarRefreshTime(sim *core.Simulation, ripRefreshTime 
 		return roarEnd
 	}
 
-	standardRefreshTime := core.TernaryDuration(cat.ComboPoints() < 5, roarEnd, roarEnd - roarBuff.BaseTickLength)
+	standardRefreshTime := core.TernaryDuration(cat.ComboPoints() < 5, roarEnd, roarEnd-roarBuff.BaseTickLength)
 
 	// Project Rip end time assuming full Bloodletting extensions
-	remainingExtensions := druid.RipMaxNumTicks - ripDot.BaseTickCount
-	ripEnd := ripDot.ExpiresAt() + time.Duration(remainingExtensions) * ripDot.BaseTickLength
+	remainingExtensions := cat.RipMaxNumTicks - ripDot.BaseTickCount
+	ripEnd := ripDot.ExpiresAt() + time.Duration(remainingExtensions)*ripDot.BaseTickLength
 	fightEnd := sim.Duration
 
 	if roarEnd > (ripEnd + ripLeeway) {
@@ -253,7 +253,7 @@ func (cat *FeralDruid) calcRoarRefreshTime(sim *core.Simulation, ripRefreshTime 
 
 	// Outside of Execute, use offset rule to determine whether to clip.
 	if !sim.IsExecutePhase25() {
-		return core.TernaryDuration(newRoarEnd >= ripEnd + minRoarOffset, targetClipTime, standardRefreshTime)
+		return core.TernaryDuration(newRoarEnd >= ripEnd+minRoarOffset, targetClipTime, standardRefreshTime)
 	}
 
 	// Under Execute conditions, ignore the offset rule and instead optimize
@@ -263,7 +263,7 @@ func (cat *FeralDruid) calcRoarRefreshTime(sim *core.Simulation, ripRefreshTime 
 	}
 
 	minRoarsPossible := (fightEnd - roarEnd) / newRoarDur
-	projectedRoarCasts := (fightEnd - newRoarEnd) / newRoarDur + 1
+	projectedRoarCasts := (fightEnd-newRoarEnd)/newRoarDur + 1
 	return core.TernaryDuration(projectedRoarCasts == minRoarsPossible, targetClipTime, standardRefreshTime)
 }
 
@@ -279,7 +279,7 @@ func (cat *FeralDruid) canBearWeave(sim *core.Simulation, furorCap float64, rege
 
 	// Calculate effective Energy cap for out-of-form pooling.
 	targetWeaveDuration := core.GCDDefault*3 + cat.ReactionTime*2
-	maxStartingEnergy := furorCap - targetWeaveDuration.Seconds() * regenRate
+	maxStartingEnergy := furorCap - targetWeaveDuration.Seconds()*regenRate
 
 	if currentEnergy > maxStartingEnergy {
 		return false
@@ -294,28 +294,28 @@ func (cat *FeralDruid) canBearWeave(sim *core.Simulation, furorCap float64, rege
 	}
 
 	// Mana check
-	if cat.CurrentMana() < cat.CatForm.DefaultCast.Cost * 2 {
+	if cat.CurrentMana() < cat.CatForm.DefaultCast.Cost*2 {
 		cat.Metrics.MarkOOM(sim)
 		return false
 	}
 
 	// Also add a condition to make sure we can spend down our Energy
 	// post-weave before the encounter ends or TF is ready.
-	energyToDump := currentEnergy + (earliestWeaveEnd - sim.CurrentTime).Seconds() * regenRate
-	timeToDump := earliestWeaveEnd + core.DurationFromSeconds(math.Floor(energyToDump / cat.Shred.DefaultCast.Cost))
+	energyToDump := currentEnergy + (earliestWeaveEnd-sim.CurrentTime).Seconds()*regenRate
+	timeToDump := earliestWeaveEnd + core.DurationFromSeconds(math.Floor(energyToDump/cat.Shred.DefaultCast.Cost))
 	return (timeToDump < sim.Duration) && !cat.tfExpectedBefore(sim, timeToDump)
 }
 
 func (rotation *FeralDruidRotation) shouldTerminateBearWeave(sim *core.Simulation, isClearcast bool, currentEnergy float64, furorCap float64, regenRate float64, upcomingTimers *PoolingActions) bool {
 	// Shift back early if a bear auto resulted in an Omen proc.
-	if isClearcast && (sim.CurrentTime - rotation.lastShiftAt > core.GCDDefault) {
+	if isClearcast && (sim.CurrentTime-rotation.lastShiftAt > core.GCDDefault) {
 		return true
 	}
 
 	// Check Energy pooling leeway.
 	cat := rotation.agent
 	smallestWeaveExtension := core.GCDDefault + cat.ReactionTime
-	finalEnergy := currentEnergy + smallestWeaveExtension.Seconds() * regenRate
+	finalEnergy := currentEnergy + smallestWeaveExtension.Seconds()*regenRate
 
 	if finalEnergy > furorCap {
 		return true
@@ -331,8 +331,8 @@ func (rotation *FeralDruidRotation) shouldTerminateBearWeave(sim *core.Simulatio
 
 	// Also add a condition to prevent extending a weave if we don't have
 	// enough time to spend the pooled Energy thus far.
-	energyToDump := finalEnergy + 1.5 * regenRate // need to include Cat Form GCD here
-	timeToDump := earliestWeaveEnd + core.DurationFromSeconds(math.Floor(energyToDump / cat.Shred.DefaultCast.Cost))
+	energyToDump := finalEnergy + 1.5*regenRate // need to include Cat Form GCD here
+	timeToDump := earliestWeaveEnd + core.DurationFromSeconds(math.Floor(energyToDump/cat.Shred.DefaultCast.Cost))
 	return (timeToDump >= sim.Duration) || cat.tfExpectedBefore(sim, timeToDump)
 }
 
@@ -341,7 +341,7 @@ func (rotation *FeralDruidRotation) ProcessNextPlannedAction(sim *core.Simulatio
 	// accidentally over-cap while waiting on other timers.
 	cat := rotation.agent
 	timeToCap := core.DurationFromSeconds((cat.MaximumEnergy() - cat.CurrentEnergy()) / cat.EnergyRegenPerSecond())
-	nextActionAt = min(nextActionAt, sim.CurrentTime + timeToCap)
+	nextActionAt = min(nextActionAt, sim.CurrentTime+timeToCap)
 
 	// Offset the ideal evaluation time by player latency.
 	nextActionAt += cat.ReactionTime

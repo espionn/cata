@@ -6,9 +6,6 @@ import (
 	"github.com/wowsims/mop/sim/core"
 )
 
-const RipBaseNumTicks int32 = 8
-const RipMaxNumTicks int32 = RipBaseNumTicks + 3
-
 func (druid *Druid) registerRipSpell() {
 	// Raw parameters from DB
 	const coefficient = 0.10300000012
@@ -52,7 +49,7 @@ func (druid *Druid) registerRipSpell() {
 			Aura: druid.applyRendAndTear(core.Aura{
 				Label: "Rip",
 			}),
-			NumberOfTicks: RipBaseNumTicks,
+			NumberOfTicks: druid.RipBaseNumTicks,
 			TickLength:    time.Second * 2,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
@@ -76,7 +73,7 @@ func (druid *Druid) registerRipSpell() {
 			result := spell.CalcOutcome(sim, target, spell.OutcomeMeleeSpecialHitNoHitCounter)
 			if result.Landed() {
 				dot := spell.Dot(target)
-				dot.BaseTickCount = RipBaseNumTicks
+				dot.BaseTickCount = druid.RipBaseNumTicks
 				dot.Apply(sim)
 				druid.SpendComboPoints(sim, spell.ComboPointMetrics())
 			} else {
@@ -113,7 +110,7 @@ func (druid *Druid) CurrentRipCost() float64 {
 func (druid *Druid) ApplyBloodletting(target *core.Unit) {
 	ripDot := druid.Rip.Dot(target)
 
-	if ripDot.IsActive() && (ripDot.BaseTickCount < RipMaxNumTicks) {
+	if ripDot.IsActive() && (ripDot.BaseTickCount < druid.RipMaxNumTicks) {
 		ripDot.BaseTickCount += 1
 		ripDot.UpdateExpires(ripDot.ExpiresAt() + ripDot.BaseTickLength)
 	}

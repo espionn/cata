@@ -131,9 +131,17 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecDemonologyWarlock, {
 export class DemonologyWarlockSimUI extends IndividualSimUI<Spec.SpecDemonologyWarlock> {
 	constructor(parentElem: HTMLElement, player: Player<Spec.SpecDemonologyWarlock>) {
 		super(parentElem, player, SPEC_CONFIG);
+
+		const statSelectionPresets = [
+			{
+				unitStat: UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent),
+				presets: Presets.DEMONOLOGY_BREAKPOINTS.presets,
+			},
+		];
+
 		player.sim.waitForInit().then(() => {
 			new ReforgeOptimizer(this, {
-				statSelectionPresets: Presets.DEMONOLOGY_BREAKPOINTS,
+				statSelectionPresets,
 			});
 		});
 	}
