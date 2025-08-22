@@ -89,16 +89,19 @@ const (
 	DruidSpellAstralStorm
 	DruidSpellAstralCommunion
 	DruidSpellFerociousBite
+	DruidSpellFrenziedRegeneration
 	DruidSpellInnervate
 	DruidSpellLacerate
 	DruidSpellMangleBear
 	DruidSpellMangleCat
 	DruidSpellMaul
+	DruidSpellMightOfUrsoc
 	DruidSpellMoonfire
 	DruidSpellMoonfireDoT
 	DruidSpellRake
 	DruidSpellRavage
 	DruidSpellRip
+	DruidSpellSavageDefense
 	DruidSpellSavageRoar
 	DruidSpellShred
 	DruidSpellStarfall
