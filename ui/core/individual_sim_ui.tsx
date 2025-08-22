@@ -110,6 +110,8 @@ export interface RaidSimPreset<SpecType extends Spec> {
 }
 
 export interface IndividualSimUIConfig<SpecType extends Spec> extends PlayerConfig<SpecType> {
+	// Override for required talent rows. If not specified, defaults to requiring all rows [0, 1, 2, 3, 4, 5]
+	requiredTalentRows?: number[];
 	// Additional css class to add to the root element.
 	cssClass: string;
 	// Used to generate schemed components. E.g. 'shaman', 'druid', 'raid'
