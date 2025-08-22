@@ -1,10 +1,19 @@
 import * as InputHelpers from '../../core/components/input_helpers.js';
 import { Player } from '../../core/player.js';
-import { Spec } from '../../core/proto/common.js';
+import { Class, Spec } from '../../core/proto/common.js';
 import i18n from '../../i18n/config.js';
 
 // Configuration for spec-specific UI elements on the settings tab.
 // These don't need to be in a separate file but it keeps things cleaner.
+export const SymbiosisSelection = InputHelpers.makeSpecOptionsEnumInput<Spec.SpecGuardianDruid, Player<Spec.SpecGuardianDruid>>({
+	fieldName: 'symbiosisTarget',
+	label: 'Symbiosis Target',
+	labelTooltip: 'Class from which to receive a Symbiosis spell',
+	values: [
+		{ name: 'Death Knight', value: Class.ClassDeathKnight, tooltip: 'Bone Shield' },
+		{ name: 'Monk', value: Class.ClassMonk, tooltip: 'Elusive Brew' },
+	],
+});
 
 export const GuardianDruidRotationConfig = {
 	inputs: [

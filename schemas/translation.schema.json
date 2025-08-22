@@ -371,7 +371,7 @@
                 "mana_adept": {
                     "type": "string"
                 },
-                "flashburn": {
+                "ignite": {
                     "type": "string"
                 },
                 "icicles": {
@@ -419,7 +419,7 @@
                 "enhanced_elements",
                 "essence_of_the_viper",
                 "executioner",
-                "flashburn",
+                "ignite",
                 "frozen_heart",
                 "gift_of_the_serpent",
                 "hand_of_light",

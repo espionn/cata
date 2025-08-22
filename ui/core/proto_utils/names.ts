@@ -302,7 +302,7 @@ export const masterySpellIDs: Map<Spec, number> = new Map([
 	[Spec.SpecFuryWarrior, 76856],
 	[Spec.SpecProtectionWarrior, 76857],
 	[Spec.SpecArcaneMage, 76547],
-	[Spec.SpecFireMage, 76595],
+	[Spec.SpecFireMage, 12846],
 	[Spec.SpecFrostMage, 76613],
 	[Spec.SpecDisciplinePriest, 77484],
 	[Spec.SpecHolyPriest, 77485],
