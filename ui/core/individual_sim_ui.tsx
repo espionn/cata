@@ -64,7 +64,7 @@ import { getMetaGemConditionDescription } from './proto_utils/gems';
 import { armorTypeNames, professionNames } from './proto_utils/names';
 import { pseudoStatIsCapped, StatCap, Stats, UnitStat } from './proto_utils/stats';
 import { getTalentPoints, SpecOptions, SpecRotation } from './proto_utils/utils';
-import { hasRequiredTalents, getMissingTalentRows } from './talents/required_talents';
+import { hasRequiredTalents, getMissingTalentRows, getRequiredTalentRows } from './talents/required_talents';
 import { SimUI, SimWarning } from './sim_ui';
 import { EventID, TypedEvent } from './typed_event';
 import { isDevMode } from './utils';
@@ -291,9 +291,10 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 			updateOn: this.player.talentsChangeEmitter,
 			getContent: () => {
 				const talentPoints = getTalentPoints(this.player.getTalentsString());
+				const requiredRows = getRequiredTalentRows(this.player.getSpec());
 
-				if (talentPoints == 0) {
-					// Just return here, so we don't show a warning during page load.
+				// Only skip warning during initial load if there are no required talents
+				if (talentPoints == 0 && requiredRows.length == 0) {
 					return '';
 				} else if (!hasRequiredTalents(this.player.getSpec(), this.player.getTalentsString())) {
 					const missingRows = getMissingTalentRows(this.player.getSpec(), this.player.getTalentsString());
