@@ -63,6 +63,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBalance-AllItems-BattlegearoftheEternalBlossom"
+ value: {
+  dps: 68479.98192
+  tps: 70086.93226
+  hps: 13169.0604
+ }
+}
+dps_results: {
  key: "TestBalance-AllItems-BurningPrimalDiamond"
  value: {
   dps: 90738.48936
