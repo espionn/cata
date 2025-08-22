@@ -55,6 +55,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFeral-AllItems-ArmoroftheEternalBlossom"
+ value: {
+  dps: 101976.89339
+  tps: 164725.41472
+  hps: 8896.47877
+ }
+}
+dps_results: {
  key: "TestFeral-AllItems-ArrowflightMedallion-93258"
  value: {
   dps: 105386.12841
@@ -92,6 +100,14 @@ dps_results: {
   dps: 99452.05392
   tps: 167220.22036
   hps: 8504.11501
+ }
+}
+dps_results: {
+ key: "TestFeral-AllItems-BattlegearoftheEternalBlossom"
+ value: {
+  dps: 105358.25325
+  tps: 169081.10932
+  hps: 8756.44549
  }
 }
 dps_results: {
