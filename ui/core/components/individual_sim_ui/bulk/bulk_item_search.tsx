@@ -56,7 +56,7 @@ export default class BulkItemSearch extends ContentBlock {
 			<div className="bulk-gear-search-container" ref={searchContainerRef}>
 				<div className="d-flex flex-column">
 					<label className="form-label" htmlFor="bulkGearSearch">
-						{i18n.t('sim.bulk.search.name_label')}
+						{i18n.t('common.name')}
 					</label>
 					<div className="input-group">
 						<input id="bulkGearSearch" className="form-control" type="text" placeholder={i18n.t('common.search')} ref={searchInputRef} />

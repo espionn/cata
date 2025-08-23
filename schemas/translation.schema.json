@@ -1572,9 +1572,6 @@
                 "ep_tooltip": {
                     "type": "string"
                 },
-                "search_placeholder": {
-                    "type": "string"
-                },
                 "filters_button": {
                     "type": "string"
                 },
@@ -1642,7 +1639,6 @@
                 "ranged_weapon_type",
                 "reforge_text",
                 "remove_buttons",
-                "search_placeholder",
                 "show_ep",
                 "table_headers",
                 "tabs",
@@ -2650,9 +2646,6 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "filter_placeholder": {
-                    "type": "string"
-                },
                 "top_button": {
                     "type": "string"
                 },
@@ -2668,7 +2661,6 @@
             },
             "required": [
                 "event_column",
-                "filter_placeholder",
                 "show_debug",
                 "time_column",
                 "top_button"
@@ -6607,7 +6599,6 @@
                 "min_ilvl",
                 "name_label",
                 "no_results",
-                "placeholder",
                 "showing_results",
                 "title"
             ],
@@ -6912,13 +6903,9 @@
             "properties": {
                 "title": {
                     "type": "string"
-                },
-                "search_placeholder": {
-                    "type": "string"
                 }
             },
             "required": [
-                "search_placeholder",
                 "title"
             ],
             "title": "GlyphsModal"

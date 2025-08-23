@@ -369,7 +369,6 @@
 			"search": {
 				"title": "Recherche d'objets",
 				"name_label": "Nom",
-				"placeholder": "Rechercher...",
 				"clear_search": "Effacer la recherche",
 				"min_ilvl": "ILvl min",
 				"max_ilvl": "ILvl max",
@@ -519,7 +518,6 @@
 				"tooltip": "Spécifiez les timings de cooldown, en secondes. Les cooldowns seront utilisés dès que possible après leurs timings spécifiés. Quand non spécifié, les cooldowns seront utilisés quand prêts et qu'il est raisonnable de le faire.<br><br>Plusieurs timings peuvent être fournis en séparant par des virgules. Toute utilisation de cooldown après le dernier timing fourni utilisera la logique par défaut."
 			},
 			"ep_tooltip": "EP (Points d'Équivalence) est une façon de comparer les objets en multipliant les stats brutes d'un objet avec vos poids de stats actuels. Plus d'EP ne signifie pas nécessairement plus de DPS, car EP ne prend pas en compte les plafonds de stats et les calculs de stats non linéaires.",
-			"search_placeholder": "Rechercher...",
 			"filters_button": "Filtres",
 			"unequip_item": "Déséquiper l'Objet",
 			"table_headers": {
@@ -875,8 +873,7 @@
 			"major": "Major Glyphs",
 			"minor": "Minor Glyphs",
 			"modal": {
-				"title": "Glyphs",
-				"search_placeholder": "Search..."
+				"title": "Glyphs"
 			},
 			"empty": "Empty",
 			"details": {
@@ -3941,7 +3938,6 @@
 				}
 			},
 			"logs": {
-				"filter_placeholder": "Filtrer les logs",
 				"top_button": "Haut",
 				"time_column": "Temps",
 				"event_column": "Événement",

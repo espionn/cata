@@ -369,7 +369,6 @@
 			"search": {
 				"title": "Item Search",
 				"name_label": "Name",
-				"placeholder": "Search...",
 				"clear_search": "Clear search",
 				"min_ilvl": "Min ILvl",
 				"max_ilvl": "Max ILvl",
@@ -519,7 +518,6 @@
 				"tooltip": "Specify cooldown timings, in seconds. Cooldowns will be used as soon as possible after their specified timings. When not specified, cooldowns will be used when ready and it is sensible to do so.<br><br>Multiple timings can be provided by separating with commas. Any cooldown usages after the last provided timing will use the default logic."
 			},
 			"ep_tooltip": "EP (Equivalence Points) is way of comparing items by multiplying the raw stats of an item with your current stat weights. More EP does not necessarily mean more DPS, as EP doesn't take into account stat caps and non-linear stat calculations.",
-			"search_placeholder": "Search...",
 			"filters_button": "Filters",
 			"unequip_item": "Unequip Item",
 			"table_headers": {
@@ -875,8 +873,7 @@
 			"major": "Major Glyphs",
 			"minor": "Minor Glyphs",
 			"modal": {
-				"title": "Glyphs",
-				"search_placeholder": "Search..."
+				"title": "Glyphs"
 			},
 			"empty": "Empty",
 			"details": {
@@ -3941,7 +3938,6 @@
 				}
 			},
 			"logs": {
-				"filter_placeholder": "Filter logs",
 				"top_button": "Top",
 				"time_column": "Time",
 				"event_column": "Event",
