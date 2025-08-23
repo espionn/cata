@@ -140,6 +140,10 @@
 			"melee_crit": "Critique de mêlée",
 			"melee_haste": "Hâte de mêlée",
 			"ranged_haste": "Hâte à distance"
+		},
+		"currency": {
+			"valorPoints": "Points de vaillance",
+			"justicePoints": "Points de justice"
 		}
 	},
 	"sim": {

@@ -76,10 +76,14 @@
                 },
                 "stats": {
                     "$ref": "#/definitions/Stats"
+                },
+                "currency": {
+                    "$ref": "#/definitions/Currency"
                 }
             },
             "required": [
                 "classes",
+                "currency",
                 "phases",
                 "specs",
                 "stats",
@@ -139,6 +143,23 @@
                 "warrior"
             ],
             "title": "Classes"
+        },
+        "Currency": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "valorPoints": {
+                    "type": "string"
+                },
+                "justicePoints": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "justicePoints",
+                "valorPoints"
+            ],
+            "title": "Currency"
         },
         "Specs": {
             "type": "object",
