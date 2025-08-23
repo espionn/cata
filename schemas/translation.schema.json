@@ -1534,12 +1534,16 @@
                 },
                 "gear_picker": {
                     "$ref": "#/definitions/GearPicker"
+                },
+                "preset_configurations": {
+                    "$ref": "#/definitions/PresetConfigurations"
                 }
             },
             "required": [
                 "gear_picker",
                 "gear_sets",
                 "gem_summary",
+                "preset_configurations",
                 "reforge_success",
                 "reforge_summary",
                 "slots",
@@ -1647,6 +1651,23 @@
                 "weapon_type"
             ],
             "title": "GearPicker"
+        },
+        "PresetConfigurations": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title",
+                "tooltip"
+            ],
+            "title": "PresetConfigurations"
         },
         "ExternalBuffs": {
             "type": "object",

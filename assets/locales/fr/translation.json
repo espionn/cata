@@ -538,6 +538,10 @@
 			"min_ranged_speed": "Vitesse à Distance Min",
 			"max_ranged_speed": "Vitesse à Distance Max",
 			"reforge_text": "Reforgé {fromAmount} {fromStat} → {toAmount} {toStat}"
+		},
+		"preset_configurations": {
+			"title": "Configurations Prédéfinies",
+			"tooltip": "Les configurations prédéfinies peuvent appliquer une combinaison optimale d'équipement, talents, rotation et paramètres d'affrontement."
 		}
 	},
 	"settings": {

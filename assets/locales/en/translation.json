@@ -538,6 +538,10 @@
 			"min_ranged_speed": "Min Ranged Speed",
 			"max_ranged_speed": "Max Ranged Speed",
 			"reforge_text": "Reforged {{fromAmount}} {{fromStat}} → {{toAmount}} {{toStat}}"
+		},
+		"preset_configurations": {
+			"title": "Preset Configurations",
+			"tooltip": "Preset configurations can apply an optimal combination of gear, talents, rotation and encounter settings."
 		}
 	},
 	"settings": {
