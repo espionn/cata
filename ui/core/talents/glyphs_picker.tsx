@@ -1,6 +1,5 @@
 import { ref } from 'tsx-vanilla';
 
-import i18n from '../../i18n/config';
 import { BaseModal } from '../components/base_modal.js';
 import { Component } from '../components/component.js';
 import { ContentBlock } from '../components/content_block.js';
@@ -13,6 +12,7 @@ import { Database } from '../proto_utils/database.js';
 import { EventID, TypedEvent } from '../typed_event.js';
 import { stringComparator } from '../utils.js';
 import { getClassI18nKey } from '../../i18n/entity_mapping';
+import i18n from '../../i18n/config';
 
 export type GlyphConfig = {
 	name: string;
@@ -244,12 +244,7 @@ class GlyphSelectorModal extends BaseModal {
 		this.body.appendChild(
 			<>
 				<div className="input-root">
-					<input
-						ref={search}
-						className="selector-modal-search form-control"
-						type="text"
-						placeholder={i18n.t('talents.glyphs.modal.search_placeholder')}
-					/>
+					<input ref={search} className="selector-modal-search form-control" type="text" placeholder={i18n.t('common.search')} />
 				</div>
 				<ul ref={list} className="selector-modal-list"></ul>
 			</>,

@@ -1,10 +1,10 @@
 import tippy from 'tippy.js';
 import { ref } from 'tsx-vanilla';
 
-import i18n from '../../i18n/config';
 import { EventID, TypedEvent } from '../typed_event';
 import { Component } from './component';
 import { ContentBlock, ContentBlockHeaderConfig } from './content_block';
+import i18n from '../../i18n/config';
 
 export type SavedDataManagerConfig<ModObject, T> = {
 	label: string;
@@ -232,8 +232,8 @@ export class SavedDataManager<ModObject, T> extends Component {
 		const saveInputRef = ref<HTMLInputElement>();
 		const savedDataCreateFragment = (
 			<div className="saved-data-create-container">
-				<label className="form-label">{this.config.label} {this.config.nameLabel || 'Name'}</label>
-				<input ref={saveInputRef} className="saved-data-save-input form-control" type="text" placeholder="Name" />
+				<label className="form-label">{this.config.label} {this.config.nameLabel || i18n.t('common.name')}</label>
+				<input ref={saveInputRef} className="saved-data-save-input form-control" type="text" placeholder={i18n.t('common.name')} />
 				<button ref={saveButtonRef} className="saved-data-save-button btn btn-primary">
 					{this.config.saveButtonText || `Save ${this.config.label}`}
 				</button>

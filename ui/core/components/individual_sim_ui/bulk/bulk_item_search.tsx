@@ -2,8 +2,8 @@ import tippy from 'tippy.js';
 import { ref } from 'tsx-vanilla';
 
 import { setItemQualityCssClass } from '../../../css_utils';
-import { IndividualSimUI } from '../../../individual_sim_ui';
 import i18n from '../../../../i18n/config';
+import { IndividualSimUI } from '../../../individual_sim_ui';
 import { ItemLevelState, ItemSpec } from '../../../proto/common';
 import { UIItem, UIItem_FactionRestriction } from '../../../proto/ui';
 import { ActionId } from '../../../proto_utils/action_id';
@@ -59,7 +59,7 @@ export default class BulkItemSearch extends ContentBlock {
 						{i18n.t('sim.bulk.search.name_label')}
 					</label>
 					<div className="input-group">
-						<input id="bulkGearSearch" className="form-control" type="text" placeholder={i18n.t('sim.bulk.search.placeholder')} ref={searchInputRef} />
+						<input id="bulkGearSearch" className="form-control" type="text" placeholder={i18n.t('common.search')} ref={searchInputRef} />
 						<button className="btn btn-link cancel-bulk-gear-search-btn hide" ref={cancelSearchElemRef} type="button">
 							<i className="fas fa-times" />
 						</button>

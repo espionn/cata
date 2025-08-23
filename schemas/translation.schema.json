@@ -69,6 +69,15 @@
                 "custom": {
                     "type": "string"
                 },
+                "name": {
+                    "type": "string"
+                },
+                "search": {
+                    "type": "string"
+                },
+                "filter": {
+                    "type": "string"
+                },
                 "phases": {
                     "type": "object",
                     "additionalProperties": {

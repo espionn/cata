@@ -23,6 +23,9 @@
 	"common": {
 		"none": "Aucun",
 		"custom": "Personnalisé",
+		"name": "Nom",
+		"search": "Rechercher",
+		"filter": "Filtrer",
 		"phases": {
 			"1": "Phase 1 (5.0 - T14)",
 			"2": "Phase 2 (5.1)",

@@ -3,9 +3,9 @@ import debounce from 'lodash/debounce';
 import { ref } from 'tsx-vanilla';
 
 import { SimLog } from '../../proto_utils/logs_parser';
+import i18n from '../../../i18n/config';
 import { TypedEvent } from '../../typed_event.js';
 import { fragmentToString } from '../../utils';
-import i18n from '../../../i18n/config';
 import { BooleanPicker } from '../pickers/boolean_picker.js';
 import { ResultComponent, ResultComponentConfig, SimResultData } from './result_component.js';
 export class LogRunner extends ResultComponent {
@@ -39,7 +39,7 @@ export class LogRunner extends ResultComponent {
 		this.rootElem.appendChild(
 			<>
 				<div ref={actionsRef} className="log-runner-actions">
-					<input ref={searchRef} type="text" className="form-control log-search-input" placeholder={i18n.t('results.details.logs.filter_placeholder')} />
+					<input ref={searchRef} type="text" className="form-control log-search-input" placeholder={i18n.t('common.filter')} />
 					<button ref={buttonToTopRef} className="btn btn-primary order-last log-runner-scroll-to-top-btn">
 						{i18n.t('results.details.logs.top_button')}
 					</button>

@@ -141,7 +141,7 @@ export default class ItemList<T extends ItemListType> {
 		this.tabContent = (
 			<div id={this.id} className={`selector-modal-tab-pane tab-pane fade ${selected ? 'active show' : ''}`}>
 				<div className="selector-modal-filters">
-					<input ref={searchRef} className="selector-modal-search form-control" type="text" placeholder={i18n.t('gear.gear_picker.search_placeholder')} />
+					<input ref={searchRef} className="selector-modal-search form-control" type="text" placeholder={i18n.t('common.search')} />
 					{label === SelectorModalTabs.Items && (
 						<button ref={filtersButtonRef} className="selector-modal-filters-button btn btn-primary">
 							{i18n.t('gear.gear_picker.filters_button')}
