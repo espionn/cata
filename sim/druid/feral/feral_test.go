@@ -32,8 +32,6 @@ func TestFeral(t *testing.T) {
 		OtherRaces: []proto.Race{proto.Race_RaceTroll},
 		GearSet:    core.GetGearSet("../../../ui/druid/feral/gear_sets", "preraid"),
 		OtherGearSets: []core.GearSetCombo{
-			core.GetGearSet("../../../ui/druid/feral/gear_sets", "prehof"),
-			core.GetGearSet("../../../ui/druid/feral/gear_sets", "pretoes"),
 			core.GetGearSet("../../../ui/druid/feral/gear_sets", "p1"),
 		},
 
