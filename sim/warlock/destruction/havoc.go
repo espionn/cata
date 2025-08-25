@@ -10,8 +10,6 @@ import (
 
 func (destruction *DestructionWarlock) spellMatches(aura *core.Aura, sim *core.Simulation, spell *core.Spell, target *core.Unit) {
 	if !destruction.HavocAuras.Get(target).IsActive() { //If the target of the calling spell does NOT have the HavocDebuff
-		//Check if spells cast are on a target that does NOT have the Havoc Debuff
-
 		//How many stacks are meant to be removed
 		var stacks int32
 		var spellMatched = false
@@ -48,9 +46,6 @@ func (destruction *DestructionWarlock) registerHavoc() {
 		Label:    "Havoc",
 		ActionID: core.ActionID{SpellID: 80240},
 		Duration: time.Second * 15,
-		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			destruction.HavocAuras.Get(aura.Unit).Activate(sim)
-		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			destruction.HavocAuras.Get(aura.Unit).Deactivate(sim)
 		},
@@ -60,8 +55,7 @@ func (destruction *DestructionWarlock) registerHavoc() {
 		return target.RegisterAura(havocDebuffAura)
 	})
 
-	var havocCharges int32
-	havocCharges = 3
+	var havocCharges int32 = 3
 	var cooldown = 25
 	if destruction.HasMajorGlyph(proto.WarlockMajorGlyph_GlyphOfHavoc) {
 		havocCharges = 6
@@ -83,15 +77,8 @@ func (destruction *DestructionWarlock) registerHavoc() {
 			destruction.spellMatches(aura, sim, spell, target)
 
 			if aura.GetStacks() == 0 {
-				destruction.HavocChargesAura.Deactivate(sim)
 				aura.Deactivate(sim)
-				for _, havocAura := range destruction.HavocAuras.ToMap() {
-					for _, targetAura := range havocAura {
-						if targetAura.IsActive() {
-							targetAura.Deactivate(sim)
-						}
-					}
-				}
+				destruction.HavocAuras.DeactivateAll(sim)
 			}
 		},
 
