@@ -36,8 +36,11 @@ func (destruction *DestructionWarlock) registerConflagrate() {
 				destruction.FABAura.Deactivate(sim)
 			}
 
-			// keep charges in sync
-			destruction.FABConflagrate.ConsumeCharge(sim)
+			// keep charges in sync ONLY if not a Havoc Duplicate
+			if !spell.Flags.Matches(SpellFlagDestructionHavoc) {
+				destruction.FABConflagrate.ConsumeCharge(sim)
+			}
+
 			baseDamage := destruction.CalcAndRollDamageRange(sim, conflagrateScale, conflagrateVariance)
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
 			var emberGain int32 = 1

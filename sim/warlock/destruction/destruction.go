@@ -23,6 +23,8 @@ func RegisterDestructionWarlock() {
 	)
 }
 
+const SpellFlagDestructionHavoc = core.SpellFlagAgentReserved1
+
 const DefaultBurningEmbers = 10
 
 func NewDestructionWarlock(character *core.Character, options *proto.Player) *DestructionWarlock {
@@ -43,11 +45,14 @@ func NewDestructionWarlock(character *core.Character, options *proto.Player) *De
 type DestructionWarlock struct {
 	*warlock.Warlock
 
-	Conflagrate    *core.Spell
-	BurningEmbers  core.SecondaryResourceBar
-	FABAura        *core.Aura
-	FABImmolate    *core.Spell
-	FABConflagrate *core.Spell
+	Conflagrate      *core.Spell
+	BurningEmbers    core.SecondaryResourceBar
+	FABAura          *core.Aura
+	FABImmolate      *core.Spell
+	FABConflagrate   *core.Spell
+	Havoc            *core.Spell
+	HavocChargesAura *core.Aura
+	HavocAuras       core.AuraArray
 }
 
 func (destruction DestructionWarlock) getGeneratorMasteryBonus() float64 {
@@ -77,6 +82,7 @@ func (destruction *DestructionWarlock) Initialize() {
 	destruction.registerShadowBurnSpell()
 	destruction.registerRainOfFire()
 	destruction.registerFireAndBrimstone()
+	destruction.registerHavoc()
 	destruction.RegisterDrainLife(nil) // no extra callback needed
 }
 
