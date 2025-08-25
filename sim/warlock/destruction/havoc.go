@@ -12,32 +12,30 @@ func (destruction *DestructionWarlock) spellMatches(aura *core.Aura, sim *core.S
 	if !destruction.HavocAuras.Get(target).IsActive() { //If the target of the calling spell does NOT have the HavocDebuff
 		//How many stacks are meant to be removed
 		var stacks int32
-		var spellMatched = false
 		if spell.Matches(warlock.WarlockSpellFelFlame | warlock.WarlockSpellImmolate | warlock.WarlockSpellIncinerate |
 			warlock.WarlockSpellShadowBurn | warlock.WarlockSpellConflagrate) {
 			stacks = 1
-			spellMatched = true
 		} else if spell.Matches(warlock.WarlockSpellChaosBolt) {
 			stacks = 3
-			spellMatched = true
+		} else {
+			return
 		}
 
-		if spellMatched {
-			for _, havocAuras := range destruction.HavocAuras.ToMap() {
-				for _, havocAura := range havocAuras {
-					if havocAura != nil {
-						if havocAura.IsActive() {
-							aura.RemoveStacks(sim, stacks)
-							//AddHavocFlag
-							spell.Flags |= SpellFlagDestructionHavoc
-							spell.Proc(sim, havocAura.Unit)
-							//RemoveHavocFlag
-							spell.Flags &^= SpellFlagDestructionHavoc
-						}
+		for _, havocAuras := range destruction.HavocAuras.ToMap() {
+			for _, havocAura := range havocAuras {
+				if havocAura != nil {
+					if havocAura.IsActive() {
+						aura.RemoveStacks(sim, stacks)
+						//AddHavocFlag
+						spell.Flags |= SpellFlagDestructionHavoc
+						spell.Proc(sim, havocAura.Unit)
+						//RemoveHavocFlag
+						spell.Flags &^= SpellFlagDestructionHavoc
 					}
 				}
 			}
 		}
+
 	}
 }
 
@@ -46,9 +44,6 @@ func (destruction *DestructionWarlock) registerHavoc() {
 		Label:    "Havoc",
 		ActionID: core.ActionID{SpellID: 80240},
 		Duration: time.Second * 15,
-		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			destruction.HavocAuras.Get(aura.Unit).Deactivate(sim)
-		},
 	}
 
 	destruction.HavocAuras = destruction.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
