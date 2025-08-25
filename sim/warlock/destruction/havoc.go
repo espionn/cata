@@ -20,7 +20,6 @@ func (destruction *DestructionWarlock) spellMatches(aura *core.Aura, sim *core.S
 			stacks = 1
 			spellMatched = true
 		} else if spell.Matches(warlock.WarlockSpellChaosBolt) {
-			//Chaos bolt uses burningembers, need to gain what was spent on first cast.
 			stacks = 3
 			spellMatched = true
 		}
@@ -31,8 +30,6 @@ func (destruction *DestructionWarlock) spellMatches(aura *core.Aura, sim *core.S
 					if havocAura != nil {
 						if havocAura.IsActive() {
 							aura.RemoveStacks(sim, stacks)
-							//THIS IS WHERE I NEED TO CAST AT havocAura
-							sim.Log("CASTING SPELL ON HAVOC TARGET")
 							//AddHavocFlag
 							spell.Flags |= SpellFlagDestructionHavoc
 							spell.Proc(sim, havocAura.Unit)
