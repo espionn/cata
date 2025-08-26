@@ -14,7 +14,7 @@ import * as WarlockInputs from '../inputs';
 import * as Presets from './presets';
 
 const relevantDotBreakpoints = [
-	Presets.AFFLICTION_BREAKPOINTS.presets.get('8-tick - Unstable Affliction')!,
+	// Presets.AFFLICTION_BREAKPOINTS.presets.get('8-tick - Unstable Affliction')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('5-tick - Doom')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('14-tick - Agony')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('11-tick - Corruption')!,

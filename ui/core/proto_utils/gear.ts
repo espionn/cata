@@ -1,13 +1,13 @@
-import { EquipmentSpec, GemColor, HandType, ItemSlot, ItemSpec, ItemSwap, Profession } from '../proto/common.js';
+import { EquipmentSpec, GemColor, HandType, ItemSlot, ItemSpec, Profession } from '../proto/common';
 import { ItemEffectRandPropPoints, SimDatabase, SimEnchant, SimGem, SimItem } from '../proto/db';
-import { UIEnchant as Enchant, UIGem as Gem, UIItem as Item } from '../proto/ui.js';
-import { isBluntWeaponType, isSharpWeaponType } from '../proto_utils/utils.js';
-import { distinct, equalsOrBothNull, getEnumValues } from '../utils.js';
+import { UIEnchant as Enchant, UIGem as Gem, UIItem as Item } from '../proto/ui';
+import { isBluntWeaponType, isSharpWeaponType } from '../proto_utils/utils';
+import { distinct, equalsOrBothNull, getEnumValues, sum } from '../utils';
 import { Database } from './database';
-import { EquippedItem, ReforgeData } from './equipped_item.js';
-import { gemMatchesSocket, isMetaGemActive } from './gems.js';
-import { Stats } from './stats.js';
-import { validWeaponCombo } from './utils.js';
+import { EquippedItem, ReforgeData } from './equipped_item';
+import { gemMatchesSocket, isMetaGemActive } from './gems';
+import { Stats } from './stats';
+import { validWeaponCombo } from './utils';
 
 type InternalGear = Record<ItemSlot, EquippedItem | null>;
 
@@ -417,6 +417,18 @@ export class Gear extends BaseGear {
 			reforgedItems.set(slot, reforgeData);
 		});
 		return reforgedItems;
+	}
+
+	getAverageItemLevel(canDualWield2H: boolean): number {
+		const items = this.getEquippedItems();
+		let itemSlotsToCount = this.getItemSlots().length;
+		let has2H = items?.[ItemSlot.ItemSlotMainHand]?.item?.handType === HandType.HandTypeTwoHand;
+
+		// If user cannot dual wield 2H, then only count the main hand item as there is no off hand
+		if (has2H && !canDualWield2H) itemSlotsToCount -= 1;
+
+		const totalIlvl = sum(items.filter((item): item is EquippedItem => item != null).map(item => item.ilvl));
+		return totalIlvl / itemSlotsToCount;
 	}
 }
 
