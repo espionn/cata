@@ -31,9 +31,12 @@ func TestFeral(t *testing.T) {
 		Race:       proto.Race_RaceWorgen,
 		OtherRaces: []proto.Race{proto.Race_RaceTroll},
 		GearSet:    core.GetGearSet("../../../ui/druid/feral/gear_sets", "preraid"),
+		OtherGearSets: []core.GearSetCombo{
+			core.GetGearSet("../../../ui/druid/feral/gear_sets", "p1"),
+		},
 
-		Talents:         StandardTalents,
-		Glyphs:          StandardGlyphs,
+		Talents: StandardTalents,
+		Glyphs:  StandardGlyphs,
 		OtherTalentSets: []core.TalentsCombo{
 			{Label: "SotF-HotW", Talents: "000101", Glyphs: StandardGlyphs},
 			{Label: "Incarn-NV", Talents: "000203", Glyphs: StandardGlyphs},
@@ -142,8 +145,8 @@ var PlayerOptionsMonoCatNoBleed = &proto.Player_FeralDruid{
 // }
 
 var FullConsumesSpec = &proto.ConsumesSpec{
-	FlaskId:     76084, // Flask of Spring Blossoms
-	FoodId:      74648, // Sea Mist Rice Noodles
-	PotId:       76089, // Virmen's Bite
-	PrepotId:    76089, // Virmen's Bite
+	FlaskId:  76084, // Flask of Spring Blossoms
+	FoodId:   74648, // Sea Mist Rice Noodles
+	PotId:    76089, // Virmen's Bite
+	PrepotId: 76089, // Virmen's Bite
 }
