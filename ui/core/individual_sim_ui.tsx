@@ -291,13 +291,13 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 			updateOn: this.player.talentsChangeEmitter,
 			getContent: () => {
 				const talentPoints = getTalentPoints(this.player.getTalentsString());
-				const requiredRows = getRequiredTalentRows(this.player.getSpec());
+				const requiredRows = getRequiredTalentRows(this.player.getSpecConfig());
 
 				// Only skip warning during initial load if there are no required talents
 				if (talentPoints == 0 && requiredRows.length == 0) {
 					return '';
-				} else if (!hasRequiredTalents(this.player.getSpec(), this.player.getTalentsString())) {
-					const missingRows = getMissingTalentRows(this.player.getSpec(), this.player.getTalentsString());
+				} else if (!hasRequiredTalents(this.player.getSpecConfig(), this.player.getTalentsString())) {
+					const missingRows = getMissingTalentRows(this.player.getSpecConfig(), this.player.getTalentsString());
 					const missingRowNumbers = missingRows.map(row => row + 1).join(', ');
 					return `Missing required talent selections in row ${missingRowNumbers}.`;
 				} else {
