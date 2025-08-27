@@ -43,10 +43,10 @@ func (arcane *ArcaneMage) registerArcaneMissilesSpell() {
 		ThreatMultiplier: 1,
 		BonusCoefficient: arcaneMissilesCoefficient,
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := arcane.CalcAndRollDamageRange(sim, arcaneMissilesScaling, 0)
+			baseDamage := arcane.CalcScalingSpellDmg(arcaneMissilesScaling)
 			result := spell.CalcDamage(sim, target, baseDamage, arcane.OutcomeArcaneMissiles)
 			spell.WaitTravelTime(sim, func(sim *core.Simulation) {
-				spell.DealPeriodicDamage(sim, result)
+				spell.DealDamage(sim, result)
 			})
 			spell.SpellMetrics[result.Target.UnitIndex].Casts--
 		},
@@ -95,7 +95,7 @@ func (arcane *ArcaneMage) registerArcaneMissilesSpell() {
 			if arcane.arcaneMissilesProcAura.IsActive() {
 				arcane.arcaneMissilesProcAura.RemoveStack(sim)
 			}
-			result := spell.CalcOutcome(sim, target, spell.OutcomeMagicHitNoHitCounter)
+			result := spell.CalcAndDealOutcome(sim, target, spell.OutcomeMagicHit)
 			if result.Landed() {
 				// Snapshot crit chance
 				arcane.arcaneMissileCritSnapshot = arcane.arcaneMissilesTickSpell.SpellCritChance(target)
@@ -118,7 +118,7 @@ func (arcane *ArcaneMage) registerArcaneMissilesSpell() {
 	core.MakeProcTriggerAura(&arcane.Unit, core.ProcTrigger{
 		Name:              "Arcane Missiles Activation",
 		ActionID:          core.ActionID{SpellID: 79684},
-		ClassSpellMask:    mage.MageSpellsAll ^ (mage.MageSpellArcaneMissilesTick | mage.MageSpellNetherTempestDot | mage.MageSpellLivingBombDot),
+		ClassSpellMask:    mage.MageSpellsAll ^ (mage.MageSpellArcaneMissilesCast | mage.MageSpellArcaneMissilesTick | mage.MageSpellNetherTempestDot | mage.MageSpellLivingBombDot),
 		SpellFlagsExclude: core.SpellFlagHelpful,
 		ProcChance:        0.3,
 		Callback:          core.CallbackOnSpellHitDealt,
