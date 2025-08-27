@@ -350,6 +350,7 @@ func (war *Warrior) registerBloodbath() {
 			Callback: core.CallbackOnSpellHitDealt,
 			ProcMask: core.ProcMaskMeleeSpecial,
 			Outcome:  core.OutcomeLanded,
+			Harmful:  true,
 		},
 
 		DamageCalculator: func(result *core.SpellResult) float64 {

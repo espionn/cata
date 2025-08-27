@@ -136,7 +136,7 @@ func LoadAndWriteRawItems(dbHelper *DBHelper, filter string, inputsDir string) (
 		LEFT JOIN ItemArmorShield ias ON s.ItemLevel = ias.ItemLevel
 		LEFT JOIN ItemSet itemset ON s.ItemSet = itemset.ID
 		LEFT JOIN ItemArmorQuality iaq ON s.ItemLevel = iaq.ID
-		LEFT JOIN ItemNameDescription as ind ON i.ID = ind.Field_5_5_0_61000_002
+		LEFT JOIN ItemNameDescription as ind ON s.ItemNameDescriptionID = ind.ID
 		JOIN ItemArmorTotal at ON s.ItemLevel = at.ItemLevel
 		`
 

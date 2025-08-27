@@ -41,6 +41,7 @@ func (druid *Druid) registerFrenziedRegenerationSpell() {
 		DamageMultiplier: 1,
 		CritMultiplier:   druid.DefaultCritMultiplier(),
 		ThreatMultiplier: 1,
+		ClassSpellMask:   DruidSpellFrenziedRegeneration,
 
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
