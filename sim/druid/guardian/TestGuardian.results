@@ -900,7 +900,7 @@ dps_results: {
   dps: 1.62275961419e+06
   tps: 1.13595593442e+07
   dtps: 256364.54314
-  hps: 244697.09613
+  hps: 244708.44871
  }
 }
 dps_results: {
@@ -1016,8 +1016,8 @@ dps_results: {
  value: {
   dps: 1.53669061483e+06
   tps: 1.075706643855e+07
-  dtps: 261570.95666
-  hps: 250632.46805
+  dtps: 261602.24991
+  hps: 250643.82062
  }
 }
 dps_results: {
@@ -2094,27 +2094,27 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-RegaliaoftheEternalBlossom"
  value: {
-  dps: 1.07970411522e+06
-  tps: 7.55810029562e+06
-  dtps: 332358.11489
-  hps: 293310.7624
+  dps: 1.07654639816e+06
+  tps: 7.5359973236e+06
+  dtps: 334733.20576
+  hps: 300999.97142
  }
 }
 dps_results: {
  key: "TestGuardian-AllItems-RegaliaoftheHauntedForest"
  value: {
-  dps: 1.12255113091e+06
-  tps: 7.85805392185e+06
-  dtps: 307427.05834
-  hps: 300578.49104
+  dps: 1.12275290624e+06
+  tps: 7.85946665113e+06
+  dtps: 308364.30699
+  hps: 300286.55955
  }
 }
 dps_results: {
  key: "TestGuardian-AllItems-RegaliaoftheShatteredVale"
  value: {
-  dps: 1.16183514296e+06
-  tps: 8.13305015063e+06
-  dtps: 284712.67669
+  dps: 1.16184351771e+06
+  tps: 8.13310877388e+06
+  dtps: 284677.29298
   hps: 263620.88223
  }
 }
@@ -2952,7 +2952,7 @@ dps_results: {
   dps: 1.29919935101e+06
   tps: 9.0946177323e+06
   dtps: 267486.38583
-  hps: 251330.05513
+  hps: 251341.40771
  }
 }
 dps_results: {
@@ -3003,10 +3003,10 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-Settings-Worgen-empress_default-empress_default-empress_default-FullBuffs-0.0yards-LongSingleTarget"
  value: {
-  dps: 122804.88031
-  tps: 850371.49469
-  dtps: 65343.61723
-  hps: 54532.49337
+  dps: 122830.26912
+  tps: 850549.27886
+  dtps: 65321.76558
+  hps: 54596.31105
  }
 }
 dps_results: {
@@ -3021,10 +3021,10 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-Settings-Worgen-empress_default-empress_default-empress_default-NoBuffs-0.0yards-LongMultiTarget"
  value: {
-  dps: 2.63573551722e+06
-  tps: 1.845074125144e+07
-  dtps: 1.59352621319e+06
-  hps: 288162.69975
+  dps: 2.63513785183e+06
+  tps: 1.844655727775e+07
+  dtps: 1.59245881458e+06
+  hps: 287976.07137
  }
 }
 dps_results: {
