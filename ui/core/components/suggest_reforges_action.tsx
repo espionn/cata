@@ -31,6 +31,7 @@ type YalpsConstraints = Map<string, Constraint>;
 
 type GemData = {
 	gem: Gem;
+	isJC: boolean;
 	coefficients: YalpsCoefficients;
 };
 
@@ -1125,7 +1126,9 @@ export class ReforgeOptimizer {
 							for (const [stat, value] of distributedSocketBonus.entries()) {
 								this.applyReforgeStat(coefficients, stat, value, preCapEPs);
 							}
-						} else if (gemData.gem.requiredProfession > Profession.ProfessionUnknown) {
+						}
+						// Performance optimisation to force socket bonus matching for Jewelcrafting gems.
+						else if (gemData.isJC) {
 							continue;
 						}
 
@@ -1135,7 +1138,7 @@ export class ReforgeOptimizer {
 						if (gemColorKey == GemColor.GemColorShaTouched) {
 							coefficients.set('ShaTouchedGem', 1);
 						}
-						if (gemData.gem.requiredProfession == Profession.Jewelcrafting) {
+						if (gemData.isJC) {
 							coefficients.set('JewelcraftingGem', 1);
 						}
 
@@ -1155,6 +1158,7 @@ export class ReforgeOptimizer {
 			return gemsToInclude;
 		}
 
+		const hasJC = this.player.hasProfession(Profession.Jewelcrafting);
 		const epStats = this.simUI.individualConfig.epStats;
 
 		for (const socketColor of [
@@ -1169,12 +1173,12 @@ export class ReforgeOptimizer {
 			const filteredGemDataForColor = new Array<GemData>();
 
 			for (const gem of allGemsOfColor) {
+				const isJC = gem.requiredProfession == Profession.Jewelcrafting;
 				if (
-					(gem.requiredProfession == Profession.Jewelcrafting && !this.player.hasProfession(Profession.Jewelcrafting)) ||
-					// We check explicitly for tank specs OR non-tanks and primary stats to reduce the number of combinations
-					// this is fine for now as primary stat budgets relatively are higher
-					(gem.requiredProfession == Profession.Jewelcrafting &&
-						(this.player.getPlayerSpec().isTankSpec || !gemMatchesStats(gem, [Stat.StatStrength, Stat.StatAgility, Stat.StatIntellect]))) ||
+					(isJC && !hasJC) ||
+					// Force non-tank specs to use exclusively primary stat JC gems to speed up calculations.
+					// May need to revisit this approximation at higher ilvls.
+					(isJC && !this.isTankSpec && !gemMatchesStats(gem, [Stat.StatStrength, Stat.StatAgility, Stat.StatIntellect])) ||
 					gem.name.includes('Perfect') ||
 					!gemMatchesSocket(gem, socketColor)
 				) {
@@ -1205,7 +1209,8 @@ export class ReforgeOptimizer {
 				const gemVariableMap = new Map<string, YalpsCoefficients>([['temp', coefficients]]);
 				const scoredGemVariableMap = this.updateReforgeScores(gemVariableMap, preCapEPs);
 				filteredGemDataForColor.push({
-					gem: gem,
+					gem,
+					isJC,
 					coefficients: scoredGemVariableMap.get('temp')!,
 				});
 			}
@@ -1218,12 +1223,12 @@ export class ReforgeOptimizer {
 			let foundUncappedJCGem = false;
 
 			for (const gemData of filteredGemDataForColor) {
-				if (gemData.gem.requiredProfession == Profession.ProfessionUnknown || !foundUncappedJCGem) {
+				if (gemData.isJC || !foundUncappedJCGem) {
 					includedGemDataForColor.push(gemData);
 				}
 
 				if (!ReforgeOptimizer.includesCappedStat(gemData.coefficients, reforgeCaps, reforgeSoftCaps) && socketColor != GemColor.GemColorCogwheel) {
-					if (gemData.gem.requiredProfession > Profession.ProfessionUnknown) {
+					if (gemData.isJC) {
 						foundUncappedJCGem = true;
 					} else {
 						break;
