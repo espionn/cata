@@ -99,7 +99,6 @@ func (warrior *Warrior) registerDeepWounds() {
 				baseDamage += deepWoundsBonusCoeff * spell.MeleeAttackPower()
 				return spell.CalcPeriodicDamage(sim, target, baseDamage, spell.OutcomeExpectedPhysicalCrit)
 			}
-
 		},
 	})
 
