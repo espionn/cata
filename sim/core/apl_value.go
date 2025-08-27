@@ -210,21 +210,15 @@ func (rot *APLRotation) newAPLValue(config *proto.APLValue) APLValue {
 		value = rot.newValueAuraIsActive(config.GetAuraIsActive(), config.Uuid)
 	// TODO: Deprecated - Remove in the future
 	case *proto.APLValue_AuraIsActiveWithReactionTime:
-		inputConfig := config.GetAuraIsActive()
-		if inputConfig == nil {
-			inputConfig = config.GetAuraIsActiveWithReactionTime()
-			inputConfig.IncludeReactionTime = true
-		}
+		inputConfig := config.GetAuraIsActiveWithReactionTime()
+		inputConfig.IncludeReactionTime = true
 		value = rot.newValueAuraIsActive(inputConfig, config.Uuid)
 	case *proto.APLValue_AuraIsInactive:
 		value = rot.newValueAuraIsInactive(config.GetAuraIsInactive(), config.Uuid)
 	// TODO: Deprecated - Remove in the future
 	case *proto.APLValue_AuraIsInactiveWithReactionTime:
-		inputConfig := config.GetAuraIsInactive()
-		if inputConfig == nil {
-			inputConfig = config.GetAuraIsInactiveWithReactionTime()
-			inputConfig.IncludeReactionTime = true
-		}
+		inputConfig := config.GetAuraIsInactiveWithReactionTime()
+		inputConfig.IncludeReactionTime = true
 		value = rot.newValueAuraIsInactive(inputConfig, config.Uuid)
 	case *proto.APLValue_AuraRemainingTime:
 		value = rot.newValueAuraRemainingTime(config.GetAuraRemainingTime(), config.Uuid)
@@ -236,11 +230,8 @@ func (rot *APLRotation) newAPLValue(config *proto.APLValue) APLValue {
 		value = rot.newValueAuraICDIsReady(config.GetAuraIcdIsReady(), config.Uuid)
 	// TODO: Deprecated - Remove in the future
 	case *proto.APLValue_AuraIcdIsReadyWithReactionTime:
-		inputConfig := config.GetAuraIcdIsReady()
-		if inputConfig == nil {
-			inputConfig = config.GetAuraIcdIsReadyWithReactionTime()
-			inputConfig.IncludeReactionTime = true
-		}
+		inputConfig := config.GetAuraIcdIsReadyWithReactionTime()
+		inputConfig.IncludeReactionTime = true
 		value = rot.newValueAuraICDIsReady(inputConfig, config.Uuid)
 	case *proto.APLValue_AuraShouldRefresh:
 		value = rot.newValueAuraShouldRefresh(config.GetAuraShouldRefresh(), config.Uuid)

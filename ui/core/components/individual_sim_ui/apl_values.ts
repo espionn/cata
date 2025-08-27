@@ -1127,14 +1127,13 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 	auraIsActive: inputBuilder({
 		label: 'Aura Active',
 		submenu: ['Aura'],
-		shortDescription: '<b>True</b> if the aura is currently active, otherwise <b>False</b>.',
+		shortDescription:
+			'<b>True</b> if the aura is currently active AND it has been active for at least as long as the player reaction time (configured in Settings), otherwise <b>False</b>.',
 		newValue: () => APLValueAuraIsActive.create({ includeReactionTime: true }),
 		fields: [
 			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
 			AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit'),
-			AplHelpers.booleanFieldConfig('includeReactionTime', 'Include Reaction Time', {
-				labelTooltip: 'If checked, will use the configured reaction time.',
-			}),
+			AplHelpers.reactionTimeCheckbox(),
 		],
 	}),
 	auraIsActiveWithReactionTime: inputBuilder({
@@ -1153,9 +1152,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [
 			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
 			AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit'),
-			AplHelpers.booleanFieldConfig('includeReactionTime', 'Include Reaction Time', {
-				labelTooltip: 'If checked, will use the configured reaction time.',
-			}),
+			AplHelpers.reactionTimeCheckbox(),
 		],
 	}),
 	auraIsInactiveWithReactionTime: inputBuilder({
@@ -1169,7 +1166,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		label: 'Aura Remaining Time',
 		submenu: ['Aura'],
 		shortDescription: 'Time remaining before this aura will expire, or 0 if the aura is not currently active.',
-		newValue: () => APLValueAuraRemainingTime.create({ includeReactionTime: true }),
+		newValue: APLValueAuraRemainingTime.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
 	}),
 	auraNumStacks: inputBuilder({
@@ -1180,9 +1177,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [
 			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
 			AplHelpers.actionIdFieldConfig('auraId', 'stackable_auras', 'sourceUnit'),
-			AplHelpers.booleanFieldConfig('includeReactionTime', 'Include Reaction Time', {
-				labelTooltip: 'If checked, will use the configured reaction time.',
-			}),
+			AplHelpers.reactionTimeCheckbox(),
 		],
 	}),
 	auraInternalCooldown: inputBuilder({
@@ -1201,9 +1196,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [
 			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
 			AplHelpers.actionIdFieldConfig('auraId', 'icd_auras', 'sourceUnit'),
-			AplHelpers.booleanFieldConfig('includeReactionTime', 'Include Reaction Time', {
-				labelTooltip: 'If checked, will use the configured reaction time.',
-			}),
+			AplHelpers.reactionTimeCheckbox(),
 		],
 	}),
 	auraIcdIsReadyWithReactionTime: inputBuilder({

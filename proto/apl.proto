@@ -625,7 +625,6 @@ message APLValueAuraIsInactive {
 message APLValueAuraRemainingTime {
     UnitReference source_unit = 2;
     ActionID aura_id = 1;
-	bool include_reaction_time = 3;
 }
 message APLValueAuraNumStacks {
     UnitReference source_unit = 2;
