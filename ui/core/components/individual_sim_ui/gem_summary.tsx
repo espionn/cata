@@ -22,6 +22,8 @@ export class GemSummary extends Component {
 
 	constructor(parent: HTMLElement, simUI: SimUI, player: Player<any>) {
 		super(parent, 'summary-table-root');
+		this.rootElem.classList.add('hide');
+
 		this.simUI = simUI;
 		this.player = player;
 
@@ -88,7 +90,7 @@ export class GemSummary extends Component {
 				<button
 					className="btn btn-sm btn-link btn-reset summary-table-reset-button"
 					onclick={() => {
-						this.player.setGear(TypedEvent.nextEventID(), this.player.getGear().withoutGems());
+						this.player.setGear(TypedEvent.nextEventID(), this.player.getGear().withoutGems(this.player.canDualWield2H()));
 					}}>
 					<i className="fas fa-times me-1"></i>
 					Reset gems

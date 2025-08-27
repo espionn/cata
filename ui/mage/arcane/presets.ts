@@ -16,7 +16,6 @@ import P1BISGear from './gear_sets/p1_bis.gear.json';
 // Eventually we will import these values for the raid sim too, so its good to
 // keep them in a separate file.
 export const P1_PREBIS = PresetUtils.makePresetGear('P1 - Pre-BIS', P1PreBISGear);
-export const P1_PREBIS_REALISTIC = PresetUtils.makePresetGear('P1 - Pre-BIS (Realistic)', P1PreBISRealisticGear);
 export const P1_POST_MSV = PresetUtils.makePresetGear('P1 - Post-MSV', P1PostMSVGear);
 export const P1_POST_HOF = PresetUtils.makePresetGear('P1 - Post-HoF', P1PostHOFGear);
 export const P1_BIS = PresetUtils.makePresetGear('P1 - BIS', P1BISGear);
@@ -31,9 +30,9 @@ export const P1_EP_PRESET = PresetUtils.makePresetEpWeights(
 		[Stat.StatIntellect]: 1.24,
 		[Stat.StatSpellPower]: 1,
 		[Stat.StatHitRating]: 1.31,
-		[Stat.StatCritRating]: 0.53,
-		[Stat.StatHasteRating]: 0.7,
-		[Stat.StatMasteryRating]: 0.68,
+		[Stat.StatCritRating]: 0.52,
+		[Stat.StatHasteRating]: 0.6,
+		[Stat.StatMasteryRating]: 0.62,
 	}),
 );
 

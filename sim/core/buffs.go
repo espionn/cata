@@ -1058,6 +1058,10 @@ func RallyingCryAuraArray(unit *Unit, actionTag int32) AuraArray {
 	actionID := RallyingCryActionID.WithTag(actionTag)
 
 	return unit.NewAllyAuraArray(func(allyUnit *Unit) *Aura {
+		if !allyUnit.HasHealthBar() {
+			return nil
+		}
+
 		healthMetrics := allyUnit.NewHealthMetrics(actionID)
 		var bonusHealth float64
 		return allyUnit.GetOrRegisterAura(Aura{
@@ -1144,16 +1148,27 @@ func registerSkullBannerCD(agent Agent, numSkullBanners int32) {
 }
 
 func SkullBannerAura(character *Character, actionTag int32) *Aura {
+	for _, pet := range character.Pets {
+		if !pet.IsGuardian() {
+			SkullBannerAura(&pet.Character, actionTag)
+		}
+	}
+
 	return character.GetOrRegisterAura(Aura{
 		Label:    "Skull Banner",
 		Tag:      SkullBannerAuraTag,
 		ActionID: SkullBannerActionID.WithTag(actionTag),
 		Duration: SkullBannerDuration,
 
-		OnGain: func(_ *Aura, sim *Simulation) {
+		OnGain: func(aura *Aura, sim *Simulation) {
 			character.PseudoStats.CritDamageMultiplier *= 1.2
+			for _, pet := range character.Pets {
+				if pet.IsEnabled() && !pet.IsGuardian() {
+					pet.GetAura(aura.Label).Activate(sim)
+				}
+			}
 		},
-		OnExpire: func(_ *Aura, sim *Simulation) {
+		OnExpire: func(aura *Aura, sim *Simulation) {
 			character.PseudoStats.CritDamageMultiplier /= 1.2
 		},
 	})
@@ -1253,7 +1268,7 @@ var StormLashSpellExceptions = map[int32]float64{
 	15407:  1.0, // Mind Flay
 	129197: 1.0, // Mind Flay - Insanity
 	120360: 1.0, // Barrage
-	1752:   0.5, //Sinister Strike
+	1752:   0.5, // Sinister Strike
 }
 
 // Source: https://www.wowhead.com/mop-classic/spell=120668/stormlash-totem#comments

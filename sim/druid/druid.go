@@ -21,6 +21,8 @@ type Druid struct {
 	BleedsActive      map[*core.Unit]int32
 	AssumeBleedActive bool
 	CannotShredTarget bool
+	RipBaseNumTicks   int32
+	RipMaxNumTicks    int32
 
 	MHAutoSpell *core.Spell
 
@@ -74,7 +76,7 @@ type Druid struct {
 	ProwlAura                *core.Aura
 	SurvivalInstinctsAura    *core.Aura
 
-	form         DruidForm
+	form DruidForm
 
 	// Guardian leather specialization is form-specific
 	GuardianLeatherSpecTracker *core.Aura
@@ -89,16 +91,19 @@ const (
 	DruidSpellAstralStorm
 	DruidSpellAstralCommunion
 	DruidSpellFerociousBite
+	DruidSpellFrenziedRegeneration
 	DruidSpellInnervate
 	DruidSpellLacerate
 	DruidSpellMangleBear
 	DruidSpellMangleCat
 	DruidSpellMaul
+	DruidSpellMightOfUrsoc
 	DruidSpellMoonfire
 	DruidSpellMoonfireDoT
 	DruidSpellRake
 	DruidSpellRavage
 	DruidSpellRip
+	DruidSpellSavageDefense
 	DruidSpellSavageRoar
 	DruidSpellShred
 	DruidSpellStarfall
@@ -297,7 +302,10 @@ func New(char *core.Character, form DruidForm, selfBuffs SelfBuffs, talents stri
 		form:              form,
 		ClassSpellScaling: core.GetClassSpellScalingCoefficient(proto.Class_ClassDruid),
 		BleedsActive:      make(map[*core.Unit]int32),
+		RipBaseNumTicks:   8,
 	}
+
+	druid.RipMaxNumTicks = druid.RipBaseNumTicks + 3
 
 	core.FillTalentsProto(druid.Talents.ProtoReflect(), talents)
 	druid.EnableManaBar()
