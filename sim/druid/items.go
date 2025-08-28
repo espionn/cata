@@ -1,6 +1,8 @@
 package druid
 
 import (
+	"time"
+
 	"github.com/wowsims/mop/sim/core"
 )
 
@@ -23,6 +25,83 @@ var ItemSetRegaliaOfTheEternalBloosom = core.NewItemSet(core.ItemSet{
 				Kind:      core.SpellMod_DotNumberOfTicks_Flat,
 				ClassMask: DruidSpellMoonfireDoT | DruidSpellSunfireDoT,
 				IntValue:  1,
+			})
+		},
+	},
+})
+
+// T14 Guardian
+var ItemSetArmorOfTheEternalBlossom = core.NewItemSet(core.ItemSet{
+	Name:                    "Armor of the Eternal Blossom",
+	DisabledInChallengeMode: true,
+	Bonuses: map[int32]core.ApplySetBonus{
+		2: func(_ core.Agent, setBonusAura *core.Aura) {
+			// Reduces the cooldown of your Might of Ursoc ability by 60 sec.
+			setBonusAura.AttachSpellMod(core.SpellModConfig{
+				Kind:      core.SpellMod_Cooldown_Flat,
+				ClassMask: DruidSpellMightOfUrsoc,
+				TimeValue: time.Second * -60,
+			}).ExposeToAPL(123086)
+		},
+		4: func(agent core.Agent, setBonusAura *core.Aura) {
+			druid := agent.(DruidAgent).GetDruid()
+			// Increases the dodge granted by your Savage Defense by an additional 5%.
+			druid.OnSpellRegistered(func(spell *core.Spell) {
+				if !spell.Matches(DruidSpellSavageDefense) {
+					return
+				}
+
+				hasDodgeBonus := false
+				spell.RelatedSelfBuff.ApplyOnGain(func(_ *core.Aura, sim *core.Simulation) {
+					if setBonusAura.IsActive() {
+						druid.PseudoStats.BaseDodgeChance += 0.05
+						hasDodgeBonus = true
+					}
+				}).ApplyOnExpire(func(_ *core.Aura, sim *core.Simulation) {
+					if hasDodgeBonus {
+						druid.PseudoStats.BaseDodgeChance -= 0.05
+						hasDodgeBonus = false
+					}
+				})
+			})
+
+			// Increases the healing received from your Frenzied Regeneration by 10%
+			setBonusAura.AttachSpellMod(core.SpellModConfig{
+				Kind:       core.SpellMod_DamageDone_Pct,
+				ClassMask:  DruidSpellFrenziedRegeneration,
+				FloatValue: 0.1,
+			})
+
+			setBonusAura.ExposeToAPL(123087)
+		},
+	},
+})
+
+// T14 Feral
+var ItemSetBattlegearOfTheEternalBlossom = core.NewItemSet(core.ItemSet{
+	Name:                    "Battlegear of the Eternal Blossom",
+	DisabledInChallengeMode: true,
+	Bonuses: map[int32]core.ApplySetBonus{
+		2: func(_ core.Agent, setBonusAura *core.Aura) {
+			// Your Shred and Mangle (Cat) abilities deal 5% additional damage.
+			setBonusAura.AttachSpellMod(core.SpellModConfig{
+				Kind:       core.SpellMod_DamageDone_Pct,
+				ClassMask:  DruidSpellMangleCat | DruidSpellShred,
+				FloatValue: 0.05,
+			})
+		},
+		4: func(agent core.Agent, setBonusAura *core.Aura) {
+			// Increases the duration of your Rip by 4 sec.
+			druid := agent.(DruidAgent).GetDruid()
+
+			setBonusAura.ApplyOnGain(func(_ *core.Aura, _ *core.Simulation) {
+				druid.RipBaseNumTicks += 2
+				druid.RipMaxNumTicks += 2
+			})
+
+			setBonusAura.ApplyOnExpire(func(_ *core.Aura, _ *core.Simulation) {
+				druid.RipBaseNumTicks -= 2
+				druid.RipMaxNumTicks -= 2
 			})
 		},
 	},

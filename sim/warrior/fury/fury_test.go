@@ -51,6 +51,7 @@ var ItemFilter = core.ItemFilter{
 		proto.WeaponType_WeaponTypeAxe,
 		proto.WeaponType_WeaponTypeSword,
 		proto.WeaponType_WeaponTypeMace,
+		proto.WeaponType_WeaponTypePolearm,
 		proto.WeaponType_WeaponTypeDagger,
 		proto.WeaponType_WeaponTypeFist,
 	},
