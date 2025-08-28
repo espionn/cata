@@ -1223,7 +1223,7 @@ export class ReforgeOptimizer {
 			let foundUncappedJCGem = false;
 
 			for (const gemData of filteredGemDataForColor) {
-				if (gemData.isJC || !foundUncappedJCGem) {
+				if (!gemData.isJC || !foundUncappedJCGem) {
 					includedGemDataForColor.push(gemData);
 				}
 
