@@ -18,6 +18,8 @@ import * as Presets from './presets';
 const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 	cssClass: 'feral-druid-sim-ui',
 	cssScheme: PlayerClasses.getCssClass(PlayerClasses.Druid),
+	// Override required talent rows - Feral only requires rows 3 and 5 instead of all rows
+	requiredTalentRows: [3, 5],
 	// List any known bugs / issues here and they'll be shown on the site.
 	knownIssues: [],
 	warnings: [],
