@@ -143,10 +143,11 @@ func (rot *APLRotation) newValueAuraNumStacks(config *proto.APLValueAuraNumStack
 		return nil
 	}
 	aura := rot.GetAPLAura(rot.GetSourceUnit(config.SourceUnit), config.AuraId)
-	if aura.Get() == nil {
+	resolvedAura := aura.Get()
+	if resolvedAura == nil {
 		return nil
 	}
-	if aura.Get().MaxStacks == 0 {
+	if resolvedAura.MaxStacks == 0 {
 		rot.ValidationMessageByUUID(uuid, proto.LogLevel_Warning, "%s is not a stackable aura", ProtoToActionID(config.AuraId))
 		return nil
 	}
@@ -157,10 +158,16 @@ func (rot *APLRotation) newValueAuraNumStacks(config *proto.APLValueAuraNumStack
 		includeReactionTime: config.IncludeReactionTime,
 	}
 
-	aura.Get().ApplyOnStacksChange(func(aura *Aura, sim *Simulation, oldStacks int32, newStacks int32) {
+	resolvedAura.ApplyOnStacksChange(func(aura *Aura, sim *Simulation, oldStacks int32, newStacks int32) {
+		if sim.CurrentTime-value.stackUpdateTime >= value.reactionTime {
+			value.previousStacks = oldStacks
+		}
 		value.stackUpdateTime = sim.CurrentTime
-		value.previousStacks = oldStacks
 		value.stacks = newStacks
+	}).ApplyOnReset(func(aura *Aura, sim *Simulation) {
+		value.stackUpdateTime = NeverExpires
+		value.previousStacks = aura.GetStacks()
+		value.stacks = aura.GetStacks()
 	})
 
 	return value

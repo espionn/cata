@@ -130,7 +130,6 @@ func (mage *Mage) registerSpells() {
 	mage.registerManaGems()
 	mage.registerMirrorImageCD()
 	mage.registerfrostNovaSpell()
-	mage.registerIceLanceSpell()
 	mage.registerIcyVeinsCD()
 	mage.registerHeatingUp()
 	mage.registerAlterTimeCD()
