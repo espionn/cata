@@ -72,6 +72,8 @@ type Druid struct {
 	LunarEclipseProcAura     *core.Aura
 	MightOfUrsocAura         *core.Aura
 	ProwlAura                *core.Aura
+	StampedeAura             *core.Aura
+	StampedePendingAura      *core.Aura
 	SurvivalInstinctsAura    *core.Aura
 
 	form DruidForm
