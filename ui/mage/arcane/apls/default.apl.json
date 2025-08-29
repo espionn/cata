@@ -1,10 +1,10 @@
 {
 	"type": "TypeAPL",
 	"prepullActions": [
-		{"action":{"castSpell":{"spellId":{"spellId":55342}}},"doAtValue":{"const":{"val":"-5s"}}},
-		{"action":{"castSpell":{"spellId":{"spellId":116011}}},"doAtValue":{"const":{"val":"-3.5s"}}},
-		{"action":{"castSpell":{"spellId":{"otherId":"OtherActionPotion"}}},"doAtValue":{"const":{"val":"-2s"}}},
-		{"action":{"castSpell":{"spellId":{"spellId":30451}}},"doAtValue":{"const":{"val":"-2s"}}}
+		{"action":{"castSpell":{"spellId":{"spellId":55342}}},"doAtValue":{"const":{"val":"-4.5s"}}},
+		{"action":{"castSpell":{"spellId":{"spellId":116011}}},"doAtValue":{"const":{"val":"-3s"}}},
+		{"action":{"castSpell":{"spellId":{"otherId":"OtherActionPotion"}}},"doAtValue":{"const":{"val":"-1.5s"}}},
+		{"action":{"castSpell":{"spellId":{"spellId":30451}}},"doAtValue":{"const":{"val":"-1.5s"}}}
 	],
 	"priorityList": [
 		{"action":{"condition":{"and":{"vals":[{"spellIsKnown":{"spellId":{"spellId":116011}}},{"or":{"vals":[{"auraIsInactive":{"auraId":{"spellId":116011},"includeReactionTime":true}},{"cmp":{"op":"OpLe","lhs":{"auraRemainingTime":{"auraId":{"spellId":116011}}},"rhs":{"spellCastTime":{"spellId":{"spellId":116011}}}}}]}}]}},"castSpell":{"spellId":{"spellId":116011}}}},
