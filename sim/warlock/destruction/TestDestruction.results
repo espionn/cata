@@ -2793,16 +2793,16 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Troll-p1-prebis-Destruction Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 228042.78326
-  tps: 190713.30851
+  dps: 228147.62749
+  tps: 191017.33626
   hps: 2292.05103
  }
 }
 dps_results: {
  key: "TestDestruction-Settings-Troll-p1-prebis-Destruction Warlock-default-FullBuffs-25.0yards-LongSingleTarget"
  value: {
-  dps: 99105.63066
-  tps: 73018.41714
+  dps: 99124.04241
+  tps: 73043.99626
   hps: 820.76689
  }
 }
@@ -2817,16 +2817,16 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Troll-p1-prebis-Destruction Warlock-default-NoBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 151165.3325
-  tps: 127247.24734
+  dps: 151170.59758
+  tps: 127260.6587
   hps: 2037.76407
  }
 }
 dps_results: {
  key: "TestDestruction-Settings-Troll-p1-prebis-Destruction Warlock-default-NoBuffs-25.0yards-LongSingleTarget"
  value: {
-  dps: 62739.69142
-  tps: 46193.58461
+  dps: 62729.51507
+  tps: 46201.57023
   hps: 729.67359
  }
 }

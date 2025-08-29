@@ -1628,4 +1628,8 @@ export class Player<SpecType extends Spec> {
 			return;
 		}
 	}
+
+	getSpecConfig(): IndividualSimUIConfig<SpecType> {
+		return this.specConfig;
+	}
 }
