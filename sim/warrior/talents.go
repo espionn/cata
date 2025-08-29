@@ -219,6 +219,9 @@ func (war *Warrior) registerBladestorm() {
 			IsAOE: true,
 			Aura: core.Aura{
 				Label: "Bladestorm",
+				OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+					war.ExtendGCDUntil(sim, sim.CurrentTime+war.ReactionTime)
+				},
 			},
 			NumberOfTicks: 6,
 			TickLength:    time.Second * 1,
