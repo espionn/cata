@@ -53,7 +53,7 @@ import {
 } from './proto/ui';
 import { ActionId } from './proto_utils/action_id';
 import { Database } from './proto_utils/database';
-import { EquippedItem, ReforgeData } from './proto_utils/equipped_item';
+import { EquippedItem, ReforgeData, isShaTouchedWeapon, isThroneOfThunderWeapon } from './proto_utils/equipped_item';
 import { Gear, ItemSwapGear } from './proto_utils/gear';
 import { gemMatchesSocket, isUnrestrictedGem } from './proto_utils/gems';
 import SecondaryResource from './proto_utils/secondary_resource';
@@ -260,8 +260,6 @@ export class Player<SpecType extends Spec> {
 	private healingModel: HealingModel = HealingModel.create();
 	private healingEnabled = false;
 	private challengeModeEnabled = false;
-	// Eye of the Black Prince socket
-	private eotbpSocketsEnabled = false;
 
 	private readonly autoRotationGenerator: AutoRotationGenerator<SpecType> | null = null;
 	private readonly simpleRotationGenerator: SimpleRotationGenerator<SpecType> | null = null;
@@ -307,7 +305,6 @@ export class Player<SpecType extends Spec> {
 	readonly breakpointLimitsChangeEmitter = new TypedEvent<void>('BreakpointLimits');
 	readonly miscOptionsChangeEmitter = new TypedEvent<void>('PlayerMiscOptions');
 	readonly challengeModeChangeEmitter = new TypedEvent<void>('ChallengeMode');
-	readonly eotbpSocketChangeEmitter = new TypedEvent<void>('EotbpSocket');
 
 	readonly currentStatsEmitter = new TypedEvent<void>('PlayerCurrentStats');
 	readonly epRatiosChangeEmitter = new TypedEvent<void>('PlayerEpRatios');
@@ -370,7 +367,6 @@ export class Player<SpecType extends Spec> {
 				this.statCapsChangeEmitter,
 				this.breakpointLimitsChangeEmitter,
 				this.challengeModeChangeEmitter,
-				this.eotbpSocketChangeEmitter,
 			],
 			'PlayerChange',
 		);
@@ -1032,18 +1028,6 @@ export class Player<SpecType extends Spec> {
 		this.challengeModeChangeEmitter.emit(eventID);
 	}
 
-	getEOTBPSocketsEnabled(): boolean {
-		return this.eotbpSocketsEnabled;
-	}
-
-	// Enables/Disables the Eye of the Black Prince sockets.
-	setEOTBPSocketsEnabled(eventID: EventID, value: boolean) {
-		if (value === this.eotbpSocketsEnabled) return;
-
-		this.eotbpSocketsEnabled = value;
-		this.eotbpSocketChangeEmitter.emit(eventID);
-	}
-
 	getInFrontOfTarget(): boolean {
 		return this.inFrontOfTarget;
 	}
@@ -1238,8 +1222,7 @@ export class Player<SpecType extends Spec> {
 
 	async setWowheadData(equippedItem: EquippedItem, elem: HTMLElement) {
 		const isBlacksmithing = this.hasProfession(Profession.Blacksmithing);
-		const hasEOTPBSocket = this.getEOTBPSocketsEnabled();
-		const gemIds = equippedItem.gems.length ? equippedItem.curGems(isBlacksmithing, hasEOTPBSocket).map(gem => (gem ? gem.id : 0)) : [];
+		const gemIds = equippedItem.gems.length ? equippedItem.curGems(isBlacksmithing).map(gem => (gem ? gem.id : 0)) : [];
 		const enchantIds = [equippedItem.enchant?.effectId, equippedItem.tinker?.effectId].filter((id): id is number => id !== undefined);
 		equippedItem.asActionId().setWowheadDataset(elem, {
 			gemIds,
@@ -1251,7 +1234,7 @@ export class Player<SpecType extends Spec> {
 				.asArray()
 				.filter(ei => ei != null)
 				.map(ei => ei!.item.id),
-			hasExtraSocket: equippedItem.hasExtraSocket(isBlacksmithing, hasEOTPBSocket),
+			hasExtraSocket: equippedItem.hasExtraSocket(isBlacksmithing),
 			upgradeStep: equippedItem.upgrade,
 		});
 
@@ -1313,6 +1296,13 @@ export class Player<SpecType extends Spec> {
 			if (!item) return false;
 			const armorType = item.armorType;
 			return armorType !== this.armorSpecializationArmorType;
+		});
+	}
+
+	hasEOTPBItemEquipped() {
+		return [ItemSlot.ItemSlotMainHand, ItemSlot.ItemSlotOffHand].some(itemSlot => {
+			const item = this.getEquippedItem(itemSlot)?.item;
+			return item && (isShaTouchedWeapon(item) || isThroneOfThunderWeapon(item));
 		});
 	}
 
@@ -1544,7 +1534,6 @@ export class Player<SpecType extends Spec> {
 				distanceFromTarget: this.getDistanceFromTarget(),
 				healingModel: this.getHealingModel(),
 				challengeMode: this.getChallengeModeEnabled(),
-				enableEotbpSockets: this.getEOTBPSocketsEnabled(),
 			});
 			player = withSpec(this.getSpec(), player, this.getSpecOptions());
 		}
@@ -1601,7 +1590,6 @@ export class Player<SpecType extends Spec> {
 				this.setDistanceFromTarget(eventID, proto.distanceFromTarget);
 				this.setHealingModel(eventID, proto.healingModel || HealingModel.create());
 				this.setChallengeModeEnabled(eventID, proto.challengeMode);
-				this.setEOTBPSocketsEnabled(eventID, proto.enableEotbpSockets);
 			}
 			if (loadCategory(SimSettingCategories.External)) {
 				this.setBuffs(eventID, proto.buffs || IndividualBuffs.create());

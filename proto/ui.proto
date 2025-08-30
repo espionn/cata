@@ -433,8 +433,6 @@ message SavedSettings {
 	HealingModel healing_model = 13;
 	double dark_intent_uptime = 19;
 	bool challenge_mode = 20;
-	// Whether to enable Eye Of The Black Prince sockets
-	bool enable_eotbp_sockets = 21;
 }
 
 message SavedTalents {

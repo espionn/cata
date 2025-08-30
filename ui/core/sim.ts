@@ -231,7 +231,6 @@ export class Sim {
 				let gearChanged = false;
 
 				const isBlacksmith = [player.profession1, player.profession2].includes(Profession.Blacksmithing);
-				const hasEotpbSockets = player.enableEotbpSockets;
 
 				// Disable meta gem if inactive.
 				if (gear.hasInactiveMetaGem(isBlacksmith)) {
@@ -239,14 +238,9 @@ export class Sim {
 					gearChanged = true;
 				}
 
-				// Remove bonus sockets if not blacksmith or
-				// Eye of the Black Prince sockets not enabled.
+				// Remove bonus sockets if not blacksmith.
 				if (!isBlacksmith) {
 					gear = gear.withoutBlacksmithSockets();
-					gearChanged = true;
-				}
-				if (!hasEotpbSockets) {
-					gear = gear.withoutEotbpSockets();
 					gearChanged = true;
 				}
 

@@ -19,7 +19,7 @@ import "shaman.proto";
 import "warlock.proto";
 import "warrior.proto";
 
-// NextIndex: 60
+// NextIndex: 59
 message Player {
 	// Proto version at the time Player were saved.
 	// A "breaking change" here is defined as anything that will break saved
@@ -109,8 +109,6 @@ message Player {
 	double distance_from_target = 48;
 	double dark_intent_uptime = 52;
 	bool challenge_mode = 58;
-	// Whether to enable Eye Of The Black Prince sockets
-	bool enable_eotbp_sockets = 59;
 
 	HealingModel healing_model = 49;
 

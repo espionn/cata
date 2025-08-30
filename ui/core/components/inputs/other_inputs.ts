@@ -102,18 +102,6 @@ export const InputDelay = {
 	},
 };
 
-export const EOTBPSocket = {
-	id: 'eye-of-the-black-prince-sockets',
-	type: 'boolean' as const,
-	label: 'Eye of the Black Prince Sockets',
-	labelTooltip: 'Enables Eye of the Black Prince Sockets',
-	changedEvent: (player: Player<any>) => player.eotbpSocketChangeEmitter,
-	getValue: (player: Player<any>) => player.getEOTBPSocketsEnabled(),
-	setValue: (eventID: EventID, player: Player<any>, value: boolean) => {
-		player.setEOTBPSocketsEnabled(eventID, value);
-	},
-};
-
 export const ChallengeMode = {
 	id: 'challenge-mode',
 	type: 'boolean' as const,

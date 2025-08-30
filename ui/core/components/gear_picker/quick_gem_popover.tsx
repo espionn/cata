@@ -22,7 +22,7 @@ export const addQuickGemPopover = (
 		item,
 		getItems: (currentItem: EquippedItem) => {
 			const favoriteGems = player.sim.getFilters().favoriteGems;
-			const socketColor = currentItem.curSocketColors(player.isBlacksmithing(), player.getEOTBPSocketsEnabled())[socketIdx];
+			const socketColor = currentItem.curSocketColors(player.isBlacksmithing())[socketIdx];
 			const eligibleFavoriteGems = player
 				.getGems(socketColor)
 				.filter(gem => favoriteGems.includes(gem.id))

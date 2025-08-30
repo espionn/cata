@@ -10,7 +10,7 @@ import { getEnchantDescription } from '../../proto_utils/enchants';
 import { EquippedItem } from '../../proto_utils/equipped_item';
 import { shortSecondaryStatNames, slotNames } from '../../proto_utils/names';
 import { SimUI } from '../../sim_ui';
-import { EventID, TypedEvent } from '../../typed_event';
+import { EventID } from '../../typed_event';
 import { Component } from '../component';
 import { ItemNotice } from '../item_notice/item_notice';
 import QuickSwapList from '../quick_swap';
@@ -261,13 +261,9 @@ export class ItemRenderer extends Component {
 			if (gemIdx === newItem.numPossibleSockets - 1 && newItem.couldHaveExtraSocket()) {
 				const updateGemSlots = () => {
 					const isBlacksmithinItemSlot = [ItemType.ItemTypeWrist, ItemType.ItemTypeHands].includes(newItem.item.type);
-					gemContainer.classList[
-						(isBlacksmithinItemSlot && this.player.isBlacksmithing()) || (!isBlacksmithinItemSlot && this.player.getEOTBPSocketsEnabled())
-							? 'remove'
-							: 'add'
-					]('hide');
+					gemContainer.classList[this.player.isBlacksmithing() && isBlacksmithinItemSlot ? 'remove' : 'add']('hide');
 				};
-				TypedEvent.onAny([this.player.professionChangeEmitter, this.player.eotbpSocketChangeEmitter]).on(updateGemSlots);
+				this.player.professionChangeEmitter.on(updateGemSlots);
 				updateGemSlots();
 			}
 			this.socketsElem.push(gemContainer);
@@ -347,7 +343,7 @@ export class ItemPicker extends Component {
 			this.quickSwapGemPopover.forEach(quickSwap => quickSwap.tooltip?.[this.player.sim.getShowQuickSwap() ? 'enable' : 'disable']());
 		});
 
-		TypedEvent.onAny([player.professionChangeEmitter, player.eotbpSocketChangeEmitter]).on(() => {
+		player.professionChangeEmitter.on(() => {
 			if (!!this._equippedItem) {
 				this.player.setWowheadData(this._equippedItem, this.itemElem.iconElem);
 			}

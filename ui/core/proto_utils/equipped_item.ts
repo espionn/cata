@@ -96,7 +96,7 @@ export class EquippedItem {
 		this._upgrade = upgrade ?? ItemLevelState.Base;
 		this._challengeMode = challengeMode ?? false;
 
-		this.numPossibleSockets = this.numSockets(true, true);
+		this.numPossibleSockets = this.numSockets(true);
 
 		// Fill gems with null so we always have the same number of gems as gem slots.
 		if (this._gems.length < this.numPossibleSockets) {
@@ -479,29 +479,21 @@ export class EquippedItem {
 		}
 	}
 
-	// Whether this item could have an extra socket, assuming Blacksmithing and Eye of The Black Prince.
+	// Whether this item could have an extra socket
 	couldHaveExtraSocket(): boolean {
-		return (
-			[ItemType.ItemTypeWaist, ItemType.ItemTypeWrist, ItemType.ItemTypeHands].includes(this.item.type) ||
-			isThroneOfThunderWeapon(this.item) ||
-			isShaTouchedWeapon(this.item)
-		);
+		return [ItemType.ItemTypeWrist, ItemType.ItemTypeHands].includes(this.item.type);
 	}
 
 	requiresExtraSocket(): boolean {
 		return [ItemType.ItemTypeWrist, ItemType.ItemTypeHands].includes(this.item.type) && this.hasExtraGem() && this._gems[this._gems.length - 1] != null;
 	}
 
-	hasExtraSocket(isBlacksmithing: boolean, hasEyeOfTheBlackPrice = false): boolean {
-		return (
-			this.item.type == ItemType.ItemTypeWaist ||
-			(isBlacksmithing && [ItemType.ItemTypeWrist, ItemType.ItemTypeHands].includes(this.item.type)) ||
-			(hasEyeOfTheBlackPrice && (isThroneOfThunderWeapon(this.item) || isShaTouchedWeapon(this.item)))
-		);
+	hasExtraSocket(isBlacksmithing: boolean): boolean {
+		return isBlacksmithing && [ItemType.ItemTypeWrist, ItemType.ItemTypeHands].includes(this.item.type);
 	}
 
-	numSockets(isBlacksmithing: boolean, hasEyeOfTheBlackPrice = false): number {
-		return this._item.gemSockets.length + (this.hasExtraSocket(isBlacksmithing, hasEyeOfTheBlackPrice) ? 1 : 0);
+	numSockets(isBlacksmithing: boolean): number {
+		return this._item.gemSockets.length + (this.hasExtraSocket(isBlacksmithing) ? 1 : 0);
 	}
 
 	numSocketsOfColor(color: GemColor | null): number {
@@ -537,15 +529,15 @@ export class EquippedItem {
 	allSocketColors(): Array<GemColor> {
 		return this.couldHaveExtraSocket() ? this._item.gemSockets.concat([GemColor.GemColorPrismatic]) : this._item.gemSockets;
 	}
-	curSocketColors(isBlacksmithing: boolean, hasEyeOfTheBlackPrice = false): Array<GemColor> {
-		return this.hasExtraSocket(isBlacksmithing, hasEyeOfTheBlackPrice) ? this._item.gemSockets.concat([GemColor.GemColorPrismatic]) : this._item.gemSockets;
+	curSocketColors(isBlacksmithing: boolean): Array<GemColor> {
+		return this.hasExtraSocket(isBlacksmithing) ? this._item.gemSockets.concat([GemColor.GemColorPrismatic]) : this._item.gemSockets;
 	}
 
-	curGems(isBlacksmithing: boolean, hasEyeOfTheBlackPrice = false): Array<Gem | null> {
-		return this._gems.slice(0, this.numSockets(isBlacksmithing, hasEyeOfTheBlackPrice));
+	curGems(isBlacksmithing: boolean): Array<Gem | null> {
+		return this._gems.slice(0, this.numSockets(isBlacksmithing));
 	}
-	curEquippedGems(isBlacksmithing: boolean, hasEyeOfTheBlackPrice = false): Array<Gem> {
-		return this.curGems(isBlacksmithing, hasEyeOfTheBlackPrice).filter(g => g != null) as Array<Gem>;
+	curEquippedGems(isBlacksmithing: boolean): Array<Gem> {
+		return this.curGems(isBlacksmithing).filter(g => g != null) as Array<Gem>;
 	}
 
 	getProfessionRequirements(): Array<Profession> {

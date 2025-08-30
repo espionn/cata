@@ -336,7 +336,6 @@ export class SettingsTab extends SimTab {
 					simUI.player.setDistanceFromTarget(eventID, newSettings.distanceFromTarget);
 					simUI.player.setHealingModel(eventID, newSettings.healingModel || HealingModel.create());
 					simUI.player.setChallengeModeEnabled(eventID, newSettings.challengeMode);
-					simUI.player.setEOTBPSocketsEnabled(eventID, newSettings.enableEotbpSockets);
 				});
 			},
 			changeEmitters: [
@@ -352,7 +351,6 @@ export class SettingsTab extends SimTab {
 				this.simUI.player.inFrontOfTargetChangeEmitter,
 				this.simUI.player.distanceFromTargetChangeEmitter,
 				this.simUI.player.healingModelChangeEmitter,
-				this.simUI.player.eotbpSocketChangeEmitter,
 			],
 			equals: (a: SavedSettings, b: SavedSettings) => SavedSettings.equals(a, b),
 			toJson: (a: SavedSettings) => SavedSettings.toJson(a),
@@ -409,7 +407,6 @@ export class SettingsTab extends SimTab {
 			inFrontOfTarget: this.simUI.player.getInFrontOfTarget(),
 			distanceFromTarget: this.simUI.player.getDistanceFromTarget(),
 			healingModel: this.simUI.player.getHealingModel(),
-			enableEotbpSockets: this.simUI.player.getEOTBPSocketsEnabled(),
 		});
 	}
 
