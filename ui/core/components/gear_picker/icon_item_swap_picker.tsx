@@ -4,7 +4,7 @@ import { Player } from '../../player';
 import { ItemSlot, ItemType } from '../../proto/common';
 import { EquippedItem } from '../../proto_utils/equipped_item';
 import { SimUI } from '../../sim_ui';
-import { EventID } from '../../typed_event';
+import { EventID, TypedEvent } from '../../typed_event';
 import { Component } from '../component';
 import { GearData } from './item_list';
 import SelectorModal, { SelectorModalTabs } from './selector_modal';
@@ -61,12 +61,18 @@ export default class IconItemSwapPicker extends Component {
 				<>
 					{newItem.allSocketColors().map((socketColor, gemIdx) => {
 						const gemContainer = createGemContainer(socketColor, newItem.gems[gemIdx], gemIdx);
-						if (gemIdx === newItem.numPossibleSockets - 1 && [ItemType.ItemTypeWrist, ItemType.ItemTypeHands].includes(newItem.item.type)) {
-							const updateProfession = () => {
-								gemContainer.classList[this.player.isBlacksmithing() ? 'remove' : 'add']('hide');
+						if (gemIdx === newItem.numPossibleSockets - 1 && newItem.couldHaveExtraSocket()) {
+							const updateGemSlots = () => {
+								const isBlacksmithinItemSlot = [ItemType.ItemTypeWrist, ItemType.ItemTypeHands].includes(newItem.item.type);
+								gemContainer.classList[
+									(isBlacksmithinItemSlot && this.player.isBlacksmithing()) ||
+									(!isBlacksmithinItemSlot && this.player.getEOTBPSocketsEnabled())
+										? 'remove'
+										: 'add'
+								]('hide');
 							};
-							this.player.professionChangeEmitter.on(updateProfession);
-							updateProfession();
+							TypedEvent.onAny([this.player.professionChangeEmitter, this.player.eotbpSocketChangeEmitter]).on(updateGemSlots);
+							updateGemSlots();
 						}
 						return gemContainer;
 					})}

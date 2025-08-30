@@ -257,7 +257,7 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 		this.addWarning({
 			updateOn: this.player.gearChangeEmitter,
 			getContent: () => {
-				if (!this.player.getGear().hasInactiveMetaGem(this.player.isBlacksmithing())) {
+				if (!this.player.getGear().hasInactiveMetaGem(this.player.isBlacksmithing(), this.player.getEOTBPSocketsEnabled())) {
 					return '';
 				}
 
@@ -371,7 +371,7 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 	}
 
 	applyDefaultConfigOptions(config: IndividualSimUIConfig<SpecType>): IndividualSimUIConfig<SpecType> {
-		config.otherInputs.inputs = [OtherInputs.ChallengeMode, ...config.otherInputs.inputs];
+		config.otherInputs.inputs = [OtherInputs.EOTBPSocket, OtherInputs.ChallengeMode, ...config.otherInputs.inputs];
 
 		return config;
 	}

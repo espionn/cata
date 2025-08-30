@@ -10,7 +10,7 @@ import { getEnchantDescription } from '../../proto_utils/enchants';
 import { EquippedItem } from '../../proto_utils/equipped_item';
 import { shortSecondaryStatNames, slotNames } from '../../proto_utils/names';
 import { SimUI } from '../../sim_ui';
-import { EventID } from '../../typed_event';
+import { EventID, TypedEvent } from '../../typed_event';
 import { Component } from '../component';
 import { ItemNotice } from '../item_notice/item_notice';
 import QuickSwapList from '../quick_swap';
@@ -258,12 +258,17 @@ export class ItemRenderer extends Component {
 
 		newItem.allSocketColors().forEach((socketColor, gemIdx) => {
 			const gemContainer = createGemContainer(socketColor, newItem.gems[gemIdx], gemIdx);
-			if (gemIdx === newItem.numPossibleSockets - 1 && [ItemType.ItemTypeWrist, ItemType.ItemTypeHands].includes(newItem.item.type)) {
-				const updateProfession = () => {
-					gemContainer.classList[this.player.isBlacksmithing() ? 'remove' : 'add']('hide');
+			if (gemIdx === newItem.numPossibleSockets - 1 && newItem.couldHaveExtraSocket()) {
+				const updateGemSlots = () => {
+					const isBlacksmithinItemSlot = [ItemType.ItemTypeWrist, ItemType.ItemTypeHands].includes(newItem.item.type);
+					gemContainer.classList[
+						(isBlacksmithinItemSlot && this.player.isBlacksmithing()) || (!isBlacksmithinItemSlot && this.player.getEOTBPSocketsEnabled())
+							? 'remove'
+							: 'add'
+					]('hide');
 				};
-				this.player.professionChangeEmitter.on(updateProfession);
-				updateProfession();
+				TypedEvent.onAny([this.player.professionChangeEmitter, this.player.eotbpSocketChangeEmitter]).on(updateGemSlots);
+				updateGemSlots();
 			}
 			this.socketsElem.push(gemContainer);
 			this.socketsContainerElem.appendChild(gemContainer);
@@ -342,7 +347,7 @@ export class ItemPicker extends Component {
 			this.quickSwapGemPopover.forEach(quickSwap => quickSwap.tooltip?.[this.player.sim.getShowQuickSwap() ? 'enable' : 'disable']());
 		});
 
-		player.professionChangeEmitter.on(() => {
+		TypedEvent.onAny([player.professionChangeEmitter, player.eotbpSocketChangeEmitter]).on(() => {
 			if (!!this._equippedItem) {
 				this.player.setWowheadData(this._equippedItem, this.itemElem.iconElem);
 			}
