@@ -26,7 +26,7 @@ export const getWeaponDPS = (item: Item, upgradeStep: ItemLevelState = ItemLevel
 };
 
 export const isThroneOfThunderWeapon = (item: Item) =>
-	item.type == ItemType.ItemTypeWeapon &&
+	[ItemType.ItemTypeWeapon, ItemType.ItemTypeRanged].includes(item.type) &&
 	item.phase == 3 &&
 	item.sources.some(itemSource => itemSource.source.oneofKind === 'drop' && itemSource.source.drop.zoneId === 6622);
 export const isShaTouchedWeapon = (item: Item) => item.gemSockets.some(socket => socket === GemColor.GemColorShaTouched);
