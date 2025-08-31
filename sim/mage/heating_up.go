@@ -19,7 +19,7 @@ func (mage *Mage) registerHeatingUp() {
 		Label:    "Pyroblast!",
 		ActionID: core.ActionID{SpellID: 48108},
 		Duration: time.Second * 15,
-	})).AttachSpellMod(core.SpellModConfig{
+	}).AttachSpellMod(core.SpellModConfig{
 		Kind:       core.SpellMod_PowerCost_Pct,
 		FloatValue: -2.0,
 		ClassMask:  MageSpellPyroblast,
@@ -30,8 +30,11 @@ func (mage *Mage) registerHeatingUp() {
 	}).AttachSpellMod(core.SpellModConfig{
 		Kind:       core.SpellMod_DamageDone_Pct,
 		FloatValue: .25,
-		ClassMask:  MageSpellPyroblast | MageSpellPyroblastDot,
-	})
+		// Pyroblast Dot is handled in pyroblast.go because
+		// the Dot is applied after it lands and the aura
+		// has already been consumed.
+		ClassMask: MageSpellPyroblast,
+	}))
 }
 
 func (mage *Mage) HeatingUpSpellHandler(sim *core.Simulation, spell *core.Spell, result *core.SpellResult, callback func()) {

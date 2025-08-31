@@ -64,6 +64,7 @@ import { getMetaGemConditionDescription } from './proto_utils/gems';
 import { armorTypeNames, professionNames } from './proto_utils/names';
 import { pseudoStatIsCapped, StatCap, Stats, UnitStat } from './proto_utils/stats';
 import { getTalentPoints, SpecOptions, SpecRotation } from './proto_utils/utils';
+import { hasRequiredTalents, getMissingTalentRows, getRequiredTalentRows } from './talents/required_talents';
 import { SimUI, SimWarning } from './sim_ui';
 import { EventID, TypedEvent } from './typed_event';
 import { isDevMode } from './utils';
@@ -109,6 +110,8 @@ export interface RaidSimPreset<SpecType extends Spec> {
 }
 
 export interface IndividualSimUIConfig<SpecType extends Spec> extends PlayerConfig<SpecType> {
+	// Override for required talent rows. If not specified, defaults to requiring all rows [0, 1, 2, 3, 4, 5]
+	requiredTalentRows?: number[];
 	// Additional css class to add to the root element.
 	cssClass: string;
 	// Used to generate schemed components. E.g. 'shaman', 'druid', 'raid'
@@ -247,11 +250,6 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 		this.prevEpSimResult = null;
 		this.statWeightActionSettings = new StatWeightActionSettings(this);
 
-		if (!isDevMode() && getSpecLaunchStatus(this.player) === LaunchStatus.Unlaunched) {
-			this.handleSimUnlaunched();
-			return;
-		}
-
 		if ((config.itemSwapSlots || []).length > 0 && !itemSwapEnabledSpecs.includes(player.getSpec())) {
 			itemSwapEnabledSpecs.push(player.getSpec());
 		}
@@ -282,23 +280,26 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 			updateOn: this.player.gearChangeEmitter,
 			getContent: () => {
 				const jcGems = this.player.getGear().getJCGems(this.player.isBlacksmithing());
-				if (jcGems.length <= 3) {
+				if (jcGems.length <= 2) {
 					return '';
 				}
 
-				return `Only 3 Jewelcrafting Gems are allowed, but ${jcGems.length} are equipped.`;
+				return `Only 2 Jewelcrafting Gems are allowed, but ${jcGems.length} are equipped.`;
 			},
 		});
 		this.addWarning({
 			updateOn: this.player.talentsChangeEmitter,
 			getContent: () => {
 				const talentPoints = getTalentPoints(this.player.getTalentsString());
+				const requiredRows = getRequiredTalentRows(this.player.getSpecConfig());
 
-				if (talentPoints == 0) {
-					// Just return here, so we don't show a warning during page load.
+				// Only skip warning during initial load if there are no required talents
+				if (talentPoints == 0 && requiredRows.length == 0) {
 					return '';
-				} else if (talentPoints < 6) {
-					return 'Unspent talent points.';
+				} else if (!hasRequiredTalents(this.player.getSpecConfig(), this.player.getTalentsString())) {
+					const missingRows = getMissingTalentRows(this.player.getSpecConfig(), this.player.getTalentsString());
+					const missingRowNumbers = missingRows.map(row => row + 1).join(', ');
+					return `Missing required talent selections in row ${missingRowNumbers}.`;
 				} else {
 					return '';
 				}
@@ -364,7 +365,9 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 		// request so that this can be re-enabled.
 		//this.bt = this.addBulkTab();
 
-		this.addTopbarComponents();
+		this.sim.waitForInit().then(() => {
+			this.addTopbarComponents();
+		});
 	}
 
 	applyDefaultConfigOptions(config: IndividualSimUIConfig<SpecType>): IndividualSimUIConfig<SpecType> {
@@ -426,27 +429,6 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 			this.individualConfig.displayStats,
 			this.individualConfig.modifyDisplayStats,
 			this.individualConfig.overwriteDisplayStats,
-		);
-	}
-
-	private handleSimUnlaunched() {
-		this.rootElem.classList.add('sim-ui--is-unlaunched');
-		this.simMain?.replaceChildren(
-			<div className="sim-ui-unlaunched-container d-flex flex-column align-items-center text-center mt-auto mb-auto ms-auto me-auto">
-				<i className="fas fa-ban fa-3x"></i>
-				<p className="mt-4">
-					This sim is currently not supported.
-					<br />
-					Want to contribute? Make sure to join our{' '}
-					<a href="https://discord.gg/p3DgvmnDCS" target="_blank">
-						Discord
-					</a>
-					!
-				</p>
-				<p>
-					You can check out our other sims <a href="/mop/">here</a>
-				</p>
-			</div>,
 		);
 	}
 

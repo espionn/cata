@@ -86,7 +86,7 @@ message APLAction {
     }
 }
 
-// NextIndex: 106
+// NextIndex: 109
 message APLValue {
 	UUID uuid = 85;
 
@@ -174,12 +174,14 @@ message APLValue {
         // Aura values
         APLValueAuraIsKnown aura_is_known = 73;
         APLValueAuraIsActive aura_is_active = 22;
-        APLValueAuraIsActiveWithReactionTime aura_is_active_with_reaction_time = 50;
-        APLValueAuraIsInactiveWithReactionTime aura_is_inactive_with_reaction_time = 76;
+        APLValueAuraIsActive aura_is_active_with_reaction_time = 50 [deprecated=true];
+        APLValueAuraIsInactive aura_is_inactive = 107;
+        APLValueAuraIsInactive aura_is_inactive_with_reaction_time = 76 [deprecated=true];
         APLValueAuraRemainingTime aura_remaining_time = 23;
         APLValueAuraNumStacks aura_num_stacks = 24;
         APLValueAuraInternalCooldown aura_internal_cooldown = 39;
-        APLValueAuraICDIsReadyWithReactionTime aura_icd_is_ready_with_reaction_time = 51;
+        APLValueAuraICDIsReady aura_icd_is_ready = 108;
+        APLValueAuraICDIsReady aura_icd_is_ready_with_reaction_time = 51 [deprecated=true];
         APLValueAuraShouldRefresh aura_should_refresh = 43;
 
         // Aggregate Aura set values
@@ -189,6 +191,7 @@ message APLValue {
         APLValueTrinketProcsMaxRemainingICD trinket_procs_max_remaining_icd = 82; // TODO: Rename in MoP as it includes all item/effect procs
         APLValueNumEquippedStatProcTrinkets num_equipped_stat_proc_trinkets = 81; // TODO: Rename in MoP as it includes all item/effect procs
         APLValueNumStatBuffCooldowns num_stat_buff_cooldowns = 84;
+        APLValueAnyStatBuffCooldownsActive any_stat_buff_cooldowns_active = 106;
 
         // Dot values
         APLValueDotIsActive dot_is_active = 6;
@@ -344,20 +347,17 @@ message APLActionItemSwap {
 
 message APLActionCatOptimalRotationAction {
     FeralDruid.Rotation.AplType rotation_type = 1;
-    bool maintain_faerie_fire = 3;
-    bool manual_params = 2;
-    float min_roar_offset = 4;
-    int32 rip_leeway = 5;
-    bool use_rake = 6;
-    bool use_bite = 7;
-    float bite_time = 8;
-    float berserk_bite_time = 15;
-    bool bite_during_execute = 9;
-    bool allow_aoe_berserk = 10;
-    bool melee_weave = 11;
-    bool bear_weave = 12;
-    bool snek_weave = 13;
-    bool cancel_primal_madness = 14;
+    bool bear_weave = 2;
+    bool snek_weave = 3;
+    bool allow_aoe_berserk = 4;
+    bool manual_params = 5;
+    double min_roar_offset = 6;
+    double rip_leeway = 7;
+    bool use_bite = 8;
+    double bite_time = 9;
+    double berserk_bite_time = 10;
+    bool use_ns = 11;
+    bool wrath_weave = 12;
 }
 
 message APLActionGuardianHotwDpsRotation {
@@ -615,14 +615,12 @@ message APLValueAuraIsKnown {
 message APLValueAuraIsActive {
     UnitReference source_unit = 2;
     ActionID aura_id = 1;
+	bool include_reaction_time = 3;
 }
-message APLValueAuraIsActiveWithReactionTime {
+message APLValueAuraIsInactive {
     UnitReference source_unit = 2;
     ActionID aura_id = 1;
-}
-message APLValueAuraIsInactiveWithReactionTime {
-    UnitReference source_unit = 2;
-    ActionID aura_id = 1;
+	bool include_reaction_time = 3;
 }
 message APLValueAuraRemainingTime {
     UnitReference source_unit = 2;
@@ -631,14 +629,16 @@ message APLValueAuraRemainingTime {
 message APLValueAuraNumStacks {
     UnitReference source_unit = 2;
     ActionID aura_id = 1;
+	bool include_reaction_time = 3;
 }
 message APLValueAuraInternalCooldown {
     UnitReference source_unit = 2;
     ActionID aura_id = 1;
 }
-message APLValueAuraICDIsReadyWithReactionTime {
+message APLValueAuraICDIsReady {
     UnitReference source_unit = 2;
     ActionID aura_id = 1;
+	bool include_reaction_time = 3;
 }
 message APLValueAuraShouldRefresh {
     UnitReference source_unit = 2;
@@ -677,6 +677,11 @@ message APLValueNumEquippedStatProcTrinkets {
     double min_icd_seconds = 4;
 }
 message APLValueNumStatBuffCooldowns {
+    int32 stat_type1 = 1;
+    int32 stat_type2 = 2;
+    int32 stat_type3 = 3;
+}
+message APLValueAnyStatBuffCooldownsActive {
     int32 stat_type1 = 1;
     int32 stat_type2 = 2;
     int32 stat_type3 = 3;

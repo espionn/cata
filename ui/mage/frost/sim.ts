@@ -11,8 +11,25 @@ import { DEFAULT_CASTER_GEM_STATS, StatCap, Stats, UnitStat } from '../../core/p
 import { DefaultDebuffs, DefaultRaidBuffs, MAGE_BREAKPOINTS } from '../presets';
 import * as FrostInputs from './inputs';
 import * as Presets from './presets';
+import * as MageInputs from '../inputs';
 
-const hasteBreakpoints = MAGE_BREAKPOINTS.presets;
+const mageBombBreakpoints = MAGE_BREAKPOINTS.presets;
+const livingBombBreakpoints = [
+	mageBombBreakpoints.get('6-tick - Living Bomb')!,
+	mageBombBreakpoints.get('7-tick - Living Bomb')!,
+	mageBombBreakpoints.get('8-tick - Living Bomb')!,
+];
+const netherTempestBreakpoints = [
+	mageBombBreakpoints.get('15-tick - Nether Tempest')!,
+	mageBombBreakpoints.get('16-tick - Nether Tempest')!,
+	mageBombBreakpoints.get('17-tick - Nether Tempest')!,
+	mageBombBreakpoints.get('18-tick - Nether Tempest')!,
+	mageBombBreakpoints.get('19-tick - Nether Tempest')!,
+	mageBombBreakpoints.get('20-tick - Nether Tempest')!,
+	mageBombBreakpoints.get('21-tick - Nether Tempest')!,
+	mageBombBreakpoints.get('22-tick - Nether Tempest')!,
+	mageBombBreakpoints.get('23-tick - Nether Tempest')!,
+];
 
 const SPEC_CONFIG = registerSpecConfig(Spec.SpecFrostMage, {
 	cssClass: 'frost-mage-sim-ui',
@@ -42,39 +59,27 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFrostMage, {
 
 	defaults: {
 		// Default equipped gear.
-		gear: Presets.P1_BIS.gear,
+		gear: Presets.P1_POST_MSV.gear,
 		// Default EP weights for sorting gear in the gear picker.
-		epWeights: Presets.P1_EP_PRESET.epWeights,
+		epWeights: Presets.P1_BIS_EP_PRESET.epWeights,
 		statCaps: (() => {
 			return new Stats().withPseudoStat(PseudoStat.PseudoStatSpellHitPercent, 15);
 		})(),
 		// Default soft caps for the Reforge optimizer
 		softCapBreakpoints: (() => {
 			const hasteSoftCapConfig = StatCap.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent, {
-				breakpoints: [
-					hasteBreakpoints.get('13-tick - Nether Tempest')!,
-					hasteBreakpoints.get('5-tick - Living Bomb')!,
-					hasteBreakpoints.get('14-tick - Nether Tempest')!,
-					hasteBreakpoints.get('15-tick - Nether Tempest')!,
-					hasteBreakpoints.get('16-tick - Nether Tempest')!,
-					hasteBreakpoints.get('17-tick - Nether Tempest')!,
-					hasteBreakpoints.get('6-tick - Living Bomb')!,
-					hasteBreakpoints.get('18-tick - Nether Tempest')!,
-					hasteBreakpoints.get('19-tick - Nether Tempest')!,
-					hasteBreakpoints.get('7-tick - Living Bomb')!,
-					hasteBreakpoints.get('20-tick - Nether Tempest')!,
-					hasteBreakpoints.get('8-tick - Living Bomb')!,
-					hasteBreakpoints.get('21-tick - Nether Tempest')!,
-					hasteBreakpoints.get('22-tick - Nether Tempest')!,
-				],
+				breakpoints: livingBombBreakpoints,
 				capType: StatCapType.TypeThreshold,
-				postCapEPs: [0.45 * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
+				postCapEPs: [(Presets.P1_BIS_EP_PRESET.epWeights.getStat(Stat.StatCritRating) - 0.01) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
 			});
 
 			const critSoftCapConfig = StatCap.fromPseudoStat(PseudoStat.PseudoStatSpellCritPercent, {
-				breakpoints: [25],
+				breakpoints: [23.34, 26.8],
 				capType: StatCapType.TypeSoftCap,
-				postCapEPs: [0.42 * Mechanics.CRIT_RATING_PER_CRIT_PERCENT],
+				postCapEPs: [
+					(Presets.P1_BIS_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.01) * Mechanics.CRIT_RATING_PER_CRIT_PERCENT,
+					(Presets.P1_BIS_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) / 2) * Mechanics.CRIT_RATING_PER_CRIT_PERCENT,
+				],
 			});
 
 			return [critSoftCapConfig, hasteSoftCapConfig];
@@ -94,7 +99,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFrostMage, {
 	},
 
 	// IconInputs to include in the 'Player' section on the settings tab.
-	playerIconInputs: [],
+	playerIconInputs: [MageInputs.MageArmorInputs()],
 	// Inputs to include in the 'Rotation' section on the settings tab.
 	rotationInputs: FrostInputs.MageRotationConfig,
 	// Buff and Debuff inputs to include/exclude, overriding the EP-based defaults.
@@ -118,19 +123,23 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFrostMage, {
 	},
 
 	presets: {
-		epWeights: [Presets.P1_EP_PRESET],
+		epWeights: [Presets.P1_PREBIS_EP_PRESET, Presets.P1_BIS_EP_PRESET],
 		// Preset rotations that the user can quickly select.
 		rotations: [Presets.ROTATION_PRESET_DEFAULT, Presets.ROTATION_PRESET_AOE],
 		// Preset talents that the user can quickly select.
-		talents: [Presets.FrostDefaultTalents],
+		talents: [Presets.FrostDefaultTalents, Presets.FrostTalentsCleave, Presets.FrostTalentsAoE],
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.P1_PREBIS_RICH, Presets.P1_PREBIS_POOR, Presets.P1_BIS],
+		gear: [Presets.P1_PREBIS, Presets.P1_POST_MSV, Presets.P1_POST_HOF, Presets.P1_BIS],
+
+		builds: [Presets.P1_PRESET_BUILD_DEFAULT, Presets.P1_PRESET_BUILD_CLEAVE, Presets.P1_PRESET_BUILD_AOE],
 	},
 
 	autoRotation: (player: Player<Spec.SpecFrostMage>): APLRotation => {
 		const numTargets = player.sim.encounter.targets.length;
-		if (numTargets > 3) {
+		if (numTargets >= 5) {
 			return Presets.ROTATION_PRESET_AOE.rotation.rotation!;
+			// } else if (numTargets >= 2) {
+			// 	return Presets.ROTATION_PRESET_CLEAVE.rotation.rotation!;
 		} else {
 			return Presets.ROTATION_PRESET_DEFAULT.rotation.rotation!;
 		}
@@ -151,10 +160,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFrostMage, {
 			defaultGear: {
 				[Faction.Unknown]: {},
 				[Faction.Alliance]: {
-					1: Presets.P1_PREBIS_RICH.gear,
+					1: Presets.P1_PREBIS.gear,
 				},
 				[Faction.Horde]: {
-					1: Presets.P1_PREBIS_RICH.gear,
+					1: Presets.P1_PREBIS.gear,
 				},
 			},
 		},
@@ -169,6 +178,31 @@ export class FrostMageSimUI extends IndividualSimUI<Spec.SpecFrostMage> {
 			new ReforgeOptimizer(this, {
 				statSelectionPresets: [MAGE_BREAKPOINTS],
 				enableBreakpointLimits: true,
+				getEPDefaults: player => {
+					if (this.sim.getUseCustomEPValues()) {
+						return player.getEpWeights();
+					}
+
+					const avgIlvl = player.getGear().getAverageItemLevel(false);
+					if (avgIlvl > 500) {
+						return Presets.P1_BIS_EP_PRESET.epWeights;
+					}
+					return Presets.P1_PREBIS_EP_PRESET.epWeights;
+				},
+				updateSoftCaps: softCaps => {
+					this.individualConfig.defaults.softCapBreakpoints!.forEach(softCap => {
+						const softCapToModify = softCaps.find(sc => sc.unitStat.equals(softCap.unitStat));
+						if (softCap.unitStat.equalsPseudoStat(PseudoStat.PseudoStatSpellHastePercent) && softCapToModify) {
+							const talents = player.getTalents();
+							if (talents.livingBomb) {
+								softCapToModify.breakpoints = livingBombBreakpoints;
+							} else if (talents.netherTempest) {
+								softCapToModify.breakpoints = netherTempestBreakpoints;
+							}
+						}
+					});
+					return softCaps;
+				},
 			});
 		});
 	}

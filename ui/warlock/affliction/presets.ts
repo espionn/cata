@@ -1,5 +1,5 @@
 import * as PresetUtils from '../../core/preset_utils';
-import { ConsumesSpec, Debuffs, Glyphs, IndividualBuffs, Profession, PseudoStat, RaidBuffs, Stat } from '../../core/proto/common';
+import { ConsumesSpec, Debuffs, Glyphs, IndividualBuffs, Profession, PseudoStat, Race, RaidBuffs, Stat } from '../../core/proto/common';
 import { SavedTalents } from '../../core/proto/ui';
 import {
 	AfflictionWarlock_Options as WarlockOptions,
@@ -30,9 +30,9 @@ export const DEFAULT_EP_PRESET = PresetUtils.makePresetEpWeights(
 		[Stat.StatIntellect]: 1.26,
 		[Stat.StatSpellPower]: 1.0,
 		[Stat.StatHitRating]: 0.93,
-		[Stat.StatCritRating]: 0.38,
-		[Stat.StatHasteRating]: 0.58,
-		[Stat.StatMasteryRating]: 0.8,
+		[Stat.StatCritRating]: 0.56,
+		[Stat.StatHasteRating]: 0.88,
+		[Stat.StatMasteryRating]: 0.68,
 	}),
 );
 
@@ -45,6 +45,7 @@ export const AfflictionTalents = {
 		talentsString: '231211',
 		glyphs: Glyphs.create({
 			major1: MajorGlyph.GlyphOfUnstableAffliction,
+			major2: MajorGlyph.GlyphOfSiphonLife,
 			minor3: MinorGlyph.GlyphOfUnendingBreath,
 		}),
 	}),
@@ -84,6 +85,7 @@ export const DefaultDebuffs = Debuffs.create({
 });
 
 export const OtherDefaults = {
+	race: Race.RaceTroll,
 	distanceFromTarget: 25,
 	profession1: Profession.Engineering,
 	profession2: Profession.Tailoring,

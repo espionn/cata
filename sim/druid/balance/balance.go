@@ -90,7 +90,6 @@ func (moonkin *BalanceDruid) Initialize() {
 
 func (moonkin *BalanceDruid) ApplyTalents() {
 	moonkin.Druid.ApplyTalents()
-
 	moonkin.ApplyBalanceTalents()
 }
 

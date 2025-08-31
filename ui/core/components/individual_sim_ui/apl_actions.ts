@@ -706,34 +706,31 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 		newValue: () =>
 			APLActionCatOptimalRotationAction.create({
 				rotationType: FeralDruid_Rotation_AplType.SingleTarget,
-				maintainFaerieFire: true,
 				manualParams: true,
-				minRoarOffset: 31.0,
-				ripLeeway: 1,
-				useRake: true,
+				minRoarOffset: 40,
+				ripLeeway: 4,
 				useBite: true,
-				biteTime: 11.0,
-				berserkBiteTime: 6.0,
-				biteDuringExecute: true,
+				biteTime: 11,
+				berserkBiteTime: 7,
 				allowAoeBerserk: false,
-				meleeWeave: true,
 				bearWeave: true,
 				snekWeave: true,
-				cancelPrimalMadness: false,
+				useNs: true,
+				wrathWeave: false,
 			}),
 		fields: [
 			AplHelpers.rotationTypeFieldConfig('rotationType'),
-			AplHelpers.booleanFieldConfig('maintainFaerieFire', 'Maintain Faerie Fire', {
-				labelTooltip: 'Maintain Faerie Fire debuff. Overwrites any external Sunder effects specified in settings.',
-			}),
-			AplHelpers.booleanFieldConfig('meleeWeave', 'Enable leave-weaving', {
-				labelTooltip: 'Weave out of melee range for Stampede procs. Ignored for AoE rotation or if Stampede is not talented.',
-			}),
 			AplHelpers.booleanFieldConfig('bearWeave', 'Enable bear-weaving', {
 				labelTooltip: 'Weave into Bear Form while pooling Energy. Ignored for AoE rotation.',
 			}),
 			AplHelpers.booleanFieldConfig('snekWeave', 'Use Albino Snake', {
 				labelTooltip: 'Reset swing timer at the end of bear-weaves using Albino Snake pet. Ignored if not bear-weaving.',
+			}),
+			AplHelpers.booleanFieldConfig('useNs', "Use Nature's Swiftness", {
+				labelTooltip: "Use Nature's Swiftness to fill gaps in Predatory Swiftness uptime. Ignored if Dream of Cenarius is not talented.",
+			}),
+			AplHelpers.booleanFieldConfig('wrathWeave', "Enable Wrath-weaving", {
+				labelTooltip: "Cast Wrath when possible during the Heart of the Wild DPS window. Ignored if HotW is not talented.",
 			}),
 			AplHelpers.booleanFieldConfig('allowAoeBerserk', 'Allow AoE Berserk', {
 				labelTooltip: 'Allow Berserk usage in AoE rotation. Ignored for single target rotation.',
@@ -749,9 +746,6 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 				label: 'Rip Leeway',
 				labelTooltip: 'Rip leeway when optimizing Roar clips. Ignored for AOE rotation or if not using manual advanced parameters.',
 			}),
-			AplHelpers.booleanFieldConfig('useRake', 'Use Rake', {
-				labelTooltip: 'Use Rake during rotation. Ignored for AOE rotation or if not using manual advanced parameters.',
-			}),
 			AplHelpers.booleanFieldConfig('useBite', 'Bite during rotation', {
 				labelTooltip:
 					'Use Bite during rotation rather than exclusively at end of fight. Ignored for AOE rotation or if not using manual advanced parameters.',
@@ -763,14 +757,6 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 			AplHelpers.numberFieldConfig('berserkBiteTime', true, {
 				label: 'Bite Time during Berserk',
 				labelTooltip: 'More aggressive threshold when Berserk is active.',
-			}),
-			AplHelpers.booleanFieldConfig('biteDuringExecute', 'Bite during Execute phase', {
-				labelTooltip:
-					'Bite aggressively during Execute phase. Ignored if Blood in the Water is not talented, or if not using manual advanced parameters.',
-			}),
-			AplHelpers.booleanFieldConfig('cancelPrimalMadness', 'Enable Primal Madness cancellation', {
-				labelTooltip:
-					'Click off Primal Madness buff when doing so will result in net Energy gains. Ignored if Primal Madness is not talented, or if not using manual advanced parameters.',
 			}),
 		],
 	}),

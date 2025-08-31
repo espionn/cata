@@ -12,7 +12,7 @@ const cdDuration = time.Millisecond * 1500
 func (war *Warrior) registerHeroicStrikeSpell() {
 	getHSDamageMultiplier := func() float64 {
 		has1H := war.MainHand().HandType != proto.HandType_HandTypeTwoHand
-		return core.TernaryFloat64(has1H, 1.4, 1)
+		return core.TernaryFloat64(has1H, 0.4, 0)
 	}
 
 	weaponDamageMod := war.AddDynamicMod(core.SpellModConfig{
@@ -53,8 +53,7 @@ func (war *Warrior) registerHeroicStrikeSpell() {
 		CritMultiplier:   war.DefaultCritMultiplier(),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := war.CalcScalingSpellDmg(0.40000000596)*getHSDamageMultiplier() + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower())
-
+			baseDamage := war.CalcScalingSpellDmg(0.40000000596) + spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower())
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
 
 			if !result.Landed() {
@@ -69,7 +68,7 @@ func (war *Warrior) registerCleaveSpell() {
 
 	getCleaveDamageMultiplier := func() float64 {
 		has1H := war.MainHand().HandType != proto.HandType_HandTypeTwoHand
-		return core.TernaryFloat64(has1H, .15, -0.2)
+		return core.TernaryFloat64(has1H, 0.402439, 0)
 	}
 
 	weaponDamageMod := war.AddDynamicMod(core.SpellModConfig{
@@ -108,7 +107,7 @@ func (war *Warrior) registerCleaveSpell() {
 			},
 		},
 
-		DamageMultiplier: 1,
+		DamageMultiplier: 0.82,
 		ThreatMultiplier: 1,
 		CritMultiplier:   war.DefaultCritMultiplier(),
 

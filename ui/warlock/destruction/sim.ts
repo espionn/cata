@@ -147,9 +147,17 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecDestructionWarlock, {
 export class DestructionWarlockSimUI extends IndividualSimUI<Spec.SpecDestructionWarlock> {
 	constructor(parentElem: HTMLElement, player: Player<Spec.SpecDestructionWarlock>) {
 		super(parentElem, player, SPEC_CONFIG);
+
+		const statSelectionPresets = [
+			{
+				unitStat: UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent),
+				presets: Presets.DESTRUCTION_BREAKPOINTS.presets,
+			},
+		];
+
 		player.sim.waitForInit().then(() => {
 			new ReforgeOptimizer(this, {
-				statSelectionPresets: Presets.DESTRUCTION_BREAKPOINTS,
+				statSelectionPresets,
 			});
 		});
 	}

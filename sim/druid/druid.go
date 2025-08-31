@@ -1,8 +1,6 @@
 package druid
 
 import (
-	"time"
-
 	"github.com/wowsims/mop/sim/core"
 	"github.com/wowsims/mop/sim/core/proto"
 	"github.com/wowsims/mop/sim/core/stats"
@@ -20,11 +18,11 @@ type Druid struct {
 
 	Treants TreantAgents
 
-	RebirthUsed       bool
-	RebirthTiming     float64
-	BleedsActive      int
+	BleedsActive      map[*core.Unit]int32
 	AssumeBleedActive bool
 	CannotShredTarget bool
+	RipBaseNumTicks   int32
+	RipMaxNumTicks    int32
 
 	MHAutoSpell *core.Spell
 
@@ -48,15 +46,11 @@ type Druid struct {
 	Prowl                 *DruidSpell
 	Rake                  *DruidSpell
 	Ravage                *DruidSpell
-	Rebirth               *DruidSpell
 	Rejuvenation          *DruidSpell
 	Rip                   *DruidSpell
-	SavageRoar            *DruidSpell
-	Shred                 *DruidSpell
 	SurvivalInstincts     *DruidSpell
 	SwipeBear             *DruidSpell
 	SwipeCat              *DruidSpell
-	TigersFury            *DruidSpell
 	ThrashBear            *DruidSpell
 	ThrashCat             *DruidSpell
 	Typhoon               *DruidSpell
@@ -73,7 +67,6 @@ type Druid struct {
 	BerserkBearAura          *core.Aura
 	BerserkCatAura           *core.Aura
 	CatFormAura              *core.Aura
-	ClearcastingAura         *core.Aura
 	WeakenedBlowsAuras       core.AuraArray
 	FaerieFireAuras          core.AuraArray
 	FrenziedRegenerationAura *core.Aura
@@ -83,12 +76,7 @@ type Druid struct {
 	ProwlAura                *core.Aura
 	SurvivalInstinctsAura    *core.Aura
 
-	SavageRoarDurationTable [6]time.Duration
-
-	ProcOoc func(sim *core.Simulation)
-
-	form         DruidForm
-	disabledMCDs []*core.MajorCooldown
+	form DruidForm
 
 	// Guardian leather specialization is form-specific
 	GuardianLeatherSpecTracker *core.Aura
@@ -102,19 +90,31 @@ const (
 	DruidSpellHurricane
 	DruidSpellAstralStorm
 	DruidSpellAstralCommunion
+	DruidSpellFerociousBite
+	DruidSpellFrenziedRegeneration
 	DruidSpellInnervate
+	DruidSpellLacerate
 	DruidSpellMangleBear
 	DruidSpellMangleCat
 	DruidSpellMaul
+	DruidSpellMightOfUrsoc
 	DruidSpellMoonfire
 	DruidSpellMoonfireDoT
+	DruidSpellRake
 	DruidSpellRavage
+	DruidSpellRip
+	DruidSpellSavageDefense
+	DruidSpellSavageRoar
 	DruidSpellShred
 	DruidSpellStarfall
 	DruidSpellStarfire
 	DruidSpellStarsurge
 	DruidSpellSunfire
 	DruidSpellSunfireDoT
+	DruidSpellSwipeBear
+	DruidSpellSwipeCat
+	DruidSpellThrashBear
+	DruidSpellThrashCat
 	DruidSpellWildMushroom
 	DruidSpellWildMushroomDetonate
 	DruidSpellWrath
@@ -136,6 +136,10 @@ const (
 	DruidSpellHoT                = DruidSpellRejuvenation | DruidSpellLifebloom | DruidSpellRegrowth | DruidSpellWildGrowth
 	DruidSpellInstant            = DruidSpellBarkskin | DruidSpellMoonfire | DruidSpellStarfall | DruidSpellSunfire | DruidSpellFearieFire | DruidSpellBarkskin
 	DruidSpellMangle             = DruidSpellMangleBear | DruidSpellMangleCat
+	DruidSpellThrash             = DruidSpellThrashBear | DruidSpellThrashCat
+	DruidSpellSwipe              = DruidSpellSwipeBear | DruidSpellSwipeCat
+	DruidSpellBuilder            = DruidSpellMangleCat | DruidSpellShred | DruidSpellRake | DruidSpellRavage
+	DruidSpellFinisher           = DruidSpellFerociousBite | DruidSpellRip | DruidSpellSavageRoar
 	DruidArcaneSpells            = DruidSpellMoonfire | DruidSpellMoonfireDoT | DruidSpellStarfire | DruidSpellStarsurge | DruidSpellStarfall
 	DruidNatureSpells            = DruidSpellWrath | DruidSpellStarsurge | DruidSpellSunfire | DruidSpellSunfireDoT | DruidSpellHurricane
 	DruidHealingNonInstantSpells = DruidSpellHealingTouch | DruidSpellRegrowth | DruidSpellNourish
@@ -254,13 +258,10 @@ func (druid *Druid) RegisterFeralCatSpells() {
 	druid.registerRakeSpell()
 	druid.registerRavageSpell()
 	druid.registerRipSpell()
-	// druid.registerSavageRoarSpell()
-	// druid.registerShredSpell()
 	druid.registerSwipeBearSpell()
 	druid.registerSwipeCatSpell()
 	druid.registerThrashBearSpell()
 	druid.registerThrashCatSpell()
-	// druid.registerTigersFurySpell()
 }
 
 func (druid *Druid) RegisterFeralTankSpells() {
@@ -282,10 +283,11 @@ func (druid *Druid) RegisterFeralTankSpells() {
 }
 
 func (druid *Druid) Reset(_ *core.Simulation) {
-	druid.BleedsActive = 0
 	druid.form = druid.StartingForm
-	druid.disabledMCDs = []*core.MajorCooldown{}
-	druid.RebirthUsed = false
+
+	for target := range druid.BleedsActive {
+		druid.BleedsActive[target] = 0
+	}
 }
 
 func (druid *Druid) OnEncounterStart(sim *core.Simulation) {
@@ -299,7 +301,11 @@ func New(char *core.Character, form DruidForm, selfBuffs SelfBuffs, talents stri
 		StartingForm:      form,
 		form:              form,
 		ClassSpellScaling: core.GetClassSpellScalingCoefficient(proto.Class_ClassDruid),
+		BleedsActive:      make(map[*core.Unit]int32),
+		RipBaseNumTicks:   8,
 	}
+
+	druid.RipMaxNumTicks = druid.RipBaseNumTicks + 3
 
 	core.FillTalentsProto(druid.Talents.ProtoReflect(), talents)
 	druid.EnableManaBar()

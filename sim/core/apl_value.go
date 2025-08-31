@@ -208,18 +208,31 @@ func (rot *APLRotation) newAPLValue(config *proto.APLValue) APLValue {
 		value = rot.newValueAuraIsKnown(config.GetAuraIsKnown(), config.Uuid)
 	case *proto.APLValue_AuraIsActive:
 		value = rot.newValueAuraIsActive(config.GetAuraIsActive(), config.Uuid)
+	// TODO: Deprecated - Remove in the future
 	case *proto.APLValue_AuraIsActiveWithReactionTime:
-		value = rot.newValueAuraIsActiveWithReactionTime(config.GetAuraIsActiveWithReactionTime(), config.Uuid)
+		inputConfig := config.GetAuraIsActiveWithReactionTime()
+		inputConfig.IncludeReactionTime = true
+		value = rot.newValueAuraIsActive(inputConfig, config.Uuid)
+	case *proto.APLValue_AuraIsInactive:
+		value = rot.newValueAuraIsInactive(config.GetAuraIsInactive(), config.Uuid)
+	// TODO: Deprecated - Remove in the future
 	case *proto.APLValue_AuraIsInactiveWithReactionTime:
-		value = rot.newValueAuraIsInactiveWithReactionTime(config.GetAuraIsInactiveWithReactionTime(), config.Uuid)
+		inputConfig := config.GetAuraIsInactiveWithReactionTime()
+		inputConfig.IncludeReactionTime = true
+		value = rot.newValueAuraIsInactive(inputConfig, config.Uuid)
 	case *proto.APLValue_AuraRemainingTime:
 		value = rot.newValueAuraRemainingTime(config.GetAuraRemainingTime(), config.Uuid)
 	case *proto.APLValue_AuraNumStacks:
 		value = rot.newValueAuraNumStacks(config.GetAuraNumStacks(), config.Uuid)
 	case *proto.APLValue_AuraInternalCooldown:
 		value = rot.newValueAuraInternalCooldown(config.GetAuraInternalCooldown(), config.Uuid)
+	case *proto.APLValue_AuraIcdIsReady:
+		value = rot.newValueAuraICDIsReady(config.GetAuraIcdIsReady(), config.Uuid)
+	// TODO: Deprecated - Remove in the future
 	case *proto.APLValue_AuraIcdIsReadyWithReactionTime:
-		value = rot.newValueAuraICDIsReadyWithReactionTime(config.GetAuraIcdIsReadyWithReactionTime(), config.Uuid)
+		inputConfig := config.GetAuraIcdIsReadyWithReactionTime()
+		inputConfig.IncludeReactionTime = true
+		value = rot.newValueAuraICDIsReady(inputConfig, config.Uuid)
 	case *proto.APLValue_AuraShouldRefresh:
 		value = rot.newValueAuraShouldRefresh(config.GetAuraShouldRefresh(), config.Uuid)
 
@@ -236,6 +249,8 @@ func (rot *APLRotation) newAPLValue(config *proto.APLValue) APLValue {
 		value = rot.newValueNumEquippedStatProcItems(config.GetNumEquippedStatProcTrinkets(), config.Uuid)
 	case *proto.APLValue_NumStatBuffCooldowns:
 		value = rot.newValueNumStatBuffCooldowns(config.GetNumStatBuffCooldowns(), config.Uuid)
+	case *proto.APLValue_AnyStatBuffCooldownsActive:
+		value = rot.newValueAnyStatBuffCooldownsActive(config.GetAnyStatBuffCooldownsActive(), config.Uuid)
 
 	// Dots
 	case *proto.APLValue_DotIsActive:
