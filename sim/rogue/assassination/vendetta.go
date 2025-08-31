@@ -55,8 +55,9 @@ func (sinRogue *AssassinationRogue) registerVendetta() {
 	})
 
 	sinRogue.AddMajorCooldown(core.MajorCooldown{
-		Spell:    sinRogue.Vendetta,
-		Type:     core.CooldownTypeDPS,
-		Priority: core.CooldownPriorityDefault,
+		Spell:              sinRogue.Vendetta,
+		Type:               core.CooldownTypeDPS,
+		Priority:           core.CooldownPriorityDefault,
+		AllowSpellQueueing: true,
 	})
 }

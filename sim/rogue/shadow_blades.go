@@ -63,9 +63,10 @@ func (rogue *Rogue) registerShadowBladesCD() {
 	})
 
 	rogue.AddMajorCooldown(core.MajorCooldown{
-		Spell:    rogue.ShadowBlades,
-		Type:     core.CooldownTypeDPS,
-		Priority: core.CooldownPriorityDefault,
+		Spell:              rogue.ShadowBlades,
+		Type:               core.CooldownTypeDPS,
+		Priority:           core.CooldownPriorityDefault,
+		AllowSpellQueueing: true,
 	})
 }
 
