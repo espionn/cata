@@ -76,6 +76,7 @@ type Druid struct {
 	ProwlAura                *core.Aura
 	StampedeAura             *core.Aura
 	StampedePendingAura      *core.Aura
+	TigersFury4PT15Aura      *core.Aura
 	SurvivalInstinctsAura    *core.Aura
 
 	form DruidForm
@@ -117,6 +118,7 @@ const (
 	DruidSpellSwipeCat
 	DruidSpellThrashBear
 	DruidSpellThrashCat
+	DruidSpellTigersFury
 	DruidSpellWildMushroom
 	DruidSpellWildMushroomDetonate
 	DruidSpellWrath

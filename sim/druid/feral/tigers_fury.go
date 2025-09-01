@@ -33,8 +33,9 @@ func (cat *FeralDruid) registerTigersFurySpell() {
 	})
 
 	cat.TigersFury = cat.RegisterSpell(druid.Cat, core.SpellConfig{
-		ActionID: actionID,
-		Flags:    core.SpellFlagAPL | core.SpellFlagReadinessTrinket,
+		ActionID:       actionID,
+		Flags:          core.SpellFlagAPL | core.SpellFlagReadinessTrinket,
+		ClassSpellMask: druid.DruidSpellTigersFury,
 
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
