@@ -62,12 +62,11 @@ export default class IconItemSwapPicker extends Component {
 					{newItem.allSocketColors().map((socketColor, gemIdx) => {
 						const gemContainer = createGemContainer(socketColor, newItem.gems[gemIdx], gemIdx);
 						if (gemIdx === newItem.numPossibleSockets - 1 && newItem.couldHaveExtraSocket()) {
-							const updateGemSlots = () => {
-								const isBlacksmithinItemSlot = [ItemType.ItemTypeWrist, ItemType.ItemTypeHands].includes(newItem.item.type);
-								gemContainer.classList[this.player.isBlacksmithing() && isBlacksmithinItemSlot ? 'remove' : 'add']('hide');
+							const updateProfession = () => {
+								gemContainer.classList[this.player.isBlacksmithing() ? 'remove' : 'add']('hide');
 							};
-							this.player.professionChangeEmitter.on(updateGemSlots);
-							updateGemSlots();
+							this.player.professionChangeEmitter.on(updateProfession);
+							updateProfession();
 						}
 						return gemContainer;
 					})}

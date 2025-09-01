@@ -485,11 +485,11 @@ export class EquippedItem {
 	}
 
 	requiresExtraSocket(): boolean {
-		return [ItemType.ItemTypeWrist, ItemType.ItemTypeHands].includes(this.item.type) && this.hasExtraGem() && this._gems[this._gems.length - 1] != null;
+		return this.couldHaveExtraSocket() && this.hasExtraGem() && this._gems[this._gems.length - 1] != null;
 	}
 
 	hasExtraSocket(isBlacksmithing: boolean): boolean {
-		return isBlacksmithing && [ItemType.ItemTypeWrist, ItemType.ItemTypeHands].includes(this.item.type);
+		return isBlacksmithing && this.couldHaveExtraSocket();
 	}
 
 	numSockets(isBlacksmithing: boolean): number {

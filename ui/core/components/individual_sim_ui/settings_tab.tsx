@@ -407,6 +407,7 @@ export class SettingsTab extends SimTab {
 			inFrontOfTarget: this.simUI.player.getInFrontOfTarget(),
 			distanceFromTarget: this.simUI.player.getDistanceFromTarget(),
 			healingModel: this.simUI.player.getHealingModel(),
+			challengeMode: this.simUI.player.getChallengeModeEnabled(),
 		});
 	}
 

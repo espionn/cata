@@ -563,8 +563,8 @@ export class ReforgeOptimizer {
 				const includeEOTBPGemSocket = new BooleanPicker(null, this.player, {
 					extraCssClasses: ['mb-2'],
 					id: 'reforge-optimizer-include-eotbp-socket',
-					label: 'Include EOTBP Socket',
-					labelTooltip: 'Allows the optimiser to also include the "Eye of The Black Prince" socket in the optimization.',
+					label: 'Include EotBP Socket',
+					labelTooltip: 'Allows the optimiser to also include the "Eye of the Black Prince" socket in the optimization.',
 					inline: true,
 					changedEvent: () =>
 						TypedEvent.onAny([this.includeGemsChangeEmitter, this.includeEOTBPGemSocketChangeEmitter, this.player.gearChangeEmitter]),
