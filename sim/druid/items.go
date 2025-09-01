@@ -145,7 +145,7 @@ func (druid *Druid) registerStampede() {
 		},
 
 		OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if spell.Matches(DruidSpellRavage) && result.Landed() {
+			if spell.Matches(DruidSpellRavage) {
 				druid.StampedeAura.Deactivate(sim)
 				druid.StampedePendingAura.Activate(sim)
 			}
@@ -154,10 +154,6 @@ func (druid *Druid) registerStampede() {
 		OnExpire: func(_ *core.Aura, _ *core.Simulation) {
 			druid.Ravage.ExtraCastCondition = oldExtraCastCondition
 			druid.Ravage.Cost.FlatModifier += 45
-		},
-
-		OnEncounterStart: func(_ *core.Aura, sim *core.Simulation) {
-			druid.StampedeAura.Activate(sim)
 		},
 	})
 }
