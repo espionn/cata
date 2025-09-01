@@ -159,7 +159,7 @@ func (shaman *Shaman) newFlametongueImbueSpell(weapon *core.Item) *core.Spell {
 		ProcMask:         core.ProcMaskSpellDamageProc,
 		ClassSpellMask:   SpellMaskFlametongueWeapon,
 		Flags:            core.SpellFlagPassiveSpell | SpellFlagShamanSpell,
-		DamageMultiplier: weapon.SwingSpeed / 2.6, // WIll be updated on item swap L232
+		DamageMultiplier: weapon.SwingSpeed / 2.6,
 		CritMultiplier:   shaman.DefaultCritMultiplier(),
 		ThreatMultiplier: 1,
 		BonusCoefficient: 0.05799999833,
@@ -190,13 +190,16 @@ func (shaman *Shaman) makeFTProcTriggerAura(itemSlot proto.ItemSlot, triggerProc
 			mh := shaman.MainHand()
 			mhSwap := shaman.ItemSwap.GetUnequippedItemBySlot(is)
 			if mh.TempEnchant != flametongueEnchantID {
+				// The new main hand does not have flametongue on, so deactivate
 				aura.Deactivate(sim)
 				return
 			}
 			if mhSwap.TempEnchant != flametongueEnchantID {
+				// The new main hand has flametongue on and the swapped one does not, so need to activate
 				aura.Activate(sim)
 				return
 			}
+			// Both weapons have flametongue on, so just change the attack speed damage multiplier.
 			flameTongueSpell.DamageMultiplier /= mhSwap.SwingSpeed
 			flameTongueSpell.DamageMultiplier *= mh.SwingSpeed
 		}
@@ -204,13 +207,16 @@ func (shaman *Shaman) makeFTProcTriggerAura(itemSlot proto.ItemSlot, triggerProc
 			oh := shaman.OffHand()
 			ohSwap := shaman.ItemSwap.GetUnequippedItemBySlot(is)
 			if oh.TempEnchant != flametongueEnchantID {
+				// The new offhand does not have flametongue on, so deactivate
 				aura.Deactivate(sim)
 				return
 			}
 			if ohSwap.TempEnchant != flametongueEnchantID {
+				// The new offhand has flametongue on and the swapped one does not, so need to activate
 				aura.Activate(sim)
 				return
 			}
+			// Both weapons have flametongue on, so just change the attack speed damage multiplier.
 			if ohSwap.SwingSpeed != 0 {
 				flameTongueSpell.DamageMultiplier /= ohSwap.SwingSpeed
 			}
@@ -235,14 +241,14 @@ func (shaman *Shaman) RegisterFlametongueImbue(procMask core.ProcMask) {
 		Label:    "Flametongue Weapon",
 		Duration: core.NeverExpires,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			shaman.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexFire] *= magicDamageBonus
-			shaman.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexFrost] *= magicDamageBonus
-			shaman.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexNature] *= magicDamageBonus
+			for si := stats.SchoolIndexArcane; si < stats.SchoolLen; si++ {
+				shaman.PseudoStats.SchoolDamageDealtMultiplier[si] *= magicDamageBonus
+			}
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			shaman.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexFire] /= magicDamageBonus
-			shaman.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexFrost] /= magicDamageBonus
-			shaman.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexNature] /= magicDamageBonus
+			for si := stats.SchoolIndexArcane; si < stats.SchoolLen; si++ {
+				shaman.PseudoStats.SchoolDamageDealtMultiplier[si] /= magicDamageBonus
+			}
 		},
 		OnReset: func(aura *core.Aura, sim *core.Simulation) {
 			if shaman.MainHand().TempEnchant == flametongueEnchantID || shaman.OffHand().TempEnchant == flametongueEnchantID {
