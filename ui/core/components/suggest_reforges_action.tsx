@@ -569,7 +569,7 @@ export class ReforgeOptimizer {
 					changedEvent: () =>
 						TypedEvent.onAny([this.includeGemsChangeEmitter, this.includeEOTBPGemSocketChangeEmitter, this.player.gearChangeEmitter]),
 					getValue: () => this.includeEOTBPGemSocket,
-					showWhen: () => this.includeGems && this.player.hasEOTPBItemEquipped(),
+					showWhen: () => this.includeGems && this.player.hasEotBPItemEquipped(),
 					setValue: (eventID, _player, newValue) => {
 						this.setIncludeEOTBPGemSocket(eventID, newValue);
 					},

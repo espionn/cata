@@ -1299,7 +1299,7 @@ export class Player<SpecType extends Spec> {
 		});
 	}
 
-	hasEOTPBItemEquipped() {
+	hasEotBPItemEquipped() {
 		return [ItemSlot.ItemSlotMainHand, ItemSlot.ItemSlotOffHand].some(itemSlot => {
 			const item = this.getEquippedItem(itemSlot)?.item;
 			return item && (isShaTouchedWeapon(item) || isThroneOfThunderWeapon(item));
