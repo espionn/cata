@@ -313,11 +313,11 @@ func (dot *Dot) getChannelClipDelay(sim *Simulation) time.Duration {
 
 	// if we're channeling the same spell again, we don't need to add a delay
 	// within the game we'd actually cast before the last tick and it would be carried over
-	if channelAction, ok := nextAction.impl.(*APLActionCastSpell); ok && channelAction.spell == channeledDot.Spell {
+	if channelAction, ok := nextAction.impl.(*APLActionCastSpell); ok && ((channelAction.spell == channeledDot.Spell) || (channelAction.spell.Matches(channeledDot.Spell.ClassSpellMask))) {
 		return 0
 	}
 
-	if channelAction, ok := nextAction.impl.(*APLActionChannelSpell); ok && channelAction.spell == channeledDot.Spell {
+	if channelAction, ok := nextAction.impl.(*APLActionChannelSpell); ok && ((channelAction.spell == channeledDot.Spell) || (channelAction.spell.Matches(channeledDot.Spell.ClassSpellMask))) {
 		return 0
 	}
 

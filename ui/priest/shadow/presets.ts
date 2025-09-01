@@ -21,11 +21,11 @@ export const P1_EP_PRESET = PresetUtils.makePresetEpWeights(
 	Stats.fromMap({
 		[Stat.StatIntellect]: 1.0,
 		[Stat.StatSpirit]: 0.9,
-		[Stat.StatSpellPower]: 0.79,
+		[Stat.StatSpellPower]: 0.98,
 		[Stat.StatHitRating]: 0.85,
-		[Stat.StatCritRating]: 0.42,
-		[Stat.StatHasteRating]: 0.76,
-		[Stat.StatMasteryRating]: 0.48,
+		[Stat.StatCritRating]: 0.46,
+		[Stat.StatHasteRating]: 0.49,
+		[Stat.StatMasteryRating]: 0.44,
 	}),
 );
 
@@ -149,7 +149,7 @@ export const DefaultDebuffs = Debuffs.create({
 });
 
 export const OtherDefaults = {
-	channelClipDelay: 40,
+	channelClipDelay: 100,
 	distanceFromTarget: 28,
 	profession1: Profession.Engineering,
 	profession2: Profession.Tailoring,
