@@ -1,7 +1,7 @@
 import { Encounter } from '../../core/encounter';
 import * as PresetUtils from '../../core/preset_utils.js';
 import { Class, ConsumesSpec, Debuffs, Encounter as EncounterProto, Glyphs, Profession, Race, RaidBuffs, Stat } from '../../core/proto/common.js';
-import { ElementalShaman_Options as ElementalShamanOptions, FeleAutocastSettings, ShamanMajorGlyph, ShamanShield } from '../../core/proto/shaman.js';
+import { ElementalShaman_Options as ElementalShamanOptions, FeleAutocastSettings, ShamanImbue, ShamanMajorGlyph, ShamanShield } from '../../core/proto/shaman.js';
 import { SavedTalents } from '../../core/proto/ui.js';
 import { Stats } from '../../core/proto_utils/stats';
 import { defaultRaidBuffMajorDamageCooldowns } from '../../core/proto_utils/utils';
@@ -86,11 +86,11 @@ export const DefaultOptions = ElementalShamanOptions.create({
 	classOptions: {
 		shield: ShamanShield.LightningShield,
 		feleAutocast: FeleAutocastSettings.create({
-			autocastFireblast: true,
-			autocastFirenova: true,
-			autocastImmolate: true,
-			autocastEmpower: false,
-		}),
+					autocastFireblast: true,
+					autocastFirenova: true,
+					autocastImmolate: true,
+					autocastEmpower: false,
+				}),
 	},
 });
 
