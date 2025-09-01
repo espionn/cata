@@ -5,11 +5,8 @@ import {
 	APLValueAnd,
 	APLValueAnyStatBuffCooldownsActive,
 	APLValueAnyTrinketStatProcsActive,
-	APLValueAuraICDIsReadyWithReactionTime,
 	APLValueAuraInternalCooldown,
 	APLValueAuraIsActive,
-	APLValueAuraIsActiveWithReactionTime,
-	APLValueAuraIsInactiveWithReactionTime,
 	APLValueAuraIsKnown,
 	APLValueAuraNumStacks,
 	APLValueAuraRemainingTime,
@@ -105,6 +102,8 @@ import {
 	APLValueUnitIsMoving,
 	APLValueWarlockHandOfGuldanInFlight,
 	APLValueWarlockHauntInFlight,
+	APLValueAuraIsInactive,
+	APLValueAuraICDIsReady,
 } from '../../proto/apl.js';
 import { Class, Spec } from '../../proto/common.js';
 import { ShamanTotems_TotemType as TotemType } from '../../proto/shaman.js';
@@ -1118,21 +1117,36 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		label: i18n.t('rotation.apl.values.aura_active.label'),
 		submenu: ['aura'],
 		shortDescription: i18n.t('rotation.apl.values.aura_active.tooltip'),
-		newValue: APLValueAuraIsActive.create,
-		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
+		newValue: () => APLValueAuraIsActive.create({ includeReactionTime: true }),
+		fields: [
+			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
+			AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit'),
+			AplHelpers.reactionTimeCheckbox(),
+		],
 	}),
 	auraIsActiveWithReactionTime: inputBuilder({
 		label: i18n.t('rotation.apl.values.aura_active_with_reaction_time.label'),
 		submenu: ['aura'],
 		shortDescription: i18n.t('rotation.apl.values.aura_active_with_reaction_time.tooltip'),
-		newValue: APLValueAuraIsActiveWithReactionTime.create,
+		newValue: () => APLValueAuraIsActive.create({ includeReactionTime: true }),
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
+	}),
+	auraIsInactive: inputBuilder({
+		label: i18n.t('rotation.apl.values.aura_inactive.label'),
+		submenu: ['Aura'],
+		shortDescription: i18n.t('rotation.apl.values.aura_inactive.tooltip'),
+		newValue: () => APLValueAuraIsInactive.create({ includeReactionTime: true }),
+		fields: [
+			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
+			AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit'),
+			AplHelpers.reactionTimeCheckbox(),
+		],
 	}),
 	auraIsInactiveWithReactionTime: inputBuilder({
 		label: i18n.t('rotation.apl.values.aura_inactive_with_reaction_time.label'),
-		submenu: ['aura'],
+		submenu: ['Aura'],
 		shortDescription: i18n.t('rotation.apl.values.aura_inactive_with_reaction_time.tooltip'),
-		newValue: APLValueAuraIsInactiveWithReactionTime.create,
+		newValue: () => APLValueAuraIsInactive.create({ includeReactionTime: true }),
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
 	}),
 	auraRemainingTime: inputBuilder({
@@ -1146,8 +1160,12 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		label: i18n.t('rotation.apl.values.aura_num_stacks.label'),
 		submenu: ['aura'],
 		shortDescription: i18n.t('rotation.apl.values.aura_num_stacks.tooltip'),
-		newValue: APLValueAuraNumStacks.create,
-		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'stackable_auras', 'sourceUnit')],
+		newValue: () => APLValueAuraNumStacks.create({ includeReactionTime: true }),
+		fields: [
+			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
+			AplHelpers.actionIdFieldConfig('auraId', 'stackable_auras', 'sourceUnit'),
+			AplHelpers.reactionTimeCheckbox(),
+		],
 	}),
 	auraInternalCooldown: inputBuilder({
 		label: i18n.t('rotation.apl.values.aura_remaining_icd.label'),
@@ -1156,11 +1174,22 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		newValue: APLValueAuraInternalCooldown.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'icd_auras', 'sourceUnit')],
 	}),
+	auraIcdIsReady: inputBuilder({
+		label: i18n.t('rotation.apl.values.aura_icd_is_ready.label'),
+		submenu: ['aura'],
+		shortDescription: i18n.t('rotation.apl.values.aura_icd_is_ready.tooltip'),
+		newValue: () => APLValueAuraICDIsReady.create({ includeReactionTime: true }),
+		fields: [
+			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
+			AplHelpers.actionIdFieldConfig('auraId', 'icd_auras', 'sourceUnit'),
+			AplHelpers.reactionTimeCheckbox(),
+		],
+	}),
 	auraIcdIsReadyWithReactionTime: inputBuilder({
 		label: i18n.t('rotation.apl.values.aura_icd_is_ready_with_reaction_time.label'),
 		submenu: ['aura'],
 		shortDescription: i18n.t('rotation.apl.values.aura_icd_is_ready_with_reaction_time.tooltip'),
-		newValue: APLValueAuraICDIsReadyWithReactionTime.create,
+		newValue: () => APLValueAuraICDIsReady.create({ includeReactionTime: true }),
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'icd_auras', 'sourceUnit')],
 	}),
 	auraShouldRefresh: inputBuilder({

@@ -108,11 +108,12 @@ func (shaman *Shaman) ApplyElementalTalents() {
 	manaMetrics := shaman.NewManaMetrics(actionID)
 
 	core.MakeProcTriggerAura(&shaman.Unit, core.ProcTrigger{
-		Name:           "Rolling Thunder",
-		ActionID:       actionID,
-		ClassSpellMask: SpellMaskChainLightning | SpellMaskChainLightningOverload | SpellMaskLightningBolt | SpellMaskLightningBoltOverload | SpellMaskLavaBeam | SpellMaskLavaBeamOverload,
-		Callback:       core.CallbackOnSpellHitDealt,
-		ProcChance:     0.6,
+		Name:            "Rolling Thunder",
+		ActionID:        actionID,
+		MetricsActionID: actionID,
+		ClassSpellMask:  SpellMaskChainLightning | SpellMaskChainLightningOverload | SpellMaskLightningBolt | SpellMaskLightningBoltOverload | SpellMaskLavaBeam | SpellMaskLavaBeamOverload,
+		Callback:        core.CallbackOnSpellHitDealt,
+		ProcChance:      0.6,
 		ExtraCondition: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) bool {
 			return shaman.SelfBuffs.Shield == proto.ShamanShield_LightningShield
 		},

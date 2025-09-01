@@ -75,6 +75,7 @@ func (arcane *ArcaneMage) registerArcaneMissilesSpell() {
 				OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 					arcane.ArcaneChargesAura.Activate(sim)
 					arcane.ArcaneChargesAura.AddStack(sim)
+					arcane.ExtendGCDUntil(sim, sim.CurrentTime+arcane.ReactionTime)
 				},
 				OnReset: func(aura *core.Aura, sim *core.Simulation) {
 					if arcane.T16_4pc != nil && arcane.T16_4pc.IsActive() && sim.Proc(0.15, "Item - Mage T16 4P Bonus") {
@@ -116,7 +117,7 @@ func (arcane *ArcaneMage) registerArcaneMissilesSpell() {
 
 	// Listener for procs
 	core.MakeProcTriggerAura(&arcane.Unit, core.ProcTrigger{
-		Name:              "Arcane Missiles Activation",
+		Name:              "Arcane Missiles - Activation",
 		ActionID:          core.ActionID{SpellID: 79684},
 		ClassSpellMask:    mage.MageSpellsAll ^ (mage.MageSpellArcaneMissilesCast | mage.MageSpellArcaneMissilesTick | mage.MageSpellNetherTempestDot | mage.MageSpellLivingBombDot),
 		SpellFlagsExclude: core.SpellFlagHelpful,

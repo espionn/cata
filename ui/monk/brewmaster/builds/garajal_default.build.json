@@ -137,11 +137,11 @@
 									{
 										"cmp": {
 											"op": "OpGe",
-											"lhs": { "auraNumStacks": { "auraId": { "spellId": 128938 } } },
+											"lhs": { "auraNumStacks": { "auraId": { "spellId": 128938 }, "includeReactionTime": true } },
 											"rhs": { "const": { "val": "6" } }
 										}
 									},
-									{ "auraIsInactiveWithReactionTime": { "auraId": { "spellId": 115308 } } }
+									{ "auraIsInactive": { "auraId": { "spellId": 128938 }, "includeReactionTime": true } }
 								]
 							}
 						},
@@ -162,7 +162,7 @@
 													"cmp": {
 														"op": "OpGe",
 														"lhs": { "spellTimeToReady": { "spellId": { "spellId": 121253 } } },
-														"rhs": { "const": { "val": "1.5" } }
+														"rhs": { "const": { "val": "1.5s" } }
 													}
 												}
 											]
@@ -183,15 +183,15 @@
 										"cmp": {
 											"op": "OpGt",
 											"lhs": { "auraRemainingTime": { "auraId": { "spellId": 115307 } } },
-											"rhs": { "const": { "val": "2" } }
+											"rhs": { "const": { "val": "2s" } }
 										}
 									},
 									{ "cmp": { "op": "OpGe", "lhs": { "monkCurrentChi": {} }, "rhs": { "const": { "val": "3" } } } },
-									{ "auraIsActive": { "auraId": { "spellId": 118636 } } },
+									{ "auraIsActive": { "auraId": { "spellId": 118636 }, "includeReactionTime": true } },
 									{
 										"cmp": {
 											"op": "OpGe",
-											"lhs": { "auraNumStacks": { "auraId": { "spellId": 120267 } } },
+											"lhs": { "auraNumStacks": { "auraId": { "spellId": 120267 }, "includeReactionTime": true } },
 											"rhs": { "const": { "val": "80000" } }
 										}
 									}
@@ -210,7 +210,7 @@
 										"cmp": {
 											"op": "OpLe",
 											"lhs": { "spellTimeToReady": { "spellId": { "spellId": 121253 } } },
-											"rhs": { "const": { "val": "1.5" } }
+											"rhs": { "const": { "val": "1.5s" } }
 										}
 									},
 									{
@@ -236,7 +236,7 @@
 										"cmp": {
 											"op": "OpLe",
 											"lhs": { "spellTimeToReady": { "spellId": { "spellId": 121253 } } },
-											"rhs": { "const": { "val": ".5" } }
+											"rhs": { "const": { "val": ".5s" } }
 										}
 									},
 									{
@@ -271,7 +271,7 @@
 										"cmp": {
 											"op": "OpLe",
 											"lhs": { "auraRemainingTime": { "auraId": { "spellId": 115307 } } },
-											"rhs": { "const": { "val": "2" } }
+											"rhs": { "const": { "val": "2s" } }
 										}
 									},
 									{ "cmp": { "op": "OpLe", "lhs": { "monkCurrentChi": {} }, "rhs": { "const": { "val": "1" } } } },
@@ -291,7 +291,7 @@
 										"cmp": {
 											"op": "OpLe",
 											"lhs": { "auraRemainingTime": { "auraId": { "spellId": 115307 } } },
-											"rhs": { "const": { "val": "2" } }
+											"rhs": { "const": { "val": "2s" } }
 										}
 									},
 									{ "cmp": { "op": "OpLe", "lhs": { "monkCurrentChi": {} }, "rhs": { "const": { "val": "1" } } } }
@@ -310,7 +310,7 @@
 										"cmp": {
 											"op": "OpLe",
 											"lhs": { "auraRemainingTime": { "auraId": { "spellId": 115307 } } },
-											"rhs": { "const": { "val": "1.5" } }
+											"rhs": { "const": { "val": "1.5s" } }
 										}
 									},
 									{
@@ -320,7 +320,7 @@
 													"cmp": {
 														"op": "OpLe",
 														"lhs": { "spellTimeToReady": { "spellId": { "spellId": 121253 } } },
-														"rhs": { "const": { "val": "2" } }
+														"rhs": { "const": { "val": "2s" } }
 													}
 												},
 												{
@@ -368,7 +368,7 @@
 				{
 					"action": {
 						"condition": {
-							"cmp": { "op": "OpLe", "lhs": { "auraRemainingTime": { "auraId": { "spellId": 125359 } } }, "rhs": { "const": { "val": "1.5" } } }
+							"cmp": { "op": "OpLe", "lhs": { "auraRemainingTime": { "auraId": { "spellId": 125359 } } }, "rhs": { "const": { "val": "1.5s" } } }
 						},
 						"castSpell": { "spellId": { "spellId": 100787 } }
 					}
@@ -386,7 +386,7 @@
 						"condition": {
 							"cmp": {
 								"op": "OpLt",
-								"lhs": { "auraNumStacks": { "auraId": { "spellId": 124081, "tag": 1 } } },
+								"lhs": { "auraNumStacks": { "auraId": { "spellId": 124081, "tag": 1 }, "includeReactionTime": true } },
 								"rhs": { "const": { "val": "2" } }
 							}
 						},

@@ -784,6 +784,11 @@ func (unit *Unit) onEncounterStart(sim *Simulation) {
 		agent.OnEncounterStart(sim)
 	}
 
+	// Reduce Haste fakepoints arising from overly precise swing timings relative to the GCD timer.
+	if unit.AutoAttacks.AutoSwingMelee && (unit.Type != EnemyUnit) && unit.AutoAttacks.RandomMeleeOffset {
+		unit.AutoAttacks.RandomizeMeleeTiming(sim)
+	}
+
 	unit.OnEncounterStart(sim)
 }
 

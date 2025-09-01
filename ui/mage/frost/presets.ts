@@ -6,7 +6,6 @@ import { SavedTalents } from '../../core/proto/ui';
 import { Stats } from '../../core/proto_utils/stats';
 import FrostApl from './apls/frost.apl.json';
 import FrostAoeApl from './apls/frost_aoe.apl.json';
-import FrostCleaveApl from './apls/frost_cleave.apl.json';
 import P1PreBISGear from './gear_sets/p1_prebis.gear.json';
 import P1PostMSVGear from './gear_sets/p1_post_msv.gear.json';
 import P1PostHOFGear from './gear_sets/p1_post_hof.gear.json';

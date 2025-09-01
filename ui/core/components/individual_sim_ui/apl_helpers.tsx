@@ -875,3 +875,9 @@ export function aplInputBuilder<T>(
 		});
 	};
 }
+
+export function reactionTimeCheckbox(): APLPickerBuilderFieldConfig<any, any> {
+	return booleanFieldConfig('includeReactionTime', 'Include Reaction Time', {
+		labelTooltip: 'If checked, will use the configured reaction time.',
+	});
+}

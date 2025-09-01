@@ -4204,7 +4204,7 @@
 			"meta_gem_disabled": "Gemme méta désactivée ({{gemName}}) : {{description}}",
 			"profession_requirement": "{{itemName}} nécessite {{professionName}}, mais elle n'est pas sélectionnée.",
 			"too_many_jc_gems": "Seulement 2 gemmes de joaillerie sont autorisées, mais {{count}} sont équipées.",
-			"unspent_talent_points": "Points de talent non dépensés.",
+			"unspent_talent_points": "Points de talent manquants dans les rangées {{rowNumbers}}.",
 			"armor_specialization": "Équipez de l'équipement {{armorType}} dans chaque emplacement pour l'effet de spécialisation d'armure (5% de statistique primaire).",
 			"dual_wield_2h_without_titans_grip": "Manier deux armes à deux mains sans la spécialisation Poigne de Titan."
 		},

@@ -3471,15 +3471,19 @@
 				},
 				"aura_active": {
 					"label": "Aura Active",
-					"tooltip": "<b>True</b> if the aura is currently active, otherwise <b>False</b>."
+					"tooltip": "<b>True</b> if the aura is currently active AND it has been active for at least as long as the player reaction time (configured in Settings), otherwise <b>False</b>."
 				},
 				"aura_active_with_reaction_time": {
-					"label": "Aura Active (with Reaction Time)",
-					"tooltip": "Returns true if the specified aura is active, accounting for reaction time."
+					"label": "[DEPRECATED] Aura Active (with Reaction Time)",
+					"tooltip": "All Aura checks now contain Reaction Time logic, so this is no longer needed. Use <b Aura Active</b> instead."
+				},
+				"aura_inactive": {
+					"label": "Aura Inactive",
+					"tooltip": "<b>True</b> if the aura is not currently active AND it has been inactive for at least as long as the player reaction time (configured in Settings), otherwise <b>False</b>."
 				},
 				"aura_inactive_with_reaction_time": {
-					"label": "Aura Inactive (with Reaction Time)",
-					"tooltip": "Returns true if the specified aura is inactive, accounting for reaction time."
+					"label": "[DEPRECATED] Aura Inactive (with Reaction Time)",
+					"tooltip": "All Aura checks now contain Reaction Time logic, so this is no longer needed. Use <b Aura Inactive</b> instead."
 				},
 				"aura_remaining_time": {
 					"label": "Aura Remaining Time",
@@ -3597,9 +3601,13 @@
 					"label": "Aura Remaining ICD",
 					"tooltip": "Time remaining before this aura's internal cooldown will be ready, or 0 if the ICD is ready now."
 				},
+				"aura_icd_is_ready": {
+					"label": "Aura ICD Is Ready",
+					"tooltip": "<b>True</b> if the aura's ICD is currently ready OR it was put on CD recently, within the player's reaction time (configured in Settings), otherwise <b>False</b>."
+				},
 				"aura_icd_is_ready_with_reaction_time": {
-					"label": "Aura ICD Is Ready (with Reaction Time)",
-					"tooltip": "True if the aura's ICD is currently ready OR it was put on CD recently, within the player's reaction time (configured in Settings), otherwise False."
+					"label": "[DEPRECATED] Aura ICD Is Ready (with Reaction Time)",
+					"tooltip": "All Aura checks now contain Reaction Time logic, so this is no longer needed. Use <b>Aura ICD Is Ready</b> instead."
 				},
 				"overlap": {
 					"label": "Overlap",
@@ -4204,7 +4212,7 @@
 			"meta_gem_disabled": "Meta gem disabled ({{gemName}}): {{description}}",
 			"profession_requirement": "{{itemName}} requires {{professionName}}, but it is not selected.",
 			"too_many_jc_gems": "Only 2 Jewelcrafting Gems are allowed, but {{count}} are equipped.",
-			"unspent_talent_points": "Unspent talent points.",
+			"unspent_talent_points": "Missing required talent selections in row {{rowNumbers}}.",
 			"armor_specialization": "Equip {{armorType}} gear in each slot for the Armor Specialization (5% primary stat) effect.",
 			"dual_wield_2h_without_titans_grip": "Dual wielding two-handed weapon(s) without Titan's Grip spec."
 		},

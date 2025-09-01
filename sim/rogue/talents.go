@@ -67,9 +67,10 @@ func (rogue *Rogue) ApplyTalents() {
 		})
 
 		rogue.AddMajorCooldown(core.MajorCooldown{
-			Spell:    mfdSpell,
-			Type:     core.CooldownTypeDPS,
-			Priority: core.CooldownPriorityDefault,
+			Spell:              mfdSpell,
+			Type:               core.CooldownTypeDPS,
+			Priority:           core.CooldownPriorityDefault,
+			AllowSpellQueueing: true,
 		})
 	}
 
