@@ -4139,6 +4139,9 @@
                 "aura_active_with_reaction_time": {
                     "$ref": "#/definitions/ConsumesClass"
                 },
+                "aura_inactive": {
+                    "$ref": "#/definitions/ConsumesClass"
+                },
                 "aura_inactive_with_reaction_time": {
                     "$ref": "#/definitions/ConsumesClass"
                 },
@@ -4229,6 +4232,9 @@
                 "aura_remaining_icd": {
                     "$ref": "#/definitions/ConsumesClass"
                 },
+                "aura_icd_is_ready": {
+                    "$ref": "#/definitions/ConsumesClass"
+                },
                 "aura_icd_is_ready_with_reaction_time": {
                     "$ref": "#/definitions/ConsumesClass"
                 },
@@ -4244,7 +4250,9 @@
                 "any_trinket_stat_procs_active",
                 "aura_active",
                 "aura_active_with_reaction_time",
+                "aura_icd_is_ready",
                 "aura_icd_is_ready_with_reaction_time",
+                "aura_inactive",
                 "aura_inactive_with_reaction_time",
                 "aura_known",
                 "aura_num_stacks",

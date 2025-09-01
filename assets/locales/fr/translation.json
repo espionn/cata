@@ -3471,15 +3471,19 @@
 				},
 				"aura_active": {
 					"label": "Aura Active",
-					"tooltip": "<b>Vrai</b> si l'aura est actuellement active, sinon <b>Faux</b>."
+					"tooltip": "<b>Vrai</b> si l'aura est actuellement active ET qu'elle a été active pendant au moins aussi longtemps que le temps de réaction du joueur (configuré dans Paramètres), sinon <b>Faux</b>."
 				},
 				"aura_active_with_reaction_time": {
-					"label": "Aura Active (avec Temps de Réaction)",
-					"tooltip": "Retourne vrai si l'aura spécifiée est active, en tenant compte du temps de réaction."
+					"label": "[DÉPRÉCIÉ] Aura Active (avec Temps de Réaction)",
+					"tooltip": "Toutes les vérifications d'Aura contiennent maintenant la logique de Temps de Réaction, donc ceci n'est plus nécessaire. Utilisez <b>Aura Active</b> à la place."
+				},
+				"aura_inactive": {
+					"label": "Aura Inactive",
+					"tooltip": "<b>Vrai</b> si l'aura n'est pas actuellement active ET qu'elle a été inactive pendant au moins aussi longtemps que le temps de réaction du joueur (configuré dans Paramètres), sinon <b>Faux</b>."
 				},
 				"aura_inactive_with_reaction_time": {
-					"label": "Aura Inactive (avec Temps de Réaction)",
-					"tooltip": "Retourne vrai si l'aura spécifiée est inactive, en tenant compte du temps de réaction."
+					"label": "[DÉPRÉCIÉ] Aura Inactive (avec Temps de Réaction)",
+					"tooltip": "Toutes les vérifications d'Aura contiennent maintenant la logique de Temps de Réaction, donc ceci n'est plus nécessaire. Utilisez <b>Aura Inactive</b> à la place."
 				},
 				"aura_remaining_time": {
 					"label": "Temps Restant d'Aura",
@@ -3597,9 +3601,13 @@
 					"label": "Temps Restant ICD Aura",
 					"tooltip": "Temps restant avant que le temps de recharge interne de cette aura soit prêt, ou 0 si l'ICD est prêt maintenant."
 				},
+				"aura_icd_is_ready": {
+					"label": "ICD Aura Prêt",
+					"tooltip": "<b>Vrai</b> si l'ICD de l'aura est actuellement prêt OU s'il a été mis en CD récemment, dans le temps de réaction du joueur (configuré dans Paramètres), sinon <b>Faux</b>."
+				},
 				"aura_icd_is_ready_with_reaction_time": {
-					"label": "ICD Aura Prêt (avec Temps de Réaction)",
-					"tooltip": "Vrai si l'ICD de l'aura est actuellement prêt OU s'il a été mis en CD récemment, dans le temps de réaction du joueur (configuré dans Paramètres), sinon Faux."
+					"label": "[DÉPRÉCIÉ] ICD Aura Prêt (avec Temps de Réaction)",
+					"tooltip": "Toutes les vérifications d'Aura contiennent maintenant la logique de Temps de Réaction, donc ceci n'est plus nécessaire. Utilisez <b>ICD Aura Prêt</b> à la place."
 				},
 				"overlap": {
 					"label": "Chevauchement",
