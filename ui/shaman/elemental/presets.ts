@@ -91,7 +91,6 @@ export const DefaultOptions = ElementalShamanOptions.create({
 					autocastImmolate: true,
 					autocastEmpower: false,
 				}),
-		imbueMhSwap: ShamanImbue.WindfuryWeapon,
 	},
 });
 

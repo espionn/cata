@@ -33,8 +33,8 @@ func NewEnhancementShaman(character *core.Character, options *proto.Player) *Enh
 		Shield:      enhOptions.ClassOptions.Shield,
 		ImbueMH:     enhOptions.ClassOptions.ImbueMh,
 		ImbueOH:     enhOptions.ImbueOh,
-		ImbueMHSwap: enhOptions.ClassOptions.ImbueMh,
-		ImbueOHSwap: enhOptions.ImbueOh,
+		ImbueMHSwap: enhOptions.ClassOptions.ImbueMhSwap,
+		ImbueOHSwap: enhOptions.ImbueOhSwap,
 	}
 
 	enh := &EnhancementShaman{

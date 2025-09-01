@@ -31,7 +31,7 @@ func NewElementalShaman(character *core.Character, options *proto.Player) *Eleme
 		Shield:      eleOptions.ClassOptions.Shield,
 		ImbueMH:     proto.ShamanImbue_FlametongueWeapon,
 		ImbueOH:     proto.ShamanImbue_NoImbue,
-		ImbueMHSwap: eleOptions.ClassOptions.ImbueMhSwap,
+		ImbueMHSwap: proto.ShamanImbue_FlametongueWeapon,
 		ImbueOHSwap: proto.ShamanImbue_NoImbue,
 	}
 
