@@ -13,12 +13,13 @@ type OnFocusGain func(*Simulation, float64)
 type focusBar struct {
 	unit *Unit
 
-	maxFocus           float64
-	currentFocus       float64
-	baseFocusPerSecond float64
-	focusTickDuration  time.Duration
-	nextFocusTick      time.Duration
-	isPlayer           bool
+	maxFocus              float64
+	currentFocus          float64
+	baseFocusPerSecond    float64
+	focusTickDuration     time.Duration
+	nextFocusTick         time.Duration
+	isPlayer              bool
+	hasHasteRatingScaling bool // Whether the haste rating affects the regen
 
 	// These two terms are multiplied together to scale the total Focus regen from ticks.
 	focusRegenMultiplier  float64
@@ -30,7 +31,7 @@ type focusBar struct {
 	OnFocusGain OnFocusGain
 }
 
-func (unit *Unit) EnableFocusBar(maxFocus float64, baseFocusPerSecond float64, isPlayer bool, onFocusGain OnFocusGain) {
+func (unit *Unit) EnableFocusBar(maxFocus float64, baseFocusPerSecond float64, isPlayer bool, onFocusGain OnFocusGain, hasHasteRatingScaling bool) {
 	unit.SetCurrentPowerBar(FocusBar)
 
 	unit.focusBar = focusBar{
@@ -44,6 +45,7 @@ func (unit *Unit) EnableFocusBar(maxFocus float64, baseFocusPerSecond float64, i
 		regenMetrics:          unit.NewFocusMetrics(ActionID{OtherID: proto.OtherAction_OtherActionFocusRegen}),
 		focusRefundMetrics:    unit.NewFocusMetrics(ActionID{OtherID: proto.OtherAction_OtherActionRefund}),
 		OnFocusGain:           onFocusGain,
+		hasHasteRatingScaling: hasHasteRatingScaling,
 	}
 }
 
@@ -74,11 +76,7 @@ func (fb *focusBar) FocusRegenPerTick() float64 {
 }
 
 func (fb *focusBar) FocusRegenPerSecond() float64 {
-	if fb.isPlayer {
-		return fb.baseFocusPerSecond * fb.getTotalRegenMultiplier()
-	} else {
-		return fb.baseFocusPerSecond
-	}
+	return fb.baseFocusPerSecond * fb.getTotalRegenMultiplier()
 }
 
 func (fb *focusBar) TimeToTargetFocus(targetFocus float64) time.Duration {
@@ -98,10 +96,10 @@ func (fb *focusBar) AddFocus(sim *Simulation, amount float64, metrics *ResourceM
 		panic("Trying to add negative focus!")
 	}
 	newFocus := min(fb.currentFocus+amount, fb.maxFocus)
+	if (fb.isPlayer || fb.currentFocus != newFocus) && sim.Log != nil {
+		fb.unit.Log(sim, "Gained %0.3f focus from %s (%0.3f --> %0.3f) of %0.0f total.", amount, metrics.ActionID, fb.currentFocus, newFocus, fb.maxFocus)
+	}
 	if fb.isPlayer {
-		if sim.Log != nil {
-			fb.unit.Log(sim, "Gained %0.3f focus from %s (%0.3f --> %0.3f) of %0.0f total.", amount, metrics.ActionID, fb.currentFocus, newFocus, fb.maxFocus)
-		}
 		metrics.AddEvent(amount, newFocus-fb.currentFocus)
 	}
 
@@ -149,6 +147,10 @@ func (fb *focusBar) processDynamicHasteRatingChange(sim *Simulation) {
 		return
 	}
 
+	if !fb.hasHasteRatingScaling {
+		return
+	}
+
 	fb.ResetFocusTick(sim)
 	fb.hasteRatingMultiplier = 1.0 + fb.unit.GetStat(stats.HasteRating)/(100*HasteRatingPerHastePercent)
 }
@@ -168,7 +170,13 @@ func (fb *focusBar) reset(sim *Simulation) {
 	}
 
 	fb.currentFocus = fb.maxFocus
-	fb.hasteRatingMultiplier = 1.0 + fb.unit.GetStat(stats.HasteRating)/(100*HasteRatingPerHastePercent)
+	fb.focusRegenMultiplier = 1.0
+
+	if fb.hasHasteRatingScaling {
+		fb.hasteRatingMultiplier = 1.0 + fb.unit.GetStat(stats.HasteRating)/(100*HasteRatingPerHastePercent)
+	} else {
+		fb.hasteRatingMultiplier = 1.0
+	}
 
 	if fb.unit.Type != PetUnit {
 		fb.enable(sim, sim.Environment.PrepullStartTime())

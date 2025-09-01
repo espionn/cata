@@ -54,13 +54,13 @@ $(OUT_DIR)/bundle/.dirstamp: \
   $(UI_SRC) \
   $(PAGE_INDECES) \
   vite.config.mts \
-  vite.build-workers.ts \
+  vite.build-workers.mts \
   node_modules \
   tsconfig.json \
   ui/core/index.ts \
   ui/core/proto/api.ts
 	npx tsc --noEmit
-	npx tsx vite.build-workers.ts
+	npx tsx vite.build-workers.mts
 	npx vite build
 	touch $@
 
@@ -194,7 +194,7 @@ endif
 
 rundevserver: air devserver
 ifeq ($(WATCH), 1)
-	npx tsx vite.build-workers.ts & npx vite build -m development --watch &
+	npx tsx vite.build-workers.mts & npx vite build -m development --watch &
 	ulimit -n 10240 && air -tmp_dir "/tmp" -build.include_ext "go,proto" -build.args_bin "--usefs=true --launch=false" -build.bin "./wowsimmop" -build.cmd "make devserver" -build.exclude_dir "assets,dist,node_modules,ui,tools"
 else
 	./wowsimmop --usefs=true --launch=false --host=":3333"
@@ -212,6 +212,7 @@ wowsimmop-windows.exe: wowsimmop
 release: wowsimmop wowsimmop-windows.exe
 	GOOS=darwin GOARCH=amd64 GOAMD64=v2 go build -o wowsimmop-amd64-darwin -ldflags="-X 'main.Version=$(VERSION)' -s -w" ./sim/web/main.go
 	GOOS=darwin GOARCH=arm64 go build -o wowsimmop-arm64-darwin -ldflags="-X 'main.Version=$(VERSION)' -s -w" ./sim/web/main.go
+	GOOS=darwin GOARCH=arm64 go build -o wowsimcli-arm64-darwin --tags=with_db -ldflags="-X 'main.Version=$(VERSION)' -s -w" ./cmd/wowsimcli/cli_main.go
 	GOOS=linux GOARCH=amd64 GOAMD64=v2 go build -o wowsimmop-amd64-linux   -ldflags="-X 'main.Version=$(VERSION)' -s -w" ./sim/web/main.go
 	GOOS=linux GOARCH=amd64 GOAMD64=v2 go build -o wowsimcli-amd64-linux --tags=with_db -ldflags="-X 'main.Version=$(VERSION)' -s -w" ./cmd/wowsimcli/cli_main.go
 # Now compress into a zip because the files are getting large.
@@ -220,6 +221,7 @@ release: wowsimmop wowsimmop-windows.exe
 	zip wowsimmop-arm64-darwin.zip wowsimmop-arm64-darwin
 	zip wowsimmop-amd64-linux.zip wowsimmop-amd64-linux
 	zip wowsimcli-amd64-linux.zip wowsimcli-amd64-linux
+	zip wowsimcli-arm64-darwin.zip wowsimcli-arm64-darwin
 	zip wowsimcli-windows.exe.zip wowsimcli-windows.exe
 
 sim/core/proto/api.pb.go: proto/*.proto
@@ -264,7 +266,7 @@ sim/core/items/all_items.go: $(call rwildcard,tools/database,*.go) $(call rwildc
 
 .PHONY: test
 test: $(OUT_DIR)/lib.wasm binary_dist/dist.go
-	go test --tags=with_db ./sim/...
+	GOARCH=amd64 go test --tags=with_db ./sim/...
 
 .PHONY: update-tests
 update-tests:
@@ -302,11 +304,11 @@ endif
 
 devmode: air devserver
 ifeq ($(WATCH), 1)
-	npx tsx vite.build-workers.ts & npx vite serve --host &
+	npx tsx vite.build-workers.mts & npx vite serve --host &
 	air -tmp_dir "/tmp" -build.include_ext "go,proto" -build.args_bin "--usefs=true --launch=false --wasm=false" -build.bin "./wowsimmop" -build.cmd "make devserver" -build.exclude_dir "assets,dist,node_modules,ui,tools"
 else
 	./wowsimmop --usefs=true --launch=false --host=":3333"
 endif
 
 webworkers:
-	npx tsx vite.build-workers.ts --watch=$(if $(WATCH),true,false)
+	npx tsx vite.build-workers.mts --watch=$(if $(WATCH),true,false)

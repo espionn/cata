@@ -89,6 +89,17 @@ func (warrior *Warrior) registerDeepWounds() {
 			dot := spell.Dot(target)
 			dot.Apply(sim)
 		},
+
+		ExpectedTickDamage: func(sim *core.Simulation, target *core.Unit, spell *core.Spell, useSnapshot bool) *core.SpellResult {
+			if useSnapshot {
+				dot := spell.Dot(target)
+				return dot.CalcSnapshotDamage(sim, target, dot.OutcomeExpectedSnapshotCrit)
+			} else {
+				baseDamage := warrior.CalcScalingSpellDmg(deepWoundsCoeff)
+				baseDamage += deepWoundsBonusCoeff * spell.MeleeAttackPower()
+				return spell.CalcPeriodicDamage(sim, target, baseDamage, spell.OutcomeExpectedPhysicalCrit)
+			}
+		},
 	})
 
 	core.MakeProcTriggerAura(&warrior.Unit, core.ProcTrigger{
@@ -119,11 +130,9 @@ func (war *Warrior) registerBloodAndThunder() {
 		Callback:       core.CallbackOnSpellHitDealt,
 		Outcome:        core.OutcomeLanded,
 		ClassSpellMask: SpellMaskThunderClap,
-		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			for _, target := range sim.Encounter.TargetUnits {
-				dot := war.DeepWounds.Dot(target)
-				dot.Apply(sim)
-			}
+
+		Handler: func(sim *core.Simulation, _ *core.Spell, _ *core.SpellResult) {
+			war.DeepWounds.ApplyAllDots(sim)
 		},
 	})
 }

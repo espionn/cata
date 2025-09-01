@@ -23,9 +23,19 @@ func applyDebuffEffects(target *Unit, targetIdx int, debuffs *proto.Debuffs, rai
 	if debuffs.WeakenedArmor {
 		aura := MakePermanent(WeakenedArmorAura(target))
 
-		aura.ApplyOnGain(func(aura *Aura, sim *Simulation) {
-			aura.SetStacks(sim, 3)
-		})
+		aura.OnReset = func(aura *Aura, sim *Simulation) {
+			// Ferals can require a global to put this up on pull.
+			pa := sim.GetConsumedPendingActionFromPool()
+			pa.NextActionAt = sim.CurrentTime + GCDMin
+			pa.Priority = ActionPriorityDOT
+
+			pa.OnAction = func(sim *Simulation) {
+				aura.Activate(sim)
+				aura.SetStacks(sim, 3)
+			}
+
+			sim.AddPendingAction(pa)
+		}
 	}
 
 	// Spell‐damage‐taken sources
@@ -157,10 +167,10 @@ func castSpeedReductionAura(target *Unit, label string, spellID int32, multiplie
 	aura.NewExclusiveEffect("CastSpdReduction", false, ExclusiveEffect{
 		Priority: multiplier,
 		OnGain: func(ee *ExclusiveEffect, sim *Simulation) {
-			ee.Aura.Unit.MultiplyCastSpeed(1 / multiplier)
+			ee.Aura.Unit.MultiplyCastSpeed(sim, 1/multiplier)
 		},
 		OnExpire: func(ee *ExclusiveEffect, sim *Simulation) {
-			ee.Aura.Unit.MultiplyCastSpeed(multiplier)
+			ee.Aura.Unit.MultiplyCastSpeed(sim, multiplier)
 		},
 	})
 	return aura
@@ -216,7 +226,7 @@ func ShatteringThrowAura(target *Unit, actionTag int32) *Aura {
 	return target.GetOrRegisterAura(Aura{
 		Label:    "Shattering Throw",
 		Tag:      ShatteringThrowAuraTag,
-		ActionID: ActionID{SpellID: 64382, Tag: actionTag},
+		ActionID: ActionID{SpellID: 1249459, Tag: actionTag},
 		Duration: ShatteringThrowDuration,
 		OnGain: func(aura *Aura, sim *Simulation) {
 			aura.Unit.PseudoStats.ArmorMultiplier *= (1.0 - armorReduction)

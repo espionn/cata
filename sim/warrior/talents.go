@@ -65,6 +65,7 @@ func (war *Warrior) registerImpendingVictory() {
 			DefaultCast: core.Cast{
 				GCD: core.GCDDefault,
 			},
+			IgnoreHaste: true,
 			CD: core.Cooldown{
 				Timer:    war.NewTimer(),
 				Duration: time.Second * 30,
@@ -105,17 +106,17 @@ func (war *Warrior) registerDragonRoar() {
 		SpellSchool:    core.SpellSchoolPhysical,
 		ClassSpellMask: SpellMaskDragonRoar,
 		ProcMask:       core.ProcMaskMeleeMHSpecial,
-		Flags:          core.SpellFlagAPL | core.SpellFlagMeleeMetrics | core.SpellFlagIgnoreArmor,
+		Flags:          core.SpellFlagAPL | core.SpellFlagMeleeMetrics | core.SpellFlagIgnoreArmor | core.SpellFlagReadinessTrinket,
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
 				GCD: core.GCDDefault,
 			},
+			IgnoreHaste: true,
 			CD: core.Cooldown{
 				Timer:    war.NewTimer(),
 				Duration: time.Minute * 1,
 			},
-			IgnoreHaste: true,
 		},
 
 		DamageMultiplier: 1,
@@ -123,12 +124,10 @@ func (war *Warrior) registerDragonRoar() {
 		BonusCritPercent: 100,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			damageMultiplier := damageMultipliers[min(war.Env.GetNumTargets()-1, 4)]
+			damageMultiplier := damageMultipliers[min(war.Env.ActiveTargetCount()-1, 4)]
 			baseDamage := 126 + spell.MeleeAttackPower()*1.39999997616
 			spell.DamageMultiplier *= damageMultiplier
-			for _, enemyTarget := range sim.Encounter.ActiveTargets {
-				spell.CalcAndDealDamage(sim, &enemyTarget.Unit, baseDamage, spell.OutcomeMeleeSpecialCritOnly)
-			}
+			spell.CalcAndDealAoeDamage(sim, baseDamage, spell.OutcomeMeleeSpecialCritOnly)
 			spell.DamageMultiplier /= damageMultiplier
 		},
 	})
@@ -164,10 +163,12 @@ func (war *Warrior) registerBladestorm() {
 		CritMultiplier:   war.DefaultCritMultiplier(),
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			for _, enemyTarget := range sim.Encounter.ActiveTargets {
-				baseDamage := spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower())
-				spell.CalcAndDealDamage(sim, &enemyTarget.Unit, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
-			}
+			results := spell.CalcAoeDamageWithVariance(sim, spell.OutcomeMeleeWeaponSpecialHitAndCrit, func(sim *core.Simulation, spell *core.Spell) float64 {
+				return spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower())
+			})
+
+			war.CastNormalizedSweepingStrikesAttack(results, sim)
+			spell.DealBatchedAoeDamage(sim)
 		},
 	})
 
@@ -182,24 +183,29 @@ func (war *Warrior) registerBladestorm() {
 		CritMultiplier:   war.DefaultCritMultiplier(),
 
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
-			for _, enemyTarget := range sim.Encounter.ActiveTargets {
-				baseDamage := spell.Unit.OHNormalizedWeaponDamage(sim, spell.MeleeAttackPower())
-				spell.CalcAndDealDamage(sim, &enemyTarget.Unit, baseDamage, spell.OutcomeMeleeWeaponSpecialHitAndCrit)
-			}
+			spell.CalcAndDealAoeDamageWithVariance(sim, spell.OutcomeMeleeWeaponSpecialHitAndCrit, func(sim *core.Simulation, spell *core.Spell) float64 {
+				return spell.Unit.OHNormalizedWeaponDamage(sim, spell.MeleeAttackPower())
+			})
 		},
+	})
+
+	war.AddStaticMod(core.SpellModConfig{
+		ClassMask: SpellMaskBattleShout | SpellMaskCommandingShout | SpellMaskRallyingCry | SpellMaskLastStand | SpellMaskDemoralizingShout | SpellMaskBerserkerRage,
+		Kind:      core.SpellMod_AllowCastWhileChanneling,
 	})
 
 	spell := war.RegisterSpell(core.SpellConfig{
 		ActionID:       actionID.WithTag(0),
 		SpellSchool:    core.SpellSchoolPhysical,
 		ClassSpellMask: SpellMaskBladestorm,
-		Flags:          core.SpellFlagChanneled | core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
+		Flags:          core.SpellFlagChanneled | core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagCastWhileChanneling,
 		ProcMask:       core.ProcMaskEmpty,
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
 				GCD: core.GCDDefault,
 			},
+			IgnoreHaste: true,
 			CD: core.Cooldown{
 				Timer:    war.NewTimer(),
 				Duration: time.Minute * 1,
@@ -213,12 +219,16 @@ func (war *Warrior) registerBladestorm() {
 			IsAOE: true,
 			Aura: core.Aura{
 				Label: "Bladestorm",
+				OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+					war.ExtendGCDUntil(sim, sim.CurrentTime+war.ReactionTime)
+				},
 			},
 			NumberOfTicks: 6,
 			TickLength:    time.Second * 1,
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				mhSpell.Cast(sim, target)
-				if war.OffHand() != nil && war.OffHand().WeaponType != proto.WeaponType_WeaponTypeUnknown {
+
+				if war.OffHand() != nil && (war.OffHand().WeaponType != proto.WeaponType_WeaponTypeUnknown && war.OffHand().WeaponType != proto.WeaponType_WeaponTypeShield) {
 					ohSpell.Cast(sim, target)
 				}
 			},
@@ -246,7 +256,7 @@ func (war *Warrior) registerShockwave() {
 		SpellSchool:    core.SpellSchoolPhysical,
 		ProcMask:       core.ProcMaskMeleeMHSpecial,
 		ClassSpellMask: SpellMaskShockwave,
-		Flags:          core.SpellFlagAoE | core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
+		Flags:          core.SpellFlagAoE | core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagReadinessTrinket,
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
@@ -259,21 +269,15 @@ func (war *Warrior) registerShockwave() {
 			},
 		},
 
-		DamageMultiplier: 0.75,
+		DamageMultiplier: 1,
 		CritMultiplier:   war.DefaultCritMultiplier(),
 		ThreatMultiplier: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			numLandedHits := 0
-			baseDamage := spell.MeleeAttackPower()
-			for _, aoeTarget := range sim.Encounter.TargetUnits {
-				result := spell.CalcAndDealDamage(sim, aoeTarget, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
+			baseDamage := spell.MeleeAttackPower() * 1.2
+			results := spell.CalcAndDealAoeDamage(sim, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 
-				if result.Landed() {
-					numLandedHits++
-				}
-			}
-			if numLandedHits >= 3 {
+			if results.NumLandedHits() >= 3 {
 				spell.CD.Reduce(time.Second * 20)
 			}
 		},
@@ -296,7 +300,7 @@ func (war *Warrior) registerAvatar() {
 		ActionID:       actionId,
 		SpellSchool:    core.SpellSchoolPhysical,
 		ProcMask:       core.ProcMaskEmpty,
-		Flags:          core.SpellFlagAPL,
+		Flags:          core.SpellFlagAPL | core.SpellFlagReadinessTrinket,
 		ClassSpellMask: SpellMaskAvatar,
 
 		Cast: core.CastConfig{
@@ -337,6 +341,7 @@ func (war *Warrior) registerBloodbath() {
 	shared.RegisterIgniteEffect(&war.Unit, shared.IgniteConfig{
 		ActionID:       dotActionID,
 		ClassSpellMask: SpellMaskBloodbathDot,
+		SpellSchool:    core.SpellSchoolPhysical,
 		DotAuraLabel:   "Bloodbath Dot",
 		DotAuraTag:     "BloodbathDot",
 		TickLength:     1 * time.Second,
@@ -348,6 +353,7 @@ func (war *Warrior) registerBloodbath() {
 			Callback: core.CallbackOnSpellHitDealt,
 			ProcMask: core.ProcMaskMeleeSpecial,
 			Outcome:  core.OutcomeLanded,
+			Harmful:  true,
 		},
 
 		DamageCalculator: func(result *core.SpellResult) float64 {
@@ -359,7 +365,7 @@ func (war *Warrior) registerBloodbath() {
 		ActionID:       spellActionID,
 		SpellSchool:    core.SpellSchoolPhysical,
 		ClassSpellMask: SpellMaskBloodbath,
-		Flags:          core.SpellFlagAPL,
+		Flags:          core.SpellFlagAPL | core.SpellFlagReadinessTrinket,
 		ProcMask:       core.ProcMaskEmpty,
 
 		Cast: core.CastConfig{
@@ -407,7 +413,7 @@ func (war *Warrior) registerStormBolt() {
 		BonusCoefficient: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := spell.Unit.OHNormalizedWeaponDamage(sim, spell.MeleeAttackPower())
+			baseDamage := spell.Unit.OHWeaponDamage(sim, spell.MeleeAttackPower())
 			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialNoBlockDodgeParry)
 		},
 	})
@@ -416,7 +422,7 @@ func (war *Warrior) registerStormBolt() {
 		ActionID:       actionID.WithTag(1),
 		SpellSchool:    core.SpellSchoolPhysical,
 		ProcMask:       core.ProcMaskMeleeMHSpecial,
-		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
+		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL | core.SpellFlagReadinessTrinket,
 		ClassSpellMask: SpellMaskStormBolt,
 		MaxRange:       30,
 
@@ -438,7 +444,7 @@ func (war *Warrior) registerStormBolt() {
 		BonusCoefficient: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower())
+			baseDamage := spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower())
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialNoBlockDodgeParry)
 
 			if result.Landed() && war.Spec == proto.Spec_SpecFuryWarrior && war.OffHand() != nil && war.OffHand().WeaponType != proto.WeaponType_WeaponTypeUnknown {

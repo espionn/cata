@@ -21,7 +21,7 @@ func (war *Warrior) registerRecklessness() {
 
 	spell := war.RegisterSpell(core.SpellConfig{
 		ActionID:       actionID,
-		Flags:          core.SpellFlagAPL,
+		Flags:          core.SpellFlagAPL | core.SpellFlagReadinessTrinket,
 		ClassSpellMask: SpellMaskRecklessness,
 
 		Cast: core.CastConfig{
@@ -32,7 +32,6 @@ func (war *Warrior) registerRecklessness() {
 				Timer:    war.NewTimer(),
 				Duration: time.Minute * 3,
 			},
-
 			SharedCD: core.Cooldown{
 				Timer:    war.NewTimer(),
 				Duration: 12 * time.Second,

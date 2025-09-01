@@ -45,7 +45,7 @@ func (demonology *DemonologyWarlock) registerHandOfGuldan() {
 		},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			spell.Dot(target).Activate(sim)
+			spell.Dot(target).Apply(sim)
 			spell.Dot(target).Aura.AddStack(sim)
 		},
 	})
@@ -76,33 +76,30 @@ func (demonology *DemonologyWarlock) registerHandOfGuldan() {
 			return !demonology.IsInMeta()
 		},
 
-		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
 			// keep stacks in sync as they're shared
 			demonology.ChaosWave.ConsumeCharge(sim)
+			demonology.HandOfGuldanImpactTime = sim.CurrentTime + time.Millisecond*1300
+			pa := sim.GetConsumedPendingActionFromPool()
+			pa.NextActionAt = demonology.HandOfGuldanImpactTime // Fixed delay of 1.3 seconds
+			pa.Priority = core.ActionPriorityAuto
 
-			// Shadowflame is snapshotted at cast time
-			for _, enemy := range sim.Encounter.TargetUnits {
-				shadowFlame.Dot(enemy).TakeSnapshot(sim, false)
+			pa.OnAction = func(sim *core.Simulation) {
+				for _, enemy := range sim.Encounter.ActiveTargetUnits {
+					result := spell.CalcAndDealDamage(
+						sim,
+						enemy,
+						demonology.CalcScalingSpellDmg(hogScale),
+						spell.OutcomeMagicHitAndCrit,
+					)
+
+					if result.Landed() {
+						shadowFlame.Cast(sim, enemy)
+					}
+				}
 			}
 
-			sim.AddPendingAction(&core.PendingAction{
-				NextActionAt: sim.CurrentTime + time.Millisecond*1300, // Fixed delay of 1.3 seconds
-				Priority:     core.ActionPriorityAuto,
-				OnAction: func(sim *core.Simulation) {
-					for _, enemy := range sim.Encounter.TargetUnits {
-						result := spell.CalcAndDealDamage(
-							sim,
-							enemy,
-							demonology.CalcScalingSpellDmg(hogScale),
-							spell.OutcomeMagicHitAndCrit,
-						)
-
-						if result.Landed() {
-							shadowFlame.Cast(sim, enemy)
-						}
-					}
-				},
-			})
+			sim.AddPendingAction(pa)
 		},
 	})
 }

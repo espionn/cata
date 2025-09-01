@@ -1,9 +1,8 @@
+import { getLang } from '../i18n/locale_service';
 import { hasTouch } from '../shared/bootstrap_overrides';
 import { SimRequest } from '../worker/types';
-import { getBrowserLanguageCode, setLanguageCode } from './constants/lang';
 import { CURRENT_PHASE, LOCAL_STORAGE_PREFIX } from './constants/other';
 import { Encounter } from './encounter';
-import { getCurrentLang, setCurrentLang } from './locale_service';
 import { Player, UnitMetadata } from './player';
 import {
 	BulkSettings,
@@ -78,7 +77,7 @@ export class Sim {
 	private showHealingMetrics = false;
 	private showExperimental = false;
 	private wasmConcurrency = 0;
-	private showQuickSwap = false;
+	private showQuickSwap = true;
 	private showEPValues = false;
 	private useCustomEPValues = false;
 	private useSoftCapBreakpoints = true;
@@ -186,7 +185,7 @@ export class Sim {
 
 		TypedEvent.onAny([this.raid.changeEmitter, this.encounter.changeEmitter]).on(eventID => this.updateCharacterStats(eventID));
 
-		this.language = getCurrentLang();
+		this.language = getLang();
 	}
 
 	waitForInit(): Promise<void> {
@@ -766,11 +765,9 @@ export class Sim {
 		return this.language;
 	}
 	setLanguage(eventID: EventID, newLanguage: string) {
-		newLanguage = newLanguage || getBrowserLanguageCode();
+		newLanguage = newLanguage || 'en';
 		if (newLanguage != this.language) {
 			this.language = newLanguage;
-			setCurrentLang(this.language);
-			setLanguageCode(this.language);
 			this.languageChangeEmitter.emit(eventID);
 		}
 	}
@@ -878,6 +875,7 @@ export class Sim {
 				showDamageMetrics: !isHealingSim,
 				showThreatMetrics: isTankSim,
 				showHealingMetrics: isHealingSim,
+				showQuickSwap: true,
 				language: this.getLanguage(), // Don't change language.
 				filters: Sim.defaultFilters(),
 				showEpValues: false,

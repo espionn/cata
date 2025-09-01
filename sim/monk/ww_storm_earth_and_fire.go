@@ -16,7 +16,7 @@ func (monk *Monk) registerStormEarthAndFire() {
 	}
 
 	var sefTarget *core.Unit
-	damageMultiplier := []float64{1, 0.70, 0.55}
+	damageMultiplier := []float64{1, 0.70 - 0.1, 0.55 - 0.1} // 2025-07-21 - Storm, Earth, and Fire damage multiplier reduced by 10%
 
 	sefAura := monk.RegisterAura(core.Aura{
 		Label:     "Storm, Earth, and Fire",
@@ -31,20 +31,16 @@ func (monk *Monk) registerStormEarthAndFire() {
 			// as decreasing would mean disabling SEF
 			if newStacks > oldStacks {
 				monk.SefController.PickClone(sim, sefTarget)
-				monk.PseudoStats.DamageDealtMultiplier /= damageMultiplier[oldStacks]
-				monk.PseudoStats.DamageDealtMultiplier *= damageMultiplier[newStacks]
-				for _, pet := range monk.SefController.pets {
-					pet.PseudoStats.DamageDealtMultiplier /= damageMultiplier[oldStacks]
-					pet.PseudoStats.DamageDealtMultiplier *= damageMultiplier[newStacks]
-				}
+				newDamageMultiplier := (damageMultiplier[newStacks]) / (damageMultiplier[oldStacks])
+				monk.PseudoStats.DamageDealtMultiplier *= newDamageMultiplier
+				monk.SefController.UpdateCloneDamageMultiplier(newDamageMultiplier)
 				return
 			}
 
 			aura.Deactivate(sim)
-			monk.PseudoStats.DamageDealtMultiplier /= damageMultiplier[oldStacks]
-			for _, pet := range monk.SefController.pets {
-				pet.PseudoStats.DamageDealtMultiplier /= damageMultiplier[oldStacks]
-			}
+			newDamageMultiplier := 1 / damageMultiplier[oldStacks]
+			monk.PseudoStats.DamageDealtMultiplier *= newDamageMultiplier
+			monk.SefController.UpdateCloneDamageMultiplier(newDamageMultiplier)
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			sefTarget = nil
@@ -107,6 +103,9 @@ func (pet *StormEarthAndFirePet) modifyCopySpell(sourceSpell *core.Spell, target
 }
 
 func (controller *StormEarthAndFireController) CastCopySpell(sim *core.Simulation, spell *core.Spell) {
+	if spell.Flags.Matches(core.SpellFlagPassiveSpell) {
+		return
+	}
 	for _, pet := range controller.activeClones {
 		petSpellActionID := spell.ActionID.WithTag(SEFSpellID)
 		copySpell := pet.spells[petSpellActionID]
@@ -190,6 +189,12 @@ func (controller *StormEarthAndFireController) getInactiveClones() []*StormEarth
 	return controller.inactiveClones
 }
 
+func (controller *StormEarthAndFireController) UpdateCloneDamageMultiplier(multiplier float64) {
+	for _, pet := range controller.pets {
+		pet.PseudoStats.DamageDealtMultiplier *= multiplier
+	}
+}
+
 func (controller *StormEarthAndFireController) Reset(sim *core.Simulation) {
 	for _, pet := range controller.pets {
 		pet.Disable(sim)
@@ -245,20 +250,13 @@ func (monk *Monk) NewSEFPet(name string, cloneID int32, swingSpeed float64) *Sto
 			Name:      name,
 			Owner:     &monk.Character,
 			BaseStats: stats.Stats{},
-			StatInheritance: func(ownerStats stats.Stats) stats.Stats {
-
-				hitRating := ownerStats[stats.HitRating]
-				expertiseRating := ownerStats[stats.ExpertiseRating]
-				combinedHitExp := (hitRating + expertiseRating) * 0.5
-
+			NonHitExpStatInheritance: func(ownerStats stats.Stats) stats.Stats {
 				return stats.Stats{
 					stats.Stamina:     ownerStats[stats.Stamina] * 0.1,
 					stats.AttackPower: ownerStats[stats.AttackPower],
 
-					stats.HitRating:       combinedHitExp,
-					stats.ExpertiseRating: combinedHitExp,
-					stats.DodgeRating:     ownerStats[stats.DodgeRating],
-					stats.ParryRating:     ownerStats[stats.ParryRating],
+					stats.DodgeRating: ownerStats[stats.DodgeRating],
+					stats.ParryRating: ownerStats[stats.ParryRating],
 
 					stats.PhysicalCritPercent: ownerStats[stats.PhysicalCritPercent],
 					stats.SpellCritPercent:    ownerStats[stats.SpellCritPercent],
@@ -332,6 +330,10 @@ func (sefClone *StormEarthAndFirePet) GetPet() *core.Pet {
 }
 
 func (sefClone *StormEarthAndFirePet) Reset(_ *core.Simulation) {
+	sefClone.PseudoStats.DamageDealtMultiplier = 1.0
+}
+
+func (sefClone *StormEarthAndFirePet) OnEncounterStart(_ *core.Simulation) {
 }
 
 func (sefClone *StormEarthAndFirePet) ExecuteCustomRotation(_ *core.Simulation) {

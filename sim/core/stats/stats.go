@@ -371,6 +371,7 @@ type PseudoStats struct {
 	CastSpeedMultiplier   float64
 	MeleeSpeedMultiplier  float64
 	RangedSpeedMultiplier float64
+	RangedHasteMultiplier float64
 	AttackSpeedMultiplier float64 // Used for real haste effects like Bloodlust that modify resoruce regen and are used for RPPM effects
 
 	SpiritRegenRateCombat float64 // percentage of spirit regen allowed during combat
@@ -390,8 +391,7 @@ type PseudoStats struct {
 	BonusOHDps     float64
 	BonusRangedDps float64
 
-	DisableDWMissPenalty bool    // Used by Heroic Strike and Cleave
-	IncreasedMissChance  float64 // Insect Swarm and Scorpid Sting
+	DisableDWMissPenalty bool // Used by Heroic Strike and Cleave
 
 	ThreatMultiplier float64 // Modulates the threat generated. Affected by things like salv.
 
@@ -455,6 +455,7 @@ func NewPseudoStats() PseudoStats {
 		CastSpeedMultiplier:   1,
 		MeleeSpeedMultiplier:  1,
 		RangedSpeedMultiplier: 1,
+		RangedHasteMultiplier: 1,
 		AttackSpeedMultiplier: 1,
 		SpiritRegenMultiplier: 1,
 

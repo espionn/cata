@@ -4,9 +4,9 @@ import { AssassinationRogue_Options as RogueOptions, RogueMajorGlyph, RogueOptio
 import { SavedTalents } from '../../core/proto/ui';
 import { Stats } from '../../core/proto_utils/stats';
 import AssassinationApl from './apls/assassination.apl.json';
-import PreraidGear from './gear_sets/preraid_assassination.gear.json'
 import MSVGear from './gear_sets/p1_assassination_msv.gear.json';
 import T14 from './gear_sets/p1_assassination_t14.gear.json'
+import PreraidGear from './gear_sets/preraid_assassination.gear.json'
 
 // Preset options for this spec.
 // Eventually we will import these values for the raid sim too, so its good to
@@ -25,7 +25,7 @@ export const ASN_EP_PRESET = PresetUtils.makePresetEpWeights(
 		{
 			[Stat.StatAgility]: 1.0,
 			[Stat.StatCritRating]: 0.35,
-			[Stat.StatHitRating]: 1.2,
+			[Stat.StatHitRating]: 0.46,
 			[Stat.StatHasteRating]: 0.37,
 			[Stat.StatMasteryRating]: 0.41,
 			[Stat.StatExpertiseRating]: 0.39,

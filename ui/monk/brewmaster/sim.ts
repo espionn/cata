@@ -6,11 +6,12 @@ import { IndividualSimUI, registerSpecConfig } from '../../core/individual_sim_u
 import { Player } from '../../core/player';
 import { PlayerClasses } from '../../core/player_classes';
 import { APLRotation } from '../../core/proto/apl';
-import { Debuffs, Faction, HandType, IndividualBuffs, ItemSlot, PartyBuffs, PseudoStat, Race, RaidBuffs, Spec, Stat } from '../../core/proto/common';
+import { Debuffs, Faction, IndividualBuffs, PartyBuffs, PseudoStat, Race, RaidBuffs, Spec, Stat } from '../../core/proto/common';
 import { StatCapType } from '../../core/proto/ui';
 import { StatCap, Stats, UnitStat } from '../../core/proto_utils/stats';
+import { defaultRaidBuffMajorDamageCooldowns } from '../../core/proto_utils/utils';
 import { Sim } from '../../core/sim';
-import { TypedEvent } from '../../core/typed_event';
+import * as MonkUtils from '../utils';
 import * as Presets from './presets';
 
 const SPEC_CONFIG = registerSpecConfig(Spec.SpecBrewmasterMonk, {
@@ -23,6 +24,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBrewmasterMonk, {
 	epStats: [
 		Stat.StatAgility,
 		Stat.StatAttackPower,
+		Stat.StatStamina,
 		Stat.StatHitRating,
 		Stat.StatExpertiseRating,
 		Stat.StatCritRating,
@@ -34,9 +36,32 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBrewmasterMonk, {
 	epPseudoStats: [PseudoStat.PseudoStatMainHandDps, PseudoStat.PseudoStatOffHandDps],
 	// Reference stat against which to calculate EP.
 	epReferenceStat: Stat.StatAttackPower,
+	consumableStats: [
+		Stat.StatAgility,
+		Stat.StatArmor,
+		Stat.StatBonusArmor,
+		Stat.StatStamina,
+		Stat.StatAttackPower,
+		Stat.StatDodgeRating,
+		Stat.StatParryRating,
+		Stat.StatHitRating,
+		Stat.StatHasteRating,
+		Stat.StatCritRating,
+		Stat.StatExpertiseRating,
+		Stat.StatMasteryRating,
+	],
 	// Which stats to display in the Character Stats section, at the bottom of the left-hand sidebar.
 	displayStats: UnitStat.createDisplayStatArray(
-		[Stat.StatHealth, Stat.StatStamina, Stat.StatAgility, Stat.StatStrength, Stat.StatAttackPower, Stat.StatMasteryRating, Stat.StatExpertiseRating],
+		[
+			Stat.StatHealth,
+			Stat.StatArmor,
+			Stat.StatStamina,
+			Stat.StatAgility,
+			Stat.StatStrength,
+			Stat.StatAttackPower,
+			Stat.StatMasteryRating,
+			Stat.StatExpertiseRating,
+		],
 		[
 			PseudoStat.PseudoStatPhysicalHitPercent,
 			PseudoStat.PseudoStatSpellHitPercent,
@@ -48,9 +73,11 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBrewmasterMonk, {
 		],
 	),
 
+	defaultBuild: Presets.PRESET_BUILD_DEFAULT,
+
 	defaults: {
 		// Default equipped gear.
-		gear: Presets.P1_BIS_BALANCED_DW_GEAR_PRESET.gear,
+		gear: Presets.P1_BIS_DW_GEAR_PRESET.gear,
 		// Default EP weights for sorting gear in the gear picker.
 		epWeights: Presets.PREPATCH_EP_PRESET.epWeights,
 		// Stat caps for reforge optimizer
@@ -77,6 +104,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBrewmasterMonk, {
 		specOptions: Presets.DefaultOptions,
 		// Default raid/party buffs settings.
 		raidBuffs: RaidBuffs.create({
+			...defaultRaidBuffMajorDamageCooldowns(),
 			legacyOfTheEmperor: true,
 			legacyOfTheWhiteTiger: true,
 			darkIntent: true,
@@ -85,8 +113,6 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBrewmasterMonk, {
 			moonkinAura: true,
 			blessingOfMight: true,
 			bloodlust: true,
-			skullBannerCount: 2,
-			stormlashTotemCount: 4,
 		}),
 		partyBuffs: PartyBuffs.create({}),
 		individualBuffs: IndividualBuffs.create({}),
@@ -126,16 +152,16 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBrewmasterMonk, {
 		// Preset talents that the user can quickly select.
 		talents: [Presets.DefaultTalents, Presets.DungeonTalents],
 		// Preset rotations that the user can quickly select.
-		rotations: [Presets.ROTATION_PRESET],
+		rotations: [Presets.ROTATION_PRESET, Presets.ROTATION_OFFENSIVE_PRESET, Presets.ROTATION_GARAJAL_PRESET],
 		// Preset gear configurations that the user can quickly select.
 		gear: [
-			Presets.P1_PREBIS_RICH_GEAR_PRESET,
-			Presets.P1_PREBIS_POOR_GEAR_PRESET,
-			Presets.P1_BIS_BALANCED_DW_GEAR_PRESET,
-			Presets.P1_BIS_BALANCED_2H_GEAR_PRESET,
-			Presets.P1_BIS_OFFENSIVE_DW_GEAR_PRESET,
-			Presets.P1_BIS_OFFENSIVE_2H_GEAR_PRESET,
+			Presets.P1_PREBIS_GEAR_PRESET,
+			Presets.P1_BIS_DW_GEAR_PRESET,
+			Presets.P1_BIS_2H_GEAR_PRESET,
+			Presets.P1_BIS_TIERLESS_DW_GEAR_PRESET,
+			Presets.P1_BIS_TIERLESS_2H_GEAR_PRESET,
 		],
+		builds: [Presets.PRESET_BUILD_DEFAULT, Presets.PRESET_BUILD_DEFENSIVE, Presets.PRESET_BUILD_OFFENSIVE],
 	},
 
 	autoRotation: (_: Player<Spec.SpecBrewmasterMonk>): APLRotation => {
@@ -156,16 +182,16 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBrewmasterMonk, {
 			defaultGear: {
 				[Faction.Unknown]: {},
 				[Faction.Alliance]: {
-					1: Presets.P1_BIS_BALANCED_DW_GEAR_PRESET.gear,
-					2: Presets.P1_BIS_BALANCED_DW_GEAR_PRESET.gear,
-					3: Presets.P1_BIS_BALANCED_DW_GEAR_PRESET.gear,
-					4: Presets.P1_BIS_BALANCED_DW_GEAR_PRESET.gear,
+					1: Presets.P1_BIS_DW_GEAR_PRESET.gear,
+					2: Presets.P1_BIS_DW_GEAR_PRESET.gear,
+					3: Presets.P1_BIS_DW_GEAR_PRESET.gear,
+					4: Presets.P1_BIS_DW_GEAR_PRESET.gear,
 				},
 				[Faction.Horde]: {
-					1: Presets.P1_BIS_BALANCED_DW_GEAR_PRESET.gear,
-					2: Presets.P1_BIS_BALANCED_DW_GEAR_PRESET.gear,
-					3: Presets.P1_BIS_BALANCED_DW_GEAR_PRESET.gear,
-					4: Presets.P1_BIS_BALANCED_DW_GEAR_PRESET.gear,
+					1: Presets.P1_BIS_DW_GEAR_PRESET.gear,
+					2: Presets.P1_BIS_DW_GEAR_PRESET.gear,
+					3: Presets.P1_BIS_DW_GEAR_PRESET.gear,
+					4: Presets.P1_BIS_DW_GEAR_PRESET.gear,
 				},
 			},
 			otherDefaults: Presets.OtherDefaults,
@@ -185,15 +211,9 @@ export class BrewmasterMonkSimUI extends IndividualSimUI<Spec.SpecBrewmasterMonk
 	constructor(parentElem: HTMLElement, player: Player<Spec.SpecBrewmasterMonk>) {
 		super(parentElem, player, SPEC_CONFIG);
 
-		const setTalentBasedSettings = () => {
-			const talents = player.getTalents();
-			// Zen sphere can be on 2 targets, so we set the target dummies to 1 if it is talented.
-			player.getRaid()?.setTargetDummies(TypedEvent.nextEventID(), talents.zenSphere ? 2 : 0);
-		};
-
-		setTalentBasedSettings();
+		MonkUtils.setTalentBasedSettings(player);
 		player.talentsChangeEmitter.on(() => {
-			setTalentBasedSettings();
+			MonkUtils.setTalentBasedSettings(player);
 		});
 
 		player.sim.waitForInit().then(() => {

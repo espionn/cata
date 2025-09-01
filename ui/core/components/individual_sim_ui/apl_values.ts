@@ -3,12 +3,10 @@ import {
 	APLValue,
 	APLValueAllTrinketStatProcsActive,
 	APLValueAnd,
+	APLValueAnyStatBuffCooldownsActive,
 	APLValueAnyTrinketStatProcsActive,
-	APLValueAuraICDIsReadyWithReactionTime,
 	APLValueAuraInternalCooldown,
 	APLValueAuraIsActive,
-	APLValueAuraIsActiveWithReactionTime,
-	APLValueAuraIsInactiveWithReactionTime,
 	APLValueAuraIsKnown,
 	APLValueAuraNumStacks,
 	APLValueAuraRemainingTime,
@@ -42,6 +40,9 @@ import {
 	APLValueCurrentTime,
 	APLValueCurrentTimePercent,
 	APLValueDotIsActive,
+	APLValueDotIsActiveOnAllTargets,
+	APLValueDotLowestRemainingTime,
+	APLValueDotPercentIncrease,
 	APLValueDotRemainingTime,
 	APLValueDotTickFrequency,
 	APLValueEnergyRegenPerSecond,
@@ -62,6 +63,7 @@ import {
 	APLValueMaxEnergy,
 	APLValueMaxFocus,
 	APLValueMaxHealth,
+	APLValueMaxRage,
 	APLValueMaxRunicPower,
 	APLValueMin,
 	APLValueMonkCurrentChi,
@@ -96,9 +98,12 @@ import {
 	APLValueTotemRemainingTime,
 	APLValueTrinketProcsMaxRemainingICD,
 	APLValueTrinketProcsMinRemainingTime,
+	APLValueUnitDistance,
 	APLValueUnitIsMoving,
-	APLValueWarlockShouldRecastDrainSoul,
-	APLValueWarlockShouldRefreshCorruption,
+	APLValueWarlockHandOfGuldanInFlight,
+	APLValueWarlockHauntInFlight,
+	APLValueAuraIsInactive,
+	APLValueAuraICDIsReady,
 } from '../../proto/apl.js';
 import { Class, Spec } from '../../proto/common.js';
 import { ShamanTotems_TotemType as TotemType } from '../../proto/shaman.js';
@@ -112,12 +117,21 @@ import * as AplHelpers from './apl_helpers.js';
 
 export interface APLValuePickerConfig extends InputConfig<Player<any>, APLValue | undefined> {}
 
-export type APLValueKind = APLValue['value']['oneofKind'];
-export type APLValueImplStruct<F extends APLValueKind> = Extract<APLValue['value'], { oneofKind: F }>;
-type APLValueImplTypesUnion = {
-	[f in NonNullable<APLValueKind>]: f extends keyof APLValueImplStruct<f> ? APLValueImplStruct<f>[f] : never;
+type APLValue_Value = APLValue['value'];
+export type APLValueKind = APLValue_Value['oneofKind'];
+type ValidAPLValueKind = NonNullable<APLValueKind>;
+
+export type APLValueImplStruct<F extends APLValueKind> = Extract<APLValue_Value, { oneofKind: F }>;
+
+// Get the implementation type for a specific kind using infer
+type APLValueImplFor<F extends ValidAPLValueKind> = APLValueImplStruct<F> extends { [K in F]: infer T } ? T : never;
+
+// Map all valid kinds to their implementation types
+type APLValueImplMap = {
+	[K in ValidAPLValueKind]: APLValueImplFor<K>;
 };
-export type APLValueImplType = APLValueImplTypesUnion[NonNullable<APLValueKind>] | undefined;
+
+export type APLValueImplType = APLValueImplMap[ValidAPLValueKind] | undefined;
 
 export class APLValuePicker extends Input<Player<any>, APLValue | undefined> {
 	private kindPicker: TextDropdownPicker<Player<any>, APLValueKind>;
@@ -130,8 +144,8 @@ export class APLValuePicker extends Input<Player<any>, APLValue | undefined> {
 
 		const isPrepull = this.rootElem.closest('.apl-prepull-action-picker') != null;
 
-		const allValueKinds = (Object.keys(valueKindFactories) as Array<NonNullable<APLValueKind>>).filter(
-			valueKind => valueKindFactories[valueKind].includeIf?.(player, isPrepull) ?? true,
+		const allValueKinds = (Object.keys(valueKindFactories) as ValidAPLValueKind[]).filter(
+			(valueKind): valueKind is ValidAPLValueKind => (!!valueKind && valueKindFactories[valueKind].includeIf?.(player, isPrepull)) ?? true,
 		);
 
 		if (this.rootElem.parentElement!.classList.contains('list-picker-item')) {
@@ -289,7 +303,7 @@ export class APLValuePicker extends Input<Player<any>, APLValue | undefined> {
 		}
 	}
 
-	private makeAPLValue<K extends NonNullable<APLValueKind>>(kind: K, implVal: APLValueImplTypesUnion[K]): APLValue {
+	private makeAPLValue<K extends ValidAPLValueKind>(kind: K, implVal: APLValueImplMap[K]): APLValue {
 		if (!kind) {
 			return APLValue.create({
 				uuid: { value: randomUUID() },
@@ -407,6 +421,7 @@ function executePhaseThresholdFieldConfig(field: string): AplHelpers.APLPickerBu
 					{ value: ExecutePhaseThreshold.E20, label: '20%' },
 					{ value: ExecutePhaseThreshold.E25, label: '25%' },
 					{ value: ExecutePhaseThreshold.E35, label: '35%' },
+					{ value: ExecutePhaseThreshold.E45, label: '45%' },
 					{ value: ExecutePhaseThreshold.E90, label: '90%' },
 				],
 			}),
@@ -510,7 +525,7 @@ function inputBuilder<T extends APLValueImplType>(
 	};
 }
 
-const valueKindFactories: { [f in NonNullable<APLValueKind>]: ValueKindConfig<APLValueImplTypesUnion[f]> } = {
+const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueImplMap[f]> } = {
 	// Operators
 	const: inputBuilder({
 		label: 'Const',
@@ -657,6 +672,13 @@ const valueKindFactories: { [f in NonNullable<APLValueKind>]: ValueKindConfig<AP
 		newValue: APLValueUnitIsMoving.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources')],
 	}),
+	unitDistance: inputBuilder({
+		label: 'Distance',
+		submenu: ['Unit'],
+		shortDescription: 'Returns the distance to the specified unit.',
+		newValue: APLValueUnitDistance.create,
+		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources')],
+	}),
 
 	// Resources
 	currentHealth: inputBuilder({
@@ -703,10 +725,22 @@ const valueKindFactories: { [f in NonNullable<APLValueKind>]: ValueKindConfig<AP
 		fields: [],
 	}),
 	currentRage: inputBuilder({
-		label: 'Rage',
-		submenu: ['Resources'],
+		label: 'Current Rage',
+		submenu: ['Resources', 'Rage'],
 		shortDescription: 'Amount of currently available Rage.',
 		newValue: APLValueCurrentRage.create,
+		includeIf(player: Player<any>, _isPrepull: boolean) {
+			const clss = player.getClass();
+			const spec = player.getSpec();
+			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassWarrior;
+		},
+		fields: [],
+	}),
+	maxRage: inputBuilder({
+		label: 'Max Rage',
+		submenu: ['Resources', 'Rage'],
+		shortDescription: 'Amount of maximum available Rage.',
+		newValue: APLValueMaxRage.create,
 		includeIf(player: Player<any>, _isPrepull: boolean) {
 			const clss = player.getClass();
 			const spec = player.getSpec();
@@ -850,7 +884,7 @@ const valueKindFactories: { [f in NonNullable<APLValueKind>]: ValueKindConfig<AP
 		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
 		fields: [],
 	}),
-	currentLunarEnergy: inputBuilder({
+	currentSolarEnergy: inputBuilder({
 		label: 'Solar Energy',
 		submenu: ['Resources', 'Eclipse'],
 		shortDescription: 'Amount of currently available Solar Energy.',
@@ -858,7 +892,7 @@ const valueKindFactories: { [f in NonNullable<APLValueKind>]: ValueKindConfig<AP
 		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecBalanceDruid,
 		fields: [],
 	}),
-	currentSolarEnergy: inputBuilder({
+	currentLunarEnergy: inputBuilder({
 		label: 'Lunar Energy',
 		submenu: ['Resources', 'Eclipse'],
 		shortDescription: 'Amount of currently available Lunar Energy',
@@ -1093,24 +1127,39 @@ const valueKindFactories: { [f in NonNullable<APLValueKind>]: ValueKindConfig<AP
 	auraIsActive: inputBuilder({
 		label: 'Aura Active',
 		submenu: ['Aura'],
-		shortDescription: '<b>True</b> if the aura is currently active, otherwise <b>False</b>.',
-		newValue: APLValueAuraIsActive.create,
-		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
-	}),
-	auraIsActiveWithReactionTime: inputBuilder({
-		label: 'Aura Active (with Reaction Time)',
-		submenu: ['Aura'],
 		shortDescription:
 			'<b>True</b> if the aura is currently active AND it has been active for at least as long as the player reaction time (configured in Settings), otherwise <b>False</b>.',
-		newValue: APLValueAuraIsActiveWithReactionTime.create,
+		newValue: () => APLValueAuraIsActive.create({ includeReactionTime: true }),
+		fields: [
+			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
+			AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit'),
+			AplHelpers.reactionTimeCheckbox(),
+		],
+	}),
+	auraIsActiveWithReactionTime: inputBuilder({
+		label: '[DEPRECATED] Aura Active (With Reaction Time)',
+		submenu: ['Aura'],
+		shortDescription: 'All Aura checks now contain Reaction Time logic, so this is no longer needed. Use <b Aura Active</b> instead.',
+		newValue: () => APLValueAuraIsActive.create({ includeReactionTime: true }),
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
 	}),
-	auraIsInactiveWithReactionTime: inputBuilder({
-		label: 'Aura Inactive (with Reaction Time)',
+	auraIsInactive: inputBuilder({
+		label: 'Aura Inactive',
 		submenu: ['Aura'],
 		shortDescription:
 			'<b>True</b> if the aura is not currently active AND it has been inactive for at least as long as the player reaction time (configured in Settings), otherwise <b>False</b>.',
-		newValue: APLValueAuraIsInactiveWithReactionTime.create,
+		newValue: () => APLValueAuraIsInactive.create({ includeReactionTime: true }),
+		fields: [
+			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
+			AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit'),
+			AplHelpers.reactionTimeCheckbox(),
+		],
+	}),
+	auraIsInactiveWithReactionTime: inputBuilder({
+		label: '[DEPRECATED] Aura Inactive (With Reaction Time)',
+		submenu: ['Aura'],
+		shortDescription: 'All Aura checks now contain Reaction Time logic, so this is no longer needed. Use <b Aura Inactive</b> instead.',
+		newValue: () => APLValueAuraIsInactive.create({ includeReactionTime: true }),
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
 	}),
 	auraRemainingTime: inputBuilder({
@@ -1124,8 +1173,12 @@ const valueKindFactories: { [f in NonNullable<APLValueKind>]: ValueKindConfig<AP
 		label: 'Aura Num Stacks',
 		submenu: ['Aura'],
 		shortDescription: 'Number of stacks of the aura.',
-		newValue: APLValueAuraNumStacks.create,
-		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'stackable_auras', 'sourceUnit')],
+		newValue: () => APLValueAuraNumStacks.create({ includeReactionTime: true }),
+		fields: [
+			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
+			AplHelpers.actionIdFieldConfig('auraId', 'stackable_auras', 'sourceUnit'),
+			AplHelpers.reactionTimeCheckbox(),
+		],
 	}),
 	auraInternalCooldown: inputBuilder({
 		label: 'Aura Remaining ICD',
@@ -1134,12 +1187,23 @@ const valueKindFactories: { [f in NonNullable<APLValueKind>]: ValueKindConfig<AP
 		newValue: APLValueAuraInternalCooldown.create,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'icd_auras', 'sourceUnit')],
 	}),
-	auraIcdIsReadyWithReactionTime: inputBuilder({
-		label: 'Aura ICD Is Ready (with Reaction Time)',
+	auraIcdIsReady: inputBuilder({
+		label: 'Aura ICD Is Ready',
 		submenu: ['Aura'],
 		shortDescription:
 			"<b>True</b> if the aura's ICD is currently ready OR it was put on CD recently, within the player's reaction time (configured in Settings), otherwise <b>False</b>.",
-		newValue: APLValueAuraICDIsReadyWithReactionTime.create,
+		newValue: () => APLValueAuraICDIsReady.create({ includeReactionTime: true }),
+		fields: [
+			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
+			AplHelpers.actionIdFieldConfig('auraId', 'icd_auras', 'sourceUnit'),
+			AplHelpers.reactionTimeCheckbox(),
+		],
+	}),
+	auraIcdIsReadyWithReactionTime: inputBuilder({
+		label: '[DEPRECATED] Aura ICD Is Ready (With Reaction Time)',
+		submenu: ['Aura'],
+		shortDescription: "All Aura checks now contain Reaction Time logic, so this is no longer needed. Use <b>Aura ICD Is Ready</b> instead.',",
+		newValue: () => APLValueAuraICDIsReady.create({ includeReactionTime: true }),
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'icd_auras', 'sourceUnit')],
 	}),
 	auraShouldRefresh: inputBuilder({
@@ -1279,6 +1343,22 @@ const valueKindFactories: { [f in NonNullable<APLValueKind>]: ValueKindConfig<AP
 			}),
 		fields: [AplHelpers.statTypeFieldConfig('statType1'), AplHelpers.statTypeFieldConfig('statType2'), AplHelpers.statTypeFieldConfig('statType3')],
 	}),
+	anyStatBuffCooldownsActive: inputBuilder({
+		label: 'Any Stat Buff Cooldowns Active',
+		submenu: ['Aura Sets'],
+		shortDescription: '<b>True</b> if any registered Major Cooldowns that buff the specified stat type(s) are currently active, otherwise <b>False</b>.',
+		fullDescription: `
+		<p>For stacking buffs, this condition also checks that the buff has been stacked to its maximum possible strength after the cooldown is activated.</p>
+		<p>Both manually casted cooldowns as well as cooldowns controlled by "Cast All Stat Buff Cooldowns" and "Autocast Other Cooldowns" actions are checked.</p>
+		`,
+		newValue: () =>
+			APLValueAnyStatBuffCooldownsActive.create({
+				statType1: -1,
+				statType2: -1,
+				statType3: -1,
+			}),
+		fields: [AplHelpers.statTypeFieldConfig('statType1'), AplHelpers.statTypeFieldConfig('statType2'), AplHelpers.statTypeFieldConfig('statType3')],
+	}),
 
 	// DoT
 	dotIsActive: inputBuilder({
@@ -1288,6 +1368,13 @@ const valueKindFactories: { [f in NonNullable<APLValueKind>]: ValueKindConfig<AP
 		newValue: APLValueDotIsActive.create,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
 	}),
+	dotIsActiveOnAllTargets: inputBuilder({
+		label: 'Dot Is Active On All Targets',
+		submenu: ['DoT'],
+		shortDescription: '<b>True</b> if the specified dot is currently ticking on all targets, otherwise <b>False</b>.',
+		newValue: APLValueDotIsActiveOnAllTargets.create,
+		fields: [AplHelpers.actionIdFieldConfig('spellId', 'dot_spells')],
+	}),
 	dotRemainingTime: inputBuilder({
 		label: 'Dot Remaining Time',
 		submenu: ['DoT'],
@@ -1295,12 +1382,26 @@ const valueKindFactories: { [f in NonNullable<APLValueKind>]: ValueKindConfig<AP
 		newValue: APLValueDotRemainingTime.create,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
 	}),
+	dotLowestRemainingTime: inputBuilder({
+		label: 'Dot Lowest Remaining Time',
+		submenu: ['DoT'],
+		shortDescription: 'Time remaining before the last tick of this DoT on any target will occur, or 0 if the DoT is not currently ticking.',
+		newValue: APLValueDotLowestRemainingTime.create,
+		fields: [AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
+	}),
 	dotTickFrequency: inputBuilder({
 		label: 'Dot Tick Frequency',
 		submenu: ['DoT'],
 		shortDescription: 'The time between each tick.',
 		newValue: APLValueDotTickFrequency.create,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
+	}),
+	dotPercentIncrease: inputBuilder({
+		label: 'Dot Damage Increase %',
+		submenu: ['DoT'],
+		shortDescription: 'How much stronger a new DoT would be compared to the old.',
+		newValue: APLValueDotPercentIncrease.create,
+		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', '')],
 	}),
 	sequenceIsComplete: inputBuilder({
 		label: 'Sequence Is Complete',
@@ -1336,7 +1437,7 @@ const valueKindFactories: { [f in NonNullable<APLValueKind>]: ValueKindConfig<AP
 	shamanFireElementalDuration: inputBuilder({
 		label: 'Fire Elemental Total Duration',
 		submenu: ['Shaman'],
-		shortDescription: 'Returns the duration of Fire Elemental depending on if Totemic Focus is talented or not.',
+		shortDescription: 'Returns the total duration of Fire Elemental Totem',
 		newValue: APLValueShamanFireElementalDuration.create,
 		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassShaman,
 		fields: [],
@@ -1357,21 +1458,21 @@ const valueKindFactories: { [f in NonNullable<APLValueKind>]: ValueKindConfig<AP
 		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecFeralDruid,
 		fields: [],
 	}),
-	warlockShouldRecastDrainSoul: inputBuilder({
-		label: 'Should Recast Drain Soul',
+	warlockHandOfGuldanInFlight: inputBuilder({
+		label: 'Hand of Guldan in Flight',
 		submenu: ['Warlock'],
-		shortDescription: 'Returns <b>True</b> if the current Drain Soul channel should be immediately recast, to get a better snapshot.',
-		newValue: APLValueWarlockShouldRecastDrainSoul.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassWarlock,
+		shortDescription: 'Returns <b>True</b> if the impact of Hand of Guldan currenty is in flight.',
+		newValue: APLValueWarlockHandOfGuldanInFlight.create,
+		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecDemonologyWarlock,
 		fields: [],
 	}),
-	warlockShouldRefreshCorruption: inputBuilder({
-		label: 'Should Refresh Corruption',
+	warlockHauntInFlight: inputBuilder({
+		label: 'Haunt In Flight',
 		submenu: ['Warlock'],
-		shortDescription: 'Returns <b>True</b> if the current Corruption has expired, or should be refreshed to get a better snapshot.',
-		newValue: APLValueWarlockShouldRefreshCorruption.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassWarlock,
-		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets')],
+		shortDescription: 'Returns <b>True</b> if Haunt currently is in flight.',
+		newValue: APLValueWarlockHauntInFlight.create,
+		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecAfflictionWarlock,
+		fields: [],
 	}),
 	mageCurrentCombustionDotEstimate: inputBuilder({
 		label: 'Combustion Dot Value',

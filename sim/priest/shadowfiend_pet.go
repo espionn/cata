@@ -36,7 +36,7 @@ func (priest *Priest) NewShadowfiend() *Shadowfiend {
 			Name:                            "Shadowfiend",
 			Owner:                           &priest.Character,
 			BaseStats:                       baseStats,
-			StatInheritance:                 priest.shadowfiendStatInheritance(),
+			NonHitExpStatInheritance:        priest.shadowfiendStatInheritance(),
 			EnabledOnStart:                  false,
 			IsGuardian:                      false,
 			HasDynamicMeleeSpeedInheritance: true,
@@ -127,6 +127,9 @@ func (shadowfiend *Shadowfiend) ExecuteCustomRotation(sim *core.Simulation) {
 func (shadowfiend *Shadowfiend) Reset(sim *core.Simulation) {
 	shadowfiend.ShadowcrawlAura.Deactivate(sim)
 	shadowfiend.Disable(sim)
+}
+
+func (shadowfiend *Shadowfiend) OnEncounterStart(_ *core.Simulation) {
 }
 
 func (shadowfiend *Shadowfiend) OnPetDisable(sim *core.Simulation) {

@@ -40,11 +40,13 @@ func (shaman *Shaman) ApplyElementalTalents() {
 
 	// Elemental Fury
 	shaman.AddStaticMod(core.SpellModConfig{
-		ProcMask:          core.ProcMaskSpellDamage,
-		Kind:              core.SpellMod_CritMultiplier_Flat,
-		FloatValue:        0.5,
-		ShouldApplyToPets: true,
+		SpellFlag:  SpellFlagShamanSpell,
+		Kind:       core.SpellMod_CritMultiplier_Flat,
+		FloatValue: 0.5,
 	})
+	// For fire elemental, the bonus from elemental fury is "inherited" before other effects like skull banner apply.
+	// It has a base 2.5 = 2+0.5 = 2*1.25 crit damage multiplier and 2.5*1.2 = 3 when skull banner is up (assuming primal elementalist)
+	shaman.FireElemental.PseudoStats.CritDamageMultiplier *= 1.25
 
 	//Spiritual Insight
 	shaman.AddStaticMod(core.SpellModConfig{
@@ -59,7 +61,7 @@ func (shaman *Shaman) ApplyElementalTalents() {
 		ActionID:       core.ActionID{SpellID: 88767},
 		SpellSchool:    core.SpellSchoolNature,
 		ProcMask:       core.ProcMaskSpellProc,
-		Flags:          core.SpellFlagPassiveSpell,
+		Flags:          core.SpellFlagPassiveSpell | SpellFlagShamanSpell,
 		ClassSpellMask: SpellMaskFulmination,
 		ManaCost: core.ManaCostOptions{
 			BaseCostPercent: 0,
@@ -92,10 +94,10 @@ func (shaman *Shaman) ApplyElementalTalents() {
 		ProcChance:     1.0,
 		ClassSpellMask: SpellMaskEarthShock,
 		Callback:       core.CallbackOnApplyEffects,
-		ExtraCondition: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) bool {
-			return shaman.SelfBuffs.Shield == proto.ShamanShield_LightningShield
-		},
 		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+			if shaman.SelfBuffs.Shield != proto.ShamanShield_LightningShield || shaman.LightningShieldAura.GetStacks() <= 1 {
+				return
+			}
 			shaman.Fulmination.Cast(sim, result.Target)
 			shaman.LightningShieldAura.SetStacks(sim, 1)
 		},
@@ -106,11 +108,12 @@ func (shaman *Shaman) ApplyElementalTalents() {
 	manaMetrics := shaman.NewManaMetrics(actionID)
 
 	core.MakeProcTriggerAura(&shaman.Unit, core.ProcTrigger{
-		Name:           "Rolling Thunder",
-		ActionID:       actionID,
-		ClassSpellMask: SpellMaskChainLightning | SpellMaskChainLightningOverload | SpellMaskLightningBolt | SpellMaskLightningBoltOverload | SpellMaskLavaBeam | SpellMaskLavaBeamOverload,
-		Callback:       core.CallbackOnSpellHitDealt,
-		ProcChance:     0.6,
+		Name:            "Rolling Thunder",
+		ActionID:        actionID,
+		MetricsActionID: actionID,
+		ClassSpellMask:  SpellMaskChainLightning | SpellMaskChainLightningOverload | SpellMaskLightningBolt | SpellMaskLightningBoltOverload | SpellMaskLavaBeam | SpellMaskLavaBeamOverload,
+		Callback:        core.CallbackOnSpellHitDealt,
+		ProcChance:      0.6,
 		ExtraCondition: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) bool {
 			return shaman.SelfBuffs.Shield == proto.ShamanShield_LightningShield
 		},
@@ -131,7 +134,7 @@ func (shaman *Shaman) ApplyElementalTalents() {
 
 	maxStacks := int32(2)
 
-	clearcastingAura := shaman.RegisterAura(core.Aura{
+	clearcastingAura := core.BlockPrepull(shaman.RegisterAura(core.Aura{
 		Label:     "Clearcasting",
 		ActionID:  core.ActionID{SpellID: 16246},
 		Duration:  time.Second * 15,
@@ -145,7 +148,7 @@ func (shaman *Shaman) ApplyElementalTalents() {
 			}
 			aura.RemoveStack(sim)
 		},
-	}).AttachSpellMod(core.SpellModConfig{
+	})).AttachSpellMod(core.SpellModConfig{
 		Kind:       core.SpellMod_PowerCost_Pct,
 		ClassMask:  canConsumeSpells,
 		FloatValue: -0.25,
@@ -173,11 +176,11 @@ func (shaman *Shaman) ApplyElementalTalents() {
 	})
 
 	//Lava Surge
-	procAura := shaman.RegisterAura(core.Aura{
+	procAura := core.BlockPrepull(shaman.RegisterAura(core.Aura{
 		Label:    "Lava Surge",
 		Duration: time.Second * 6,
 		ActionID: core.ActionID{SpellID: 77762},
-	}).AttachSpellMod(core.SpellModConfig{
+	})).AttachSpellMod(core.SpellModConfig{
 		ClassMask:  SpellMaskLavaBurst,
 		Kind:       core.SpellMod_CastTime_Pct,
 		FloatValue: -1.0,
@@ -196,15 +199,15 @@ func (shaman *Shaman) ApplyElementalTalents() {
 			// an existing Lava Burst cast that is set to finish on
 			// this timestep will apply the cooldown *before* it gets
 			// reset by the Lava Surge proc.
-			pa := &core.PendingAction{
-				NextActionAt: sim.CurrentTime + time.Duration(1),
-				Priority:     core.ActionPriorityDOT,
+			pa := sim.GetConsumedPendingActionFromPool()
+			pa.NextActionAt = sim.CurrentTime + 1
+			pa.Priority = core.ActionPriorityDOT
 
-				OnAction: func(sim *core.Simulation) {
-					shaman.LavaBurst.CD.Reset()
-					procAura.Activate(sim)
-				},
+			pa.OnAction = func(sim *core.Simulation) {
+				shaman.LavaBurst.CD.Reset()
+				procAura.Activate(sim)
 			}
+
 			sim.AddPendingAction(pa)
 
 			// Additionally, trigger a rotational wait so that the agent has an

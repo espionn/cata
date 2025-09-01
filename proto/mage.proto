@@ -76,7 +76,14 @@ enum MageMinorGlyph {
 
 // END GENERATED
 
+enum MageArmor{
+	MageArmorNone = 0;
+	MageArmorMageArmor = 1; // Mage Armor
+	MageArmorFrostArmor = 2; // Ice Armor
+	MageArmorMoltenArmor = 3; // Molten Armor
+}
 message MageOptions {
+	MageArmor default_mage_armor = 1;
 }
 
 message ArcaneMage {
@@ -85,8 +92,6 @@ message ArcaneMage {
 
 	message Options {
 		MageOptions class_options = 1;
-		int32 focus_magic_percent_uptime = 2;
-		UnitReference focus_magic_target = 3;
 	}
 	Options options = 1;
 }

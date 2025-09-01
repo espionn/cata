@@ -114,6 +114,9 @@ func (priest *Priest) ApplyTalents() {
 func (priest *Priest) Reset(_ *core.Simulation) {
 }
 
+func (priest *Priest) OnEncounterStart(sim *core.Simulation) {
+}
+
 func New(char *core.Character, selfBuffs SelfBuffs, talents string) *Priest {
 	priest := &Priest{
 		Character: *char,
@@ -153,6 +156,7 @@ const (
 	PriestSpellCircleOfHealing
 	PriestSpellDevouringPlague
 	PriestSpellDevouringPlagueDoT
+	PriestSpellDevouringPlagueHeal
 	PriestSpellDesperatePrayer
 	PriestSpellDispersion
 	PriestSpellDivineAegis

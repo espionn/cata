@@ -34,7 +34,7 @@ func (monk *Monk) registerFortifyingBrew() {
 
 	spell := monk.RegisterSpell(core.SpellConfig{
 		ActionID:       actionID,
-		Flags:          core.SpellFlagNoOnCastComplete | core.SpellFlagAPL,
+		Flags:          core.SpellFlagNoOnCastComplete | core.SpellFlagAPL | core.SpellFlagReadinessTrinket,
 		ClassSpellMask: MonkSpellFortifyingBrew,
 
 		Cast: core.CastConfig{
@@ -50,6 +50,7 @@ func (monk *Monk) registerFortifyingBrew() {
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			monk.FortifyingBrewAura.Activate(sim)
 		},
+		RelatedSelfBuff: monk.FortifyingBrewAura,
 	})
 
 	monk.AddMajorCooldown(core.MajorCooldown{

@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/wowsims/mop/sim/core"
+	"github.com/wowsims/mop/sim/core/stats"
 )
 
 func (druid *Druid) ApplyTalents() {
@@ -12,6 +13,144 @@ func (druid *Druid) ApplyTalents() {
 	druid.registerCenarionWard()
 
 	druid.registerForceOfNature()
+
+	druid.registerHeartOfTheWild()
+	druid.registerNaturesVigil()
+}
+
+func (druid *Druid) registerHeartOfTheWild() {
+	if !druid.Talents.HeartOfTheWild {
+		return
+	}
+
+	// Apply 6% increase to Stamina, Agility, and Intellect
+	statMultiplier := 1.06
+	druid.MultiplyStat(stats.Stamina, statMultiplier)
+	druid.MultiplyStat(stats.Agility, statMultiplier)
+	druid.MultiplyStat(stats.Intellect, statMultiplier)
+
+	// The activation spec specific effects are implemented in individual spec packages.
+}
+
+func (druid *Druid) RegisterSharedFeralHotwMods() (*core.SpellMod, *core.SpellMod, *core.SpellMod) {
+	healingMask := DruidSpellTranquility | DruidSpellRejuvenation | DruidSpellHealingTouch | DruidSpellCenarionWard
+
+	healingMod := druid.AddDynamicMod(core.SpellModConfig{
+		ClassMask:  healingMask,
+		Kind:       core.SpellMod_DamageDone_Pct,
+		FloatValue: 1,
+	})
+
+	damageMask := DruidSpellWrath | DruidSpellMoonfire | DruidSpellMoonfireDoT | DruidSpellHurricane
+
+	damageMod := druid.AddDynamicMod(core.SpellModConfig{
+		ClassMask:  damageMask,
+		Kind:       core.SpellMod_DamageDone_Pct,
+		FloatValue: 3.2,
+	})
+
+	costMod := druid.AddDynamicMod(core.SpellModConfig{
+		ClassMask:  healingMask | damageMask,
+		Kind:       core.SpellMod_PowerCost_Pct,
+		FloatValue: -2,
+	})
+
+	return healingMod, damageMod, costMod
+}
+
+func (druid *Druid) registerNaturesVigil() {
+	if !druid.Talents.NaturesVigil {
+		return
+	}
+
+	var smartHealStrength float64
+
+	smartHealSpell := druid.RegisterSpell(Any, core.SpellConfig{
+		ActionID:         core.ActionID{SpellID: 124988},
+		SpellSchool:      core.SpellSchoolNature,
+		ProcMask:         core.ProcMaskSpellHealing,
+		Flags:            core.SpellFlagHelpful | core.SpellFlagNoOnCastComplete | core.SpellFlagPassiveSpell | core.SpellFlagIgnoreAttackerModifiers,
+		DamageMultiplier: 1,
+		ThreatMultiplier: 0,
+
+		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			spell.CalcAndDealHealing(sim, target, 0.25*smartHealStrength, spell.OutcomeHealing)
+		},
+	})
+
+	actionID := core.ActionID{SpellID: 124974}
+	numAllyTargets := float64(len(druid.Env.Raid.AllPlayerUnits) - 1)
+
+	naturesVigilAura := druid.RegisterAura(core.Aura{
+		Label:    "Nature's Vigil",
+		ActionID: actionID,
+		Duration: time.Second * 30,
+
+		OnGain: func(aura *core.Aura, sim *core.Simulation) {
+			aura.Unit.PseudoStats.DamageDealtMultiplier *= 1.12
+			aura.Unit.PseudoStats.HealingDealtMultiplier *= 1.12
+			smartHealStrength = 0
+
+			core.StartPeriodicAction(sim, core.PeriodicActionOptions{
+				Period:   time.Millisecond * 250,
+				NumTicks: 119,
+				Priority: core.ActionPriorityDOT,
+
+				OnAction: func(sim *core.Simulation) {
+					if smartHealStrength == 0 {
+						return
+					}
+
+					// Assume that the target is randomly selected from 25 raid members.
+					if sim.Proc(1.0/25.0, "Nature's Vigil") {
+						smartHealSpell.Cast(sim, aura.Unit)
+					} else if numAllyTargets > 0 {
+						targetIdx := 1 + int(sim.RandomFloat("Nature's Vigil")*numAllyTargets)
+						smartHealSpell.Cast(sim, sim.Raid.AllPlayerUnits[targetIdx])
+					}
+
+					smartHealStrength = 0
+				},
+			})
+		},
+
+		OnExpire: func(aura *core.Aura, _ *core.Simulation) {
+			aura.Unit.PseudoStats.DamageDealtMultiplier /= 1.12
+			aura.Unit.PseudoStats.HealingDealtMultiplier /= 1.12
+		},
+
+		OnSpellHitDealt: func(_ *core.Aura, _ *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+			if !spell.Flags.Matches(core.SpellFlagAoE) {
+				smartHealStrength = max(smartHealStrength, result.Damage)
+			}
+		},
+	})
+
+	naturesVigilSpell := druid.RegisterSpell(Any, core.SpellConfig{
+		ActionID:        actionID,
+		Flags:           core.SpellFlagAPL,
+		RelatedSelfBuff: naturesVigilAura,
+
+		Cast: core.CastConfig{
+			DefaultCast: core.Cast{
+				GCD: 0,
+			},
+			IgnoreHaste: true,
+			CD: core.Cooldown{
+				Timer:    druid.NewTimer(),
+				Duration: time.Second * 90,
+			},
+		},
+
+		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
+			spell.RelatedSelfBuff.Activate(sim)
+		},
+	})
+
+	druid.AddMajorCooldown(core.MajorCooldown{
+		Spell: naturesVigilSpell.Spell,
+		Type:  core.CooldownTypeDPS,
+	})
 }
 
 func (druid *Druid) registerYserasGift() {
@@ -95,6 +234,7 @@ func (druid *Druid) registerCenarionWard() {
 		DamageMultiplier: 1,
 		ThreatMultiplier: 1,
 		CritMultiplier:   druid.DefaultCritMultiplier(),
+		ClassSpellMask:   DruidSpellCenarionWard,
 
 		Hot: core.DotConfig{
 			Aura: core.Aura{

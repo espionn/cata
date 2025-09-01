@@ -1,6 +1,8 @@
 package demonology
 
 import (
+	"time"
+
 	"github.com/wowsims/mop/sim/core"
 	"github.com/wowsims/mop/sim/core/proto"
 	"github.com/wowsims/mop/sim/warlock"
@@ -45,13 +47,17 @@ type DemonologyWarlock struct {
 	HandOfGuldan  *core.Spell
 	ChaosWave     *core.Spell
 
-	Felguard *warlock.WarlockPet
-	WildImps []*WildImpPet
+	Felguard               *warlock.WarlockPet
+	WildImps               []*WildImpPet
+	HandOfGuldanImpactTime time.Duration
+	ImpSwarm               *core.Spell
 }
 
 func (demonology *DemonologyWarlock) GetWarlock() *warlock.Warlock {
 	return demonology.Warlock
 }
+
+const DefaultDemonicFury = 200
 
 func (demonology *DemonologyWarlock) Initialize() {
 	demonology.Warlock.Initialize()
@@ -59,7 +65,7 @@ func (demonology *DemonologyWarlock) Initialize() {
 	demonology.DemonicFury = demonology.RegisterNewDefaultSecondaryResourceBar(core.SecondaryResourceConfig{
 		Type:    proto.SecondaryResourceType_SecondaryResourceTypeDemonicFury,
 		Max:     1000,
-		Default: 200,
+		Default: DefaultDemonicFury,
 	})
 
 	demonology.registerMetamorphosis()
@@ -79,6 +85,7 @@ func (demonology *DemonologyWarlock) Initialize() {
 	demonology.registerTouchOfChaos()
 	demonology.registerVoidRay()
 	demonology.registerDarksoulKnowledge()
+	demonology.registerImpSwarm()
 }
 
 func (demonology *DemonologyWarlock) ApplyTalents() {
@@ -91,6 +98,13 @@ func (demonology *DemonologyWarlock) ApplyTalents() {
 
 func (demonology *DemonologyWarlock) Reset(sim *core.Simulation) {
 	demonology.Warlock.Reset(sim)
+
+	demonology.HandOfGuldanImpactTime = 0
+}
+
+func (demonology *DemonologyWarlock) OnEncounterStart(sim *core.Simulation) {
+	demonology.DemonicFury.ResetBarTo(sim, DefaultDemonicFury)
+	demonology.Warlock.OnEncounterStart(sim)
 }
 
 func NewDemonicFuryCost(cost int) *warlock.SecondaryResourceCost {

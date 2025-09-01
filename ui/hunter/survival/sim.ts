@@ -5,11 +5,10 @@ import * as Mechanics from '../../core/constants/mechanics.js';
 import { IndividualSimUI, registerSpecConfig } from '../../core/individual_sim_ui';
 import { Player } from '../../core/player';
 import { PlayerClasses } from '../../core/player_classes';
-import { APLListItem, APLRotation } from '../../core/proto/apl';
-import { Cooldowns, Debuffs, Faction, IndividualBuffs, ItemSlot, PartyBuffs, PseudoStat, Race, RaidBuffs, Spec, Stat } from '../../core/proto/common';
-import { SurvivalHunter_Rotation } from '../../core/proto/hunter';
-import * as AplUtils from '../../core/proto_utils/apl_utils';
+import { APLRotation } from '../../core/proto/apl';
+import { Debuffs, Faction, IndividualBuffs, ItemSlot, PartyBuffs, PseudoStat, Race, RaidBuffs, Spec, Stat } from '../../core/proto/common';
 import { Stats, UnitStat } from '../../core/proto_utils/stats';
+import { defaultRaidBuffMajorDamageCooldowns } from '../../core/proto_utils/utils';
 import * as HunterInputs from '../inputs';
 import { sharedHunterDisplayStatsModifiers } from '../shared';
 import * as SVInputs from './inputs';
@@ -43,14 +42,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecSurvivalHunter, {
 	modifyDisplayStats: (player: Player<Spec.SpecSurvivalHunter>) => {
 		return sharedHunterDisplayStatsModifiers(player);
 	},
-	itemSwapSlots: [
-		ItemSlot.ItemSlotMainHand,
-		ItemSlot.ItemSlotHands,
-		ItemSlot.ItemSlotTrinket1,
-		ItemSlot.ItemSlotTrinket2,
-		ItemSlot.ItemSlotFinger1,
-		ItemSlot.ItemSlotFinger2,
-	],
+	itemSwapSlots: [ItemSlot.ItemSlotMainHand, ItemSlot.ItemSlotTrinket1, ItemSlot.ItemSlotTrinket2],
 	defaults: {
 		// Default equipped gear.
 		gear: Presets.P1_PRESET_GEAR.gear,
@@ -67,11 +59,12 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecSurvivalHunter, {
 		// Default consumes settings.
 		consumables: Presets.DefaultConsumables,
 		// Default talents.
-		talents: Presets.SurvivalTalents.data,
+		talents: Presets.DefaultTalents.data,
 		// Default spec-specific settings.
 		specOptions: Presets.SVDefaultOptions,
 		// Default raid/party buffs settings.
 		raidBuffs: RaidBuffs.create({
+			...defaultRaidBuffMajorDamageCooldowns(),
 			blessingOfKings: true,
 			trueshotAura: true,
 			leaderOfThePack: true,
@@ -79,8 +72,6 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecSurvivalHunter, {
 			commandingShout: true,
 			unholyAura: true,
 			bloodlust: true,
-			skullBannerCount: 2,
-			stormlashTotemCount: 4,
 		}),
 		partyBuffs: PartyBuffs.create({}),
 		individualBuffs: IndividualBuffs.create({}),
@@ -111,7 +102,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecSurvivalHunter, {
 	presets: {
 		epWeights: [Presets.P1_EP_PRESET],
 		// Preset talents that the user can quickly select.
-		talents: [Presets.SurvivalTalents],
+		talents: [Presets.DefaultTalents],
 		// Preset rotations that the user can quickly select.
 		rotations: [Presets.ROTATION_PRESET_SV, Presets.ROTATION_PRESET_AOE],
 		// Preset gear configurations that the user can quickly select.
@@ -120,33 +111,14 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecSurvivalHunter, {
 	},
 
 	autoRotation: (player: Player<Spec.SpecSurvivalHunter>): APLRotation => {
-		const numTargets = player.sim.encounter.targets.length;
-		if (numTargets >= 4) {
-			return Presets.ROTATION_PRESET_AOE.rotation.rotation!;
-		} else {
-			return Presets.ROTATION_PRESET_SV.rotation.rotation!;
-		}
-	},
-
-	simpleRotation: (player: Player<Spec.SpecSurvivalHunter>, simple: SurvivalHunter_Rotation, cooldowns: Cooldowns): APLRotation => {
-		const [prepullActions, actions] = AplUtils.standardCooldownDefaults(cooldowns);
-
-		return APLRotation.create({
-			prepullActions: prepullActions,
-			priorityList: actions.map(action =>
-				APLListItem.create({
-					action: action,
-				}),
-			),
-		});
+		return player.sim.encounter.targets.length >= 3 ? Presets.ROTATION_PRESET_AOE.rotation.rotation! : Presets.ROTATION_PRESET_SV.rotation.rotation!;
 	},
 
 	raidSimPresets: [
 		{
 			spec: Spec.SpecSurvivalHunter,
-			talents: Presets.SurvivalTalents.data,
+			talents: Presets.DefaultTalents.data,
 			specOptions: Presets.SVDefaultOptions,
-
 			consumables: Presets.DefaultConsumables,
 			defaultFactionRaces: {
 				[Faction.Unknown]: Race.RaceUnknown,
@@ -173,7 +145,7 @@ export class SurvivalHunterSimUI extends IndividualSimUI<Spec.SpecSurvivalHunter
 
 		player.sim.waitForInit().then(() => {
 			new ReforgeOptimizer(this, {
-				getEPDefaults: (player: Player<Spec.SpecSurvivalHunter>) => {
+				getEPDefaults: (_: Player<Spec.SpecSurvivalHunter>) => {
 					return Presets.P1_EP_PRESET.epWeights;
 				},
 			});

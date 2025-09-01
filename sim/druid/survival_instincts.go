@@ -27,6 +27,7 @@ func (druid *Druid) registerSurvivalInstinctsCD() {
 
 	druid.SurvivalInstincts = druid.RegisterSpell(Cat|Bear, core.SpellConfig{
 		ActionID: actionID,
+		Flags:    core.SpellFlagReadinessTrinket,
 
 		Cast: core.CastConfig{
 			CD: core.Cooldown{
@@ -38,6 +39,7 @@ func (druid *Druid) registerSurvivalInstinctsCD() {
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
 			druid.SurvivalInstinctsAura.Activate(sim)
 		},
+		RelatedSelfBuff: druid.SurvivalInstinctsAura,
 	})
 
 	druid.AddMajorCooldown(core.MajorCooldown{

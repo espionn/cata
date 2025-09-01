@@ -21,12 +21,14 @@ func (shaman *Shaman) ApplyEnhancementTalents() {
 		Kind:       core.SpellMod_PowerCost_Pct,
 		FloatValue: -0.75,
 	})
-	primalWisdomManaMetrics := shaman.NewManaMetrics(core.ActionID{SpellID: 63375})
+	PWActionID := core.ActionID{SpellID: 63375}
+	primalWisdomManaMetrics := shaman.NewManaMetrics(PWActionID)
 	core.MakeProcTriggerAura(&shaman.Unit, core.ProcTrigger{
-		Name:       "Mental Quickness",
-		ProcMask:   core.ProcMaskMelee,
-		Callback:   core.CallbackOnSpellHitDealt,
-		ProcChance: 0.4,
+		Name:            "Mental Quickness",
+		ProcMask:        core.ProcMaskMelee,
+		Callback:        core.CallbackOnSpellHitDealt,
+		ProcChance:      0.4,
+		MetricsActionID: PWActionID,
 		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			shaman.AddMana(sim, 0.05*shaman.MaxMana(), primalWisdomManaMetrics)
 		},
@@ -76,7 +78,7 @@ func (shaman *Shaman) ApplyEnhancementTalents() {
 		FloatValue: 0.2,
 	})
 
-	searingFlameStackingAura := shaman.RegisterAura(core.Aura{
+	searingFlameStackingAura := core.BlockPrepull(shaman.RegisterAura(core.Aura{
 		Label:     "Searing Flames",
 		ActionID:  core.ActionID{SpellID: 77661},
 		Duration:  time.Second * 15,
@@ -97,7 +99,7 @@ func (shaman *Shaman) ApplyEnhancementTalents() {
 			}
 			aura.Deactivate(sim)
 		},
-	})
+	}))
 
 	core.MakeProcTriggerAura(&shaman.FireElemental.Unit, core.ProcTrigger{
 		Name:           "Searing Flames Dummy Fire ele",
@@ -150,7 +152,7 @@ func (shaman *Shaman) ApplyEnhancementTalents() {
 		Kind:       core.SpellMod_PowerCost_Pct,
 		FloatValue: -0.2,
 	})
-	shaman.MaelstromWeaponAura = shaman.RegisterAura(core.Aura{
+	shaman.MaelstromWeaponAura = core.BlockPrepull(shaman.RegisterAura(core.Aura{
 		Label:     "MaelstromWeapon Proc",
 		ActionID:  core.ActionID{SpellID: 51530},
 		Duration:  time.Second * 30,
@@ -176,7 +178,7 @@ func (shaman *Shaman) ApplyEnhancementTalents() {
 			}
 			shaman.MaelstromWeaponAura.Deactivate(sim)
 		},
-	})
+	}))
 
 	ppm := core.TernaryFloat64(shaman.S12Enh2pc.IsActive(), 12.0, 10.0)
 

@@ -18,6 +18,7 @@ var OtherItemIdsToFetch = []string{
 var ConsumableOverrides = []*proto.Consumable{
 	{Id: 62290, BuffsMainStat: true, Stats: stats.Stats{stats.Stamina: 90}.ToProtoArray()},
 	{Id: 62649, BuffsMainStat: true, Stats: stats.Stats{stats.Stamina: 90}.ToProtoArray()},
+	{Id: 86125, Type: proto.ConsumableType_ConsumableTypePotion},
 }
 var ItemOverrides = []*proto.UIItem{
 	// Boosted 359 green weapon damage stats are way off
@@ -188,8 +189,6 @@ var ItemAllowList = map[int32]struct{}{
 	2140: {},
 	2505: {},
 
-	12590: {}, // Felstriker
-
 	//Shaman Dungeon Set 3 Tidefury
 	27510: {}, // Tidefury Gauntlets
 	27802: {}, // Tidefury Shoulderguards
@@ -199,23 +198,9 @@ var ItemAllowList = map[int32]struct{}{
 
 	29309: {}, // Band of the Eternal Restorer
 
-	29996: {}, // Rod of the Sun King
-
-	31026: {}, // Slayer's Handguards
-	31027: {}, // Slayer's Helm
-	31028: {}, // Slayer's Chestguard
-	31029: {}, // Slayer's Legguards
-	31030: {}, // Slayer's Shoulderpads
-	34448: {}, // Slayer's Bracers
-	34558: {}, // Slayer's Belt
-	34575: {}, // Slayer's Boots
-
 	34677: {}, // Shattered Sun Pendant of Restoration
 
 	45703: {}, // Spark of Hope
-
-	49982: {}, // Heartpierce N
-	50641: {}, // Heartpierce H
 }
 
 // Keep these sorted by item ID.
@@ -834,6 +819,7 @@ var ExtraItemIcons = []int32{
 	41166,
 	42545,
 	42641,
+	86125,
 
 	// Poisons
 	43231,
@@ -883,7 +869,7 @@ var SharedSpellsIcons = []int32{
 	// Registered CD's
 	49016,
 	57933,
-	64382,
+	1249459,
 	10060,
 	16190,
 	29166,
@@ -1180,5 +1166,30 @@ var EnchantDenyList = map[int32]struct{}{
 	4671: {}, // Kyle's Test Enchantment
 	4687: {}, // Enchant Weapon - Ninja (TEST VERSION)
 	4717: {}, // Enchant Weapon - Pandamonium (DNT)
+	5029: {}, // Custom - Jaina - Crackling Lightning
 	5110: {}, // Lightweave Embroidery - Junk
+}
+
+// Note: EffectId is required for all enchants, because they are
+// used by various importers/exporters
+var EnchantOverrides = []*proto.UIEnchant{
+	{EffectId: 4419, SpellId: 104395}, // Enchant Chest - Glorious Stats
+	{EffectId: 4428, SpellId: 104409}, // Enchant Boots - Blurred Speed
+	{EffectId: 4429, SpellId: 104414}, // Enchant Boots - Pandaren's Step
+	{EffectId: 4441, SpellId: 104425}, // Enchant Weapon - Windsong
+	{EffectId: 4442, SpellId: 104427}, // Enchant Weapon - Jade Spirit
+	{EffectId: 4443, SpellId: 104430}, // Enchant Weapon - Elemental Force
+	{EffectId: 4444, SpellId: 104434}, // Enchant Weapon - Dancing Steel
+	{EffectId: 4445, SpellId: 104040}, // Enchant Weapon - Colossus
+	{EffectId: 4446, SpellId: 104442}, // Enchant Weapon - River's Song
+
+	{EffectId: 4892, SpellId: 125481}, // Lightweave Embroidery (Rank 3)
+	{EffectId: 4893, SpellId: 125482}, // Darkglow Embroidery (Rank 3)
+	{EffectId: 4894, SpellId: 125483}, // Swordguard Embroidery (Rank 3)
+	{EffectId: 4895, SpellId: 125496}, // Master's Spellthread (Rank 3)
+	{EffectId: 4896, SpellId: 125497}, // Sanctified Spellthread (Rank 3)
+	{EffectId: 4898, SpellId: 126731}, // Synapse Springs (Mark II)
+
+	{EffectId: 5124, SpellId: 142469}, // Enchant Weapon - Spirit of Conquest
+	{EffectId: 5125, SpellId: 142468}, // Enchant Weapon - Bloody Dancing Steel
 }

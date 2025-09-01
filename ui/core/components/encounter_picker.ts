@@ -1,6 +1,6 @@
 import { Encounter } from '../encounter.js';
 import { IndividualSimUI } from '../individual_sim_ui.js';
-import { InputType, MobType, SpellSchool, Stat, Target, Target as TargetProto, TargetInput } from '../proto/common.js';
+import { InputType, MobType, Spec, SpellSchool, Stat, Target, Target as TargetProto, TargetInput } from '../proto/common.js';
 import { getStatName } from '../proto_utils/names.js';
 import { Stats } from '../proto_utils/stats.js';
 import { Raid } from '../raid.js';
@@ -126,6 +126,9 @@ export class EncounterPicker extends Component {
 					},
 					showWhen: (raid: Raid) => {
 						const shouldEnable = player.shouldEnableTargetDummies();
+						if ([Spec.SpecBrewmasterMonk, Spec.SpecWindwalkerMonk].includes(player.getSpec())) {
+							return false;
+						}
 
 						if (!shouldEnable) {
 							raid.setTargetDummies(TypedEvent.nextEventID(), 0);
@@ -349,7 +352,6 @@ class TargetPicker extends Input<Encounter, TargetProto> {
 				{ name: '91', value: 91 },
 				{ name: '90', value: 90 },
 				{ name: '88', value: 88 },
-
 			],
 			changedEvent: () => encounter.targetsChangeEmitter,
 			getValue: () => this.getTarget().level,
@@ -738,7 +740,7 @@ function addEncounterFieldPickers(rootElem: HTMLElement, encounter: Encounter, s
 			id: 'encounter-execute-proportion-35',
 			label: 'Execute Duration 35 (%)',
 			labelTooltip:
-				'Percentage of the total encounter duration, for which the targets will be considered to be in execute range (< 35% HP) for the purpose of effects like Warrior Execute or Mage Molten Fury.',
+				'Percentage of the total encounter duration, for which the targets will be considered to be in execute range (< 35% HP) for the purpose of effects like Death Knight Soul Reaper.',
 			changedEvent: (encounter: Encounter) => encounter.changeEmitter,
 			getValue: (encounter: Encounter) => encounter.getExecuteProportion35() * 100,
 			setValue: (eventID: EventID, encounter: Encounter, newValue: number) => {
@@ -749,7 +751,21 @@ function addEncounterFieldPickers(rootElem: HTMLElement, encounter: Encounter, s
 			},
 		});
 		new NumberPicker(executeGroup, encounter, {
-			id: 'encounter-execute-proportion-50',
+			id: 'encounter-execute-proportion-45',
+			label: 'Execute Duration 45 (%)',
+			labelTooltip:
+				'Percentage of the total encounter duration, for which the targets will be considered to be in execute range (< 45% HP) for the purpose of effects like Death Knight Soul Reaper with T15 DPS 4pc.',
+			changedEvent: (encounter: Encounter) => encounter.changeEmitter,
+			getValue: (encounter: Encounter) => encounter.getExecuteProportion45() * 100,
+			setValue: (eventID: EventID, encounter: Encounter, newValue: number) => {
+				encounter.setExecuteProportion45(eventID, newValue / 100);
+			},
+			enableWhen: _obj => {
+				return !encounter.getUseHealth();
+			},
+		});
+		new NumberPicker(executeGroup, encounter, {
+			id: 'encounter-execute-proportion-90',
 			label: 'Duration spent below high-HP regime (%)',
 			labelTooltip:
 				'Percentage of the total encounter duration, for which the targets are considered out of range for effects like Hunter Careful Aim (<90% HP) or Druid Predatory Strikes (<80% HP).',

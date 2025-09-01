@@ -35,12 +35,12 @@ func tigerPowerBuffConfig(monk *Monk, isSEFClone bool) core.Aura {
 		Duration: time.Second * 20,
 
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			for _, target := range sim.Encounter.TargetUnits {
+			for _, target := range sim.Encounter.AllTargetUnits {
 				aura.Unit.AttackTables[target.UnitIndex].ArmorIgnoreFactor += 0.3
 			}
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			for _, target := range sim.Encounter.TargetUnits {
+			for _, target := range sim.Encounter.AllTargetUnits {
 				aura.Unit.AttackTables[target.UnitIndex].ArmorIgnoreFactor -= 0.3
 			}
 		},
@@ -84,8 +84,9 @@ func tigerPalmSpellConfig(monk *Monk, isSEFClone bool, overrides core.SpellConfi
 func (monk *Monk) registerTigerPalm() {
 	chiMetrics := monk.NewChiMetrics(tigerPalmActionID)
 	isBrewmaster := monk.Spec == proto.Spec_SpecBrewmasterMonk
+	chiCost := int32(1)
 
-	tigerPowerBuff := monk.RegisterAura(tigerPowerBuffConfig(monk, false))
+	tigerPowerBuff := core.BlockPrepull(monk.RegisterAura(tigerPowerBuffConfig(monk, false)))
 
 	monk.RegisterSpell(tigerPalmSpellConfig(monk, false, core.SpellConfig{
 		ActionID:       tigerPalmActionID,
@@ -107,7 +108,7 @@ func (monk *Monk) registerTigerPalm() {
 		CritMultiplier:   monk.DefaultCritMultiplier(),
 
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
-			return isBrewmaster || monk.GetChi() >= 1 || monk.ComboBreakerTigerPalmAura.IsActive()
+			return isBrewmaster || monk.GetChi() >= chiCost || monk.ComboBreakerTigerPalmAura.IsActive()
 		},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
@@ -117,11 +118,12 @@ func (monk *Monk) registerTigerPalm() {
 
 			if result.Landed() {
 				tigerPowerBuff.Activate(sim)
-
-				if monk.ComboBreakerTigerPalmAura.IsActive() || isBrewmaster {
-					monk.SpendChi(sim, 0, chiMetrics)
-				} else {
-					monk.SpendChi(sim, 1, chiMetrics)
+				if !isBrewmaster {
+					if monk.ComboBreakerTigerPalmAura.IsActive() {
+						monk.onChiSpent(sim, chiCost)
+					} else {
+						monk.SpendChi(sim, chiCost, chiMetrics)
+					}
 				}
 			}
 
@@ -131,7 +133,7 @@ func (monk *Monk) registerTigerPalm() {
 }
 
 func (pet *StormEarthAndFirePet) registerSEFTigerPalm() {
-	tigerPowerBuff := pet.RegisterAura(tigerPowerBuffConfig(pet.owner, true))
+	tigerPowerBuff := core.BlockPrepull(pet.RegisterAura(tigerPowerBuffConfig(pet.owner, true)))
 
 	pet.RegisterSpell(tigerPalmSpellConfig(pet.owner, true, core.SpellConfig{
 		Cast: core.CastConfig{

@@ -164,7 +164,9 @@ const (
 	SpellFlagApplyArmorReduction                           // Forces damage reduction from armor to apply, even if it otherwise wouldn't.
 	SpellFlagCannotBeDodged                                // Ignores dodge in physical hit rolls
 	SpellFlagBinary                                        // Does not do partial resists and could need a different hit roll.
+	SpellFlagBypassAbsorbs                                 // Prevents any active DamageAbsorptionAuras from applying their damage reduction effects.
 	SpellFlagChanneled                                     // Spell is channeled
+	SpellFlagCastWhileChanneling                           // Spell can be cast while channeling. If SpellFlagChanneled and SpellFlagCastWhileChanneling are both set, it means that other spells with the SpellFlagCastWhileChanneling flag can be cast without interrupting the channeled spell.
 	SpellFlagDisease                                       // Spell is categorized as disease
 	SpellFlagHelpful                                       // For healing spells / buffs.
 	SpellFlagMeleeMetrics                                  // Marks a spell as a melee ability for metrics.
@@ -187,6 +189,7 @@ const (
 	SpellFlagSwapped                                       // Indicates that this spell is not useable because it is from a currently swapped item
 	SpellFlagAoE                                           // Indicates that this spell is an AoE spell. Spells flagged with this will use the AoE Cap multiplier when calculating damage.
 	SpellFlagRanged                                        // Indicates that this spell is a ranged spell. Spells flagged with this will have increased damage when Hunters Mark is active.
+	SpellFlagReadinessTrinket                              // Indicates that this spell part of Readiness. Used by Siege of Orgrimmar CDR trinkets.
 
 	// Used to let agents categorize their spells.
 	SpellFlagAgentReserved1
@@ -210,6 +213,10 @@ const (
 	SpellSchoolShadow
 	SpellSchoolChaos       SpellSchool = SpellSchoolArcane | SpellSchoolFire | SpellSchoolFrost | SpellSchoolHoly | SpellSchoolNature | SpellSchoolShadow
 	SpellSchoolShadowFlame SpellSchool = SpellSchoolFire | SpellSchoolShadow
+	SpellSchoolShadowFrost SpellSchool = SpellSchoolFrost | SpellSchoolShadow
+	SpellSchoolPlague      SpellSchool = SpellSchoolNature | SpellSchoolShadow
+	SpellSchoolFirestorm   SpellSchool = SpellSchoolFire | SpellSchoolNature
+	SpellSchoolElemental   SpellSchool = SpellSchoolFire | SpellSchoolNature | SpellSchoolFrost
 )
 
 // Returns whether there is any overlap between the given masks.

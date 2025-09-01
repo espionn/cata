@@ -20,14 +20,14 @@ func (war *Warrior) registerHeroicThrow() {
 			DefaultCast: core.Cast{
 				GCD: core.GCDDefault,
 			},
+			IgnoreHaste: true,
 			CD: core.Cooldown{
 				Timer:    war.NewTimer(),
 				Duration: time.Second * 30,
 			},
 			ModifyCast: func(sim *core.Simulation, spell *core.Spell, cast *core.Cast) {
-				war.AutoAttacks.StopMeleeUntil(sim, sim.CurrentTime+cast.CastTime, war.AutoAttacks.MH().SwingSpeed == war.AutoAttacks.OH().SwingSpeed)
+				war.AutoAttacks.StopMeleeUntil(sim, sim.CurrentTime+cast.CastTime)
 			},
-			IgnoreHaste: true,
 		},
 		DamageMultiplier: 0.5,
 		ThreatMultiplier: 1,

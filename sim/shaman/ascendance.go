@@ -18,7 +18,7 @@ func (shaman *Shaman) registerAscendanceSpell() {
 		ActionID:    core.ActionID{SpellID: 114089, Tag: 1},
 		SpellSchool: core.SpellSchoolNature,
 		ProcMask:    core.ProcMaskMeleeMHAuto,
-		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete,
+		Flags:       core.SpellFlagMeleeMetrics | core.SpellFlagNoOnCastComplete | core.SpellFlagReadinessTrinket,
 
 		DamageMultiplier:         1,
 		DamageMultiplierAdditive: 1,
@@ -63,16 +63,17 @@ func (shaman *Shaman) registerAscendanceSpell() {
 				originalOHSpell = shaman.AutoAttacks.OHAuto()
 				shaman.AutoAttacks.SetMHSpell(windslashMH)
 				shaman.AutoAttacks.SetOHSpell(windslashOH)
+			} else {
+				shaman.LavaBurst.CD.Reset()
 			}
-			pa := &core.PendingAction{
-				NextActionAt: aura.ExpiresAt(),
-				Priority:     core.ActionPriorityGCD,
-				OnAction:     func(sim *core.Simulation) {},
-			}
+
+			pa := sim.GetConsumedPendingActionFromPool()
+			pa.NextActionAt = aura.ExpiresAt()
+			pa.OnAction = func(sim *core.Simulation) {}
 			sim.AddPendingAction(pa)
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			//Lava Beam cast gets cancelled if ascendance fades during it
+			// Lava Beam cast gets cancelled if ascendance fades during it
 			if (shaman.Hardcast.ActionID.SpellID == 114074) && shaman.Hardcast.Expires > sim.CurrentTime {
 				shaman.CancelHardcast(sim)
 			}
@@ -80,8 +81,10 @@ func (shaman *Shaman) registerAscendanceSpell() {
 				shaman.Stormstrike.CD.Set(shaman.Stormblast.CD.ReadyAt())
 				shaman.AutoAttacks.SetMHSpell(originalMHSpell)
 				shaman.AutoAttacks.SetOHSpell(originalOHSpell)
-				//weapon swap can set crit multiplier to 0 if swapped during ascendance to a Two-Handed
+				// Weapon swap can set oh crit multiplier to 0 if swapped during ascendance to a Two-Handed
 				windslashOH.CritMultiplier = shaman.DefaultCritMultiplier()
+				originalOHSpell.CritMultiplier = shaman.DefaultCritMultiplier()
+
 			}
 		},
 	}).AttachSpellMod(core.SpellModConfig{

@@ -1,5 +1,5 @@
 import * as PresetUtils from '../../core/preset_utils';
-import { ConsumesSpec, Debuffs, Glyphs, IndividualBuffs, Profession, PseudoStat, RaidBuffs, Stat } from '../../core/proto/common';
+import { ConsumesSpec, Debuffs, Glyphs, IndividualBuffs, Profession, PseudoStat, Race, RaidBuffs, Stat } from '../../core/proto/common';
 import { SavedTalents } from '../../core/proto/ui';
 import {
 	AfflictionWarlock_Options as WarlockOptions,
@@ -8,6 +8,7 @@ import {
 	WarlockOptions_Summon as Summon,
 } from '../../core/proto/warlock';
 import { Stats } from '../../core/proto_utils/stats';
+import { defaultRaidBuffMajorDamageCooldowns } from '../../core/proto_utils/utils';
 import { WARLOCK_BREAKPOINTS } from '../presets';
 import DefaultApl from './apls/default.apl.json';
 import P1Gear from './gear_sets/p1.gear.json';
@@ -29,9 +30,9 @@ export const DEFAULT_EP_PRESET = PresetUtils.makePresetEpWeights(
 		[Stat.StatIntellect]: 1.26,
 		[Stat.StatSpellPower]: 1.0,
 		[Stat.StatHitRating]: 0.93,
-		[Stat.StatCritRating]: 0.52,
-		[Stat.StatHasteRating]: 0.58,
-		[Stat.StatMasteryRating]: 0.38,
+		[Stat.StatCritRating]: 0.56,
+		[Stat.StatHasteRating]: 0.88,
+		[Stat.StatMasteryRating]: 0.68,
 	}),
 );
 
@@ -43,6 +44,8 @@ export const AfflictionTalents = {
 	data: SavedTalents.create({
 		talentsString: '231211',
 		glyphs: Glyphs.create({
+			major1: MajorGlyph.GlyphOfUnstableAffliction,
+			major2: MajorGlyph.GlyphOfSiphonLife,
 			minor3: MinorGlyph.GlyphOfUnendingBreath,
 		}),
 	}),
@@ -63,14 +66,13 @@ export const DefaultConsumables = ConsumesSpec.create({
 });
 
 export const DefaultRaidBuffs = RaidBuffs.create({
+	...defaultRaidBuffMajorDamageCooldowns(),
 	arcaneBrilliance: true,
 	blessingOfKings: true,
 	leaderOfThePack: true,
 	blessingOfMight: true,
 	bloodlust: true,
 	moonkinAura: true,
-	skullBannerCount: 2,
-	stormlashTotemCount: 4,
 	unholyAura: true,
 });
 
@@ -83,6 +85,7 @@ export const DefaultDebuffs = Debuffs.create({
 });
 
 export const OtherDefaults = {
+	race: Race.RaceTroll,
 	distanceFromTarget: 25,
 	profession1: Profession.Engineering,
 	profession2: Profession.Tailoring,

@@ -478,6 +478,7 @@ func NewStackingStatBonusEffect(config StackingStatBonusEffect) {
 			},
 		})
 
+		procAura.Icd = triggerAura.Icd
 		character.AddStatProcBuff(config.ItemID, procAura, false, eligibleSlotsForItem)
 		character.ItemSwap.RegisterProcWithSlots(config.ItemID, triggerAura, eligibleSlotsForItem)
 	})
@@ -591,21 +592,21 @@ func NewProcDamageEffect(config ProcDamageEffect) {
 	})
 }
 
-// Takes in the SpellResult for the triggering spell, and returns the damage per
-// tick of a *fresh* Ignite triggered by that spell. Roll-over damage
+// Takes in the SpellResult for the triggering spell, and returns the total damage
+// of a *fresh* Ignite triggered by that spell. Roll-over damage
 // calculations for existing Ignites are handled internally.
 type IgniteDamageCalculator func(result *core.SpellResult) float64
 
 type IgniteConfig struct {
 	ActionID           core.ActionID
 	ClassSpellMask     int64
+	SpellSchool        core.SpellSchool
 	DisableCastMetrics bool
 	DotAuraLabel       string
 	DotAuraTag         string
 	ProcTrigger        core.ProcTrigger // Ignores the Handler field and creates a custom one, but uses all others.
 	DamageCalculator   IgniteDamageCalculator
 	IncludeAuraDelay   bool // "munching" and "free roll-over" interactions
-	SpellSchool        core.SpellSchool
 	NumberOfTicks      int32
 	TickLength         time.Duration
 	ParentAura         *core.Aura
@@ -651,8 +652,7 @@ func RegisterIgniteEffect(unit *core.Unit, config IgniteConfig) *core.Spell {
 			AffectedByCastSpeed: false,
 
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
-				result := dot.Spell.CalcPeriodicDamage(sim, target, dot.SnapshotBaseDamage, dot.OutcomeTick)
-				dot.Spell.DealPeriodicDamage(sim, result)
+				dot.Spell.CalcAndDealPeriodicDamage(sim, target, dot.SnapshotBaseDamage, dot.OutcomeTick)
 			},
 		},
 
@@ -718,7 +718,7 @@ func RegisterIgniteEffect(unit *core.Unit, config IgniteConfig) *core.Spell {
 				}
 			}
 
-			scheduledRefresh = core.StartDelayedAction(sim, core.DelayedActionOptions{
+			scheduledRefresh = core.NewDelayedAction(core.DelayedActionOptions{
 				DoAt:     applyDotAt,
 				Priority: core.ActionPriorityDOT,
 
@@ -726,6 +726,8 @@ func RegisterIgniteEffect(unit *core.Unit, config IgniteConfig) *core.Spell {
 					refreshIgnite(sim, target, damagePerTick)
 				},
 			})
+
+			sim.AddPendingAction(scheduledRefresh)
 		} else {
 			refreshIgnite(sim, target, damagePerTick)
 		}
@@ -777,7 +779,43 @@ func (version ItemVersion) GetLabel() string {
 }
 
 func (versions ItemVersionMap) RegisterAll(fac ItemVersionFactory) {
+	var maxItemID int32
+
+	for _, id := range versions {
+		maxItemID = max(maxItemID, id)
+	}
+
 	for version, id := range versions {
+		core.AddEffectsToTest = (id == maxItemID)
 		fac(version, id, version.GetLabel())
 	}
+
+	core.AddEffectsToTest = true
+}
+
+func RegisterRiposteEffect(character *core.Character, auraSpellID int32, triggerSpellID int32) {
+	riposteAura := core.BlockPrepull(character.RegisterAura(core.Aura{
+		Label:     "Riposte" + character.Label,
+		ActionID:  core.ActionID{SpellID: auraSpellID},
+		Duration:  time.Second * 20,
+		MaxStacks: math.MaxInt32,
+
+		OnStacksChange: func(aura *core.Aura, sim *core.Simulation, oldStacks, newStacks int32) {
+			character.AddStatDynamic(sim, stats.CritRating, float64(newStacks-oldStacks))
+		},
+	}))
+
+	core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
+		Name:     "Riposte Trigger" + character.Label,
+		ActionID: core.ActionID{SpellID: triggerSpellID},
+		Callback: core.CallbackOnSpellHitTaken,
+		Outcome:  core.OutcomeDodge | core.OutcomeParry,
+		ICD:      time.Second * 1,
+
+		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+			bonusCrit := math.Round((character.GetStat(stats.DodgeRating) + character.GetParryRatingWithoutStrength()) * 0.75)
+			riposteAura.Activate(sim)
+			riposteAura.SetStacks(sim, int32(bonusCrit))
+		},
+	})
 }

@@ -7,21 +7,19 @@ import (
 
 var PestilenceActionID = core.ActionID{SpellID: 50842}
 
-func (dk *DeathKnight) registerPestilenceSpell() {
+// Spreads existing Blood Plague and Frost Fever infections from your target to all other enemies within 10 yards.
+func (dk *DeathKnight) registerPestilence() {
 	hasReaping := dk.Inputs.Spec == proto.Spec_SpecUnholyDeathKnight
+	maxRange := core.MaxMeleeRange + core.TernaryFloat64(dk.HasMajorGlyph(proto.DeathKnightMajorGlyph_GlyphOfPestilence), 5, 0)
 
-	pestiHandler := func(sim *core.Simulation, spell *core.Spell, target *core.Unit) {
-		spell.DamageMultiplier *= 0.5
-		spell.Cast(sim, target)
-		spell.DamageMultiplier /= 0.5
-	}
-
-	dk.RegisterSpell(core.SpellConfig{
-		ActionID:       core.ActionID{SpellID: 50842},
-		Flags:          core.SpellFlagAPL,
+	dk.PestilenceSpell = dk.RegisterSpell(core.SpellConfig{
+		ActionID:       PestilenceActionID,
+		Flags:          core.SpellFlagAPL | core.SpellFlagEncounterOnly,
 		SpellSchool:    core.SpellSchoolShadow,
 		ProcMask:       core.ProcMaskSpellDamage,
 		ClassSpellMask: DeathKnightSpellPestilence,
+
+		MaxRange: maxRange,
 
 		RuneCost: core.RuneCostOptions{
 			BloodRuneCost:  1,
@@ -30,7 +28,7 @@ func (dk *DeathKnight) registerPestilenceSpell() {
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
+				GCD: core.GCDMin,
 			},
 		},
 
@@ -41,12 +39,15 @@ func (dk *DeathKnight) registerPestilenceSpell() {
 			frostFeverActive := dk.FrostFeverSpell.Dot(target).IsActive()
 			bloodPlagueActive := dk.BloodPlagueSpell.Dot(target).IsActive()
 
-			for _, aoeTarget := range sim.Encounter.TargetUnits {
+			for _, aoeTarget := range sim.Encounter.ActiveTargetUnits {
 				result := spell.CalcAndDealOutcome(sim, aoeTarget, spell.OutcomeMagicHit)
 
 				if aoeTarget == target {
 					if hasReaping {
-						spell.SpendRefundableCostAndConvertBloodRune(sim, result, 1)
+						// In terms of keeping Death runes Death through Reaping, abilities using Blood runes look at both Blood and Frost slots
+						// when deciding if they should be converted back to their defaults.
+						// Spending an Frost (Death) rune on Pestilence keeps it as a Death rune, but an Unholy (Death) rune gets converted back to Unholy.
+						spell.SpendRefundableCostAndConvertBloodOrFrostRune(sim, result.Landed())
 					} else {
 						spell.SpendRefundableCost(sim, result)
 					}
@@ -55,10 +56,41 @@ func (dk *DeathKnight) registerPestilenceSpell() {
 				if result.Landed() {
 					if aoeTarget != target {
 						if frostFeverActive {
-							pestiHandler(sim, dk.FrostFeverSpell, aoeTarget)
+							dk.FrostFeverSpell.Cast(sim, aoeTarget)
 						}
 						if bloodPlagueActive {
-							pestiHandler(sim, dk.BloodPlagueSpell, aoeTarget)
+							dk.BloodPlagueSpell.Cast(sim, aoeTarget)
+						}
+					}
+				}
+			}
+		},
+	})
+}
+
+func (dk *DeathKnight) registerDrwPestilence() *core.Spell {
+	return dk.RuneWeapon.RegisterSpell(core.SpellConfig{
+		ActionID:    core.ActionID{SpellID: 50842},
+		Flags:       core.SpellFlagAPL,
+		SpellSchool: core.SpellSchoolShadow,
+		ProcMask:    core.ProcMaskSpellDamage,
+
+		MaxRange: core.MaxMeleeRange,
+
+		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			frostFeverActive := dk.RuneWeapon.FrostFeverSpell.Dot(target).IsActive()
+			bloodPlagueActive := dk.RuneWeapon.BloodPlagueSpell.Dot(target).IsActive()
+
+			for _, aoeTarget := range sim.Encounter.ActiveTargetUnits {
+				result := spell.CalcAndDealOutcome(sim, aoeTarget, spell.OutcomeMagicHit)
+
+				if result.Landed() {
+					if aoeTarget != target {
+						if frostFeverActive {
+							dk.RuneWeapon.FrostFeverSpell.Cast(sim, aoeTarget)
+						}
+						if bloodPlagueActive {
+							dk.RuneWeapon.BloodPlagueSpell.Cast(sim, aoeTarget)
 						}
 					}
 				}

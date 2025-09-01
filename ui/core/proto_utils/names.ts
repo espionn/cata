@@ -122,20 +122,6 @@ export function getStatName(stat: Stat): string {
 	}
 }
 
-export function getClassPseudoStatName(pseudoStat: PseudoStat, playerClass: Class): string {
-	const genericName = PseudoStat[pseudoStat]
-		.split(/(?<![A-Z])(?=[A-Z])/)
-		.slice(2)
-		.join(' ')
-		.replace('Dps', 'DPS');
-
-	if (playerClass == Class.ClassHunter) {
-		return genericName.replace('Physical', 'Ranged');
-	} else {
-		return genericName.replace('Physical', 'Melee');
-	}
-}
-
 // TODO: Make sure BE exports the spell schools properly
 export enum SpellSchool {
 	None = 0,
@@ -162,6 +148,8 @@ export const spellSchoolNames: Map<number, string> = new Map([
 	[SpellSchool.Arcane + SpellSchool.Frost, 'Spellfrost'],
 	[SpellSchool.Frost + SpellSchool.Fire, 'Frostfire'],
 	[SpellSchool.Shadow + SpellSchool.Frost, 'Shadowfrost'],
+	[SpellSchool.Nature + SpellSchool.Shadow, 'Plague'],
+	[SpellSchool.Fire + SpellSchool.Nature, 'Firestorm'],
 ]);
 
 export const shortSecondaryStatNames: Map<Stat, string> = new Map([
@@ -262,14 +250,11 @@ export const sourceNames: Map<SourceFilterOption, string> = new Map([
 ]);
 export const raidNames: Map<RaidFilterOption, string> = new Map([
 	[RaidFilterOption.RaidUnknown, 'Unknown'],
-	[RaidFilterOption.RaidIcecrownCitadel, 'Icecrown Citadel'],
-	[RaidFilterOption.RaidRubySanctum, 'Ruby Sanctum'],
-	[RaidFilterOption.RaidBlackwingDescent, 'Blackwing Descent'],
-	[RaidFilterOption.RaidTheBastionOfTwilight, 'The Bastion of Twilight'],
-	[RaidFilterOption.RaidBaradinHold, 'Baradin Hold'],
-	[RaidFilterOption.RaidThroneOfTheFourWinds, 'Throne of the Four Winds'],
-	[RaidFilterOption.RaidFirelands, 'Firelands'],
-	[RaidFilterOption.RaidDragonSoul, 'Dragon Soul'],
+	[RaidFilterOption.RaidMogushanVaults, 'Mogu\'shan Vaults'],
+	[RaidFilterOption.RaidHeartOfFear, 'Heart of Fear'],
+	[RaidFilterOption.RaidTerraceOfEndlessSpring, 'Terrace of Endless Spring'],
+	[RaidFilterOption.RaidThroneOfThunder, 'Throne of Thunder'],
+	[RaidFilterOption.RaidSiegeOfOrgrimmar, 'Siege of Orgrimmar'],
 ]);
 
 export const difficultyNames: Map<DungeonDifficulty, string> = new Map([
@@ -389,8 +374,8 @@ export const masterySpellNames: Map<Spec, string> = new Map([
 	[Spec.SpecFuryWarrior, 'Unshackled Fury'],
 	[Spec.SpecProtectionWarrior, 'Critical Block'],
 	[Spec.SpecArcaneMage, 'Mana Adept'],
-	[Spec.SpecFireMage, 'Flashburn'],
-	[Spec.SpecFrostMage, 'Frostburn'],
+	[Spec.SpecFireMage, 'Ignite'],
+	[Spec.SpecFrostMage, 'Icicles'],
 	[Spec.SpecDisciplinePriest, 'Shield Discipline'],
 	[Spec.SpecHolyPriest, 'Echo of Light'],
 	[Spec.SpecShadowPriest, 'Shadow Orb Power'],
@@ -426,7 +411,7 @@ export const masterySpellIDs: Map<Spec, number> = new Map([
 	[Spec.SpecFuryWarrior, 76856],
 	[Spec.SpecProtectionWarrior, 76857],
 	[Spec.SpecArcaneMage, 76547],
-	[Spec.SpecFireMage, 76595],
+	[Spec.SpecFireMage, 12846],
 	[Spec.SpecFrostMage, 76613],
 	[Spec.SpecDisciplinePriest, 77484],
 	[Spec.SpecHolyPriest, 77485],
@@ -436,7 +421,7 @@ export const masterySpellIDs: Map<Spec, number> = new Map([
 	[Spec.SpecDestructionWarlock, 77220],
 	[Spec.SpecBrewmasterMonk, 117906],
 	[Spec.SpecMistweaverMonk, 117907],
-	[Spec.SpecWindwalkerMonk, 115636],
+	[Spec.SpecWindwalkerMonk, 1247280],
 ]);
 export const statCapTypeNames = new Map<StatCapType, string>([
 	[StatCapType.TypeHardCap, 'Hard cap'],

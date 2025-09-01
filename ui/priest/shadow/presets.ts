@@ -3,6 +3,7 @@ import { ConsumesSpec, Debuffs, Glyphs, IndividualBuffs, Profession, PseudoStat,
 import { PriestMajorGlyph as MajorGlyph, PriestMinorGlyph as MinorGlyph, PriestOptions_Armor, ShadowPriest_Options as Options } from '../../core/proto/priest';
 import { SavedTalents } from '../../core/proto/ui';
 import { Stats, UnitStat, UnitStatPresets } from '../../core/proto_utils/stats';
+import { defaultRaidBuffMajorDamageCooldowns } from '../../core/proto_utils/utils';
 import DefaultApl from './apls/default.apl.json';
 import P1Gear from './gear_sets/p1.gear.json';
 import PreRaidGear from './gear_sets/pre_raid.gear.json';
@@ -20,11 +21,11 @@ export const P1_EP_PRESET = PresetUtils.makePresetEpWeights(
 	Stats.fromMap({
 		[Stat.StatIntellect]: 1.0,
 		[Stat.StatSpirit]: 0.9,
-		[Stat.StatSpellPower]: 0.79,
+		[Stat.StatSpellPower]: 0.98,
 		[Stat.StatHitRating]: 0.85,
-		[Stat.StatCritRating]: 0.42,
-		[Stat.StatHasteRating]: 0.76,
-		[Stat.StatMasteryRating]: 0.48,
+		[Stat.StatCritRating]: 0.46,
+		[Stat.StatHasteRating]: 0.49,
+		[Stat.StatMasteryRating]: 0.44,
 	}),
 );
 
@@ -131,6 +132,7 @@ export const DefaultConsumables = ConsumesSpec.create({
 });
 
 export const DefaultRaidBuffs = RaidBuffs.create({
+	...defaultRaidBuffMajorDamageCooldowns(),
 	arcaneBrilliance: true,
 	blessingOfKings: true,
 	mindQuickening: true,
@@ -138,8 +140,6 @@ export const DefaultRaidBuffs = RaidBuffs.create({
 	blessingOfMight: true,
 	unholyAura: true,
 	bloodlust: true,
-	skullBannerCount: 2,
-	stormlashTotemCount: 4,
 });
 
 export const DefaultIndividualBuffs = IndividualBuffs.create({});
@@ -149,8 +149,8 @@ export const DefaultDebuffs = Debuffs.create({
 });
 
 export const OtherDefaults = {
-	channelClipDelay: 40,
-	distanceFromTarget: 20,
+	channelClipDelay: 100,
+	distanceFromTarget: 28,
 	profession1: Profession.Engineering,
 	profession2: Profession.Tailoring,
 };

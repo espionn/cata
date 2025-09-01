@@ -21,7 +21,7 @@ func (priest *Priest) NewMindBender() *MindBender {
 			Name:                            "Mindbender",
 			Owner:                           &priest.Character,
 			BaseStats:                       baseStats,
-			StatInheritance:                 priest.mindbenderStatInheritance(),
+			NonHitExpStatInheritance:        priest.mindbenderStatInheritance(),
 			IsGuardian:                      false,
 			EnabledOnStart:                  false,
 			HasDynamicMeleeSpeedInheritance: true,
@@ -113,6 +113,9 @@ func (mindbender *MindBender) ExecuteCustomRotation(sim *core.Simulation) {
 func (mindbender *MindBender) Reset(sim *core.Simulation) {
 	mindbender.ShadowcrawlAura.Deactivate(sim)
 	mindbender.Disable(sim)
+}
+
+func (mindbender *MindBender) OnEncounterStart(sim *core.Simulation) {
 }
 
 func (mindbender *MindBender) OnPetDisable(sim *core.Simulation) {

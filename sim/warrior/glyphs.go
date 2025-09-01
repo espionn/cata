@@ -41,10 +41,11 @@ func (war *Warrior) applyMajorGlyphs() {
 		actionID := core.ActionID{SpellID: 58384}
 		rageMetrics := war.NewRageMetrics(actionID)
 		core.MakeProcTriggerAura(&war.Unit, core.ProcTrigger{
-			Name:           "Glyph of Sweeping Strikes",
-			ActionID:       actionID,
-			ClassSpellMask: SpellMaskSweepingStrikesHit,
-			Callback:       core.CallbackOnSpellHitDealt,
+			Name:            "Glyph of Sweeping Strikes",
+			ActionID:        actionID,
+			MetricsActionID: actionID,
+			ClassSpellMask:  SpellMaskSweepingStrikesHit,
+			Callback:        core.CallbackOnSpellHitDealt,
 			Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 				war.AddRage(sim, 1, rageMetrics)
 			},
@@ -52,39 +53,49 @@ func (war *Warrior) applyMajorGlyphs() {
 	}
 
 	if war.HasMajorGlyph(proto.WarriorMajorGlyph_GlyphOfResonatingPower) {
-		war.AddStaticMod(core.SpellModConfig{
+		core.MakePermanent(war.RegisterAura(core.Aura{
+			Label:    "Glyph of Resonating Power",
+			ActionID: core.ActionID{SpellID: 58356},
+			Duration: core.NeverExpires,
+		}).AttachSpellMod(core.SpellModConfig{
 			ClassMask:  SpellMaskThunderClap,
 			Kind:       core.SpellMod_DamageDone_Pct,
 			FloatValue: 0.5,
-		})
-
-		war.AddStaticMod(core.SpellModConfig{
+		}).AttachSpellMod(core.SpellModConfig{
 			ClassMask: SpellMaskThunderClap,
 			Kind:      core.SpellMod_Cooldown_Flat,
 			TimeValue: 3 * time.Second,
-		})
+		}))
 	}
 
 	if war.HasMajorGlyph(proto.WarriorMajorGlyph_GlyphOfIncite) {
 		actionID := core.ActionID{SpellID: 122016}
 
-		inciteAura := war.RegisterAura(core.Aura{
+		war.InciteAura = war.RegisterAura(core.Aura{
 			Label:     "Incite",
 			ActionID:  actionID,
 			Duration:  10 * time.Second,
 			MaxStacks: 3,
-		}).AttachSpellMod(core.SpellModConfig{
-			ClassMask:  SpellMaskHeroicStrike | SpellMaskCleave,
-			Kind:       core.SpellMod_PowerCost_Pct,
-			FloatValue: -2,
-		})
 
-		core.MakeProcTriggerAura(&war.Unit, core.ProcTrigger{
+			OnGain: func(aura *core.Aura, sim *core.Simulation) {
+				war.HeroicStrikeCleaveCostMod.Activate()
+			},
+			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+				if !war.UltimatumAura.IsActive() {
+					war.HeroicStrikeCleaveCostMod.Deactivate()
+				}
+			},
+		}).AttachProcTrigger(core.ProcTrigger{
 			Name:           "Incite - Consume",
 			ClassSpellMask: SpellMaskHeroicStrike | SpellMaskCleave,
-			Callback:       core.CallbackOnCastComplete,
+			Callback:       core.CallbackOnSpellHitDealt,
+
+			ExtraCondition: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) bool {
+				return spell.CurCast.Cost <= 0 && !war.UltimatumAura.IsActive()
+			},
+
 			Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-				inciteAura.RemoveStack(sim)
+				war.InciteAura.RemoveStack(sim)
 			},
 		})
 
@@ -93,7 +104,8 @@ func (war *Warrior) applyMajorGlyphs() {
 			ClassSpellMask: SpellMaskDemoralizingShout,
 			Callback:       core.CallbackOnCastComplete,
 			Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-				inciteAura.Activate(sim)
+				war.InciteAura.Activate(sim)
+				war.InciteAura.SetStacks(sim, 3)
 			},
 		})
 	}
@@ -173,6 +185,18 @@ func (war *Warrior) applyMajorGlyphs() {
 				})
 			},
 			RemoveCustom: func(mod *core.SpellMod, spell *core.Spell) {},
+		})
+	}
+
+	if war.HasMajorGlyph(proto.WarriorMajorGlyph_GlyphOfHamstring) {
+		war.GlyphOfHamstring = war.RegisterAura(core.Aura{
+			ActionID: core.ActionID{SpellID: 115945},
+			Label:    "Glyph of Hamstring",
+			Duration: core.NeverExpires,
+		}).AttachSpellMod(core.SpellModConfig{
+			ClassMask:  SpellMaskHamstring,
+			Kind:       core.SpellMod_PowerCost_Pct,
+			FloatValue: -2,
 		})
 	}
 

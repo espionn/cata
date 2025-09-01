@@ -56,7 +56,7 @@ func (character *Character) enableItemSwap(itemSwap *proto.ItemSwap, mhCritMulti
 
 	has2HSwap := swapItems[proto.ItemSlot_ItemSlotMainHand].HandType == proto.HandType_HandTypeTwoHand
 	hasMhEquipped := character.HasMHWeapon()
-	hasOhEquipped := character.HasOHWeapon()
+	hasOhEquipped := character.HasOH()
 
 	// Handle MH and OH together, because present MH + empty OH --> swap MH and unequip OH
 	if hasItemSwap[proto.ItemSlot_ItemSlotOffHand] && hasMhEquipped {
@@ -68,7 +68,6 @@ func (character *Character) enableItemSwap(itemSwap *proto.ItemSwap, mhCritMulti
 	}
 
 	slots := SetToSortedSlice(hasItemSwap)
-
 	if len(slots) == 0 {
 		return
 	}
@@ -78,7 +77,7 @@ func (character *Character) enableItemSwap(itemSwap *proto.ItemSwap, mhCritMulti
 		prepullBonusStats = stats.FromUnitStatsProto(itemSwap.PrepullBonusStats)
 	}
 
-	equipmentStats := calcItemSwapStatsOffset(character.Equipment, swapItems, prepullBonusStats, slots)
+	equipmentStats := calcItemSwapStatsOffset(character.Equipment, swapItems, prepullBonusStats, slots, character.Spec)
 
 	character.ItemSwap = ItemSwap{
 		isFuryWarrior:        character.Spec == proto.Spec_SpecFuryWarrior,
@@ -357,7 +356,7 @@ func (swap *ItemSwap) SwapItems(sim *Simulation, swapSet proto.APLActionItemSwap
 	character.AddDynamicEquipStats(sim, statsToSwap)
 
 	if !isPrepull && !isReset && weaponSlotSwapped {
-		character.AutoAttacks.StopMeleeUntil(sim, sim.CurrentTime, false)
+		character.AutoAttacks.StopMeleeUntil(sim, sim.CurrentTime)
 		character.AutoAttacks.StopRangedUntil(sim, sim.CurrentTime)
 		character.ExtendGCDUntil(sim, max(character.NextGCDAt(), sim.CurrentTime+GCDDefault))
 	}
@@ -432,20 +431,24 @@ func (swap *ItemSwap) doneIteration(sim *Simulation) {
 	swap.reset(sim)
 }
 
-func calcItemSwapStatsOffset(originalEquipment Equipment, swapEquipment Equipment, prepullBonusStats stats.Stats, slots []proto.ItemSlot) ItemSwapStats {
+func calcItemSwapStatsOffset(originalEquipment Equipment, swapEquipment Equipment, prepullBonusStats stats.Stats, slots []proto.ItemSlot, spec proto.Spec) ItemSwapStats {
 	allSlotStats := prepullBonusStats
-	weaponSlotStats := stats.Stats{}
 	allWeaponSlots := AllWeaponSlots()
+	swapStatEquipment := originalEquipment
+	weaponStatEquipment := originalEquipment
 
 	for _, slot := range slots {
-		slotStats := ItemEquipmentStats(swapEquipment[slot]).Subtract(ItemEquipmentStats(originalEquipment[slot]))
-		allSlotStats = allSlotStats.Add(slotStats)
+		if swapEquipment.GetItemBySlot(slot) != nil {
+			swapStatEquipment[slot] = swapEquipment[slot]
+		}
 
 		if slices.Contains(allWeaponSlots, slot) {
-			weaponSlotStats = weaponSlotStats.Add(slotStats)
+			weaponStatEquipment[slot] = swapEquipment[slot]
 		}
 	}
 
+	allSlotStats = allSlotStats.Add(swapStatEquipment.Stats(spec).Subtract(originalEquipment.Stats(spec)))
+	weaponSlotStats := weaponStatEquipment.Stats(spec).Subtract(originalEquipment.Stats(spec))
 	return ItemSwapStats{
 		allSlots:    allSlotStats,
 		weaponSlots: weaponSlotStats,

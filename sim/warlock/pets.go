@@ -41,21 +41,12 @@ var petBaseStats = map[proto.WarlockOptions_Summon]*stats.Stats{
 
 func (warlock *Warlock) SimplePetStatInheritanceWithScale(apScale float64) core.PetStatInheritance {
 	return func(ownerStats stats.Stats) stats.Stats {
-
-		hitRating := ownerStats[stats.HitRating]
-		expertiseRating := ownerStats[stats.ExpertiseRating]
-		combinedHitExp := (hitRating + expertiseRating) * 0.5
-
 		return stats.Stats{
 			stats.Stamina:             ownerStats[stats.Stamina] * 1.0 / 3.0,
 			stats.SpellPower:          ownerStats[stats.SpellPower], // All pets inherit spell 1:1
 			stats.HasteRating:         ownerStats[stats.HasteRating],
-			stats.PhysicalCritPercent: ownerStats[stats.PhysicalCritPercent],
+			stats.PhysicalCritPercent: ownerStats[stats.SpellCritPercent], // All pets seem to use spell crit for Physical abilities
 			stats.SpellCritPercent:    ownerStats[stats.SpellCritPercent],
-
-			// unclear what exactly the scaling is here, but at hit cap they should definitely all be capped
-			stats.HitRating:       combinedHitExp,
-			stats.ExpertiseRating: combinedHitExp,
 
 			stats.AttackPower: ownerStats[stats.SpellPower] * apScale,
 		}
@@ -87,7 +78,7 @@ func (warlock *Warlock) makePet(
 			Name:                            name,
 			Owner:                           &warlock.Character,
 			BaseStats:                       baseStats,
-			StatInheritance:                 statInheritance,
+			NonHitExpStatInheritance:        statInheritance,
 			EnabledOnStart:                  enabledOnStart,
 			IsGuardian:                      isGuardian,
 			HasDynamicMeleeSpeedInheritance: true,
@@ -116,8 +107,9 @@ func (warlock *Warlock) setPetOptions(petAgent core.PetAgent, aaOptions *core.Au
 	}
 
 	pet.EnableEnergyBar(core.EnergyBarOptions{
-		MaxEnergy: 200,
-		UnitClass: proto.Class_ClassWarlock,
+		MaxEnergy:             200,
+		UnitClass:             proto.Class_ClassWarlock,
+		HasHasteRatingScaling: false,
 	})
 
 	warlock.AddPet(petAgent)
@@ -208,7 +200,11 @@ func (pet *WarlockPet) GetPet() *core.Pet {
 	return &pet.Pet
 }
 
-func (pet *WarlockPet) Reset(_ *core.Simulation) {}
+func (pet *WarlockPet) Reset(_ *core.Simulation) {
+}
+
+func (pet *WarlockPet) OnEncounterStart(_ *core.Simulation) {
+}
 
 func (pet *WarlockPet) ExecuteCustomRotation(sim *core.Simulation) {
 	waitUntil := time.Duration(1<<63 - 1)

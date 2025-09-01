@@ -65,6 +65,12 @@
 		text-align: center;
 	}
 
+	.boolean-picker-input {
+		cursor: pointer;
+		width: 1.5rem;
+		height: 1.5rem;
+	}
+
 	.apl-prepull-actions-doat {
 		width: unset;
 		margin: 0;
@@ -199,9 +205,22 @@
 .apl-picker-builder-root.apl-action-sequence .apl-action-condition {
 	display: none;
 }
+
+/* stylelint-disable-next-line plugin/stylelint-bem-namics */
 .apl-picker-builder-root.apl-action-strictSequence .apl-action-condition {
 	display: none;
 }
-.apl-action-schedule .apl-action-condition {
-	display: none;
+
+.apl-action-schedule {
+	.apl-action-condition {
+		display: none;
+	}
+
+	.adaptive-string-picker-root {
+		.form-control {
+			width: 10rem;
+			max-width: 100%;
+			text-align: left;
+		}
+	}
 }

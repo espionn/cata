@@ -10,6 +10,7 @@ import (
 	"slices"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/wowsims/mop/sim/core/proto"
@@ -33,19 +34,20 @@ type Simulation struct {
 	testRands map[string]Rand
 
 	// Current Simulation State
-	pendingActions []*PendingAction
-	CurrentTime    time.Duration // duration that has elapsed in the sim since starting
-	Duration       time.Duration // Duration of current iteration
-	NeedsInput     bool          // Sim is in interactive mode and needs input
+	pendingActions    []*PendingAction
+	pendingActionPool *sync.Pool
+	CurrentTime       time.Duration // duration that has elapsed in the sim since starting
+	Duration          time.Duration // Duration of current iteration
+	NeedsInput        bool          // Sim is in interactive mode and needs input
 
 	ProgressReport func(*proto.ProgressMetrics)
 	Signals        simsignals.Signals
 
 	Log func(string, ...interface{})
 
-	executePhase int32 // 20, 25, or 35 for the respective execute range, 100 otherwise
+	executePhase int32 // 20, 25, 35, 45 or 90 for the respective execute range, 100 otherwise
 
-	executePhaseCallbacks []func(*Simulation, int32) // 2nd parameter is 35 for 35%, 25 for 25% and 20 for 20%
+	executePhaseCallbacks []func(*Simulation, int32) // 2nd parameter is 90 for 90%, 45 for 45%, 35 for 35%, 25 for 25% and 20 for 20%
 
 	nextExecuteDuration time.Duration
 	nextExecuteDamage   float64
@@ -61,6 +63,8 @@ type Simulation struct {
 
 	minTaskTime time.Duration
 	tasks       []Task
+
+	isInPrepull bool
 }
 
 func (sim *Simulation) rescheduleTracker(trackerTime time.Duration) {
@@ -204,6 +208,14 @@ func newSimWithEnv(env *Environment, simOptions *proto.SimOptions, signals simsi
 		testRands: make(map[string]Rand),
 
 		Signals: signals,
+
+		pendingActionPool: &sync.Pool{
+			New: func() any {
+				return &PendingAction{
+					canPool: true,
+				}
+			},
+		},
 	}
 }
 
@@ -363,8 +375,10 @@ func (sim *Simulation) run() *proto.RaidSimResult {
 
 // RunOnce is the main event loop. It will run the simulation for number of seconds.
 func (sim *Simulation) runOnce() {
+	sim.isInPrepull = true
 	sim.reset()
 	sim.PrePull()
+	sim.isInPrepull = false
 	sim.runPendingActions()
 	sim.Cleanup()
 }
@@ -437,8 +451,14 @@ func (sim *Simulation) PrePull() {
 
 	sim.AddPendingAction(&PendingAction{
 		NextActionAt: 0,
-		Priority:     ActionPriorityPrePull,
+		Priority:     ActionPriorityPrePull + ActionPriority(len(sim.prepullActions)+1),
 		OnAction: func(sim *Simulation) {
+			for _, unit := range sim.Environment.AllUnits {
+				if unit.enabled {
+					unit.onEncounterStart(sim)
+				}
+			}
+
 			for _, unit := range sim.Environment.AllUnits {
 				if unit.enabled {
 					unit.startPull(sim)
@@ -463,6 +483,8 @@ func (sim *Simulation) Cleanup() {
 		if pa.CleanUp != nil {
 			pa.CleanUp(sim)
 		}
+
+		pa.dispose(sim)
 	}
 
 	sim.Raid.doneIteration(sim)
@@ -471,7 +493,7 @@ func (sim *Simulation) Cleanup() {
 	for _, unit := range sim.Raid.AllUnits {
 		unit.Metrics.doneIteration(unit, sim)
 	}
-	for _, target := range sim.Encounter.TargetUnits {
+	for _, target := range sim.Encounter.AllTargetUnits {
 		target.Metrics.doneIteration(target, sim)
 	}
 }
@@ -505,23 +527,29 @@ func (sim *Simulation) Step() bool {
 	}
 
 	sim.pendingActions = sim.pendingActions[:last]
+	pa.consumed = true
+
 	if pa.cancelled {
+		pa.dispose(sim)
 		return false
 	}
 
 	if pa.NextActionAt > sim.endOfCombatDuration || sim.Encounter.DamageTaken > sim.endOfCombatDamage {
+		pa.dispose(sim)
 		return true
 	}
 
 	if pa.NextActionAt > sim.CurrentTime {
 		sim.advance(pa.NextActionAt)
 	}
-	pa.consumed = true
 
 	if pa.cancelled {
+		pa.dispose(sim)
 		return false
 	}
+
 	pa.OnAction(sim)
+	pa.dispose(sim)
 	return false
 }
 
@@ -552,7 +580,7 @@ func (sim *Simulation) advance(nextTime time.Duration) {
 	sim.CurrentTime = nextTime
 
 	// this is a loop to handle duplicate ExecuteProportions, e.g. if they're all set to 100%, you reach
-	// execute phases 35%, 25%, and 20% in the first advance() call.
+	// execute phases 90%, 45%, 35%, 25%, and 20% in the first advance() call.
 	for sim.CurrentTime >= sim.nextExecuteDuration || sim.Encounter.DamageTaken >= sim.nextExecuteDamage {
 		sim.nextExecutePhase()
 		for _, callback := range sim.executePhaseCallbacks {
@@ -590,9 +618,11 @@ func (sim *Simulation) nextExecutePhase() {
 	switch sim.executePhase {
 	case 0: // initially waiting for 90%
 		setup(100, 0.90, sim.Encounter.ExecuteProportion_90)
-	case 100: // at 90%, waiting for 35%
-		setup(90, 0.35, sim.Encounter.ExecuteProportion_35)
-	case 90: // at 35%, waiting for 25%
+	case 100: // at 90%, waiting for 45%
+		setup(90, 0.45, sim.Encounter.ExecuteProportion_45)
+	case 90: // at 45%, waiting for 35%
+		setup(45, 0.35, sim.Encounter.ExecuteProportion_35)
+	case 45: // at 35%, waiting for 25%
 		setup(35, 0.25, sim.Encounter.ExecuteProportion_25)
 	case 35: // at 25%, waiting for 20%
 		setup(25, 0.20, sim.Encounter.ExecuteProportion_20)
@@ -628,6 +658,21 @@ func (sim *Simulation) AddPendingAction(pa *PendingAction) {
 	sim.pendingActions = append(sim.pendingActions, pa)
 }
 
+// Use this for any "fire and forget" delayed actions where your code does not
+// require persistent access to the returned *PendingAction pointer. This helper
+// avoids unnecessary re-allocations of the PendingAction struct for improved
+// code performance, but offers no guarantees on the long-term state of the
+// underlying struct, which will be re-used once consumed.
+func (sim *Simulation) GetConsumedPendingActionFromPool() *PendingAction {
+	pa := sim.pendingActionPool.Get().(*PendingAction)
+	pa.NextActionAt = 0
+	pa.Priority = 0
+	pa.OnAction = nil
+	pa.CleanUp = nil
+	pa.cancelled = false
+	return pa
+}
+
 func (sim *Simulation) RegisterExecutePhaseCallback(callback func(sim *Simulation, isExecute int32)) {
 	sim.executePhaseCallbacks = append(sim.executePhaseCallbacks, callback)
 }
@@ -639,6 +684,9 @@ func (sim *Simulation) IsExecutePhase25() bool {
 }
 func (sim *Simulation) IsExecutePhase35() bool {
 	return sim.executePhase <= 35
+}
+func (sim *Simulation) IsExecutePhase45() bool {
+	return sim.executePhase <= 45
 }
 func (sim *Simulation) IsExecutePhase90() bool {
 	return sim.executePhase > 90

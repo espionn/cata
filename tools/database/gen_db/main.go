@@ -72,7 +72,7 @@ func main() {
 		panic(fmt.Sprintf("Error loading DBC data %v", err))
 	}
 
-	_, err = database.LoadAndWriteRawItems(helper, "s.OverallQualityId != 7 AND NOT (s.Bonding = 2 AND ind.Description_lang IS NOT NULL and ind.Description_lang NOT LIKE '%Season%') AND s.Field_1_15_7_59706_054 = 0 AND s.OverallQualityId != 0 AND (i.ClassID = 2 OR i.ClassID = 4) AND s.Display_lang != '' AND (s.ID != 34219 AND s.Display_lang NOT LIKE '%Test%' AND s.Display_lang NOT LIKE 'QA%')", inputsDir)
+	_, err = database.LoadAndWriteRawItems(helper, "s.OverallQualityId != 7 AND s.Field_1_15_7_59706_054 = 0 AND s.OverallQualityId != 0 AND (i.ClassID = 2 OR i.ClassID = 4) AND s.Display_lang != '' AND (s.ID != 34219 AND s.Display_lang NOT LIKE '%Test%' AND s.Display_lang NOT LIKE 'QA%')", inputsDir)
 	if err != nil {
 		panic(fmt.Sprintf("Error loading DBC data %v", err))
 	}
@@ -232,8 +232,8 @@ func main() {
 	database.GenerateMissingEffectsFile()
 	database.GenerateItemEffectRandomPropPoints(instance, db)
 
-	for _, key := range slices.SortedFunc(maps.Keys(db.Enchants), func(l database.EnchantDBKey, r database.EnchantDBKey) int {
-		return int(l.EffectID) - int(r.EffectID)
+	for _, key := range slices.SortedFunc(maps.Keys(db.Enchants), func(l int32, r int32) int {
+		return int(l) - int(r)
 	}) {
 		enchant := db.Enchants[key]
 		if enchant.ItemId != 0 {
@@ -276,14 +276,25 @@ func main() {
 
 	craftedSpellIds := []int32{}
 	for _, item := range db.Items {
+		// 1. Add Belt Buckle gem socket to Waist.
+		// 2. Add Eye Of The Black Prince gem socket to Sha-touched items.
+		if item.Type == proto.ItemType_ItemTypeWaist || slices.Contains(item.GemSockets, proto.GemColor_GemColorShaTouched) {
+			item.GemSockets = append(item.GemSockets, proto.GemColor_GemColorPrismatic)
+		}
+
 		for _, source := range item.Sources {
 			if crafted := source.GetCrafted(); crafted != nil {
 				craftedSpellIds = append(craftedSpellIds, crafted.SpellId)
+			}
+			// Add Eye Of The Black Prince gem socket to Throne of Thunder weapons.
+			if drop := source.GetDrop(); drop != nil && (item.Type == proto.ItemType_ItemTypeWeapon || item.Type == proto.ItemType_ItemTypeRanged) && drop.ZoneId == 6622 {
+				item.GemSockets = append(item.GemSockets, proto.GemColor_GemColorPrismatic)
 			}
 		}
 		if item.Phase < 2 {
 			item.Phase = InferPhase(item)
 		}
+
 	}
 	addSpellIcons(db, craftedSpellIds, icons, iconsMap)
 
@@ -460,7 +471,14 @@ func InferPhase(item *proto.UIItem) int32 {
 func processItems(instance *dbc.DBC, iconsMap map[int]string, names map[int]string, dropSources map[int][]*proto.DropSource, craftingSources map[int][]*proto.CraftedSource, repSources map[int][]*proto.RepSource, db *database.WowDatabase) {
 	sourceMap := make(map[string][]*proto.UIItemSource, len(instance.Items))
 	parsedItems := make([]*proto.UIItem, 0, len(instance.Items))
-	for _, item := range instance.Items {
+
+	sortedItemKeys := slices.Sorted(maps.Keys(instance.Items))
+	sortedItems := make([]dbc.Item, len(instance.Items))
+	for i, k := range sortedItemKeys {
+		sortedItems[i] = instance.Items[k]
+	}
+
+	for _, item := range sortedItems {
 		if item.Flags2&0x10 != 0 && (item.StatAlloc[0] > 0 && item.StatAlloc[0] < 600) {
 			continue
 		}
@@ -618,7 +636,7 @@ func ApplyGlobalFilters(db *database.WowDatabase) {
 		return icon.Name != "" && icon.Icon != "" && icon.Id != 0
 	})
 
-	db.Enchants = core.FilterMap(db.Enchants, func(_ database.EnchantDBKey, enchant *proto.UIEnchant) bool {
+	db.Enchants = core.FilterMap(db.Enchants, func(_ int32, enchant *proto.UIEnchant) bool {
 		// MoP no longer has head enchants, so filter them.
 		if enchant.Type == proto.ItemType_ItemTypeHead {
 			return false
@@ -823,7 +841,7 @@ func GetAllRotationSpellIds() map[string][]int32 {
 			Class:         proto.Class_ClassDeathKnight,
 			Equipment:     &proto.EquipmentSpec{},
 			TalentsString: "000000",
-		}, &proto.Player_BloodDeathKnight{BloodDeathKnight: &proto.BloodDeathKnight{Options: &proto.BloodDeathKnight_Options{ClassOptions: &proto.DeathKnightOptions{}}, Rotation: &proto.BloodDeathKnight_Rotation{}}}), nil, nil, nil)},
+		}, &proto.Player_BloodDeathKnight{BloodDeathKnight: &proto.BloodDeathKnight{Options: &proto.BloodDeathKnight_Options{ClassOptions: &proto.DeathKnightOptions{}}}}), nil, nil, nil)},
 		{Name: "frostDeathKnight", Raid: core.SinglePlayerRaidProto(core.WithSpec(&proto.Player{
 			Class:         proto.Class_ClassDeathKnight,
 			Equipment:     &proto.EquipmentSpec{},
@@ -1008,12 +1026,12 @@ func GetAllRotationSpellIds() map[string][]int32 {
 			Class:         proto.Class_ClassMonk,
 			Equipment:     &proto.EquipmentSpec{},
 			TalentsString: "000000",
-		}, &proto.Player_BrewmasterMonk{BrewmasterMonk: &proto.BrewmasterMonk{Options: &proto.BrewmasterMonk_Options{ClassOptions: &proto.MonkOptions{}, Stance: proto.MonkStance_SturdyOx}}}), nil, nil, nil)},
+		}, &proto.Player_BrewmasterMonk{BrewmasterMonk: &proto.BrewmasterMonk{Options: &proto.BrewmasterMonk_Options{ClassOptions: &proto.MonkOptions{}}}}), nil, nil, nil)},
 		{Name: "mistweaverMonk", Raid: core.SinglePlayerRaidProto(core.WithSpec(&proto.Player{
 			Class:         proto.Class_ClassMonk,
 			Equipment:     &proto.EquipmentSpec{},
 			TalentsString: "000000",
-		}, &proto.Player_MistweaverMonk{MistweaverMonk: &proto.MistweaverMonk{Options: &proto.MistweaverMonk_Options{ClassOptions: &proto.MonkOptions{}, Stance: proto.MonkStance_WiseSerpent}}}), nil, nil, nil)},
+		}, &proto.Player_MistweaverMonk{MistweaverMonk: &proto.MistweaverMonk{Options: &proto.MistweaverMonk_Options{ClassOptions: &proto.MonkOptions{}}}}), nil, nil, nil)},
 		{Name: "windwalkerMonk", Raid: core.SinglePlayerRaidProto(core.WithSpec(&proto.Player{
 			Class:         proto.Class_ClassMonk,
 			Equipment:     &proto.EquipmentSpec{},

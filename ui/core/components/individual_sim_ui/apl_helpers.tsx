@@ -2,7 +2,7 @@ import { ref } from 'tsx-vanilla';
 
 import { CacheHandler } from '../../cache_handler';
 import { Player, UnitMetadata } from '../../player.js';
-import { APLValueEclipsePhase, APLValueRuneSlot, APLValueRuneType } from '../../proto/apl.js';
+import { APLActionGuardianHotwDpsRotation_Strategy as HotwStrategy, APLValueEclipsePhase, APLValueRuneSlot, APLValueRuneType } from '../../proto/apl.js';
 import { ActionID, OtherAction, Stat, UnitReference, UnitReference_Type as UnitType } from '../../proto/common.js';
 import { FeralDruid_Rotation_AplType } from '../../proto/druid.js';
 import { ActionId, defaultTargetIcon, getPetIconFromName } from '../../proto_utils/action_id.js';
@@ -28,7 +28,8 @@ export type ACTION_ID_SET =
 	| 'castable_dot_spells'
 	| 'shield_spells'
 	| 'non_instant_spells'
-	| 'friendly_spells';
+	| 'friendly_spells'
+	| 'expected_dot_spells';
 
 const actionIdSets: Record<
 	ACTION_ID_SET,
@@ -125,8 +126,8 @@ const actionIdSets: Record<
 						extraCssClasses: actionId.data.prepullOnly
 							? ['apl-prepull-actions-only']
 							: actionId.data.encounterOnly
-							? ['apl-priority-list-only']
-							: [],
+								? ['apl-priority-list-only']
+								: [],
 					};
 				}),
 				[
@@ -143,8 +144,8 @@ const actionIdSets: Record<
 						extraCssClasses: actionId.data.prepullOnly
 							? ['apl-prepull-actions-only']
 							: actionId.data.encounterOnly
-							? ['apl-priority-list-only']
-							: [],
+								? ['apl-priority-list-only']
+								: [],
 					};
 				}),
 				[
@@ -231,6 +232,23 @@ const actionIdSets: Record<
 						value: actionId.id,
 					};
 				});
+		},
+	},
+	expected_dot_spells: {
+		defaultLabel: 'DoT Spell',
+		getActionIDs: async metadata => {
+			return (
+				metadata
+					.getSpells()
+					.filter(spell => spell.data.hasExpectedTick)
+					// filter duplicate dot entries from RelatedDotSpell
+					.filter((value, index, self) => self.findIndex(v => v.id.anyId() === value.id.anyId()) === index)
+					.map(actionId => {
+						return {
+							value: actionId.id,
+						};
+					})
+			);
 		},
 	},
 	shield_spells: {
@@ -355,6 +373,8 @@ const unitSets: Record<
 					.asList()
 					.map((petMetadata, i) => UnitReference.create({ type: UnitType.Pet, index: i, owner: UnitReference.create({ type: UnitType.Self }) })),
 				UnitReference.create({ type: UnitType.CurrentTarget }),
+				UnitReference.create({ type: UnitType.PreviousTarget }),
+				UnitReference.create({ type: UnitType.NextTarget }),
 				player.sim.raid
 					.getActivePlayers()
 					.filter(filter => filter != player)
@@ -383,6 +403,8 @@ const unitSets: Record<
 			return [
 				undefined,
 				player.sim.encounter.targetsMetadata.asList().map((_targetMetadata, i) => UnitReference.create({ type: UnitType.Target, index: i })),
+				UnitReference.create({ type: UnitType.PreviousTarget }),
+				UnitReference.create({ type: UnitType.NextTarget }),
 			].flat();
 		},
 	},
@@ -441,6 +463,18 @@ export class APLUnitPicker extends UnitPicker<Player<any>> {
 				value: ref,
 				iconUrl: 'fa-bullseye',
 				text: 'Current Target',
+			};
+		} else if (ref.type == UnitType.PreviousTarget) {
+			return {
+				value: ref,
+				iconUrl: 'fa-arrow-left',
+				text: 'Previous Target',
+			};
+		} else if (ref.type == UnitType.NextTarget) {
+			return {
+				value: ref,
+				iconUrl: 'fa-arrow-right',
+				text: 'Next Target',
 			};
 		} else if (ref.type == UnitType.Player) {
 			const player = thisPlayer.sim.raid.getPlayer(ref.index);
@@ -777,6 +811,28 @@ export function rotationTypeFieldConfig(field: string): APLPickerBuilderFieldCon
 	};
 }
 
+export function hotwStrategyFieldConfig(field: string): APLPickerBuilderFieldConfig<any, any> {
+	const values = [
+		{ value: HotwStrategy.Caster, label: 'Caster' },
+		{ value: HotwStrategy.Cat, label: 'Cat' },
+		{ value: HotwStrategy.Hybrid, label: 'Hybrid' },
+	];
+
+	return {
+		field: field,
+		label: 'Strategy',
+		newValue: () => HotwStrategy.Caster,
+		factory: (parent, player, config) =>
+			new TextDropdownPicker(parent, player, {
+				id: randomUUID(),
+				...config,
+				defaultLabel: 'Caster',
+				equals: (a, b) => a == b,
+				values: values,
+			}),
+	};
+}
+
 export function statTypeFieldConfig(field: string): APLPickerBuilderFieldConfig<any, any> {
 	const allStats = getEnumValues(Stat) as Array<Stat>;
 	const values = [{ value: -1, label: 'None' }].concat(
@@ -817,4 +873,10 @@ export function aplInputBuilder<T>(
 			fields: fields,
 		});
 	};
+}
+
+export function reactionTimeCheckbox(): APLPickerBuilderFieldConfig<any, any> {
+	return booleanFieldConfig('includeReactionTime', 'Include Reaction Time', {
+		labelTooltip: 'If checked, will use the configured reaction time.',
+	});
 }

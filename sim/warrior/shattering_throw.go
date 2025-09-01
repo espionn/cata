@@ -12,7 +12,7 @@ func (war *Warrior) registerShatteringThrow() {
 	})
 
 	ShatteringThrowSpell := war.RegisterSpell(core.SpellConfig{
-		ActionID:       core.ActionID{SpellID: 64382},
+		ActionID:       core.ActionID{SpellID: 1249459},
 		SpellSchool:    core.SpellSchoolPhysical,
 		ProcMask:       core.ProcMaskMeleeMHSpecial,
 		Flags:          core.SpellFlagMeleeMetrics | core.SpellFlagAPL,
@@ -22,17 +22,13 @@ func (war *Warrior) registerShatteringThrow() {
 
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD:      core.GCDDefault,
-				CastTime: time.Millisecond * 1500,
+				GCD: core.GCDDefault,
 			},
+			IgnoreHaste: true,
 			CD: core.Cooldown{
 				Timer:    war.NewTimer(),
 				Duration: time.Minute * 5,
 			},
-			ModifyCast: func(sim *core.Simulation, spell *core.Spell, cast *core.Cast) {
-				war.AutoAttacks.StopMeleeUntil(sim, sim.CurrentTime+cast.CastTime, war.AutoAttacks.MH().SwingSpeed == war.AutoAttacks.OH().SwingSpeed)
-			},
-			IgnoreHaste: true,
 		},
 
 		DamageMultiplier: 1,
@@ -41,10 +37,13 @@ func (war *Warrior) registerShatteringThrow() {
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			baseDamage := 12 + spell.MeleeAttackPower()*0.5
-			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialNoBlockDodgeParry)
-			if result.Landed() {
-				shattDebuffs.Get(target).Activate(sim)
-			}
+			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialNoBlockDodgeParry)
+			spell.WaitTravelTime(sim, func(sim *core.Simulation) {
+				spell.DealDamage(sim, result)
+				if result.Landed() {
+					shattDebuffs.Get(target).Activate(sim)
+				}
+			})
 		},
 
 		RelatedAuraArrays: shattDebuffs.ToMap(),

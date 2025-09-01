@@ -36,6 +36,7 @@ type PendingAction struct {
 
 	cancelled bool
 	consumed  bool
+	canPool   bool // Flags the PA as safe to use in shared object pools.
 }
 
 func (pa *PendingAction) IsConsumed() bool {
@@ -56,5 +57,11 @@ func (pa *PendingAction) Cancel(sim *Simulation) {
 
 	if i := slices.Index(sim.pendingActions, pa); i != -1 {
 		sim.pendingActions = append(sim.pendingActions[:i], sim.pendingActions[i+1:]...)
+	}
+}
+
+func (pa *PendingAction) dispose(sim *Simulation) {
+	if pa.canPool && pa.consumed {
+		sim.pendingActionPool.Put(pa)
 	}
 }

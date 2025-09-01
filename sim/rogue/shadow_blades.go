@@ -39,14 +39,14 @@ func (rogue *Rogue) registerShadowBladesCD() {
 
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			if result.Landed() && spell.Flags.Matches(SpellFlagBuilder) {
-				rogue.AddComboPoints(sim, 1, cpMetrics)
+				rogue.AddComboPointsOrAnticipation(sim, 1, cpMetrics)
 			}
 		},
 	})
 
 	rogue.ShadowBlades = rogue.RegisterSpell(core.SpellConfig{
 		ActionID:       core.ActionID{SpellID: 121471},
-		Flags:          core.SpellFlagAPL,
+		Flags:          core.SpellFlagAPL | core.SpellFlagReadinessTrinket,
 		ClassSpellMask: RogueSpellShadowBlades,
 
 		Cast: core.CastConfig{
@@ -63,9 +63,10 @@ func (rogue *Rogue) registerShadowBladesCD() {
 	})
 
 	rogue.AddMajorCooldown(core.MajorCooldown{
-		Spell:    rogue.ShadowBlades,
-		Type:     core.CooldownTypeDPS,
-		Priority: core.CooldownPriorityDefault,
+		Spell:              rogue.ShadowBlades,
+		Type:               core.CooldownTypeDPS,
+		Priority:           core.CooldownPriorityDefault,
+		AllowSpellQueueing: true,
 	})
 }
 

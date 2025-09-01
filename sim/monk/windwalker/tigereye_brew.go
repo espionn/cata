@@ -8,8 +8,8 @@ import (
 )
 
 func (ww *WindwalkerMonk) registerTigereyeBrew() {
-	buffActionID := core.ActionID{SpellID: 116740}
-	stackActionID := core.ActionID{SpellID: 125195}
+	buffActionID := core.ActionID{SpellID: 1247275}
+	stackActionID := core.ActionID{SpellID: 1247279}
 
 	ww.Monk.RegisterOnChiSpent(func(sim *core.Simulation, chiSpent int32) {
 		accumulatedChi := ww.outstandingChi + chiSpent
@@ -22,15 +22,14 @@ func (ww *WindwalkerMonk) registerTigereyeBrew() {
 		ww.outstandingChi = accumulatedChi
 	})
 
-	ww.TigereyeBrewStackAura = ww.RegisterAura(core.Aura{
+	ww.TigereyeBrewStackAura = core.BlockPrepull(ww.RegisterAura(core.Aura{
 		Label:     "Tigereye Brew Stacks" + ww.Label,
 		ActionID:  stackActionID,
 		Duration:  time.Minute * 2,
 		MaxStacks: 20,
-	})
+	}))
 
 	ww.Monk.RegisterOnNewBrewStacks(func(sim *core.Simulation, stacksToAdd int32) {
-
 		if ww.T15Windwalker4P != nil && ww.T15Windwalker4P.IsActive() && sim.Proc(0.1, "Item - Monk T15 Windwalker 4P Bonus") {
 			stacksToAdd += 1
 		}
@@ -40,7 +39,7 @@ func (ww *WindwalkerMonk) registerTigereyeBrew() {
 	})
 
 	var damageMultiplier float64
-	buffAura := ww.RegisterAura(core.Aura{
+	buffAura := core.BlockPrepull(ww.RegisterAura(core.Aura{
 		Label:    "Tigereye Brew Buff" + ww.Label,
 		ActionID: buffActionID,
 		Duration: time.Second * 15,
@@ -52,6 +51,7 @@ func (ww *WindwalkerMonk) registerTigereyeBrew() {
 			damageMultiplier = (1 + damagePerStack*float64(stacksToConsume))
 
 			ww.PseudoStats.DamageDealtMultiplier *= damageMultiplier
+			ww.SefController.UpdateCloneDamageMultiplier(damageMultiplier)
 
 			ww.TigereyeBrewStackAura.SetStacks(sim, ww.TigereyeBrewStackAura.GetStacks()-stacksToConsume)
 
@@ -65,8 +65,9 @@ func (ww *WindwalkerMonk) registerTigereyeBrew() {
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
 			ww.PseudoStats.DamageDealtMultiplier /= damageMultiplier
+			ww.SefController.UpdateCloneDamageMultiplier(1 / damageMultiplier)
 		},
-	})
+	}))
 
 	ww.RegisterSpell(core.SpellConfig{
 		ActionID:       buffActionID,
@@ -88,6 +89,7 @@ func (ww *WindwalkerMonk) registerTigereyeBrew() {
 		},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			buffAura.Deactivate(sim)
 			buffAura.Activate(sim)
 		},
 

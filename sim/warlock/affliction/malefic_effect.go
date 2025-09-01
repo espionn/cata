@@ -19,7 +19,7 @@ func (affliction *AfflictionWarlock) registerMaleficEffect() {
 			CritMultiplier:   affliction.DefaultCritMultiplier(),
 			BonusSpellPower:  0, // used to transmit base damage
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				spell.CalcAndDealDamage(sim, target, spell.BonusSpellPower, spell.OutcomeMagicHit)
+				spell.CalcAndDealDamage(sim, target, spell.BonusSpellPower, spell.OutcomeMagicCrit)
 			},
 		})
 	}
@@ -56,7 +56,7 @@ func (affliction *AfflictionWarlock) registerMaleficEffect() {
 			source := procTable[proc]
 			dot := (*source).Dot(target)
 			if !dot.IsActive() {
-				return
+				continue
 			}
 
 			proc.BonusSpellPower = calculateDoTBaseTickDamage(dot) * coeff

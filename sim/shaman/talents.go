@@ -45,11 +45,11 @@ func (shaman *Shaman) ApplyElementalMastery() {
 		ActionID: eleMasterActionID,
 		Duration: time.Second * 20,
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			shaman.MultiplyCastSpeed(1.3)
+			shaman.MultiplyCastSpeed(sim, 1.3)
 			shaman.MultiplyAttackSpeed(sim, 1.3)
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			shaman.MultiplyCastSpeed(1 / 1.3)
+			shaman.MultiplyCastSpeed(sim, 1/1.3)
 			shaman.MultiplyAttackSpeed(sim, 1/1.3)
 		},
 	})
@@ -146,10 +146,12 @@ func (shaman *Shaman) ApplyEchoOfTheElements() {
 	var alreadyProcced = map[*core.Spell]bool{}
 	var lastTimestamp time.Duration
 
+	const cantProc int64 = SpellMaskTotem | SpellMaskLightningShield | SpellMaskImbue | SpellMaskFulmination | SpellMaskFlameShockDot
+
 	core.MakePermanent(shaman.GetOrRegisterAura(core.Aura{
 		Label: "Echo of The Elements Dummy",
 		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			if !result.Landed() || spell.Flags.Matches(SpellFlagIsEcho) || !spell.Flags.Matches(SpellFlagShamanSpell) {
+			if !result.Landed() || spell.Flags.Matches(SpellFlagIsEcho) || !spell.Flags.Matches(SpellFlagShamanSpell) || spell.Matches(cantProc) {
 				return
 			}
 			if sim.CurrentTime == lastTimestamp && alreadyProcced[spell] {
@@ -173,7 +175,7 @@ func (shaman *Shaman) ApplyEchoOfTheElements() {
 					ProcMask:                 core.ProcMaskSpellProc,
 					ApplyEffects:             spell.ApplyEffects,
 					ManaCost:                 core.ManaCostOptions{},
-					CritMultiplier:           spell.Unit.Env.Raid.GetPlayerFromUnit(spell.Unit).GetCharacter().DefaultCritMultiplier(),
+					CritMultiplier:           shaman.DefaultCritMultiplier(),
 					BonusCritPercent:         spell.BonusCritPercent,
 					DamageMultiplier:         core.TernaryFloat64(spell.Tag == CastTagLightningOverload, 0.75, 1),
 					DamageMultiplierAdditive: 1,
@@ -231,11 +233,11 @@ func (shaman *Shaman) ApplyUnleashedFury() {
 	})
 
 	core.MakeProcTriggerAura(&shaman.Unit, core.ProcTrigger{
-		Name:           "Unleashed Fury",
-		ActionID:       core.ActionID{SpellID: 117012},
-		Callback:       core.CallbackOnApplyEffects,
-		ClassSpellMask: SpellMaskUnleashElements,
-		ProcChance:     1.0,
+		Name:            "Unleashed Fury",
+		MetricsActionID: core.ActionID{SpellID: 117012},
+		Callback:        core.CallbackOnApplyEffects,
+		ClassSpellMask:  SpellMaskUnleashElements,
+		ProcChance:      1.0,
 		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			mh := shaman.GetMHWeapon()
 			switch mh.TempEnchant {

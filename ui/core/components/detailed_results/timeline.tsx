@@ -613,7 +613,9 @@ export class Timeline extends ResultComponent {
 		// Don't add a row for buffs that were already visualized in a cast row or are prioritized.
 		const buffsToShow = buffsById.filter(auraUptimeLogs =>
 			playerCastsByAbility.findIndex(
-				casts => auraUptimeLogs[0].actionId && (casts[0].actionId!.equalsIgnoringTag(auraUptimeLogs[0].actionId) || auraAsResource.includes(auraUptimeLogs[0].actionId.anyId())),
+				casts =>
+					auraUptimeLogs[0].actionId &&
+					(casts[0].actionId!.equalsIgnoringTag(auraUptimeLogs[0].actionId) || auraAsResource.includes(auraUptimeLogs[0].actionId.anyId())),
 			),
 		);
 		if (buffsToShow.length > 0) {
@@ -982,9 +984,9 @@ export class Timeline extends ResultComponent {
 		// If there are any auras that correspond to this cast, visualize them in the same row.
 		aurasById
 			.filter(auraUptimeLogs => {
-				return idsToGroupForRotation.includes(actionId.spellId) ?
-				actionId.equalsIgnoringTag(buffAuraToSpellIdMap[auraUptimeLogs[0].actionId!.spellId] ?? auraUptimeLogs[0].actionId!) :
-				actionId.equals(buffAuraToSpellIdMap[auraUptimeLogs[0].actionId!.spellId] ?? auraUptimeLogs[0].actionId!)
+				return idsToGroupForRotation.includes(actionId.spellId)
+					? actionId.equalsIgnoringTag(buffAuraToSpellIdMap[auraUptimeLogs[0].actionId!.spellId] ?? auraUptimeLogs[0].actionId!)
+					: actionId.equals(buffAuraToSpellIdMap[auraUptimeLogs[0].actionId!.spellId] ?? auraUptimeLogs[0].actionId!);
 			})
 			.forEach(auraUptimeLogs => this.applyAuraUptimeLogsToRow(auraUptimeLogs, rowElem, true));
 
@@ -1267,6 +1269,13 @@ const auraAsResource = [
 
 	// Monk
 	124255, // Stagger
+	128938, // Elusive Brew - Stacks
+	115308, // Elusive Brew - Active
+	1247279, // Tiger Eye Brew - Stacks
+	1247275, // Tiger Eye Brew - Active
+
+	// Mage
+	148022, // Icicle
 ];
 
 // Hard-coded spell categories for controlling rotation ordering.
@@ -1290,8 +1299,7 @@ const idToCategoryMap: Record<number, number> = {
 	[48465]: SPELL_ACTION_CATEGORY + 0.1, // Starfire
 	[48461]: SPELL_ACTION_CATEGORY + 0.2, // Wrath
 	[53201]: SPELL_ACTION_CATEGORY + 0.3, // Starfall
-	[48468]: SPELL_ACTION_CATEGORY + 0.4, // Insect Swarm
-	[48463]: SPELL_ACTION_CATEGORY + 0.5, // Moonfire
+	[48463]: SPELL_ACTION_CATEGORY + 0.4, // Moonfire
 
 	// Hunter
 	[48996]: 0.1, // Raptor Strike
@@ -1315,7 +1323,6 @@ const idToCategoryMap: Record<number, number> = {
 	// Paladin
 	[76672]: MELEE_ACTION_CATEGORY + 0.01, // Hand of Light (mastery)
 	[35395]: MELEE_ACTION_CATEGORY + 0.02, // Crusader Strike
-	[99092]: MELEE_ACTION_CATEGORY + 0.03, // Flames of the Faithful (ret T12 2pc)
 	[53595]: MELEE_ACTION_CATEGORY + 0.04, // Hammer of the Righteous (Physical)
 	[88263]: MELEE_ACTION_CATEGORY + 0.05, // Hammer of the Righteous (Holy)
 	[53385]: MELEE_ACTION_CATEGORY + 0.06, // Divine Storm
@@ -1325,7 +1332,6 @@ const idToCategoryMap: Record<number, number> = {
 	[31803]: MELEE_ACTION_CATEGORY + 0.1, // Censure (Seal of Truth)
 	[101423]: MELEE_ACTION_CATEGORY + 0.11, // Seal of Righteousness
 	[53600]: MELEE_ACTION_CATEGORY + 0.12, // Shield of the Righteous
-	[99075]: MELEE_ACTION_CATEGORY + 0.13, // Righteous Flames (prot T12 2pc)
 	[879]: MELEE_ACTION_CATEGORY + 0.15, // Exorcism
 	[26573]: MELEE_ACTION_CATEGORY + 0.16, // Consecration
 	[119072]: MELEE_ACTION_CATEGORY + 0.17, // Holy Wrath
@@ -1339,7 +1345,6 @@ const idToCategoryMap: Record<number, number> = {
 	[84963]: SPELL_ACTION_CATEGORY + 0.01, // Inquisition
 	[54428]: SPELL_ACTION_CATEGORY + 0.02, // Divine Plea
 	[498]: SPELL_ACTION_CATEGORY + 0.03, // Divine Protection
-	[99090]: SPELL_ACTION_CATEGORY + 0.04, // Flaming Aegis (Prot T12 4pc)
 	[66233]: SPELL_ACTION_CATEGORY + 0.05, // Ardent Defender
 	[31884]: SPELL_ACTION_CATEGORY + 0.06, // Avenging Wrath
 	[114232]: SPELL_ACTION_CATEGORY + 0.07, // Sanctified Wrath
@@ -1418,6 +1423,8 @@ const idToCategoryMap: Record<number, number> = {
 	[47610]: SPELL_ACTION_CATEGORY + 0.02, // Frostfire Bolt
 	[42897]: SPELL_ACTION_CATEGORY + 0.02, // Arcane Blast
 	[42833]: SPELL_ACTION_CATEGORY + 0.02, // Fireball
+	[10]: SPELL_ACTION_CATEGORY + 0.021, // Blizzard - Cast
+	[42208]: SPELL_ACTION_CATEGORY + 0.022, // Blizzard - Tick
 	[42859]: SPELL_ACTION_CATEGORY + 0.03, // Scorch
 	[42891]: SPELL_ACTION_CATEGORY + 0.1, // Pyroblast
 	[42846]: SPELL_ACTION_CATEGORY + 0.1, // Arcane Missiles
@@ -1458,26 +1465,38 @@ const idToCategoryMap: Record<number, number> = {
 	[12867]: SPELL_ACTION_CATEGORY + 0.51, // Deep Wounds
 	[58874]: SPELL_ACTION_CATEGORY + 0.52, // Damage Shield
 	[47296]: SPELL_ACTION_CATEGORY + 0.53, // Critical Block
-	[46924]: SPELL_ACTION_CATEGORY + 0.61, // Bladestorm
+	[46924]: MELEE_ACTION_CATEGORY + 0.61, // Bladestorm
+	[46968]: MELEE_ACTION_CATEGORY + 0.61, // Shockwave
+	[118000]: MELEE_ACTION_CATEGORY + 0.61, // Dragon Roar
 	[2565]: SPELL_ACTION_CATEGORY + 0.62, // Shield Block
-	[64382]: SPELL_ACTION_CATEGORY + 0.65, // Shattering Throw
+	[112048]: SPELL_ACTION_CATEGORY + 0.63, // Shield Barrier
+	[76857]: SPELL_ACTION_CATEGORY + 0.64, // Mastery: Critical Block
+	[1249459]: SPELL_ACTION_CATEGORY + 0.65, // Shattering Throw
 	[71]: DEFAULT_ACTION_CATEGORY + 0.1, // Defensive Stance
 	[2457]: DEFAULT_ACTION_CATEGORY + 0.1, // Battle Stance
-	[2458]: DEFAULT_ACTION_CATEGORY + 0.1, // Berserker Stance
+	[6673]: DEFAULT_ACTION_CATEGORY + 0.1, // Battle Shout
+	[469]: DEFAULT_ACTION_CATEGORY + 0.1, // Commanding Shout
 
 	// Death Knight
-	[51425]: MELEE_ACTION_CATEGORY + 0.05, // Obliterate
-	[55268]: MELEE_ACTION_CATEGORY + 0.1, // Frost strike
-	[49930]: MELEE_ACTION_CATEGORY + 0.15, // Blood strike
+	[49998]: MELEE_ACTION_CATEGORY + 0.01, // Death Strike
+	[45470]: MELEE_ACTION_CATEGORY + 0.02, // Death Strike (Heal)
+	[77535]: MELEE_ACTION_CATEGORY + 0.03, // Blood Shield
+	[49184]: MELEE_ACTION_CATEGORY + 0.04, // Howling Blast
+	[49020]: MELEE_ACTION_CATEGORY + 0.05, // Obliterate
+	[49143]: MELEE_ACTION_CATEGORY + 0.1, // Frost strike
+	[45902]: MELEE_ACTION_CATEGORY + 0.15, // Blood strike
 	[50842]: MELEE_ACTION_CATEGORY + 0.2, // Pestilence
-	[51411]: MELEE_ACTION_CATEGORY + 0.25, // Howling Blast
-	[49895]: MELEE_ACTION_CATEGORY + 0.25, // Death Coil
-	[49938]: MELEE_ACTION_CATEGORY + 0.25, // Death and Decay
-	[63560]: MELEE_ACTION_CATEGORY + 0.25, // Ghoul Frenzy
+	[47541]: MELEE_ACTION_CATEGORY + 0.25, // Death Coil
+	[43265]: MELEE_ACTION_CATEGORY + 0.25, // Death and Decay
+	[63560]: MELEE_ACTION_CATEGORY + 0.25, // Dark Transformation
 	[50536]: MELEE_ACTION_CATEGORY + 0.25, // Unholy Blight
 	[57623]: MELEE_ACTION_CATEGORY + 0.25, // HoW
-	[59131]: MELEE_ACTION_CATEGORY + 0.3, // Icy touch
-	[49921]: MELEE_ACTION_CATEGORY + 0.3, // Plague strike
+	[45477]: MELEE_ACTION_CATEGORY + 0.3, // Icy touch
+	[45462]: MELEE_ACTION_CATEGORY + 0.3, // Plague strike
+	[114866]: MELEE_ACTION_CATEGORY + 0.31, // Soul Reaper
+	[130735]: MELEE_ACTION_CATEGORY + 0.31, // Soul Reaper
+	[130736]: MELEE_ACTION_CATEGORY + 0.31, // Soul Reaper
+	[114867]: MELEE_ACTION_CATEGORY + 0.32, // Soul Reaper (Tick)
 	[51271]: MELEE_ACTION_CATEGORY + 0.35, // UA
 	[45529]: MELEE_ACTION_CATEGORY + 0.35, // BT
 	[47568]: MELEE_ACTION_CATEGORY + 0.35, // ERW
@@ -1485,10 +1504,7 @@ const idToCategoryMap: Record<number, number> = {
 	[46584]: MELEE_ACTION_CATEGORY + 0.35, // Raise Dead
 	[55095]: MELEE_ACTION_CATEGORY + 0.4, // Frost Fever
 	[55078]: MELEE_ACTION_CATEGORY + 0.4, // Blood Plague
-	[49655]: MELEE_ACTION_CATEGORY + 0.4, // Wandering Plague
 	[50401]: MELEE_ACTION_CATEGORY + 0.5, // Razor Frost
-	[51460]: MELEE_ACTION_CATEGORY + 0.5, // Necrosis
-	[50463]: MELEE_ACTION_CATEGORY + 0.5, // BCB
 	[50689]: DEFAULT_ACTION_CATEGORY + 0.1, // Blood Presence
 	[48263]: DEFAULT_ACTION_CATEGORY + 0.1, // Frost Presence
 	[48265]: DEFAULT_ACTION_CATEGORY + 0.1, // Unholy Presence
@@ -1516,9 +1532,11 @@ const idToCategoryMap: Record<number, number> = {
 	[123986]: SPELL_ACTION_CATEGORY + 0.01, // Chi Burst
 	[148135]: SPELL_ACTION_CATEGORY + 0.011, // Chi Burst (Damage)
 	[130654]: SPELL_ACTION_CATEGORY + 0.012, // Chi Burst (Heal)
-	[116740]: SPELL_ACTION_CATEGORY + 0.02, // Tigereye Brew
+	[1247275]: SPELL_ACTION_CATEGORY + 0.02, // Tigereye Brew
 	[115399]: SPELL_ACTION_CATEGORY + 0.03, // Chi Brew
 	[115288]: SPELL_ACTION_CATEGORY + 0.04, // Energizing Brew
+	[123402]: SPELL_ACTION_CATEGORY + 0.04, // Guard
+	[115295]: SPELL_ACTION_CATEGORY + 0.04, // Guard
 	[126456]: SPELL_ACTION_CATEGORY + 0.05, // Fortifying Brew
 	[123904]: SPELL_ACTION_CATEGORY + 0.06, // Invoke Xuen, the White Tiger
 	[115008]: SPELL_ACTION_CATEGORY + 0.06, // Chi Torpedo
@@ -1531,31 +1549,17 @@ const idToCategoryMap: Record<number, number> = {
 	[40536]: SPELL_ACTION_CATEGORY + 0.942, // Explosive Decoy
 	[41119]: SPELL_ACTION_CATEGORY + 0.943, // Saronite Bomb
 	[40771]: SPELL_ACTION_CATEGORY + 0.944, // Cobalt Frag Bomb
-
-	// Souldrinker - to pair up the damage part with the healing
-	[109828]: SPELL_ACTION_CATEGORY + 0.945, // Drain Life - LFR
-	[108022]: SPELL_ACTION_CATEGORY + 0.946, // Drain Life - Normal
-	[109831]: SPELL_ACTION_CATEGORY + 0.947, // Drain Life - Heroic
-
-	// No'Kaled - to pair up the different spells it can proc
-	[109871]: SPELL_ACTION_CATEGORY + 0.948, // Flameblast - LFR
-	[109869]: SPELL_ACTION_CATEGORY + 0.949, // Iceblast - LFR
-	[109867]: SPELL_ACTION_CATEGORY + 0.95, // Shadowblast - LFR
-	[107785]: SPELL_ACTION_CATEGORY + 0.951, // Flameblast - Normal
-	[107789]: SPELL_ACTION_CATEGORY + 0.952, // Iceblast - Normal
-	[107787]: SPELL_ACTION_CATEGORY + 0.953, // Shadowblast - Normal
-	[109872]: SPELL_ACTION_CATEGORY + 0.954, // Flameblast - Heroic
-	[109870]: SPELL_ACTION_CATEGORY + 0.955, // Iceblast - Heroic
-	[109868]: SPELL_ACTION_CATEGORY + 0.956, // Shadowblast - Heroic
+	[120687]: DEFAULT_ACTION_CATEGORY + 0.945, // Stormlash Totem
+	[114206]: DEFAULT_ACTION_CATEGORY + 0.946, // Skull Bnaner
 };
 
 const idsToGroupForRotation: Array<number> = [
-	5171, 	// Rogue - Slice and Dice
-	2098, 	// Rogue - Eviscerate
-	1943, 	// Rogue - Rupture
-	51690, 	// Rogue - Killing Spree
-	32645, 	// Rogue - Envenom
-	16511, 	// Rogue - Hemorrhage
+	5171, // Rogue - Slice and Dice
+	2098, // Rogue - Eviscerate
+	1943, // Rogue - Rupture
+	51690, // Rogue - Killing Spree
+	32645, // Rogue - Envenom
+	16511, // Rogue - Hemorrhage
 	121471, // Rogue - Shadow Blades
 ];
 

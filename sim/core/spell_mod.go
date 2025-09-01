@@ -19,6 +19,7 @@ type SpellModConfig struct {
 	Kind              SpellModType
 	School            SpellSchool
 	ProcMask          ProcMask
+	SpellFlag         SpellFlag
 	ResourceType      proto.ResourceType
 	IntValue          int32
 	TimeValue         time.Duration
@@ -35,6 +36,7 @@ type SpellMod struct {
 	Kind           SpellModType
 	School         SpellSchool
 	ProcMask       ProcMask
+	SpellFlag      SpellFlag
 	ResourceType   proto.ResourceType
 	floatValue     float64
 	intValue       int32
@@ -91,6 +93,7 @@ func buildMod(unit *Unit, config SpellModConfig) *SpellMod {
 		Kind:         config.Kind,
 		School:       config.School,
 		ProcMask:     config.ProcMask,
+		SpellFlag:    config.SpellFlag,
 		ResourceType: config.ResourceType,
 		floatValue:   config.FloatValue,
 		intValue:     config.IntValue,
@@ -178,6 +181,10 @@ func shouldApply(spell *Spell, mod *SpellMod) bool {
 	}
 
 	if mod.ProcMask > 0 && !mod.ProcMask.Matches(spell.ProcMask) {
+		return false
+	}
+
+	if mod.SpellFlag > 0 && !mod.SpellFlag.Matches(spell.Flags) {
 		return false
 	}
 
@@ -322,6 +329,9 @@ const (
 	// Enables casting while moving
 	SpellMod_AllowCastWhileMoving
 
+	// Enables casting while channeling
+	SpellMod_AllowCastWhileChanneling
+
 	// Add/subtract bonus spell power
 	// Uses: FloatValue
 	SpellMod_BonusSpellPower_Flat
@@ -349,6 +359,10 @@ const (
 	// Will multiply the dot.PeriodicDamageMultiplier. +5% = 0.05
 	// Uses FloatValue
 	SpellMod_DotDamageDone_Pct
+
+	// Will increase the dot.BaseDurationMultiplier. +5% = 0.05
+	// Uses FloatValue
+	SpellMod_DotBaseDuration_Pct
 )
 
 var spellModMap = map[SpellModType]*SpellModFunctions{
@@ -437,6 +451,11 @@ var spellModMap = map[SpellModType]*SpellModFunctions{
 		Remove: removeAllowCastWhileMoving,
 	},
 
+	SpellMod_AllowCastWhileChanneling: {
+		Apply:  applyAllowCastWhileChanneling,
+		Remove: removeAllowCastWhileChanneling,
+	},
+
 	SpellMod_BonusSpellPower_Flat: {
 		Apply:  applyBonusSpellPowerFlat,
 		Remove: removeBonusSpellPowerFlat,
@@ -465,9 +484,15 @@ var spellModMap = map[SpellModType]*SpellModFunctions{
 		Apply:  applyModChargesFlat,
 		Remove: removeModChargesFlat,
 	},
+
 	SpellMod_DotDamageDone_Pct: {
 		Apply:  applyDotDamageDonePercent,
 		Remove: removeDotDamageDonePercent,
+	},
+
+	SpellMod_DotBaseDuration_Pct: {
+		Apply:  applyDotBaseDurationMultiplier,
+		Remove: removeDotBaseDurationMultiplier,
 	},
 }
 
@@ -663,6 +688,14 @@ func removeAllowCastWhileMoving(mod *SpellMod, spell *Spell) {
 	spell.Flags ^= SpellFlagCanCastWhileMoving
 }
 
+func applyAllowCastWhileChanneling(mod *SpellMod, spell *Spell) {
+	spell.Flags |= SpellFlagCastWhileChanneling
+}
+
+func removeAllowCastWhileChanneling(mod *SpellMod, spell *Spell) {
+	spell.Flags ^= SpellFlagCastWhileChanneling
+}
+
 func applyBonusSpellPowerFlat(mod *SpellMod, spell *Spell) {
 	spell.BonusSpellPower += mod.floatValue
 }
@@ -755,12 +788,12 @@ func applyDotDamageDonePercent(mod *SpellMod, spell *Spell) {
 	if spell.dots != nil {
 		for _, dot := range spell.dots {
 			if dot != nil {
-				dot.PeriodicDamageMultiplier *= mod.floatValue
+				dot.PeriodicDamageMultiplier *= (1 + mod.floatValue)
 			}
 		}
 	}
 	if spell.aoeDot != nil {
-		spell.aoeDot.PeriodicDamageMultiplier *= mod.floatValue
+		spell.aoeDot.PeriodicDamageMultiplier *= (1 + mod.floatValue)
 	}
 }
 
@@ -768,11 +801,39 @@ func removeDotDamageDonePercent(mod *SpellMod, spell *Spell) {
 	if spell.dots != nil {
 		for _, dot := range spell.dots {
 			if dot != nil {
-				dot.PeriodicDamageMultiplier /= mod.floatValue
+				dot.PeriodicDamageMultiplier /= (1 + mod.floatValue)
 			}
 		}
 	}
 	if spell.aoeDot != nil {
-		spell.aoeDot.PeriodicDamageMultiplier /= mod.floatValue
+		spell.aoeDot.PeriodicDamageMultiplier /= (1 + mod.floatValue)
+	}
+}
+
+func applyDotBaseDurationMultiplier(mod *SpellMod, spell *Spell) {
+	if spell.dots != nil {
+		for _, dot := range spell.dots {
+			if dot != nil {
+				dot.BaseDurationMultiplier *= (1 + mod.floatValue)
+			}
+		}
+	}
+
+	if spell.aoeDot != nil {
+		spell.aoeDot.BaseDurationMultiplier *= (1 + mod.floatValue)
+	}
+}
+
+func removeDotBaseDurationMultiplier(mod *SpellMod, spell *Spell) {
+	if spell.dots != nil {
+		for _, dot := range spell.dots {
+			if dot != nil {
+				dot.BaseDurationMultiplier /= (1 + mod.floatValue)
+			}
+		}
+	}
+
+	if spell.aoeDot != nil {
+		spell.aoeDot.BaseDurationMultiplier /= (1 + mod.floatValue)
 	}
 }

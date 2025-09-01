@@ -11,6 +11,7 @@ func (fireElemental *FireElemental) registerFireBlast() {
 		ActionID:    core.ActionID{SpellID: 57984},
 		SpellSchool: core.SpellSchoolFire,
 		ProcMask:    core.ProcMaskSpellDamage,
+		Flags:       SpellFlagShamanSpell,
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: 40,
@@ -42,7 +43,7 @@ func (fireElemental *FireElemental) registerFireNova() {
 		ActionID:    core.ActionID{SpellID: 117588},
 		SpellSchool: core.SpellSchoolFire,
 		ProcMask:    core.ProcMaskSpellDamage,
-		Flags:       core.SpellFlagAoE,
+		Flags:       core.SpellFlagAoE | SpellFlagShamanSpell,
 
 		ManaCost: core.ManaCostOptions{
 			FlatCost: 30,
@@ -63,11 +64,10 @@ func (fireElemental *FireElemental) registerFireNova() {
 		ThreatMultiplier: 1,
 		BonusCoefficient: 1.00,
 
-		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			for _, aoeTarget := range sim.Encounter.TargetUnits {
-				baseDamage := sim.Roll(49*levelScalingMultiplier, 58*levelScalingMultiplier) //Estimated from beta testing 49 58
-				spell.CalcAndDealDamage(sim, aoeTarget, baseDamage, spell.OutcomeMagicHitAndCrit)
-			}
+		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
+			spell.CalcAndDealAoeDamageWithVariance(sim, spell.OutcomeMagicHitAndCrit, func(sim *core.Simulation, _ *core.Spell) float64 {
+				return sim.Roll(49*levelScalingMultiplier, 58*levelScalingMultiplier) //Estimated from beta testing 49 58
+			})
 		},
 	})
 }
@@ -79,6 +79,7 @@ func (fireElemental *FireElemental) registerImmolate() {
 		ActionID:    actionID,
 		SpellSchool: core.SpellSchoolFire,
 		ProcMask:    core.ProcMaskSpellDamage,
+		Flags:       SpellFlagShamanSpell,
 
 		DamageMultiplier: 1,
 		CritMultiplier:   fireElemental.DefaultCritMultiplier(),

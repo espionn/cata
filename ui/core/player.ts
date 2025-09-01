@@ -53,7 +53,7 @@ import {
 } from './proto/ui';
 import { ActionId } from './proto_utils/action_id';
 import { Database } from './proto_utils/database';
-import { EquippedItem, ReforgeData } from './proto_utils/equipped_item';
+import { EquippedItem, ReforgeData, isShaTouchedWeapon, isThroneOfThunderWeapon } from './proto_utils/equipped_item';
 import { Gear, ItemSwapGear } from './proto_utils/gear';
 import { gemMatchesSocket, isUnrestrictedGem } from './proto_utils/gems';
 import SecondaryResource from './proto_utils/secondary_resource';
@@ -374,7 +374,7 @@ export class Player<SpecType extends Spec> {
 
 	bindChallengeModeChange() {
 		this.challengeModeChangeEmitter.on(() => {
-			this.setGear(TypedEvent.nextEventID(), this.gear.withChallengeMode(this.challengeModeEnabled));
+			this.setGear(TypedEvent.nextEventID(), this.gear, true);
 		});
 	}
 
@@ -754,9 +754,9 @@ export class Player<SpecType extends Spec> {
 		return this.gear;
 	}
 
-	setGear(eventID: EventID, newGear: Gear) {
-		if (newGear.equals(this.gear)) return;
-		this.gear = newGear;
+	setGear(eventID: EventID, newGear: Gear, forceUpdate?: boolean) {
+		if (newGear.equals(this.gear) && !forceUpdate) return;
+		this.gear = newGear.withChallengeMode(this.challengeModeEnabled);
 		this.gearChangeEmitter.emit(eventID);
 	}
 
@@ -915,7 +915,7 @@ export class Player<SpecType extends Spec> {
 			rot.type = APLRotationType.TypeSimple;
 			return rot;
 		} else {
-			return this.aplRotation;
+			return omitDeep(this.aplRotation, ['uuid']);
 		}
 	}
 
@@ -1269,14 +1269,11 @@ export class Player<SpecType extends Spec> {
 	};
 
 	static readonly RAID_IDS: Partial<Record<RaidFilterOption, number>> = {
-		[RaidFilterOption.RaidIcecrownCitadel]: 4812,
-		[RaidFilterOption.RaidRubySanctum]: 4987,
-		[RaidFilterOption.RaidBlackwingDescent]: 5094,
-		[RaidFilterOption.RaidTheBastionOfTwilight]: 5334,
-		[RaidFilterOption.RaidBaradinHold]: 5600,
-		[RaidFilterOption.RaidThroneOfTheFourWinds]: 5638,
-		[RaidFilterOption.RaidFirelands]: 5723,
-		[RaidFilterOption.RaidDragonSoul]: 5892,
+		[RaidFilterOption.RaidMogushanVaults]: 6125,
+		[RaidFilterOption.RaidHeartOfFear]: 6297,
+		[RaidFilterOption.RaidTerraceOfEndlessSpring]: 6067,
+		[RaidFilterOption.RaidThroneOfThunder]: 6622,
+		[RaidFilterOption.RaidSiegeOfOrgrimmar]: 6738,
 	};
 
 	get armorSpecializationArmorType() {
@@ -1299,6 +1296,13 @@ export class Player<SpecType extends Spec> {
 			if (!item) return false;
 			const armorType = item.armorType;
 			return armorType !== this.armorSpecializationArmorType;
+		});
+	}
+
+	hasEotBPItemEquipped() {
+		return [ItemSlot.ItemSlotMainHand, ItemSlot.ItemSlotOffHand].some(itemSlot => {
+			const item = this.getEquippedItem(itemSlot)?.item;
+			return item && (isShaTouchedWeapon(item) || isThroneOfThunderWeapon(item));
 		});
 	}
 
@@ -1485,7 +1489,7 @@ export class Player<SpecType extends Spec> {
 		const aplRotation = forSimming
 			? this.getResolvedAplRotation()
 			: // When exporting we want to omit the uuid field to prevent bloat
-			  omitDeep(this.aplRotation, ['uuid']);
+				omitDeep(this.aplRotation, ['uuid']);
 
 		let player = PlayerProto.create({
 			class: this.getClass(),
@@ -1630,5 +1634,9 @@ export class Player<SpecType extends Spec> {
 		if (!(proto.apiVersion < CURRENT_API_VERSION)) {
 			return;
 		}
+	}
+
+	getSpecConfig(): IndividualSimUIConfig<SpecType> {
+		return this.specConfig;
 	}
 }

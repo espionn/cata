@@ -282,7 +282,7 @@ func (apl *APLRotation) DoNextAction(sim *Simulation) {
 		return
 	}
 
-	if apl.unit.ChanneledDot != nil {
+	if apl.unit.IsChanneling() && !apl.unit.ChanneledDot.Spell.Flags.Matches(SpellFlagCastWhileChanneling) {
 		return
 	}
 
@@ -347,25 +347,17 @@ func (apl *APLRotation) popControllingAction(ca APLActionImpl) {
 func (apl *APLRotation) shouldInterruptChannel(sim *Simulation) bool {
 	channeledDot := apl.unit.ChanneledDot
 
-	if channeledDot.remainingTicks == 0 {
-		// Channel has ended, but apl.unit.ChanneledDot hasn't been cleared yet meaning the aura is still active.
-		return false
-	}
-
-	if apl.interruptChannelIf == nil || !apl.interruptChannelIf.GetBool(sim) {
-		// Continue the channel.
+	if !channeledDot.ChannelCanBeInterrupted(sim) {
 		return false
 	}
 
 	// Allow next action to interrupt the channel, but if the action is the same action then it still needs to continue.
 	nextAction := apl.getNextAction(sim)
-	if nextAction == nil {
-		return false
-	}
-
-	if channelAction, ok := nextAction.impl.(*APLActionChannelSpell); ok && channelAction.spell == channeledDot.Spell {
-		// Newly selected action is channeling the same spell, so continue the channel unless recast is allowed.
-		return apl.allowChannelRecastOnInterrupt
+	if nextAction != nil {
+		if channelAction, ok := nextAction.impl.(*APLActionChannelSpell); ok && channelAction.spell == channeledDot.Spell {
+			// Newly selected action is channeling the same spell, so continue the channel unless recast is allowed.
+			return apl.allowChannelRecastOnInterrupt
+		}
 	}
 
 	return true
