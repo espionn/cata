@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/mop/sim/core"
-	"github.com/wowsims/mop/sim/core/proto"
 )
 
 // T14 Balance
@@ -119,13 +118,11 @@ var ItemSetGladiatorSanctuary = core.NewItemSet(core.ItemSet{
 		4: func(agent core.Agent, setBonusAura *core.Aura) {
 			// Once every 30 sec, your next Ravage is free and has no positional or stealth requirement.
 			druid := agent.(DruidAgent).GetDruid()
-			if druid.Spec == proto.Spec_SpecFeralDruid {
-				druid.registerStampede()
-				druid.registerStampedePending()
-				setBonusAura.ApplyOnEncounterStart(func(_ *core.Aura, sim *core.Simulation) {
-					druid.StampedeAura.Activate(sim)
-				})
-			}
+			druid.registerStampede()
+			druid.registerStampedePending()
+			setBonusAura.ApplyOnEncounterStart(func(_ *core.Aura, sim *core.Simulation) {
+				druid.StampedeAura.Activate(sim)
+			})
 		},
 	},
 })
