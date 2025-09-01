@@ -9,7 +9,7 @@ import { IndividualSimUI } from '../individual_sim_ui';
 import { Player } from '../player';
 import { Class, GemColor, ItemSlot, Profession, PseudoStat, ReforgeStat, Spec, Stat } from '../proto/common';
 import { UIGem as Gem, IndividualSimSettings, StatCapType } from '../proto/ui';
-import { ReforgeData } from '../proto_utils/equipped_item';
+import { isShaTouchedWeapon, isThroneOfThunderWeapon, ReforgeData } from '../proto_utils/equipped_item';
 import { Gear } from '../proto_utils/gear';
 import { gemMatchesSocket, gemMatchesStats } from '../proto_utils/gems';
 import { shortSecondaryStatNames, slotNames, statCapTypeNames } from '../proto_utils/names';
@@ -183,6 +183,8 @@ export class ReforgeOptimizer {
 	protected statSelectionPresets: ReforgeOptimizerOptions['statSelectionPresets'];
 	readonly includeGemsChangeEmitter = new TypedEvent<void>();
 	protected includeGems = false;
+	readonly includeEOTBPGemSocketChangeEmitter = new TypedEvent<void>();
+	protected includeEOTBPGemSocket = false;
 	readonly freezeItemSlotsChangeEmitter = new TypedEvent<void>();
 	protected freezeItemSlots = false;
 	protected frozenItemSlots = new Map<ItemSlot, boolean>();
@@ -456,6 +458,13 @@ export class ReforgeOptimizer {
 		}
 	}
 
+	setIncludeEOTBPGemSocket(eventID: EventID, newValue: boolean) {
+		if (this.includeEOTBPGemSocket !== newValue) {
+			this.includeEOTBPGemSocket = newValue;
+			this.includeEOTBPGemSocketChangeEmitter.emit(eventID);
+		}
+	}
+
 	setFreezeItemSlots(eventID: EventID, newValue: boolean) {
 		if (this.freezeItemSlots !== newValue) {
 			this.freezeItemSlots = newValue;
@@ -544,7 +553,25 @@ export class ReforgeOptimizer {
 					changedEvent: () => this.includeGemsChangeEmitter,
 					getValue: () => this.includeGems,
 					setValue: (eventID, _player, newValue) => {
-						this.setIncludeGems(eventID, newValue);
+						TypedEvent.freezeAllAndDo(() => {
+							this.setIncludeGems(eventID, newValue);
+							this.setIncludeEOTBPGemSocket(eventID, this.player.sim.getPhase() >= 2);
+						});
+					},
+				});
+
+				const includeEOTBPGemSocket = new BooleanPicker(null, this.player, {
+					extraCssClasses: ['mb-2'],
+					id: 'reforge-optimizer-include-eotbp-socket',
+					label: 'Include EotBP Socket',
+					labelTooltip: 'Allows the optimiser to also include the "Eye of the Black Prince" socket in the optimization.',
+					inline: true,
+					changedEvent: () =>
+						TypedEvent.onAny([this.includeGemsChangeEmitter, this.includeEOTBPGemSocketChangeEmitter, this.player.gearChangeEmitter]),
+					getValue: () => this.includeEOTBPGemSocket,
+					showWhen: () => this.includeGems && this.player.hasEotBPItemEquipped(),
+					setValue: (eventID, _player, newValue) => {
+						this.setIncludeEOTBPGemSocket(eventID, newValue);
 					},
 				});
 
@@ -579,6 +606,7 @@ export class ReforgeOptimizer {
 						{forcedProcInput.rootElem}
 						{this.buildSoftCapBreakpointsLimiter({ useSoftCapBreakpointsInput })}
 						{includeGemsInput.rootElem}
+						{includeEOTBPGemSocket.rootElem}
 						{freezeItemSlotsInput.rootElem}
 						{this.buildFrozenSlotsInputs()}
 						{this.buildEPWeightsToggle({ useCustomEPValuesInput: useCustomEPValuesInput })}
@@ -1048,10 +1076,13 @@ export class ReforgeOptimizer {
 			if (!this.includeGems) {
 				continue;
 			}
+			const uiItem = item.item;
+			const socketColors = item.curSocketColors(this.player.isBlacksmithing());
+			if (!this.includeEOTBPGemSocket && (isShaTouchedWeapon(uiItem) || isThroneOfThunderWeapon(uiItem))) {
+				socketColors.pop();
+			}
 
-			const distributedSocketBonus = new Stats(scaledItem.item.socketBonus)
-				.scale(1.0 / (scaledItem.curSocketColors(this.player.isBlacksmithing()).length || 1))
-				.getBuffedStats();
+			const distributedSocketBonus = new Stats(scaledItem.item.socketBonus).scale(1.0 / (socketColors.length || 1)).getBuffedStats();
 
 			// First determine whether the socket bonus should be obviously matched in order to save on brute force computation.
 			let forceSocketBonus: boolean = false;
@@ -1069,7 +1100,7 @@ export class ReforgeOptimizer {
 			dummyVariables.set('matched', new Map<string, number>());
 			dummyVariables.set('unmatched', new Map<string, number>());
 
-			for (const [_, socketColor] of item.curSocketColors(this.player.isBlacksmithing()).entries()) {
+			for (const socketColor of socketColors.values()) {
 				if (![GemColor.GemColorRed, GemColor.GemColorBlue, GemColor.GemColorYellow, GemColor.GemColorPrismatic].includes(socketColor)) {
 					break;
 				}
@@ -1099,7 +1130,7 @@ export class ReforgeOptimizer {
 				forceSocketBonus = true;
 			}
 
-			item.curSocketColors(this.player.isBlacksmithing()).forEach((socketColor, socketIdx) => {
+			socketColors.forEach((socketColor, socketIdx) => {
 				let gemColorKeys: GemColor[] = [];
 
 				if ([GemColor.GemColorPrismatic, GemColor.GemColorCogwheel, GemColor.GemColorShaTouched].includes(socketColor)) {
