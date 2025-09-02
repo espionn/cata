@@ -3,8 +3,6 @@ import { Spec } from '../proto/common';
 export const CHARACTER_LEVEL = 90;
 export const BOSS_LEVEL = CHARACTER_LEVEL + 3;
 export const MAX_CHALLENGE_MODE_ILVL = 463;
-export const UPGRADE_VALOR_POINTS_COST = 750;
-export const UPGRADE_JUSTICE_POINTS_COST = 1500;
 
 export const HASTE_RATING_PER_HASTE_PERCENT = 425.0;
 export const EXPERTISE_PER_QUARTER_PERCENT_REDUCTION = 85.0;

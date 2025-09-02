@@ -1,20 +1,34 @@
-import { Player } from '../../player.js';
-import { Stat } from '../../proto/common.js';
+import { Player } from '../../player';
+import { Faction, ItemQuality } from '../../proto/common';
 import i18n from '../../../i18n/config';
-import { IndividualSimSettings } from '../../proto/ui.js';
-import { shortSecondaryStatNames } from '../../proto_utils/names.js';
-import { TypedEvent } from '../../typed_event.js';
-import { Component } from '../component.js';
-import { ContentBlock } from '../content_block.jsx';
-import { CopyButton } from '../copy_button.jsx';
-import { IndividualSimUI } from '../../individual_sim_ui.jsx';
+import { TypedEvent } from '../../typed_event';
+import { Component } from '../component';
+import { ContentBlock } from '../content_block';
+import { IndividualSimUI } from '../../individual_sim_ui';
 import { EquippedItem } from '../../proto_utils/equipped_item';
-import { UPGRADE_JUSTICE_POINTS_COST, UPGRADE_VALOR_POINTS_COST } from '../../constants/mechanics';
 
 type UpgradeSummaryTotal = {
-	valorPoints: number;
 	justicePoints: number;
+	honorPoints: number;
 };
+
+export const COSTS = new Map<keyof UpgradeSummaryTotal, Map<ItemQuality, number>>([
+	[
+		'justicePoints',
+		new Map<ItemQuality, number>([
+			[ItemQuality.ItemQualityRare, 750],
+			[ItemQuality.ItemQualityEpic, 1000],
+			[ItemQuality.ItemQualityLegendary, 1000],
+		]),
+	],
+	[
+		'honorPoints',
+		new Map<ItemQuality, number>([
+			[ItemQuality.ItemQualityRare, 1000],
+			[ItemQuality.ItemQualityEpic, 1500],
+		]),
+	],
+]);
 
 export class UpgradeCostsSummary extends Component {
 	private readonly simUI: IndividualSimUI<any>;
@@ -34,7 +48,7 @@ export class UpgradeCostsSummary extends Component {
 			extraCssClasses: ['summary-table--upgrade-costs'],
 		});
 
-		player.gearChangeEmitter.on(() => this.updateTable());
+		TypedEvent.onAny([player.gearChangeEmitter, player.raceChangeEmitter]).on(() => this.updateTable());
 	}
 
 	private updateTable() {
@@ -46,22 +60,18 @@ export class UpgradeCostsSummary extends Component {
 
 		const totals = itemsWithUpgrade.reduce<UpgradeSummaryTotal>(
 			(acc, item) => {
-				switch (item._item.quality) {
-					case 3:
-						acc.justicePoints += item.upgrade * UPGRADE_JUSTICE_POINTS_COST;
-						break;
-					case 4:
-					case 5:
-						acc.valorPoints += item.upgrade * UPGRADE_VALOR_POINTS_COST;
-						break;
-					default:
-						break;
+				let key: keyof UpgradeSummaryTotal = 'justicePoints';
+				if (item._item.name.includes("Gladiator's")) {
+					key = 'honorPoints';
 				}
+
+				acc[key] += (COSTS.get(key)?.get(item._item.quality) || 0) * item.upgrade;
+
 				return acc;
 			},
 			{
-				valorPoints: 0,
 				justicePoints: 0,
+				honorPoints: 0,
 			},
 		);
 
@@ -78,7 +88,7 @@ export class UpgradeCostsSummary extends Component {
 								src={
 									key === 'justicePoints'
 										? 'https://wow.zamimg.com/images/wow/icons/small/pvecurrency-justice.jpg'
-										: 'https://wow.zamimg.com/images/wow/icons/small/pvecurrency-valor.jpg'
+										: `https://wow.zamimg.com/images/wow/icons/small/pvpcurrency-honor-${this.player.getFaction() === Faction.Horde ? 'horde' : 'alliance'}.jpg`
 								}
 							/>
 							<div>{i18n.t(`common.currency.${key}`)}</div>

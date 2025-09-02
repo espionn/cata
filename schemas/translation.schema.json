@@ -153,11 +153,15 @@
                 },
                 "justicePoints": {
                     "type": "string"
+                },
+                "honorPoints": {
+                    "type": "string"
                 }
             },
             "required": [
                 "justicePoints",
-                "valorPoints"
+                "valorPoints",
+                "honorPoints"
             ],
             "title": "Currency"
         },
