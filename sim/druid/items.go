@@ -136,9 +136,11 @@ func (druid *Druid) registerStampede() {
 		Duration: core.NeverExpires,
 
 		OnGain: func(_ *core.Aura, _ *core.Simulation) {
-			oldExtraCastCondition = druid.Ravage.ExtraCastCondition
-			druid.Ravage.ExtraCastCondition = nil
-			druid.Ravage.Cost.FlatModifier -= 45
+			if druid.Ravage != nil {
+				oldExtraCastCondition = druid.Ravage.ExtraCastCondition
+				druid.Ravage.ExtraCastCondition = nil
+				druid.Ravage.Cost.FlatModifier -= 45
+			}
 		},
 
 		OnSpellHitDealt: func(_ *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
@@ -149,8 +151,10 @@ func (druid *Druid) registerStampede() {
 		},
 
 		OnExpire: func(_ *core.Aura, _ *core.Simulation) {
-			druid.Ravage.ExtraCastCondition = oldExtraCastCondition
-			druid.Ravage.Cost.FlatModifier += 45
+			if druid.Ravage != nil {
+				druid.Ravage.ExtraCastCondition = oldExtraCastCondition
+				druid.Ravage.Cost.FlatModifier += 45
+			}
 		},
 	})
 }
