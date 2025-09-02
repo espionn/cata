@@ -13,8 +13,8 @@
 		{"action":{"condition":{"spellIsReady":{"spellId":{"spellId":84714}}},"castSpell":{"spellId":{"spellId":84714}}}},
 		{"action":{"condition":{"cmp":{"op":"OpEq","lhs":{"auraNumStacks":{"auraId":{"spellId":112965},"includeReactionTime":true}},"rhs":{"const":{"val":"2"}}}},"castSpell":{"spellId":{"spellId":30455}}}},
 		{"action":{"condition":{"auraIsActive":{"auraId":{"spellId":44549},"includeReactionTime":true}},"castSpell":{"spellId":{"spellId":44614}}}},
-		{"action":{"condition":{"and":{"vals":[{"cmp":{"op":"OpGe","lhs":{"remainingTime":{}},"rhs":{"math":{"op":"OpMul","lhs":{"dotTickFrequency":{"spellId":{"spellId":44457}}},"rhs":{"const":{"val":"3"}}}}}}]}},"multidot":{"spellId":{"spellId":44457},"maxDots":3,"maxOverlap":{"dotTickFrequency":{"spellId":{"spellId":44457}}}}}},
-		{"action":{"multidot":{"spellId":{"spellId":114923},"maxDots":5,"maxOverlap":{"dotTickFrequency":{"spellId":{"spellId":114923}}}}}},
+		{"action":{"condition":{"and":{"vals":[{"cmp":{"op":"OpGe","lhs":{"remainingTime":{}},"rhs":{"math":{"op":"OpMul","lhs":{"dotTickFrequency":{"spellId":{"spellId":44457}}},"rhs":{"const":{"val":"3"}}}}}}]}},"multidot":{"spellId":{"spellId":44457},"maxDots":3,"maxOverlap":{"math":{"op":"OpAdd","lhs":{"dotTickFrequency":{"spellId":{"spellId":44457}}},"rhs":{"inputDelay":{}}}}}}},
+        {"action":{"strictMultidot":{"spellId":{"spellId":114923},"maxDots":5,"maxOverlap":{"math":{"op":"OpAdd","lhs":{"dotTickFrequency":{"spellId":{"spellId":114923}}},"rhs":{"inputDelay":{}}}}}}},
 		{"action":{"condition":{"auraIsInactive":{"sourceUnit":{"type":"CurrentTarget"},"auraId":{"spellId":112948},"includeReactionTime":true}},"castSpell":{"spellId":{"spellId":112948}}}},
 		{"action":{"condition":{"auraIsActive":{"auraId":{"spellId":112965},"includeReactionTime":true}},"castSpell":{"spellId":{"spellId":30455}}}},
 		{"action":{"channelSpell":{"spellId":{"spellId":10},"interruptIf":{"or":{"vals":[{"spellIsReady":{"spellId":{"spellId":84714}}},{"auraIsActive":{"auraId":{"spellId":112965},"includeReactionTime":true}},{"auraIsActive":{"auraId":{"spellId":44549},"includeReactionTime":true}}]}}}}}
