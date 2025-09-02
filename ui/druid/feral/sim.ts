@@ -18,6 +18,8 @@ import * as Presets from './presets';
 const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 	cssClass: 'feral-druid-sim-ui',
 	cssScheme: PlayerClasses.getCssClass(PlayerClasses.Druid),
+	// Override required talent rows - Feral only requires rows 3 and 5 instead of all rows
+	requiredTalentRows: [3, 5],
 	// List any known bugs / issues here and they'll be shown on the site.
 	knownIssues: [],
 	warnings: [],
@@ -114,7 +116,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 		talents: [Presets.StandardTalents],
 		rotations: [Presets.SIMPLE_ROTATION_DEFAULT, Presets.APL_ROTATION_DEFAULT],
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.PRERAID_PRESET],
+		gear: [Presets.PRERAID_PRESET, Presets.PREHOF_PRESET, Presets.PRETOES_PRESET, Presets.P1_PRESET],
 		itemSwaps: [],
 		builds: [
 			//Presets.PRESET_BUILD_DEFAULT,

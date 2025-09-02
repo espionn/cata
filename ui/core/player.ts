@@ -53,7 +53,7 @@ import {
 } from './proto/ui';
 import { ActionId } from './proto_utils/action_id';
 import { Database } from './proto_utils/database';
-import { EquippedItem, ReforgeData } from './proto_utils/equipped_item';
+import { EquippedItem, ReforgeData, isShaTouchedWeapon, isThroneOfThunderWeapon } from './proto_utils/equipped_item';
 import { Gear, ItemSwapGear } from './proto_utils/gear';
 import { gemMatchesSocket, isUnrestrictedGem } from './proto_utils/gems';
 import SecondaryResource from './proto_utils/secondary_resource';
@@ -1299,6 +1299,13 @@ export class Player<SpecType extends Spec> {
 		});
 	}
 
+	hasEotBPItemEquipped() {
+		return [ItemSlot.ItemSlotMainHand, ItemSlot.ItemSlotOffHand].some(itemSlot => {
+			const item = this.getEquippedItem(itemSlot)?.item;
+			return item && (isShaTouchedWeapon(item) || isThroneOfThunderWeapon(item));
+		});
+	}
+
 	filterItemData<T>(itemData: Array<T>, getItemFunc: (val: T) => Item, slot: ItemSlot): Array<T> {
 		const filters = this.sim.getFilters();
 
@@ -1482,7 +1489,7 @@ export class Player<SpecType extends Spec> {
 		const aplRotation = forSimming
 			? this.getResolvedAplRotation()
 			: // When exporting we want to omit the uuid field to prevent bloat
-			  omitDeep(this.aplRotation, ['uuid']);
+				omitDeep(this.aplRotation, ['uuid']);
 
 		let player = PlayerProto.create({
 			class: this.getClass(),
@@ -1627,5 +1634,9 @@ export class Player<SpecType extends Spec> {
 		if (!(proto.apiVersion < CURRENT_API_VERSION)) {
 			return;
 		}
+	}
+
+	getSpecConfig(): IndividualSimUIConfig<SpecType> {
+		return this.specConfig;
 	}
 }

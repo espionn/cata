@@ -7,14 +7,13 @@ import i18n from '../../i18n/config.js';
 import * as Mechanics from '../constants/mechanics.js';
 import { IndividualSimUI } from '../individual_sim_ui';
 import { Player } from '../player';
-import { Class, GemColor, ItemSlot, PseudoStat, ReforgeStat, Spec, Stat } from '../proto/common';
+import { Class, GemColor, ItemSlot, Profession, PseudoStat, ReforgeStat, Spec, Stat } from '../proto/common';
 import { UIGem as Gem, IndividualSimSettings, StatCapType } from '../proto/ui';
-import { ReforgeData } from '../proto_utils/equipped_item';
+import { isShaTouchedWeapon, isThroneOfThunderWeapon, ReforgeData } from '../proto_utils/equipped_item';
 import { Gear } from '../proto_utils/gear';
-import { gemMatchesSocket } from '../proto_utils/gems';
+import { gemMatchesSocket, gemMatchesStats } from '../proto_utils/gems';
 import { shortSecondaryStatNames, slotNames, statCapTypeNames } from '../proto_utils/names';
 import { pseudoStatIsCapped, StatCap, statIsCapped, Stats, UnitStat, UnitStatPresets } from '../proto_utils/stats';
-import { SpecTalents } from '../proto_utils/utils';
 import { Sim } from '../sim';
 import { ActionGroupItem } from '../sim_ui';
 import { EventID, TypedEvent } from '../typed_event';
@@ -32,6 +31,7 @@ type YalpsConstraints = Map<string, Constraint>;
 
 type GemData = {
 	gem: Gem;
+	isJC: boolean;
 	coefficients: YalpsCoefficients;
 };
 
@@ -169,6 +169,7 @@ export class ReforgeOptimizer {
 	protected readonly playerClass: Class;
 	protected readonly isExperimental: ReforgeOptimizerOptions['experimental'];
 	protected readonly isHybridCaster: boolean;
+	protected readonly isTankSpec: boolean;
 	protected readonly sim: Sim;
 	protected readonly defaults: IndividualSimUI<any>['individualConfig']['defaults'];
 	protected getEPDefaults: ReforgeOptimizerOptions['getEPDefaults'];
@@ -182,6 +183,8 @@ export class ReforgeOptimizer {
 	protected statSelectionPresets: ReforgeOptimizerOptions['statSelectionPresets'];
 	readonly includeGemsChangeEmitter = new TypedEvent<void>();
 	protected includeGems = false;
+	readonly includeEOTBPGemSocketChangeEmitter = new TypedEvent<void>();
+	protected includeEOTBPGemSocket = false;
 	readonly freezeItemSlotsChangeEmitter = new TypedEvent<void>();
 	protected freezeItemSlots = false;
 	protected frozenItemSlots = new Map<ItemSlot, boolean>();
@@ -196,6 +199,7 @@ export class ReforgeOptimizer {
 		this.playerClass = this.player.getClass();
 		this.isExperimental = options?.experimental;
 		this.isHybridCaster = [Spec.SpecBalanceDruid, Spec.SpecShadowPriest, Spec.SpecElementalShaman, Spec.SpecMistweaverMonk].includes(this.player.getSpec());
+		this.isTankSpec = this.player.getPlayerSpec().isTankSpec;
 		this.sim = simUI.sim;
 		this.defaults = simUI.individualConfig.defaults;
 		this.getEPDefaults = options?.getEPDefaults;
@@ -218,11 +222,11 @@ export class ReforgeOptimizer {
 					button.disabled = true;
 				}
 
-				const wasCM = simUI.player.getChallengeModeEnabled()
+				const wasCM = simUI.player.getChallengeModeEnabled();
 				try {
 					performance.mark('reforge-optimization-start');
 					if (wasCM) {
-						simUI.player.setChallengeModeEnabled(TypedEvent.nextEventID(), false)
+						simUI.player.setChallengeModeEnabled(TypedEvent.nextEventID(), false);
 					}
 					await this.optimizeReforges();
 					this.onReforgeDone();
@@ -230,7 +234,7 @@ export class ReforgeOptimizer {
 					this.onReforgeError(error);
 				} finally {
 					if (wasCM) {
-						simUI.player.setChallengeModeEnabled(TypedEvent.nextEventID(), true)
+						simUI.player.setChallengeModeEnabled(TypedEvent.nextEventID(), true);
 					}
 					performance.mark('reforge-optimization-end');
 					if (isDevMode())
@@ -454,6 +458,13 @@ export class ReforgeOptimizer {
 		}
 	}
 
+	setIncludeEOTBPGemSocket(eventID: EventID, newValue: boolean) {
+		if (this.includeEOTBPGemSocket !== newValue) {
+			this.includeEOTBPGemSocket = newValue;
+			this.includeEOTBPGemSocketChangeEmitter.emit(eventID);
+		}
+	}
+
 	setFreezeItemSlots(eventID: EventID, newValue: boolean) {
 		if (this.freezeItemSlots !== newValue) {
 			this.freezeItemSlots = newValue;
@@ -470,6 +481,7 @@ export class ReforgeOptimizer {
 			placement: 'right-start',
 			onShow: instance => {
 				const useCustomEPValuesInput = new BooleanPicker(null, this.player, {
+					extraCssClasses: ['mb-2'],
 					id: 'reforge-optimizer-enable-custom-ep-weights',
 					label: 'Use custom EP Weights',
 					inline: true,
@@ -482,6 +494,7 @@ export class ReforgeOptimizer {
 				let useSoftCapBreakpointsInput: BooleanPicker<Player<any>> | null = null;
 				if (!!this.softCapsConfig?.length) {
 					useSoftCapBreakpointsInput = new BooleanPicker(null, this.player, {
+						extraCssClasses: ['mb-2'],
 						id: 'reforge-optimizer-enable-soft-cap-breakpoints',
 						label: 'Use soft cap breakpoints',
 						inline: true,
@@ -532,19 +545,38 @@ export class ReforgeOptimizer {
 				});
 
 				const includeGemsInput = new BooleanPicker(null, this.player, {
+					extraCssClasses: ['mb-2'],
 					id: 'reforge-optimizer-include-gems',
 					label: 'Include gems',
-					labelTooltip:
-						'Optimize gems and Reforges simultaneously.',
+					labelTooltip: 'Optimize gems and Reforges simultaneously.',
 					inline: true,
 					changedEvent: () => this.includeGemsChangeEmitter,
 					getValue: () => this.includeGems,
 					setValue: (eventID, _player, newValue) => {
-						this.setIncludeGems(eventID, newValue);
+						TypedEvent.freezeAllAndDo(() => {
+							this.setIncludeGems(eventID, newValue);
+							this.setIncludeEOTBPGemSocket(eventID, this.player.sim.getPhase() >= 2);
+						});
+					},
+				});
+
+				const includeEOTBPGemSocket = new BooleanPicker(null, this.player, {
+					extraCssClasses: ['mb-2'],
+					id: 'reforge-optimizer-include-eotbp-socket',
+					label: 'Include EotBP Socket',
+					labelTooltip: 'Allows the optimiser to also include the "Eye of the Black Prince" socket in the optimization.',
+					inline: true,
+					changedEvent: () =>
+						TypedEvent.onAny([this.includeGemsChangeEmitter, this.includeEOTBPGemSocketChangeEmitter, this.player.gearChangeEmitter]),
+					getValue: () => this.includeEOTBPGemSocket,
+					showWhen: () => this.includeGems && this.player.hasEotBPItemEquipped(),
+					setValue: (eventID, _player, newValue) => {
+						this.setIncludeEOTBPGemSocket(eventID, newValue);
 					},
 				});
 
 				const freezeItemSlotsInput = new BooleanPicker(null, this.player, {
+					extraCssClasses: ['mb-2'],
 					id: 'reforge-optimizer-freeze-item-slots',
 					label: 'Freeze item slots',
 					labelTooltip:
@@ -574,6 +606,7 @@ export class ReforgeOptimizer {
 						{forcedProcInput.rootElem}
 						{this.buildSoftCapBreakpointsLimiter({ useSoftCapBreakpointsInput })}
 						{includeGemsInput.rootElem}
+						{includeEOTBPGemSocket.rootElem}
 						{freezeItemSlotsInput.rootElem}
 						{this.buildFrozenSlotsInputs()}
 						{this.buildEPWeightsToggle({ useCustomEPValuesInput: useCustomEPValuesInput })}
@@ -597,7 +630,7 @@ export class ReforgeOptimizer {
 
 		const tableRef = ref<HTMLTableElement>();
 		const content = (
-			<table ref={tableRef}>
+			<table className="d-none mb-2" ref={tableRef}>
 				{slotsByRow.map(slots => {
 					const rowRef = ref<HTMLTableRowElement>();
 					const row = (
@@ -612,7 +645,6 @@ export class ReforgeOptimizer {
 									setValue: (_eventID, _player, newValue) => {
 										this.frozenItemSlots.set(slot, newValue);
 									},
-									showWhen: () => this.freezeItemSlots,
 								});
 								const column = <td>{picker.rootElem}</td>;
 								return column;
@@ -623,6 +655,10 @@ export class ReforgeOptimizer {
 				})}
 			</table>
 		);
+
+		this.freezeItemSlotsChangeEmitter.on(() => {
+			tableRef.value?.classList[this.freezeItemSlots ? 'remove' : 'add']('d-none');
+		});
 
 		return content;
 	}
@@ -709,7 +745,7 @@ export class ReforgeOptimizer {
 									enableWhen: () => this.isAllowedToOverrideStatCaps || !this.softCapsConfig.some(config => config.unitStat.equals(unitStat)),
 									...sharedInputConfig,
 									...sharedStatInputConfig,
-							  })
+								})
 							: null;
 
 						const tooltipText = this.statTooltips[rootStat];
@@ -742,7 +778,7 @@ export class ReforgeOptimizer {
 						const tooltip = tooltipText
 							? tippy(statTooltipRef.value!, {
 									content: tooltipText,
-							  })
+								})
 							: null;
 
 						useCustomEPValuesInput.addOnDisposeCallback(() => tooltip?.destroy());
@@ -801,7 +837,7 @@ export class ReforgeOptimizer {
 				{savedEpWeights.rootElem}
 				{this.simUI.epWeightsModal && (
 					<button
-						className="btn btn-outline-primary"
+						className="btn btn-outline-primary mt-2"
 						onclick={() => {
 							this.simUI.epWeightsModal?.open();
 							hideAll();
@@ -835,7 +871,10 @@ export class ReforgeOptimizer {
 				</thead>
 				<tbody>
 					{this.softCapsConfig
-						.filter(config => (config.capType === StatCapType.TypeThreshold ||config.capType === StatCapType.TypeSoftCap) && config.breakpoints.length > 1)
+						.filter(
+							config =>
+								(config.capType === StatCapType.TypeThreshold || config.capType === StatCapType.TypeSoftCap) && config.breakpoints.length > 1,
+						)
 						.map(({ breakpoints, unitStat }) => {
 							if (!unitStat.hasRootStat()) return;
 							const rootStat = unitStat.getRootStat();
@@ -862,7 +901,7 @@ export class ReforgeOptimizer {
 										setValue: (eventID, _player, newValue) => {
 											this.player.setBreakpointLimits(eventID, this.player.getBreakpointLimits().withUnitStat(unitStat, newValue));
 										},
-								  })
+									})
 								: null;
 
 							if (!picker?.rootElem) return null;
@@ -941,7 +980,10 @@ export class ReforgeOptimizer {
 		let reforgeCaps = baseStats.computeStatCapsDelta(this.processedStatCaps);
 
 		if (this.player.getSpec() == Spec.SpecGuardianDruid) {
-			reforgeCaps = reforgeCaps.withPseudoStat(PseudoStat.PseudoStatMeleeHastePercent, reforgeCaps.getPseudoStat(PseudoStat.PseudoStatMeleeHastePercent) / 1.5);
+			reforgeCaps = reforgeCaps.withPseudoStat(
+				PseudoStat.PseudoStatMeleeHastePercent,
+				reforgeCaps.getPseudoStat(PseudoStat.PseudoStatMeleeHastePercent) / 1.5,
+			);
 		}
 
 		if (isDevMode()) {
@@ -1034,8 +1076,13 @@ export class ReforgeOptimizer {
 			if (!this.includeGems) {
 				continue;
 			}
+			const uiItem = item.item;
+			const socketColors = item.curSocketColors(this.player.isBlacksmithing());
+			if (!this.includeEOTBPGemSocket && (isShaTouchedWeapon(uiItem) || isThroneOfThunderWeapon(uiItem))) {
+				socketColors.pop();
+			}
 
-			const distributedSocketBonus = new Stats(scaledItem.item.socketBonus).scale(1.0 / (scaledItem.curSocketColors(this.player.isBlacksmithing()).length || 1)).getBuffedStats();
+			const distributedSocketBonus = new Stats(scaledItem.item.socketBonus).scale(1.0 / (socketColors.length || 1)).getBuffedStats();
 
 			// First determine whether the socket bonus should be obviously matched in order to save on brute force computation.
 			let forceSocketBonus: boolean = false;
@@ -1050,15 +1097,15 @@ export class ReforgeOptimizer {
 			}
 
 			const dummyVariables = new Map<string, YalpsCoefficients>();
-			dummyVariables.set("matched", new Map<string, number>());
-			dummyVariables.set("unmatched", new Map<string, number>());
+			dummyVariables.set('matched', new Map<string, number>());
+			dummyVariables.set('unmatched', new Map<string, number>());
 
-			for (const [socketIdx, socketColor] of item.curSocketColors(this.player.isBlacksmithing()).entries()) {
+			for (const socketColor of socketColors.values()) {
 				if (![GemColor.GemColorRed, GemColor.GemColorBlue, GemColor.GemColorYellow, GemColor.GemColorPrismatic].includes(socketColor)) {
 					break;
 				}
 
-				const matchedCoeffs = dummyVariables.get("matched")!;
+				const matchedCoeffs = dummyVariables.get('matched')!;
 				const worstMatchedGemData = gemsToInclude.get(socketColor)!.at(-1)!;
 
 				for (const [key, value] of worstMatchedGemData.coefficients.entries()) {
@@ -1069,7 +1116,7 @@ export class ReforgeOptimizer {
 					matchedCoeffs.set(key, (matchedCoeffs.get(key) || 0) + value);
 				}
 
-				const unmatchedCoeffs = dummyVariables.get("unmatched")!;
+				const unmatchedCoeffs = dummyVariables.get('unmatched')!;
 				const worstUnmatchedGemData = gemsToInclude.get(GemColor.GemColorPrismatic)!.at(-1)!;
 
 				for (const [key, value] of worstUnmatchedGemData.coefficients.entries()) {
@@ -1079,14 +1126,14 @@ export class ReforgeOptimizer {
 
 			const scoredDummyVariables = this.updateReforgeScores(dummyVariables, preCapEPs);
 
-			if (scoredDummyVariables.get("matched")!.get("score")! > scoredDummyVariables.get("unmatched")!.get("score")!) {
+			if (scoredDummyVariables.get('matched')!.get('score')! > scoredDummyVariables.get('unmatched')!.get('score')!) {
 				forceSocketBonus = true;
 			}
 
-			item.curSocketColors(this.player.isBlacksmithing()).forEach((socketColor, socketIdx) => {
+			socketColors.forEach((socketColor, socketIdx) => {
 				let gemColorKeys: GemColor[] = [];
 
-				if ([GemColor.GemColorPrismatic, GemColor.GemColorCogwheel].includes(socketColor)) {
+				if ([GemColor.GemColorPrismatic, GemColor.GemColorCogwheel, GemColor.GemColorShaTouched].includes(socketColor)) {
 					gemColorKeys.push(socketColor);
 				} else if ([GemColor.GemColorRed, GemColor.GemColorBlue, GemColor.GemColorYellow].includes(socketColor)) {
 					gemColorKeys.push(socketColor);
@@ -1111,9 +1158,19 @@ export class ReforgeOptimizer {
 								this.applyReforgeStat(coefficients, stat, value, preCapEPs);
 							}
 						}
+						// Performance optimisation to force socket bonus matching for Jewelcrafting gems.
+						else if (gemData.isJC) {
+							continue;
+						}
 
 						if (gemColorKey == GemColor.GemColorCogwheel) {
 							coefficients.set(`${gemData.gem.id}`, 1);
+						}
+						if (gemColorKey == GemColor.GemColorShaTouched) {
+							coefficients.set('ShaTouchedGem', 1);
+						}
+						if (gemData.isJC) {
+							coefficients.set('JewelcraftingGem', 1);
 						}
 
 						variables.set(variableKey, coefficients);
@@ -1132,14 +1189,30 @@ export class ReforgeOptimizer {
 			return gemsToInclude;
 		}
 
+		const hasJC = this.player.hasProfession(Profession.Jewelcrafting);
 		const epStats = this.simUI.individualConfig.epStats;
 
-		for (const socketColor of [GemColor.GemColorPrismatic, GemColor.GemColorCogwheel, GemColor.GemColorRed, GemColor.GemColorBlue, GemColor.GemColorYellow]) {
+		for (const socketColor of [
+			GemColor.GemColorPrismatic,
+			GemColor.GemColorShaTouched,
+			GemColor.GemColorCogwheel,
+			GemColor.GemColorRed,
+			GemColor.GemColorBlue,
+			GemColor.GemColorYellow,
+		]) {
 			const allGemsOfColor = this.player.getGems(socketColor);
 			const filteredGemDataForColor = new Array<GemData>();
 
 			for (const gem of allGemsOfColor) {
-				if ((gem.requiredProfession > 0) || gem.name.includes("Perfect") || !gemMatchesSocket(gem, socketColor)) {
+				const isJC = gem.requiredProfession == Profession.Jewelcrafting;
+				if (
+					(isJC && !hasJC) ||
+					// Force non-tank specs to use exclusively primary stat JC gems to speed up calculations.
+					// May need to revisit this approximation at higher ilvls.
+					(isJC && !this.isTankSpec && !gemMatchesStats(gem, [Stat.StatStrength, Stat.StatAgility, Stat.StatIntellect])) ||
+					gem.name.includes('Perfect') ||
+					!gemMatchesSocket(gem, socketColor)
+				) {
 					continue;
 				}
 
@@ -1151,7 +1224,7 @@ export class ReforgeOptimizer {
 						continue;
 					}
 
-					if (!epStats.includes(statIdx) && (statIdx != Stat.StatExpertiseRating)) {
+					if (!epStats.includes(statIdx) && statIdx != Stat.StatExpertiseRating) {
 						allStatsValid = false;
 						break;
 					}
@@ -1164,25 +1237,33 @@ export class ReforgeOptimizer {
 				}
 
 				// Create single-entry map to re-use scoring code.
-				const gemVariableMap = new Map<string, YalpsCoefficients>([["temp", coefficients]]);
+				const gemVariableMap = new Map<string, YalpsCoefficients>([['temp', coefficients]]);
 				const scoredGemVariableMap = this.updateReforgeScores(gemVariableMap, preCapEPs);
 				filteredGemDataForColor.push({
-					gem: gem,
-					coefficients: scoredGemVariableMap.get("temp")!,
+					gem,
+					isJC,
+					coefficients: scoredGemVariableMap.get('temp')!,
 				});
 			}
 
 			// Sort from highest to lowest pre-cap EP.
-			filteredGemDataForColor.sort((a, b) => b.coefficients.get("score")! - a.coefficients.get("score")!);
+			filteredGemDataForColor.sort((a, b) => b.coefficients.get('score')! - a.coefficients.get('score')!);
 
 			// Go down the list and include all gems until we find the highest EP option with zero capped stats.
 			const includedGemDataForColor = new Array<GemData>();
+			let foundUncappedJCGem = false;
 
 			for (const gemData of filteredGemDataForColor) {
-				includedGemDataForColor.push(gemData);
+				if (!gemData.isJC || !foundUncappedJCGem) {
+					includedGemDataForColor.push(gemData);
+				}
 
-				if (!ReforgeOptimizer.includesCappedStat(gemData.coefficients, reforgeCaps, reforgeSoftCaps) && (socketColor != GemColor.GemColorCogwheel)) {
-					break;
+				if (!ReforgeOptimizer.includesCappedStat(gemData.coefficients, reforgeCaps, reforgeSoftCaps) && socketColor != GemColor.GemColorCogwheel) {
+					if (gemData.isJC) {
+						foundUncappedJCGem = true;
+					} else {
+						break;
+					}
 				}
 			}
 
@@ -1231,18 +1312,28 @@ export class ReforgeOptimizer {
 
 	buildYalpsConstraints(gear: Gear, baseStats: Stats): YalpsConstraints {
 		const constraints = new Map<string, Constraint>();
+		const allCogwheelGems = this.includeGems ? this.player.getGems(GemColor.GemColorCogwheel) : [];
 
 		for (const slot of gear.getItemSlots()) {
 			constraints.set(ItemSlot[slot], lessEq(1));
 
 			if (this.includeGems) {
-				gear.getEquippedItem(slot)?.curSocketColors(this.player.isBlacksmithing()).forEach((socketColor, socketIdx) => {
-					constraints.set(`${slot}_${socketIdx}`, lessEq(1));
-				})
+				gear.getEquippedItem(slot)
+					?.curSocketColors(this.player.isBlacksmithing())
+					.forEach((_, socketIdx) => {
+						constraints.set(`${slot}_${socketIdx}`, lessEq(1));
+					});
+
+				// Enforce uniqueness of Sha-Touched gems.
+				constraints.set('ShaTouchedGem', lessEq(1));
+
+				// Enforce two Jewelcrafting gems.
+				constraints.set('JewelcraftingGem', lessEq(2));
 
 				// Enforce uniqueness of Cogwheel gems.
-				for (const cogwheelID of [77542, 77541, 77543, 77545, 77547, 77544, 77546, 77540]) {
-					constraints.set(`${cogwheelID}`, lessEq(1));
+				for (const cogwheelGem of allCogwheelGems) {
+					if (!cogwheelGem.unique) continue;
+					constraints.set(`${cogwheelGem.id}`, lessEq(1));
 				}
 			}
 		}
@@ -1299,7 +1390,7 @@ export class ReforgeOptimizer {
 			console.log(solution);
 		}
 
-		if (isNaN(solution.result) || (this.includeGems && (solution.status == "timedout") && (maxIterations < 1000000))) {
+		if (isNaN(solution.result) || (this.includeGems && solution.status == 'timedout' && maxIterations < 1000000)) {
 			if (maxIterations > 1000000) {
 				throw solution;
 			} else {

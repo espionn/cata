@@ -276,14 +276,25 @@ func main() {
 
 	craftedSpellIds := []int32{}
 	for _, item := range db.Items {
+		// 1. Add Belt Buckle gem socket to Waist.
+		// 2. Add Eye Of The Black Prince gem socket to Sha-touched items.
+		if item.Type == proto.ItemType_ItemTypeWaist || slices.Contains(item.GemSockets, proto.GemColor_GemColorShaTouched) {
+			item.GemSockets = append(item.GemSockets, proto.GemColor_GemColorPrismatic)
+		}
+
 		for _, source := range item.Sources {
 			if crafted := source.GetCrafted(); crafted != nil {
 				craftedSpellIds = append(craftedSpellIds, crafted.SpellId)
+			}
+			// Add Eye Of The Black Prince gem socket to Throne of Thunder weapons.
+			if drop := source.GetDrop(); drop != nil && (item.Type == proto.ItemType_ItemTypeWeapon || item.Type == proto.ItemType_ItemTypeRanged) && drop.ZoneId == 6622 {
+				item.GemSockets = append(item.GemSockets, proto.GemColor_GemColorPrismatic)
 			}
 		}
 		if item.Phase < 2 {
 			item.Phase = InferPhase(item)
 		}
+
 	}
 	addSpellIcons(db, craftedSpellIds, icons, iconsMap)
 

@@ -6,8 +6,6 @@ import { SavedTalents } from '../../core/proto/ui';
 import { Stats } from '../../core/proto_utils/stats';
 import FrostApl from './apls/frost.apl.json';
 import FrostAoeApl from './apls/frost_aoe.apl.json';
-import FrostCleaveApl from './apls/frost_cleave.apl.json';
-import P1PreBISRealisticGear from './gear_sets/p1_prebis_realistic.gear.json';
 import P1PreBISGear from './gear_sets/p1_prebis.gear.json';
 import P1PostMSVGear from './gear_sets/p1_post_msv.gear.json';
 import P1PostHOFGear from './gear_sets/p1_post_hof.gear.json';
@@ -17,7 +15,6 @@ import P1BISGear from './gear_sets/p1_bis.gear.json';
 // keep them in a separate file.
 
 export const P1_PREBIS = PresetUtils.makePresetGear('P1 - Pre-BIS', P1PreBISGear);
-export const P1_PREBIS_REALISTIC = PresetUtils.makePresetGear('P1 - Pre-BIS (Realistic)', P1PreBISRealisticGear);
 export const P1_POST_MSV = PresetUtils.makePresetGear('P1 - Post-MSV', P1PostMSVGear);
 export const P1_POST_HOF = PresetUtils.makePresetGear('P1 - Post-HoF', P1PostHOFGear);
 export const P1_BIS = PresetUtils.makePresetGear('P1 - BIS', P1BISGear);
@@ -27,15 +24,27 @@ export const ROTATION_PRESET_AOE = PresetUtils.makePresetAPLRotation('AOE', Fros
 // export const ROTATION_PRESET_CLEAVE = PresetUtils.makePresetAPLRotation('Cleave', FrostCleaveApl);
 
 // Preset options for EP weights
-export const P1_EP_PRESET = PresetUtils.makePresetEpWeights(
-	'P1',
+export const P1_BIS_EP_PRESET = PresetUtils.makePresetEpWeights(
+	'Item Level > 500',
 	Stats.fromMap({
-		[Stat.StatIntellect]: 1.00,
-		[Stat.StatSpellPower]: 0.80,
+		[Stat.StatIntellect]: 1.0,
+		[Stat.StatSpellPower]: 0.98,
 		[Stat.StatHitRating]: 1.15,
-		[Stat.StatCritRating]: 0.47,
-		[Stat.StatHasteRating]: 0.45,
-		[Stat.StatMasteryRating]: 0.39,
+		[Stat.StatCritRating]: 0.49,
+		[Stat.StatHasteRating]: 0.51,
+		[Stat.StatMasteryRating]: 0.44,
+	}),
+);
+
+export const P1_PREBIS_EP_PRESET = PresetUtils.makePresetEpWeights(
+	'Item Level < 500',
+	Stats.fromMap({
+		[Stat.StatIntellect]: 1.25,
+		[Stat.StatSpellPower]: 1.0,
+		[Stat.StatHitRating]: 1.55,
+		[Stat.StatCritRating]: 0.55,
+		[Stat.StatHasteRating]: 0.62,
+		[Stat.StatMasteryRating]: 0.5,
 	}),
 );
 
@@ -67,7 +76,7 @@ export const DefaultConsumables = ConsumesSpec.create({
 export const FrostTalentsCleave = {
 	name: 'Cleave',
 	data: SavedTalents.create({
-		talentsString: '311112',
+		talentsString: '311122',
 		glyphs: Glyphs.create({
 			major1: MageMajorGlyph.GlyphOfSplittingIce,
 			major2: MageMajorGlyph.GlyphOfIcyVeins,

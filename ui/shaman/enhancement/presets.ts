@@ -68,6 +68,7 @@ export const DefaultOptions = EnhancementShamanOptions.create({
 	classOptions: {
 		shield: ShamanShield.LightningShield,
 		imbueMh: ShamanImbue.WindfuryWeapon,
+		imbueMhSwap: ShamanImbue.WindfuryWeapon,
 		feleAutocast: FeleAutocastSettings.create({
 			autocastFireblast: true,
 			autocastFirenova: true,
@@ -76,6 +77,7 @@ export const DefaultOptions = EnhancementShamanOptions.create({
 		}),
 	},
 	imbueOh: ShamanImbue.FlametongueWeapon,
+	imbueOhSwap: ShamanImbue.FlametongueWeapon,
 	syncType: ShamanSyncType.Auto,
 });
 
