@@ -579,8 +579,8 @@ func init() {
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 				Name:    label,
 				Harmful: true,
-				DPM: character.NewRPPMProcManager(itemID, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
-					PPM: 0.57999998331,
+				DPM: character.NewRPPMProcManager(itemID, false, core.ProcMaskMeleeOrMeleeProc|core.ProcMaskRangedOrRangedProc, core.RPPMConfig{
+					PPM: 1.10000002384,
 				}.WithApproximateIlvlMod(1.0, 528)),
 				ICD:      time.Second * 10,
 				Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
