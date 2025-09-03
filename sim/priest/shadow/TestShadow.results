@@ -1351,30 +1351,6 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestShadow-AllItems-Kri'tak,ImperialScepteroftheSwarm-86227"
- value: {
-  dps: 88975.11935
-  tps: 83792.33071
-  hps: 1666.531
- }
-}
-dps_results: {
- key: "TestShadow-AllItems-Kri'tak,ImperialScepteroftheSwarm-86865"
- value: {
-  dps: 88975.11935
-  tps: 83792.33071
-  hps: 1666.531
- }
-}
-dps_results: {
- key: "TestShadow-AllItems-Kri'tak,ImperialScepteroftheSwarm-86990"
- value: {
-  dps: 88975.11935
-  tps: 83792.33071
-  hps: 1666.531
- }
-}
-dps_results: {
  key: "TestShadow-AllItems-Lao-Chin'sLiquidCourage-89079"
  value: {
   dps: 86035.59291
