@@ -78,7 +78,12 @@ export interface PresetEncounter extends PresetBase {
 }
 export interface PresetEncounterOptions extends PresetOptionsBase {}
 
-type PresetPlayerOptions = Partial<Pick<PlayerProto, 'distanceFromTarget' | 'profession1' | 'profession2' | 'enableItemSwap' | 'itemSwap'>>;
+type PresetPlayerOptions = Partial<
+	Pick<
+		PlayerProto,
+		'reactionTimeMs' | 'channelClipDelayMs' | 'inFrontOfTarget' | 'distanceFromTarget' | 'profession1' | 'profession2' | 'enableItemSwap' | 'itemSwap'
+	>
+>;
 
 export interface PresetSettings extends PresetBase {
 	race?: Race;

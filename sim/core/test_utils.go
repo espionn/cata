@@ -323,7 +323,9 @@ func GetTestBuildFromJSON(class proto.Class, dir string, file string, itemFilter
 			Label:    file,
 			ItemSwap: simSettings.Player.ItemSwap,
 		},
-		StartingDistance: simSettings.Player.DistanceFromTarget,
+		StartingDistance:   simSettings.Player.DistanceFromTarget,
+		ReactionTimeMs:     simSettings.Player.ReactionTimeMs,
+		ChannelClipDelayMs: simSettings.Player.ChannelClipDelayMs,
 
 		Consumables:     simSettings.Player.Consumables,
 		IndividualBuffs: simSettings.Player.Buffs,
