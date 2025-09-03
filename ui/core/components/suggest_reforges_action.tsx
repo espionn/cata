@@ -106,7 +106,7 @@ class RelativeStatCap {
 	]);
 
 	static canEnable(player: Player<any>): boolean {
-		const variableStatTrinkets: number[] = [69150, 68994, 69113, 68972];
+		const variableStatTrinkets: number[] = [95802, 94532, 96546, 96174, 96918];
 		return player.getGear().hasTrinketFromOptions(variableStatTrinkets);
 	}
 
@@ -507,8 +507,9 @@ export class ReforgeOptimizer {
 				}
 
 				const forcedProcInput = new EnumPicker(null, this.player, {
+					extraCssClasses: ["mb-2"],
 					id: 'reforge-optimizer-force-stat-proc',
-					label: 'Force Matrix/Apparatus proc',
+					label: 'RoRo proc',
 					values: [
 						{ name: 'Any', value: -1 },
 						...[...RelativeStatCap.relevantStats].map(stat => {
