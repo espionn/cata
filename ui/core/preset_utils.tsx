@@ -262,6 +262,9 @@ const makePresetSettingsHelper = (name: string, spec: Spec, simSettings: Individ
 		}
 
 		settings.playerOptions = {
+			reactionTimeMs: simSettings.player.reactionTimeMs,
+			channelClipDelayMs: simSettings.player.channelClipDelayMs,
+			inFrontOfTarget: simSettings.player.inFrontOfTarget,
 			distanceFromTarget: simSettings.player.distanceFromTarget,
 			enableItemSwap: simSettings.player.enableItemSwap,
 		};
