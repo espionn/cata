@@ -10,6 +10,8 @@ import PreraidGear from './gear_sets/preraid.gear.json';
 export const PRERAID_PRESET = PresetUtils.makePresetGear('Pre-MSV BiS', PreraidGear);
 import MsvGear from './gear_sets/msv.gear.json';
 export const MSV_PRESET = PresetUtils.makePresetGear('Pre-HoF BiS', MsvGear);
+import HofGear from './gear_sets/hof.gear.json';
+export const HOF_PRESET = PresetUtils.makePresetGear('Pre-ToES BiS', HofGear);
 import P1Gear from './gear_sets/p1.gear.json';
 export const P1_PRESET = PresetUtils.makePresetGear('P1/P2', P1Gear);
 import P2Gear from './gear_sets/p2.gear.json';
@@ -31,12 +33,15 @@ import { Stats } from '../../core/proto_utils/stats';
 import DefaultApl from './apls/default.apl.json';
 import OffensiveHotwApl from './apls/offensiveHotw.apl.json';
 import EmpressApl from './apls/empress.apl.json';
-import DefaultBuild from './builds/empress_default.build.json';
+import ShaApl from './apls/sha.apl.json';
+import DefaultBuild from './builds/sha_default.build.json';
 import GarajalBuild from './builds/garajal_encounter_only.build.json';
 import EmpressBuild from './builds/empress_encounter_only.build.json';
+import ShaBuild from './builds/sha_encounter_only.build.json';
 export const ROTATION_DEFAULT = PresetUtils.makePresetAPLRotation("Gara'jal Default", DefaultApl);
 export const ROTATION_HOTW = PresetUtils.makePresetAPLRotation("Gara'jal Offensive HotW", OffensiveHotwApl);
 export const ROTATION_EMPRESS = PresetUtils.makePresetAPLRotation("Empress Adds", EmpressApl);
+export const ROTATION_SHA = PresetUtils.makePresetAPLRotation("Sha Hybrid HotW", ShaApl);
 
 //export const ROTATION_PRESET_SIMPLE = PresetUtils.makePresetSimpleRotation('Simple Default', Spec.SpecGuardianDruid, DefaultSimpleRotation);
 
@@ -45,24 +50,24 @@ export const SURVIVAL_EP_PRESET = PresetUtils.makePresetEpWeights(
 	'Survival',
 	Stats.fromMap(
 		{
-			[Stat.StatHealth]: 0.06,
-			[Stat.StatStamina]: 1.44,
+			[Stat.StatHealth]: 0.11,
+			[Stat.StatStamina]: 2.55,
 			[Stat.StatAgility]: 1.0,
-			[Stat.StatArmor]: 2.62,
-			[Stat.StatBonusArmor]: 0.60,
-			[Stat.StatDodgeRating]: 0.73,
-			[Stat.StatMasteryRating]: 1.15,
-			[Stat.StatStrength]: 0.01,
-			[Stat.StatAttackPower]: 0.01,
-			[Stat.StatHitRating]: 1.12,
-			[Stat.StatExpertiseRating]: 1.11,
-			[Stat.StatCritRating]: 0.62,
-			[Stat.StatHasteRating]: 0.37,
+			[Stat.StatArmor]: 4.48,
+			[Stat.StatBonusArmor]: 1.02,
+			[Stat.StatDodgeRating]: 0.70,
+			[Stat.StatMasteryRating]: 1.89,
+			[Stat.StatStrength]: 0.03,
+			[Stat.StatAttackPower]: 0.03,
+			[Stat.StatHitRating]: 1.18,
+			[Stat.StatExpertiseRating]: 1.16,
+			[Stat.StatCritRating]: 0.72,
+			[Stat.StatHasteRating]: 0.80,
 		},
 		{
 			[PseudoStat.PseudoStatMainHandDps]: 0.0,
-			[PseudoStat.PseudoStatPhysicalHitPercent]: 1.11 * Mechanics.PHYSICAL_HIT_RATING_PER_HIT_PERCENT,
-			[PseudoStat.PseudoStatSpellHitPercent]: 0.01 * Mechanics.SPELL_HIT_RATING_PER_HIT_PERCENT,
+			[PseudoStat.PseudoStatPhysicalHitPercent]: 1.16 * Mechanics.PHYSICAL_HIT_RATING_PER_HIT_PERCENT,
+			[PseudoStat.PseudoStatSpellHitPercent]: 0.02 * Mechanics.SPELL_HIT_RATING_PER_HIT_PERCENT,
 		},
 	),
 );
@@ -71,23 +76,23 @@ export const BALANCED_EP_PRESET = PresetUtils.makePresetEpWeights(
 	'Balanced',
 	Stats.fromMap(
 		{
-			[Stat.StatHealth]: 0.07,
-			[Stat.StatStamina]: 1.56,
+			[Stat.StatHealth]: 0.04,
+			[Stat.StatStamina]: 0.86,
 			[Stat.StatAgility]: 1.0,
-			[Stat.StatArmor]: 1.58,
-			[Stat.StatBonusArmor]: 0.36,
-			[Stat.StatDodgeRating]: 0.44,
-			[Stat.StatMasteryRating]: 0.69,
-			[Stat.StatStrength]: 0.06,
-			[Stat.StatAttackPower]: 0.06,
-			[Stat.StatHitRating]: 1.56,
-			[Stat.StatExpertiseRating]: 1.55,
-			[Stat.StatCritRating]: 1.19,
-			[Stat.StatHasteRating]: 0.43,
+			[Stat.StatArmor]: 1.51,
+			[Stat.StatBonusArmor]: 0.34,
+			[Stat.StatDodgeRating]: 0.24,
+			[Stat.StatMasteryRating]: 0.64,
+			[Stat.StatStrength]: 0.17,
+			[Stat.StatAttackPower]: 0.16,
+			[Stat.StatHitRating]: 0.86,
+			[Stat.StatExpertiseRating]: 0.85,
+			[Stat.StatCritRating]: 0.65,
+			[Stat.StatHasteRating]: 0.56,
 		},
 		{
-			[PseudoStat.PseudoStatMainHandDps]: 0.21,
-			[PseudoStat.PseudoStatPhysicalHitPercent]: 1.55 * Mechanics.PHYSICAL_HIT_RATING_PER_HIT_PERCENT,
+			[PseudoStat.PseudoStatMainHandDps]: 0.70,
+			[PseudoStat.PseudoStatPhysicalHitPercent]: 0.85 * Mechanics.PHYSICAL_HIT_RATING_PER_HIT_PERCENT,
 			[PseudoStat.PseudoStatSpellHitPercent]: 0.01 * Mechanics.SPELL_HIT_RATING_PER_HIT_PERCENT,
 		},
 	),
@@ -130,8 +135,10 @@ export const OtherDefaults = {
 	iterationCount: 50000,
 	profession1: Profession.Engineering,
 	profession2: Profession.ProfessionUnknown,
+	reactionTime: 750,
 };
 
 export const PRESET_BUILD_DEFAULT = PresetUtils.makePresetBuildFromJSON("Default", Spec.SpecGuardianDruid, DefaultBuild);
 export const PRESET_BUILD_GARAJAL = PresetUtils.makePresetBuildFromJSON("Gara'jal", Spec.SpecGuardianDruid, GarajalBuild);
 export const PRESET_BUILD_EMPRESS = PresetUtils.makePresetBuildFromJSON("Empress P2 Adds", Spec.SpecGuardianDruid, EmpressBuild);
+export const PRESET_BUILD_SHA = PresetUtils.makePresetBuildFromJSON("Sha of Fear P2", Spec.SpecGuardianDruid, ShaBuild);
