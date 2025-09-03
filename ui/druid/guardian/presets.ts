@@ -135,7 +135,6 @@ export const OtherDefaults = {
 	iterationCount: 50000,
 	profession1: Profession.Engineering,
 	profession2: Profession.ProfessionUnknown,
-	reactionTime: 750,
 };
 
 export const PRESET_BUILD_DEFAULT = PresetUtils.makePresetBuildFromJSON("Default", Spec.SpecGuardianDruid, DefaultBuild);
