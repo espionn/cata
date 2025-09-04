@@ -136,7 +136,9 @@ func (shaman *Shaman) ApplyEnhancementTalents() {
 			return shaman.SelfBuffs.Shield == proto.ShamanShield_LightningShield
 		},
 		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-			shaman.LightningShieldDamage.Cast(sim, result.Target)
+			if shaman.LightningShieldDamage != nil {
+				shaman.LightningShieldDamage.Cast(sim, result.Target)
+			}
 		},
 	})
 
