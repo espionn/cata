@@ -89,8 +89,8 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 138767.67785
-  tps: 99525.05896
+  dps: 144661.3512
+  tps: 105352.9545
   hps: 1930.27674
  }
 }
