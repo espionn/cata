@@ -512,7 +512,6 @@ func init() {
 				character.Class == proto.Class_ClassPriest,
 				character.Spec == proto.Spec_SpecBalanceDruid,
 				character.Spec == proto.Spec_SpecElementalShaman,
-				character.Spec == proto.Spec_SpecEnhancementShaman,
 				character.Spec == proto.Spec_SpecMistweaverMonk,
 				character.Spec == proto.Spec_SpecHolyPaladin:
 				// These are valid
