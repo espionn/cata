@@ -287,7 +287,7 @@ func (druid *Druid) RegisterMoonkinFormAura() {
 		druid.NewDynamicMultiplyStat(stats.Armor, 0.6),
 	).AttachSpellMod(core.SpellModConfig{
 		Kind:       core.SpellMod_DamageDone_Pct,
-		FloatValue: 0.25,
+		FloatValue: 0.35,
 		School:     core.SpellSchoolArcane | core.SpellSchoolNature,
 	})
 }
