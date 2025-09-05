@@ -1967,6 +1967,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestShadow-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 85047.67601
+  tps: 80117.02295
+  hps: 1657.295
+ }
+}
+dps_results: {
  key: "TestShadow-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 85006.80319

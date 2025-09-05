@@ -481,6 +481,15 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBlood-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 115578.84369
+  tps: 706952.07014
+  dtps: 95892.49195
+  hps: 81443.93427
+ }
+}
+dps_results: {
  key: "TestBlood-AllItems-RuneofSpellbreaking-3595"
  value: {
   dps: 111305.08638
@@ -573,10 +582,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 119266.02584
-  tps: 728797.98991
-  dtps: 95976.95607
-  hps: 82043.32625
+  dps: 115390.67107
+  tps: 705721.99482
+  dtps: 95892.49195
+  hps: 81443.93427
  }
 }
 dps_results: {

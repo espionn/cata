@@ -1967,6 +1967,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestDestruction-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 91277.86158
+  tps: 67291.23551
+  hps: 804.0729
+ }
+}
+dps_results: {
  key: "TestDestruction-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 91277.86158

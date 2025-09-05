@@ -2254,6 +2254,15 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBrewmaster-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 121043.24329
+  tps: 680530.84288
+  dtps: 20150.31049
+  hps: 26959.29448
+ }
+}
+dps_results: {
  key: "TestBrewmaster-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 114719.05203
@@ -2877,10 +2886,10 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 116546.68186
-  tps: 654334.09119
-  dtps: 20630.70909
-  hps: 26863.21135
+  dps: 114719.05203
+  tps: 644539.19606
+  dtps: 20862.49801
+  hps: 26490.83465
  }
 }
 dps_results: {

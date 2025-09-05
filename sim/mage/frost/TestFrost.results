@@ -346,6 +346,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFrost-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 139583.65104
+  tps: 95379.72316
+ }
+}
+dps_results: {
  key: "TestFrost-AllItems-SinisterPrimalDiamond"
  value: {
   dps: 144353.53774

@@ -1967,6 +1967,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestAffliction-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 84047.64258
+  tps: 57430.58629
+  hps: 1577.59724
+ }
+}
+dps_results: {
  key: "TestAffliction-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 83980.82838

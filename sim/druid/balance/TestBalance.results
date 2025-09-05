@@ -399,6 +399,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBalance-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 86810.35389
+  tps: 88181.04926
+  hps: 13503.68871
+ }
+}
+dps_results: {
  key: "TestBalance-AllItems-SinisterPrimalDiamond"
  value: {
   dps: 89608.08565

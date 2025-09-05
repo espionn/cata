@@ -414,6 +414,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFrostMasterfrost-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 149148.96608
+  tps: 137472.9038
+  hps: 1543.45501
+ }
+}
+dps_results: {
  key: "TestFrostMasterfrost-AllItems-RuneofSpellbreaking-3595"
  value: {
   dps: 141263.24634
@@ -490,9 +498,9 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 153025.86284
-  tps: 141071.09035
-  hps: 1636.0046
+  dps: 149006.09536
+  tps: 137346.68683
+  hps: 1543.45501
  }
 }
 dps_results: {

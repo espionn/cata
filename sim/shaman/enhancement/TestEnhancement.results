@@ -1767,6 +1767,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestEnhancement-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 136766.60924
+  tps: 116089.33223
+ }
+}
+dps_results: {
  key: "TestEnhancement-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 124018.5735

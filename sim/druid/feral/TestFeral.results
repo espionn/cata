@@ -1999,6 +1999,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFeral-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 110306.75018
+  tps: 187206.10895
+  hps: 8516.77149
+ }
+}
+dps_results: {
  key: "TestFeral-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 97360.6921
@@ -2553,9 +2561,9 @@ dps_results: {
 dps_results: {
  key: "TestFeral-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 101534.66385
-  tps: 169769.16352
-  hps: 9339.25074
+  dps: 97416.7835
+  tps: 158314.56757
+  hps: 8944.81347
  }
 }
 dps_results: {

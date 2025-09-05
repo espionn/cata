@@ -353,6 +353,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestArms-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 146748.21421
+  tps: 98742.95499
+ }
+}
+dps_results: {
  key: "TestArms-AllItems-SinisterPrimalDiamond"
  value: {
   dps: 147359.22853
@@ -383,8 +390,8 @@ dps_results: {
 dps_results: {
  key: "TestArms-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 151368.65871
-  tps: 100968.97841
+  dps: 146778.49524
+  tps: 98693.05639
  }
 }
 dps_results: {
