@@ -551,6 +551,20 @@ func init() {
 
 		core.NewItemEffect(itemID, func(agent core.Agent, state proto.ItemLevelState) {
 			character := agent.GetCharacter()
+			// @TODO: Old posts say that only Agility users can proc this effect
+			switch {
+			case character.Class == proto.Class_ClassRogue,
+				character.Class == proto.Class_ClassHunter,
+				character.Spec == proto.Spec_SpecFeralDruid,
+				character.Spec == proto.Spec_SpecGuardianDruid,
+				character.Spec == proto.Spec_SpecEnhancementShaman,
+				character.Spec == proto.Spec_SpecWindwalkerMonk,
+				character.Spec == proto.Spec_SpecBrewmasterMonk:
+				// Don't do anything
+			default:
+				return
+			}
+
 			duration := time.Second * 10
 			masteryRaidBuffs := character.GetExclusiveEffectCategory("MasteryRatingBuff")
 			buffStats := stats.Stats{stats.CritRating: 0, stats.HasteRating: 0, stats.MasteryRating: 0}
@@ -582,9 +596,13 @@ func init() {
 				DPM: character.NewRPPMProcManager(itemID, false, core.ProcMaskMeleeOrMeleeProc|core.ProcMaskRangedOrRangedProc, core.RPPMConfig{
 					PPM: 1.10000002384,
 				}.WithApproximateIlvlMod(1.0, 528)),
-				ICD:      time.Second * 10,
+				ICD:      duration,
 				Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
 				Handler: func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
+					mastery.Deactivate(sim)
+					crit.Deactivate(sim)
+					haste.Deactivate(sim)
+
 					hasMasteryRaidBuff := masteryRaidBuffs.GetActiveAura() != nil && masteryRaidBuffs.GetActiveAura().IsActive()
 					critValue := character.GetStat(stats.CritRating)
 					hasteValue := character.GetStat(stats.HasteRating)
@@ -608,27 +626,24 @@ func init() {
 					switch highestStat {
 					case stats.CritRating:
 						buffStats = stats.Stats{
-							stats.CritRating:    critValue * 2,
+							stats.CritRating:    (hasteValue + masteryValue) * 2,
 							stats.HasteRating:   -hasteValue,
 							stats.MasteryRating: -masteryValue,
 						}
 					case stats.HasteRating:
 						buffStats = stats.Stats{
 							stats.CritRating:    -critValue,
-							stats.HasteRating:   hasteValue * 2,
+							stats.HasteRating:   (critValue + masteryValue) * 2,
 							stats.MasteryRating: -masteryValue,
 						}
 					case stats.MasteryRating:
 						buffStats = stats.Stats{
 							stats.CritRating:    -critValue,
 							stats.HasteRating:   -hasteValue,
-							stats.MasteryRating: masteryValue * 2,
+							stats.MasteryRating: (critValue + hasteValue) * 2,
 						}
 					}
 
-					mastery.Deactivate(sim)
-					crit.Deactivate(sim)
-					haste.Deactivate(sim)
 					switch highestStat {
 					case stats.CritRating:
 						crit.Activate(sim)
