@@ -105,4 +105,5 @@ func init() {
 
 	// Sinister Primal Diamond
 	// Courageous Primal Diamond
+	// Indomitable Primal Diamond
 }
