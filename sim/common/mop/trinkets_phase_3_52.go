@@ -505,6 +505,20 @@ func init() {
 
 		core.NewItemEffect(itemID, func(agent core.Agent, state proto.ItemLevelState) {
 			character := agent.GetCharacter()
+			// @TODO: Old posts say that only Intellect users can proc this effect
+			switch {
+			case character.Class == proto.Class_ClassWarlock,
+				character.Class == proto.Class_ClassMage,
+				character.Class == proto.Class_ClassPriest,
+				character.Spec == proto.Spec_SpecBalanceDruid,
+				character.Spec == proto.Spec_SpecElementalShaman,
+				character.Spec == proto.Spec_SpecEnhancementShaman,
+				character.Spec == proto.Spec_SpecMistweaverMonk,
+				character.Spec == proto.Spec_SpecHolyPaladin:
+				// These are valid
+			default:
+				return
+			}
 
 			statBuffAura := character.NewTemporaryStatsAura(
 				fmt.Sprintf("%s %s", label, versionLabel),
@@ -560,7 +574,7 @@ func init() {
 				character.Spec == proto.Spec_SpecEnhancementShaman,
 				character.Spec == proto.Spec_SpecWindwalkerMonk,
 				character.Spec == proto.Spec_SpecBrewmasterMonk:
-				// Don't do anything
+				// These are valid
 			default:
 				return
 			}
