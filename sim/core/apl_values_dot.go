@@ -229,3 +229,91 @@ func (value *APLValueDotPercentIncrease) GetFloat(sim *Simulation) float64 {
 func (value *APLValueDotPercentIncrease) String() string {
 	return fmt.Sprintf("Dot Percent Increase (%s)", value.spell.ActionID)
 }
+
+type APLValueDotCritPercentIncrease struct {
+	DefaultAPLValueImpl
+	spell  *Spell
+	target *Unit
+}
+
+func (rot *APLRotation) newValueDotCritPercentIncrease(config *proto.APLValueDotPercentIncrease, _ *proto.UUID) APLValue {
+	spell := rot.GetAPLSpell(config.SpellId)
+	if spell == nil || spell.expectedTickDamageInternal == nil {
+		return nil
+	}
+
+	target := rot.GetTargetUnit(config.TargetUnit).Get()
+	return &APLValueDotCritPercentIncrease{
+		spell:  spell,
+		target: target,
+	}
+}
+
+func (value *APLValueDotCritPercentIncrease) Type() proto.APLValueType {
+	return proto.APLValueType_ValueTypeFloat
+}
+
+func (value *APLValueDotCritPercentIncrease) GetFloat(sim *Simulation) float64 {
+	currentCritChance := value.getCritChance(true)
+	if currentCritChance == 0 {
+		return 1
+	}
+	val := value.getCritChance(false)/currentCritChance - 1
+	return val
+}
+
+func (value *APLValueDotCritPercentIncrease) getCritChance(useSnapshot bool) float64 {
+	dot := value.spell.Dot(value.target)
+	if useSnapshot {
+		return dot.SnapshotCritChance
+	}
+	return dot.Spell.SpellCritChance(value.target)
+}
+
+func (value *APLValueDotCritPercentIncrease) String() string {
+	return fmt.Sprintf("Dot Crit Chance Percent Increase (%s)", value.spell.ActionID)
+}
+
+type APLValueDotTickRatePercentIncrease struct {
+	DefaultAPLValueImpl
+	spell  *Spell
+	target *Unit
+}
+
+func (rot *APLRotation) newValueDotTickRatePercentIncrease(config *proto.APLValueDotPercentIncrease, _ *proto.UUID) APLValue {
+	spell := rot.GetAPLSpell(config.SpellId)
+	if spell == nil || spell.expectedTickDamageInternal == nil {
+		return nil
+	}
+
+	target := rot.GetTargetUnit(config.TargetUnit).Get()
+	return &APLValueDotTickRatePercentIncrease{
+		spell:  spell,
+		target: target,
+	}
+}
+
+func (value *APLValueDotTickRatePercentIncrease) Type() proto.APLValueType {
+	return proto.APLValueType_ValueTypeFloat
+}
+
+func (value *APLValueDotTickRatePercentIncrease) GetFloat(sim *Simulation) float64 {
+	currentTickrate := value.getTickRate(true)
+	if currentTickrate == 0 {
+		return 1
+	}
+	val := value.getTickRate(false)/currentTickrate - 1
+	return val
+}
+
+func (value *APLValueDotTickRatePercentIncrease) getTickRate(useSnapshot bool) float64 {
+	dot := value.spell.Dot(value.target)
+	if useSnapshot {
+		return dot.TickPeriod().Seconds()
+	}
+	return dot.CalcTickPeriod().Round(time.Millisecond).Seconds()
+}
+
+func (value *APLValueDotTickRatePercentIncrease) String() string {
+	return fmt.Sprintf("Dot Tick Rate Percent Increase (%s)", value.spell.ActionID)
+}
