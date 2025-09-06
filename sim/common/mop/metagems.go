@@ -39,12 +39,14 @@ func init() {
 			ProcMask:    core.ProcMaskEmpty,
 			Flags:       core.SpellFlagNoOnCastComplete,
 
+			MaxRange: 45,
+
 			DamageMultiplier: 1,
 			CritMultiplier:   character.DefaultCritMultiplier(),
 			ThreatMultiplier: 1,
 
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				baseDamage := character.CalcAndRollDamageRange(sim, 0.13300000131, 0.15000000596)
+				baseDamage := sim.Roll(core.CalcScalingSpellEffectVarianceMinMax(proto.Class_ClassUnknown, 0.13300000131, 0.15000000596))
 				apDamage := 0.75 * core.Ternary(spell.IsRanged(), spell.RangedAttackPower(), spell.MeleeAttackPower())
 
 				outcome := core.Ternary(spell.IsRanged(), spell.OutcomeRangedHitAndCritNoBlock, spell.OutcomeMeleeSpecialNoBlockDodgeParry)
@@ -67,7 +69,7 @@ func init() {
 
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 			Name:     "Lightning Strike Charges Trigger",
-			ActionID: core.ActionID{ItemID: 137595},
+			ActionID: core.ActionID{SpellID: 137595},
 			Harmful:  true,
 			Callback: core.CallbackOnSpellHitDealt,
 			Outcome:  core.OutcomeLanded,
@@ -104,6 +106,75 @@ func init() {
 	})
 
 	// Sinister Primal Diamond
+	// Chance on dealing spell damage to gain 30% spell haste for 10 sec.
+	// (Approximately 1.35 procs per minute)
+	core.NewItemEffect(95347, func(agent core.Agent, _ proto.ItemLevelState) {
+		character := agent.GetCharacter()
+		hasteMulti := 1.3
+
+		aura := character.GetOrRegisterAura(core.Aura{
+			Label:    "Tempus Repit",
+			ActionID: core.ActionID{SpellID: 137590},
+			Duration: time.Second * 10,
+		}).
+			AttachMultiplyCastSpeed(hasteMulti)
+
+		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
+			Name:     "Haste Trigger",
+			ActionID: core.ActionID{SpellID: 137592},
+			Harmful:  true,
+			Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
+			Outcome:  core.OutcomeLanded,
+			ICD:      time.Second * 3,
+			DPM: character.NewRPPMProcManager(95347, false, true, core.ProcMaskSpellOrSpellProc, core.RPPMConfig{
+				PPM: 1.35000002384,
+			}.
+				// https://wago.tools/db2/SpellProcsPerMinuteMod?build=5.5.0.60548&filter%5BSpellProcsPerMinuteID%5D=55&filter%5BType%5D=4&page=1&sort%5BParam%5D=asc
+				WithSpecMod(-0.23899999261, proto.Spec_SpecArcaneMage).
+				WithSpecMod(-0.29499998689, proto.Spec_SpecFireMage).
+				WithSpecMod(0.38699999452, proto.Spec_SpecFrostMage).
+				WithSpecMod(0.87199997902, proto.Spec_SpecBalanceDruid).
+				WithSpecMod(-0.06700000167, proto.Spec_SpecShadowPriest).
+				WithSpecMod(0.89099997282, proto.Spec_SpecElementalShaman).
+				WithSpecMod(-0.375, proto.Spec_SpecAfflictionWarlock).
+				WithSpecMod(-0.40200001001, proto.Spec_SpecDemonologyWarlock).
+				WithSpecMod(-0.49099999666, proto.Spec_SpecDestructionWarlock),
+			),
+			Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+				aura.Activate(sim)
+			},
+		})
+	})
+
 	// Courageous Primal Diamond
+	// @TODO: Healing gem
+
 	// Indomitable Primal Diamond
+	// Chance on being hit by a melee attack to gain a 20% reduction to all damage taken for 15 sec.
+	// (Approximately 2.57 procs per minute)
+	core.NewItemEffect(95344, func(agent core.Agent, _ proto.ItemLevelState) {
+		character := agent.GetCharacter()
+
+		aura := character.GetOrRegisterAura(core.Aura{
+			Label:    "Fortitude",
+			ActionID: core.ActionID{SpellID: 137593},
+			Duration: time.Second * 15,
+		}).
+			AttachMultiplicativePseudoStatBuff(&character.PseudoStats.DamageTakenMultiplier, 0.8)
+
+		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
+			Name:     "Fortitude Trigger",
+			ActionID: core.ActionID{SpellID: 137594},
+			Harmful:  true,
+			Callback: core.CallbackOnSpellHitTaken,
+			Outcome:  core.OutcomeLanded,
+			ICD:      time.Second * 3,
+			DPM: character.NewRPPMProcManager(95344, false, true, core.ProcMaskMeleeOrMeleeProc, core.RPPMConfig{
+				PPM: 2.56999993324,
+			}),
+			Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+				aura.Activate(sim)
+			},
+		})
+	})
 }
