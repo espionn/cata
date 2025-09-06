@@ -261,14 +261,14 @@ export const difficultyNames: Map<DungeonDifficulty, string> = new Map([
 	[DungeonDifficulty.DifficultyUnknown, 'Unknown'],
 	[DungeonDifficulty.DifficultyNormal, 'N'],
 	[DungeonDifficulty.DifficultyHeroic, 'H'],
-	[DungeonDifficulty.DifficultyCelestial, 'Celestial'],
+	[DungeonDifficulty.DifficultyCelestial, 'CEL'],
 	[DungeonDifficulty.DifficultyRaid10, '10N'],
 	[DungeonDifficulty.DifficultyRaid10H, '10H'],
 	[DungeonDifficulty.DifficultyRaid25RF, 'RF'],
 	[DungeonDifficulty.DifficultyRaid25, 'RN'],
 	[DungeonDifficulty.DifficultyRaid25H, 'RH'],
-	[DungeonDifficulty.DifficultyRaidMythic, 'Mythic'],
-	[DungeonDifficulty.DifficultyRaidFlex, 'Flex'],
+	[DungeonDifficulty.DifficultyRaidMythic, 'RM'],
+	[DungeonDifficulty.DifficultyRaidFlex, 'RFL'],
 ]);
 
 export const REP_LEVEL_NAMES: Record<RepLevel, string> = {
