@@ -195,8 +195,8 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 113876.69464
-  tps: 618926.28968
+  dps: 113882.9506
+  tps: 618964.42944
   dtps: 14154.02994
   hps: 11522.25188
  }
@@ -1374,10 +1374,10 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-IndomitablePrimalDiamond"
  value: {
-  dps: 106562.04961
-  tps: 572738.25771
-  dtps: 14062.14818
-  hps: 11394.06197
+  dps: 106589.08151
+  tps: 573493.04114
+  dtps: 12077.95411
+  hps: 11234.95686
  }
 }
 dps_results: {
@@ -2337,10 +2337,10 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 107408.36746
-  tps: 578093.63911
-  dtps: 14090.14682
-  hps: 11255.21065
+  dps: 107740.6868
+  tps: 576481.67838
+  dtps: 14194.68642
+  hps: 11252.91405
  }
 }
 dps_results: {

@@ -177,8 +177,8 @@ dps_results: {
 dps_results: {
  key: "TestFeral-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 109524.45851
-  tps: 182787.39914
+  dps: 109538.41777
+  tps: 182814.23153
   hps: 8725.97833
  }
 }

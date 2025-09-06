@@ -185,8 +185,8 @@ dps_results: {
 dps_results: {
  key: "TestProtectionWarrior-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 117008.32474
-  tps: 740992.49122
+  dps: 117011.92087
+  tps: 741017.66416
   dtps: 23075.35477
  }
 }
@@ -1233,9 +1233,9 @@ dps_results: {
 dps_results: {
  key: "TestProtectionWarrior-AllItems-IndomitablePrimalDiamond"
  value: {
-  dps: 112667.08473
-  tps: 710698.6564
-  dtps: 22776.40392
+  dps: 112781.51821
+  tps: 712144.97186
+  dtps: 20226.91419
  }
 }
 dps_results: {

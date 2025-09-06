@@ -401,9 +401,9 @@ dps_results: {
 dps_results: {
  key: "TestBalance-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 89608.08565
-  tps: 90953.32004
-  hps: 13656.28796
+  dps: 99605.52339
+  tps: 101065.08008
+  hps: 14695.41025
  }
 }
 dps_results: {
