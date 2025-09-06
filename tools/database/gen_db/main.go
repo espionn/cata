@@ -402,6 +402,10 @@ func InferPhase(item *proto.UIItem) int32 {
 			if rep.RepFactionId == proto.RepFaction_RepFactionShadoPanAssault {
 				return 3
 			}
+			//- All items with Reputation requirements of "Sunreaver Onslaught" or "Kirin Tor Offensive" are 5.2
+			if rep.RepFactionId == proto.RepFaction_RepFactionSunreaverOnslaught || rep.RepFactionId == proto.RepFaction_RepFactionKirinTorOffensive {
+				return 3
+			}
 			if rep.RepFactionId == proto.RepFaction_RepFactionOperationShieldwall || rep.RepFactionId == proto.RepFaction_RepFactionDominanceOffensive {
 				return 2
 			}
