@@ -377,8 +377,8 @@ func InferPhase(item *proto.UIItem) int32 {
 		return 5
 	}
 
-	//- All pve tier items of ilvl 502/522/535 are 5.2
 	//- All pve tier items of ilvl 528/540/553/566 are 5.4
+	//- All pve tier items of ilvl 502/522/535 are 5.2
 	if item.SetId > 0 {
 		switch ilvl {
 		case 528, 540, 553, 566:
@@ -388,10 +388,10 @@ func InferPhase(item *proto.UIItem) int32 {
 		}
 	}
 
-	// Timeless Isle trinkets are all ilvl 496 and does not have a source listed.
-	if item.Sources == nil {
-		if item.Type == proto.ItemType_ItemTypeTrinket && ilvl == 496 {
-			return 3
+	// Timeless Isle trinkets are all ilvl 496 or 535 and description "Timeless" and does not have a source listed.
+	if len(item.Sources) == 0 {
+		if item.Type == proto.ItemType_ItemTypeTrinket && (ilvl == 496 || (ilvl == 535 && item.NameDescription == "Timeless")) {
+			return 5
 		}
 	}
 
