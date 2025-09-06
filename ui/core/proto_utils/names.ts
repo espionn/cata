@@ -247,6 +247,7 @@ export const sourceNames: Map<SourceFilterOption, string> = new Map([
 	[SourceFilterOption.SourceRaid, 'Raid'],
 	[SourceFilterOption.SourceRaidH, 'Raid (H)'],
 	[SourceFilterOption.SourceRaidRF, 'Raid (RF)'],
+	[SourceFilterOption.SourceRaidFlex, 'Raid (Flex)'],
 ]);
 export const raidNames: Map<RaidFilterOption, string> = new Map([
 	[RaidFilterOption.RaidUnknown, 'Unknown'],
@@ -267,7 +268,6 @@ export const difficultyNames: Map<DungeonDifficulty, string> = new Map([
 	[DungeonDifficulty.DifficultyRaid25RF, 'RF'],
 	[DungeonDifficulty.DifficultyRaid25, 'RN'],
 	[DungeonDifficulty.DifficultyRaid25H, 'RH'],
-	[DungeonDifficulty.DifficultyRaidMythic, 'RM'],
 	[DungeonDifficulty.DifficultyRaidFlex, 'RFL'],
 ]);
 

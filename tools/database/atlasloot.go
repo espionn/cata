@@ -136,7 +136,7 @@ func readAtlasLootDungeonData(db *WowDatabase, expansion proto.Expansion, srcUrl
 
 			for _, difficultyMatch := range diffItemsPattern.FindAllStringSubmatch(npcSplit, -1) {
 				diffString := difficultyMatch[1]
-				if expansion == proto.Expansion_ExpansionCata && contentType == "RAID_CONTENT" {
+				if expansion == proto.Expansion_ExpansionMop && contentType == "RAID_CONTENT" {
 					diffString = AtlasLootDungeonToRaidDifficulty[diffString]
 				}
 				difficulty, ok := AtlasLootDifficulties[diffString]
@@ -405,13 +405,14 @@ var AtlasLootDifficulties = map[string]proto.DungeonDifficulty{
 	"RAID25_DIFF":    proto.DungeonDifficulty_DifficultyRaid25,
 	"RAID25H_DIFF":   proto.DungeonDifficulty_DifficultyRaid25H,
 	"FLEX_DIFF":      proto.DungeonDifficulty_DifficultyRaidFlex,
-	"MYTHIC_DIFF":    proto.DungeonDifficulty_DifficultyRaidMythic,
 	"VENDOR_DIFF":    proto.DungeonDifficulty_DifficultyVendor,
 }
 var AtlasLootDungeonToRaidDifficulty = map[string]string{
-	"RF_DIFF":     "RAID25RF_DIFF",
-	"NORMAL_DIFF": "RAID25_DIFF",
-	"HEROIC_DIFF": "RAID25H_DIFF",
+	"RF_DIFF":        "RAID25RF_DIFF",
+	"NORMAL_DIFF":    "RAID25_DIFF",
+	"HEROIC_DIFF":    "RAID25H_DIFF",
+	"FLEX_DIFF":      "FLEX_DIFF",
+	"CELESTIAL_DIFF": "CELESTIAL_DIFF",
 }
 
 const EndTimeEchoLootString = `{
