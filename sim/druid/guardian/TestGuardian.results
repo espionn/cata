@@ -195,10 +195,10 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 113882.9506
-  tps: 618964.42944
-  dtps: 14154.02994
-  hps: 11522.25188
+  dps: 113849.38311
+  tps: 618807.3046
+  dtps: 14128.25588
+  hps: 11524.84541
  }
 }
 dps_results: {

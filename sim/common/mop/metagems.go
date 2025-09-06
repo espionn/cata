@@ -36,7 +36,7 @@ func init() {
 		lightningStrike := character.RegisterSpell(core.SpellConfig{
 			ActionID:    core.ActionID{SpellID: 137597},
 			SpellSchool: core.SpellSchoolNature,
-			ProcMask:    core.ProcMaskEmpty,
+			ProcMask:    core.ProcMaskMeleeProc,
 			Flags:       core.SpellFlagNoOnCastComplete,
 
 			MaxRange: 45,
@@ -73,7 +73,7 @@ func init() {
 			Harmful:  true,
 			Callback: core.CallbackOnSpellHitDealt,
 			Outcome:  core.OutcomeLanded,
-			DPM: character.NewRPPMProcManager(95346, false, true, core.ProcMaskMeleeOrRanged|core.ProcMaskMeleeOrMeleeProc, core.RPPMConfig{
+			DPM: character.NewRPPMProcManager(95346, false, true, core.ProcMaskMeleeOrRanged, core.RPPMConfig{
 				PPM: 19.27000045776,
 			}.WithHasteMod().
 				// https://wago.tools/db2/SpellProcsPerMinuteMod?build=5.5.0.60548&filter%5BSpellProcsPerMinuteID%5D=51&filter%5BType%5D=4&page=1&sort%5BParam%5D=asc
@@ -85,7 +85,7 @@ func init() {
 				WithSpecMod(0.72100001574, proto.Spec_SpecFeralDruid).
 				WithSpecMod(-0.40000000596, proto.Spec_SpecGuardianDruid).
 				WithSpecMod(-0.40000000596, proto.Spec_SpecBloodDeathKnight).
-				WithSpecMod(-0.53200000525, proto.Spec_SpecFrostDeathKnight).
+				WithSpecMod(0.53200000525, proto.Spec_SpecFrostDeathKnight).
 				WithSpecMod(-0.16200000048, proto.Spec_SpecUnholyDeathKnight).
 				WithSpecMod(-0.05000000075, proto.Spec_SpecBeastMasteryHunter).
 				WithSpecMod(0.10700000077, proto.Spec_SpecMarksmanshipHunter).
