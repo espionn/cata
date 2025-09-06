@@ -171,7 +171,19 @@ func main() {
 	}
 
 	for _, item := range atlaslootDB.Items {
-		if _, ok := db.Items[item.Id]; ok {
+		if src, ok := db.Items[item.Id]; ok {
+
+			// Manually filter sources from AtlasLoot to prevent duplicates
+			item.Sources = core.FilterSlice(item.Sources, func(source *proto.UIItemSource) bool {
+				if rep := source.GetRep(); rep != nil {
+					for _, srcSource := range src.Sources {
+						if srcRep := srcSource.GetRep(); srcRep != nil {
+							return srcRep.FactionId != rep.FactionId
+						}
+					}
+				}
+				return true
+			})
 			db.MergeItem(item)
 		}
 	}
@@ -309,6 +321,7 @@ func main() {
 func InferPhase(item *proto.UIItem) int32 {
 	ilvl := item.ScalingOptions[int32(proto.ItemLevelState_Base)].Ilvl
 	name := item.Name
+	description := item.NameDescription
 	quality := item.Quality
 
 	if strings.Contains(name, "Necklace of the Terra-Cotta") {
@@ -372,6 +385,11 @@ func InferPhase(item *proto.UIItem) int32 {
 		return 5
 	}
 
+	//- Any item ilvl 502 (Celestial) is 5.4
+	if ilvl == 502 && strings.Contains(description, "Celestial") {
+		return 5
+	}
+
 	//- Any 483 green item is a boosted level 90 item in 5.4
 	if ilvl == 483 && quality == proto.ItemQuality_ItemQualityUncommon {
 		return 5
@@ -390,7 +408,7 @@ func InferPhase(item *proto.UIItem) int32 {
 
 	// Timeless Isle trinkets are all ilvl 496 or 535 and description "Timeless" and does not have a source listed.
 	if len(item.Sources) == 0 {
-		if item.Type == proto.ItemType_ItemTypeTrinket && (ilvl == 496 || (ilvl == 535 && item.NameDescription == "Timeless")) {
+		if item.Type == proto.ItemType_ItemTypeTrinket && (ilvl == 496 || (ilvl == 535 && strings.Contains(description, "Timeless"))) {
 			return 5
 		}
 	}

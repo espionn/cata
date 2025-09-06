@@ -1520,14 +1520,16 @@ func LoadCraftedItems(dbHelper *DBHelper) (
 
 func ScanRepItems(rows *sql.Rows) (itemID int, ds *proto.RepSource, err error) {
 	var (
-		rep proto.RepSource
+		minReputation int
+		rep           proto.RepSource
 	)
 
 	err = rows.Scan(
 		&itemID,
 		&rep.RepFactionId,
-		&rep.RepLevel,
+		&minReputation,
 	)
+	rep.RepLevel = dbc.GetRepLevel(minReputation)
 	if err != nil {
 		return 0, nil, fmt.Errorf("scanning rep row: %w", err)
 	}
