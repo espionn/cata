@@ -3,11 +3,8 @@ import { Player } from '../../core/player';
 import { Spec } from '../../core/proto/common.js';
 import { ShamanImbue, ShamanSyncType } from '../../core/proto/shaman.js';
 import { ActionId } from '../../core/proto_utils/action_id.js';
-<<<<<<< HEAD
 import i18n from '../../i18n/config.js';
-=======
 import { TypedEvent } from '../../core/typed_event';
->>>>>>> master
 
 // Configuration for spec-specific UI elements on the settings tab.
 // These don't need to be in a separate file but it keeps things cleaner.
