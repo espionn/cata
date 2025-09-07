@@ -109,7 +109,7 @@ func (action *APLActionGuardianHotwDpsRotation) Execute(sim *core.Simulation) {
 		return
 	}
 
-	action.nextActionAt = sim.CurrentTime + poolingTime + bear.ReactionTime
+	action.nextActionAt = sim.CurrentTime + max(poolingTime, 0) + bear.ReactionTime
 	bear.WaitUntil(sim, action.nextActionAt)
 }
 

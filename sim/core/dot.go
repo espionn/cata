@@ -279,14 +279,15 @@ func (dot *Dot) periodicTick(sim *Simulation) {
 	dot.remainingTicks--
 	dot.TickOnce(sim)
 	if dot.isChanneled {
+		channelDelay := dot.getChannelClipDelay(sim)
 		// Note: even if the clip delay is 0ms, need a WaitUntil so that APL is called after the channel aura fades.
 		if dot.remainingTicks == 0 && dot.Spell.Unit.GCD.IsReady(sim) {
-			dot.Spell.Unit.WaitUntil(sim, sim.CurrentTime+dot.getChannelClipDelay(sim))
+			dot.Spell.Unit.WaitUntil(sim, sim.CurrentTime+channelDelay)
 		} else if dot.Spell.Unit.Rotation.shouldInterruptChannel(sim) {
 			dot.tickAction.NextActionAt = NeverExpires // don't tick again in ApplyOnExpire
 			dot.Deactivate(sim)
 			if dot.Spell.Unit.GCD.IsReady(sim) {
-				dot.Spell.Unit.WaitUntil(sim, sim.CurrentTime+dot.getChannelClipDelay(sim))
+				dot.Spell.Unit.WaitUntil(sim, sim.CurrentTime+channelDelay)
 			}
 
 			return // don't schedule another tick
@@ -313,11 +314,11 @@ func (dot *Dot) getChannelClipDelay(sim *Simulation) time.Duration {
 
 	// if we're channeling the same spell again, we don't need to add a delay
 	// within the game we'd actually cast before the last tick and it would be carried over
-	if channelAction, ok := nextAction.impl.(*APLActionCastSpell); ok && channelAction.spell == channeledDot.Spell {
+	if channelAction, ok := nextAction.impl.(*APLActionCastSpell); ok && ((channelAction.spell == channeledDot.Spell) || (channelAction.spell.Matches(channeledDot.Spell.ClassSpellMask))) {
 		return 0
 	}
 
-	if channelAction, ok := nextAction.impl.(*APLActionChannelSpell); ok && channelAction.spell == channeledDot.Spell {
+	if channelAction, ok := nextAction.impl.(*APLActionChannelSpell); ok && ((channelAction.spell == channeledDot.Spell) || (channelAction.spell.Matches(channeledDot.Spell.ClassSpellMask))) {
 		return 0
 	}
 

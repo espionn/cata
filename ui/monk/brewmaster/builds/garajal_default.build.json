@@ -141,7 +141,7 @@
 											"rhs": { "const": { "val": "6" } }
 										}
 									},
-									{ "auraIsInactive": { "auraId": { "spellId": 128938 }, "includeReactionTime": true } }
+									{ "auraIsInactive": { "auraId": { "spellId": 115308 }, "includeReactionTime": true } }
 								]
 							}
 						},

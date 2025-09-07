@@ -53,6 +53,10 @@ type MajorCooldown struct {
 	// all DPS cooldowns during their regen rotation.
 	Type CooldownType
 
+	// If False, the MCD will not be queued up before the GCD has fully expired.
+	// This is desirable for auto-chaining multiple MCDs just before a GCD ability.
+	AllowSpellQueueing bool
+
 	// Whether the cooldown meets all optional conditions for activation. These
 	// conditions will be ignored when the user specifies their own activation time.
 	// This is for things like mana thresholds, which are optimizations for better
@@ -257,7 +261,7 @@ func (mcdm *majorCooldownManager) AddMajorCooldown(mcd MajorCooldown) {
 
 	mcd.Spell.Flags |= SpellFlagAPL | SpellFlagMCD
 
-	if mcd.Type.Matches(CooldownTypeSurvival) && (mcd.Spell.DefaultCast.EffectiveTime() == 0) {
+	if (mcd.Type.Matches(CooldownTypeSurvival) && (mcd.Spell.DefaultCast.EffectiveTime() == 0)) || mcd.AllowSpellQueueing {
 		mcd.Spell.Flags |= SpellFlagReactive
 	}
 

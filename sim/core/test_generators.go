@@ -488,17 +488,19 @@ func (generator *CombinedTestGenerator) GetTest(testIdx int) (string, *proto.Com
 type CharacterSuiteConfig struct {
 	Class proto.Class
 
-	Race             proto.Race
-	Profession1      proto.Profession
-	Profession2      proto.Profession
-	GearSet          GearSetCombo
-	SpecOptions      SpecOptionsCombo
-	Talents          string
-	Glyphs           *proto.Glyphs
-	Rotation         RotationCombo
-	Encounter        EncounterCombo
-	ItemSwapSet      ItemSwapSetCombo
-	StartingDistance float64
+	Race               proto.Race
+	Profession1        proto.Profession
+	Profession2        proto.Profession
+	GearSet            GearSetCombo
+	SpecOptions        SpecOptionsCombo
+	Talents            string
+	Glyphs             *proto.Glyphs
+	Rotation           RotationCombo
+	Encounter          EncounterCombo
+	ItemSwapSet        ItemSwapSetCombo
+	StartingDistance   float64
+	ReactionTimeMs     int32
+	ChannelClipDelayMs int32
 
 	Consumables     *proto.ConsumesSpec
 	IndividualBuffs *proto.IndividualBuffs
@@ -571,8 +573,8 @@ func FullCharacterTestSuiteGenerator(configs []CharacterSuiteConfig) []TestGener
 
 				InFrontOfTarget:    config.InFrontOfTarget,
 				DistanceFromTarget: config.StartingDistance,
-				ReactionTimeMs:     100,
-				ChannelClipDelayMs: 50,
+				ReactionTimeMs:     TernaryInt32(config.ReactionTimeMs != 0, config.ReactionTimeMs, 100),
+				ChannelClipDelayMs: TernaryInt32(config.ChannelClipDelayMs != 0, config.ChannelClipDelayMs, 50),
 			},
 			config.SpecOptions.SpecOptions)
 
