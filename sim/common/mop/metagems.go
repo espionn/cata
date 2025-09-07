@@ -36,8 +36,9 @@ func init() {
 		lightningStrike := character.RegisterSpell(core.SpellConfig{
 			ActionID:    core.ActionID{SpellID: 137597},
 			SpellSchool: core.SpellSchoolNature,
-			ProcMask:    core.ProcMaskMeleeProc,
-			Flags:       core.SpellFlagNoOnCastComplete,
+			// @TODO: TEST ON PTR: See if weapon enchants can/cannot be procced by this spell.
+			ProcMask: core.ProcMaskMeleeProc,
+			Flags:    core.SpellFlagNoOnCastComplete,
 
 			MaxRange: 45,
 
