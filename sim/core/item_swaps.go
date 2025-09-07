@@ -99,6 +99,17 @@ func (swap *ItemSwap) initialize(character *Character) {
 	swap.character = character
 }
 
+// Used by shaman imbues because itemswap is setup before Imbue spells registers
+func (swap *ItemSwap) AddTempEnchant(enchantID int32, slot proto.ItemSlot, swapped bool) {
+	// Add it to the swapped item
+	if swapped {
+		swap.unEquippedItems[slot].TempEnchant = enchantID
+		swap.swapEquip[slot].TempEnchant = enchantID
+	} else {
+		swap.originalEquip[slot].TempEnchant = enchantID
+	}
+}
+
 func (character *Character) RegisterItemSwapCallback(slots []proto.ItemSlot, callback OnItemSwap) {
 	if character == nil || !character.ItemSwap.IsEnabled() || len(slots) == 0 {
 		return

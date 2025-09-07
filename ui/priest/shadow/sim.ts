@@ -141,7 +141,7 @@ export class ShadowPriestSimUI extends IndividualSimUI<Spec.SpecShadowPriest> {
 		super(parentElem, player, SPEC_CONFIG);
 		player.sim.waitForInit().then(() => {
 			new ReforgeOptimizer(this, {
-				statSelectionPresets: Presets.SHADOW_BREAKPOINTS,
+				statSelectionPresets: [Presets.SHADOW_BREAKPOINTS],
 			});
 		});
 	}

@@ -1043,10 +1043,22 @@ func (auras AuraArray) ActivateAllPlayers(sim *Simulation) {
 	auras.activateAllInternal(sim, sim.Environment.Raid.AllPlayerUnits)
 }
 
+func (auras AuraArray) DeactivateAll(sim *Simulation) {
+	auras.deactivateAllInternal(sim, sim.Environment.AllUnits)
+}
+
 func (auras AuraArray) activateAllInternal(sim *Simulation, units []*Unit) {
 	for _, target := range units {
 		if target.IsEnabled() && (auras[target.UnitIndex] != nil) {
 			auras[target.UnitIndex].Activate(sim)
+		}
+	}
+}
+
+func (auras AuraArray) deactivateAllInternal(sim *Simulation, units []*Unit) {
+	for _, target := range units {
+		if target.IsEnabled() && (auras[target.UnitIndex] != nil) {
+			auras[target.UnitIndex].Deactivate(sim)
 		}
 	}
 }
