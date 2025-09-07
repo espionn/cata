@@ -169,7 +169,7 @@ func (ai *ShaAI) registerTankSwaps() {
 	ai.TankSwapDebuff = ai.TankUnit.RegisterAura(core.Aura{
 		Label:    "Naked and Afraid",
 		ActionID: actionID,
-		Duration: time.Second * 50,
+		Duration: time.Second * 55,
 
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			ai.Target.AutoAttacks.CancelAutoSwing(sim)
