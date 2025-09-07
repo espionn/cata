@@ -40,9 +40,8 @@ var ItemSetRegaliaOfTheWitchDoctor = core.NewItemSet(core.ItemSet{
 			shaman := agent.(ShamanAgent).GetShaman()
 
 			lightningStrike := shaman.RegisterSpell(core.SpellConfig{
-				ActionID:    core.ActionID{SpellID: 138146},
-				SpellSchool: core.SpellSchoolNature,
-				// @TODO: See if weapon enchants can/cannot be procced by this spell.
+				ActionID:       core.ActionID{SpellID: 138146},
+				SpellSchool:    core.SpellSchoolNature,
 				ProcMask:       core.ProcMaskSpellProc,
 				CritMultiplier: shaman.DefaultCritMultiplier(),
 				MissileSpeed:   20,
