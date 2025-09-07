@@ -67,8 +67,9 @@ type Druid struct {
 	BerserkBearAura          *core.Aura
 	BerserkCatAura           *core.Aura
 	CatFormAura              *core.Aura
-	WeakenedBlowsAuras       core.AuraArray
 	FaerieFireAuras          core.AuraArray
+	FeralFuryAura            *core.Aura
+	FeralRageAura            *core.Aura
 	FrenziedRegenerationAura *core.Aura
 	LunarEclipseProcAura     *core.Aura
 	MightOfUrsocAura         *core.Aura
@@ -78,6 +79,7 @@ type Druid struct {
 	StampedePendingAura      *core.Aura
 	TigersFury4PT15Aura      *core.Aura
 	SurvivalInstinctsAura    *core.Aura
+	WeakenedBlowsAuras       core.AuraArray
 
 	form DruidForm
 

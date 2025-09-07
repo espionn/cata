@@ -31,9 +31,12 @@ func (cat *FeralDruid) applyOmenOfClarity() {
 			}, func(spell *druid.DruidSpell) bool { return spell != nil })
 		},
 
-		OnGain: func(_ *core.Aura, _ *core.Simulation) {
+		OnGain: func(_ *core.Aura, sim *core.Simulation) {
 			for _, spell := range affectedSpells {
 				spell.Cost.PercentModifier *= -1
+			}
+			if cat.Druid.FeralFuryAura != nil {
+				cat.Druid.FeralFuryAura.Activate(sim)
 			}
 		},
 

@@ -111,6 +111,22 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFeral-AllItems-BattlegearoftheHauntedForest"
+ value: {
+  dps: 116386.23376
+  tps: 184420.07089
+  hps: 10573.18323
+ }
+}
+dps_results: {
+ key: "TestFeral-AllItems-BattlegearoftheShatteredVale"
+ value: {
+  dps: 120205.40411
+  tps: 181083.48279
+  hps: 10932.89002
+ }
+}
+dps_results: {
  key: "TestFeral-AllItems-BlossomofPureSnow-89081"
  value: {
   dps: 98450.75426

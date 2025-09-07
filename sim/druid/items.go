@@ -238,11 +238,6 @@ var ItemSetBattlegearOfTheHauntedForest = core.NewItemSet(core.ItemSet{
 			// After using Tiger's Fury, you gain 40% increased critical strike chance on the next 3 uses of Mangle, Shred, Ferocious Bite, Ravage, and Swipe.
 			druid := agent.(DruidAgent).GetDruid()
 			druid.registerTigersFury4PT15()
-			setBonusAura.OnCastComplete = func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-				if spell.Matches(DruidSpellTigersFury) {
-					druid.TigersFury4PT15Aura.Activate(sim)
-				}
-			}
 		},
 	},
 })
@@ -294,7 +289,7 @@ var ItemSetRegaliaOfTheShatteredVale = core.NewItemSet(core.ItemSet{
 	},
 })
 
-// T16 Balance
+// T16 Feral
 var ItemSetBattlegearOfTheShatteredVale = core.NewItemSet(core.ItemSet{
 	ID:                      1197,
 	DisabledInChallengeMode: true,
@@ -302,12 +297,79 @@ var ItemSetBattlegearOfTheShatteredVale = core.NewItemSet(core.ItemSet{
 	Bonuses: map[int32]core.ApplySetBonus{
 		2: func(agent core.Agent, setBonusAura *core.Aura) {
 			// Omen of Clarity increases damage of Shred, Mangle, Swipe, and Ravage by 50% for 6 sec.
+			druid := agent.(DruidAgent).GetDruid()
+			druid.registerFeralFury()
 		},
 		4: func(agent core.Agent, setBonusAura *core.Aura) {
 			// After using Tiger's Fury, your next finishing move will restore 3 combo points on your current target after being used.
+			druid := agent.(DruidAgent).GetDruid()
+			druid.registerFeralRage()
 		},
 	},
 })
+
+func (druid *Druid) registerFeralFury() {
+	meleeAbilityMask := DruidSpellMangleCat | DruidSpellShred | DruidSpellRavage | DruidSpellSwipeCat
+
+	feralFuryMod := druid.AddDynamicMod(core.SpellModConfig{
+		ClassMask:  meleeAbilityMask,
+		Kind:       core.SpellMod_DamageDone_Pct,
+		FloatValue: 0.5,
+	})
+
+	druid.FeralFuryAura = druid.RegisterAura(core.Aura{
+		Label:    "Feral Fury 2PT16",
+		ActionID: core.ActionID{SpellID: 144865},
+		Duration: time.Second * 6,
+
+		OnGain: func(aura *core.Aura, sim *core.Simulation) {
+			feralFuryMod.Activate()
+		},
+
+		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
+			if spell.Matches(meleeAbilityMask) {
+				aura.Deactivate(sim)
+			}
+		},
+
+		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+			feralFuryMod.Deactivate()
+		},
+	})
+}
+
+func (druid *Druid) registerFeralRage() {
+	actionID := core.ActionID{SpellID: 146874}
+	cpMetrics := druid.NewComboPointMetrics(actionID)
+
+	var resultLanded bool
+
+	proc4pT16 := func(sim *core.Simulation, unit *core.Unit, isRoar bool) {
+		if resultLanded || isRoar {
+			unit.AddComboPoints(sim, 3, cpMetrics)
+		}
+		resultLanded = false
+	}
+
+	druid.FeralRageAura = druid.RegisterAura(core.Aura{
+		Label:    "Feral Rage 4PT16",
+		ActionID: actionID,
+		Duration: time.Second * 12,
+
+		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+			if spell.Matches(DruidSpellFinisher) && result.Landed() {
+				resultLanded = true
+			}
+		},
+
+		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
+			if spell.Matches(DruidSpellFinisher) {
+				proc4pT16(sim, aura.Unit, spell.Matches(DruidSpellSavageRoar))
+				aura.Deactivate(sim)
+			}
+		},
+	})
+}
 
 func init() {
 }
