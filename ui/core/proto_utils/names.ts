@@ -241,6 +241,7 @@ export const sourceNames: Map<SourceFilterOption, string> = new Map([
 	[SourceFilterOption.SourceCrafting, 'Crafting'],
 	[SourceFilterOption.SourceQuest, 'Quest'],
 	[SourceFilterOption.SourceReputation, 'Reputation'],
+	[SourceFilterOption.SourceSoldBy, 'Sold'],
 	[SourceFilterOption.SourcePvp, 'PVP'],
 	[SourceFilterOption.SourceDungeon, 'Dungeon'],
 	[SourceFilterOption.SourceDungeonH, 'Dungeon (H)'],

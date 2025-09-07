@@ -303,8 +303,18 @@ func main() {
 				item.GemSockets = append(item.GemSockets, proto.GemColor_GemColorPrismatic)
 			}
 		}
+
+		if item.NameDescription == "Celestial" {
+			item.Sources = inferCelestialItemSource(item)
+		}
+
+		// Infer the drop difficulty for the item
+		if item.NameDescription == "Flexible" {
+			item.Sources = inferFlexibleRaidItemSource(item)
+		}
+
 		if item.Phase < 2 {
-			item.Phase = InferPhase(item)
+			item.Phase = inferPhase(item)
 		}
 
 	}
@@ -318,7 +328,7 @@ func main() {
 	db.WriteBinaryAndJson(fmt.Sprintf("%s/db.bin", dbDir), fmt.Sprintf("%s/db.json", dbDir))
 }
 
-func InferPhase(item *proto.UIItem) int32 {
+func inferPhase(item *proto.UIItem) int32 {
 	ilvl := item.ScalingOptions[int32(proto.ItemLevelState_Base)].Ilvl
 	name := item.Name
 	description := item.NameDescription
@@ -488,6 +498,47 @@ func InferPhase(item *proto.UIItem) int32 {
 	}
 
 	return 0
+}
+
+func inferCelestialItemSource(item *proto.UIItem) []*proto.UIItemSource {
+	if item.Phase <= 2 {
+		sources := make([]*proto.UIItemSource, 0, len(item.Sources)+1)
+		// Make sure to always add the SoldBy source first so it shows up first in the UI since we pick the first index
+		// but we still need the other sources to add things like Sha-Touched gems
+		sources = append(sources, &proto.UIItemSource{
+			Source: &proto.UIItemSource_SoldBy{SoldBy: &proto.SoldBySource{
+				NpcId:   248108,
+				NpcName: "Avatar of the August Celestials",
+			}},
+		})
+		sources = append(sources, item.Sources...)
+		return sources
+	}
+	return item.Sources
+}
+func inferFlexibleRaidItemSource(item *proto.UIItem) []*proto.UIItemSource {
+	sources := item.Sources
+	hasSources := len(item.Sources) > 0
+	if hasSources {
+		for _, source := range sources {
+			if drop := source.GetDrop(); drop != nil {
+				// Flex raid has no difficulty index so we need to infer it from name
+				if drop.Difficulty == proto.DungeonDifficulty_DifficultyUnknown {
+					drop.Difficulty = proto.DungeonDifficulty_DifficultyRaidFlex
+				}
+			}
+		}
+	} else {
+		// Some Flex items don't have a drop source listed,
+		// so just add the difficulty for filtering
+		sources = append(sources, &proto.UIItemSource{
+			Source: &proto.UIItemSource_Drop{Drop: &proto.DropSource{
+				Difficulty: proto.DungeonDifficulty_DifficultyRaidFlex,
+			}},
+		})
+	}
+
+	return sources
 }
 
 func processItems(instance *dbc.DBC, iconsMap map[int]string, names map[int]string, dropSources map[int][]*proto.DropSource, craftingSources map[int][]*proto.CraftedSource, repSources map[int][]*proto.RepSource, db *database.WowDatabase) {
