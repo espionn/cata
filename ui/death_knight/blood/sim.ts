@@ -7,7 +7,8 @@ import { Player } from '../../core/player';
 import { PlayerClasses } from '../../core/player_classes';
 import { APLRotation, APLRotation_Type } from '../../core/proto/apl.js';
 import { Debuffs, Faction, IndividualBuffs, ItemSlot, PartyBuffs, PseudoStat, Race, RaidBuffs, Spec, Stat } from '../../core/proto/common';
-import { Stats, UnitStat } from '../../core/proto_utils/stats';
+import { StatCapType } from '../../core/proto/ui';
+import { StatCap, Stats, UnitStat } from '../../core/proto_utils/stats';
 import { defaultRaidBuffMajorDamageCooldowns } from '../../core/proto_utils/utils';
 import * as Presets from './presets';
 
@@ -68,9 +69,16 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBloodDeathKnight, {
 		// Default stat caps for the Reforge Optimizer
 		statCaps: (() => {
 			const hitCap = new Stats().withPseudoStat(PseudoStat.PseudoStatPhysicalHitPercent, 7.5);
-			const expCap = new Stats().withStat(Stat.StatExpertiseRating, 7.5 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION);
+			const expCap = new Stats().withStat(Stat.StatExpertiseRating, 15 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION);
 
 			return hitCap.add(expCap);
+		})(),
+		softCapBreakpoints: (() => {
+			return [StatCap.fromStat(Stat.StatExpertiseRating, {
+				breakpoints: [7.5 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION, 15 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION],
+				capType: StatCapType.TypeSoftCap,
+				postCapEPs: [0.22, 0],
+			})];
 		})(),
 		other: Presets.OtherDefaults,
 		// Default consumes settings.
@@ -101,6 +109,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBloodDeathKnight, {
 		}),
 		rotationType: APLRotation_Type.TypeAuto,
 	},
+
+	defaultBuild: Presets.PRESET_BUILD_DEFAULT,
 
 	// modifyDisplayStats: (player: Player<Spec.SpecBloodDeathKnight>) => {
 	// },
@@ -138,7 +148,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBloodDeathKnight, {
 		talents: [Presets.BloodTalents],
 		// Preset gear configurations that the user can quickly select.
 		gear: [Presets.P1_BLOOD_PRESET],
-		builds: [Presets.P1_PRESET],
+		builds: [Presets.PRESET_BUILD_SHA],
 	},
 
 	autoRotation: (_player: Player<Spec.SpecBloodDeathKnight>): APLRotation => {
