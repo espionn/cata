@@ -73,8 +73,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostTwoHand-AllItems-BattleplateoftheAll-ConsumingMaw"
  value: {
-  dps: 151556.69253
-  tps: 135652.52778
+  dps: 152037.40862
+  tps: 135979.95307
   hps: 2746.55373
  }
 }
@@ -217,8 +217,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostTwoHand-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 161649.01085
-  tps: 147323.0548
+  dps: 161737.38041
+  tps: 147343.85482
   hps: 2520.76774
  }
 }
@@ -249,9 +249,9 @@ dps_results: {
 dps_results: {
  key: "TestFrostTwoHand-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 161240.80737
-  tps: 147332.29333
-  hps: 2566.95547
+  dps: 161543.94596
+  tps: 147531.67591
+  hps: 2573.37869
  }
 }
 dps_results: {
@@ -385,8 +385,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostTwoHand-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 151858.37653
-  tps: 139155.57512
+  dps: 151884.41989
+  tps: 139171.26917
   hps: 2520.76774
  }
 }
@@ -497,9 +497,9 @@ dps_results: {
 dps_results: {
  key: "TestFrostTwoHand-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 155838.56823
-  tps: 142734.28377
-  hps: 2658.37488
+  dps: 157456.87359
+  tps: 143647.85791
+  hps: 2704.28414
  }
 }
 dps_results: {

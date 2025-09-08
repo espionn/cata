@@ -87,10 +87,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-BadJuju-96781"
  value: {
-  dps: 96241.67487
-  tps: 542261.99858
-  dtps: 35697.01076
-  hps: 38989.2244
+  dps: 96267.1202
+  tps: 542651.97085
+  dtps: 35694.26097
+  hps: 38949.9
  }
 }
 dps_results: {
@@ -123,10 +123,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-BattleplateoftheAll-ConsumingMaw"
  value: {
-  dps: 102010.01642
-  tps: 564878.75972
-  dtps: 36083.25489
-  hps: 40534.51717
+  dps: 102074.59782
+  tps: 564923.46068
+  dtps: 36179.03933
+  hps: 40733.40513
  }
 }
 dps_results: {
@@ -1032,10 +1032,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 102404.86397
-  tps: 574498.48519
-  dtps: 34465.38929
-  hps: 36981.74277
+  dps: 102526.54827
+  tps: 575006.64788
+  dtps: 34501.84852
+  hps: 37046.56894
  }
 }
 dps_results: {
@@ -2211,10 +2211,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 98836.56674
-  tps: 557686.86705
-  dtps: 35565.19721
-  hps: 37333.0813
+  dps: 98735.5688
+  tps: 556508.80852
+  dtps: 35534.19786
+  hps: 37348.10518
  }
 }
 dps_results: {
@@ -2949,10 +2949,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 100486.46604
-  tps: 566457.71196
-  dtps: 35651.11493
-  hps: 38074.74915
+  dps: 100930.6755
+  tps: 566366.41304
+  dtps: 35589.10317
+  hps: 38100.1508
  }
 }
 dps_results: {
@@ -3048,8 +3048,8 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-Xing-Ho,BreathofYu'lon-102246"
  value: {
-  dps: 96806.51394
-  tps: 543456.31395
+  dps: 96809.19538
+  tps: 543475.08408
   dtps: 36349.33526
   hps: 40537.41682
  }

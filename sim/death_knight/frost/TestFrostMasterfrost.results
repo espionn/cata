@@ -73,9 +73,9 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-BattleplateoftheAll-ConsumingMaw"
  value: {
-  dps: 150435.32143
-  tps: 135611.84054
-  hps: 1808.55208
+  dps: 151281.24688
+  tps: 136182.6971
+  hps: 1816.01516
  }
 }
 dps_results: {
@@ -217,8 +217,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 164451.83947
-  tps: 150930.28381
+  dps: 164042.72761
+  tps: 150461.417
   hps: 1619.55338
  }
 }
@@ -249,9 +249,9 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 160124.27603
-  tps: 147265.00509
-  hps: 1584.31653
+  dps: 160252.43639
+  tps: 147304.19483
+  hps: 1589.18756
  }
 }
 dps_results: {
@@ -385,8 +385,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 149136.18497
-  tps: 137449.51258
+  dps: 149167.44106
+  tps: 137469.09897
   hps: 1543.45501
  }
 }
@@ -490,16 +490,16 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 153025.86284
-  tps: 141071.09035
-  hps: 1636.0046
+  dps: 155412.89589
+  tps: 142240.18508
+  hps: 1652.3731
  }
 }
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-Wushoolay'sFinalChoice-96785"
  value: {
-  dps: 151206.18404
-  tps: 139485.41319
+  dps: 151211.32499
+  tps: 139490.68156
   hps: 1619.55338
  }
 }

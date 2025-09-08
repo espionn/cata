@@ -97,9 +97,9 @@ dps_results: {
 dps_results: {
  key: "TestWindwalker-AllItems-BadJuju-96781"
  value: {
-  dps: 160402.09593
-  tps: 149421.74171
-  hps: 7931.75529
+  dps: 159958.65388
+  tps: 148781.86424
+  hps: 7981.6949
  }
 }
 dps_results: {
@@ -785,9 +785,9 @@ dps_results: {
 dps_results: {
  key: "TestWindwalker-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 153373.98566
-  tps: 142914.57775
-  hps: 7660.26888
+  dps: 153470.98554
+  tps: 142957.24941
+  hps: 7674.53949
  }
 }
 dps_results: {
@@ -929,9 +929,9 @@ dps_results: {
 dps_results: {
  key: "TestWindwalker-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 154689.83252
-  tps: 144328.84969
-  hps: 7810.9096
+  dps: 154800.19301
+  tps: 144443.49258
+  hps: 7818.21816
  }
 }
 dps_results: {
@@ -1969,9 +1969,9 @@ dps_results: {
 dps_results: {
  key: "TestWindwalker-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 157896.09266
-  tps: 146895.62219
-  hps: 7928.41039
+  dps: 157813.99886
+  tps: 146535.73866
+  hps: 7883.68269
  }
 }
 dps_results: {
@@ -2097,9 +2097,9 @@ dps_results: {
 dps_results: {
  key: "TestWindwalker-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 157220.64214
-  tps: 146824.4556
-  hps: 7621.05616
+  dps: 157082.65131
+  tps: 146689.55132
+  hps: 7623.73518
  }
 }
 dps_results: {
@@ -2545,9 +2545,9 @@ dps_results: {
 dps_results: {
  key: "TestWindwalker-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 149371.35923
-  tps: 139569.63677
-  hps: 7418.3202
+  dps: 150776.55977
+  tps: 140479.07539
+  hps: 7520.4406
  }
 }
 dps_results: {

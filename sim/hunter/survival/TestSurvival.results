@@ -75,8 +75,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-BadJuju-96781"
  value: {
-  dps: 164377.09762
-  tps: 134645.31813
+  dps: 163493.00852
+  tps: 133491.32805
  }
 }
 dps_results: {
@@ -789,8 +789,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 149137.37073
-  tps: 123109.52034
+  dps: 149171.82755
+  tps: 123084.23705
  }
 }
 dps_results: {
@@ -1699,8 +1699,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 162470.7473
-  tps: 133210.00309
+  dps: 163195.73772
+  tps: 133225.10237
  }
 }
 dps_results: {
@@ -2217,8 +2217,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 149816.49842
-  tps: 123958.88909
+  dps: 150598.28747
+  tps: 124361.22757
  }
 }
 dps_results: {
@@ -2287,8 +2287,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-Wushoolay'sFinalChoice-96785"
  value: {
-  dps: 146205.61586
-  tps: 120770.72209
+  dps: 146204.87616
+  tps: 120769.98238
  }
 }
 dps_results: {
