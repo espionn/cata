@@ -204,10 +204,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 96538.959
-  tps: 541834.30953
-  dtps: 36223.6828
-  hps: 38442.18971
+  dps: 102606.95899
+  tps: 583868.27392
+  dtps: 36165.43855
+  hps: 39026.47335
  }
 }
 dps_results: {
@@ -1392,10 +1392,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-IndomitablePrimalDiamond"
  value: {
-  dps: 96832.95379
-  tps: 544144.19697
-  dtps: 36218.46658
-  hps: 38659.83337
+  dps: 95974.1032
+  tps: 538914.23541
+  dtps: 31761.07908
+  hps: 35923.67476
  }
 }
 dps_results: {

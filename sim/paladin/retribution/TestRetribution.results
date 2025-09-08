@@ -159,8 +159,8 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 156143.09752
-  tps: 146879.45622
+  dps: 161525.67303
+  tps: 152398.23548
  }
 }
 dps_results: {
@@ -1811,8 +1811,8 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 156143.09752
-  tps: 146879.45622
+  dps: 156540.29612
+  tps: 147423.9427
  }
 }
 dps_results: {

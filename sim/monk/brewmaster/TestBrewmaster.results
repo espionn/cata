@@ -213,10 +213,10 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 116891.24077
-  tps: 655498.02831
-  dtps: 20002.05498
-  hps: 26661.78226
+  dps: 123377.78432
+  tps: 701591.32469
+  dtps: 19886.19944
+  hps: 26693.8715
  }
 }
 dps_results: {
@@ -1410,10 +1410,10 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-IndomitablePrimalDiamond"
  value: {
-  dps: 116756.02709
-  tps: 654289.742
-  dtps: 19947.25324
-  hps: 26587.54217
+  dps: 116687.58542
+  tps: 654602.81872
+  dtps: 17726.95906
+  hps: 25553.49248
  }
 }
 dps_results: {
