@@ -105,10 +105,10 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-BadJuju-96781"
  value: {
-  dps: 119663.90552
-  tps: 670884.27968
-  dtps: 19119.54352
-  hps: 26778.18955
+  dps: 119745.7816
+  tps: 669823.96407
+  dtps: 19443.06108
+  hps: 27037.0571
  }
 }
 dps_results: {
@@ -888,10 +888,10 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 117284.22237
-  tps: 660223.46654
-  dtps: 21129.13013
-  hps: 26718.02948
+  dps: 117272.4464
+  tps: 660230.49407
+  dtps: 21129.10297
+  hps: 26717.02018
  }
 }
 dps_results: {
@@ -1050,10 +1050,10 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 118746.85993
-  tps: 666963.53099
-  dtps: 20476.56471
-  hps: 27034.15353
+  dps: 119318.6161
+  tps: 669948.06932
+  dtps: 20213.38541
+  hps: 27032.33514
  }
 }
 dps_results: {
@@ -2211,10 +2211,10 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 120283.85797
-  tps: 675235.2212
-  dtps: 19949.52088
-  hps: 27056.23609
+  dps: 120315.04845
+  tps: 675099.98695
+  dtps: 19921.45675
+  hps: 27081.24901
  }
 }
 dps_results: {
@@ -2877,10 +2877,10 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 116546.68186
-  tps: 654334.09119
-  dtps: 20630.70909
-  hps: 26863.21135
+  dps: 117909.73426
+  tps: 659373.51958
+  dtps: 20252.57972
+  hps: 27145.62445
  }
 }
 dps_results: {
@@ -2967,8 +2967,8 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-Xing-Ho,BreathofYu'lon-102246"
  value: {
-  dps: 118525.37602
-  tps: 665817.23383
+  dps: 118535.35756
+  tps: 665887.10464
   dtps: 20015.75921
   hps: 26309.34723
  }

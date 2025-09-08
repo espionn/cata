@@ -180,8 +180,8 @@ dps_results: {
 dps_results: {
  key: "TestArcane-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 147542.41733
-  tps: 144146.91772
+  dps: 147541.44922
+  tps: 144145.9496
  }
 }
 dps_results: {
@@ -208,8 +208,8 @@ dps_results: {
 dps_results: {
  key: "TestArcane-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 145298.71739
-  tps: 142902.52671
+  dps: 145545.94195
+  tps: 143138.0969
  }
 }
 dps_results: {
@@ -348,8 +348,8 @@ dps_results: {
 dps_results: {
  key: "TestArcane-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 155752.22668
-  tps: 152076.82742
+  dps: 156694.75584
+  tps: 152664.80028
  }
 }
 dps_results: {
@@ -383,15 +383,15 @@ dps_results: {
 dps_results: {
  key: "TestArcane-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 160138.44275
-  tps: 156594.14904
+  dps: 165595.83175
+  tps: 161170.07902
  }
 }
 dps_results: {
  key: "TestArcane-AllItems-Wushoolay'sFinalChoice-96785"
  value: {
-  dps: 159372.64384
-  tps: 156212.29239
+  dps: 159040.62966
+  tps: 155879.08891
  }
 }
 dps_results: {

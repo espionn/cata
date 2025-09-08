@@ -209,8 +209,8 @@ dps_results: {
 dps_results: {
  key: "TestBalance-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 89279.23237
-  tps: 90502.34408
+  dps: 89280.12611
+  tps: 90503.23782
   hps: 14676.43731
  }
 }
@@ -241,9 +241,9 @@ dps_results: {
 dps_results: {
  key: "TestBalance-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 91853.4087
-  tps: 93065.66981
-  hps: 14881.96516
+  dps: 92520.45764
+  tps: 93725.69494
+  hps: 14924.56113
  }
 }
 dps_results: {
@@ -441,17 +441,17 @@ dps_results: {
 dps_results: {
  key: "TestBalance-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 100455.11
-  tps: 101619.18444
-  hps: 15554.45762
+  dps: 103193.55396
+  tps: 103975.38237
+  hps: 15587.30357
  }
 }
 dps_results: {
  key: "TestBalance-AllItems-Wushoolay'sFinalChoice-96785"
  value: {
-  dps: 99938.96084
-  tps: 100825.93571
-  hps: 15455.45023
+  dps: 101348.1112
+  tps: 102162.21492
+  hps: 15559.72235
  }
 }
 dps_results: {
