@@ -302,7 +302,7 @@ func (value *APLValueDotTickRatePercentIncrease) GetFloat(sim *Simulation) float
 	if currentTickrate == 0 {
 		return 1
 	}
-	val := value.getTickRate(false)/currentTickrate - 1
+	val := currentTickrate/value.getTickRate(false) - 1
 	return val
 }
 
