@@ -193,6 +193,8 @@ func (action *APLActionStrictSequence) GetNextAction(sim *Simulation) *APLAction
 
 		if action.unit.GCD.IsReady(sim) {
 			action.advanceSequence()
+		} else if _, ok := nextAction.impl.(*APLActionWait); ok {
+			action.advanceSequence()
 		} else {
 			pa := sim.GetConsumedPendingActionFromPool()
 			pa.NextActionAt = action.unit.NextGCDAt()
