@@ -204,18 +204,22 @@ func (character *Character) NewSetBonusRPPMProcManager(spellID int32, setBonusAu
 //	char.NewRPPMProcManager(
 //			1234,
 //			false,
+//			false,
 //			ProcMaskDirect,
 //			RPPMConfig{PPM: 2}.
 //				WithClassMod(-0.5, 255).
 //				WithHasteMod(),
 //		)
-func (character *Character) NewRPPMProcManager(effectID int32, isEnchant bool, procMask ProcMask, rppmConfig RPPMConfig) *DynamicProcManager {
+func (character *Character) NewRPPMProcManager(effectID int32, isEnchant bool, isGem bool, procMask ProcMask, rppmConfig RPPMConfig) *DynamicProcManager {
 	var slotList []proto.ItemSlot
 	if isEnchant {
 		slotList = character.ItemSwap.EligibleSlotsForEffect(effectID)
+	} else if isGem {
+		slotList = character.ItemSwap.EligibleSlotsForGem(effectID)
 	} else {
 		slotList = character.ItemSwap.EligibleSlotsForItem(effectID)
 	}
+
 	builder := func() DynamicProcManager {
 		manager := DynamicProcManager{
 			procMasks:   []ProcMask{},
@@ -224,7 +228,7 @@ func (character *Character) NewRPPMProcManager(effectID int32, isEnchant bool, p
 
 		for _, slot := range slotList {
 			eq := character.Equipment.GetItemBySlot(slot)
-			if eq.selectEffectId(isEnchant) != effectID {
+			if eq.selectEffectId(isEnchant, isGem) != effectID {
 				continue
 			}
 
@@ -264,9 +268,11 @@ func (character *Character) NewRPPMProcManager(effectID int32, isEnchant bool, p
 	return &dpm
 }
 
-func (item *Item) selectEffectId(isEnchant bool) int32 {
+func (item *Item) selectEffectId(isEnchant bool, isGem bool) int32 {
 	if isEnchant {
 		return item.Enchant.EffectID
+	} else if isGem {
+		return item.Gems[0].ID
 	}
 
 	return item.ID

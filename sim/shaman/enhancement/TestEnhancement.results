@@ -152,8 +152,8 @@ dps_results: {
 dps_results: {
  key: "TestEnhancement-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 132018.78071
-  tps: 111627.51329
+  dps: 138488.06587
+  tps: 117986.00565
  }
 }
 dps_results: {
@@ -1846,8 +1846,8 @@ dps_results: {
 dps_results: {
  key: "TestEnhancement-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 132018.78071
-  tps: 111627.51329
+  dps: 134231.59024
+  tps: 113558.26165
  }
 }
 dps_results: {

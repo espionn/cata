@@ -45,6 +45,7 @@ func init() {
 			DPM: character.NewRPPMProcManager(
 				4441,
 				true,
+				false,
 				core.ProcMaskDirect|core.ProcMaskProc,
 				core.RPPMConfig{
 					PPM: 2.2,
@@ -92,6 +93,7 @@ func init() {
 				DPM: character.NewRPPMProcManager(
 					4442,
 					true,
+					false,
 					core.ProcMaskDirect|core.ProcMaskProc,
 					core.RPPMConfig{
 						PPM: 2.2,
@@ -154,6 +156,7 @@ func init() {
 				DPM: character.NewRPPMProcManager(
 					effectId,
 					true,
+					false,
 					core.ProcMaskMelee|core.ProcMaskMeleeProc,
 					core.RPPMConfig{
 						PPM: 2.53,
@@ -195,6 +198,7 @@ func init() {
 			DPM: character.NewRPPMProcManager(
 				4445,
 				true,
+				false,
 				core.ProcMaskDirect|core.ProcMaskProc,
 				core.RPPMConfig{
 					PPM: 5.5,
@@ -229,6 +233,7 @@ func init() {
 			DPM: character.NewRPPMProcManager(
 				4446,
 				true,
+				false,
 				core.ProcMaskDirect|core.ProcMaskProc,
 				core.RPPMConfig{
 					PPM:         3.67,
@@ -271,6 +276,7 @@ func init() {
 			DPM: character.NewRPPMProcManager(
 				4443,
 				true,
+				false,
 				core.ProcMaskDirect|core.ProcMaskProc,
 				core.RPPMConfig{
 					PPM:         9.17,

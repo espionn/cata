@@ -89,8 +89,8 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 138767.67785
-  tps: 99525.05896
+  dps: 144667.85837
+  tps: 105359.46168
   hps: 1930.27674
  }
 }
@@ -465,8 +465,8 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 138767.67785
-  tps: 99525.05896
+  dps: 139882.66679
+  tps: 99336.3403
   hps: 1930.27674
  }
 }

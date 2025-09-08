@@ -58,7 +58,7 @@ func init() {
 		proctrigger := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 			Name:    label,
 			Harmful: true,
-			DPM: character.NewRPPMProcManager(102246, false, core.ProcMaskSpellOrSpellProc, core.RPPMConfig{
+			DPM: character.NewRPPMProcManager(102246, false, false, core.ProcMaskSpellOrSpellProc, core.RPPMConfig{
 				PPM: 2.61100006104,
 			}.WithHasteMod().
 				WithSpecMod(0.25, proto.Spec_SpecArcaneMage).
@@ -134,6 +134,7 @@ func init() {
 				Harmful:  true,
 				ICD:      time.Second * 3,
 				DPM: character.NewRPPMProcManager(itemID,
+					false,
 					false,
 					core.ProcMaskMeleeOrMeleeProc|core.ProcMaskRangedOrRangedProc,
 					core.RPPMConfig{

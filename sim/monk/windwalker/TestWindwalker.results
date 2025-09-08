@@ -185,9 +185,9 @@ dps_results: {
 dps_results: {
  key: "TestWindwalker-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 157289.76275
-  tps: 146891.44689
-  hps: 7597.49293
+  dps: 166099.57442
+  tps: 155639.86362
+  hps: 7617.48657
  }
 }
 dps_results: {
@@ -2097,9 +2097,9 @@ dps_results: {
 dps_results: {
  key: "TestWindwalker-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 157289.76275
-  tps: 146891.44689
-  hps: 7597.49293
+  dps: 157220.64214
+  tps: 146824.4556
+  hps: 7621.05616
  }
 }
 dps_results: {
