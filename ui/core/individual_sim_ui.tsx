@@ -441,8 +441,6 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 	}
 
 	private addSettingsTab() {
-		if (this.disabled) { return }
-
 		new SettingsTab(this.simTabContentsContainer, this);
 	}
 
@@ -451,14 +449,10 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 	}
 
 	private addRotationTab() {
-		if (this.disabled) { return }
-
 		new RotationTab(this.simTabContentsContainer, this);
 	}
 
 	private addDetailedResultsTab() {
-		if (this.disabled) { return }
-
 		const detailedResults = (<div className="detailed-results"></div>) as HTMLElement;
 		this.addTab(i18n.t('results.title'), 'detailed-results-tab', detailedResults);
 
