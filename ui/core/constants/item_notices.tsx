@@ -8,7 +8,7 @@ export const MISSING_RANDOM_SUFFIX_WARNING = <p className="mb-0">Please select a
 
 const MISSING_IMPLEMENTATION_WARNING = (
 	<>
-		<p className="fw-bold">This item is not implemented!</p>
+		<p className="fw-bold">This item effect (on-use or proc) is not implemented!</p>
 		<p>We are working hard on gathering all the old resources to allow for an initial implementation.</p>
 		<WantToHelpMessage />
 	</>
@@ -27,7 +27,7 @@ const WILL_NOT_BE_IMPLEMENTED_WARNING = <>The equip/use effect on this item will
 
 const WILL_NOT_BE_IMPLEMENTED_ITEMS: number[] = [];
 
-const TENTATIVE_IMPLEMENTATION_ITEMS: number[] = [];
+const TENTATIVE_IMPLEMENTATION_ITEMS: number[] = [95346, 95347, 95344];
 
 export const ITEM_NOTICES = new Map<number, ItemNoticeData>([
 	...WILL_NOT_BE_IMPLEMENTED_ITEMS.map((itemID): [number, ItemNoticeData] => [
