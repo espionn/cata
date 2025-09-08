@@ -78,6 +78,9 @@ type FeralDruid struct {
 	Shred          *druid.DruidSpell
 	TigersFury     *druid.DruidSpell
 
+	// Bonus references
+	FeralFuryBonus *core.Aura
+
 	tempSnapshotAura *core.Aura
 }
 

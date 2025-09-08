@@ -35,8 +35,8 @@ func (cat *FeralDruid) applyOmenOfClarity() {
 			for _, spell := range affectedSpells {
 				spell.Cost.PercentModifier *= -1
 			}
-			if cat.Druid.FeralFuryAura != nil {
-				cat.Druid.FeralFuryAura.Activate(sim)
+			if cat.FeralFuryBonus.IsActive() {
+				cat.FeralFuryAura.Activate(sim)
 			}
 		},
 

@@ -21,12 +21,6 @@ func (cat *FeralDruid) registerTigersFurySpell() {
 
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			aura.Unit.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= 1.15
-			if cat.Druid.TigersFury4PT15Aura != nil {
-				cat.Druid.TigersFury4PT15Aura.Activate(sim)
-			}
-			if cat.Druid.FeralRageAura != nil {
-				cat.Druid.FeralRageAura.Activate(sim)
-			}
 		},
 
 		OnExpire: func(aura *core.Aura, _ *core.Simulation) {
