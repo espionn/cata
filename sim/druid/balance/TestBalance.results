@@ -79,14 +79,6 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestBalance-AllItems-BattlegearoftheShatteredVale"
- value: {
-  dps: 72379.27964
-  tps: 73856.22881
-  hps: 15505.9879
- }
-}
-dps_results: {
  key: "TestBalance-AllItems-BurningPrimalDiamond"
  value: {
   dps: 92996.95216

@@ -130,15 +130,6 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestGuardian-AllItems-BattlegearoftheShatteredVale"
- value: {
-  dps: 105966.75001
-  tps: 560054.45819
-  dtps: 12946.74909
-  hps: 11527.78555
- }
-}
-dps_results: {
  key: "TestGuardian-AllItems-BlossomofPureSnow-89081"
  value: {
   dps: 108943.90599
