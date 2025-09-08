@@ -74,6 +74,8 @@ type Druid struct {
 	MightOfUrsocAura         *core.Aura
 	MoonkinFormAura          *core.Aura
 	ProwlAura                *core.Aura
+	StampedeAura             *core.Aura
+	StampedePendingAura      *core.Aura
 	SurvivalInstinctsAura    *core.Aura
 
 	form DruidForm

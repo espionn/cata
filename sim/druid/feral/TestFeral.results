@@ -919,6 +919,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFeral-AllItems-Gladiator'sSanctuary"
+ value: {
+  dps: 128696.55486
+  tps: 194953.19606
+  hps: 10676.02497
+ }
+}
+dps_results: {
  key: "TestFeral-AllItems-Gong-Lu,StrengthofXuen-102249"
  value: {
   dps: 114710.47824

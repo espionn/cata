@@ -247,6 +247,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBalance-AllItems-Gladiator'sSanctuary"
+ value: {
+  dps: 75820.61735
+  tps: 77239.06779
+  hps: 15777.70337
+ }
+}
+dps_results: {
  key: "TestBalance-AllItems-Gong-Lu,StrengthofXuen-102249"
  value: {
   dps: 94141.18156
