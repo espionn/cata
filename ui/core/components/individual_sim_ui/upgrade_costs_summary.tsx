@@ -44,7 +44,7 @@ export class UpgradeCostsSummary extends Component {
 		this.player = player;
 
 		this.container = new ContentBlock(this.rootElem, 'summary-table-container', {
-			header: { title: 'Upgrade Costs Summary' },
+			header: { title: 'Remaining Upgrade Costs' },
 			extraCssClasses: ['summary-table--upgrade-costs'],
 		});
 
@@ -56,7 +56,8 @@ export class UpgradeCostsSummary extends Component {
 		const itemsWithUpgrade = this.player
 			.getGear()
 			.asArray()
-			.filter((item): item is EquippedItem => !!(item?.upgrade && item.upgrade > 0));
+			// Ensure to only pick items that have scaling options
+			.filter((item): item is EquippedItem => !!(item?._item.scalingOptions && item.getMaxUpgradeCount() > 1));
 
 		const totals = itemsWithUpgrade.reduce<UpgradeSummaryTotal>(
 			(acc, item) => {
@@ -65,7 +66,7 @@ export class UpgradeCostsSummary extends Component {
 					key = 'honorPoints';
 				}
 
-				acc[key] += (COSTS.get(key)?.get(item._item.quality) || 0) * item.upgrade;
+				acc[key] += (COSTS.get(key)?.get(item._item.quality) || 0) * (item.getMaxUpgradeCount() - item.upgrade);
 
 				return acc;
 			},

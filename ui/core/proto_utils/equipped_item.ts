@@ -190,6 +190,10 @@ export class EquippedItem {
 		return scalingOptions;
 	}
 
+	getMaxUpgradeCount(): number {
+		return Object.keys(this.getUpgrades()).length;
+	}
+
 	equals(other: EquippedItem) {
 		if (!Item.equals(this._item, other.item)) return false;
 
