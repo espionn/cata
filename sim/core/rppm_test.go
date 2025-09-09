@@ -163,7 +163,16 @@ func TestProcManagerShouldProcForItemEffect(t *testing.T) {
 	sim := SetupFakeSim()
 	char := GetFakeCharacter([]proto.ItemSlot{proto.ItemSlot_ItemSlotTrinket1}, false)
 
-	procManager := char.NewRPPMProcManager(1, false, ProcMaskDirect, RPPMConfig{PPM: 2})
+	procManager := char.NewRPPMProcManager(1, false, false, ProcMaskDirect, RPPMConfig{PPM: 2})
+	if !procManager.Proc(sim, ProcMaskMeleeMHAuto, "Melee Swing") {
+		t.Fatal("Did not proc for 100% proc chance")
+	}
+}
+func TestProcManagerShouldProcForGemEffect(t *testing.T) {
+	sim := SetupFakeSim()
+	char := GetFakeCharacter([]proto.ItemSlot{proto.ItemSlot_ItemSlotHead}, false)
+
+	procManager := char.NewRPPMProcManager(5678, false, true, ProcMaskDirect, RPPMConfig{PPM: 2})
 	if !procManager.Proc(sim, ProcMaskMeleeMHAuto, "Melee Swing") {
 		t.Fatal("Did not proc for 100% proc chance")
 	}
@@ -174,7 +183,7 @@ func TestProcManagerShouldBeConfigurable(t *testing.T) {
 	char := GetFakeCharacter([]proto.ItemSlot{proto.ItemSlot_ItemSlotTrinket1}, false)
 
 	const expectedChanceWithMod = 0.1
-	procManager := char.NewRPPMProcManager(1, false, ProcMaskDirect, RPPMConfig{PPM: 1.2}.WithClassMod(-0.5, 256))
+	procManager := char.NewRPPMProcManager(1, false, false, ProcMaskDirect, RPPMConfig{PPM: 1.2}.WithClassMod(-0.5, 256))
 	procChance := procManager.Chance(ProcMaskMelee, sim)
 	if math.Abs(procChance-expectedChanceWithMod) > 0.001 {
 		t.Fatalf("Proc chance wrong. Expected %f, got %f", expectedChanceWithMod, procChance)
@@ -197,7 +206,7 @@ func TestProcManagerShouldProcOffCorrectWeaponForItemEffect(t *testing.T) {
 
 		char := GetFakeCharacter([]proto.ItemSlot{itemSlot}, mask.Matches(ProcMaskRanged))
 
-		procManager := char.NewRPPMProcManager(1, false, ProcMaskDirect, RPPMConfig{PPM: 2})
+		procManager := char.NewRPPMProcManager(1, false, false, ProcMaskDirect, RPPMConfig{PPM: 2})
 		if mask.Matches(ProcMaskMeleeOHAuto) != (procManager.Chance(ProcMaskMeleeOHAuto, sim) > 0) {
 			t.Fatal("Wrong proc chance")
 		}
@@ -227,7 +236,7 @@ func TestProcManagerShouldProcOffCorrectWeaponForEnchantEffect(t *testing.T) {
 		}
 
 		char := GetFakeCharacter([]proto.ItemSlot{itemSlot}, mask.Matches(ProcMaskRanged))
-		procManager := char.NewRPPMProcManager(1234, true, ProcMaskDirect, RPPMConfig{PPM: 2})
+		procManager := char.NewRPPMProcManager(1234, true, false, ProcMaskDirect, RPPMConfig{PPM: 2})
 		if mask.Matches(ProcMaskMeleeOHAuto) != (procManager.Chance(ProcMaskMeleeOHAuto, sim) > 0) {
 			t.Fatal("Wrong proc chance")
 		}
@@ -245,7 +254,7 @@ func TestProcManagerShouldProcOffCorrectWeaponForEnchantEffect(t *testing.T) {
 func TestProcManagerShouldProcIndependentForSameEffect(t *testing.T) {
 	sim := SetupFakeSim()
 	char := GetFakeCharacter([]proto.ItemSlot{proto.ItemSlot_ItemSlotMainHand, proto.ItemSlot_ItemSlotOffHand}, false)
-	procManager := char.NewRPPMProcManager(1234, true, ProcMaskDirect, RPPMConfig{PPM: 2})
+	procManager := char.NewRPPMProcManager(1234, true, false, ProcMaskDirect, RPPMConfig{PPM: 2})
 	if !procManager.Proc(sim, ProcMaskMeleeMHAuto, "MH Auto") {
 		t.Fatal("Wrong proc")
 	}
@@ -277,6 +286,9 @@ func GetFakeCharacter(slots []proto.ItemSlot, withRangedWeapon bool) *Character 
 					Ilvl: 528,
 				},
 			},
+			Gems: []Gem{
+				{ID: 5678},
+			},
 		}
 
 		if slots[idx] == proto.ItemSlot_ItemSlotMainHand && withRangedWeapon {
@@ -285,6 +297,8 @@ func GetFakeCharacter(slots []proto.ItemSlot, withRangedWeapon bool) *Character 
 		} else if slots[idx] == proto.ItemSlot_ItemSlotMainHand || slots[idx] == proto.ItemSlot_ItemSlotOffHand {
 			item.Type = proto.ItemType_ItemTypeWeapon
 			item.HandType = proto.HandType_HandTypeOneHand
+		} else if slots[idx] == proto.ItemSlot_ItemSlotHead {
+			item.Type = proto.ItemType_ItemTypeHead
 		} else {
 			item.Type = proto.ItemType_ItemTypeTrinket
 		}

@@ -87,8 +87,8 @@ dps_results: {
 dps_results: {
  key: "TestProtection-AllItems-BadJuju-96781"
  value: {
-  dps: 165503.34384
-  tps: 1.14491233115e+06
+  dps: 165518.91628
+  tps: 1.14502133824e+06
   dtps: 36612.93275
   hps: 32128.46868
  }
@@ -195,10 +195,10 @@ dps_results: {
 dps_results: {
  key: "TestProtection-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 169310.27477
-  tps: 1.17074224875e+06
-  dtps: 36918.42151
-  hps: 33007.84671
+  dps: 178441.91219
+  tps: 1.23451037201e+06
+  dtps: 36814.94774
+  hps: 33044.0549
  }
 }
 dps_results: {
@@ -213,8 +213,8 @@ dps_results: {
 dps_results: {
  key: "TestProtection-AllItems-Cha-Ye'sEssenceofBrilliance-96888"
  value: {
-  dps: 170428.60895
-  tps: 1.17860437415e+06
+  dps: 170418.00253
+  tps: 1.17853012921e+06
   dtps: 38895.77986
   hps: 32130.02155
  }
@@ -870,10 +870,10 @@ dps_results: {
 dps_results: {
  key: "TestProtection-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 170943.63357
-  tps: 1.18269418146e+06
-  dtps: 36028.55227
-  hps: 33331.89955
+  dps: 170816.739
+  tps: 1.18180442446e+06
+  dtps: 36035.56252
+  hps: 33331.78754
  }
 }
 dps_results: {
@@ -1014,8 +1014,8 @@ dps_results: {
 dps_results: {
  key: "TestProtection-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 173068.48851
-  tps: 1.19725145694e+06
+  dps: 173613.38316
+  tps: 1.20106571945e+06
   dtps: 36716.24719
   hps: 33064.88445
  }
@@ -1374,10 +1374,10 @@ dps_results: {
 dps_results: {
  key: "TestProtection-AllItems-IndomitablePrimalDiamond"
  value: {
-  dps: 168319.7612
-  tps: 1.16391315756e+06
-  dtps: 36834.39985
-  hps: 32991.8356
+  dps: 168138.02919
+  tps: 1.16277082354e+06
+  dtps: 30349.91348
+  hps: 32970.83792
  }
 }
 dps_results: {
@@ -2184,10 +2184,10 @@ dps_results: {
 dps_results: {
  key: "TestProtection-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 165611.15908
-  tps: 1.14554729394e+06
+  dps: 165617.72991
+  tps: 1.14559328974e+06
   dtps: 38776.33002
-  hps: 32220.11349
+  hps: 32220.27072
  }
 }
 dps_results: {
@@ -2328,10 +2328,10 @@ dps_results: {
 dps_results: {
  key: "TestProtection-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 169310.27477
-  tps: 1.17074224875e+06
-  dtps: 36918.42151
-  hps: 33007.84671
+  dps: 169489.82564
+  tps: 1.17200205482e+06
+  dtps: 35914.79846
+  hps: 33016.25875
  }
 }
 dps_results: {
@@ -2850,8 +2850,8 @@ dps_results: {
 dps_results: {
  key: "TestProtection-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 174071.38129
-  tps: 1.20433815437e+06
+  dps: 176286.78762
+  tps: 1.21601445559e+06
   dtps: 38895.77986
   hps: 32130.02155
  }
@@ -2985,8 +2985,8 @@ dps_results: {
 dps_results: {
  key: "TestProtection-AllItems-Wushoolay'sFinalChoice-96785"
  value: {
-  dps: 165400.37005
-  tps: 1.14421330853e+06
+  dps: 165408.76809
+  tps: 1.14427209484e+06
   dtps: 38895.77986
   hps: 32130.02155
  }

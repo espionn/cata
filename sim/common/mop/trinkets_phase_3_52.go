@@ -43,7 +43,7 @@ func init() {
 				Name:    label,
 				Harmful: true,
 				ICD:     time.Second * 10,
-				DPM: character.NewRPPMProcManager(itemID, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
+				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
 					PPM: 1.21000003815,
 				}),
 				Outcome:  core.OutcomeLanded,
@@ -109,7 +109,7 @@ func init() {
 				Name:    label,
 				Harmful: true,
 				ICD:     time.Second * 3,
-				DPM: character.NewRPPMProcManager(itemID, false, core.ProcMaskSpellHealing, core.RPPMConfig{
+				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskSpellHealing, core.RPPMConfig{
 					PPM: 0.95999997854,
 				}.WithHasteMod()),
 				Outcome:  core.OutcomeLanded,
@@ -159,7 +159,7 @@ func init() {
 				Name:    label,
 				Harmful: true,
 				ICD:     time.Second * 10,
-				DPM: character.NewRPPMProcManager(itemID, false, core.ProcMaskSpellOrSpellProc, core.RPPMConfig{
+				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskSpellOrSpellProc, core.RPPMConfig{
 					PPM: 1.21000003815,
 				}),
 				Outcome:  core.OutcomeLanded,
@@ -207,7 +207,7 @@ func init() {
 				Name:    label,
 				Harmful: true,
 				ICD:     time.Second * 10,
-				DPM: character.NewRPPMProcManager(itemID, false, core.ProcMaskSpellOrSpellProc, core.RPPMConfig{
+				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskSpellOrSpellProc, core.RPPMConfig{
 					PPM: 1.21000003815,
 				}),
 				Outcome:  core.OutcomeLanded,
@@ -290,7 +290,7 @@ func init() {
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 				Name:    label,
 				Harmful: true,
-				DPM: character.NewRPPMProcManager(itemID, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
+				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
 					PPM: 3.5,
 				}),
 				ICD:      time.Second * 5,
@@ -340,7 +340,7 @@ func init() {
 				Name:    label,
 				Harmful: true,
 				ICD:     time.Second * 17,
-				DPM: character.NewRPPMProcManager(itemID, false, core.ProcMaskSpellHealing, core.RPPMConfig{
+				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskSpellHealing, core.RPPMConfig{
 					PPM: 1.63999998569,
 				}.WithHasteMod()),
 				Outcome:  core.OutcomeLanded,
@@ -429,7 +429,7 @@ func init() {
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 				Name:    label,
 				Harmful: true,
-				DPM: character.NewRPPMProcManager(itemID, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
+				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
 					PPM: 3.5,
 				}),
 				ICD:      time.Second * 5,
@@ -474,7 +474,7 @@ func init() {
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 				Name:    label,
 				Harmful: true,
-				DPM: character.NewRPPMProcManager(itemID, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
+				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
 					PPM: 0.72000002861,
 				}.WithCritMod()),
 				ICD:      time.Second * 10,
@@ -516,7 +516,7 @@ func init() {
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 				Name:    label,
 				Harmful: true,
-				DPM: character.NewRPPMProcManager(itemID, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
+				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
 					PPM: 0.57999998331,
 				}.WithApproximateIlvlMod(1.0, 528).
 					WithClassMod(-0.40000000596, int(1<<proto.Class_ClassWarlock)).

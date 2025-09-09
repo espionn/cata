@@ -280,7 +280,9 @@ func (ai *ShaAI) registerSubmerge() {
 
 func (ai *ShaAI) Reset(sim *core.Simulation) {
 	ai.Target.Enable(sim)
-	ai.TankSwapSpell.CD.Use(sim)
+	if ai.TankUnit != nil {
+		ai.TankSwapSpell.CD.Use(sim)
+	}
 	ai.Submerge.CD.Set(core.DurationFromSeconds(sim.RandomFloat("Submerge Timing") * ai.Submerge.CD.Duration.Seconds()))
 }
 

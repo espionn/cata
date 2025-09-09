@@ -25,8 +25,12 @@ func TestBlood(t *testing.T) {
 
 			GearSet: core.GetGearSet("../../../ui/death_knight/blood/gear_sets", "p1"),
 
-			Talents:     BloodTalents,
-			Glyphs:      BloodDefaultGlyphs,
+			Talents: BloodTalents,
+			Glyphs:  BloodDefaultGlyphs,
+			OtherTalentSets: []core.TalentsCombo{
+				{Label: "RC-example-build", Talents: AltTalents, Glyphs: AltGlyphs},
+			},
+
 			Consumables: FullConsumesSpec,
 			SpecOptions: core.SpecOptionsCombo{Label: "Basic", SpecOptions: PlayerOptionsBlood},
 			Rotation:    core.GetAplRotation("../../../ui/death_knight/blood/apls", "defensive"),
@@ -47,6 +51,16 @@ var BloodDefaultGlyphs = &proto.Glyphs{
 	Major2: int32(proto.DeathKnightMajorGlyph_GlyphOfRegenerativeMagic),
 	Major3: int32(proto.DeathKnightMajorGlyph_GlyphOfIceboundFortitude),
 	Minor1: int32(proto.DeathKnightMinorGlyph_GlyphOfTheLongWinter),
+}
+
+var AltTalents = "121131"
+var AltGlyphs = &proto.Glyphs{
+	Major1: 43826,
+	Major2: 43825,
+	Major3: 104049,
+	Minor1: 43550,
+	Minor2: 43672,
+	Minor3: 104101,
 }
 
 var PlayerOptionsBlood = &proto.Player_BloodDeathKnight{

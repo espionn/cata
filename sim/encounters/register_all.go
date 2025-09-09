@@ -4,9 +4,6 @@ import (
 	"github.com/wowsims/mop/sim/core"
 	"github.com/wowsims/mop/sim/core/proto"
 	"github.com/wowsims/mop/sim/core/stats"
-	"github.com/wowsims/mop/sim/encounters/bwd"
-	"github.com/wowsims/mop/sim/encounters/dragonsoul"
-	"github.com/wowsims/mop/sim/encounters/firelands"
 	"github.com/wowsims/mop/sim/encounters/hof"
 	"github.com/wowsims/mop/sim/encounters/msv"
 	"github.com/wowsims/mop/sim/encounters/toes"
@@ -15,9 +12,6 @@ import (
 func init() {
 	AddDefaultPresetEncounter()
 	addMovementAI()
-	bwd.Register()
-	firelands.Register()
-	dragonsoul.Register()
 	msv.Register()
 	hof.Register()
 	toes.Register()

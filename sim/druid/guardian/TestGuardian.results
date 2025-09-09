@@ -96,10 +96,10 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-BadJuju-96781"
  value: {
-  dps: 113051.52944
-  tps: 601395.16216
-  dtps: 13120.39863
-  hps: 10778.68745
+  dps: 113144.47959
+  tps: 601996.84671
+  dtps: 13085.88631
+  hps: 10846.73403
  }
 }
 dps_results: {
@@ -195,10 +195,10 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 106895.13999
-  tps: 574760.41273
-  dtps: 14102.01364
-  hps: 11416.92823
+  dps: 113453.53491
+  tps: 616746.79719
+  dtps: 14352.36035
+  hps: 11615.2513
  }
 }
 dps_results: {
@@ -915,10 +915,10 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-Fen-Yu,FuryofXuen-102248"
  value: {
-  dps: 116912.23453
-  tps: 630293.25485
-  dtps: 13548.48551
-  hps: 11835.81262
+  dps: 116999.30391
+  tps: 630306.82097
+  dtps: 13421.834
+  hps: 11767.84805
  }
 }
 dps_results: {
@@ -1014,10 +1014,10 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 111545.36903
-  tps: 599869.47365
-  dtps: 14214.15097
-  hps: 11233.24466
+  dps: 111739.44217
+  tps: 600450.0073
+  dtps: 14213.8527
+  hps: 11253.88383
  }
 }
 dps_results: {
@@ -1030,12 +1030,21 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestGuardian-AllItems-Gladiator'sSanctuary"
+ value: {
+  dps: 113239.45603
+  tps: 597770.96905
+  dtps: 12069.46525
+  hps: 11999.9736
+ }
+}
+dps_results: {
  key: "TestGuardian-AllItems-Gong-Lu,StrengthofXuen-102249"
  value: {
-  dps: 112452.69958
-  tps: 613301.48619
-  dtps: 13738.67091
-  hps: 11778.51364
+  dps: 112633.94814
+  tps: 614111.21275
+  dtps: 13680.52795
+  hps: 11633.25931
  }
 }
 dps_results: {
@@ -1357,7 +1366,7 @@ dps_results: {
  key: "TestGuardian-AllItems-Horridon'sLastGasp-96757"
  value: {
   dps: 107205.76267
-  tps: 572536.45214
+  tps: 572536.53072
   dtps: 14252.30721
   hps: 11051.12965
  }
@@ -1374,10 +1383,10 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-IndomitablePrimalDiamond"
  value: {
-  dps: 106209.14862
-  tps: 571334.74075
-  dtps: 14172.76594
-  hps: 11464.78426
+  dps: 106257.89266
+  tps: 571864.98784
+  dtps: 12109.28019
+  hps: 11315.12175
  }
 }
 dps_results: {
@@ -2202,10 +2211,10 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 115856.281
-  tps: 619249.90511
-  dtps: 13059.73924
-  hps: 10976.95851
+  dps: 115784.2933
+  tps: 616991.95785
+  dtps: 13249.86371
+  hps: 11085.04659
  }
 }
 dps_results: {
@@ -2337,10 +2346,10 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 106895.13999
-  tps: 574760.41273
-  dtps: 14102.01364
-  hps: 11416.92823
+  dps: 107303.49601
+  tps: 574074.10347
+  dtps: 14082.86623
+  hps: 11280.4115
  }
 }
 dps_results: {
@@ -2868,10 +2877,10 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 110024.20854
-  tps: 585139.07851
-  dtps: 14335.33445
-  hps: 11124.27627
+  dps: 109828.38773
+  tps: 582064.01826
+  dtps: 14275.75388
+  hps: 11042.88741
  }
 }
 dps_results: {
@@ -2967,8 +2976,8 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-Xing-Ho,BreathofYu'lon-102246"
  value: {
-  dps: 106797.83252
-  tps: 571333.02817
+  dps: 106821.74145
+  tps: 571428.4365
   dtps: 13864.67774
   hps: 11765.61746
  }

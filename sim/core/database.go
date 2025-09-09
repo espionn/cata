@@ -428,6 +428,12 @@ func (equipment *Equipment) containsItemInSlots(itemID int32, possibleSlots []pr
 	})
 }
 
+func (equipment *Equipment) containsGemInSlot(itemID int32, slot proto.ItemSlot) bool {
+	return slices.ContainsFunc(equipment[slot].Gems, func(gem Gem) bool {
+		return gem.ID == itemID
+	})
+}
+
 func GetEnchantByEffectID(effectID int32) *Enchant {
 	if enchant, ok := EnchantsByEffectID[effectID]; ok {
 		return &enchant
@@ -797,7 +803,6 @@ func eligibleSlotsForItem(item *Item, isFuryWarrior bool) []proto.ItemSlot {
 	if item == nil {
 		return nil
 	}
-
 	if slots, ok := itemTypeToSlotsMap[item.Type]; ok {
 		return slots
 	}
