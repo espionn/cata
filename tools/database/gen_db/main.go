@@ -287,7 +287,7 @@ func main() {
 				craftedSpellIds = append(craftedSpellIds, crafted.SpellId)
 			}
 			// Add Eye Of The Black Prince gem socket to Throne of Thunder weapons.
-			if drop := source.GetDrop(); drop != nil && (item.Type == proto.ItemType_ItemTypeWeapon || item.Type == proto.ItemType_ItemTypeRanged) && drop.ZoneId == 6622 {
+			if drop := source.GetDrop(); drop != nil && (item.Type == proto.ItemType_ItemTypeWeapon || item.Type == proto.ItemType_ItemTypeRanged) && (item.WeaponType != proto.WeaponType_WeaponTypeOffHand && item.WeaponType != proto.WeaponType_WeaponTypeShield) && drop.ZoneId == 6622 {
 				item.GemSockets = append(item.GemSockets, proto.GemColor_GemColorPrismatic)
 			}
 		}
