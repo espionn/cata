@@ -42,7 +42,7 @@ func createHeroicShaPreset(raidPrefix string, raidSize int32, bossHealth float64
 		AI: makeShaAI(raidSize),
 	})
 
-	core.AddPresetEncounter(bossName + " P2", []string{
+	core.AddPresetEncounter(bossName+" P2", []string{
 		raidPrefix + "/" + bossName,
 	})
 }
@@ -105,7 +105,7 @@ func (ai *ShaAI) registerThrash() {
 				ai.lastAutoTime = sim.CurrentTime
 
 				for range 2 {
-					aura.Unit.AutoAttacks.MHAuto().Cast(sim, result.Target) 
+					aura.Unit.AutoAttacks.MHAuto().Cast(sim, result.Target)
 				}
 
 				ai.numThrashesSinceLastDreadThrash += 1
@@ -114,7 +114,7 @@ func (ai *ShaAI) registerThrash() {
 			}
 		},
 	})
-	
+
 	ai.DreadThrashAura = ai.Target.RegisterAura(core.Aura{
 		Label:    "Dread Thrash",
 		ActionID: core.ActionID{SpellID: 132007},
@@ -125,7 +125,7 @@ func (ai *ShaAI) registerThrash() {
 				ai.lastAutoTime = sim.CurrentTime
 
 				for range 4 {
-					aura.Unit.AutoAttacks.MHAuto().Cast(sim, result.Target) 
+					aura.Unit.AutoAttacks.MHAuto().Cast(sim, result.Target)
 				}
 
 				ai.numThrashesSinceLastDreadThrash = 0
@@ -169,7 +169,7 @@ func (ai *ShaAI) registerTankSwaps() {
 	ai.TankSwapDebuff = ai.TankUnit.RegisterAura(core.Aura{
 		Label:    "Naked and Afraid",
 		ActionID: actionID,
-		Duration: time.Second * 50,
+		Duration: time.Second * 55,
 
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			ai.Target.AutoAttacks.CancelAutoSwing(sim)
@@ -280,7 +280,9 @@ func (ai *ShaAI) registerSubmerge() {
 
 func (ai *ShaAI) Reset(sim *core.Simulation) {
 	ai.Target.Enable(sim)
-	ai.TankSwapSpell.CD.Use(sim)
+	if ai.TankUnit != nil {
+		ai.TankSwapSpell.CD.Use(sim)
+	}
 	ai.Submerge.CD.Set(core.DurationFromSeconds(sim.RandomFloat("Submerge Timing") * ai.Submerge.CD.Duration.Seconds()))
 }
 
@@ -294,6 +296,6 @@ func (ai *ShaAI) ExecuteCustomRotation(sim *core.Simulation) {
 	} else if ai.TankSwapSpell.IsReady(sim) {
 		ai.TankSwapSpell.Cast(sim, ai.TankUnit)
 	} else {
-		ai.Target.ExtendGCDUntil(sim, sim.CurrentTime + core.BossGCD)
+		ai.Target.ExtendGCDUntil(sim, sim.CurrentTime+core.BossGCD)
 	}
 }

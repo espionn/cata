@@ -75,7 +75,7 @@ dps_results: {
 dps_results: {
  key: "TestElemental-AllItems-BadJuju-96781"
  value: {
-  dps: 127163.40617
+  dps: 127162.61838
   tps: 91270.18418
  }
 }
@@ -131,8 +131,8 @@ dps_results: {
 dps_results: {
  key: "TestElemental-AllItems-BreathoftheHydra-96827"
  value: {
-  dps: 140136.23794
-  tps: 102847.39653
+  dps: 140325.58263
+  tps: 102948.12256
  }
 }
 dps_results: {
@@ -187,8 +187,8 @@ dps_results: {
 dps_results: {
  key: "TestElemental-AllItems-Cha-Ye'sEssenceofBrilliance-96888"
  value: {
-  dps: 137573.77605
-  tps: 100980.74545
+  dps: 138444.73736
+  tps: 101571.84827
  }
 }
 dps_results: {
@@ -691,7 +691,7 @@ dps_results: {
 dps_results: {
  key: "TestElemental-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 123913.27068
+  dps: 123909.75622
   tps: 91267.41656
  }
 }
@@ -803,8 +803,8 @@ dps_results: {
 dps_results: {
  key: "TestElemental-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 126241.39931
-  tps: 93007.10586
+  dps: 126674.66585
+  tps: 93253.87302
  }
 }
 dps_results: {
@@ -1720,7 +1720,7 @@ dps_results: {
 dps_results: {
  key: "TestElemental-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 124047.60119
+  dps: 124051.16856
   tps: 91267.41656
  }
 }
@@ -1832,8 +1832,8 @@ dps_results: {
 dps_results: {
  key: "TestElemental-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 130248.84081
-  tps: 95685.34274
+  dps: 140489.46947
+  tps: 103786.23082
  }
 }
 dps_results: {
@@ -2245,8 +2245,8 @@ dps_results: {
 dps_results: {
  key: "TestElemental-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 137222.30811
-  tps: 100900.15579
+  dps: 138001.46816
+  tps: 100855.25771
  }
 }
 dps_results: {
@@ -2315,8 +2315,8 @@ dps_results: {
 dps_results: {
  key: "TestElemental-AllItems-Wushoolay'sFinalChoice-96785"
  value: {
-  dps: 136879.44354
-  tps: 100351.33555
+  dps: 137050.9944
+  tps: 100431.99549
  }
 }
 dps_results: {

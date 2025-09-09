@@ -208,8 +208,8 @@ dps_results: {
 dps_results: {
  key: "TestFrost-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 142235.89662
-  tps: 97179.46255
+  dps: 142166.37812
+  tps: 97142.83972
  }
 }
 dps_results: {
@@ -327,8 +327,8 @@ dps_results: {
 dps_results: {
  key: "TestFrost-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 139629.65358
-  tps: 95389.97495
+  dps: 139583.65104
+  tps: 95379.72316
  }
 }
 dps_results: {
@@ -348,8 +348,8 @@ dps_results: {
 dps_results: {
  key: "TestFrost-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 144353.53774
-  tps: 98268.31644
+  dps: 156365.85304
+  tps: 106602.19821
  }
 }
 dps_results: {
@@ -383,15 +383,15 @@ dps_results: {
 dps_results: {
  key: "TestFrost-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 152829.14626
-  tps: 104117.98524
+  dps: 154561.6253
+  tps: 104735.79194
  }
 }
 dps_results: {
  key: "TestFrost-AllItems-Wushoolay'sFinalChoice-96785"
  value: {
-  dps: 153839.15798
-  tps: 104989.21244
+  dps: 154217.341
+  tps: 105288.07655
  }
 }
 dps_results: {

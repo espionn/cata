@@ -89,9 +89,9 @@ dps_results: {
 dps_results: {
  key: "TestFeral-AllItems-BadJuju-96781"
  value: {
-  dps: 115235.50836
-  tps: 193168.92032
-  hps: 9081.97226
+  dps: 116409.58313
+  tps: 193166.59633
+  hps: 8973.0866
  }
 }
 dps_results: {
@@ -177,9 +177,9 @@ dps_results: {
 dps_results: {
  key: "TestFeral-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 103211.99031
-  tps: 169425.75613
-  hps: 8626.00517
+  dps: 108398.19478
+  tps: 178503.40393
+  hps: 8725.80912
  }
 }
 dps_results: {
@@ -905,9 +905,9 @@ dps_results: {
 dps_results: {
  key: "TestFeral-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 103436.0514
-  tps: 174807.3634
-  hps: 8749.50773
+  dps: 103929.46719
+  tps: 174016.26081
+  hps: 8860.62635
  }
 }
 dps_results: {
@@ -916,6 +916,14 @@ dps_results: {
   dps: 101382.64448
   tps: 170145.46828
   hps: 8517.41203
+ }
+}
+dps_results: {
+ key: "TestFeral-AllItems-Gladiator'sSanctuary"
+ value: {
+  dps: 128696.55486
+  tps: 194953.19606
+  hps: 10676.02497
  }
 }
 dps_results: {
@@ -1210,7 +1218,7 @@ dps_results: {
  key: "TestFeral-AllItems-Horridon'sLastGasp-96757"
  value: {
   dps: 97416.7835
-  tps: 158326.10692
+  tps: 158326.05667
   hps: 8944.81347
  }
 }
@@ -1961,9 +1969,9 @@ dps_results: {
 dps_results: {
  key: "TestFeral-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 115672.53138
-  tps: 186446.13601
-  hps: 8973.53077
+  dps: 116571.02293
+  tps: 186401.35987
+  hps: 9006.9003
  }
 }
 dps_results: {
@@ -2553,9 +2561,9 @@ dps_results: {
 dps_results: {
  key: "TestFeral-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 101534.66385
-  tps: 169769.16352
-  hps: 9339.25074
+  dps: 103728.91845
+  tps: 168432.33396
+  hps: 9906.88267
  }
 }
 dps_results: {

@@ -129,9 +129,9 @@ dps_results: {
 dps_results: {
  key: "TestDemonology-AllItems-BreathoftheHydra-96827"
  value: {
-  dps: 97908.41837
-  tps: 59588.9682
-  hps: 1181.7604
+  dps: 98004.89075
+  tps: 59468.37614
+  hps: 1181.01692
  }
 }
 dps_results: {
@@ -177,9 +177,9 @@ dps_results: {
 dps_results: {
  key: "TestDemonology-AllItems-Cha-Ye'sEssenceofBrilliance-96888"
  value: {
-  dps: 96217.84837
-  tps: 58447.58962
-  hps: 1106.29724
+  dps: 97882.36271
+  tps: 59383.65885
+  hps: 1117.07769
  }
 }
 dps_results: {
@@ -881,9 +881,9 @@ dps_results: {
 dps_results: {
  key: "TestDemonology-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 86516.34002
-  tps: 52690.56791
-  hps: 1125.25597
+  dps: 86460.94504
+  tps: 52656.75837
+  hps: 1118.93639
  }
 }
 dps_results: {
@@ -2065,9 +2065,9 @@ dps_results: {
 dps_results: {
  key: "TestDemonology-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 89328.79796
-  tps: 53701.05646
-  hps: 1107.7842
+  dps: 94442.84016
+  tps: 58170.1617
+  hps: 1231.57351
  }
 }
 dps_results: {
@@ -2529,9 +2529,9 @@ dps_results: {
 dps_results: {
  key: "TestDemonology-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 97521.19426
-  tps: 58857.53878
-  hps: 1141.61251
+  dps: 104951.89594
+  tps: 62264.93283
+  hps: 1109.6429
  }
 }
 dps_results: {
@@ -2609,9 +2609,9 @@ dps_results: {
 dps_results: {
  key: "TestDemonology-AllItems-Wushoolay'sFinalChoice-96785"
  value: {
-  dps: 96855.12237
-  tps: 58670.55949
-  hps: 1114.47552
+  dps: 97624.2009
+  tps: 59230.08508
+  hps: 1112.61682
  }
 }
 dps_results: {
