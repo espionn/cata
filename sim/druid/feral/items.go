@@ -69,13 +69,6 @@ func (cat *FeralDruid) registerFeralRage() {
 
 	var resultLanded bool
 
-	proc4pT16 := func(sim *core.Simulation, unit *core.Unit, isRoar bool) {
-		if resultLanded || isRoar {
-			unit.AddComboPoints(sim, 3, cpMetrics)
-		}
-		resultLanded = false
-	}
-
 	cat.FeralRageAura = cat.RegisterAura(core.Aura{
 		Label:    "Feral Rage 4PT16",
 		ActionID: actionID,
@@ -88,10 +81,18 @@ func (cat *FeralDruid) registerFeralRage() {
 		},
 
 		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-			if spell.Matches(druid.DruidSpellFinisher) {
-				proc4pT16(sim, aura.Unit, spell.Matches(druid.DruidSpellSavageRoar))
+			if !spell.Matches(druid.DruidSpellFinisher) {
+				return
+			}
+
+			if spell.Matches(druid.DruidSpellSavageRoar) || resultLanded {
+				aura.Unit.AddComboPoints(sim, 3, cpMetrics)
+				resultLanded = false
 				aura.Deactivate(sim)
 			}
 		},
 	})
+}
+
+func init() {
 }
