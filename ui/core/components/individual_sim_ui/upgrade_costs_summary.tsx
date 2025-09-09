@@ -70,7 +70,7 @@ export class UpgradeCostsSummary extends Component {
 						key = 'honorPoints';
 					}
 
-					acc[key] += (COSTS.get(key)?.get(item._item.quality) || 0) * (item.getMaxUpgradeCount() - item.upgrade);
+					acc[key] += (COSTS.get(key)?.get(item._item.quality) || 0) * (item.getMaxUpgradeCount() - 1 - item.upgrade);
 
 					return acc;
 				},
