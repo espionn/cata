@@ -59,27 +59,27 @@ export class UpgradeCostsSummary extends Component {
 			// Ensure to only pick items that have scaling options
 			.filter((item): item is EquippedItem => !!(item?._item.scalingOptions && item.getMaxUpgradeCount() > 1));
 
-		const totals = itemsWithUpgrade.reduce<UpgradeSummaryTotal>(
-			(acc, item) => {
-				let key: keyof UpgradeSummaryTotal = 'justicePoints';
-				if (item._item.name.includes("Gladiator's")) {
-					key = 'honorPoints';
-				}
+		const hasUpgradeItems = !!Object.keys(itemsWithUpgrade).length;
+		this.rootElem.classList[!hasUpgradeItems ? 'add' : 'remove']('hide');
 
-				acc[key] += (COSTS.get(key)?.get(item._item.quality) || 0) * (item.getMaxUpgradeCount() - item.upgrade);
+		if (hasUpgradeItems) {
+			const totals = itemsWithUpgrade.reduce<UpgradeSummaryTotal>(
+				(acc, item) => {
+					let key: keyof UpgradeSummaryTotal = 'justicePoints';
+					if (item._item.name.includes("Gladiator's")) {
+						key = 'honorPoints';
+					}
 
-				return acc;
-			},
-			{
-				justicePoints: 0,
-				honorPoints: 0,
-			},
-		);
+					acc[key] += (COSTS.get(key)?.get(item._item.quality) || 0) * (item.getMaxUpgradeCount() - item.upgrade);
 
-		const hasUpgradedItems = !!Object.keys(itemsWithUpgrade).length;
-		this.rootElem.classList[!hasUpgradedItems ? 'add' : 'remove']('hide');
+					return acc;
+				},
+				{
+					justicePoints: 0,
+					honorPoints: 0,
+				},
+			);
 
-		if (hasUpgradedItems) {
 			Object.entries(totals).forEach(([key, points]) => {
 				body.appendChild(
 					<div className="summary-table-row d-flex align-items-center">
