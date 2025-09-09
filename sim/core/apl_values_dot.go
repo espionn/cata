@@ -194,23 +194,40 @@ func (value *APLValueDotTickFrequency) String() string {
 	return fmt.Sprintf("Dot Tick Frequency(%s)", value.dot.Get().Spell.ActionID)
 }
 
-type APLValueDotPercentIncrease struct {
+type APLValueDotIncreaseCheck struct {
 	DefaultAPLValueImpl
-	spell  *Spell
-	target *Unit
+	spell    *Spell
+	target   *Unit
+	baseName string
 }
 
-func (rot *APLRotation) newValueDotPercentIncrease(config *proto.APLValueDotPercentIncrease, _ *proto.UUID) APLValue {
-	spell := rot.GetAPLSpell(config.SpellId)
+func (rot *APLRotation) newDotIncreaseValue(baseName string, spellId *proto.ActionID, targetUnit *proto.UnitReference) *APLValueDotIncreaseCheck {
+	spell := rot.GetAPLSpell(spellId)
 	if spell == nil || spell.expectedTickDamageInternal == nil {
 		return nil
 	}
-
-	target := rot.GetTargetUnit(config.TargetUnit).Get()
-	return &APLValueDotPercentIncrease{
-		spell:  spell,
-		target: target,
+	target := rot.GetTargetUnit(targetUnit).Get()
+	return &APLValueDotIncreaseCheck{
+		spell:    spell,
+		target:   target,
+		baseName: baseName,
 	}
+}
+
+func (value *APLValueDotIncreaseCheck) String() string {
+	return fmt.Sprintf("%s (%s)", value.baseName, value.spell.ActionID)
+}
+
+type APLValueDotPercentIncrease struct {
+	*APLValueDotIncreaseCheck
+}
+
+func (rot *APLRotation) newValueDotPercentIncrease(config *proto.APLValueDotPercentIncrease, _ *proto.UUID) APLValue {
+	parentImpl := rot.newDotIncreaseValue("Dot Percent Increase", config.SpellId, config.TargetUnit)
+	if parentImpl == nil {
+		return nil
+	}
+	return &APLValueDotPercentIncrease{APLValueDotIncreaseCheck: parentImpl}
 }
 
 func (value *APLValueDotPercentIncrease) Type() proto.APLValueType {
@@ -222,31 +239,19 @@ func (value *APLValueDotPercentIncrease) GetFloat(sim *Simulation) float64 {
 	if expectedDamage == 0 {
 		return 1
 	}
-
 	return value.spell.ExpectedTickDamage(sim, value.target)/expectedDamage - 1
 }
 
-func (value *APLValueDotPercentIncrease) String() string {
-	return fmt.Sprintf("Dot Percent Increase (%s)", value.spell.ActionID)
-}
-
 type APLValueDotCritPercentIncrease struct {
-	DefaultAPLValueImpl
-	spell  *Spell
-	target *Unit
+	*APLValueDotIncreaseCheck
 }
 
 func (rot *APLRotation) newValueDotCritPercentIncrease(config *proto.APLValueDotPercentIncrease, _ *proto.UUID) APLValue {
-	spell := rot.GetAPLSpell(config.SpellId)
-	if spell == nil || spell.expectedTickDamageInternal == nil {
+	parentImpl := rot.newDotIncreaseValue("Dot Crit Chance Percent Increase", config.SpellId, config.TargetUnit)
+	if parentImpl == nil {
 		return nil
 	}
-
-	target := rot.GetTargetUnit(config.TargetUnit).Get()
-	return &APLValueDotCritPercentIncrease{
-		spell:  spell,
-		target: target,
-	}
+	return &APLValueDotCritPercentIncrease{APLValueDotIncreaseCheck: parentImpl}
 }
 
 func (value *APLValueDotCritPercentIncrease) Type() proto.APLValueType {
@@ -270,27 +275,16 @@ func (value *APLValueDotCritPercentIncrease) getCritChance(useSnapshot bool) flo
 	return dot.Spell.SpellCritChance(value.target)
 }
 
-func (value *APLValueDotCritPercentIncrease) String() string {
-	return fmt.Sprintf("Dot Crit Chance Percent Increase (%s)", value.spell.ActionID)
-}
-
 type APLValueDotTickRatePercentIncrease struct {
-	DefaultAPLValueImpl
-	spell  *Spell
-	target *Unit
+	*APLValueDotIncreaseCheck
 }
 
 func (rot *APLRotation) newValueDotTickRatePercentIncrease(config *proto.APLValueDotPercentIncrease, _ *proto.UUID) APLValue {
-	spell := rot.GetAPLSpell(config.SpellId)
-	if spell == nil || spell.expectedTickDamageInternal == nil {
+	parentImpl := rot.newDotIncreaseValue("Dot Tick Rate Percent Increase", config.SpellId, config.TargetUnit)
+	if parentImpl == nil {
 		return nil
 	}
-
-	target := rot.GetTargetUnit(config.TargetUnit).Get()
-	return &APLValueDotTickRatePercentIncrease{
-		spell:  spell,
-		target: target,
-	}
+	return &APLValueDotTickRatePercentIncrease{APLValueDotIncreaseCheck: parentImpl}
 }
 
 func (value *APLValueDotTickRatePercentIncrease) Type() proto.APLValueType {
@@ -312,8 +306,4 @@ func (value *APLValueDotTickRatePercentIncrease) getTickRate(useSnapshot bool) f
 		return dot.TickPeriod().Seconds()
 	}
 	return dot.CalcTickPeriod().Round(time.Millisecond).Seconds()
-}
-
-func (value *APLValueDotTickRatePercentIncrease) String() string {
-	return fmt.Sprintf("Dot Tick Rate Percent Increase (%s)", value.spell.ActionID)
 }
