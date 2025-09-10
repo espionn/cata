@@ -474,7 +474,7 @@ export class Stats {
 			statDelta /= this.getPseudoStat(PseudoStat.PseudoStatCastSpeedMultiplier);
 		}
 
-		return statDelta;
+		return (statDelta == 0) ? 1e-12 : statDelta;
 	}
 
 	computeStatCapsDelta(statCaps: Stats): Stats {
