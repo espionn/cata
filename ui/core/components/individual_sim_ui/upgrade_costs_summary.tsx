@@ -6,6 +6,7 @@ import { Component } from '../component';
 import { ContentBlock } from '../content_block';
 import { IndividualSimUI } from '../../individual_sim_ui';
 import { EquippedItem } from '../../proto_utils/equipped_item';
+import { CopyButton } from '../copy_button';
 
 type UpgradeSummaryTotal = {
 	justicePoints: number;
@@ -57,7 +58,7 @@ export class UpgradeCostsSummary extends Component {
 			.getGear()
 			.asArray()
 			// Ensure to only pick items that have scaling options
-			.filter((item): item is EquippedItem => !!(item?._item.scalingOptions && item.getMaxUpgradeCount() > 1));
+			.filter((item): item is EquippedItem => !!(item?._item.scalingOptions && item.getMaxUpgradeCount() > 0));
 
 		const hasUpgradeItems = !!Object.keys(itemsWithUpgrade).length;
 		this.rootElem.classList[!hasUpgradeItems ? 'add' : 'remove']('hide');
@@ -70,7 +71,7 @@ export class UpgradeCostsSummary extends Component {
 						key = 'honorPoints';
 					}
 
-					acc[key] += (COSTS.get(key)?.get(item._item.quality) || 0) * (item.getMaxUpgradeCount() - 1 - item.upgrade);
+					acc[key] += (COSTS.get(key)?.get(item._item.quality) || 0) * (item.getMaxUpgradeCount() - item.upgrade);
 
 					return acc;
 				},
@@ -101,6 +102,35 @@ export class UpgradeCostsSummary extends Component {
 
 			// Replace rows in body
 			this.container.bodyElement.replaceChildren(body);
+
+			// Add / replace footer action area with copy button
+			const existingFooter = this.container.bodyElement.querySelector('.upgrade-costs-summary-footer');
+			if (existingFooter) existingFooter.remove();
+
+			this.container.bodyElement.appendChild(
+				<div className="upgrade-costs-summary-footer mt-2">
+					<div className="d-flex w-100 justify-content-end">
+						<button
+							className="btn btn-outline-primary"
+							onclick={() => {
+								let curGear = this.player.getGear();
+
+								for (const slot of curGear.getItemSlots()) {
+									const item = curGear.getEquippedItem(slot);
+
+									if (item) {
+										curGear = curGear.withEquippedItem(slot, item.withUpgrade(item.getMaxUpgradeCount()), this.player.canDualWield2H());
+									}
+								}
+
+								this.player.setGear(TypedEvent.nextEventID(), curGear);
+							}}>
+							<i className="fas fa-arrow-up me-1"></i>
+							Upgrade all items
+						</button>
+					</div>
+				</div>,
+			);
 
 			if (!this.container.headerElement) return;
 			const existingResetButton = this.container.headerElement.querySelector('.summary-table-reset-button');

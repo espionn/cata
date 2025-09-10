@@ -193,7 +193,7 @@ export class EquippedItem {
 	}
 
 	getMaxUpgradeCount(): number {
-		return Object.keys(this.getUpgrades()).length;
+		return Object.keys(this.getUpgrades()).length -1;
 	}
 
 	equals(other: EquippedItem) {
