@@ -9,6 +9,7 @@ import (
 
 func InferPhase(item *proto.UIItem) int32 {
 	ilvl := item.ScalingOptions[int32(proto.ItemLevelState_Base)].Ilvl
+	hasRandomSuffixOptions := len(item.RandomSuffixOptions) > 0
 	name := item.Name
 	description := item.NameDescription
 	quality := item.Quality
@@ -39,26 +40,6 @@ func InferPhase(item *proto.UIItem) int32 {
 		return 3
 	}
 
-	//- Any 476 epic item with random stats is 5.1
-	//- Any 496 epic item with random stats is 5.4
-	//- Any 516 epic items with random stats are 5.3
-	//- Any 535 epic items with random stats are 5.4
-	//- Any 489 random stat epic is 5.3
-	if item.RandPropPoints > 0 {
-		switch ilvl {
-		case 476:
-			return 2
-		case 489:
-			return 4
-		case 496:
-			return 5
-		case 516:
-			return 4
-		case 535:
-			return 5
-		}
-	}
-
 	//iLvl 600 legendary vs. epic
 	if ilvl == core.MaxIlvl {
 		if quality == proto.ItemQuality_ItemQualityLegendary {
@@ -71,11 +52,6 @@ func InferPhase(item *proto.UIItem) int32 {
 
 	//- Any item above ilvl 542 is 5.4 (except the 600 ilvl Epic Cloaks from the legendary questline)
 	if ilvl > 542 && quality < proto.ItemQuality_ItemQualityLegendary {
-		return 5
-	}
-
-	//- Any item ilvl 502 (Celestial) is 5.4
-	if ilvl == 502 && strings.Contains(description, "Celestial") {
 		return 5
 	}
 
@@ -153,9 +129,24 @@ func InferPhase(item *proto.UIItem) int32 {
 		}
 	}
 
-	// Any 489 random stat epic is 5.3
-	if ilvl >= 489 && len(item.RandomSuffixOptions) > 0 {
-		return 2
+	//- Any 476 epic item with random stats is 5.1
+	//- Any 496 epic item with random stats is 5.4
+	//- Any 516 epic items with random stats are 5.3
+	//- Any 535 epic items with random stats are 5.4
+	//- Any 489 random stat epic is 5.3
+	if hasRandomSuffixOptions {
+		switch ilvl {
+		case 476:
+			return 2
+		case 489:
+			return 4
+		case 496:
+			return 5
+		case 516:
+			return 4
+		case 535:
+			return 5
+		}
 	}
 
 	// high ilvl greens probably boosted
