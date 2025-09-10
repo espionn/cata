@@ -71,6 +71,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBalance-AllItems-BattlegearoftheHauntedForest"
+ value: {
+  dps: 72028.69524
+  tps: 73445.17154
+  hps: 15020.9264
+ }
+}
+dps_results: {
  key: "TestBalance-AllItems-BurningPrimalDiamond"
  value: {
   dps: 92996.95216

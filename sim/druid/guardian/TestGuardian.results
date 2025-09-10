@@ -121,6 +121,15 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestGuardian-AllItems-BattlegearoftheHauntedForest"
+ value: {
+  dps: 106569.75527
+  tps: 567396.86122
+  dtps: 13069.63271
+  hps: 11356.32468
+ }
+}
+dps_results: {
  key: "TestGuardian-AllItems-BlossomofPureSnow-89081"
  value: {
   dps: 108943.90599
