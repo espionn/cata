@@ -64,6 +64,8 @@ type FeralDruid struct {
 	// Aura references
 	ClearcastingAura        *core.Aura
 	DreamOfCenariusAura     *core.Aura
+	FeralFuryAura           *core.Aura
+	FeralRageAura           *core.Aura
 	HeartOfTheWildAura      *core.Aura
 	IncarnationAura         *core.Aura
 	PredatorySwiftnessAura  *core.Aura

@@ -47,7 +47,7 @@ func (cat *FeralDruid) registerFeralFury(setBonusTracker *core.Aura) {
 		ActionID: core.ActionID{SpellID: 144865},
 		Duration: time.Second * 6,
 
-		OnGain: func(aura *core.Aura, sim *core.Simulation) {
+		OnGain: func(_ *core.Aura, _ *core.Simulation) {
 			feralFuryMod.Activate()
 		},
 
@@ -57,7 +57,7 @@ func (cat *FeralDruid) registerFeralFury(setBonusTracker *core.Aura) {
 			}
 		},
 
-		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+		OnExpire: func(_ *core.Aura, _ *core.Simulation) {
 			feralFuryMod.Deactivate()
 		},
 	})
@@ -74,7 +74,7 @@ func (cat *FeralDruid) registerFeralRage() {
 		ActionID: actionID,
 		Duration: time.Second * 12,
 
-		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+		OnSpellHitDealt: func(_ *core.Aura, _ *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			if spell.Matches(druid.DruidSpellFinisher) && result.Landed() {
 				resultLanded = true
 			}

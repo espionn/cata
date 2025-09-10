@@ -19,7 +19,7 @@ func (cat *FeralDruid) registerTigersFurySpell() {
 		ActionID: actionID,
 		Duration: 6 * time.Second,
 
-		OnGain: func(aura *core.Aura, sim *core.Simulation) {
+		OnGain: func(aura *core.Aura, _ *core.Simulation) {
 			aura.Unit.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical] *= 1.15
 		},
 

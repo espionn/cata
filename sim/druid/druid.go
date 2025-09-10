@@ -68,8 +68,6 @@ type Druid struct {
 	BerserkCatAura           *core.Aura
 	CatFormAura              *core.Aura
 	FaerieFireAuras          core.AuraArray
-	FeralFuryAura            *core.Aura
-	FeralRageAura            *core.Aura
 	FrenziedRegenerationAura *core.Aura
 	LunarEclipseProcAura     *core.Aura
 	MightOfUrsocAura         *core.Aura
