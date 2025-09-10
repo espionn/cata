@@ -72,10 +72,17 @@ export class FiltersMenu extends BaseModal {
 
 		const sourceSection = this.newSection('Source');
 		sourceSection.classList.add('filters-menu-section-bool-list');
-		Sim.ALL_SOURCES.forEach(source => {
+		const sourceKeys = [...sourceNames.keys()];
+		Sim.ALL_SOURCES.sort((a, b) => {
+			const aIndex = sourceKeys.indexOf(a);
+			const bIndex = sourceKeys.indexOf(b);
+			return aIndex - bIndex;
+		}).forEach(source => {
+			const label = sourceNames.get(source);
+			if (!label) return;
 			new BooleanPicker<Sim>(sourceSection, player.sim, {
 				id: `filters-source-${source}`,
-				label: sourceNames.get(source),
+				label: label,
 				inline: true,
 				changedEvent: (sim: Sim) => sim.filtersChangeEmitter,
 				getValue: (sim: Sim) => sim.getFilters().sources.includes(source),
