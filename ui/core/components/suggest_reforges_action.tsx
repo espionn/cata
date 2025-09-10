@@ -1411,7 +1411,7 @@ export class ReforgeOptimizer {
 		const options: Options = {
 			timeout: maxSeconds * 1000,
 			maxIterations: maxIterations,
-			tolerance: this.includeGems ? 0.05 : 0.01,
+			tolerance: 0.01,
 		};
 		const startTimeMs: number = Date.now()
 		const solution = solve(model, options);
