@@ -1406,7 +1406,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 	dotCritPercentIncrease: inputBuilder({
 		label: 'Dot Crit Chance Increase %',
 		submenu: ['DoT'],
-		shortDescription: 'How much higher a new DoT\'s Critical Strike Chance would be compare to the old.',
+		shortDescription: 'How much higher a new DoT\'s Critical Strike Chance would be compared to the old.',
 		newValue: APLValueDotPercentIncrease.create,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', '')],
 	}),

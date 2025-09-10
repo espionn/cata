@@ -201,17 +201,21 @@ type APLValueDotIncreaseCheck struct {
 	baseName string
 }
 
-func (rot *APLRotation) newDotIncreaseValue(baseName string, spellId *proto.ActionID, targetUnit *proto.UnitReference) *APLValueDotIncreaseCheck {
-	spell := rot.GetAPLSpell(spellId)
+func (rot *APLRotation) newDotIncreaseValue(baseName string, config *proto.APLValueDotPercentIncrease) *APLValueDotIncreaseCheck {
+	spell := rot.GetAPLSpell(config.SpellId)
 	if spell == nil || spell.expectedTickDamageInternal == nil {
 		return nil
 	}
-	target := rot.GetTargetUnit(targetUnit).Get()
+	target := rot.GetTargetUnit(config.TargetUnit).Get()
 	return &APLValueDotIncreaseCheck{
 		spell:    spell,
 		target:   target,
 		baseName: baseName,
 	}
+}
+
+func (value *APLValueDotIncreaseCheck) Type() proto.APLValueType {
+	return proto.APLValueType_ValueTypeFloat
 }
 
 func (value *APLValueDotIncreaseCheck) String() string {
@@ -223,15 +227,11 @@ type APLValueDotPercentIncrease struct {
 }
 
 func (rot *APLRotation) newValueDotPercentIncrease(config *proto.APLValueDotPercentIncrease, _ *proto.UUID) APLValue {
-	parentImpl := rot.newDotIncreaseValue("Dot Percent Increase", config.SpellId, config.TargetUnit)
+	parentImpl := rot.newDotIncreaseValue("Dot Percent Increase", config)
 	if parentImpl == nil {
 		return nil
 	}
 	return &APLValueDotPercentIncrease{APLValueDotIncreaseCheck: parentImpl}
-}
-
-func (value *APLValueDotPercentIncrease) Type() proto.APLValueType {
-	return proto.APLValueType_ValueTypeFloat
 }
 
 func (value *APLValueDotPercentIncrease) GetFloat(sim *Simulation) float64 {
@@ -247,15 +247,11 @@ type APLValueDotCritPercentIncrease struct {
 }
 
 func (rot *APLRotation) newValueDotCritPercentIncrease(config *proto.APLValueDotPercentIncrease, _ *proto.UUID) APLValue {
-	parentImpl := rot.newDotIncreaseValue("Dot Crit Chance Percent Increase", config.SpellId, config.TargetUnit)
+	parentImpl := rot.newDotIncreaseValue("Dot Crit Chance Percent Increase", config)
 	if parentImpl == nil {
 		return nil
 	}
 	return &APLValueDotCritPercentIncrease{APLValueDotIncreaseCheck: parentImpl}
-}
-
-func (value *APLValueDotCritPercentIncrease) Type() proto.APLValueType {
-	return proto.APLValueType_ValueTypeFloat
 }
 
 func (value *APLValueDotCritPercentIncrease) GetFloat(sim *Simulation) float64 {
@@ -280,15 +276,11 @@ type APLValueDotTickRatePercentIncrease struct {
 }
 
 func (rot *APLRotation) newValueDotTickRatePercentIncrease(config *proto.APLValueDotPercentIncrease, _ *proto.UUID) APLValue {
-	parentImpl := rot.newDotIncreaseValue("Dot Tick Rate Percent Increase", config.SpellId, config.TargetUnit)
+	parentImpl := rot.newDotIncreaseValue("Dot Tick Rate Percent Increase", config)
 	if parentImpl == nil {
 		return nil
 	}
 	return &APLValueDotTickRatePercentIncrease{APLValueDotIncreaseCheck: parentImpl}
-}
-
-func (value *APLValueDotTickRatePercentIncrease) Type() proto.APLValueType {
-	return proto.APLValueType_ValueTypeFloat
 }
 
 func (value *APLValueDotTickRatePercentIncrease) GetFloat(sim *Simulation) float64 {
