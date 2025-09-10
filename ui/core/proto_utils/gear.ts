@@ -355,6 +355,19 @@ export class Gear extends BaseGear {
 
 		return curGear;
 	}
+	withoutUpgrades(canDualWield2H: boolean): Gear {
+		let curGear: Gear = this;
+
+		for (const slot of this.getItemSlots()) {
+			const item = this.getEquippedItem(slot);
+
+			if (item) {
+				curGear = curGear.withEquippedItem(slot, item.withUpgrade(0), canDualWield2H);
+			}
+		}
+
+		return curGear;
+	}
 
 	// Removes bonus gems from blacksmith profession bonus.
 	withoutBlacksmithSockets(): Gear {

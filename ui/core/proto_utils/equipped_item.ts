@@ -12,6 +12,7 @@ import {
 	ReforgeStat,
 	ScalingItemProperties,
 	Stat,
+	WeaponType,
 } from '../proto/common.js';
 import { UIEnchant as Enchant, UIGem as Gem, UIItem as Item } from '../proto/ui.js';
 import { distinct } from '../utils.js';
@@ -27,6 +28,7 @@ export const getWeaponDPS = (item: Item, upgradeStep: ItemLevelState = ItemLevel
 
 export const isThroneOfThunderWeapon = (item: Item) =>
 	[ItemType.ItemTypeWeapon, ItemType.ItemTypeRanged].includes(item.type) &&
+	![WeaponType.WeaponTypeOffHand, WeaponType.WeaponTypeShield].includes(item.weaponType) &&
 	item.phase == 3 &&
 	item.sources.some(itemSource => itemSource.source.oneofKind === 'drop' && itemSource.source.drop.zoneId === 6622);
 export const isShaTouchedWeapon = (item: Item) => item.gemSockets.some(socket => socket === GemColor.GemColorShaTouched);
@@ -188,6 +190,10 @@ export class EquippedItem {
 		// Make sure to always exclude Challenge Mode scaling options as those are handled globally
 		delete scalingOptions[ItemLevelState.ChallengeMode];
 		return scalingOptions;
+	}
+
+	getMaxUpgradeCount(): number {
+		return Object.keys(this.getUpgrades()).length;
 	}
 
 	equals(other: EquippedItem) {
