@@ -86,7 +86,7 @@ message APLAction {
     }
 }
 
-// NextIndex: 109
+// NextIndex: 111
 message APLValue {
 	UUID uuid = 85;
 
@@ -200,6 +200,8 @@ message APLValue {
         APLValueDotLowestRemainingTime dot_lowest_remaining_time = 104;
         APLValueDotTickFrequency dot_tick_frequency = 67;
 		APLValueDotPercentIncrease dot_percent_increase = 101;
+		APLValueDotPercentIncrease dot_crit_percent_increase = 109;
+        APLValueDotPercentIncrease dot_tick_rate_percent_increase = 110;
 
         // Sequence values
         APLValueSequenceIsComplete sequence_is_complete = 44;
