@@ -1,4 +1,130 @@
 {
+  "raidBuffs": {
+    "trueshotAura": true,
+    "serpentsSwiftness": true,
+    "arcaneBrilliance": true,
+    "elementalOath": true,
+    "blessingOfMight": true,
+    "blessingOfKings": true,
+    "powerWordFortitude": true,
+    "bloodlust": true,
+    "stormlashTotemCount": 4,
+    "skullBannerCount": 2
+  },
+  "debuffs": {
+    "weakenedBlows": true,
+    "physicalVulnerability": true,
+    "weakenedArmor": true,
+    "curseOfElements": true
+  },
+  "tanks": [
+    {
+      "type": "Player"
+    }
+  ],
+  "partyBuffs": {
+  },
+  "player": {
+    "name": "Player",
+    "race": "RaceBloodElf",
+    "class": "ClassPaladin",
+    "equipment": {
+      "items": [
+        {"id":87111,"gems":[76895,76642],"reforging":131},
+        {"id":90508,"reforging":138},
+        {"id":87113,"enchant":4805,"gems":[76654],"reforging":167},
+        {"id":86945,"enchant":4422,"reforging":140,"tinker":4897},
+        {"id":87109,"enchant":4420,"gems":[76699,76699],"reforging":131},
+        {"id":90506,"enchant":4415,"gems":[76699],"reforging":138},
+        {"id":87059,"enchant":4432,"gems":[76654,76699],"reforging":140,"tinker":4898},
+        {"id":86955,"gems":[76699,76654,76699],"reforging":153,"tinker":4223},
+        {"id":87112,"enchant":4824,"gems":[76667],"reforging":124},
+        {"id":86979,"enchant":4426,"gems":[76699],"reforging":139},
+        {"id":86968,"reforging":124},
+        {"id":86957},
+        {"id":87072},
+        {"id":89079},
+        {"id":87173,"enchant":4444,"gems":[89881,0],"reforging":138},
+        {"id":87050,"enchant":4993,"reforging":131}
+      ]
+    },
+    "consumables": {
+      "prepotId": 76095,
+      "potId": 76090,
+      "flaskId": 76087,
+      "foodId": 74656,
+      "conjuredId": 5512
+    },
+    "bonusStats": {
+      "apiVersion": 1,
+      "stats": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      "pseudoStats": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    },
+    "itemSwap": {
+      "items": [
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        }
+      ],
+      "prepullBonusStats": {
+        "apiVersion": 1,
+        "stats": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        "pseudoStats": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      }
+    },
+    "buffs": {
+      "painSuppressionCount": 1,
+      "vigilanceCount": 2
+    },
+    "protectionPaladin": {
+      "options": {
+        "classOptions": {
+          "seal": "Insight"
+        }
+      }
+    },
+    "talentsString": "313213",
+    "glyphs": {
+      "major1": 41101,
+      "major2": 45744,
+      "major3": 41096,
+      "minor1": 80581
+    },
+    "profession1": "Blacksmithing",
+    "profession2": "Engineering",
+    "cooldowns": {
+      "hpPercentForDefensives": 0.3
+    },
+    "rotation": {
       "type": "TypeAPL",
       "simple": {
         "cooldowns": {
@@ -40,4 +166,38 @@
         {"action":{"castSpell":{"spellId":{"spellId":114852,"tag":1}}}},
         {"action":{"castSpell":{"spellId":{"spellId":20925}}}}
       ]
+    },
+    "reactionTimeMs": 750,
+    "inFrontOfTarget": true,
+    "distanceFromTarget": 5,
+    "healingModel": {
+      "hps": 58682,
+      "cadenceSeconds": 0.4,
+      "cadenceVariation": 2.1,
+      "absorbFrac": 0.107,
+      "burstWindow": 6
+    }
+  },
+  "encounter": {
+    "apiVersion": 1,
+    "duration": 620,
+    "durationVariation": 16,
+    "executeProportion20": 0.2,
+    "executeProportion25": 0.25,
+    "executeProportion35": 0.35,
+    "executeProportion45": 0.45,
+    "executeProportion90": 0.9,
+    "targets": [
+      {
+        "id": 60999,
+        "name": "Sha of Fear 25 H",
+        "level": 93,
+        "mobType": "MobTypeElemental",
+        "stats": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24835,0,1632111860,0,0],
+        "minBaseDamage": 620921,
+        "damageSpread": 0.6195,
+        "swingSpeed": 2.5
+      }
+    ]
+  }
 }

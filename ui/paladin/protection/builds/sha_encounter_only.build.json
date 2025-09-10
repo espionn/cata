@@ -1,4 +1,57 @@
 {
+  "raidBuffs": {
+    "trueshotAura": true,
+    "serpentsSwiftness": true,
+    "arcaneBrilliance": true,
+    "elementalOath": true,
+    "blessingOfMight": true,
+    "blessingOfKings": true,
+    "powerWordFortitude": true,
+    "bloodlust": true,
+    "stormlashTotemCount": 4,
+    "skullBannerCount": 2
+  },
+  "debuffs": {
+    "weakenedBlows": true,
+    "physicalVulnerability": true,
+    "weakenedArmor": true,
+    "curseOfElements": true
+  },
+  "tanks": [
+    {
+      "type": "Player"
+    }
+  ],
+  "partyBuffs": {
+  },
+  "player": {
+    "name": "Player",
+    "race": "RaceBloodElf",
+    "class": "ClassPaladin",
+    "consumables": {
+      "prepotId": 76095,
+      "potId": 76090,
+      "flaskId": 76087,
+      "foodId": 74656,
+      "conjuredId": 5512
+    },
+    "buffs": {
+      "painSuppressionCount": 1,
+      "vigilanceCount": 2
+    },
+    "protectionPaladin": {
+      "options": {
+        "classOptions": {
+          "seal": "Insight"
+        }
+      }
+    },
+    "profession1": "Blacksmithing",
+    "profession2": "Engineering",
+    "cooldowns": {
+      "hpPercentForDefensives": 0.3
+    },
+    "rotation": {
       "type": "TypeAPL",
       "simple": {
         "cooldowns": {
@@ -40,4 +93,38 @@
         {"action":{"castSpell":{"spellId":{"spellId":114852,"tag":1}}}},
         {"action":{"castSpell":{"spellId":{"spellId":20925}}}}
       ]
+    },
+    "reactionTimeMs": 750,
+    "inFrontOfTarget": true,
+    "distanceFromTarget": 5,
+    "healingModel": {
+      "hps": 58682,
+      "cadenceSeconds": 0.4,
+      "cadenceVariation": 2.1,
+      "absorbFrac": 0.107,
+      "burstWindow": 6
+    }
+  },
+  "encounter": {
+    "apiVersion": 1,
+    "duration": 620,
+    "durationVariation": 16,
+    "executeProportion20": 0.2,
+    "executeProportion25": 0.25,
+    "executeProportion35": 0.35,
+    "executeProportion45": 0.45,
+    "executeProportion90": 0.9,
+    "targets": [
+      {
+        "id": 60999,
+        "name": "Sha of Fear 25 H",
+        "level": 93,
+        "mobType": "MobTypeElemental",
+        "stats": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24835,0,1632111860,0,0],
+        "minBaseDamage": 620921,
+        "damageSpread": 0.6195,
+        "swingSpeed": 2.5
+      }
+    ]
+  }
 }
