@@ -188,6 +188,8 @@ export class ReforgeOptimizer {
 	readonly freezeItemSlotsChangeEmitter = new TypedEvent<void>();
 	protected freezeItemSlots = false;
 	protected frozenItemSlots = new Map<ItemSlot, boolean>();
+	readonly includeTimeoutChangeEmitter = new TypedEvent<void>();
+	protected includeTimeout = true;
 	protected previousGear: Gear | null = null;
 	protected previousReforges = new Map<ItemSlot, ReforgeData>();
 	protected currentReforges = new Map<ItemSlot, ReforgeData>();
@@ -391,6 +393,28 @@ export class ReforgeOptimizer {
 		return false;
 	}
 
+	static getCappedStatKeys(coefficients: YalpsCoefficients, reforgeCaps: Stats, reforgeSoftCaps: StatCap[]): string[] {
+		const cappedStatKeys: string[] = [];
+
+		for (const [coefficientKey, value] of coefficients.entries()) {
+			if (coefficientKey.includes('PseudoStat')) {
+				const statKey = (PseudoStat as any)[coefficientKey] as PseudoStat;
+
+				if (pseudoStatIsCapped(statKey, reforgeCaps, reforgeSoftCaps)) {
+					cappedStatKeys.push(coefficientKey);
+				}
+			} else if (coefficientKey.includes('Stat')) {
+				const statKey = (Stat as any)[coefficientKey] as Stat;
+
+				if (statIsCapped(statKey, reforgeCaps, reforgeSoftCaps)) {
+					cappedStatKeys.push(coefficientKey);
+				}
+			}
+		}
+
+		return cappedStatKeys;
+	}
+
 	buildReforgeButtonTooltip() {
 		return (
 			<>
@@ -454,6 +478,11 @@ export class ReforgeOptimizer {
 	setIncludeGems(eventID: EventID, newValue: boolean) {
 		if (this.includeGems !== newValue) {
 			this.includeGems = newValue;
+
+			if (newValue) {
+				this.setIncludeTimeout(eventID, true);
+			}
+
 			this.includeGemsChangeEmitter.emit(eventID);
 		}
 	}
@@ -470,6 +499,13 @@ export class ReforgeOptimizer {
 			this.freezeItemSlots = newValue;
 			this.frozenItemSlots.clear();
 			this.freezeItemSlotsChangeEmitter.emit(eventID);
+		}
+	}
+
+	setIncludeTimeout(eventID: EventID, newValue: boolean) {
+		if (this.includeTimeout !== newValue) {
+			this.includeTimeout = newValue;
+			this.includeTimeoutChangeEmitter.emit(eventID);
 		}
 	}
 
@@ -589,6 +625,20 @@ export class ReforgeOptimizer {
 					},
 				});
 
+				const includeTimeoutInput = new BooleanPicker(null, this.player, {
+					extraCssClasses: ['mb-2'],
+					id: 'reforge-optimizer-include-timeout',
+					label: 'Limit execution time',
+					labelTooltip:
+						'If checked, the solver will error out if the total computation time exceeds 30 seconds. If unchecked, then total computation time will be capped at 1 hour instead.',
+					inline: true,
+					changedEvent: () => TypedEvent.onAny([this.includeTimeoutChangeEmitter, this.includeGemsChangeEmitter]),
+					getValue: () => this.includeTimeout,
+					setValue: (eventID, _player, newValue) => {
+						this.setIncludeTimeout(eventID, newValue);
+					},
+				});
+
 				const descriptionRef = ref<HTMLParagraphElement>();
 				instance.setContent(
 					<>
@@ -607,6 +657,7 @@ export class ReforgeOptimizer {
 						{this.buildSoftCapBreakpointsLimiter({ useSoftCapBreakpointsInput })}
 						{includeGemsInput.rootElem}
 						{includeEOTBPGemSocket.rootElem}
+						{includeTimeoutInput.rootElem}
 						{freezeItemSlotsInput.rootElem}
 						{this.buildFrozenSlotsInputs()}
 						{this.buildEPWeightsToggle({ useCustomEPValuesInput: useCustomEPValuesInput })}
@@ -1003,7 +1054,7 @@ export class ReforgeOptimizer {
 		const constraints = this.buildYalpsConstraints(baseGear, baseStats);
 
 		// Solve in multiple passes to enforce caps
-		await this.solveModel(baseGear, validatedWeights, reforgeCaps, reforgeSoftCaps, variables, constraints, 75000);
+		await this.solveModel(baseGear, validatedWeights, reforgeCaps, reforgeSoftCaps, variables, constraints, 50000, this.includeTimeout ? 30 : 3600);
 		this.currentReforges = this.player.getGear().getAllReforges();
 	}
 
@@ -1252,13 +1303,44 @@ export class ReforgeOptimizer {
 			// Go down the list and include all gems until we find the highest EP option with zero capped stats.
 			const includedGemDataForColor = new Array<GemData>();
 			let foundUncappedJCGem = false;
+			const numGemOptionsForStat = new Map<string, number>();
+			let maxGemOptionsForStat: number = 3;
+
+			if (socketColor == GemColor.GemColorYellow) {
+				let foundCritOrHasteCap = false;
+
+				for (const parentStat of [Stat.StatCritRating, Stat.StatHasteRating]) {
+					for (const childStat of UnitStat.getChildren(parentStat)) {
+						if (pseudoStatIsCapped(childStat, reforgeCaps, reforgeSoftCaps)) {
+							foundCritOrHasteCap = true;
+						}
+					}
+				}
+
+				if (!foundCritOrHasteCap) {
+					maxGemOptionsForStat = 1;
+				}
+			}
 
 			for (const gemData of filteredGemDataForColor) {
-				if (!gemData.isJC || !foundUncappedJCGem) {
+				const cappedStatKeys = ReforgeOptimizer.getCappedStatKeys(gemData.coefficients, reforgeCaps, reforgeSoftCaps);
+				let isRedundantGem: boolean = false;
+
+				for (const statKey of cappedStatKeys) {
+					const numExistingOptions = numGemOptionsForStat.get(statKey) || 0;
+
+					if (numExistingOptions == maxGemOptionsForStat) {
+						isRedundantGem = true;
+					} else if (!gemData.isJC) {
+						numGemOptionsForStat.set(statKey, numExistingOptions + 1);
+					}
+				}
+
+				if ((!gemData.isJC || !foundUncappedJCGem) && !isRedundantGem) {
 					includedGemDataForColor.push(gemData);
 				}
 
-				if (!ReforgeOptimizer.includesCappedStat(gemData.coefficients, reforgeCaps, reforgeSoftCaps) && socketColor != GemColor.GemColorCogwheel) {
+				if ((cappedStatKeys.length == 0) && (socketColor != GemColor.GemColorCogwheel)) {
 					if (gemData.isJC) {
 						foundUncappedJCGem = true;
 					} else {
@@ -1357,6 +1439,7 @@ export class ReforgeOptimizer {
 		variables: YalpsVariables,
 		constraints: YalpsConstraints,
 		maxIterations: number,
+		maxSeconds: number,
 	): Promise<number> {
 		// Calculate EP scores for each Reforge option
 		if (isDevMode()) {
@@ -1379,23 +1462,25 @@ export class ReforgeOptimizer {
 			binaries: true,
 		};
 		const options: Options = {
-			timeout: Infinity,
+			timeout: maxSeconds * 1000,
 			maxIterations: maxIterations,
 			tolerance: 0.01,
 		};
+		const startTimeMs: number = Date.now()
 		const solution = solve(model, options);
+		const elapsedSeconds: number = (Date.now() - startTimeMs) / 1000;
 
 		if (isDevMode()) {
 			console.log('LP solution for this iteration:');
 			console.log(solution);
 		}
 
-		if (isNaN(solution.result) || (this.includeGems && solution.status == 'timedout' && maxIterations < 1000000)) {
-			if (maxIterations > 1000000) {
+		if (isNaN(solution.result) || ((solution.status == 'timedout') && (maxIterations < 4000000) && (elapsedSeconds < maxSeconds))) {
+			if ((maxIterations > 4000000) || (elapsedSeconds > maxSeconds)) {
 				throw solution;
 			} else {
-				if (isDevMode()) console.log('No feasible solution was found, doubling max iterations...');
-				return await this.solveModel(gear, weights, reforgeCaps, reforgeSoftCaps, variables, constraints, maxIterations * 2);
+				if (isDevMode()) console.log('No optimal solution was found, doubling max iterations...');
+				return await this.solveModel(gear, weights, reforgeCaps, reforgeSoftCaps, variables, constraints, maxIterations * 10, maxSeconds - elapsedSeconds);
 			}
 		}
 
@@ -1420,7 +1505,7 @@ export class ReforgeOptimizer {
 		} else {
 			if (isDevMode()) console.log('One or more stat caps were exceeded, starting constrained iteration...');
 			await sleep(100);
-			return await this.solveModel(updatedGear, updatedWeights, reforgeCaps, reforgeSoftCaps, updatedVariables, updatedConstraints, maxIterations);
+			return await this.solveModel(updatedGear, updatedWeights, reforgeCaps, reforgeSoftCaps, updatedVariables, updatedConstraints, maxIterations, maxSeconds - elapsedSeconds);
 		}
 	}
 
