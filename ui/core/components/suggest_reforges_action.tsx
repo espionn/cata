@@ -393,6 +393,28 @@ export class ReforgeOptimizer {
 		return false;
 	}
 
+	static getCappedStatKeys(coefficients: YalpsCoefficients, reforgeCaps: Stats, reforgeSoftCaps: StatCap[]): string[] {
+		const cappedStatKeys: string[] = [];
+
+		for (const [coefficientKey, value] of coefficients.entries()) {
+			if (coefficientKey.includes('PseudoStat')) {
+				const statKey = (PseudoStat as any)[coefficientKey] as PseudoStat;
+
+				if (pseudoStatIsCapped(statKey, reforgeCaps, reforgeSoftCaps)) {
+					cappedStatKeys.push(coefficientKey);
+				}
+			} else if (coefficientKey.includes('Stat')) {
+				const statKey = (Stat as any)[coefficientKey] as Stat;
+
+				if (statIsCapped(statKey, reforgeCaps, reforgeSoftCaps)) {
+					cappedStatKeys.push(coefficientKey);
+				}
+			}
+		}
+
+		return cappedStatKeys;
+	}
+
 	buildReforgeButtonTooltip() {
 		return (
 			<>
@@ -1032,7 +1054,7 @@ export class ReforgeOptimizer {
 		const constraints = this.buildYalpsConstraints(baseGear, baseStats);
 
 		// Solve in multiple passes to enforce caps
-		await this.solveModel(baseGear, validatedWeights, reforgeCaps, reforgeSoftCaps, variables, constraints, 75000, this.includeTimeout ? 30 : 3600);
+		await this.solveModel(baseGear, validatedWeights, reforgeCaps, reforgeSoftCaps, variables, constraints, 50000, this.includeTimeout ? 30 : 3600);
 		this.currentReforges = this.player.getGear().getAllReforges();
 	}
 
@@ -1281,13 +1303,44 @@ export class ReforgeOptimizer {
 			// Go down the list and include all gems until we find the highest EP option with zero capped stats.
 			const includedGemDataForColor = new Array<GemData>();
 			let foundUncappedJCGem = false;
+			const numGemOptionsForStat = new Map<string, number>();
+			let maxGemOptionsForStat: number = 3;
+
+			if (socketColor == GemColor.GemColorYellow) {
+				let foundCritOrHasteCap = false;
+
+				for (const parentStat of [Stat.StatCritRating, Stat.StatHasteRating]) {
+					for (const childStat of UnitStat.getChildren(parentStat)) {
+						if (pseudoStatIsCapped(childStat, reforgeCaps, reforgeSoftCaps)) {
+							foundCritOrHasteCap = true;
+						}
+					}
+				}
+
+				if (!foundCritOrHasteCap) {
+					maxGemOptionsForStat = 1;
+				}
+			}
 
 			for (const gemData of filteredGemDataForColor) {
-				if (!gemData.isJC || !foundUncappedJCGem) {
+				const cappedStatKeys = ReforgeOptimizer.getCappedStatKeys(gemData.coefficients, reforgeCaps, reforgeSoftCaps);
+				let isRedundantGem: boolean = false;
+
+				for (const statKey of cappedStatKeys) {
+					const numExistingOptions = numGemOptionsForStat.get(statKey) || 0;
+
+					if (numExistingOptions == maxGemOptionsForStat) {
+						isRedundantGem = true;
+					} else if (!gemData.isJC) {
+						numGemOptionsForStat.set(statKey, numExistingOptions + 1);
+					}
+				}
+
+				if ((!gemData.isJC || !foundUncappedJCGem) && !isRedundantGem) {
 					includedGemDataForColor.push(gemData);
 				}
 
-				if (!ReforgeOptimizer.includesCappedStat(gemData.coefficients, reforgeCaps, reforgeSoftCaps) && socketColor != GemColor.GemColorCogwheel) {
+				if ((cappedStatKeys.length == 0) && (socketColor != GemColor.GemColorCogwheel)) {
 					if (gemData.isJC) {
 						foundUncappedJCGem = true;
 					} else {
@@ -1422,12 +1475,12 @@ export class ReforgeOptimizer {
 			console.log(solution);
 		}
 
-		if (isNaN(solution.result) || ((solution.status == 'timedout') && (maxIterations < 1000000) && (elapsedSeconds < maxSeconds))) {
-			if ((maxIterations > 1000000) || (elapsedSeconds > maxSeconds)) {
+		if (isNaN(solution.result) || ((solution.status == 'timedout') && (maxIterations < 4000000) && (elapsedSeconds < maxSeconds))) {
+			if ((maxIterations > 4000000) || (elapsedSeconds > maxSeconds)) {
 				throw solution;
 			} else {
 				if (isDevMode()) console.log('No optimal solution was found, doubling max iterations...');
-				return await this.solveModel(gear, weights, reforgeCaps, reforgeSoftCaps, variables, constraints, maxIterations * 2, maxSeconds - elapsedSeconds);
+				return await this.solveModel(gear, weights, reforgeCaps, reforgeSoftCaps, variables, constraints, maxIterations * 10, maxSeconds - elapsedSeconds);
 			}
 		}
 
