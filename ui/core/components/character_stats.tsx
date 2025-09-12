@@ -362,11 +362,6 @@ export class CharacterStats extends Component {
 
 			const tooltipContent = (
 				<div>
-					{unitStat.isPseudoStat() && unitStat.getPseudoStat() === PseudoStat.PseudoStatSpellHitPercent && (
-					<div className="character-stats-tooltip-row">
-						<span>Includes Expertise (MoP)</span>
-					</div>
-					)}
 					<div className="character-stats-tooltip-row">
 						<span>{i18n.t('sidebar.character_stats.tooltip.base')}</span>
 						<span>{this.statDisplayString(baseDelta, unitStat, true)}</span>
@@ -397,6 +392,11 @@ export class CharacterStats extends Component {
 						<span>{i18n.t('sidebar.character_stats.tooltip.total')}</span>
 						<span>{this.statDisplayString(finalStats, unitStat, true)}</span>
 					</div>
+					{unitStat.isPseudoStat() && unitStat.getPseudoStat() === PseudoStat.PseudoStatSpellHitPercent && (
+					<div className="character-stats-tooltip-row">
+						<span><i>Total Includes Expertise</i></span>
+					</div>
+					)}
 				</div>
 			);
 
