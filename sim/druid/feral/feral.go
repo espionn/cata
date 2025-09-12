@@ -64,6 +64,8 @@ type FeralDruid struct {
 	// Aura references
 	ClearcastingAura        *core.Aura
 	DreamOfCenariusAura     *core.Aura
+	FeralFuryAura           *core.Aura
+	FeralRageAura           *core.Aura
 	HeartOfTheWildAura      *core.Aura
 	IncarnationAura         *core.Aura
 	PredatorySwiftnessAura  *core.Aura
@@ -77,6 +79,9 @@ type FeralDruid struct {
 	SavageRoar     *druid.DruidSpell
 	Shred          *druid.DruidSpell
 	TigersFury     *druid.DruidSpell
+
+	// Bonus references
+	FeralFuryBonus *core.Aura
 
 	tempSnapshotAura *core.Aura
 }

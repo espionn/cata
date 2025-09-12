@@ -75,8 +75,8 @@ dps_results: {
 dps_results: {
  key: "TestMarksmanship-AllItems-BadJuju-96781"
  value: {
-  dps: 160250.56071
-  tps: 131126.46014
+  dps: 160991.73186
+  tps: 131211.75921
  }
 }
 dps_results: {
@@ -145,8 +145,8 @@ dps_results: {
 dps_results: {
  key: "TestMarksmanship-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 153655.4235
-  tps: 125836.08124
+  dps: 158584.51136
+  tps: 130552.55351
  }
 }
 dps_results: {
@@ -789,8 +789,8 @@ dps_results: {
 dps_results: {
  key: "TestMarksmanship-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 150618.90792
-  tps: 124084.36098
+  dps: 150669.24982
+  tps: 124044.29223
  }
 }
 dps_results: {
@@ -1699,8 +1699,8 @@ dps_results: {
 dps_results: {
  key: "TestMarksmanship-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 160097.4863
-  tps: 130321.55802
+  dps: 160239.94993
+  tps: 130390.09973
  }
 }
 dps_results: {

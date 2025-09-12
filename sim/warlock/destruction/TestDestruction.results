@@ -129,8 +129,8 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-AllItems-BreathoftheHydra-96827"
  value: {
-  dps: 103092.33073
-  tps: 76605.99888
+  dps: 103653.33966
+  tps: 77072.34811
   hps: 838.64468
  }
 }
@@ -177,8 +177,8 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-AllItems-Cha-Ye'sEssenceofBrilliance-96888"
  value: {
-  dps: 104770.84907
-  tps: 77491.85547
+  dps: 104870.65075
+  tps: 77515.12748
   hps: 804.81637
  }
 }
@@ -889,8 +889,8 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 93592.25126
-  tps: 69096.65791
+  dps: 93553.77027
+  tps: 69056.00122
   hps: 804.44464
  }
 }
@@ -1194,7 +1194,7 @@ dps_results: {
  key: "TestDestruction-AllItems-Horridon'sLastGasp-96757"
  value: {
   dps: 99065.86359
-  tps: 73109.8365
+  tps: 73111.1545
   hps: 805.55985
  }
 }
@@ -2081,9 +2081,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 95208.95407
-  tps: 70137.99349
-  hps: 806.30333
+  dps: 97657.51553
+  tps: 72312.55411
+  hps: 843.84904
  }
 }
 dps_results: {
@@ -2545,9 +2545,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 103379.44472
-  tps: 76502.69841
-  hps: 804.0729
+  dps: 103916.82585
+  tps: 76797.65667
+  hps: 804.81637
  }
 }
 dps_results: {
@@ -2617,9 +2617,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-AllItems-Wushoolay'sFinalChoice-96785"
  value: {
-  dps: 102405.32976
-  tps: 75501.82192
-  hps: 805.55985
+  dps: 102659.75844
+  tps: 75727.5133
+  hps: 805.18811
  }
 }
 dps_results: {

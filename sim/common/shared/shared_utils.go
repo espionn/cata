@@ -148,7 +148,7 @@ func factory_StatBonusEffect(config ProcStatBonusEffect, extraSpell func(agent c
 
 		var dpm *core.DynamicProcManager
 		if proc.GetRppm() != nil {
-			dpm = character.NewRPPMProcManager(effectID, isEnchant, config.ProcMask, core.RppmConfigFromProcEffectProto(proc))
+			dpm = character.NewRPPMProcManager(effectID, isEnchant, false, config.ProcMask, core.RppmConfigFromProcEffectProto(proc))
 		} else if proc.GetPpm() > 0 {
 			if config.ProcMask == core.ProcMaskUnknown {
 				if isEnchant {
@@ -333,7 +333,7 @@ func NewStackingStatBonusCD(config StackingStatBonusCD) {
 
 		var dpm *core.DynamicProcManager
 		if config.Rppm.PPM > 0 {
-			dpm = character.NewRPPMProcManager(config.ID, false, config.ProcMask, config.Rppm)
+			dpm = character.NewRPPMProcManager(config.ID, false, false, config.ProcMask, config.Rppm)
 		}
 
 		duration := core.TernaryDuration(config.TrinketLimitsDuration, core.NeverExpires, config.Duration)
@@ -448,7 +448,7 @@ func NewStackingStatBonusEffect(config StackingStatBonusEffect) {
 
 		var dpm *core.DynamicProcManager
 		if config.Rppm.PPM > 0 {
-			dpm = character.NewRPPMProcManager(config.ItemID, false, config.ProcMask, config.Rppm)
+			dpm = character.NewRPPMProcManager(config.ItemID, false, false, config.ProcMask, config.Rppm)
 		}
 
 		procAura := core.MakeStackingAura(character, core.StackingStatAura{

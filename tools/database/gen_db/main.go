@@ -72,7 +72,7 @@ func main() {
 		panic(fmt.Sprintf("Error loading DBC data %v", err))
 	}
 
-	_, err = database.LoadAndWriteRawItems(helper, "s.OverallQualityId != 7 AND s.Field_1_15_7_59706_054 = 0 AND s.OverallQualityId != 0 AND (i.ClassID = 2 OR i.ClassID = 4) AND s.Display_lang != '' AND (s.ID != 34219 AND s.Display_lang NOT LIKE '%Test%' AND s.Display_lang NOT LIKE 'QA%')", inputsDir)
+	_, err = database.LoadAndWriteRawItems(helper, "s.OverallQualityId != 7 AND s.Field_1_15_7_59706_054 = 0 AND s.OverallQualityId != 0 AND (i.ClassID = 2 OR i.ClassID = 4) AND s.Display_lang != '' AND (s.ID != 34219 AND s.Display_lang NOT LIKE '%Test%' AND s.Display_lang NOT LIKE 'QA%' AND s.Display_lang != 'unused')", inputsDir)
 	if err != nil {
 		panic(fmt.Sprintf("Error loading DBC data %v", err))
 	}
@@ -170,9 +170,23 @@ func main() {
 		db.MergeEnchant(parsed)
 	}
 
-	for _, item := range atlaslootDB.Items {
-		if _, ok := db.Items[item.Id]; ok {
-			db.MergeItem(item)
+	for _, atlaslootItem := range atlaslootDB.Items {
+		if dbItem, ok := db.Items[atlaslootItem.Id]; ok {
+			firstDBRepFaction := proto.RepFaction(-1)
+
+			for _, dbItemSource := range dbItem.Sources {
+				if dbRepSource := dbItemSource.GetRep(); dbRepSource != nil {
+					firstDBRepFaction = dbRepSource.RepFactionId
+					break
+				}
+			}
+
+			atlaslootItem.Sources = core.FilterSlice(atlaslootItem.Sources, func(atlaslootItemSource *proto.UIItemSource) bool {
+				atlaslootRepSource := atlaslootItemSource.GetRep()
+				return (atlaslootRepSource == nil) || (atlaslootRepSource.RepFactionId != firstDBRepFaction)
+			})
+
+			db.MergeItem(atlaslootItem)
 		}
 	}
 
@@ -287,12 +301,22 @@ func main() {
 				craftedSpellIds = append(craftedSpellIds, crafted.SpellId)
 			}
 			// Add Eye Of The Black Prince gem socket to Throne of Thunder weapons.
-			if drop := source.GetDrop(); drop != nil && (item.Type == proto.ItemType_ItemTypeWeapon || item.Type == proto.ItemType_ItemTypeRanged) && drop.ZoneId == 6622 {
+			if drop := source.GetDrop(); drop != nil && (item.Type == proto.ItemType_ItemTypeWeapon || item.Type == proto.ItemType_ItemTypeRanged) && (item.WeaponType != proto.WeaponType_WeaponTypeOffHand && item.WeaponType != proto.WeaponType_WeaponTypeShield) && drop.ZoneId == 6622 {
 				item.GemSockets = append(item.GemSockets, proto.GemColor_GemColorPrismatic)
 			}
 		}
+
+		if item.NameDescription == "Celestial" {
+			item.Sources = database.InferCelestialItemSource(item)
+		}
+
+		// Infer the drop difficulty for the item
+		if item.NameDescription == "Flexible" {
+			item.Sources = database.InferFlexibleRaidItemSource(item)
+		}
+
 		if item.Phase < 2 {
-			item.Phase = InferPhase(item)
+			item.Phase = database.InferPhase(item)
 		}
 
 	}
@@ -304,168 +328,6 @@ func main() {
 	db.MergeZones(atlasDBProto.Zones)
 	db.MergeNpcs(atlasDBProto.Npcs)
 	db.WriteBinaryAndJson(fmt.Sprintf("%s/db.bin", dbDir), fmt.Sprintf("%s/db.json", dbDir))
-}
-
-func InferPhase(item *proto.UIItem) int32 {
-	ilvl := item.ScalingOptions[int32(proto.ItemLevelState_Base)].Ilvl
-	name := item.Name
-	quality := item.Quality
-
-	if strings.Contains(name, "Necklace of the Terra-Cotta") {
-		return 4
-	}
-
-	//- Any blue pvp ''Crafted'' item of ilvl 458 is 5.2
-	//- Any blue pvp ''Crafted'' item of ilvl 476 is 5.4
-	if strings.Contains(name, "Crafted") {
-		switch ilvl {
-		case 458:
-			return 3
-		case 476:
-			return 5
-		}
-	}
-
-	//- Any "Tyrannical" item is 5.2
-	//- Any "Grievous" item is 5.4
-	//- Any "Prideful" item is 5.4
-	switch {
-	case strings.Contains(name, "Grievous"),
-		strings.Contains(name, "Prideful"):
-		return 5
-	case strings.Contains(name, "Tyrannical"):
-		return 3
-	}
-
-	//- Any 476 epic item with random stats is 5.1
-	//- Any 496 epic item with random stats is 5.4
-	//- Any 516 epic items with random stats are 5.3
-	//- Any 535 epic items with random stats are 5.4
-	//- Any 489 random stat epic is 5.3
-	if item.RandPropPoints > 0 {
-		switch ilvl {
-		case 476:
-			return 2
-		case 489:
-			return 4
-		case 496:
-			return 5
-		case 516:
-			return 4
-		case 535:
-			return 5
-		}
-	}
-
-	//iLvl 600 legendary vs. epic
-	if ilvl == core.MaxIlvl {
-		if quality == proto.ItemQuality_ItemQualityLegendary {
-			return 5
-		}
-		if quality == proto.ItemQuality_ItemQualityEpic {
-			return 4
-		}
-	}
-
-	//- Any item above ilvl 542 is 5.4 (except the 600 ilvl Epic Cloaks from the legendary questline)
-	if ilvl > 542 && quality < proto.ItemQuality_ItemQualityLegendary {
-		return 5
-	}
-
-	//- Any 483 green item is a boosted level 90 item in 5.4
-	if ilvl == 483 && quality == proto.ItemQuality_ItemQualityUncommon {
-		return 5
-	}
-
-	//- All pve tier items of ilvl 502/522/535 are 5.2
-	//- All pve tier items of ilvl 528/540/553/566 are 5.4
-	if item.SetId > 0 {
-		switch ilvl {
-		case 528, 540, 553, 566:
-			return 5
-		case 502, 522, 535:
-			return 3
-		}
-	}
-
-	// Timeless Isle trinkets are all ilvl 496 and does not have a source listed.
-	if item.Sources == nil {
-		if item.Type == proto.ItemType_ItemTypeTrinket && ilvl == 496 {
-			return 3
-		}
-	}
-
-	//AtlasLoot‐style source checks
-	for _, src := range item.Sources {
-		if rep := src.GetRep(); rep != nil {
-			//- All items with Reputation requirements of "Shado-Pan Assault" are 5.2
-			if rep.RepFactionId == proto.RepFaction_RepFactionShadoPanAssault {
-				return 3
-			}
-			if rep.RepFactionId == proto.RepFaction_RepFactionOperationShieldwall || rep.RepFactionId == proto.RepFaction_RepFactionDominanceOffensive {
-				return 2
-			}
-			//- All items with Reputation requirements of "Emperor Shaohao" are 5.4
-			if rep.RepFactionId == proto.RepFaction_RepFactionEmperorShaohao {
-				return 3
-			}
-		}
-		if craft := src.GetCrafted(); craft != nil {
-			switch ilvl {
-			case 476, 496:
-				return 1
-			case 502:
-				return 4
-			case 522:
-				return 3
-			case 553:
-				return 4
-			}
-		}
-		if drop := src.GetDrop(); drop != nil {
-			switch drop.ZoneId {
-			case 6297, 6125, 6067:
-				return 1
-			case 6622:
-				return 3
-			case 6738:
-				return 5
-			}
-			//- All "Oondasta (World Boss)" items are 5.2
-			if drop.NpcId == 826 {
-				return 3
-			}
-			//- All "Ordos (World Boss)" items are 5.4
-			if drop.NpcId == 861 {
-				return 5
-			}
-		}
-	}
-
-	// Any 489 random stat epic is 5.3
-	if ilvl >= 489 && len(item.RandomSuffixOptions) > 0 {
-		return 2
-	}
-
-	// high ilvl greens probably boosted
-	if ilvl > 440 && quality < proto.ItemQuality_ItemQualityRare {
-		return 5
-	}
-
-	if ilvl <= 463 {
-		return 1
-	}
-
-	switch ilvl {
-	case 476, 483, 489, 496:
-		return 1
-	case 502, 522, 535, 541:
-		return 3
-	case 553, 528, 566, 540:
-		return 5
-	}
-
-	return 0
 }
 
 func processItems(instance *dbc.DBC, iconsMap map[int]string, names map[int]string, dropSources map[int][]*proto.DropSource, craftingSources map[int][]*proto.CraftedSource, repSources map[int][]*proto.RepSource, db *database.WowDatabase) {

@@ -174,6 +174,15 @@ func ApplyProcTriggerCallback(unit *Unit, procAura *Aura, config ProcTrigger) {
 			if config.ProcChance != 1 && sim.RandomFloat(config.Name) > config.ProcChance {
 				return
 			}
+			if config.ExtraCondition != nil {
+				emptyResult := spell.NewResult(target)
+				extraConditionMet := config.ExtraCondition(sim, spell, emptyResult)
+				spell.DisposeResult(emptyResult)
+
+				if !extraConditionMet {
+					return
+				}
+			}
 
 			if icd.Duration != 0 {
 				icd.Use(sim)

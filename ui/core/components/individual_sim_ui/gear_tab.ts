@@ -11,6 +11,7 @@ import { SimTab } from '../sim_tab';
 import { GemSummary } from './gem_summary';
 import { PresetConfigurationCategory, PresetConfigurationPicker } from './preset_configuration_picker';
 import { ReforgeSummary } from './reforge_summary';
+import { UpgradeCostsSummary } from './upgrade_costs_summary';
 
 export class GearTab extends SimTab {
 	protected simUI: IndividualSimUI<any>;
@@ -48,6 +49,7 @@ export class GearTab extends SimTab {
 
 		new GemSummary(container, this.simUI, this.simUI.player);
 		new ReforgeSummary(container, this.simUI, this.simUI.player);
+		new UpgradeCostsSummary(container, this.simUI, this.simUI.player);
 	}
 
 	private buildGearPickers() {

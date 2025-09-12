@@ -1403,6 +1403,20 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		newValue: APLValueDotPercentIncrease.create,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', '')],
 	}),
+	dotCritPercentIncrease: inputBuilder({
+		label: 'Dot Crit Chance Increase %',
+		submenu: ['DoT'],
+		shortDescription: 'How much higher a new DoT\'s Critical Strike Chance would be compared to the old.',
+		newValue: APLValueDotPercentIncrease.create,
+		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', '')],
+	}),
+	dotTickRatePercentIncrease: inputBuilder({
+		label: 'Dot Tick Rate Increase %',
+		submenu: ['DoT'],
+		shortDescription: 'How much faster a new DoT would tick compared to the old.',
+		newValue: APLValueDotPercentIncrease.create,
+		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', '')],
+	}),
 	sequenceIsComplete: inputBuilder({
 		label: 'Sequence Is Complete',
 		submenu: ['Sequence'],

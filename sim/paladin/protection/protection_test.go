@@ -6,15 +6,18 @@ import (
 	"github.com/wowsims/mop/sim/common" // imported to get item effects included.
 	"github.com/wowsims/mop/sim/core"
 	"github.com/wowsims/mop/sim/core/proto"
+	"github.com/wowsims/mop/sim/encounters/toes"
 )
 
 func init() {
 	RegisterProtectionPaladin()
 	common.RegisterAllEffects()
+	toes.Register()
 }
 
 func TestProtection(t *testing.T) {
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
+		core.GetTestBuildFromJSON(proto.Class_ClassPaladin, "../../../ui/paladin/protection/builds", "sha_default", ItemFilter, nil, nil),
 		{
 			Class: proto.Class_ClassPaladin,
 			Race:  proto.Race_RaceBloodElf,
@@ -32,22 +35,7 @@ func TestProtection(t *testing.T) {
 
 			IsTank:          true,
 			InFrontOfTarget: true,
-
-			ItemFilter: core.ItemFilter{
-				WeaponTypes: []proto.WeaponType{
-					proto.WeaponType_WeaponTypeAxe,
-					proto.WeaponType_WeaponTypeSword,
-					proto.WeaponType_WeaponTypeMace,
-					proto.WeaponType_WeaponTypeShield,
-				},
-				HandTypes: []proto.HandType{
-					proto.HandType_HandTypeMainHand,
-					proto.HandType_HandTypeOneHand,
-					proto.HandType_HandTypeOffHand,
-				},
-				ArmorType:         proto.ArmorType_ArmorTypePlate,
-				RangedWeaponTypes: []proto.RangedWeaponType{},
-			},
+			ItemFilter:      ItemFilter,
 		},
 	}))
 }
@@ -126,4 +114,20 @@ var FullConsumesSpec = &proto.ConsumesSpec{
 	FoodId:   74656, // Chun Tian Spring Rolls
 	PotId:    76095, // Potion of Mogu Power
 	PrepotId: 76095, // Potion of Mogu Power
+}
+
+var ItemFilter = core.ItemFilter{
+	WeaponTypes: []proto.WeaponType{
+		proto.WeaponType_WeaponTypeAxe,
+		proto.WeaponType_WeaponTypeSword,
+		proto.WeaponType_WeaponTypeMace,
+		proto.WeaponType_WeaponTypeShield,
+	},
+	HandTypes: []proto.HandType{
+		proto.HandType_HandTypeMainHand,
+		proto.HandType_HandTypeOneHand,
+		proto.HandType_HandTypeOffHand,
+	},
+	ArmorType:         proto.ArmorType_ArmorTypePlate,
+	RangedWeaponTypes: []proto.RangedWeaponType{},
 }

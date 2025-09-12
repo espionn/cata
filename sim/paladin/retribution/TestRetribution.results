@@ -75,8 +75,8 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-BadJuju-96781"
  value: {
-  dps: 150744.10782
-  tps: 142459.16774
+  dps: 150757.77338
+  tps: 142466.1308
  }
 }
 dps_results: {
@@ -131,8 +131,8 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-BreathoftheHydra-96827"
  value: {
-  dps: 151693.4537
-  tps: 143202.22204
+  dps: 151676.10525
+  tps: 143184.8736
  }
 }
 dps_results: {
@@ -159,8 +159,8 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 156143.09752
-  tps: 146879.45622
+  dps: 161525.67303
+  tps: 152398.23548
  }
 }
 dps_results: {
@@ -173,8 +173,8 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-Cha-Ye'sEssenceofBrilliance-96888"
  value: {
-  dps: 150086.53584
-  tps: 141545.38908
+  dps: 150074.15241
+  tps: 141533.00565
  }
 }
 dps_results: {
@@ -677,8 +677,8 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 159071.82662
-  tps: 149539.12239
+  dps: 159627.72987
+  tps: 150017.81083
  }
 }
 dps_results: {
@@ -789,8 +789,8 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 157888.0495
-  tps: 148869.74378
+  dps: 158817.85243
+  tps: 149647.81323
  }
 }
 dps_results: {
@@ -1699,8 +1699,8 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 146949.53265
-  tps: 138661.28155
+  dps: 146939.84463
+  tps: 138637.66164
  }
 }
 dps_results: {
@@ -1818,8 +1818,8 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 156143.09752
-  tps: 146879.45622
+  dps: 156540.29612
+  tps: 147423.9427
  }
 }
 dps_results: {
@@ -2329,8 +2329,8 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-Wushoolay'sFinalChoice-96785"
  value: {
-  dps: 146802.33909
-  tps: 138530.64327
+  dps: 146800.54876
+  tps: 138528.85295
  }
 }
 dps_results: {

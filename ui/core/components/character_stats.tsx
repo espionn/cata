@@ -392,6 +392,11 @@ export class CharacterStats extends Component {
 						<span>{i18n.t('sidebar.character_stats.tooltip.total')}</span>
 						<span>{this.statDisplayString(finalStats, unitStat, true)}</span>
 					</div>
+					{unitStat.isPseudoStat() && unitStat.getPseudoStat() === PseudoStat.PseudoStatSpellHitPercent && (
+					<div className="character-stats-tooltip-row">
+						<span><i>Total Includes Expertise</i></span>
+					</div>
+					)}
 				</div>
 			);
 
