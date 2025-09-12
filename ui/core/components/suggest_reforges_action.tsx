@@ -1323,24 +1323,11 @@ export class ReforgeOptimizer {
 			}
 
 			for (const gemData of filteredGemDataForColor) {
-				const cappedStatKeys = ReforgeOptimizer.getCappedStatKeys(gemData.coefficients, reforgeCaps, reforgeSoftCaps);
-				let isRedundantGem: boolean = false;
-
-				for (const statKey of cappedStatKeys) {
-					const numExistingOptions = numGemOptionsForStat.get(statKey) || 0;
-
-					if (numExistingOptions == maxGemOptionsForStat) {
-						isRedundantGem = true;
-					} else if (!gemData.isJC) {
-						numGemOptionsForStat.set(statKey, numExistingOptions + 1);
-					}
-				}
-
-				if ((!gemData.isJC || !foundUncappedJCGem) && !isRedundantGem) {
+				if (!gemData.isJC || !foundUncappedJCGem) {
 					includedGemDataForColor.push(gemData);
 				}
 
-				if ((cappedStatKeys.length == 0) && (socketColor != GemColor.GemColorCogwheel)) {
+				if (!ReforgeOptimizer.includesCappedStat(gemData.coefficients, reforgeCaps, reforgeSoftCaps) && socketColor != GemColor.GemColorCogwheel) {
 					if (gemData.isJC) {
 						foundUncappedJCGem = true;
 					} else {
@@ -1466,7 +1453,7 @@ export class ReforgeOptimizer {
 			maxIterations: maxIterations,
 			tolerance: 0.01,
 		};
-		const startTimeMs: number = Date.now()
+		const startTimeMs: number = Date.now();
 		const solution = solve(model, options);
 		const elapsedSeconds: number = (Date.now() - startTimeMs) / 1000;
 
@@ -1475,12 +1462,21 @@ export class ReforgeOptimizer {
 			console.log(solution);
 		}
 
-		if (isNaN(solution.result) || ((solution.status == 'timedout') && (maxIterations < 4000000) && (elapsedSeconds < maxSeconds))) {
-			if ((maxIterations > 4000000) || (elapsedSeconds > maxSeconds)) {
+		if (isNaN(solution.result) || (solution.status == 'timedout' && maxIterations < 4000000 && elapsedSeconds < maxSeconds)) {
+			if (maxIterations > 4000000 || elapsedSeconds > maxSeconds) {
 				throw solution;
 			} else {
 				if (isDevMode()) console.log('No optimal solution was found, doubling max iterations...');
-				return await this.solveModel(gear, weights, reforgeCaps, reforgeSoftCaps, variables, constraints, maxIterations * 10, maxSeconds - elapsedSeconds);
+				return await this.solveModel(
+					gear,
+					weights,
+					reforgeCaps,
+					reforgeSoftCaps,
+					variables,
+					constraints,
+					maxIterations * 10,
+					maxSeconds - elapsedSeconds,
+				);
 			}
 		}
 
@@ -1505,7 +1501,16 @@ export class ReforgeOptimizer {
 		} else {
 			if (isDevMode()) console.log('One or more stat caps were exceeded, starting constrained iteration...');
 			await sleep(100);
-			return await this.solveModel(updatedGear, updatedWeights, reforgeCaps, reforgeSoftCaps, updatedVariables, updatedConstraints, maxIterations, maxSeconds - elapsedSeconds);
+			return await this.solveModel(
+				updatedGear,
+				updatedWeights,
+				reforgeCaps,
+				reforgeSoftCaps,
+				updatedVariables,
+				updatedConstraints,
+				maxIterations,
+				maxSeconds - elapsedSeconds,
+			);
 		}
 	}
 
