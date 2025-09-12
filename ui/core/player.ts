@@ -1154,7 +1154,7 @@ export class Player<SpecType extends Spec> {
 			return this.upgradeEPCache.get(cacheKey)!;
 		}
 
-		const stats = equippedItem.withUpgrade(upgradeLevel).calcStats(slot);
+		const stats = equippedItem.withUpgrade(upgradeLevel).withDynamicStats().calcStats(slot);
 		const ep = this.computeStatsEP(stats);
 		this.upgradeEPCache.set(cacheKey, ep);
 
