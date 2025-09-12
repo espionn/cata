@@ -362,6 +362,11 @@ export class CharacterStats extends Component {
 
 			const tooltipContent = (
 				<div>
+					{unitStat.isPseudoStat() && unitStat.getPseudoStat() === PseudoStat.PseudoStatSpellHitPercent && (
+					<div className="character-stats-tooltip-row">
+						<span>Includes Expertise (MoP)</span>
+					</div>
+					)}
 					<div className="character-stats-tooltip-row">
 						<span>{i18n.t('sidebar.character_stats.tooltip.base')}</span>
 						<span>{this.statDisplayString(baseDelta, unitStat, true)}</span>
