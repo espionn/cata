@@ -580,13 +580,14 @@ func init() {
 
 			duration := time.Second * 10
 			masteryRaidBuffs := character.GetExclusiveEffectCategory("MasteryRatingBuff")
-			buffStats := stats.Stats{stats.CritRating: 0, stats.HasteRating: 0, stats.MasteryRating: 0}
+			var buffStats stats.Stats
+			buffedStatTypes := []stats.Stat{stats.CritRating, stats.HasteRating, stats.MasteryRating}
 
-			createStatBuffAura := func(label string, actionID core.ActionID) *core.StatBuffAura {
+			createStatBuffAura := func(label string, spellID int32) *core.StatBuffAura {
 				return &core.StatBuffAura{
 					Aura: character.RegisterAura(core.Aura{
-						Label:    label,
-						ActionID: actionID,
+						Label:    fmt.Sprintf("Re-Origination - %s", label),
+						ActionID: core.ActionID{SpellID: spellID},
 						Duration: duration,
 						OnGain: func(aura *core.Aura, sim *core.Simulation) {
 							character.AddStatsDynamic(sim, buffStats)
@@ -595,83 +596,55 @@ func init() {
 							character.AddStatsDynamic(sim, buffStats.Invert())
 						},
 					}),
-					BuffedStatTypes: []stats.Stat{stats.CritRating, stats.HasteRating, stats.MasteryRating},
+					BuffedStatTypes: buffedStatTypes,
 				}
 			}
 
-			crit := createStatBuffAura("Re-Origination - Crit", core.ActionID{SpellID: 139117})
-			haste := createStatBuffAura("Re-Origination - Haste", core.ActionID{SpellID: 139121})
-			mastery := createStatBuffAura("Re-Origination - Mastery", core.ActionID{SpellID: 139120})
+			buffAuras := make(map[stats.Stat]*core.StatBuffAura, 3)
+			buffAuras[stats.CritRating] = createStatBuffAura("Crit", 139117)
+			buffAuras[stats.HasteRating] = createStatBuffAura("Haste", 139121)
+			buffAuras[stats.MasteryRating] = createStatBuffAura("Mastery", 139120)
 
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 				Name:    label,
 				Harmful: true,
-				DPM: character.NewRPPMProcManager(itemID, false, core.ProcMaskMeleeOrMeleeProc|core.ProcMaskRangedOrRangedProc, core.RPPMConfig{
+				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskMeleeOrMeleeProc|core.ProcMaskRangedOrRangedProc, core.RPPMConfig{
 					PPM: 1.10000002384,
 				}.WithApproximateIlvlMod(1.0, 528)),
 				ICD:      duration,
 				Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
 				Handler: func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
-					mastery.Deactivate(sim)
-					crit.Deactivate(sim)
-					haste.Deactivate(sim)
-
-					hasMasteryRaidBuff := masteryRaidBuffs.GetActiveAura() != nil && masteryRaidBuffs.GetActiveAura().IsActive()
-					critValue := character.GetStat(stats.CritRating)
-					hasteValue := character.GetStat(stats.HasteRating)
-					// TODO: Confirm this actually excludes Mastery raid buffs
-					// At proc time, it checks how much crit, haste, and mastery you have (yes, this is a snapshot, and does NOT include the mastery raid buff).
-					// Source: http://us.battle.net/wow/en/forum/topic/7811342046?page=81#1606
-					masteryValue := character.GetStat(stats.MasteryRating) + core.TernaryFloat64(hasMasteryRaidBuff, -3000, 0)
-
-					// Determine highestStat stat with tiebreakers: Crit > Haste > Mastery
-					highestStat := stats.CritRating
-					highestValue := critValue
-					if hasteValue > highestValue {
-						highestStat = stats.HasteRating
-						highestValue = hasteValue
-					}
-					if masteryValue > highestValue {
-						highestStat = stats.MasteryRating
-						highestValue = masteryValue
+					for _, buffAura := range buffAuras {
+						buffAura.Deactivate(sim)
 					}
 
-					switch highestStat {
-					case stats.CritRating:
-						buffStats = stats.Stats{
-							stats.CritRating:    (hasteValue + masteryValue) * 2,
-							stats.HasteRating:   -hasteValue,
-							stats.MasteryRating: -masteryValue,
-						}
-					case stats.HasteRating:
-						buffStats = stats.Stats{
-							stats.CritRating:    -critValue,
-							stats.HasteRating:   (critValue + masteryValue) * 2,
-							stats.MasteryRating: -masteryValue,
-						}
-					case stats.MasteryRating:
-						buffStats = stats.Stats{
-							stats.CritRating:    -critValue,
-							stats.HasteRating:   -hasteValue,
-							stats.MasteryRating: (critValue + hasteValue) * 2,
+					hasMasteryRaidBuff := masteryRaidBuffs.GetActiveAura().IsActive()
+					currentStats := character.GetStats()
+
+					if hasMasteryRaidBuff {
+						currentStats[stats.MasteryRating] -= core.MasteryRaidBuffStrength
+					}
+
+					highestStat := currentStats.GetHighestStatType(buffedStatTypes)
+
+					var buffStrength float64
+
+					for _, statType := range buffedStatTypes {
+						if statType != highestStat {
+							buffStrength += currentStats[statType] * 2
+							buffStats[statType] = -currentStats[statType]
 						}
 					}
 
-					switch highestStat {
-					case stats.CritRating:
-						crit.Activate(sim)
-					case stats.HasteRating:
-						haste.Activate(sim)
-					case stats.MasteryRating:
-						mastery.Activate(sim)
-					}
+					buffStats[highestStat] = buffStrength
+					buffAuras[highestStat].Activate(sim)
 				},
 			})
 
 			eligibleSlots := character.ItemSwap.EligibleSlotsForItem(itemID)
-			character.AddStatProcBuff(itemID, mastery, false, eligibleSlots)
-			character.AddStatProcBuff(itemID, crit, false, eligibleSlots)
-			character.AddStatProcBuff(itemID, haste, false, eligibleSlots)
+			for _, buffAura := range buffAuras {
+				character.AddStatProcBuff(itemID, buffAura, false, eligibleSlots)
+			}
 			character.ItemSwap.RegisterProcWithSlots(itemID, triggerAura, eligibleSlots)
 		})
 	})
