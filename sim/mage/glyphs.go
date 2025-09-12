@@ -28,10 +28,20 @@ func (mage *Mage) registerGlyphs() {
 		})
 	}
 
+	// Glyph of Water Elemental
 	if mage.HasMajorGlyph(proto.MageMajorGlyph_GlyphOfWaterElemental) {
 		mage.AddStaticMod(core.SpellModConfig{
 			Kind:      core.SpellMod_AllowCastWhileMoving,
 			ClassMask: MageWaterElementalSpellWaterBolt,
+		})
+	}
+
+	// Glyph of Armors
+	if mage.HasMajorGlyph(proto.MageMajorGlyph_GlyphOfArmors) {
+		mage.AddStaticMod(core.SpellModConfig{
+			Kind:      core.SpellMod_CastTime_Flat,
+			ClassMask: MageSpellFrostArmor | MageSpellMageArmor | MageSpellMoltenArmor,
+			TimeValue: -time.Millisecond * 1500,
 		})
 	}
 
