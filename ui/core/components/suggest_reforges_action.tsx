@@ -1304,7 +1304,9 @@ export class ReforgeOptimizer {
 			const includedGemDataForColor = new Array<GemData>();
 			let foundUncappedJCGem = false;
 			const numGemOptionsForStat = new Map<string, number>();
-			let maxGemOptionsForStat: number = 3;
+			// Temporary fix to prevent single stat gems being selected
+			// whilst multi stat gems would be a better option
+			let maxGemOptionsForStat: number = this.isTankSpec ? 3 : 8;
 
 			if (socketColor == GemColor.GemColorYellow) {
 				let foundCritOrHasteCap = false;
@@ -1323,11 +1325,24 @@ export class ReforgeOptimizer {
 			}
 
 			for (const gemData of filteredGemDataForColor) {
-				if (!gemData.isJC || !foundUncappedJCGem) {
+				const cappedStatKeys = ReforgeOptimizer.getCappedStatKeys(gemData.coefficients, reforgeCaps, reforgeSoftCaps);
+				let isRedundantGem: boolean = false;
+
+				for (const statKey of cappedStatKeys) {
+					const numExistingOptions = numGemOptionsForStat.get(statKey) || 0;
+
+					if (numExistingOptions == maxGemOptionsForStat) {
+						isRedundantGem = true;
+					} else if (!gemData.isJC) {
+						numGemOptionsForStat.set(statKey, numExistingOptions + 1);
+					}
+				}
+
+				if ((!gemData.isJC || !foundUncappedJCGem) && !isRedundantGem) {
 					includedGemDataForColor.push(gemData);
 				}
 
-				if (!ReforgeOptimizer.includesCappedStat(gemData.coefficients, reforgeCaps, reforgeSoftCaps) && socketColor != GemColor.GemColorCogwheel) {
+				if (cappedStatKeys.length == 0 && socketColor != GemColor.GemColorCogwheel) {
 					if (gemData.isJC) {
 						foundUncappedJCGem = true;
 					} else {
