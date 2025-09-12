@@ -54,7 +54,7 @@ export const P1_PREBIS_EP_PRESET = PresetUtils.makePresetEpWeights(
 export const FrostDefaultTalents = {
 	name: 'Default',
 	data: SavedTalents.create({
-		talentsString: '311122',
+		talentsString: '111122',
 		glyphs: Glyphs.create({
 			major1: MageMajorGlyph.GlyphOfSplittingIce,
 			major2: MageMajorGlyph.GlyphOfIcyVeins,
@@ -76,7 +76,7 @@ export const DefaultConsumables = ConsumesSpec.create({
 export const FrostTalentsCleave = {
 	name: 'Cleave',
 	data: SavedTalents.create({
-		talentsString: '311122',
+		talentsString: '111122',
 		glyphs: Glyphs.create({
 			major1: MageMajorGlyph.GlyphOfSplittingIce,
 			major2: MageMajorGlyph.GlyphOfIcyVeins,
@@ -91,7 +91,7 @@ export const FrostTalentsCleave = {
 export const FrostTalentsAoE = {
 	name: 'AoE (5+)',
 	data: SavedTalents.create({
-		talentsString: '311112',
+		talentsString: '111112',
 		glyphs: Glyphs.create({
 			major1: MageMajorGlyph.GlyphOfSplittingIce,
 			major2: MageMajorGlyph.GlyphOfIcyVeins,
