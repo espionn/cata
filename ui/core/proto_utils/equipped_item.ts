@@ -12,6 +12,7 @@ import {
 	ReforgeStat,
 	ScalingItemProperties,
 	Stat,
+	WeaponType,
 } from '../proto/common.js';
 import { UIEnchant as Enchant, UIGem as Gem, UIItem as Item } from '../proto/ui.js';
 import { distinct } from '../utils.js';
@@ -24,6 +25,13 @@ export const getWeaponDPS = (item: Item, upgradeStep: ItemLevelState = ItemLevel
 	const { weaponDamageMin, weaponDamageMax } = item.scalingOptions[upgradeStep];
 	return (weaponDamageMin + weaponDamageMax) / 2 / (item.weaponSpeed || 1);
 };
+
+export const isThroneOfThunderWeapon = (item: Item) =>
+	[ItemType.ItemTypeWeapon, ItemType.ItemTypeRanged].includes(item.type) &&
+	![WeaponType.WeaponTypeOffHand, WeaponType.WeaponTypeShield].includes(item.weaponType) &&
+	item.phase == 3 &&
+	item.sources.some(itemSource => itemSource.source.oneofKind === 'drop' && itemSource.source.drop.zoneId === 6622);
+export const isShaTouchedWeapon = (item: Item) => item.gemSockets.some(socket => socket === GemColor.GemColorShaTouched);
 
 export const getWeaponStatsBySlot = (item: Item, slot: ItemSlot, upgradeStep: ItemLevelState = ItemLevelState.Base) => {
 	let itemStats = new Stats();
@@ -182,6 +190,10 @@ export class EquippedItem {
 		// Make sure to always exclude Challenge Mode scaling options as those are handled globally
 		delete scalingOptions[ItemLevelState.ChallengeMode];
 		return scalingOptions;
+	}
+
+	getMaxUpgradeCount(): number {
+		return Object.keys(this.getUpgrades()).length -1;
 	}
 
 	equals(other: EquippedItem) {
@@ -473,17 +485,17 @@ export class EquippedItem {
 		}
 	}
 
-	// Whether this item could have an extra socket, assuming Blacksmithing.
+	// Whether this item could have an extra socket
 	couldHaveExtraSocket(): boolean {
-		return [ItemType.ItemTypeWaist, ItemType.ItemTypeWrist, ItemType.ItemTypeHands].includes(this.item.type);
+		return [ItemType.ItemTypeWrist, ItemType.ItemTypeHands].includes(this.item.type);
 	}
 
 	requiresExtraSocket(): boolean {
-		return [ItemType.ItemTypeWrist, ItemType.ItemTypeHands].includes(this.item.type) && this.hasExtraGem() && this._gems[this._gems.length - 1] != null;
+		return this.couldHaveExtraSocket() && this.hasExtraGem() && this._gems[this._gems.length - 1] != null;
 	}
 
 	hasExtraSocket(isBlacksmithing: boolean): boolean {
-		return this.item.type == ItemType.ItemTypeWaist || (isBlacksmithing && [ItemType.ItemTypeWrist, ItemType.ItemTypeHands].includes(this.item.type));
+		return isBlacksmithing && this.couldHaveExtraSocket();
 	}
 
 	numSockets(isBlacksmithing: boolean): number {

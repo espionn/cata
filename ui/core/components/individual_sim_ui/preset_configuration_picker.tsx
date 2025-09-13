@@ -3,12 +3,10 @@ import { ref } from 'tsx-vanilla';
 
 import { IndividualSimUI } from '../../individual_sim_ui';
 import { PresetBuild } from '../../preset_utils';
-import { APLRotation, APLRotation_Type } from '../../proto/apl';
 import { ConsumesSpec, Debuffs, Encounter, EquipmentSpec, HealingModel, IndividualBuffs, ItemSwap, RaidBuffs, Spec } from '../../proto/common';
 import { SavedTalents } from '../../proto/ui';
 import { isEqualAPLRotation } from '../../proto_utils/apl_utils';
 import { Stats } from '../../proto_utils/stats';
-import { SpecOptions, SpecType } from '../../proto_utils/utils';
 import { TypedEvent } from '../../typed_event';
 import { Component } from '../component';
 import { ContentBlock } from '../content_block';
@@ -162,7 +160,12 @@ export class PresetConfigurationPicker extends Component {
 				if (settings.consumables) simUI.player.setConsumes(eventID, settings.consumables);
 				if (settings.playerOptions?.profession1) simUI.player.setProfession1(eventID, settings.playerOptions.profession1);
 				if (settings.playerOptions?.profession2) simUI.player.setProfession2(eventID, settings.playerOptions.profession2);
-				if (settings.playerOptions?.distanceFromTarget) simUI.player.setDistanceFromTarget(eventID, settings.playerOptions.distanceFromTarget);
+				if (typeof settings.playerOptions?.distanceFromTarget === 'number')
+					simUI.player.setDistanceFromTarget(eventID, settings.playerOptions.distanceFromTarget);
+				if (typeof settings.playerOptions?.reactionTimeMs === 'number') simUI.player.setReactionTime(eventID, settings.playerOptions.reactionTimeMs);
+				if (typeof settings.playerOptions?.channelClipDelayMs === 'number') simUI.player.setChannelClipDelay(eventID, settings.playerOptions.channelClipDelayMs);
+				if (typeof settings.playerOptions?.inFrontOfTarget === 'boolean')
+					simUI.player.setInFrontOfTarget(eventID, settings.playerOptions.inFrontOfTarget);
 				if (settings.playerOptions?.enableItemSwap !== undefined && settings.playerOptions?.itemSwap) {
 					simUI.player.itemSwapSettings.setItemSwapSettings(
 						eventID,
@@ -199,7 +202,7 @@ export class PresetConfigurationPicker extends Component {
 						talentsString: this.simUI.player.getTalentsString(),
 						glyphs: this.simUI.player.getGlyphs(),
 					}),
-			  )
+				)
 			: true;
 		let hasRotation = true;
 		if (rotationType) {

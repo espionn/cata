@@ -9,9 +9,11 @@ import { APLRotation } from '../../core/proto/apl';
 import { Faction, IndividualBuffs, ItemSlot, PartyBuffs, PseudoStat, Race, Spec, Stat } from '../../core/proto/common';
 import { StatCapType } from '../../core/proto/ui';
 import { DEFAULT_CASTER_GEM_STATS, StatCap, Stats, UnitStat } from '../../core/proto_utils/stats';
+import { formatToNumber } from '../../core/utils';
 import { DefaultDebuffs, DefaultRaidBuffs, MAGE_BREAKPOINTS } from '../presets';
 import * as ArcaneInputs from './inputs';
 import * as Presets from './presets';
+import * as MageInputs from '../inputs';
 
 const hasteBreakpoints = MAGE_BREAKPOINTS.presets;
 
@@ -42,7 +44,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecArcaneMage, {
 
 	defaults: {
 		// Default equipped gear.
-		gear: Presets.P1_BIS_PRESET.gear,
+		gear: Presets.P1_PREBIS.gear,
 		// Default EP weights for sorting gear in the gear picker.
 		epWeights: Presets.P1_EP_PRESET.epWeights,
 		// Default stat caps for the Reforge Optimizer
@@ -53,20 +55,15 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecArcaneMage, {
 		softCapBreakpoints: (() => {
 			const hasteSoftCapConfig = StatCap.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent, {
 				breakpoints: [
-					hasteBreakpoints.get('13-tick - Nether Tempest')!,
 					hasteBreakpoints.get('5-tick - Living Bomb')!,
-					hasteBreakpoints.get('14-tick - Nether Tempest')!,
-					hasteBreakpoints.get('15-tick - Nether Tempest')!,
-					hasteBreakpoints.get('16-tick - Nether Tempest')!,
-					// hasteBreakpoints.get('17-tick - Nether Tempest')!,
-					// hasteBreakpoints.get('6-tick - Living Bomb')!,
-					// hasteBreakpoints.get('18-tick - Nether Tempest')!,
-					// hasteBreakpoints.get('19-tick - Nether Tempest')!,
-					// hasteBreakpoints.get('7-tick - Living Bomb')!,
-					// hasteBreakpoints.get('20-tick - Nether Tempest')!,
-					// hasteBreakpoints.get('8-tick - Living Bomb')!,
-					// hasteBreakpoints.get('21-tick - Nether Tempest')!,
-					// hasteBreakpoints.get('22-tick - Nether Tempest')!,
+					hasteBreakpoints.get('6-tick - Living Bomb')!,
+					hasteBreakpoints.get('7-tick - Living Bomb')!,
+					hasteBreakpoints.get('8-tick - Living Bomb')!,
+					hasteBreakpoints.get('9-tick - Living Bomb')!,
+					hasteBreakpoints.get('10-tick - Living Bomb')!,
+					// Higher ticks commented out as they may be unrealistic for most gear levels
+					// hasteBreakpoints.get('11-tick - Living Bomb')!,
+					// hasteBreakpoints.get('12-tick - Living Bomb')!,
 				],
 				capType: StatCapType.TypeThreshold,
 				postCapEPs: [0.6 * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
@@ -90,7 +87,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecArcaneMage, {
 	},
 
 	// IconInputs to include in the 'Player' section on the settings tab.
-	playerIconInputs: [],
+	playerIconInputs: [MageInputs.MageArmorInputs()],
 	// Inputs to include in the 'Rotation' section on the settings tab.
 	rotationInputs: ArcaneInputs.MageRotationConfig,
 	// Buff and Debuff inputs to include/exclude, overriding the EP-based defaults.
@@ -113,7 +110,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecArcaneMage, {
 		// Preset talents that the user can quickly select.
 		talents: [Presets.ArcaneTalents, Presets.ArcaneTalentsCleave],
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.PREBIS_PRESET, Presets.RICH_PREBIS_PRESET, Presets.P1_BIS_PRESET],
+		gear: [Presets.P1_PREBIS, Presets.P1_POST_MSV, Presets.P1_POST_HOF, Presets.P1_BIS],
 
 		builds: [Presets.P1_PRESET_BUILD_DEFAULT, Presets.P1_PRESET_BUILD_CLEAVE],
 	},
@@ -142,10 +139,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecArcaneMage, {
 			defaultGear: {
 				[Faction.Unknown]: {},
 				[Faction.Alliance]: {
-					1: Presets.P1_BIS_PRESET.gear,
+					1: Presets.P1_PREBIS.gear,
 				},
 				[Faction.Horde]: {
-					1: Presets.P1_BIS_PRESET.gear,
+					1: Presets.P1_PREBIS.gear,
 				},
 			},
 		},
@@ -156,10 +153,67 @@ export class ArcaneMageSimUI extends IndividualSimUI<Spec.SpecArcaneMage> {
 	constructor(parentElem: HTMLElement, player: Player<Spec.SpecArcaneMage>) {
 		super(parentElem, player, SPEC_CONFIG);
 
+		const statSelectionPresets = [
+			{
+				unitStat: UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent),
+				presets: hasteBreakpoints,
+			},
+		];
+
 		player.sim.waitForInit().then(() => {
 			new ReforgeOptimizer(this, {
-				statSelectionPresets: [MAGE_BREAKPOINTS],
+				statSelectionPresets: statSelectionPresets,
 				enableBreakpointLimits: true,
+				updateSoftCaps: softCaps => {
+					const raidBuffs = player.getRaid()?.getBuffs();
+					const hasBL = !!raidBuffs?.bloodlust;
+					const hasBerserking = player.getRace() === Race.RaceTroll;
+
+					const modifyHaste = (oldHastePercent: number, modifier: number) =>
+						Number(formatToNumber(((oldHastePercent / 100 + 1) / modifier - 1) * 100, { maximumFractionDigits: 5 }));
+
+					this.individualConfig.defaults.softCapBreakpoints!.forEach(softCap => {
+						const softCapToModify = softCaps.find(sc => sc.unitStat.equals(softCap.unitStat));
+						if (softCap.unitStat.equalsPseudoStat(PseudoStat.PseudoStatSpellHastePercent) && softCapToModify) {
+							const adjustedHasteBreakpoints = new Set([...softCap.breakpoints]);
+							const hasCloseMatchingValue = (value: number) =>
+								[...adjustedHasteBreakpoints.values()].find(bp => bp.toFixed(2) === value.toFixed(2));
+
+							softCap.breakpoints.forEach(breakpoint => {
+								if (hasBL) {
+									const blBreakpoint = modifyHaste(breakpoint, 1.3);
+
+									if (blBreakpoint > 0) {
+										if (!hasCloseMatchingValue(blBreakpoint)) adjustedHasteBreakpoints.add(blBreakpoint);
+										if (hasBerserking) {
+											const berserkingBreakpoint = modifyHaste(blBreakpoint, 1.2);
+											if (berserkingBreakpoint > 0 && !hasCloseMatchingValue(berserkingBreakpoint)) {
+												adjustedHasteBreakpoints.add(berserkingBreakpoint);
+											}
+										}
+									}
+								}
+							});
+							softCapToModify.breakpoints = [...adjustedHasteBreakpoints].sort((a, b) => a - b);
+						}
+					});
+					return softCaps;
+				},
+				additionalSoftCapTooltipInformation: {
+					[Stat.StatHasteRating]: () => {
+						const raidBuffs = player.getRaid()?.getBuffs();
+						const hasBL = !!raidBuffs?.bloodlust;
+						const hasBerserking = player.getRace() === Race.RaceTroll;
+
+						if (hasBL || hasBerserking) {
+							let tooltip = 'Additional Living Bomb breakpoints have been created using the following cooldowns:\n';
+							if (hasBL) tooltip += '• Bloodlust\n';
+							if (hasBerserking) tooltip += '• Berserking\n';
+							return tooltip;
+						}
+						return '';
+					},
+				},
 			});
 		});
 	}

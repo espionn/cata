@@ -219,6 +219,9 @@ func (war *Warrior) registerBladestorm() {
 			IsAOE: true,
 			Aura: core.Aura{
 				Label: "Bladestorm",
+				OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+					war.ExtendGCDUntil(sim, sim.CurrentTime+war.ReactionTime)
+				},
 			},
 			NumberOfTicks: 6,
 			TickLength:    time.Second * 1,
@@ -266,12 +269,12 @@ func (war *Warrior) registerShockwave() {
 			},
 		},
 
-		DamageMultiplier: 0.75,
+		DamageMultiplier: 1,
 		CritMultiplier:   war.DefaultCritMultiplier(),
 		ThreatMultiplier: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := spell.MeleeAttackPower()
+			baseDamage := spell.MeleeAttackPower() * 1.2
 			results := spell.CalcAndDealAoeDamage(sim, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 
 			if results.NumLandedHits() >= 3 {
@@ -338,6 +341,7 @@ func (war *Warrior) registerBloodbath() {
 	shared.RegisterIgniteEffect(&war.Unit, shared.IgniteConfig{
 		ActionID:       dotActionID,
 		ClassSpellMask: SpellMaskBloodbathDot,
+		SpellSchool:    core.SpellSchoolPhysical,
 		DotAuraLabel:   "Bloodbath Dot",
 		DotAuraTag:     "BloodbathDot",
 		TickLength:     1 * time.Second,
@@ -349,6 +353,7 @@ func (war *Warrior) registerBloodbath() {
 			Callback: core.CallbackOnSpellHitDealt,
 			ProcMask: core.ProcMaskMeleeSpecial,
 			Outcome:  core.OutcomeLanded,
+			Harmful:  true,
 		},
 
 		DamageCalculator: func(result *core.SpellResult) float64 {
@@ -408,7 +413,7 @@ func (war *Warrior) registerStormBolt() {
 		BonusCoefficient: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := spell.Unit.OHNormalizedWeaponDamage(sim, spell.MeleeAttackPower())
+			baseDamage := spell.Unit.OHWeaponDamage(sim, spell.MeleeAttackPower())
 			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialNoBlockDodgeParry)
 		},
 	})
@@ -439,7 +444,7 @@ func (war *Warrior) registerStormBolt() {
 		BonusCoefficient: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := spell.Unit.MHNormalizedWeaponDamage(sim, spell.MeleeAttackPower())
+			baseDamage := spell.Unit.MHWeaponDamage(sim, spell.MeleeAttackPower())
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialNoBlockDodgeParry)
 
 			if result.Landed() && war.Spec == proto.Spec_SpecFuryWarrior && war.OffHand() != nil && war.OffHand().WeaponType != proto.WeaponType_WeaponTypeUnknown {

@@ -271,14 +271,18 @@ func (pet *Pet) Enable(sim *Simulation, petAgent PetAgent) {
 		// make sure to reset it to refresh focus
 		pet.focusBar.reset(sim)
 		pet.focusBar.enable(sim, sim.CurrentTime)
-		pet.focusBar.focusRegenMultiplier *= pet.Owner.PseudoStats.AttackSpeedMultiplier
+		if pet.hasResourceRegenInheritance {
+			pet.focusBar.focusRegenMultiplier *= pet.Owner.PseudoStats.AttackSpeedMultiplier
+		}
 	}
 
 	if pet.HasEnergyBar() {
 		// make sure to reset it to refresh energy
 		pet.energyBar.reset(sim)
 		pet.energyBar.enable(sim, sim.CurrentTime)
-		pet.energyBar.energyRegenMultiplier *= pet.Owner.PseudoStats.AttackSpeedMultiplier
+		if pet.hasResourceRegenInheritance {
+			pet.energyBar.energyRegenMultiplier *= pet.Owner.PseudoStats.AttackSpeedMultiplier
+		}
 	}
 }
 

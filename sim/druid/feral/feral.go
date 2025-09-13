@@ -39,9 +39,10 @@ func NewFeralDruid(character *core.Character, options *proto.Player) *FeralDruid
 	cat.registerTreants()
 
 	cat.EnableEnergyBar(core.EnergyBarOptions{
-		MaxComboPoints: 5,
-		MaxEnergy:      100.0,
-		UnitClass:      proto.Class_ClassDruid,
+		MaxComboPoints:        5,
+		MaxEnergy:             100.0,
+		UnitClass:             proto.Class_ClassDruid,
+		HasHasteRatingScaling: true,
 	})
 	cat.EnableRageBar(core.RageBarOptions{BaseRageMultiplier: 2.5})
 
@@ -63,6 +64,8 @@ type FeralDruid struct {
 	// Aura references
 	ClearcastingAura        *core.Aura
 	DreamOfCenariusAura     *core.Aura
+	FeralFuryAura           *core.Aura
+	FeralRageAura           *core.Aura
 	HeartOfTheWildAura      *core.Aura
 	IncarnationAura         *core.Aura
 	PredatorySwiftnessAura  *core.Aura
@@ -76,6 +79,9 @@ type FeralDruid struct {
 	SavageRoar     *druid.DruidSpell
 	Shred          *druid.DruidSpell
 	TigersFury     *druid.DruidSpell
+
+	// Bonus references
+	FeralFuryBonus *core.Aura
 
 	tempSnapshotAura *core.Aura
 }

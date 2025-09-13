@@ -21,12 +21,14 @@ func (shaman *Shaman) ApplyEnhancementTalents() {
 		Kind:       core.SpellMod_PowerCost_Pct,
 		FloatValue: -0.75,
 	})
-	primalWisdomManaMetrics := shaman.NewManaMetrics(core.ActionID{SpellID: 63375})
+	PWActionID := core.ActionID{SpellID: 63375}
+	primalWisdomManaMetrics := shaman.NewManaMetrics(PWActionID)
 	core.MakeProcTriggerAura(&shaman.Unit, core.ProcTrigger{
-		Name:       "Mental Quickness",
-		ProcMask:   core.ProcMaskMelee,
-		Callback:   core.CallbackOnSpellHitDealt,
-		ProcChance: 0.4,
+		Name:            "Mental Quickness",
+		ProcMask:        core.ProcMaskMelee,
+		Callback:        core.CallbackOnSpellHitDealt,
+		ProcChance:      0.4,
+		MetricsActionID: PWActionID,
 		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			shaman.AddMana(sim, 0.05*shaman.MaxMana(), primalWisdomManaMetrics)
 		},

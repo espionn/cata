@@ -26,8 +26,7 @@ func TestBrewmaster(t *testing.T) {
 			GearSet: core.GetGearSet("../../../ui/monk/brewmaster/gear_sets", "p1_bis_2h"),
 			OtherGearSets: []core.GearSetCombo{
 				core.GetGearSet("../../../ui/monk/brewmaster/gear_sets", "p1_bis_dw"),
-				core.GetGearSet("../../../ui/monk/brewmaster/gear_sets", "p1_prebis_rich"),
-				core.GetGearSet("../../../ui/monk/brewmaster/gear_sets", "p1_prebis_poor"),
+				core.GetGearSet("../../../ui/monk/brewmaster/gear_sets", "p1_prebis"),
 			},
 			Talents: BrewmasterDefaultTalents,
 			OtherTalentSets: []core.TalentsCombo{

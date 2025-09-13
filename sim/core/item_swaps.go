@@ -99,6 +99,17 @@ func (swap *ItemSwap) initialize(character *Character) {
 	swap.character = character
 }
 
+// Used by shaman imbues because itemswap is setup before Imbue spells registers
+func (swap *ItemSwap) AddTempEnchant(enchantID int32, slot proto.ItemSlot, swapped bool) {
+	// Add it to the swapped item
+	if swapped {
+		swap.unEquippedItems[slot].TempEnchant = enchantID
+		swap.swapEquip[slot].TempEnchant = enchantID
+	} else {
+		swap.originalEquip[slot].TempEnchant = enchantID
+	}
+}
+
 func (character *Character) RegisterItemSwapCallback(slots []proto.ItemSlot, callback OnItemSwap) {
 	if character == nil || !character.ItemSwap.IsEnabled() || len(slots) == 0 {
 		return
@@ -300,6 +311,24 @@ func (swap *ItemSwap) EligibleSlotsForEffect(effectID int32) []proto.ItemSlot {
 			}
 		} else {
 			if swap.originalEquip.containsEnchantInSlot(effectID, itemSlot) || swap.swapEquip.containsEnchantInSlot(effectID, itemSlot) {
+				eligibleSlots = append(eligibleSlots, itemSlot)
+			}
+		}
+	}
+
+	return eligibleSlots
+}
+
+func (swap *ItemSwap) EligibleSlotsForGem(effectID int32) []proto.ItemSlot {
+	var eligibleSlots []proto.ItemSlot
+
+	for itemSlot := proto.ItemSlot(0); itemSlot < NumItemSlots; itemSlot++ {
+		if !swap.IsEnabled() {
+			if swap.character.Equipment.containsGemInSlot(effectID, itemSlot) {
+				eligibleSlots = append(eligibleSlots, itemSlot)
+			}
+		} else {
+			if swap.originalEquip.containsGemInSlot(effectID, itemSlot) || swap.swapEquip.containsGemInSlot(effectID, itemSlot) {
 				eligibleSlots = append(eligibleSlots, itemSlot)
 			}
 		}

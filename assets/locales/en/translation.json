@@ -140,6 +140,11 @@
 			"melee_crit": "Melee Crit",
 			"melee_haste": "Melee Haste",
 			"ranged_haste": "Ranged Haste"
+		},
+		"currency": {
+			"valorPoints": "Valor Points",
+			"justicePoints": "Justice Points",
+			"honorPoints": "Honor Points"
 		}
 	},
 	"sim": {

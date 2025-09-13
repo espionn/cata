@@ -24,6 +24,7 @@ type Warlock struct {
 	Shadowburn           *core.Spell
 	Hellfire             *core.Spell
 	DrainLife            *core.Spell
+	SiphonLife           *core.Spell
 
 	ActivePet *WarlockPet
 	Felhunter *WarlockPet
@@ -67,7 +68,7 @@ func (warlock *Warlock) Initialize() {
 	warlock.registerSummonDoomguard(doomguardInfernalTimer)
 	warlock.registerSummonInfernal(doomguardInfernalTimer)
 	warlock.registerLifeTap()
-	warlock.registerEternalResolve()
+	warlock.registerGlyphs()
 
 	// Fel Armor 10% Stamina
 	core.MakePermanent(
@@ -184,12 +185,14 @@ const (
 	WarlockSpellCarrionSwarm
 	WarlockSpellDoom
 	WarlockSpellVoidray
+	WarlockSpellSiphonLife
+	WarlockSpellHavoc
 	WarlockSpellAll int64 = 1<<iota - 1
 
 	WarlockShadowDamage = WarlockSpellCorruption | WarlockSpellUnstableAffliction | WarlockSpellHaunt |
 		WarlockSpellDrainSoul | WarlockSpellDrainLife | WarlockSpellAgony |
 		WarlockSpellShadowBolt | WarlockSpellSeedOfCorruptionExposion | WarlockSpellHandOfGuldan |
-		WarlockSpellShadowflame | WarlockSpellFelFlame | WarlockSpellChaosBolt | WarlockSpellShadowBurn
+		WarlockSpellShadowflame | WarlockSpellFelFlame | WarlockSpellChaosBolt | WarlockSpellShadowBurn | WarlockSpellHavoc
 
 	WarlockPeriodicShadowDamage = WarlockSpellCorruption | WarlockSpellUnstableAffliction | WarlockSpellDrainSoul |
 		WarlockSpellDrainLife | WarlockSpellAgony

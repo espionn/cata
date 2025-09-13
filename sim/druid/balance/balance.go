@@ -46,6 +46,7 @@ func NewBalanceDruid(character *core.Character, options *proto.Player) *BalanceD
 		moonkin.SelfBuffs.InnervateTarget = balanceOptions.Options.ClassOptions.InnervateTarget
 	}
 
+	moonkin.RegisterMoonkinFormAura()
 	return moonkin
 }
 
@@ -89,11 +90,12 @@ func (moonkin *BalanceDruid) Initialize() {
 
 func (moonkin *BalanceDruid) ApplyTalents() {
 	moonkin.Druid.ApplyTalents()
-
 	moonkin.ApplyBalanceTalents()
 }
 
 func (moonkin *BalanceDruid) RegisterBalanceSpells() {
+	moonkin.RegisterMoonkinFormSpell()
+
 	moonkin.registerSunfireSpell()
 	moonkin.registerStarfireSpell()
 	moonkin.registerStarsurgeSpell()

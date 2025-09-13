@@ -90,9 +90,8 @@ func (item *Item) ToScaledUIItem(itemLevel int) *proto.UIItem {
 
 	// Amount of upgrade steps is defined in MAX_UPGRADE_LEVELS
 	// In P2 of MoP it is expected to be 2 steps
-	//
 	if item.ItemLevel >= core.MinUpgradeIlvl && UPGRADE_SYSTEM_ACTIVE && item.Flags2.Has(CAN_BE_UPGRADED) {
-		for _, upgradeLevel := range MAX_UPGRADE_LEVELS {
+		for _, upgradeLevel := range item.GetMaxUpgradeCount() {
 			upgradedIlvl := item.ItemLevel + item.UpgradeItemLevelBy(upgradeLevel)
 			upgradeStep := proto.ItemLevelState(upgradeLevel)
 			scalingProperties[int32(upgradeStep)] = &proto.ScalingItemProperties{
@@ -412,6 +411,18 @@ func (item *Item) GetRandomSuffixType() int {
 
 	default:
 		return -1
+	}
+}
+
+func (item *Item) GetMaxUpgradeCount() []int {
+	switch item.OverallQuality {
+	// Rare items are limited to 1 upgrade level
+	case 3:
+		return MAX_UPGRADE_LEVELS[:1]
+	case 4, 5:
+		return MAX_UPGRADE_LEVELS
+	default:
+		return []int{}
 	}
 }
 

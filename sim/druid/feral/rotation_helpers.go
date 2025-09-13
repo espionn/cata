@@ -96,7 +96,7 @@ func (rotation *FeralDruidRotation) ShiftBearCat(sim *core.Simulation) {
 		cat.CatForm.Cast(sim, nil)
 
 		// Reset swing timer with Albino Snake when advantageous
-		if cat.AutoAttacks.NextAttackAt()-sim.CurrentTime > cat.AutoAttacks.MainhandSwingSpeed() {
+		if rotation.SnekWeave && (cat.AutoAttacks.NextAttackAt()-sim.CurrentTime > cat.AutoAttacks.MainhandSwingSpeed()) {
 			cat.AutoAttacks.StopMeleeUntil(sim, sim.CurrentTime)
 		}
 	}
@@ -132,7 +132,7 @@ func (cat *FeralDruid) calcBleedRefreshTime(sim *core.Simulation, bleedSpell *dr
 	// duration, project "buffEnd" forward in time such that we block clips if we are
 	// already maxing out the number of full durations we can snapshot.
 	buffRemains := cat.tempSnapshotAura.RemainingDuration(sim)
-	maxTickCount := core.TernaryInt32(isRip, druid.RipMaxNumTicks, bleedDot.BaseTickCount)
+	maxTickCount := core.TernaryInt32(isRip, cat.RipMaxNumTicks, bleedDot.BaseTickCount)
 	maxBleedDur := bleedDot.BaseTickLength * time.Duration(maxTickCount)
 	numCastsCovered := buffRemains / maxBleedDur
 	buffEnd := cat.tempSnapshotAura.ExpiresAt() - numCastsCovered*maxBleedDur
@@ -184,7 +184,7 @@ func (cat *FeralDruid) shouldDelayBleedRefreshForTf(sim *core.Simulation, bleedD
 	}
 
 	finalTickLeeway := core.TernaryDuration(bleedDot.IsActive(), bleedDot.TimeUntilNextTick(sim), 0)
-	maxTickCount := core.TernaryInt32(isRip, druid.RipMaxNumTicks, bleedDot.BaseTickCount)
+	maxTickCount := core.TernaryInt32(isRip, cat.RipMaxNumTicks, bleedDot.BaseTickCount)
 	buffedTickCount := min(maxTickCount, int32((sim.GetRemainingDuration()-finalTickLeeway)/bleedDot.BaseTickLength))
 	delayBreakpoint := finalTickLeeway + core.DurationFromSeconds(0.15*float64(buffedTickCount)*bleedDot.BaseTickLength.Seconds())
 
@@ -225,7 +225,7 @@ func (cat *FeralDruid) calcRoarRefreshTime(sim *core.Simulation, ripRefreshTime 
 	standardRefreshTime := core.TernaryDuration(cat.ComboPoints() < 5, roarEnd, roarEnd-roarBuff.BaseTickLength)
 
 	// Project Rip end time assuming full Bloodletting extensions
-	remainingExtensions := druid.RipMaxNumTicks - ripDot.BaseTickCount
+	remainingExtensions := cat.RipMaxNumTicks - ripDot.BaseTickCount
 	ripEnd := ripDot.ExpiresAt() + time.Duration(remainingExtensions)*ripDot.BaseTickLength
 	fightEnd := sim.Duration
 

@@ -115,6 +115,7 @@ type RPPMProc struct {
 	lastCheck   time.Duration
 	ilvl        int32
 	mods        []rppmMod
+	isFirstProc bool
 }
 
 // Attach a crit mod to the RPPM config
@@ -178,6 +179,7 @@ func NewRPPMProc(character *Character, config RPPMConfig) DynamicProc {
 		lastProc:    -time.Second * 120,
 		lastCheck:   -time.Second * 10,
 		mods:        []rppmMod{},
+		isFirstProc: true,
 	}
 
 	if config.Mods != nil {
@@ -222,9 +224,13 @@ func (proc *RPPMProc) getProcChance(sim *Simulation) float64 {
 
 func (proc *RPPMProc) Proc(sim *Simulation, label string) bool {
 	result := sim.Proc(proc.getProcChance(sim), label)
-	proc.lastCheck = sim.CurrentTime
 	if result {
+		proc.isFirstProc = false
 		proc.lastProc = sim.CurrentTime
+	}
+
+	if !proc.isFirstProc {
+		proc.lastCheck = sim.CurrentTime
 	}
 
 	return result
@@ -237,6 +243,7 @@ func (proc *RPPMProc) Chance(sim *Simulation) float64 {
 func (proc *RPPMProc) Reset() {
 	proc.lastCheck = time.Second * -10
 	proc.lastProc = time.Second * -120
+	proc.isFirstProc = true
 }
 
 func RppmModFromProto(config *proto.RppmMod) (rppmMod, error) {

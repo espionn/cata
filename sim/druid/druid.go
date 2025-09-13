@@ -21,6 +21,8 @@ type Druid struct {
 	BleedsActive      map[*core.Unit]int32
 	AssumeBleedActive bool
 	CannotShredTarget bool
+	RipBaseNumTicks   int32
+	RipMaxNumTicks    int32
 
 	MHAutoSpell *core.Spell
 
@@ -56,21 +58,26 @@ type Druid struct {
 	WildMushrooms         *DruidSpell
 	WildMushroomsDetonate *DruidSpell
 
-	CatForm  *DruidSpell
-	BearForm *DruidSpell
+	CatForm     *DruidSpell
+	BearForm    *DruidSpell
+	MoonkinForm *DruidSpell
 
 	BarkskinAura             *core.Aura
 	BearFormAura             *core.Aura
 	BerserkBearAura          *core.Aura
 	BerserkCatAura           *core.Aura
 	CatFormAura              *core.Aura
-	WeakenedBlowsAuras       core.AuraArray
 	FaerieFireAuras          core.AuraArray
 	FrenziedRegenerationAura *core.Aura
 	LunarEclipseProcAura     *core.Aura
 	MightOfUrsocAura         *core.Aura
+	MoonkinFormAura          *core.Aura
 	ProwlAura                *core.Aura
+	StampedeAura             *core.Aura
+	StampedePendingAura      *core.Aura
+	TigersFury4PT15Aura      *core.Aura
 	SurvivalInstinctsAura    *core.Aura
+	WeakenedBlowsAuras       core.AuraArray
 
 	form DruidForm
 
@@ -87,16 +94,19 @@ const (
 	DruidSpellAstralStorm
 	DruidSpellAstralCommunion
 	DruidSpellFerociousBite
+	DruidSpellFrenziedRegeneration
 	DruidSpellInnervate
 	DruidSpellLacerate
 	DruidSpellMangleBear
 	DruidSpellMangleCat
 	DruidSpellMaul
+	DruidSpellMightOfUrsoc
 	DruidSpellMoonfire
 	DruidSpellMoonfireDoT
 	DruidSpellRake
 	DruidSpellRavage
 	DruidSpellRip
+	DruidSpellSavageDefense
 	DruidSpellSavageRoar
 	DruidSpellShred
 	DruidSpellStarfall
@@ -108,6 +118,7 @@ const (
 	DruidSpellSwipeCat
 	DruidSpellThrashBear
 	DruidSpellThrashCat
+	DruidSpellTigersFury
 	DruidSpellWildMushroom
 	DruidSpellWildMushroomDetonate
 	DruidSpellWrath
@@ -295,7 +306,10 @@ func New(char *core.Character, form DruidForm, selfBuffs SelfBuffs, talents stri
 		form:              form,
 		ClassSpellScaling: core.GetClassSpellScalingCoefficient(proto.Class_ClassDruid),
 		BleedsActive:      make(map[*core.Unit]int32),
+		RipBaseNumTicks:   8,
 	}
+
+	druid.RipMaxNumTicks = druid.RipBaseNumTicks + 3
 
 	core.FillTalentsProto(druid.Talents.ProtoReflect(), talents)
 	druid.EnableManaBar()

@@ -6,17 +6,23 @@ import (
 	"github.com/wowsims/mop/sim/common"
 	"github.com/wowsims/mop/sim/core"
 	"github.com/wowsims/mop/sim/core/proto"
+	"github.com/wowsims/mop/sim/encounters/hof"
 	"github.com/wowsims/mop/sim/encounters/msv"
+	"github.com/wowsims/mop/sim/encounters/toes"
 )
 
 func init() {
 	RegisterGuardianDruid()
 	common.RegisterAllEffects()
 	msv.Register()
+	hof.Register()
+	toes.Register()
 }
 
 func TestGuardian(t *testing.T) {
 	core.RunTestSuite(t, t.Name(), core.FullCharacterTestSuiteGenerator([]core.CharacterSuiteConfig{
+		core.GetTestBuildFromJSON(proto.Class_ClassDruid, "../../../ui/druid/guardian/builds", "sha_default", ItemFilter, nil, nil),
+		core.GetTestBuildFromJSON(proto.Class_ClassDruid, "../../../ui/druid/guardian/builds", "empress_default", ItemFilter, nil, nil),
 		core.GetTestBuildFromJSON(proto.Class_ClassDruid, "../../../ui/druid/guardian/builds", "garajal_default", ItemFilter, nil, nil),
 		{
 			Class: proto.Class_ClassDruid,
@@ -91,7 +97,9 @@ var StandardGlyphs = &proto.Glyphs{
 
 var PlayerOptionsDefault = &proto.Player_GuardianDruid{
 	GuardianDruid: &proto.GuardianDruid{
-		Options: &proto.GuardianDruid_Options{},
+		Options: &proto.GuardianDruid_Options{
+			SymbiosisTarget: proto.Class_ClassMonk,
+		},
 	},
 }
 var FullConsumesSpec = &proto.ConsumesSpec{

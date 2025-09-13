@@ -14,7 +14,7 @@ func (fire *FireMage) registerCriticalMass() {
 
 	criticalMassCritBuffMod := fire.AddDynamicMod(core.SpellModConfig{
 		FloatValue: getCritPercent(),
-		ClassMask:  mage.MageSpellFireball | mage.MageSpellFrostfireBolt | mage.MageSpellScorch | mage.MageSpellPyroblast,
+		ClassMask:  mage.MageSpellFireball | mage.MageSpellFrostfireBolt | mage.MageSpellScorch | mage.MageSpellPyroblast | mage.MageSpellPyroblastDot,
 		Kind:       core.SpellMod_BonusCrit_Percent,
 	})
 

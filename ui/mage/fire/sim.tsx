@@ -10,46 +10,66 @@ import { MageMajorGlyph } from '../../core/proto/mage';
 import { StatCapType } from '../../core/proto/ui';
 import { DEFAULT_CASTER_GEM_STATS, StatCap, Stats, UnitStat } from '../../core/proto_utils/stats';
 import { formatToNumber } from '../../core/utils';
-import { DefaultDebuffs, DefaultRaidBuffs } from '../presets';
+import { DefaultDebuffs, DefaultRaidBuffs, MAGE_BREAKPOINTS } from '../presets';
 import * as Presets from './presets';
+import * as MageInputs from '../inputs';
 
+const mageBombBreakpoints = MAGE_BREAKPOINTS.presets;
 const combustBreakpoints = Presets.COMBUSTION_BREAKPOINT.presets;
 const glyphedCombustBreakpoints = Presets.GLYPHED_COMBUSTION_BREAKPOINT.presets;
 
-const relevantCombustionBreakpoints = [
-	combustBreakpoints.get('12-tick - Combust')!,
-	combustBreakpoints.get('13-tick - Combust')!,
-	combustBreakpoints.get('14-tick - Combust')!,
-	combustBreakpoints.get('15-tick - Combust')!,
-	combustBreakpoints.get('16-tick - Combust')!,
-	combustBreakpoints.get('17-tick - Combust')!,
-	combustBreakpoints.get('18-tick - Combust')!,
-	combustBreakpoints.get('19-tick - Combust')!,
-	combustBreakpoints.get('20-tick - Combust')!,
-	combustBreakpoints.get('21-tick - Combust')!,
+const relevantMageBombBreakpoints = [
+	mageBombBreakpoints.get('5-tick - Living Bomb')!,
+	mageBombBreakpoints.get('6-tick - Living Bomb')!,
+	mageBombBreakpoints.get('7-tick - Living Bomb')!,
+	mageBombBreakpoints.get('8-tick - Living Bomb')!,
+	// mageBombBreakpoints.get('13-tick - Nether Tempest')!,
+	// mageBombBreakpoints.get('14-tick - Nether Tempest')!,
+	// mageBombBreakpoints.get('15-tick - Nether Tempest')!,
+	// mageBombBreakpoints.get('16-tick - Nether Tempest')!,
+	// mageBombBreakpoints.get('17-tick - Nether Tempest')!,
+	// mageBombBreakpoints.get('18-tick - Nether Tempest')!,
+	// mageBombBreakpoints.get('19-tick - Nether Tempest')!,
+	// mageBombBreakpoints.get('20-tick - Nether Tempest')!,
+	// mageBombBreakpoints.get('21-tick - Nether Tempest')!,
+	// mageBombBreakpoints.get('22-tick - Nether Tempest')!,
+	// mageBombBreakpoints.get('23-tick - Nether Tempest')!,
 ];
 
-const relevantGlyphedCombustionBreakpoints = [
-	glyphedCombustBreakpoints.get('21-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('22-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('23-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('24-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('25-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('26-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('27-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('28-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('29-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('30-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('31-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('32-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('33-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('34-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('35-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('36-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('37-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('38-tick - Combust (Glyph)')!,
-	glyphedCombustBreakpoints.get('39-tick - Combust (Glyph)')!,
-];
+// const relevantCombustionBreakpoints = [
+// 	...relevantMageBombBreakpoints,
+// 	combustBreakpoints.get('12-tick - Combust')!,
+// 	combustBreakpoints.get('13-tick - Combust')!,
+// 	combustBreakpoints.get('14-tick - Combust')!,
+// 	combustBreakpoints.get('15-tick - Combust')!,
+// 	combustBreakpoints.get('16-tick - Combust')!,
+// 	combustBreakpoints.get('17-tick - Combust')!,
+// 	combustBreakpoints.get('18-tick - Combust')!,
+// 	combustBreakpoints.get('19-tick - Combust')!,
+// ].sort();
+
+// const relevantGlyphedCombustionBreakpoints = [
+// 	...relevantMageBombBreakpoints,
+// 	glyphedCombustBreakpoints.get('21-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('22-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('23-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('24-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('25-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('26-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('27-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('28-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('29-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('30-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('31-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('32-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('33-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('34-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('35-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('36-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('37-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('38-tick - Combust (Glyph)')!,
+// 	glyphedCombustBreakpoints.get('39-tick - Combust (Glyph)')!,
+// ].sort();
 
 const SPEC_CONFIG = registerSpecConfig(Spec.SpecFireMage, {
 	cssClass: 'fire-mage-sim-ui',
@@ -79,7 +99,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFireMage, {
 
 	defaults: {
 		// Default equipped gear.
-		gear: Presets.P1_BIS_PRESET.gear,
+		gear: Presets.P1_PREBIS.gear,
 		// Default EP weights for sorting gear in the gear picker.
 		epWeights: Presets.DEFAULT_EP_PRESET.epWeights,
 		// Default stat caps for the Reforge Optimizer
@@ -89,12 +109,18 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFireMage, {
 		// Default soft caps for the Reforge optimizer
 		softCapBreakpoints: (() => {
 			const hasteSoftCapConfig = StatCap.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent, {
-				breakpoints: relevantCombustionBreakpoints,
+				breakpoints: [...relevantMageBombBreakpoints],
 				capType: StatCapType.TypeThreshold,
-				postCapEPs: [0.61 * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
+				postCapEPs: [(Presets.DEFAULT_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.10) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
 			});
 
-			return [hasteSoftCapConfig];
+			const masterySoftCapConfig = StatCap.fromStat(Stat.StatMasteryRating, {
+				breakpoints: [11200],
+				capType: StatCapType.TypeSoftCap,
+				postCapEPs: [(Presets.DEFAULT_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.15) ],
+			});
+
+			return [hasteSoftCapConfig, masterySoftCapConfig];
 		})(),
 		// Default consumes settings.
 		consumables: Presets.DefaultFireConsumables,
@@ -115,7 +141,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFireMage, {
 	},
 
 	// IconInputs to include in the 'Player' section on the settings tab.
-	playerIconInputs: [],
+	playerIconInputs: [MageInputs.MageArmorInputs()],
 	// Inputs to include in the 'Rotation' section on the settings tab.
 	// rotationInputs: FireInputs.MageRotationConfig,
 	// Buff and Debuff inputs to include/exclude, overriding the EP-based defaults.
@@ -138,7 +164,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFireMage, {
 		// Preset talents that the user can quickly select.
 		talents: [Presets.FireTalents, Presets.FireTalentsCleave],
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.PREBIS_PRESET, Presets.P1_BIS_PRESET],
+		gear: [Presets.P1_PREBIS, Presets.P1_POST_MSV, Presets.P1_POST_HOF, Presets.P1_BIS],
 
 		builds: [Presets.P1_PRESET_BUILD_DEFAULT, Presets.P1_PRESET_BUILD_CLEAVE],
 	},
@@ -227,12 +253,12 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFireMage, {
 			defaultGear: {
 				[Faction.Unknown]: {},
 				[Faction.Alliance]: {
-					1: Presets.P1_BIS_PRESET.gear,
-					2: Presets.PREBIS_PRESET.gear,
+					1: Presets.P1_PREBIS.gear,
+					2: Presets.P1_BIS.gear,
 				},
 				[Faction.Horde]: {
-					1: Presets.P1_BIS_PRESET.gear,
-					2: Presets.PREBIS_PRESET.gear,
+					1: Presets.P1_PREBIS.gear,
+					2: Presets.P1_BIS.gear,
 				},
 			},
 		},
@@ -246,7 +272,11 @@ export class FireMageSimUI extends IndividualSimUI<Spec.SpecFireMage> {
 		const statSelectionPresets = [
 			{
 				unitStat: UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent),
-				presets: new Map([...Presets.COMBUSTION_BREAKPOINT.presets, ...Presets.GLYPHED_COMBUSTION_BREAKPOINT.presets].sort((a, b) => a[1] - b[1])),
+				presets: new Map(
+					[...MAGE_BREAKPOINTS.presets, ...Presets.COMBUSTION_BREAKPOINT.presets, ...Presets.GLYPHED_COMBUSTION_BREAKPOINT.presets].sort(
+						(a, b) => a[1] - b[1],
+					),
+				),
 			},
 		];
 
@@ -254,65 +284,65 @@ export class FireMageSimUI extends IndividualSimUI<Spec.SpecFireMage> {
 			new ReforgeOptimizer(this, {
 				statSelectionPresets: statSelectionPresets,
 				enableBreakpointLimits: true,
-				updateSoftCaps: softCaps => {
-					const raidBuffs = player.getRaid()?.getBuffs();
-					const hasBL = !!raidBuffs?.bloodlust;
-					const hasBerserking = player.getRace() === Race.RaceTroll;
-					const hasGlyphOfCombustion = !!player.getMajorGlyphs().find(glyph => glyph === MageMajorGlyph.GlyphOfCombustion);
+				// updateSoftCaps: softCaps => {
+				// 	const raidBuffs = player.getRaid()?.getBuffs();
+				// 	const hasBL = !!raidBuffs?.bloodlust;
+				// 	const hasBerserking = player.getRace() === Race.RaceTroll;
+				// 	const hasGlyphOfCombustion = !!player.getMajorGlyphs().find(glyph => glyph === MageMajorGlyph.GlyphOfCombustion);
 
-					const modifyHaste = (oldHastePercent: number, modifier: number) =>
-						Number(formatToNumber(((oldHastePercent / 100 + 1) / modifier - 1) * 100, { maximumFractionDigits: 5 }));
+				// 	const modifyHaste = (oldHastePercent: number, modifier: number) =>
+				// 		Number(formatToNumber(((oldHastePercent / 100 + 1) / modifier - 1) * 100, { maximumFractionDigits: 5 }));
 
-					this.individualConfig.defaults.softCapBreakpoints!.forEach(softCap => {
-						const softCapToModify = softCaps.find(sc => sc.unitStat.equals(softCap.unitStat));
-						if (softCap.unitStat.equalsPseudoStat(PseudoStat.PseudoStatSpellHastePercent) && softCapToModify) {
-							if (hasGlyphOfCombustion) softCap.breakpoints = relevantGlyphedCombustionBreakpoints;
+				// 	this.individualConfig.defaults.softCapBreakpoints!.forEach(softCap => {
+				// 		const softCapToModify = softCaps.find(sc => sc.unitStat.equals(softCap.unitStat));
+				// 		if (softCap.unitStat.equalsPseudoStat(PseudoStat.PseudoStatSpellHastePercent) && softCapToModify) {
+				// 			if (hasGlyphOfCombustion) softCap.breakpoints = relevantMageBombBreakpoints;
 
-							const adjustedHastedBreakpoints = new Set([...softCap.breakpoints]);
-							const hasCloseMatchingValue = (value: number) =>
-								[...adjustedHastedBreakpoints.values()].find(bp => bp.toFixed(2) === value.toFixed(2));
+				// 			const adjustedHastedBreakpoints = new Set([...softCap.breakpoints]);
+				// 			const hasCloseMatchingValue = (value: number) =>
+				// 				[...adjustedHastedBreakpoints.values()].find(bp => bp.toFixed(2) === value.toFixed(2));
 
-							softCap.breakpoints.forEach(breakpoint => {
-								if (hasBL) {
-									const blBreakpoint = modifyHaste(breakpoint, 1.3);
+				// 			softCap.breakpoints.forEach(breakpoint => {
+				// 				if (hasBL) {
+				// 					const blBreakpoint = modifyHaste(breakpoint, 1.3);
 
-									if (blBreakpoint > 0) {
-										if (!hasCloseMatchingValue(blBreakpoint)) adjustedHastedBreakpoints.add(blBreakpoint);
-										if (hasBerserking) {
-											const berserkingBreakpoint = modifyHaste(blBreakpoint, 1.2);
-											if (berserkingBreakpoint > 0 && !hasCloseMatchingValue(berserkingBreakpoint)) {
-												adjustedHastedBreakpoints.add(berserkingBreakpoint);
-											}
-										}
-									}
-								}
-							});
-							softCapToModify.breakpoints = [...adjustedHastedBreakpoints].sort((a, b) => a - b);
-						}
-					});
-					return softCaps;
-				},
-				additionalSoftCapTooltipInformation: {
-					[Stat.StatHasteRating]: () => {
-						const raidBuffs = player.getRaid()?.getBuffs();
-						const hasBL = !!raidBuffs?.bloodlust;
-						const hasBerserking = player.getRace() === Race.RaceTroll;
+				// 					if (blBreakpoint > 0) {
+				// 						if (!hasCloseMatchingValue(blBreakpoint)) adjustedHastedBreakpoints.add(blBreakpoint);
+				// 						if (hasBerserking) {
+				// 							const berserkingBreakpoint = modifyHaste(blBreakpoint, 1.2);
+				// 							if (berserkingBreakpoint > 0 && !hasCloseMatchingValue(berserkingBreakpoint)) {
+				// 								adjustedHastedBreakpoints.add(berserkingBreakpoint);
+				// 							}
+				// 						}
+				// 					}
+				// 				}
+				// 			});
+				// 			softCapToModify.breakpoints = [...adjustedHastedBreakpoints].sort((a, b) => a - b);
+				// 		}
+				// 	});
+				// 	return softCaps;
+				// },
+				// additionalSoftCapTooltipInformation: {
+				// 	[Stat.StatHasteRating]: () => {
+				// 		const raidBuffs = player.getRaid()?.getBuffs();
+				// 		const hasBL = !!raidBuffs?.bloodlust;
+				// 		const hasBerserking = player.getRace() === Race.RaceTroll;
 
-						return (
-							<>
-								{(hasBL || hasBerserking) && (
-									<>
-										<p className="mb-0">Additional breakpoints have been created using the following cooldowns:</p>
-										<ul className="mb-0">
-											{hasBL && <li>Bloodlust</li>}
-											{hasBerserking && <li>Berserking</li>}
-										</ul>
-									</>
-								)}
-							</>
-						);
-					},
-				},
+				// 		return (
+				// 			<>
+				// 				{(hasBL || hasBerserking) && (
+				// 					<>
+				// 						<p className="mb-0">Additional breakpoints have been created using the following cooldowns:</p>
+				// 						<ul className="mb-0">
+				// 							{hasBL && <li>Bloodlust</li>}
+				// 							{hasBerserking && <li>Berserking</li>}
+				// 						</ul>
+				// 					</>
+				// 				)}
+				// 			</>
+				// 		);
+				// 	},
+				// },
 			});
 		});
 	}

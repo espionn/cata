@@ -15,6 +15,12 @@ func (fire *FireMage) registerPyroblastSpell() {
 	pyroblastDotScaling := .36
 	pyroblastDotCoefficient := .36
 
+	instantPyroblastDotMod := fire.AddDynamicMod(core.SpellModConfig{
+		Kind:       core.SpellMod_DamageDone_Pct,
+		FloatValue: .25,
+		ClassMask:  mage.MageSpellPyroblastDot,
+	})
+
 	fire.Pyroblast = fire.RegisterSpell(core.SpellConfig{
 		ActionID:       actionID,
 		SpellSchool:    core.SpellSchoolFire,
@@ -42,9 +48,12 @@ func (fire *FireMage) registerPyroblastSpell() {
 			if !fire.InstantPyroblastAura.IsActive() && fire.PresenceOfMindAura != nil {
 				fire.PresenceOfMindAura.Deactivate(sim)
 			}
-			fire.InstantPyroblastAura.Deactivate(sim)
 			baseDamage := fire.CalcAndRollDamageRange(sim, pyroblastScaling, pyroblastVariance)
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
+			if fire.InstantPyroblastAura.IsActive() {
+				fire.InstantPyroblastAura.Deactivate(sim)
+				instantPyroblastDotMod.Activate()
+			}
 			fire.HeatingUpSpellHandler(sim, spell, result, func() {
 				spell.RelatedDotSpell.Cast(sim, target)
 				spell.DealDamage(sim, result)
@@ -81,6 +90,7 @@ func (fire *FireMage) registerPyroblastSpell() {
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			spell.Dot(target).Apply(sim)
+			instantPyroblastDotMod.Deactivate()
 		},
 	})
 }

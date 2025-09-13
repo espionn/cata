@@ -318,7 +318,7 @@ func (wa *WeaponAttack) swing(sim *Simulation) time.Duration {
 	wa.swingAt = sim.CurrentTime + wa.curSwingDuration
 	attackSpell.Cast(sim, wa.unit.CurrentTarget)
 
-	if !sim.Options.Interactive && wa.unit.Rotation != nil {
+	if !sim.Options.Interactive && (wa.unit.Rotation != nil) && !wa.unit.Metrics.isTanking {
 		wa.unit.ReactToEvent(sim)
 	}
 
@@ -341,8 +341,9 @@ func (wa *WeaponAttack) addWeaponAttack(sim *Simulation, swingSpeed float64) {
 }
 
 type AutoAttacks struct {
-	AutoSwingMelee  bool
-	AutoSwingRanged bool
+	AutoSwingMelee    bool
+	AutoSwingRanged   bool
+	RandomMeleeOffset bool
 
 	IsDualWielding bool
 
@@ -373,8 +374,9 @@ func (unit *Unit) EnableAutoAttacks(agent Agent, options AutoAttackOptions) {
 	}
 
 	unit.AutoAttacks = AutoAttacks{
-		AutoSwingMelee:  options.AutoSwingMelee,
-		AutoSwingRanged: options.AutoSwingRanged,
+		AutoSwingMelee:    options.AutoSwingMelee,
+		AutoSwingRanged:   options.AutoSwingRanged,
+		RandomMeleeOffset: true,
 
 		IsDualWielding: options.OffHand.SwingSpeed != 0,
 
@@ -825,9 +827,13 @@ func (aa *AutoAttacks) NextAttackAt() time.Duration {
 // Used to prevent artificial Haste breakpoints arising from APL evaluations after autos occurring at
 // locally optimal timings.
 func (aa *AutoAttacks) RandomizeMeleeTiming(sim *Simulation) {
+	if !aa.AutoSwingMelee {
+		return
+	}
+
 	swingDur := aa.MainhandSwingSpeed()
 	randomAutoOffset := DurationFromSeconds(sim.RandomFloat("Melee Timing") * swingDur.Seconds() / 2)
-	aa.StopMeleeUntil(sim, sim.CurrentTime-swingDur+randomAutoOffset)
+	aa.DelayMeleeBy(sim, randomAutoOffset)
 }
 
 // Returns whether a PPM-based effect procced.

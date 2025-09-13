@@ -39,9 +39,9 @@ export const P1_EP_PRESET = PresetUtils.makePresetEpWeights(
 			[Stat.StatStamina]: 0.0,
 			[Stat.StatAgility]: 1,
 			[Stat.StatHitRating]: 0.63,
-			[Stat.StatCritRating]: 0.3,
-			[Stat.StatHasteRating]: 0.37,
-			[Stat.StatMasteryRating]: 0.32,
+			[Stat.StatCritRating]: 0.38,
+			[Stat.StatHasteRating]: 0.32,
+			[Stat.StatMasteryRating]: 0.35,
 			[Stat.StatExpertiseRating]: 0.59,
 		},
 		{
@@ -54,19 +54,19 @@ export const PRERAID_PRESET = PresetUtils.makePresetBuild('Pre-raid', {
 	gear: PRERAID_PRESET_GEAR,
 	epWeights: P1_EP_PRESET,
 	talents: DefaultTalents,
-	rotationType: APLRotationType.TypeAPL,
+	rotationType: APLRotationType.TypeAuto,
 });
 export const PRERAID_PRESET_CELESTIAL = PresetUtils.makePresetBuild('Pre-raid (Celestial)', {
 	gear: PRERAID_CELESTIAL_PRESET_GEAR,
 	epWeights: P1_EP_PRESET,
 	talents: DefaultTalents,
-	rotationType: APLRotationType.TypeAPL,
+	rotationType: APLRotationType.TypeAuto,
 });
 export const P1_PRESET = PresetUtils.makePresetBuild('P1', {
 	gear: P1_PRESET_GEAR,
 	epWeights: P1_EP_PRESET as PresetUtils.PresetEpWeights,
 	talents: DefaultTalents,
-	rotationType: APLRotationType.TypeAPL,
+	rotationType: APLRotationType.TypeAuto,
 });
 
 export const BMDefaultOptions = BeastMasteryOptions.create({
@@ -74,6 +74,7 @@ export const BMDefaultOptions = BeastMasteryOptions.create({
 		petUptime: 1,
 		useHuntersMark: true,
 		petType: PetType.Wolf,
+		glaiveTossSuccess: 0.8,
 	},
 });
 
@@ -89,5 +90,4 @@ export const OtherDefaults = {
 	iterationCount: 25000,
 	profession1: Profession.Engineering,
 	profession2: Profession.Leatherworking,
-	GlaiveTossChance: 80,
 };

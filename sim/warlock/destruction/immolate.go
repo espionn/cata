@@ -7,8 +7,8 @@ import (
 	"github.com/wowsims/mop/sim/warlock"
 )
 
-const immolateScale = 0.47 * 1.13 // Hotfix
-const immolateCoeff = 0.47 * 1.13
+const immolateScale = 0.47 * 1.3 // Hotfix
+const immolateCoeff = 0.47 * 1.3
 
 // Damage Done By Caster setup
 const (
@@ -87,6 +87,9 @@ func (destruction *DestructionWarlock) registerImmolate() {
 				result := dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeSnapshotCrit)
 				if result.DidCrit() {
 					destruction.BurningEmbers.Gain(sim, 1, dot.Spell.ActionID)
+				}
+				if destruction.SiphonLife != nil {
+					destruction.SiphonLife.Cast(sim, &destruction.Unit)
 				}
 			},
 		},

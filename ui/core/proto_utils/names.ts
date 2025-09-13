@@ -241,12 +241,14 @@ export const sourceNames: Map<SourceFilterOption, string> = new Map([
 	[SourceFilterOption.SourceCrafting, 'Crafting'],
 	[SourceFilterOption.SourceQuest, 'Quest'],
 	[SourceFilterOption.SourceReputation, 'Reputation'],
+	[SourceFilterOption.SourceSoldBy, 'Sold'],
 	[SourceFilterOption.SourcePvp, 'PVP'],
 	[SourceFilterOption.SourceDungeon, 'Dungeon'],
 	[SourceFilterOption.SourceDungeonH, 'Dungeon (H)'],
 	[SourceFilterOption.SourceRaid, 'Raid'],
 	[SourceFilterOption.SourceRaidH, 'Raid (H)'],
 	[SourceFilterOption.SourceRaidRF, 'Raid (RF)'],
+	[SourceFilterOption.SourceRaidFlex, 'Raid (Flex)'],
 ]);
 export const raidNames: Map<RaidFilterOption, string> = new Map([
 	[RaidFilterOption.RaidUnknown, 'Unknown'],
@@ -261,13 +263,13 @@ export const difficultyNames: Map<DungeonDifficulty, string> = new Map([
 	[DungeonDifficulty.DifficultyUnknown, 'Unknown'],
 	[DungeonDifficulty.DifficultyNormal, 'N'],
 	[DungeonDifficulty.DifficultyHeroic, 'H'],
-	[DungeonDifficulty.DifficultyTitanRuneAlpha, 'TRA'],
-	[DungeonDifficulty.DifficultyTitanRuneBeta, 'TRB'],
+	[DungeonDifficulty.DifficultyCelestial, 'CEL'],
 	[DungeonDifficulty.DifficultyRaid10, '10N'],
 	[DungeonDifficulty.DifficultyRaid10H, '10H'],
 	[DungeonDifficulty.DifficultyRaid25RF, 'RF'],
 	[DungeonDifficulty.DifficultyRaid25, 'RN'],
 	[DungeonDifficulty.DifficultyRaid25H, 'RH'],
+	[DungeonDifficulty.DifficultyRaidFlex, 'RFL'],
 ]);
 
 export const REP_LEVEL_NAMES: Record<RepLevel, string> = {
@@ -374,7 +376,7 @@ export const masterySpellNames: Map<Spec, string> = new Map([
 	[Spec.SpecFuryWarrior, 'Unshackled Fury'],
 	[Spec.SpecProtectionWarrior, 'Critical Block'],
 	[Spec.SpecArcaneMage, 'Mana Adept'],
-	[Spec.SpecFireMage, 'Flashburn'],
+	[Spec.SpecFireMage, 'Ignite'],
 	[Spec.SpecFrostMage, 'Icicles'],
 	[Spec.SpecDisciplinePriest, 'Shield Discipline'],
 	[Spec.SpecHolyPriest, 'Echo of Light'],
@@ -411,7 +413,7 @@ export const masterySpellIDs: Map<Spec, number> = new Map([
 	[Spec.SpecFuryWarrior, 76856],
 	[Spec.SpecProtectionWarrior, 76857],
 	[Spec.SpecArcaneMage, 76547],
-	[Spec.SpecFireMage, 76595],
+	[Spec.SpecFireMage, 12846],
 	[Spec.SpecFrostMage, 76613],
 	[Spec.SpecDisciplinePriest, 77484],
 	[Spec.SpecHolyPriest, 77485],

@@ -18,6 +18,8 @@ import * as Presets from './presets.js';
 const SPEC_CONFIG = registerSpecConfig(Spec.SpecGuardianDruid, {
 	cssClass: 'guardian-druid-sim-ui',
 	cssScheme: PlayerClasses.getCssClass(PlayerClasses.Druid),
+	// Override required talent rows - Guardian only requires rows 1, 3, and 5 instead of all rows
+	requiredTalentRows: [1, 3, 5],
 	// List any known bugs / issues here and they'll be shown on the site.
 	knownIssues: [],
 	warnings: [],
@@ -71,7 +73,14 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecGuardianDruid, {
 		epWeights: Presets.BALANCED_EP_PRESET.epWeights,
 		// Default stat caps for the Reforge Optimizer
 		statCaps: (() => {
-			return new Stats().withStat(Stat.StatExpertiseRating, 15 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION).withPseudoStat(PseudoStat.PseudoStatPhysicalHitPercent, 7.5).withPseudoStat(PseudoStat.PseudoStatSpellHitPercent, 15);
+			return new Stats().withStat(Stat.StatExpertiseRating, 15 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION).withPseudoStat(PseudoStat.PseudoStatPhysicalHitPercent, 7.5);
+		})(),
+		softCapBreakpoints: (() => {
+			return [StatCap.fromStat(Stat.StatExpertiseRating, {
+				breakpoints: [7.5 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION, 15 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION],
+				capType: StatCapType.TypeSoftCap,
+				postCapEPs: [0.59, 0],
+			})];
 		})(),
 		other: Presets.OtherDefaults,
 		// Default consumes settings.
@@ -123,6 +132,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecGuardianDruid, {
 			OtherInputs.BurstWindow,
 			OtherInputs.HpPercentForDefensives,
 			OtherInputs.InFrontOfTarget,
+			DruidInputs.SymbiosisSelection,
 		],
 	},
 	encounterPicker: {
@@ -135,11 +145,13 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecGuardianDruid, {
 		// Preset talents that the user can quickly select.
 		talents: [Presets.DefensiveTalents, Presets.OffensiveTalents],
 		// Preset rotations that the user can quickly select.
-		rotations: [Presets.ROTATION_DEFAULT, Presets.ROTATION_HOTW],
+		rotations: [Presets.ROTATION_DEFAULT, Presets.ROTATION_HOTW, Presets.ROTATION_EMPRESS, Presets.ROTATION_SHA],
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.PRERAID_PRESET],
+		gear: [Presets.PRERAID_PRESET, Presets.MSV_PRESET, Presets.HOF_PRESET],
 		builds: [
 			Presets.PRESET_BUILD_GARAJAL,
+			Presets.PRESET_BUILD_EMPRESS,
+			Presets.PRESET_BUILD_SHA,
 		],
 	},
 

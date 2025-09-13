@@ -75,7 +75,6 @@ export class CharacterStats extends Component {
 					UnitStat.fromStat(Stat.StatStamina),
 					UnitStat.fromStat(Stat.StatIntellect),
 					UnitStat.fromStat(Stat.StatSpirit),
-					UnitStat.fromStat(Stat.StatExpertiseRating),
 				],
 			],
 			[
@@ -111,10 +110,16 @@ export class CharacterStats extends Component {
 		]);
 
 		if (this.player.getPlayerSpec().isTankSpec) {
+			const hitIndex = statGroups.get(StatGroup.Physical)!.findIndex(stat => stat.equalsPseudoStat(PseudoStat.PseudoStatPhysicalHitPercent));
+			statGroups.get(StatGroup.Physical)!.splice(hitIndex+1, 0, UnitStat.fromStat(Stat.StatExpertiseRating));
 			statGroups.get(StatGroup.Defense)!.push(UnitStat.fromStat(Stat.StatMasteryRating));
 		} else if ([Stat.StatIntellect, Stat.StatSpellPower].includes(simUI.individualConfig.epReferenceStat)) {
+			const hitIndex = statGroups.get(StatGroup.Spell)!.findIndex(stat => stat.equalsPseudoStat(PseudoStat.PseudoStatSpellHitPercent));
+			statGroups.get(StatGroup.Spell)!.splice(hitIndex+1, 0, UnitStat.fromStat(Stat.StatExpertiseRating));
 			statGroups.get(StatGroup.Spell)!.push(UnitStat.fromStat(Stat.StatMasteryRating));
 		} else {
+			const hitIndex = statGroups.get(StatGroup.Physical)!.findIndex(stat => stat.equalsPseudoStat(PseudoStat.PseudoStatPhysicalHitPercent));
+			statGroups.get(StatGroup.Physical)!.splice(hitIndex+1, 0, UnitStat.fromStat(Stat.StatExpertiseRating));
 			statGroups.get(StatGroup.Physical)!.push(UnitStat.fromStat(Stat.StatMasteryRating));
 		}
 
@@ -387,6 +392,11 @@ export class CharacterStats extends Component {
 						<span>{i18n.t('sidebar.character_stats.tooltip.total')}</span>
 						<span>{this.statDisplayString(finalStats, unitStat, true)}</span>
 					</div>
+					{unitStat.isPseudoStat() && unitStat.getPseudoStat() === PseudoStat.PseudoStatSpellHitPercent && (
+					<div className="character-stats-tooltip-row">
+						<span><i>Total Includes Expertise</i></span>
+					</div>
+					)}
 				</div>
 			);
 

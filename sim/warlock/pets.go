@@ -45,7 +45,7 @@ func (warlock *Warlock) SimplePetStatInheritanceWithScale(apScale float64) core.
 			stats.Stamina:             ownerStats[stats.Stamina] * 1.0 / 3.0,
 			stats.SpellPower:          ownerStats[stats.SpellPower], // All pets inherit spell 1:1
 			stats.HasteRating:         ownerStats[stats.HasteRating],
-			stats.PhysicalCritPercent: ownerStats[stats.PhysicalCritPercent],
+			stats.PhysicalCritPercent: ownerStats[stats.SpellCritPercent], // All pets seem to use spell crit for Physical abilities
 			stats.SpellCritPercent:    ownerStats[stats.SpellCritPercent],
 
 			stats.AttackPower: ownerStats[stats.SpellPower] * apScale,
@@ -107,8 +107,9 @@ func (warlock *Warlock) setPetOptions(petAgent core.PetAgent, aaOptions *core.Au
 	}
 
 	pet.EnableEnergyBar(core.EnergyBarOptions{
-		MaxEnergy: 200,
-		UnitClass: proto.Class_ClassWarlock,
+		MaxEnergy:             200,
+		UnitClass:             proto.Class_ClassWarlock,
+		HasHasteRatingScaling: false,
 	})
 
 	warlock.AddPet(petAgent)
@@ -169,7 +170,7 @@ func (warlock *Warlock) registerSuccubus() *WarlockPet {
 func (warlock *Warlock) registerSuccubusWithName(name string, enabledOnStart bool, isGuardian bool) *WarlockPet {
 	pet := warlock.RegisterPet(proto.WarlockOptions_Succubus, 3, 1.667, name, enabledOnStart, isGuardian)
 	pet.registerLashOfPainSpell()
-	pet.MinEnergy = 160
+	pet.MinEnergy = 60
 	return pet
 }
 
@@ -313,7 +314,7 @@ func (pet *WarlockPet) registerLashOfPainSpell() {
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
+				GCD: time.Second,
 			},
 		},
 
