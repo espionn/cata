@@ -25,7 +25,7 @@ func (hunter *Hunter) RegisterStampedeSpell() {
 		},
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
 			for _, pet := range hunter.StampedePet {
-				pet.EnableWithTimeout(sim, pet, time.Second*20)
+				pet.EnableWithHastedTimeout(sim, pet, time.Millisecond*20500, time.Millisecond*300)
 			}
 		},
 	})

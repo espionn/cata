@@ -1,6 +1,8 @@
 package hunter
 
 import (
+	"time"
+
 	"github.com/wowsims/mop/sim/core"
 	"github.com/wowsims/mop/sim/core/proto"
 	"github.com/wowsims/mop/sim/core/stats"
@@ -104,6 +106,7 @@ func (hunter *Hunter) NewDireBeastPet() *HunterPet {
 			hunter.AddFocus(sim, 5, focusMetrics)
 		},
 	})
+
 	return direBeastPet
 }
 
@@ -345,4 +348,49 @@ var DefaultPetConfigs = [...]PetConfig{
 	proto.HunterOptions_Beetle:       {Name: "Beetle", FocusDump: Bite},
 	proto.HunterOptions_Quilen:       {Name: "Quilen", FocusDump: Bite},
 	proto.HunterOptions_WaterStrider: {Name: "Water Strider", FocusDump: Claw},
+}
+
+func (hp *HunterPet) EnableWithHastedTimeout(sim *core.Simulation, petAgent core.PetAgent, nominalDuration time.Duration, variance time.Duration) {
+	hp.Enable(sim, petAgent)
+
+	hp.recalculateHastedDuration(sim, nominalDuration, variance)
+}
+
+func (hp *HunterPet) recalculateHastedDuration(sim *core.Simulation, nominalDuration time.Duration, variance time.Duration) {
+	swingSpeed := hp.AutoAttacks.MainhandSwingSpeed()
+
+	if swingSpeed <= 0 {
+		hp.SetTimeoutAction(sim, nominalDuration)
+		return
+	}
+
+	expectedTotalSwings := 1 + float64(nominalDuration)/float64(swingSpeed)
+	guaranteedSwings := int(expectedTotalSwings)
+
+	var finalSwings int
+	if sim.RandomFloat("Hunter Pet Duration") < (expectedTotalSwings - float64(guaranteedSwings)) {
+		finalSwings = guaranteedSwings + 1
+	} else {
+		finalSwings = guaranteedSwings
+	}
+
+	minTime := time.Duration(finalSwings-1) * swingSpeed
+	maxTime := time.Duration(finalSwings) * swingSpeed
+
+	minBound := nominalDuration - variance
+	maxBound := nominalDuration + variance
+
+	if minTime < minBound {
+		minTime = minBound
+	}
+	if maxTime > maxBound {
+		maxTime = maxBound
+	}
+
+	if maxTime > minTime {
+		finalDuration := minTime + time.Duration(sim.RandomFloat("Hunter Pet Swing Variance")*float64(maxTime-minTime))
+		hp.SetTimeoutAction(sim, finalDuration)
+	} else {
+		hp.SetTimeoutAction(sim, minTime)
+	}
 }
