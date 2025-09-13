@@ -605,6 +605,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestShadow-AllItems-EnchantWeapon-ElementalForce-4443"
+ value: {
+  dps: 85818.49232
+  tps: 81164.29614
+ }
+}
+dps_results: {
  key: "TestShadow-AllItems-EnchantWeapon-River'sSong-4446"
  value: {
   dps: 85242.28062
@@ -1449,6 +1456,13 @@ dps_results: {
  value: {
   dps: 91200.93891
   tps: 85914.35521
+ }
+}
+dps_results: {
+ key: "TestShadow-AllItems-NitroBoosts-4223"
+ value: {
+  dps: 88448.61069
+  tps: 83402.8442
  }
 }
 dps_results: {

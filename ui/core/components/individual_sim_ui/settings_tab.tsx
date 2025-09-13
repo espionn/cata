@@ -202,13 +202,8 @@ export class SettingsTab extends SimTab {
 
 	private buildBuffsSettings() {
 		const contentBlock = new ContentBlock(this.column3, 'buffs-settings', {
-			header: { title: 'Raid Buffs', tooltip: Tooltips.BUFFS_SECTION },
+			header: { title: 'Raid Buffs', tooltip: i18n.t('settings.buffs.tooltip') },
 		});
-		contentBlock.headerElement?.appendChild(
-			<p className="fs-body">
-				All raid buffs/debuffs selected are assumed to be provided by <strong>other</strong> raid members than the simulated player.
-			</p>,
-		);
 
 		const buffOptions = relevantStatOptions(BuffDebuffInputs.RAID_BUFFS_CONFIG, this.simUI);
 		this.configureIconSection(
@@ -263,7 +258,7 @@ export class SettingsTab extends SimTab {
 
 	private buildDebuffsSettings() {
 		const contentBlock = new ContentBlock(this.column3, 'debuffs-settings', {
-			header: { title: 'Debuffs', tooltip: Tooltips.DEBUFFS_SECTION },
+			header: { title: 'Debuffs', tooltip: i18n.t('settings.debuffs.tooltip') },
 		});
 
 		const debuffOptions = relevantStatOptions(BuffDebuffInputs.DEBUFFS_CONFIG, this.simUI);

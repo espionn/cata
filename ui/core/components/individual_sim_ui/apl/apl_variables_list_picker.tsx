@@ -1,19 +1,21 @@
 import i18n from "../../../../i18n/config";
+import { IndividualSimUI } from "../../../individual_sim_ui";
 import { Player } from "../../../player";
 import { APLValueVariable } from "../../../proto/apl";
-import { EventID } from "../../../typed_event";
+import { EventID, TypedEvent } from "../../../typed_event";
 import { randomUUID } from "../../../utils";
 import { Component } from "../../component";
 import { Input } from "../../input";
 import { ListItemPickerConfig, ListPicker } from "../../pickers/list_picker";
 import { AdaptiveStringPicker } from "../../pickers/string_picker";
 import { APLValuePicker } from "../apl_values";
+import { AplFloatingActionBar } from "./apl_floating_action_bar";
 
 export class APLVariablesListPicker extends Component {
-	constructor(container: HTMLElement, player: Player<any>) {
-		super(container, 'apl-variables-list-picker');
+	constructor(container: HTMLElement, simUI: IndividualSimUI<any>) {
+		super(container, 'apl-variables-list-picker-root');
 
-		new ListPicker<Player<any>, APLValueVariable>(this.rootElem, player, {
+		const listPicker = new ListPicker<Player<any>, APLValueVariable>(this.rootElem, simUI.player, {
 			title: i18n.t('rotation.apl.variables.header'),
 			titleTooltip: i18n.t('rotation.apl.variables.tooltips.overview'),
 			extraCssClasses: ['apl-list-item-picker', 'apl-value-variables-picker'],
@@ -31,8 +33,8 @@ export class APLVariablesListPicker extends Component {
 				_: ListPicker<Player<any>, APLValueVariable>,
 				index: number,
 				config: ListItemPickerConfig<Player<any>, APLValueVariable>,
-			) => new APLValueVariablePicker(parent, player, index, config),
-			allowedActions: ['create', 'copy', 'delete', 'move'],
+			) => new APLValueVariablePicker(parent, simUI.player, index, config),
+			allowedActions: ['copy', 'delete', 'move'],
 			actions: {
 				create: {
 					useIcon: false,
@@ -40,6 +42,8 @@ export class APLVariablesListPicker extends Component {
 			},
 			inlineMenuBar: true,
 		});
+
+		new AplFloatingActionBar(this.rootElem, simUI, listPicker, i18n.t('rotation.apl.variables.name'))
 	}
 
 	private createValueVariable(): APLValueVariable {

@@ -125,24 +125,13 @@ export const updateSimPageMetadata = (): void => {
 
 	const { className, specName } = classSpecInfo;
 
-	const translatedClass = translateClass(className);
-	const translatedSpec = translateSpec(className, specName);
+	const translationData = {
+		class: translateClass(className),
+		spec: translateSpec(className, specName)
+	};
 
-	const titleElement = document.querySelector('title');
-	if (titleElement) {
-		const titleTemplate = i18n.t('sim.title');
-		titleElement.textContent = titleTemplate
-			.replace('{class}', translatedClass)
-			.replace('{spec}', translatedSpec);
-	}
-
-	const metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
-	if (metaDescription) {
-		const descriptionTemplate = i18n.t('sim.description');
-		metaDescription.content = descriptionTemplate
-			.replace('{class}', translatedClass)
-			.replace('{spec}', translatedSpec);
-	}
+	document.querySelector('title')!.textContent = i18n.t('sim.title', translationData)
+	document.querySelector('meta[name="description"]')!.textContent = i18n.t('sim.description', translationData)
 };
 
 export const updateSimLinks = (): void => {

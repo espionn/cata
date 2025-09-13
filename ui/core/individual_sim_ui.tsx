@@ -364,7 +364,9 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 		// request so that this can be re-enabled.
 		//this.bt = this.addBulkTab();
 
-		this.addTopbarComponents();
+		this.sim.waitForInit().then(() => {
+			this.addTopbarComponents();
+		});
 	}
 
 	applyDefaultConfigOptions(config: IndividualSimUIConfig<SpecType>): IndividualSimUIConfig<SpecType> {

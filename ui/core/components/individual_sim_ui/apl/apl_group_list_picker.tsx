@@ -1,16 +1,18 @@
 import i18n from "../../../../i18n/config";
+import { IndividualSimUI } from "../../../individual_sim_ui";
 import { Player } from "../../../player";
 import { APLGroup } from "../../../proto/apl";
 import { EventID } from "../../../typed_event";
 import { Component } from "../../component";
 import { ListItemPickerConfig, ListPicker } from "../../pickers/list_picker";
+import { AplFloatingActionBar } from "./apl_floating_action_bar";
 import { APLGroupEditor } from "./apl_group_editor";
 
 export class APLGroupListPicker extends Component {
-	constructor(parent: HTMLElement, player: Player<any>) {
-		super(parent, 'apl-group-list-picker');
+	constructor(parent: HTMLElement, simUI: IndividualSimUI<any>) {
+		super(parent, 'apl-group-list-picker-root');
 
-		new ListPicker<Player<any>, APLGroup>(this.rootElem, player, {
+		const listPicker = new ListPicker<Player<any>, APLGroup>(this.rootElem, simUI.player, {
 			title: i18n.t('rotation.apl.actionGroups.header'),
 			titleTooltip: i18n.t('rotation.apl.actionGroups.tooltips.overview'),
 			extraCssClasses: ['apl-list-item-picker', 'apl-groups-picker'],
@@ -33,9 +35,11 @@ export class APLGroupListPicker extends Component {
 				_: ListPicker<Player<any>, APLGroup>,
 				index: number,
 				config: ListItemPickerConfig<Player<any>, APLGroup>,
-			) => new APLGroupEditor(parent, player, config),
-			allowedActions: ['create', 'copy', 'delete', 'move'],
+			) => new APLGroupEditor(parent, simUI.player, config),
+			allowedActions: ['copy', 'delete', 'move'],
 			inlineMenuBar: true,
 		});
+
+		new AplFloatingActionBar(this.rootElem, simUI, listPicker, i18n.t('rotation.apl.actionGroups.name'))
 	}
 }

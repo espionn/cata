@@ -83,10 +83,6 @@
 		}
 	}
 
-	.list-picker-new-button {
-		width: 100%;
-	}
-
 	&.horizontal {
 		flex-direction: row;
 		align-items: center;
@@ -103,6 +99,7 @@
 			border: 0;
 			padding: 0 !important;
 		}
+
 		.list-picker-item-header {
 			display: none !important;
 		}

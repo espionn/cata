@@ -1,18 +1,20 @@
 import i18n from "../../../../i18n/config";
+import { IndividualSimUI } from "../../../individual_sim_ui";
 import { Player } from "../../../player";
 import { APLAction, APLListItem } from "../../../proto/apl";
-import { EventID } from "../../../typed_event";
+import { EventID, TypedEvent } from "../../../typed_event";
 import { Component } from "../../component";
 import { Input } from "../../input";
 import { ListItemPickerConfig, ListPicker } from "../../pickers/list_picker";
 import { APLActionPicker } from "../apl_actions";
+import { AplFloatingActionBar } from "./apl_floating_action_bar";
 import { APLHidePicker } from "./hide_picker";
 
 export class APLPriorityListPicker extends Component{
-	constructor(container: HTMLElement, player: Player<any>) {
-		super(container, 'apl-priority-list-picker');
+	constructor(container: HTMLElement, simUI: IndividualSimUI<any>) {
+		super(container, 'apl-priority-list-picker-root');
 
-		new ListPicker<Player<any>, APLListItem>(this.rootElem, player, {
+		const listPicker = new ListPicker<Player<any>, APLListItem>(this.rootElem, simUI.player, {
 			title: i18n.t('rotation.apl.priorityList.header'),
 			titleTooltip: i18n.t('rotation.apl.priorityList.tooltips.overview'),
 			extraCssClasses: ['apl-list-item-picker'],
@@ -23,20 +25,19 @@ export class APLPriorityListPicker extends Component{
 				player.aplRotation.priorityList = newValue;
 				player.rotationChangeEmitter.emit(eventID);
 			},
-			newItem: () =>
-				APLListItem.create({
-					action: {},
-				}),
+			newItem: () => APLListItem.create({action: {}}),
 			copyItem: (oldItem: APLListItem) => APLListItem.clone(oldItem),
 			newItemPicker: (
 				parent: HTMLElement,
 				_: ListPicker<Player<any>, APLListItem>,
 				index: number,
 				config: ListItemPickerConfig<Player<any>, APLListItem>,
-			) => new APLListItemPicker(parent, player, config, index),
-			allowedActions: ['create', 'copy', 'delete', 'move'],
+			) => new APLListItemPicker(parent, simUI.player, config, index),
+			allowedActions: ['copy', 'delete', 'move'],
 			inlineMenuBar: true,
 		});
+
+		new AplFloatingActionBar(this.rootElem,simUI,listPicker,i18n.t('rotation.apl.priorityList.name'));
 	}
 }
 

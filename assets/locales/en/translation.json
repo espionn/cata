@@ -109,9 +109,9 @@
 			"stamina": "Stamina",
 			"intellect": "Intellect",
 			"spirit": "Spirit",
-			"spell_hit": "Spell Hit",
-			"spell_crit": "Spell Crit",
-			"spell_haste": "Spell Haste",
+			"hit": "Hit",
+			"crit": "Crit",
+			"haste": "Haste",
 			"expertise": "Expertise",
 			"dodge": "Dodge",
 			"parry": "Parry",
@@ -133,27 +133,35 @@
 			"melee_speed_multiplier": "Melee Speed Multiplier",
 			"ranged_speed_multiplier": "Ranged Speed Multiplier",
 			"cast_speed_multiplier": "Cast Speed Multiplier",
-			"melee_haste": "Melee Haste",
-			"ranged_haste": "Ranged Haste",
+			"spell_hit": "Spell Hit",
+			"spell_crit": "Spell Crit",
+			"spell_haste": "Spell Haste",
 			"melee_hit": "Melee Hit",
-			"melee_crit": "Melee Crit"
+			"melee_crit": "Melee Crit",
+			"melee_haste": "Melee Haste",
+			"ranged_haste": "Ranged Haste"
 		}
 	},
 	"sim": {
-		"title": "Mists of Pandaria {spec} {class} simulator",
-		"description": "{spec} {class} simulations for World of Warcraft® Mists of Pandaria Classic."
+		"title": "Mists of Pandaria {{spec}} {{class}} simulator",
+		"description": "{{spec}} {{class}} simulations for World of Warcraft® Mists of Pandaria Classic."
 	},
 	"gear": {
 		"title": "Gear"
 	},
 	"settings": {
+		"buffs": {
+			"tooltip": "All raid buffs selected are assumed to be provided by <strong>other</strong> raid members than the simulated player."
+		},
+		"debuffs": {
+			"tooltip": "All raid debuffs selected are assumed to be applied by <strong>other</strong> raid members than the simulated player."
+		},
 		"title": "Settings"
 	},
 	"talents": {
 		"title": "Talents"
 	},
 	"rotation": {
-		"title": "Rotation",
 		"apl": {
 			"actionGroups": {
 				"attributes": {
@@ -168,6 +176,9 @@
 					"name": "Name of this action group (e.g., 'careful_aim', 'cooldowns').",
 					"overview": "Groups of actions that can be referenced in the Action Priority List (APL). Useful for organizing your APL and reusing common action sequences. Actions are performed in order from top to bottom within a group."
 				}
+			},
+			"floatingActionBar": {
+				"new": "New {{itemName}}"
 			},
 			"prePullActions": {
 				"header": "Pre-Pull Action List",
@@ -203,7 +214,11 @@
 					"value": "The value expression that this variable represents."
 				}
 			}
-		}
+		},
+		"auto": {
+			"description": "Automatically using a Saved Rotation based on your current settings."
+		},
+		"title": "Rotation"
 	},
 	"results": {
 		"title": "Results"
