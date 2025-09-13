@@ -145,7 +145,7 @@ export class APLValuePicker extends Input<Player<any>, APLValue | undefined> {
 		super(parent, 'apl-value-picker-root', player, config);
 
 		const isPrepull = this.rootElem.closest('.apl-prepull-action-picker') != null;
-		const isGroup = this.rootElem.closest('.apl-group-list-picker') != null;
+		const isGroup = this.rootElem.closest('.apl-groups-picker') != null;
 
 		const allValueKinds = (Object.keys(valueKindFactories) as ValidAPLValueKind[]).filter(
 			(valueKind): valueKind is ValidAPLValueKind => (!!valueKind && valueKindFactories[valueKind].includeIf?.(player, isPrepull, isGroup)) ?? true,
@@ -1409,7 +1409,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 	dotCritPercentIncrease: inputBuilder({
 		label: 'Dot Crit Chance Increase %',
 		submenu: ['DoT'],
-		shortDescription: 'How much higher a new DoT\'s Critical Strike Chance would be compared to the old.',
+		shortDescription: "How much higher a new DoT's Critical Strike Chance would be compared to the old.",
 		newValue: APLValueDotPercentIncrease.create,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', '')],
 	}),

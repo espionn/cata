@@ -18,8 +18,6 @@ func (rot *APLRotation) newActionGroupReference(config *proto.APLActionGroupRefe
 		return nil
 	}
 
-	fmt.Printf("Creating APLActionGroupReference with GroupName: '%s'\n", config.GroupName)
-
 	// Don't create group references with empty names
 	if config.GroupName == "" {
 		fmt.Println("Skipping group reference creation: GroupName is empty")
@@ -66,7 +64,6 @@ func (action *APLActionGroupReference) GetAPLValues() []APLValue {
 }
 
 func (action *APLActionGroupReference) Finalize(rot *APLRotation) {
-	fmt.Printf("Finalizing APLActionGroupReference with groupName: '%s'\n", action.groupName)
 
 	// Skip finalization if groupName is empty
 	if action.groupName == "" {
@@ -77,15 +74,11 @@ func (action *APLActionGroupReference) Finalize(rot *APLRotation) {
 	// Find the referenced group
 	for _, group := range rot.groups {
 		if group.name == action.groupName {
-			fmt.Println("Found group:", group.name, action.groupName, action.group)
-			fmt.Println(group.name)
-			fmt.Println(action.groupName)
 			action.group = group
-			fmt.Println("Assigned group:", action.group.name)
 			break
 		}
 	}
-	fmt.Println("Finalized group:", action.groupName, action.group)
+
 	if action.group == nil {
 		rot.ValidationMessage(proto.LogLevel_Error, "Group reference '%s' not found", action.groupName)
 		return

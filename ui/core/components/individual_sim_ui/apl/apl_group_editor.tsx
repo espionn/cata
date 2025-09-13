@@ -72,7 +72,7 @@ export class APLGroupEditor extends Input<Player<any>, APLGroup> {
 				_: ListPicker<Player<any>, APLListItem>,
 				index: number,
 				config: ListItemPickerConfig<Player<any>, APLListItem>,
-			) => new APLGroupActionPicker(parent, this.modObject, config),
+			) => new APLGroupActionPicker(parent, this.modObject, index, config),
 			inlineMenuBar: true,
 			allowedActions: ['create', 'copy', 'delete', 'move'],
 		});
@@ -110,15 +110,15 @@ export class APLGroupEditor extends Input<Player<any>, APLGroup> {
 class APLGroupActionPicker extends Input<Player<any>, APLListItem> {
 	private readonly actionPicker: APLActionPicker;
 
-	constructor(parent: HTMLElement, player: Player<any>, config: ListItemPickerConfig<Player<any>, APLListItem>) {
+	constructor(parent: HTMLElement, player: Player<any>, index: number, config: ListItemPickerConfig<Player<any>, APLListItem>) {
 		// Use the same root class as Priority List items for consistent styling
 		super(parent, 'apl-list-item-picker-root', player, config);
 		this.rootElem.classList.add('apl-list-item-picker-root');
 
 		// Add validation support just like Priority List picker
 		const itemHeaderElem = ListPicker.getItemHeaderElem(this);
-		const index = config.index || 0;
-		
+		// index passed in from ListPicker.addNewPicker
+
 		// Find parent group index to get proper validation path
 		let groupIndex = 0;
 		let currentElem = parent.parentElement;
@@ -132,7 +132,7 @@ class APLGroupActionPicker extends Input<Player<any>, APLListItem> {
 				groupIndex = groupItems.indexOf(currentElem);
 			}
 		}
-		
+
 		ListPicker.makeListItemValidations(itemHeaderElem, player, player => {
 			const groups = player.aplRotation.groups || [];
 			if (groupIndex < groups.length && groups[groupIndex].actions && index < groups[groupIndex].actions.length) {

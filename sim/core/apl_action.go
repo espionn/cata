@@ -161,8 +161,6 @@ func (rot *APLRotation) newAPLActionImpl(config *proto.APLAction) APLActionImpl 
 		return nil
 	}
 
-	fmt.Printf("newAPLActionImpl called with action type: %T\n", config.Action)
-
 	customAction := rot.unit.Env.GetAgentFromUnit(rot.unit).NewAPLAction(rot, config)
 	if customAction != nil {
 		return customAction

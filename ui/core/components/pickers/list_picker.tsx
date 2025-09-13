@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import i18n from '../../../i18n/config';
 import tippy, { Instance as TippyInstance } from 'tippy.js';
 
 import { Player } from '../../player';
@@ -94,11 +95,7 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 		}
 
 		if (this.config.titleTooltip) {
-			new TooltipButton(
-				this.rootElem.querySelector('.list-picker-title') as HTMLElement,
-				this.config.titleTooltip,
-				['ms-2'],
-			);
+			new TooltipButton(this.rootElem.querySelector('.list-picker-title') as HTMLElement, this.config.titleTooltip, ['ms-2']);
 		}
 
 		if (this.actionEnabled('create')) {
@@ -108,14 +105,14 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 				newItemButton = ListPicker.makeActionElem('link-success', 'fa-plus');
 				newButtonTooltip = tippy(newItemButton, {
 					allowHTML: false,
-					content: `New ${config.itemLabel}`,
+					content: i18n.t('rotation.apl.floatingActionBar.new', { itemName: config.itemLabel }),
 				});
 				this.addOnDisposeCallback(() => newButtonTooltip?.destroy());
 			} else {
 				newItemButton = (
 					<button className="btn btn-primary">
 						<i className="fa fa-plus me-2" />
-						New {config.itemLabel}
+						{i18n.t('rotation.apl.floatingActionBar.new', { itemName: config.itemLabel })}
 					</button>
 				) as HTMLButtonElement;
 			}
@@ -247,7 +244,7 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 
 				const deleteButtonTooltip = tippy(deleteButton, {
 					allowHTML: false,
-					content: `Delete ${this.config.itemLabel}`,
+					content: i18n.t('rotation.apl.listPicker.delete', { itemName: this.config.itemLabel }),
 				});
 
 				deleteButton.addEventListener(
@@ -271,7 +268,7 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 			popover.appendChild(copyButton);
 			const copyButtonTooltip = tippy(copyButton, {
 				allowHTML: false,
-				content: `Copy to New ${this.config.itemLabel}`,
+				content: i18n.t('rotation.apl.listPicker.copy', { itemName: this.config.itemLabel }),
 			});
 
 			copyButton.addEventListener(
@@ -300,7 +297,7 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 
 			const moveButtonTooltip = tippy(moveButton, {
 				allowHTML: false,
-				content: 'Move (Drag+Drop)',
+				content: i18n.t('rotation.apl.listPicker.moveTooltip'),
 			});
 
 			moveButton.addEventListener(
