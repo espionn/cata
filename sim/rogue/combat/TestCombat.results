@@ -362,8 +362,8 @@ dps_results: {
 dps_results: {
  key: "TestCombat-AllItems-RuneofRe-Origination-96918"
  value: {
-  dps: 104496.95892
-  tps: 73647.22789
+  dps: 111871.23686
+  tps: 78850.1929
  }
 }
 dps_results: {
@@ -404,8 +404,8 @@ dps_results: {
 dps_results: {
  key: "TestCombat-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 94790.65642
-  tps: 66827.48221
+  dps: 101569.61585
+  tps: 71624.42405
  }
 }
 dps_results: {

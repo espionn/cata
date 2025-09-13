@@ -2274,10 +2274,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-RuneofRe-Origination-96918"
  value: {
-  dps: 115578.84369
-  tps: 706952.07014
-  dtps: 95892.49195
-  hps: 81443.93427
+  dps: 97879.72428
+  tps: 550332.83744
+  dtps: 35620.69544
+  hps: 37596.94728
  }
 }
 dps_results: {
@@ -2958,10 +2958,91 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 115390.67107
-  tps: 705721.99482
-  dtps: 95892.49195
-  hps: 81443.93427
+  dps: 97771.91576
+  tps: 549808.2527
+  dtps: 35620.69544
+  hps: 37596.94728
+ }
+}
+dps_results: {
+ key: "TestBlood-AllItems-VaporshieldMedallion-93262"
+ value: {
+  dps: 97553.4973
+  tps: 549318.06675
+  dtps: 35599.72713
+  hps: 38285.68871
+ }
+}
+dps_results: {
+ key: "TestBlood-AllItems-VialofDragon'sBlood-87063"
+ value: {
+  dps: 97409.66629
+  tps: 546403.54796
+  dtps: 35460.9857
+  hps: 38400.15364
+ }
+}
+dps_results: {
+ key: "TestBlood-AllItems-VialofIchorousBlood-100963"
+ value: {
+  dps: 97771.91576
+  tps: 549808.2527
+  dtps: 35620.69544
+  hps: 37596.94728
+ }
+}
+dps_results: {
+ key: "TestBlood-AllItems-VialofIchorousBlood-81264"
+ value: {
+  dps: 97771.91576
+  tps: 549808.2527
+  dtps: 35620.69544
+  hps: 37596.94728
+ }
+}
+dps_results: {
+ key: "TestBlood-AllItems-ViciousTalismanoftheShado-PanAssault-94511"
+ value: {
+  dps: 97775.92256
+  tps: 550518.79723
+  dtps: 35566.7212
+  hps: 37402.50615
+ }
+}
+dps_results: {
+ key: "TestBlood-AllItems-VisionofthePredator-81192"
+ value: {
+  dps: 99034.93526
+  tps: 557758.97089
+  dtps: 35725.94209
+  hps: 37786.76285
+ }
+}
+dps_results: {
+ key: "TestBlood-AllItems-VolatileTalismanoftheShado-PanAssault-94510"
+ value: {
+  dps: 99793.62444
+  tps: 561689.64261
+  dtps: 35786.38196
+  hps: 37994.90732
+ }
+}
+dps_results: {
+ key: "TestBlood-AllItems-WindsweptPages-81125"
+ value: {
+  dps: 99393.59462
+  tps: 560105.07251
+  dtps: 35584.91938
+  hps: 37901.3553
+ }
+}
+dps_results: {
+ key: "TestBlood-AllItems-WoundripperMedallion-93253"
+ value: {
+  dps: 99001.42351
+  tps: 557082.43754
+  dtps: 35660.79123
+  hps: 37664.86955
  }
 }
 dps_results: {

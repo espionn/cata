@@ -2265,10 +2265,10 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-RuneofRe-Origination-96918"
  value: {
-  dps: 1.43913886671e+06
-  tps: 1.007421532963e+07
-  dtps: 249304.58306
-  hps: 232708.4935
+  dps: 119278.49964
+  tps: 636053.42612
+  dtps: 13734.38489
+  hps: 11056.32579
  }
 }
 dps_results: {
@@ -2895,10 +2895,10 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 1.31324034595e+06
-  tps: 9.19286929012e+06
-  dtps: 268378.56132
-  hps: 242001.29062
+  dps: 107217.9172
+  tps: 572439.49937
+  dtps: 14267.06907
+  hps: 11107.9199
  }
 }
 dps_results: {
