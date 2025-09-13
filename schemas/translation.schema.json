@@ -19,13 +19,13 @@
                     "$ref": "#/definitions/Export"
                 },
                 "settings": {
-                    "$ref": "#/definitions/Export"
+                    "$ref": "#/definitions/Settings"
                 },
                 "talents": {
                     "$ref": "#/definitions/Export"
                 },
                 "rotation": {
-                    "$ref": "#/definitions/Export"
+                    "$ref": "#/definitions/Rotation"
                 },
                 "results": {
                     "$ref": "#/definitions/Export"
@@ -159,9 +159,9 @@
                 }
             },
             "required": [
+                "honorPoints",
                 "justicePoints",
-                "valorPoints",
-                "honorPoints"
+                "valorPoints"
             ],
             "title": "Currency"
         },
@@ -748,6 +748,350 @@
                 "full_raid"
             ],
             "title": "Simulations"
+        },
+        "Rotation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "apl": {
+                    "$ref": "#/definitions/APL"
+                },
+                "auto": {
+                    "$ref": "#/definitions/Auto"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "apl",
+                "auto",
+                "title"
+            ],
+            "title": "Rotation"
+        },
+        "APL": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "actionGroups": {
+                    "$ref": "#/definitions/ActionGroups"
+                },
+                "floatingActionBar": {
+                    "$ref": "#/definitions/FloatingActionBar"
+                },
+                "listPicker": {
+                    "$ref": "#/definitions/ListPicker"
+                },
+                "prePullActions": {
+                    "$ref": "#/definitions/PrePullActions"
+                },
+                "priorityList": {
+                    "$ref": "#/definitions/PrePullActions"
+                },
+                "tabs": {
+                    "$ref": "#/definitions/Tabs"
+                },
+                "variables": {
+                    "$ref": "#/definitions/Variables"
+                }
+            },
+            "required": [
+                "actionGroups",
+                "floatingActionBar",
+                "listPicker",
+                "prePullActions",
+                "priorityList",
+                "tabs",
+                "variables"
+            ],
+            "title": "APL"
+        },
+        "ActionGroups": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "attributes": {
+                    "$ref": "#/definitions/ActionGroupsAttributes"
+                },
+                "header": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "newGroupName": {
+                    "type": "string"
+                },
+                "tooltips": {
+                    "$ref": "#/definitions/ActionGroupsTooltips"
+                }
+            },
+            "required": [
+                "attributes",
+                "header",
+                "name",
+                "newGroupName",
+                "tooltips"
+            ],
+            "title": "ActionGroups"
+        },
+        "ActionGroupsAttributes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "actions": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "actions",
+                "name"
+            ],
+            "title": "ActionGroupsAttributes"
+        },
+        "ActionGroupsTooltips": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "actions": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "overview": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "actions",
+                "name",
+                "overview"
+            ],
+            "title": "ActionGroupsTooltips"
+        },
+        "FloatingActionBar": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "new": {
+                    "type": "string"
+                },
+                "reset": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "new",
+                "reset"
+            ],
+            "title": "FloatingActionBar"
+        },
+        "ListPicker": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "delete": {
+                    "type": "string"
+                },
+                "copy": {
+                    "type": "string"
+                },
+                "moveTooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "copy",
+                "delete",
+                "moveTooltip"
+            ],
+            "title": "ListPicker"
+        },
+        "PrePullActions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "header": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "tooltips": {
+                    "$ref": "#/definitions/PrePullActionsTooltips"
+                }
+            },
+            "required": [
+                "header",
+                "name",
+                "tooltips"
+            ],
+            "title": "PrePullActions"
+        },
+        "PrePullActionsTooltips": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "overview": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "overview"
+            ],
+            "title": "PrePullActionsTooltips"
+        },
+        "Tabs": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "actionGroups": {
+                    "type": "string"
+                },
+                "priorityList": {
+                    "type": "string"
+                },
+                "variables": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "actionGroups",
+                "priorityList",
+                "variables"
+            ],
+            "title": "Tabs"
+        },
+        "Variables": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "attributes": {
+                    "$ref": "#/definitions/VariablesAttributes"
+                },
+                "copyName": {
+                    "type": "string"
+                },
+                "header": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "newVariableName": {
+                    "type": "string"
+                },
+                "tooltips": {
+                    "$ref": "#/definitions/VariablesTooltips"
+                }
+            },
+            "required": [
+                "attributes",
+                "copyName",
+                "header",
+                "name",
+                "newVariableName",
+                "tooltips"
+            ],
+            "title": "Variables"
+        },
+        "VariablesAttributes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "nameTooltip": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                },
+                "valueTooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "nameTooltip",
+                "value",
+                "valueTooltip"
+            ],
+            "title": "VariablesAttributes"
+        },
+        "VariablesTooltips": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "overview": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "overview",
+                "value"
+            ],
+            "title": "VariablesTooltips"
+        },
+        "Auto": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description"
+            ],
+            "title": "Auto"
+        },
+        "Settings": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "buffs": {
+                    "$ref": "#/definitions/Buffs"
+                },
+                "debuffs": {
+                    "$ref": "#/definitions/Buffs"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "buffs",
+                "debuffs",
+                "title"
+            ],
+            "title": "Settings"
+        },
+        "Buffs": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "tooltip"
+            ],
+            "title": "Buffs"
         },
         "Sidebar": {
             "type": "object",
