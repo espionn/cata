@@ -19,16 +19,14 @@ export class EnumPicker<ModObject> extends Input<ModObject, number> {
 		super(parent, 'enum-picker-root', modObject, config);
 
 		this.selectElem = this.rootElem.appendChild(
-			<select id={config.id} className="enum-picker-selector form-select" />
+			<select id={config.id} className="enum-picker-selector form-select">
+				{config.values.map(value => (
+					<option value={String(value.value)} title={value.tooltip}>
+						{value.name}
+					</option>
+				))}
+			</select>,
 		) as HTMLSelectElement;
-
-		config.values.forEach(value => {
-			this.selectElem.appendChild(
-				<option value={String(value.value)} title={value.tooltip}>
-					{value.name}
-				</option>
-			);
-		});
 
 		this.init();
 
