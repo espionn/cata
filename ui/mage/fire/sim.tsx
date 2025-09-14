@@ -6,17 +6,15 @@ import { Player } from '../../core/player';
 import { PlayerClasses } from '../../core/player_classes';
 import { APLRotation } from '../../core/proto/apl';
 import { Faction, IndividualBuffs, ItemSlot, PartyBuffs, PseudoStat, Race, Spec, Stat } from '../../core/proto/common';
-import { MageMajorGlyph } from '../../core/proto/mage';
 import { StatCapType } from '../../core/proto/ui';
 import { DEFAULT_CASTER_GEM_STATS, StatCap, Stats, UnitStat } from '../../core/proto_utils/stats';
-import { formatToNumber } from '../../core/utils';
 import { DefaultDebuffs, DefaultRaidBuffs, MAGE_BREAKPOINTS } from '../presets';
 import * as Presets from './presets';
 import * as MageInputs from '../inputs';
 
 const mageBombBreakpoints = MAGE_BREAKPOINTS.presets;
-const combustBreakpoints = Presets.COMBUSTION_BREAKPOINT.presets;
-const glyphedCombustBreakpoints = Presets.GLYPHED_COMBUSTION_BREAKPOINT.presets;
+// const combustBreakpoints = Presets.COMBUSTION_BREAKPOINT.presets;
+// const glyphedCombustBreakpoints = Presets.GLYPHED_COMBUSTION_BREAKPOINT.presets;
 
 const relevantMageBombBreakpoints = [
 	mageBombBreakpoints.get('5-tick - Living Bomb')!,
@@ -111,16 +109,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFireMage, {
 			const hasteSoftCapConfig = StatCap.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent, {
 				breakpoints: [...relevantMageBombBreakpoints],
 				capType: StatCapType.TypeThreshold,
-				postCapEPs: [(Presets.DEFAULT_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.10) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
+				postCapEPs: [(Presets.DEFAULT_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.1) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
 			});
 
-			const masterySoftCapConfig = StatCap.fromStat(Stat.StatMasteryRating, {
-				breakpoints: [11200],
-				capType: StatCapType.TypeSoftCap,
-				postCapEPs: [(Presets.DEFAULT_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.15) ],
-			});
-
-			return [hasteSoftCapConfig, masterySoftCapConfig];
+			return [hasteSoftCapConfig];
 		})(),
 		// Default consumes settings.
 		consumables: Presets.DefaultFireConsumables,
