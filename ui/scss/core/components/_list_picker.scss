@@ -5,6 +5,7 @@
 
 	.list-picker-title {
 		width: 100%;
+		display: flex;
 		border-bottom: var(--border-default);
 		margin-bottom: var(--block-spacer);
 		font-size: 1rem;
@@ -80,10 +81,6 @@
 				}
 			}
 		}
-	}
-
-	.list-picker-new-button {
-		width: 100%;
 	}
 
 	&.horizontal {

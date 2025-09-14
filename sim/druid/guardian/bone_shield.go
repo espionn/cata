@@ -22,7 +22,7 @@ func (bear *GuardianDruid) registerBoneShieldSpell() {
 		},
 
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-aura.Unit.PseudoStats.DamageTakenMultiplier *= 0.9
+			aura.Unit.PseudoStats.DamageTakenMultiplier *= 0.9
 			aura.SetStacks(sim, 3)
 			aura.Icd.Use(sim)
 		},

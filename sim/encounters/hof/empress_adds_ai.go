@@ -61,7 +61,7 @@ func createEmpressAddsPreset(raidPrefix string, raidSize int32, isHeroic bool, a
 		targetPathNames = append(targetPathNames, raidPrefix+"/"+currentAddName)
 	}
 
-	core.AddPresetEncounter(bossName + " P2 Adds", targetPathNames)
+	core.AddPresetEncounter(bossName+" P2 Adds", targetPathNames)
 }
 
 func makeEmpressAI(raidSize int32, isHeroic bool, addIdx int32) core.AIFactory {
@@ -97,8 +97,8 @@ func (ai *WindbladeAI) Initialize(target *core.Target, config *proto.Target) {
 	ai.TankUnit = target.CurrentTarget
 
 	// Hack for UI results parsing
-	ai.Target.AutoAttacks.MHConfig().ActionID.Tag = windbladeAddID*100 + ai.addIdx 
-	ai.Target.AutoAttacks.OHConfig().ActionID.Tag = windbladeAddID*100 + ai.addIdx 
+	ai.Target.AutoAttacks.MHConfig().ActionID.Tag = windbladeAddID*100 + ai.addIdx
+	ai.Target.AutoAttacks.OHConfig().ActionID.Tag = windbladeAddID*100 + ai.addIdx
 
 	// Register relevant spells and auras
 	ai.registerSonicBlade()
@@ -123,7 +123,7 @@ func (ai *WindbladeAI) registerSonicBlade() {
 				Duration: time.Second * 20,
 			},
 		},
-	
+
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			baseDamage := spell.Unit.AutoAttacks.MH().EnemyWeaponDamage(sim, spell.MeleeAttackPower(), windbladeMeleeDamageSpread)
 			spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeEnemyMeleeWhite)
@@ -143,11 +143,11 @@ func (ai *WindbladeAI) registerBandOfValor() {
 		},
 
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			aura.SetStacks(sim, int32(len(ai.AddUnits) - 1))
+			aura.SetStacks(sim, int32(len(ai.AddUnits)-1))
 		},
 
 		OnStacksChange: func(aura *core.Aura, _ *core.Simulation, oldStacks int32, newStacks int32) {
-			aura.Unit.PseudoStats.DamageDealtMultiplier *= (1.0 + 0.3 * float64(newStacks)) / (1.0 + 0.3 * float64(oldStacks))
+			aura.Unit.PseudoStats.DamageDealtMultiplier *= (1.0 + 0.3*float64(newStacks)) / (1.0 + 0.3*float64(oldStacks))
 		},
 	})
 }
@@ -155,7 +155,7 @@ func (ai *WindbladeAI) registerBandOfValor() {
 func (ai *WindbladeAI) Reset(sim *core.Simulation) {
 	aa := &ai.Target.AutoAttacks
 	aa.RandomizeMeleeTiming(sim)
-	aa.SetOffhandSwingAt(aa.NextAttackAt() + core.DurationFromSeconds(sim.RandomFloat("OH Desync") * aa.MainhandSwingSpeed().Seconds()))
+	aa.SetOffhandSwingAt(aa.NextAttackAt() + core.DurationFromSeconds(sim.RandomFloat("OH Desync")*aa.MainhandSwingSpeed().Seconds()))
 	ai.SonicBlade.CD.Set(time.Second * 10)
 }
 
@@ -167,6 +167,6 @@ func (ai *WindbladeAI) ExecuteCustomRotation(sim *core.Simulation) {
 	if ai.SonicBlade.IsReady(sim) && sim.Proc(0.5, "Sonic Blade Timing") {
 		ai.SonicBlade.Cast(sim, ai.TankUnit)
 	} else {
-		ai.Target.ExtendGCDUntil(sim, sim.CurrentTime + core.BossGCD)
+		ai.Target.ExtendGCDUntil(sim, sim.CurrentTime+core.BossGCD)
 	}
 }

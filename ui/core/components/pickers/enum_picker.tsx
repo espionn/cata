@@ -1,5 +1,5 @@
 import { TypedEvent } from '../../typed_event.js';
-import { Input, InputConfig } from '../input.js';
+import { Input, InputConfig } from '../input.jsx';
 
 export interface EnumValueConfig {
 	name: string;
@@ -18,21 +18,15 @@ export class EnumPicker<ModObject> extends Input<ModObject, number> {
 	constructor(parent: HTMLElement | null, modObject: ModObject, config: EnumPickerConfig<ModObject>) {
 		super(parent, 'enum-picker-root', modObject, config);
 
-		this.selectElem = document.createElement('select');
-		this.selectElem.id = config.id;
-		this.selectElem.classList.add('enum-picker-selector', 'form-select');
-
-		config.values.forEach(value => {
-			const option = document.createElement('option');
-			option.value = String(value.value);
-			option.textContent = value.name;
-			this.selectElem.appendChild(option);
-
-			if (value.tooltip) {
-				option.title = value.tooltip;
-			}
-		});
-		this.rootElem.appendChild(this.selectElem);
+		this.selectElem = this.rootElem.appendChild(
+			<select id={config.id} className="enum-picker-selector form-select">
+				{config.values.map(value => (
+					<option value={String(value.value)} title={value.tooltip}>
+						{value.name}
+					</option>
+				))}
+			</select>,
+		) as HTMLSelectElement;
 
 		this.init();
 

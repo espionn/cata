@@ -133,6 +133,10 @@ export class EquippedItem {
 		// Make a defensive copy
 		return this._gems.map(gem => (gem == null ? null : Gem.clone(gem)));
 	}
+	get gemSockets(): Array<GemColor> {
+		// Make a defensive copy
+		return [...this._item.gemSockets];
+	}
 	get upgrade(): ItemLevelState {
 		let upgradeLevel: ItemLevelState;
 		if (!this._challengeMode) {
@@ -193,7 +197,7 @@ export class EquippedItem {
 	}
 
 	getMaxUpgradeCount(): number {
-		return Object.keys(this.getUpgrades()).length -1;
+		return Object.keys(this.getUpgrades()).length - 1;
 	}
 
 	equals(other: EquippedItem) {
@@ -533,10 +537,10 @@ export class EquippedItem {
 	}
 
 	allSocketColors(): Array<GemColor> {
-		return this.couldHaveExtraSocket() ? this._item.gemSockets.concat([GemColor.GemColorPrismatic]) : this._item.gemSockets;
+		return this.couldHaveExtraSocket() ? this.gemSockets.concat([GemColor.GemColorPrismatic]) : this.gemSockets;
 	}
 	curSocketColors(isBlacksmithing: boolean): Array<GemColor> {
-		return this.hasExtraSocket(isBlacksmithing) ? this._item.gemSockets.concat([GemColor.GemColorPrismatic]) : this._item.gemSockets;
+		return this.hasExtraSocket(isBlacksmithing) ? this.gemSockets.concat([GemColor.GemColorPrismatic]) : this.gemSockets;
 	}
 
 	curGems(isBlacksmithing: boolean): Array<Gem | null> {
