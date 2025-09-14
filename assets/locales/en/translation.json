@@ -183,9 +183,6 @@
 				}
 			},
 			"floatingActionBar": {
-				"new": "New {{itemName}}"
-			},
-			"floatingActionBar": {
 				"new": "New {{itemName}}",
 				"reset": "Reset APL"
 			},
