@@ -11,6 +11,7 @@
 		{ "action": { "castSpell": { "spellId": { "spellId": 53301 } } } },
 		{ "action": { "condition": { "isExecutePhase": { "threshold": "E20" } }, "castSpell": { "spellId": { "spellId": 53351 } } } },
 		{ "action": { "castSpell": { "spellId": { "spellId": 131894 } } } },
+		{ "action": { "castSpell": { "spellId": { "spellId": 120697 } } } },
 		{
 			"action": {
 				"condition": { "cmp": { "op": "OpGe", "lhs": { "remainingTime": {} }, "rhs": { "const": { "val": "8s" } } } },
@@ -32,6 +33,8 @@
 			}
 		},
 		{ "action": { "castSpell": { "spellId": { "spellId": 117050 } } } },
+		{ "action": { "castSpell": { "spellId": { "spellId": 109259 } } } },
+		{ "action": { "castSpell": { "spellId": { "spellId": 120360 } } } },
 		{ "action": { "condition": { "variableRef": { "name": "ShouldAS" } }, "castSpell": { "spellId": { "spellId": 3044 } } } },
 		{ "action": { "castSpell": { "spellId": { "spellId": 13812 } } } },
 		{ "action": { "castSpell": { "spellId": { "spellId": 77767 } } } }
@@ -76,6 +79,15 @@
 						"castSpell": {
 							"spellId": {
 								"spellId": 82726
+							}
+						}
+					}
+				},
+				{
+					"action": {
+						"castSpell": {
+							"spellId": {
+								"spellId": 120679
 							}
 						}
 					}
@@ -242,6 +254,24 @@
 						"castSpell": {
 							"spellId": {
 								"spellId": 117050
+							}
+						}
+					}
+				},
+				{
+					"action": {
+						"castSpell": {
+							"spellId": {
+								"spellId": 120360
+							}
+						}
+					}
+				},
+				{
+					"action": {
+						"castSpell": {
+							"spellId": {
+								"spellId": 109259
 							}
 						}
 					}
