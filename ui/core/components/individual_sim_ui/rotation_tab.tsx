@@ -1,5 +1,3 @@
-import classNames from 'classnames';
-
 import i18n from '../../../i18n/config';
 import * as Tooltips from '../../constants/tooltips';
 import { IndividualSimUI, InputSection } from '../../individual_sim_ui';
@@ -25,6 +23,7 @@ import { APLPriorityListPicker } from './apl/priority_list_picker';
 import { CooldownsPicker } from './cooldowns_picker';
 import { PresetConfigurationCategory, PresetConfigurationPicker } from './preset_configuration_picker';
 import { TextDropdownPicker } from '../pickers/dropdown_picker';
+import clsx from 'clsx';
 
 export class RotationTab extends SimTab {
 	protected simUI: IndividualSimUI<any>;
@@ -141,7 +140,7 @@ export class RotationTab extends SimTab {
 		tabsContainer.appendChild(
 			<li className="nav-item" attributes={{ role: 'presentation' }}>
 				<button
-					className={classNames({
+					className={clsx({
 						'nav-link': true,
 						'active': isActive,
 					})}
@@ -162,7 +161,7 @@ export class RotationTab extends SimTab {
 		) as HTMLLIElement;
 
 		const tabContent = container.appendChild(
-			<div id={tabId} className={classNames({
+			<div id={tabId} className={clsx({
 				'tab-pane fade': true,
 				'active show': isActive,
 			})} />
