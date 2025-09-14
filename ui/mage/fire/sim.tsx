@@ -21,8 +21,8 @@ const glyphedCombustBreakpoints = Presets.GLYPHED_COMBUSTION_BREAKPOINT.presets;
 const relevantMageBombBreakpoints = [
 	mageBombBreakpoints.get('5-tick - Living Bomb')!,
 	mageBombBreakpoints.get('6-tick - Living Bomb')!,
-	mageBombBreakpoints.get('7-tick - Living Bomb')!,
-	mageBombBreakpoints.get('8-tick - Living Bomb')!,
+	// mageBombBreakpoints.get('7-tick - Living Bomb')!,
+	// mageBombBreakpoints.get('8-tick - Living Bomb')!,
 	// mageBombBreakpoints.get('13-tick - Nether Tempest')!,
 	// mageBombBreakpoints.get('14-tick - Nether Tempest')!,
 	// mageBombBreakpoints.get('15-tick - Nether Tempest')!,
@@ -158,7 +158,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFireMage, {
 	},
 
 	presets: {
-		epWeights: [Presets.DEFAULT_EP_PRESET],
+		epWeights: [Presets.DEFAULT_EP_PRESET, Presets.P1_PREBIS_EP_PRESET],
 		// Preset rotations that the user can quickly select.
 		rotations: [Presets.FIRE_ROTATION_PRESET_DEFAULT],
 		// Preset talents that the user can quickly select.

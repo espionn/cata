@@ -39,7 +39,7 @@ export const FIRE_ROTATION_PRESET_DEFAULT = PresetUtils.makePresetAPLRotation('D
 
 // Preset options for EP weights
 export const DEFAULT_EP_PRESET = PresetUtils.makePresetEpWeights(
-	'Default',
+	'Item Level > 500',
 	Stats.fromMap({
 		[Stat.StatIntellect]: 1.37,
 		[Stat.StatSpellPower]: 1.0,
@@ -47,6 +47,18 @@ export const DEFAULT_EP_PRESET = PresetUtils.makePresetEpWeights(
 		[Stat.StatCritRating]: 1.05,
 		[Stat.StatHasteRating]: 0.62,
 		[Stat.StatMasteryRating]: 0.79,
+	}),
+);
+
+export const P1_PREBIS_EP_PRESET = PresetUtils.makePresetEpWeights(
+	'Item Level < 500',
+	Stats.fromMap({
+		[Stat.StatIntellect]: 1.37,
+		[Stat.StatSpellPower]: 1.0,
+		[Stat.StatHitRating]: 1.21,
+		[Stat.StatCritRating]: 0.94,
+		[Stat.StatHasteRating]: 0.95,
+		[Stat.StatMasteryRating]: 0.59,
 	}),
 );
 
