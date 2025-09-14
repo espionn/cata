@@ -7,18 +7,15 @@ import { Stats, UnitStat, UnitStatPresets } from '../../core/proto_utils/stats';
 import FireApl from './apls/fire.apl.json';
 import FireCleaveApl from './apls/fire_cleave.apl.json';
 import P1PreBISGear from './gear_sets/p1_prebis.gear.json';
-import P1PostMSVGear from './gear_sets/p1_post_msv.gear.json';
-import P1PostHOFGear from './gear_sets/p1_post_hof.gear.json';
 import P1BISGear from './gear_sets/p1_bis.gear.json';
+import P2BISGear from './gear_sets/p2_bis.gear.json';
 
 // Preset options for this spec.
 // Eventually we will import these values for the raid sim too, so its good to
 // keep them in a separate file.
 export const P1_PREBIS = PresetUtils.makePresetGear('P1 - Pre-BIS', P1PreBISGear);
-export const P1_POST_MSV = PresetUtils.makePresetGear('P1 - Post-MSV', P1PostMSVGear);
-export const P1_POST_HOF = PresetUtils.makePresetGear('P1 - Post-HoF', P1PostHOFGear);
 export const P1_BIS = PresetUtils.makePresetGear('P1 - BIS', P1BISGear);
-
+export const P2_BIS = PresetUtils.makePresetGear('P2 - BIS', P2BISGear);
 
 // export const P1TrollDefaultSimpleRotation = FireMage_Rotation.create({
 // 	combustThreshold: 515000,
@@ -46,10 +43,10 @@ export const DEFAULT_EP_PRESET = PresetUtils.makePresetEpWeights(
 	Stats.fromMap({
 		[Stat.StatIntellect]: 1.37,
 		[Stat.StatSpellPower]: 1.0,
-		[Stat.StatHitRating]: 1.21,
-		[Stat.StatCritRating]: 0.94,
-		[Stat.StatHasteRating]: 0.95,
-		[Stat.StatMasteryRating]: 0.59,
+		[Stat.StatHitRating]: 1.2,
+		[Stat.StatCritRating]: 1.05,
+		[Stat.StatHasteRating]: 0.62,
+		[Stat.StatMasteryRating]: 0.79,
 	}),
 );
 
