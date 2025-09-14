@@ -343,3 +343,6 @@ func (rotation *FeralDruidRotation) PickSingleTargetGCDAction(sim *core.Simulati
 
 	rotation.ProcessNextPlannedAction(sim, nextActionAt)
 }
+
+func (action *FeralDruidRotation) ReResolveVariableRefs(*core.APLRotation, map[string]*proto.APLValue) {
+}

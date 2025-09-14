@@ -25,8 +25,8 @@ func TestBlood(t *testing.T) {
 
 			GearSet: core.GetGearSet("../../../ui/death_knight/blood/gear_sets", "p1"),
 
-			Talents:         BloodTalents,
-			Glyphs:          BloodDefaultGlyphs,
+			Talents: BloodTalents,
+			Glyphs:  BloodDefaultGlyphs,
 			OtherTalentSets: []core.TalentsCombo{
 				{Label: "RC-example-build", Talents: AltTalents, Glyphs: AltGlyphs},
 			},
