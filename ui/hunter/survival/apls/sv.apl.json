@@ -9,6 +9,12 @@
 		{ "action": { "groupReference": { "groupName": "Opener" } } },
 		{ "action": { "groupReference": { "groupName": "Cooldowns" } } },
 		{ "action": { "castSpell": { "spellId": { "spellId": 53301 } } } },
+		{
+			"action": {
+				"condition": { "auraIsActive": { "auraId": { "spellId": 120668, "tag": -1 }, "includeReactionTime": true } },
+				"castSpell": { "spellId": { "spellId": 120360 } }
+			}
+		},
 		{ "action": { "condition": { "isExecutePhase": { "threshold": "E20" } }, "castSpell": { "spellId": { "spellId": 53351 } } } },
 		{ "action": { "castSpell": { "spellId": { "spellId": 131894 } } } },
 		{ "action": { "castSpell": { "spellId": { "spellId": 120697 } } } },
