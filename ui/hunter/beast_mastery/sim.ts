@@ -63,8 +63,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBeastMasteryHunter, {
 			return [
 				StatCap.fromPseudoStat(PseudoStat.PseudoStatRangedHastePercent, {
 					breakpoints: [19, 20, 26, 33],
-					capType: StatCapType.TypeThreshold,
-					postCapEPs: [0.3, 0.3, 0.3, 0.3], // Single value that gets repeated for all breakpoints
+					capType: StatCapType.TypeSoftCap,
+					postCapEPs: [0.25, 0.2, 0.2, 0.2], // Single value that gets repeated for all breakpoints
 				}),
 			];
 		})(),
@@ -160,7 +160,6 @@ export class BeastMasteryHunterSimUI extends IndividualSimUI<Spec.SpecBeastMaste
 
 		player.sim.waitForInit().then(() => {
 			new ReforgeOptimizer(this, {
-				enableBreakpointLimits: true,
 				getEPDefaults: (_: Player<Spec.SpecBeastMasteryHunter>) => {
 					return Presets.P1_EP_PRESET.epWeights;
 				},
@@ -175,6 +174,7 @@ export class BeastMasteryHunterSimUI extends IndividualSimUI<Spec.SpecBeastMaste
 							softCapToModify.postCapEPs = softCap.breakpoints.map((_, index) => Math.max(0, baseEP - reduction * (index + 1)));
 						}
 					});
+					console.log(softCaps);
 					return softCaps;
 				},
 			});

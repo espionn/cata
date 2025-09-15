@@ -49,119 +49,23 @@
 		{
 			"name": "Cooldowns",
 			"actions": [
+				{ "action": { "castSpell": { "spellId": { "spellId": 126734 } } } },
+				{ "action": { "castSpell": { "spellId": { "spellId": 53401 } } } },
 				{
 					"action": {
-						"castSpell": {
-							"spellId": {
-								"spellId": 126734
-							}
-						}
+						"condition": { "cmp": { "op": "OpLe", "lhs": { "currentFocus": {} }, "rhs": { "const": { "val": "50" } } } },
+						"castSpell": { "spellId": { "spellId": 82726 } }
 					}
 				},
-				{
-					"action": {
-						"castSpell": {
-							"spellId": {
-								"spellId": 53401
-							}
-						}
-					}
-				},
-				{
-					"action": {
-						"condition": {
-							"cmp": {
-								"op": "OpLe",
-								"lhs": {
-									"currentFocus": {}
-								},
-								"rhs": {
-									"const": {
-										"val": "50"
-									}
-								}
-							}
-						},
-						"castSpell": {
-							"spellId": {
-								"spellId": 82726
-							}
-						}
-					}
-				},
-				{
-					"action": {
-						"castSpell": {
-							"spellId": {
-								"spellId": 120679
-							}
-						}
-					}
-				},
-				{
-					"action": {
-						"castSpell": {
-							"spellId": {
-								"spellId": 3045
-							}
-						}
-					}
-				},
-				{
-					"action": {
-						"castSpell": {
-							"spellId": {
-								"spellId": 33697
-							}
-						}
-					}
-				},
-				{
-					"action": {
-						"castSpell": {
-							"spellId": {
-								"spellId": 121818
-							}
-						}
-					}
-				},
-				{
-					"action": {
-						"castSpell": {
-							"spellId": {
-								"spellId": 114206,
-								"tag": -1
-							}
-						}
-					}
-				},
-				{
-					"action": {
-						"castSpell": {
-							"spellId": {
-								"spellId": 2825,
-								"tag": -1
-							}
-						}
-					}
-				},
-				{
-					"action": {
-						"castSpell": {
-							"spellId": {
-								"spellId": 120668,
-								"tag": -1
-							}
-						}
-					}
-				},
-				{
-					"action": {
-						"groupReference": {
-							"groupName": "Second Pot"
-						}
-					}
-				}
+				{ "action": { "castSpell": { "spellId": { "spellId": 120679 } } } },
+				{ "action": { "castSpell": { "spellId": { "spellId": 3045 } } } },
+				{ "action": { "castSpell": { "spellId": { "spellId": 33697 } } } },
+				{ "action": { "castSpell": { "spellId": { "spellId": 26297 } } } },
+				{ "action": { "castSpell": { "spellId": { "spellId": 121818 } } } },
+				{ "action": { "castSpell": { "spellId": { "spellId": 114206, "tag": -1 } } } },
+				{ "action": { "castSpell": { "spellId": { "spellId": 2825, "tag": -1 } } } },
+				{ "action": { "castSpell": { "spellId": { "spellId": 120668, "tag": -1 } } } },
+				{ "action": { "groupReference": { "groupName": "Second Pot" } } }
 			]
 		},
 		{
@@ -169,22 +73,8 @@
 			"actions": [
 				{
 					"action": {
-						"condition": {
-							"cmp": {
-								"op": "OpLe",
-								"lhs": {
-									"currentTime": {}
-								},
-								"rhs": {
-									"const": {
-										"val": "10s"
-									}
-								}
-							}
-						},
-						"groupReference": {
-							"groupName": "InnerOpener"
-						}
+						"condition": { "cmp": { "op": "OpLe", "lhs": { "currentTime": {} }, "rhs": { "const": { "val": "10s" } } } },
+						"groupReference": { "groupName": "InnerOpener" }
 					}
 				}
 			]
@@ -192,96 +82,26 @@
 		{
 			"name": "InnerOpener",
 			"actions": [
+				{ "action": { "castSpell": { "spellId": { "spellId": 3674 } } } },
+				{ "action": { "castSpell": { "spellId": { "spellId": 131894 } } } },
+				{ "action": { "castSpell": { "spellId": { "spellId": 82726 } } } },
 				{
 					"action": {
-						"castSpell": {
-							"spellId": {
-								"spellId": 3674
-							}
-						}
+						"condition": { "auraIsInactive": { "auraId": { "spellId": 56343 }, "includeReactionTime": true } },
+						"castSpell": { "spellId": { "spellId": 53301 } }
 					}
 				},
 				{
 					"action": {
-						"castSpell": {
-							"spellId": {
-								"spellId": 131894
-							}
-						}
+						"condition": { "not": { "val": { "dotIsActive": { "spellId": { "spellId": 1978 } } } } },
+						"castSpell": { "spellId": { "spellId": 2643 } }
 					}
 				},
-				{
-					"action": {
-						"castSpell": {
-							"spellId": {
-								"spellId": 82726
-							}
-						}
-					}
-				},
-				{
-					"action": {
-						"castSpell": {
-							"spellId": {
-								"spellId": 53301
-							}
-						}
-					}
-				},
-				{
-					"action": {
-						"groupReference": {
-							"groupName": "Cooldowns"
-						}
-					}
-				},
-				{
-					"action": {
-						"condition": {
-							"not": {
-								"val": {
-									"dotIsActive": {
-										"spellId": {
-											"spellId": 1978
-										}
-									}
-								}
-							}
-						},
-						"castSpell": {
-							"spellId": {
-								"spellId": 2643
-							}
-						}
-					}
-				},
-				{
-					"action": {
-						"castSpell": {
-							"spellId": {
-								"spellId": 117050
-							}
-						}
-					}
-				},
-				{
-					"action": {
-						"castSpell": {
-							"spellId": {
-								"spellId": 120360
-							}
-						}
-					}
-				},
-				{
-					"action": {
-						"castSpell": {
-							"spellId": {
-								"spellId": 109259
-							}
-						}
-					}
-				}
+				{ "action": { "groupReference": { "groupName": "Cooldowns" } } },
+				{ "action": { "castSpell": { "spellId": { "spellId": 53301 } } } },
+				{ "action": { "castSpell": { "spellId": { "spellId": 117050 } } } },
+				{ "action": { "castSpell": { "spellId": { "spellId": 120360 } } } },
+				{ "action": { "castSpell": { "spellId": { "spellId": 109259 } } } }
 			]
 		},
 		{
@@ -290,40 +110,9 @@
 				{
 					"action": {
 						"condition": {
-							"or": {
-								"vals": [
-									{
-										"isExecutePhase": {
-											"threshold": "E20"
-										}
-									},
-									{
-										"dotIsActive": {
-											"spellId": {
-												"spellId": 131894
-											}
-										}
-									}
-								]
-							}
+							"or": { "vals": [{ "isExecutePhase": { "threshold": "E20" } }, { "dotIsActive": { "spellId": { "spellId": 131894 } } }] }
 						},
-						"castSpell": {
-							"spellId": {
-								"itemId": 76089
-							}
-						}
-					}
-				}
-			]
-		},
-		{
-			"name": "AmocCds",
-			"actions": [
-				{
-					"action": {
-						"castSpell": {
-							"spellId": {}
-						}
+						"castSpell": { "spellId": { "itemId": 76089 } }
 					}
 				}
 			]
@@ -338,58 +127,18 @@
 						{
 							"and": {
 								"vals": [
+									{ "cmp": { "op": "OpGe", "lhs": { "currentFocus": {} }, "rhs": { "const": { "val": "50" } } } },
 									{
 										"cmp": {
 											"op": "OpGe",
-											"lhs": {
-												"currentFocus": {}
-											},
-											"rhs": {
-												"const": {
-													"val": "50"
-												}
-											}
-										}
-									},
-									{
-										"cmp": {
-											"op": "OpGe",
-											"lhs": {
-												"spellTimeToReady": {
-													"spellId": {
-														"spellId": 3674
-													}
-												}
-											},
-											"rhs": {
-												"const": {
-													"val": "4s"
-												}
-											}
+											"lhs": { "spellTimeToReady": { "spellId": { "spellId": 3674 } } },
+											"rhs": { "const": { "val": "4s" } }
 										}
 									}
 								]
 							}
 						},
-						{
-							"and": {
-								"vals": [
-									{
-										"cmp": {
-											"op": "OpGe",
-											"lhs": {
-												"currentFocus": {}
-											},
-											"rhs": {
-												"const": {
-													"val": "70"
-												}
-											}
-										}
-									}
-								]
-							}
-						}
+						{ "and": { "vals": [{ "cmp": { "op": "OpGe", "lhs": { "currentFocus": {} }, "rhs": { "const": { "val": "70" } } } }] } }
 					]
 				}
 			}
