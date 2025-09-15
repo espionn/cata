@@ -1306,7 +1306,7 @@ export class ReforgeOptimizer {
 			const numGemOptionsForStat = new Map<string, number>();
 			// Temporary fix to prevent single stat gems being selected
 			// whilst multi stat gems would be a better option
-			let maxGemOptionsForStat: number = this.isTankSpec ? 3 : 8;
+			let maxGemOptionsForStat: number = this.isTankSpec ? 3 : 4;
 
 			if (socketColor == GemColor.GemColorYellow) {
 				let foundCritOrHasteCap = false;
