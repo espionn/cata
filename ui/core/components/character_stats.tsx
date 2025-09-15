@@ -397,6 +397,11 @@ export class CharacterStats extends Component {
 						<span><i>Total Includes Expertise</i></span>
 					</div>
 					)}
+					{unitStat.isStat() && unitStat.getStat() === Stat.StatExpertiseRating && (
+					<div className="character-stats-tooltip-row">
+						<span><i>Contributes to Spell Hit</i></span>
+					</div>
+					)}
 				</div>
 			);
 
