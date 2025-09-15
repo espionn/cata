@@ -12,6 +12,7 @@ import { defaultRaidBuffMajorDamageCooldowns } from '../../core/proto_utils/util
 import { WARLOCK_BREAKPOINTS } from '../presets';
 import DefaultApl from './apls/default.apl.json';
 import P1Gear from './gear_sets/p1.gear.json';
+import P2Gear from './gear_sets/p2.gear.json';
 import PreraidGear from './gear_sets/preraid.gear.json';
 
 // Preset options for this spec.
@@ -20,6 +21,7 @@ import PreraidGear from './gear_sets/preraid.gear.json';
 
 export const PRERAID_PRESET = PresetUtils.makePresetGear('Pre-raid', PreraidGear);
 export const P1_PRESET = PresetUtils.makePresetGear('P1 - BIS', P1Gear);
+export const P2_PRESET = PresetUtils.makePresetGear('P2 - BIS', P2Gear);
 
 export const APL_Default = PresetUtils.makePresetAPLRotation('Affliction', DefaultApl);
 
@@ -29,10 +31,10 @@ export const DEFAULT_EP_PRESET = PresetUtils.makePresetEpWeights(
 	Stats.fromMap({
 		[Stat.StatIntellect]: 1.26,
 		[Stat.StatSpellPower]: 1.0,
-		[Stat.StatHitRating]: 0.93,
+		[Stat.StatHitRating]: 1.0,
 		[Stat.StatCritRating]: 0.56,
-		[Stat.StatHasteRating]: 0.88,
-		[Stat.StatMasteryRating]: 0.68,
+		[Stat.StatHasteRating]: 0.75,
+		[Stat.StatMasteryRating]: 0.70,
 	}),
 );
 

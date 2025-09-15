@@ -1,5 +1,5 @@
 import * as PresetUtils from '../../core/preset_utils';
-import { ConsumesSpec, Debuffs, Glyphs, IndividualBuffs, Profession, PseudoStat, RaidBuffs, Stat } from '../../core/proto/common';
+import { ConsumesSpec, Debuffs, Glyphs, IndividualBuffs, Profession, PseudoStat, Race, RaidBuffs, Stat } from '../../core/proto/common';
 import { SavedTalents } from '../../core/proto/ui';
 import {
 	DestructionWarlock_Options as WarlockOptions,
@@ -12,6 +12,7 @@ import { defaultRaidBuffMajorDamageCooldowns } from '../../core/proto_utils/util
 import { WARLOCK_BREAKPOINTS } from '../presets';
 import DefaultApl from './apls/default.apl.json';
 import P1Gear from './gear_sets/p1.gear.json';
+import P2Gear from './gear_sets/p2.gear.json';
 import P1PreBisGear from './gear_sets/p1-prebis.gear.json';
 
 // Preset options for this spec.
@@ -20,6 +21,7 @@ import P1PreBisGear from './gear_sets/p1-prebis.gear.json';
 
 export const P1_PREBIS_PRESET = PresetUtils.makePresetGear('P1 - Pre-BIS', P1PreBisGear);
 export const P1_PRESET = PresetUtils.makePresetGear('P1 - BIS', P1Gear);
+export const P2_PRESET = PresetUtils.makePresetGear('P2 - BIS', P2Gear);
 export const DEFAULT_APL = PresetUtils.makePresetAPLRotation('Default', DefaultApl);
 
 // Preset options for EP weights
@@ -82,6 +84,7 @@ export const DefaultDebuffs = Debuffs.create({
 });
 
 export const OtherDefaults = {
+	race: Race.RaceTroll,
 	distanceFromTarget: 25,
 	profession1: Profession.Engineering,
 	profession2: Profession.Tailoring,
