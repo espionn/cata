@@ -90,7 +90,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecAfflictionWarlock, {
 
 	defaults: {
 		// Default equipped gear.
-		gear: Presets.PRERAID_PRESET.gear,
+		gear: Presets.P1_PRESET.gear,
 
 		// Default EP weights for sorting gear in the gear picker.
 		epWeights: Presets.DEFAULT_EP_PRESET.epWeights,
@@ -103,7 +103,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecAfflictionWarlock, {
 			const hasteSoftCapConfig = StatCap.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent, {
 				breakpoints: relevantDotBreakpoints,
 				capType: StatCapType.TypeThreshold,
-				postCapEPs: [(Presets.DEFAULT_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.01) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
+				postCapEPs: [(Presets.DEFAULT_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.05) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
 			});
 
 			return [hasteSoftCapConfig];
@@ -159,7 +159,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecAfflictionWarlock, {
 		rotations: [Presets.APL_Default],
 
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.PRERAID_PRESET, Presets.P1_PRESET],
+		gear: [Presets.PRERAID_PRESET, Presets.P1_PRESET, Presets.P2_PRESET],
 		itemSwaps: [],
 	},
 
