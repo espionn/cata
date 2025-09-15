@@ -35,7 +35,6 @@ export class CharacterStats extends Component {
 	masteryElem: HTMLTableCellElement | undefined;
 	hasRacialHitBonus = false;
 	hasRacialExpertiseBonus = false;
-	isSpellHit = false;
 
 	private readonly player: Player<any>;
 	private readonly modifyDisplayStats?: (player: Player<any>) => StatMods;
@@ -118,7 +117,6 @@ export class CharacterStats extends Component {
 			const hitIndex = statGroups.get(StatGroup.Spell)!.findIndex(stat => stat.equalsPseudoStat(PseudoStat.PseudoStatSpellHitPercent));
 			statGroups.get(StatGroup.Spell)!.splice(hitIndex+1, 0, UnitStat.fromStat(Stat.StatExpertiseRating));
 			statGroups.get(StatGroup.Spell)!.push(UnitStat.fromStat(Stat.StatMasteryRating));
-			this.isSpellHit = true
 		} else {
 			const hitIndex = statGroups.get(StatGroup.Physical)!.findIndex(stat => stat.equalsPseudoStat(PseudoStat.PseudoStatPhysicalHitPercent));
 			statGroups.get(StatGroup.Physical)!.splice(hitIndex+1, 0, UnitStat.fromStat(Stat.StatExpertiseRating));
@@ -394,12 +392,12 @@ export class CharacterStats extends Component {
 						<span>{i18n.t('sidebar.character_stats.tooltip.total')}</span>
 						<span>{this.statDisplayString(finalStats, unitStat, true)}</span>
 					</div>
-					{unitStat.isPseudoStat() && unitStat.getPseudoStat() === PseudoStat.PseudoStatSpellHitPercent && this.isSpellHit && (
+					{unitStat.isPseudoStat() && unitStat.getPseudoStat() === PseudoStat.PseudoStatSpellHitPercent && (
 					<div className="character-stats-tooltip-row">
 						<span><i>Total Includes Expertise</i></span>
 					</div>
 					)}
-					{unitStat.isStat() && unitStat.getStat() === Stat.StatExpertiseRating && this.isSpellHit && (
+					{unitStat.isStat() && unitStat.getStat() === Stat.StatExpertiseRating && (
 					<div className="character-stats-tooltip-row">
 						<span><i>Contributes to Spell Hit</i></span>
 					</div>
