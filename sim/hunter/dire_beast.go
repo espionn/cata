@@ -27,7 +27,9 @@ func (hunter *Hunter) RegisterDireBeastSpell() {
 			},
 		},
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
-			hunter.DireBeastPet.EnableWithHastedTimeout(sim, hunter.DireBeastPet, time.Millisecond*15500, time.Millisecond*300)
+			varianceRoll := time.Duration(sim.Roll(0, 800))
+			summonDuration := time.Second*15 + time.Millisecond*varianceRoll
+			hunter.DireBeastPet.EnableWithTimeout(sim, hunter.DireBeastPet, summonDuration)
 		},
 	})
 

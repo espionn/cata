@@ -7,7 +7,8 @@ import { Player } from '../../core/player';
 import { PlayerClasses } from '../../core/player_classes';
 import { APLRotation } from '../../core/proto/apl';
 import { Debuffs, Faction, IndividualBuffs, ItemSlot, PartyBuffs, PseudoStat, Race, RaidBuffs, Spec, Stat } from '../../core/proto/common';
-import { Stats, UnitStat } from '../../core/proto_utils/stats';
+import { StatCapType } from '../../core/proto/ui';
+import { StatCap, Stats, UnitStat } from '../../core/proto_utils/stats';
 import { defaultRaidBuffMajorDamageCooldowns } from '../../core/proto_utils/utils';
 import * as HunterInputs from '../inputs';
 import { sharedHunterDisplayStatsModifiers } from '../shared';
@@ -53,6 +54,19 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBeastMasteryHunter, {
 			return new Stats()
 				.withPseudoStat(PseudoStat.PseudoStatPhysicalHitPercent, 7.5)
 				.withStat(Stat.StatExpertiseRating, 7.5 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION);
+		})(),
+		// Default breakpoint limits - set 19% haste as default target
+		breakpointLimits: (() => {
+			return new Stats().withPseudoStat(PseudoStat.PseudoStatRangedHastePercent, 19);
+		})(),
+		softCapBreakpoints: (() => {
+			return [
+				StatCap.fromPseudoStat(PseudoStat.PseudoStatRangedHastePercent, {
+					breakpoints: [19, 20, 26, 33],
+					capType: StatCapType.TypeSoftCap,
+					postCapEPs: [0.25, 0.2, 0.2, 0.2], // Single value that gets repeated for all breakpoints
+				}),
+			];
 		})(),
 
 		other: Presets.OtherDefaults,
@@ -146,8 +160,22 @@ export class BeastMasteryHunterSimUI extends IndividualSimUI<Spec.SpecBeastMaste
 
 		player.sim.waitForInit().then(() => {
 			new ReforgeOptimizer(this, {
-				getEPDefaults: (_: Player<Spec.SpecFuryWarrior>) => {
+				getEPDefaults: (_: Player<Spec.SpecBeastMasteryHunter>) => {
 					return Presets.P1_EP_PRESET.epWeights;
+				},
+				updateSoftCaps: softCaps => {
+					// Implement stepped EP reduction for haste breakpoints
+					this.individualConfig.defaults.softCapBreakpoints!.forEach(softCap => {
+						const softCapToModify = softCaps.find(sc => sc.unitStat.equals(softCap.unitStat));
+						if (softCap.unitStat.equalsStat(Stat.StatHasteRating) && softCapToModify) {
+							// Set stepped EP values: 0.39 -> 0.36 -> 0.33 -> 0.30 -> 0.27
+							const baseEP = 0.35;
+							const reduction = 0.03;
+							softCapToModify.postCapEPs = softCap.breakpoints.map((_, index) => Math.max(0, baseEP - reduction * (index + 1)));
+						}
+					});
+					console.log(softCaps);
+					return softCaps;
 				},
 			});
 		});
