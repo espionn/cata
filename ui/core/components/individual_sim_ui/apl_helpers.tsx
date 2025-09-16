@@ -2,7 +2,13 @@ import { ref } from 'tsx-vanilla';
 
 import { CacheHandler } from '../../cache_handler';
 import { Player, UnitMetadata } from '../../player.js';
-import { APLActionGuardianHotwDpsRotation_Strategy as HotwStrategy, APLValueEclipsePhase, APLValueRuneSlot, APLValueRuneType } from '../../proto/apl.js';
+import {
+	APLActionGuardianHotwDpsRotation_Strategy as HotwStrategy,
+	APLActionItemSwap_SwapSet as ItemSwapSet,
+	APLValueEclipsePhase,
+	APLValueRuneSlot,
+	APLValueRuneType,
+} from '../../proto/apl.js';
 import { ActionID, OtherAction, Stat, UnitReference, UnitReference_Type as UnitType } from '../../proto/common.js';
 import { FeralDruid_Rotation_AplType } from '../../proto/druid.js';
 import { ActionId, defaultTargetIcon, getPetIconFromName } from '../../proto_utils/action_id.js';
@@ -1215,4 +1221,22 @@ export function reactionTimeCheckbox(): APLPickerBuilderFieldConfig<any, any> {
 	return booleanFieldConfig('includeReactionTime', 'Include Reaction Time', {
 		labelTooltip: 'If checked, will use the configured reaction time.',
 	});
+}
+
+export function itemSwapSetFieldConfig(field: string): APLPickerBuilderFieldConfig<any, any> {
+	return {
+		field: field,
+		newValue: () => ItemSwapSet.Swap1,
+		factory: (parent, player, config) =>
+			new TextDropdownPicker(parent, player, {
+				id: randomUUID(),
+				...config,
+				defaultLabel: 'None',
+				equals: (a, b) => a == b,
+				values: [
+					{ value: ItemSwapSet.Main, label: 'Main' },
+					{ value: ItemSwapSet.Swap1, label: 'Swapped' },
+				],
+			}),
+	};
 }

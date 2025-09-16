@@ -41,6 +41,7 @@ import { Input, InputConfig } from '../input.js';
 import { TextDropdownPicker } from '../pickers/dropdown_picker.jsx';
 import { ListItemPickerConfig, ListPicker } from '../pickers/list_picker.jsx';
 import * as AplHelpers from './apl_helpers.js';
+import { itemSwapSetFieldConfig } from './apl_helpers.js';
 import * as AplValues from './apl_values.js';
 
 export interface APLActionPickerConfig extends InputConfig<Player<any>, APLAction> {}
@@ -263,24 +264,6 @@ type ActionKindConfig<T> = {
 	newValue: () => T;
 	factory: (parent: HTMLElement, player: Player<any>, config: InputConfig<Player<any>, T>) => Input<Player<any>, T>;
 };
-
-function itemSwapSetFieldConfig(field: string): AplHelpers.APLPickerBuilderFieldConfig<any, any> {
-	return {
-		field: field,
-		newValue: () => ItemSwapSet.Swap1,
-		factory: (parent, player, config) =>
-			new TextDropdownPicker(parent, player, {
-				id: randomUUID(),
-				...config,
-				defaultLabel: 'None',
-				equals: (a, b) => a == b,
-				values: [
-					{ value: ItemSwapSet.Main, label: 'Main' },
-					{ value: ItemSwapSet.Swap1, label: 'Swapped' },
-				],
-			}),
-	};
-}
 
 function actionFieldConfig(field: string): AplHelpers.APLPickerBuilderFieldConfig<any, any> {
 	return {
