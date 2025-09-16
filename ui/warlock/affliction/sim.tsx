@@ -93,7 +93,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecAfflictionWarlock, {
 		gear: Presets.P1_PRESET.gear,
 
 		// Default EP weights for sorting gear in the gear picker.
-		epWeights: Presets.DEFAULT_EP_PRESET.epWeights,
+		epWeights: Presets.P1_BIS_EP_PRESET.epWeights,
 		// Default stat caps for the Reforge optimizer
 		statCaps: (() => {
 			return new Stats().withPseudoStat(PseudoStat.PseudoStatSpellHitPercent, 15);
@@ -103,7 +103,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecAfflictionWarlock, {
 			const hasteSoftCapConfig = StatCap.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent, {
 				breakpoints: relevantDotBreakpoints,
 				capType: StatCapType.TypeThreshold,
-				postCapEPs: [(Presets.DEFAULT_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.05) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
+				postCapEPs: [(Presets.P1_BIS_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.05) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
 			});
 
 			return [hasteSoftCapConfig];
@@ -152,7 +152,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecAfflictionWarlock, {
 	},
 
 	presets: {
-		epWeights: [Presets.DEFAULT_EP_PRESET],
+		epWeights: [Presets.P1_BIS_EP_PRESET, Presets.P2_BIS_EP_PRESET],
 		// Preset talents that the user can quickly select.
 		talents: [Presets.AfflictionTalents],
 		// Preset rotations that the user can quickly select.
@@ -208,6 +208,17 @@ export class AfflictionWarlockSimUI extends IndividualSimUI<Spec.SpecAfflictionW
 		player.sim.waitForInit().then(() => {
 			new ReforgeOptimizer(this, {
 				statSelectionPresets,
+				getEPDefaults: player => {
+					if (this.sim.getUseCustomEPValues()) {
+						return player.getEpWeights();
+					}
+
+					const avgIlvl = player.getGear().getAverageItemLevel(false);
+					if (avgIlvl >= 512) {
+						return Presets.P2_BIS_EP_PRESET.epWeights;
+					}
+					return Presets.P1_BIS_EP_PRESET.epWeights;
+				},
 				// updateSoftCaps: softCaps => {
 				// 	const raidBuffs = player.getRaid()?.getBuffs();
 				// 	const hasBL = !!raidBuffs?.bloodlust;
