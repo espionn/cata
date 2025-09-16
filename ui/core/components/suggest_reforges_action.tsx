@@ -681,7 +681,7 @@ export class ReforgeOptimizer {
 
 		const tableRef = ref<HTMLTableElement>();
 		const content = (
-			<table className="d-none mb-2" ref={tableRef}>
+			<table className={clsx("mb-2", { 'd-none': !this.freezeItemSlots })} ref={tableRef}>
 				{slotsByRow.map(slots => {
 					const rowRef = ref<HTMLTableRowElement>();
 					const row = (
