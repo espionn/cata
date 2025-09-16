@@ -174,8 +174,7 @@ class RelativeStatCap {
 	}
 
 	updateWeights(statWeights: Stats) {
-		const statsToAverage = RelativeStatCap.relevantStats.filter(stat => !this.forcedHighestStat.equalsStat(stat));
-		const averagedWeight = statsToAverage.reduce((sum, stat) => sum + statWeights.getStat(stat), 0) / statsToAverage.length;
+		const averagedWeight = 0.5 * (statWeights.getUnitStat(this.constrainedStats[0]) + statWeights.getUnitStat(this.constrainedStats[1]));
 
 		for (const stat of RelativeStatCap.relevantStats) {
 			statWeights = statWeights.withStat(stat, this.forcedHighestStat.equalsStat(stat) ? 0 : averagedWeight);
