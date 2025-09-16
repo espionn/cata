@@ -2649,49 +2649,49 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-Settings-Goblin-p1-Affliction Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 156043.27216
-  tps: 128866.97862
-  hps: 1971.75648
+  dps: 158190.86654
+  tps: 131712.65748
+  hps: 2104.35337
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Goblin-p1-Affliction Warlock-default-FullBuffs-25.0yards-LongSingleTarget"
  value: {
-  dps: 156043.27216
-  tps: 111326.17506
-  hps: 1971.75648
+  dps: 158190.86654
+  tps: 112495.15945
+  hps: 2104.35337
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Goblin-p1-Affliction Warlock-default-FullBuffs-25.0yards-ShortSingleTarget"
  value: {
-  dps: 246692.5162
-  tps: 164467.88343
-  hps: 2611.20837
+  dps: 245019.1339
+  tps: 162753.4941
+  hps: 2760.54958
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Goblin-p1-Affliction Warlock-default-NoBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 97687.25399
-  tps: 87261.07734
-  hps: 1743.99633
+  dps: 97489.38181
+  tps: 88714.56796
+  hps: 1847.35681
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Goblin-p1-Affliction Warlock-default-NoBuffs-25.0yards-LongSingleTarget"
  value: {
-  dps: 97687.25399
-  tps: 70842.01059
-  hps: 1743.99633
+  dps: 97489.38181
+  tps: 70726.03159
+  hps: 1847.35681
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Goblin-p1-Affliction Warlock-default-NoBuffs-25.0yards-ShortSingleTarget"
  value: {
-  dps: 121808.88312
-  tps: 83059.04062
-  hps: 1906.2384
+  dps: 120338.57596
+  tps: 81389.47041
+  hps: 2031.20292
  }
 }
 dps_results: {
@@ -2745,49 +2745,49 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-Settings-Human-p1-Affliction Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 155196.51474
-  tps: 127626.74254
-  hps: 1959.53765
+  dps: 155687.29029
+  tps: 129074.4435
+  hps: 2084.89376
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Human-p1-Affliction Warlock-default-FullBuffs-25.0yards-LongSingleTarget"
  value: {
-  dps: 155196.51474
-  tps: 110472.86847
-  hps: 1959.53765
+  dps: 155687.29029
+  tps: 110501.82795
+  hps: 2084.89376
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Human-p1-Affliction Warlock-default-FullBuffs-25.0yards-ShortSingleTarget"
  value: {
-  dps: 244553.8182
-  tps: 163064.30929
-  hps: 2588.58092
+  dps: 242895.43533
+  tps: 161778.56579
+  hps: 2658.72603
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Human-p1-Affliction Warlock-default-NoBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 97164.10143
-  tps: 86755.29248
-  hps: 1725.35756
+  dps: 95980.27925
+  tps: 86857.20322
+  hps: 1827.0236
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Human-p1-Affliction Warlock-default-NoBuffs-25.0yards-LongSingleTarget"
  value: {
-  dps: 97164.10143
-  tps: 70577.68259
-  hps: 1725.35756
+  dps: 95980.27925
+  tps: 69230.85215
+  hps: 1827.0236
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Human-p1-Affliction Warlock-default-NoBuffs-25.0yards-ShortSingleTarget"
  value: {
-  dps: 120326.17785
-  tps: 81637.08369
-  hps: 1813.04452
+  dps: 119101.39687
+  tps: 80706.72903
+  hps: 1997.31423
  }
 }
 dps_results: {
@@ -2841,49 +2841,49 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-Settings-Orc-p1-Affliction Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 159017.48831
-  tps: 129933.40653
-  hps: 1975.44465
+  dps: 158886.58561
+  tps: 131070.328
+  hps: 2084.51273
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Orc-p1-Affliction Warlock-default-FullBuffs-25.0yards-LongSingleTarget"
  value: {
-  dps: 159017.48831
-  tps: 113036.9057
-  hps: 1975.44465
+  dps: 158886.58561
+  tps: 112368.09425
+  hps: 2084.51273
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Orc-p1-Affliction Warlock-default-FullBuffs-25.0yards-ShortSingleTarget"
  value: {
-  dps: 245642.3864
-  tps: 162125.23082
-  hps: 2541.15045
+  dps: 245118.0386
+  tps: 161052.66585
+  hps: 2704.07372
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Orc-p1-Affliction Warlock-default-NoBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 99455.05033
-  tps: 87575.90181
-  hps: 1756.33951
+  dps: 98654.35345
+  tps: 88007.46625
+  hps: 1859.70343
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Orc-p1-Affliction Warlock-default-NoBuffs-25.0yards-LongSingleTarget"
  value: {
-  dps: 99455.05033
-  tps: 72001.41508
-  hps: 1756.33951
+  dps: 98654.35345
+  tps: 70984.19006
+  hps: 1859.70343
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Orc-p1-Affliction Warlock-default-NoBuffs-25.0yards-ShortSingleTarget"
  value: {
-  dps: 122286.05735
-  tps: 82626.59129
-  hps: 1914.77438
+  dps: 119290.21589
+  tps: 79531.40003
+  hps: 2018.56193
  }
 }
 dps_results: {
@@ -2937,49 +2937,49 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-Settings-Troll-p1-Affliction Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 163058.20852
-  tps: 133329.73933
-  hps: 2077.20042
+  dps: 162758.54553
+  tps: 134101.07772
+  hps: 2198.03104
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Troll-p1-Affliction Warlock-default-FullBuffs-25.0yards-LongSingleTarget"
  value: {
-  dps: 163058.20852
-  tps: 115788.93576
-  hps: 2077.20042
+  dps: 162758.54553
+  tps: 115141.53269
+  hps: 2198.03104
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Troll-p1-Affliction Warlock-default-FullBuffs-25.0yards-ShortSingleTarget"
  value: {
-  dps: 270811.4088
-  tps: 180355.26204
-  hps: 2918.94177
+  dps: 266777.97747
+  tps: 175888.7768
+  hps: 3131.63985
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Troll-p1-Affliction Warlock-default-NoBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 100292.7128
-  tps: 89073.99185
-  hps: 1834.64856
+  dps: 100200.77014
+  tps: 89885.86684
+  hps: 1934.62017
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Troll-p1-Affliction Warlock-default-NoBuffs-25.0yards-LongSingleTarget"
  value: {
-  dps: 100292.7128
-  tps: 72413.46823
-  hps: 1834.64856
+  dps: 100200.77014
+  tps: 72259.51577
+  hps: 1934.62017
  }
 }
 dps_results: {
  key: "TestAffliction-Settings-Troll-p1-Affliction Warlock-default-NoBuffs-25.0yards-ShortSingleTarget"
  value: {
-  dps: 132012.2286
-  tps: 89774.98935
-  hps: 2166.75765
+  dps: 130745.32271
+  tps: 88863.98922
+  hps: 2295.95825
  }
 }
 dps_results: {
