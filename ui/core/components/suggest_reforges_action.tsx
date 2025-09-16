@@ -77,10 +77,14 @@ export type ReforgeOptimizerOptions = {
 	updateSoftCaps?: (softCaps: StatCap[]) => StatCap[];
 	// Allows you to specifiy additional information for the soft cap tooltips
 	additionalSoftCapTooltipInformation?: StatTooltipContent;
+	// Sets the default stat to be the highest for relative stat cap calculations
+	// Defaults to Any
+	defaultRelativeStatCap?: Stat | null;
 };
 
 // Used to force a particular proc from trinkets like Matrix Restabilizer and Apparatus of Khaz'goroth.
 class RelativeStatCap {
+	readonly player: Player<any>;
 	static relevantStats: Stat[] = [Stat.StatCritRating, Stat.StatHasteRating, Stat.StatMasteryRating];
 	readonly forcedHighestStat: UnitStat;
 	readonly constrainedStats: UnitStat[];
@@ -105,16 +109,15 @@ class RelativeStatCap {
 		[Stat.StatMasteryRating, new Map([])],
 	]);
 
-	static canEnable(player: Player<any>): boolean {
-		const variableStatTrinkets: number[] = [95802, 94532, 96546, 96174, 96918];
-		return player.getGear().hasTrinketFromOptions(variableStatTrinkets);
+	static hasRoRo(player: Player<any>): boolean {
+		return player.getGear().hasTrinketFromOptions([95802, 94532, 96546, 96174, 96918]);
 	}
 
-	constructor(forcedHighestStat: Stat, playerClass: Class) {
+	constructor(forcedHighestStat: Stat, player: Player<any>, playerClass: Class) {
 		if (!RelativeStatCap.relevantStats.includes(forcedHighestStat)) {
 			throw new Error('Forced highest stat must be either Crit, Haste, or Mastery!');
 		}
-
+		this.player = player;
 		this.forcedHighestStat = UnitStat.fromStat(forcedHighestStat);
 		this.constrainedStats = RelativeStatCap.relevantStats.filter(stat => stat !== forcedHighestStat).map(stat => UnitStat.fromStat(stat));
 		this.constraintKeys = this.constrainedStats.map(
@@ -140,6 +143,14 @@ class RelativeStatCap {
 	}
 
 	updateConstraints(constraints: YalpsConstraints, gear: Gear, baseStats: Stats) {
+		baseStats = baseStats.addStat(Stat.StatMasteryRating, -this.player.getBaseMastery() * Mechanics.MASTERY_RATING_PER_MASTERY_POINT);
+		const raidBuffs = this.player.getRaid()?.getBuffs();
+		// @TODO: Validate on PTR
+		// Mastery raid buff does not count towards RoRo calculation
+		if (raidBuffs && (raidBuffs.roarOfCourage || raidBuffs.blessingOfMight || raidBuffs.spiritBeastBlessing || raidBuffs.graceOfAir)) {
+			baseStats = baseStats.addStat(Stat.StatMasteryRating, -Mechanics.RAID_BUFF_MASTERY_RATING);
+		}
+
 		for (const [idx, constrainedStat] of this.constrainedStats.entries()) {
 			const weightedStatsArray = new Stats().withUnitStat(this.forcedHighestStat, 1).withUnitStat(constrainedStat, -1);
 			let minReforgeContribution = 1 - baseStats.computeEP(weightedStatsArray);
@@ -160,6 +171,17 @@ class RelativeStatCap {
 
 			constraints.set(this.constraintKeys[idx], greaterEq(minReforgeContribution));
 		}
+	}
+
+	updateWeights(statWeights: Stats) {
+		const statsToAverage = RelativeStatCap.relevantStats.filter(stat => !this.forcedHighestStat.equalsStat(stat));
+		const averagedWeight = statsToAverage.reduce((sum, stat) => sum + statWeights.getStat(stat), 0) / statsToAverage.length;
+
+		for (const stat of RelativeStatCap.relevantStats) {
+			statWeights = statWeights.withStat(stat, this.forcedHighestStat.equalsStat(stat) ? 0 : averagedWeight);
+		}
+
+		return statWeights;
 	}
 }
 
@@ -193,6 +215,7 @@ export class ReforgeOptimizer {
 	protected previousGear: Gear | null = null;
 	protected previousReforges = new Map<ItemSlot, ReforgeData>();
 	protected currentReforges = new Map<ItemSlot, ReforgeData>();
+	protected defaultRelativeStatCap: Stat | null = null;
 	protected relativeStatCap: RelativeStatCap | null = null;
 
 	constructor(simUI: IndividualSimUI<any>, options?: ReforgeOptimizerOptions) {
@@ -213,6 +236,7 @@ export class ReforgeOptimizer {
 		this.statSelectionPresets = options?.statSelectionPresets;
 		this._statCaps = this.statCaps;
 		this.enableBreakpointLimits = !!options?.enableBreakpointLimits;
+		this.defaultRelativeStatCap = options?.defaultRelativeStatCap ?? null;
 
 		const startReforgeOptimizationEntry: ActionGroupItem = {
 			label: i18n.t('sidebar.buttons.suggest_reforges'),
@@ -374,15 +398,15 @@ export class ReforgeOptimizer {
 	}
 
 	static includesCappedStat(coefficients: YalpsCoefficients, reforgeCaps: Stats, reforgeSoftCaps: StatCap[]): boolean {
-		for (const [coefficientKey, value] of coefficients.entries()) {
+		for (const coefficientKey of coefficients.keys()) {
 			if (coefficientKey.includes('PseudoStat')) {
-				const statKey = (PseudoStat as any)[coefficientKey] as PseudoStat;
+				const statKey = PseudoStat[coefficientKey as keyof typeof PseudoStat];
 
 				if (pseudoStatIsCapped(statKey, reforgeCaps, reforgeSoftCaps)) {
 					return true;
 				}
 			} else if (coefficientKey.includes('Stat')) {
-				const statKey = (Stat as any)[coefficientKey] as Stat;
+				const statKey = Stat[coefficientKey as keyof typeof Stat];
 
 				if (statIsCapped(statKey, reforgeCaps, reforgeSoftCaps)) {
 					return true;
@@ -396,15 +420,15 @@ export class ReforgeOptimizer {
 	static getCappedStatKeys(coefficients: YalpsCoefficients, reforgeCaps: Stats, reforgeSoftCaps: StatCap[]): string[] {
 		const cappedStatKeys: string[] = [];
 
-		for (const [coefficientKey, value] of coefficients.entries()) {
+		for (const coefficientKey of coefficients.keys()) {
 			if (coefficientKey.includes('PseudoStat')) {
-				const statKey = (PseudoStat as any)[coefficientKey] as PseudoStat;
+				const statKey = PseudoStat[coefficientKey as keyof typeof PseudoStat];
 
 				if (pseudoStatIsCapped(statKey, reforgeCaps, reforgeSoftCaps)) {
 					cappedStatKeys.push(coefficientKey);
 				}
 			} else if (coefficientKey.includes('Stat')) {
-				const statKey = (Stat as any)[coefficientKey] as Stat;
+				const statKey = Stat[coefficientKey as keyof typeof Stat];
 
 				if (statIsCapped(statKey, reforgeCaps, reforgeSoftCaps)) {
 					cappedStatKeys.push(coefficientKey);
@@ -543,9 +567,10 @@ export class ReforgeOptimizer {
 				}
 
 				const forcedProcInput = new EnumPicker(null, this.player, {
-					extraCssClasses: ["mb-2"],
+					extraCssClasses: ['mb-2'],
 					id: 'reforge-optimizer-force-stat-proc',
-					label: 'RoRo proc',
+					label: 'Force RoRo proc',
+					defaultValue: this.defaultRelativeStatCap ?? -1,
 					values: [
 						{ name: 'Any', value: -1 },
 						...[...RelativeStatCap.relevantStats].map(stat => {
@@ -567,14 +592,16 @@ export class ReforgeOptimizer {
 						if (newValue == -1) {
 							this.relativeStatCap = null;
 						} else {
-							this.relativeStatCap = new RelativeStatCap(newValue, this.playerClass);
+							this.relativeStatCap = new RelativeStatCap(newValue, this.player, this.playerClass);
 						}
 					},
 					showWhen: () => {
-						const canEnable = RelativeStatCap.canEnable(this.player);
+						const canEnable = RelativeStatCap.hasRoRo(this.player);
 
 						if (!canEnable) {
 							this.relativeStatCap = null;
+						} else if (!this.relativeStatCap && this.defaultRelativeStatCap) {
+							this.relativeStatCap = new RelativeStatCap(this.defaultRelativeStatCap, this.player, this.playerClass);
 						}
 
 						return canEnable;
@@ -682,7 +709,7 @@ export class ReforgeOptimizer {
 
 		const tableRef = ref<HTMLTableElement>();
 		const content = (
-			<table className={clsx("mb-2", { 'd-none': !this.freezeItemSlots })} ref={tableRef}>
+			<table className={clsx('mb-2', { 'd-none': !this.freezeItemSlots })} ref={tableRef}>
 				{slotsByRow.map(slots => {
 					const rowRef = ref<HTMLTableRowElement>();
 					const row = (
@@ -1048,7 +1075,11 @@ export class ReforgeOptimizer {
 
 		// Perform any required processing on the pre-cap EPs to make them internally consistent with the
 		// configured hard caps and soft caps.
-		const validatedWeights = ReforgeOptimizer.checkWeights(this.preCapEPs, reforgeCaps, reforgeSoftCaps);
+		let validatedWeights = ReforgeOptimizer.checkWeights(this.preCapEPs, reforgeCaps, reforgeSoftCaps);
+
+		if (this.relativeStatCap) {
+			validatedWeights = this.relativeStatCap.updateWeights(validatedWeights);
+		}
 
 		// Set up YALPS model
 		const variables = this.buildYalpsVariables(baseGear, validatedWeights, reforgeCaps, reforgeSoftCaps);
@@ -1424,11 +1455,7 @@ export class ReforgeOptimizer {
 		}
 
 		if (this.relativeStatCap) {
-			const statsWithoutBaseMastery = baseStats.addStat(
-				Stat.StatMasteryRating,
-				-this.player.getBaseMastery() * Mechanics.MASTERY_RATING_PER_MASTERY_POINT,
-			);
-			this.relativeStatCap.updateConstraints(constraints, gear, statsWithoutBaseMastery);
+			this.relativeStatCap.updateConstraints(constraints, gear, baseStats);
 		}
 
 		return constraints;

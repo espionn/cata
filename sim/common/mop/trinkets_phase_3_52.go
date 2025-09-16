@@ -591,9 +591,18 @@ func init() {
 						Duration: duration,
 						OnGain: func(aura *core.Aura, sim *core.Simulation) {
 							character.AddStatsDynamic(sim, buffStats)
+
+							for i := range character.OnTemporaryStatsChanges {
+								character.OnTemporaryStatsChanges[i](sim, aura, buffStats)
+							}
 						},
 						OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-							character.AddStatsDynamic(sim, buffStats.Invert())
+							invertedBuffStats := buffStats.Invert()
+							character.AddStatsDynamic(sim, invertedBuffStats)
+
+							for i := range character.OnTemporaryStatsChanges {
+								character.OnTemporaryStatsChanges[i](sim, aura, invertedBuffStats)
+							}
 						},
 					}),
 					BuffedStatTypes: buffedStatTypes,
