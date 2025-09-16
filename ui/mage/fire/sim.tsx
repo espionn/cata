@@ -6,23 +6,21 @@ import { Player } from '../../core/player';
 import { PlayerClasses } from '../../core/player_classes';
 import { APLRotation } from '../../core/proto/apl';
 import { Faction, IndividualBuffs, ItemSlot, PartyBuffs, PseudoStat, Race, Spec, Stat } from '../../core/proto/common';
-import { MageMajorGlyph } from '../../core/proto/mage';
 import { StatCapType } from '../../core/proto/ui';
 import { DEFAULT_CASTER_GEM_STATS, StatCap, Stats, UnitStat } from '../../core/proto_utils/stats';
-import { formatToNumber } from '../../core/utils';
 import { DefaultDebuffs, DefaultRaidBuffs, MAGE_BREAKPOINTS } from '../presets';
 import * as Presets from './presets';
 import * as MageInputs from '../inputs';
 
 const mageBombBreakpoints = MAGE_BREAKPOINTS.presets;
-const combustBreakpoints = Presets.COMBUSTION_BREAKPOINT.presets;
-const glyphedCombustBreakpoints = Presets.GLYPHED_COMBUSTION_BREAKPOINT.presets;
+// const combustBreakpoints = Presets.COMBUSTION_BREAKPOINT.presets;
+// const glyphedCombustBreakpoints = Presets.GLYPHED_COMBUSTION_BREAKPOINT.presets;
 
 const relevantMageBombBreakpoints = [
 	mageBombBreakpoints.get('5-tick - Living Bomb')!,
 	mageBombBreakpoints.get('6-tick - Living Bomb')!,
-	mageBombBreakpoints.get('7-tick - Living Bomb')!,
-	mageBombBreakpoints.get('8-tick - Living Bomb')!,
+	// mageBombBreakpoints.get('7-tick - Living Bomb')!,
+	// mageBombBreakpoints.get('8-tick - Living Bomb')!,
 	// mageBombBreakpoints.get('13-tick - Nether Tempest')!,
 	// mageBombBreakpoints.get('14-tick - Nether Tempest')!,
 	// mageBombBreakpoints.get('15-tick - Nether Tempest')!,
@@ -111,16 +109,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFireMage, {
 			const hasteSoftCapConfig = StatCap.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent, {
 				breakpoints: [...relevantMageBombBreakpoints],
 				capType: StatCapType.TypeThreshold,
-				postCapEPs: [(Presets.DEFAULT_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.10) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
+				postCapEPs: [(Presets.DEFAULT_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.1) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
 			});
 
-			const masterySoftCapConfig = StatCap.fromStat(Stat.StatMasteryRating, {
-				breakpoints: [11200],
-				capType: StatCapType.TypeSoftCap,
-				postCapEPs: [(Presets.DEFAULT_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.15) ],
-			});
-
-			return [hasteSoftCapConfig, masterySoftCapConfig];
+			return [hasteSoftCapConfig];
 		})(),
 		// Default consumes settings.
 		consumables: Presets.DefaultFireConsumables,
@@ -158,13 +150,13 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFireMage, {
 	},
 
 	presets: {
-		epWeights: [Presets.DEFAULT_EP_PRESET],
+		epWeights: [Presets.DEFAULT_EP_PRESET, Presets.P1_PREBIS_EP_PRESET],
 		// Preset rotations that the user can quickly select.
 		rotations: [Presets.FIRE_ROTATION_PRESET_DEFAULT],
 		// Preset talents that the user can quickly select.
 		talents: [Presets.FireTalents, Presets.FireTalentsCleave],
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.P1_PREBIS, Presets.P1_POST_MSV, Presets.P1_POST_HOF, Presets.P1_BIS],
+		gear: [Presets.P1_PREBIS, Presets.P1_BIS, Presets.P2_BIS],
 
 		builds: [Presets.P1_PRESET_BUILD_DEFAULT, Presets.P1_PRESET_BUILD_CLEAVE],
 	},

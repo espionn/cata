@@ -151,6 +151,15 @@ func (rotation *FeralDruidRotation) Execute(sim *core.Simulation) {
 		rotation.ShiftBearCat(sim)
 	} else if rotation.RotationType == proto.FeralDruid_Rotation_SingleTarget {
 		rotation.PickSingleTargetGCDAction(sim)
+
+		if !cat.GCD.IsReady(sim) && rotation.WrathWeave && cat.HeartOfTheWild.IsReady(sim) && cat.BerserkCatAura.IsActive() && (cat.BerserkCatAura.RemainingDuration(sim) < core.GCDDefault) {
+			cat.HeartOfTheWild.Cast(sim, nil)
+			cat.UpdateMajorCooldowns()
+		}
+
+		if !cat.GCD.IsReady(sim) && cat.ItemSwap.IsEnabled() && rotation.shouldWrathWeave(sim) && cat.CatFormAura.IsActive() {
+			cat.ItemSwap.SwapItems(sim, proto.APLActionItemSwap_Swap1, false)
+		}
 	} else {
 		panic("AoE rotation not yet supported!")
 	}
@@ -231,7 +240,7 @@ func (rotation *FeralDruidRotation) PickSingleTargetGCDAction(sim *core.Simulati
 	bearWeaveNow := rotation.BearWeave && cat.canBearWeave(sim, furorCap, regenRate, curEnergy, excessE, rotation.pendingPoolWeaves)
 
 	// Check Wrath-weaving conditions.
-	wrathWeaveNow := rotation.WrathWeave && cat.HeartOfTheWildAura.IsActive() && (cat.HeartOfTheWildAura.RemainingDuration(sim) > cat.Wrath.DefaultCast.CastTime) && !isClearcast && ((curCp == 5) || (curEnergy+cat.Wrath.DefaultCast.CastTime.Seconds()*2*regenRate <= furorCap)) && ripDot.IsActive() && (!ripRefreshPending || (ripRefreshTime > sim.CurrentTime+cat.Wrath.DefaultCast.CastTime+core.GCDDefault)) && rakeDot.IsActive() && (!rakeRefreshPending || (rakeRefreshTime > sim.CurrentTime+cat.Wrath.DefaultCast.CastTime+core.GCDDefault))
+	wrathWeaveNow := rotation.shouldWrathWeave(sim)
 
 	// Main decision tree starts here.
 	var timeToNextAction time.Duration
@@ -258,7 +267,7 @@ func (rotation *FeralDruidRotation) PickSingleTargetGCDAction(sim *core.Simulati
 			timeToNextAction = cat.ReactionTime
 		}
 	} else if !cat.CatFormAura.IsActive() {
-		if !cat.HeartOfTheWildAura.IsActive() || (cat.HeartOfTheWildAura.RemainingDuration(sim) <= cat.Wrath.DefaultCast.CastTime) || !ripDot.IsActive() || (ripRefreshPending && (ripRefreshTime <= sim.CurrentTime+cat.Wrath.DefaultCast.CastTime+core.GCDDefault)) || !rakeDot.IsActive() || (rakeRefreshPending && (rakeRefreshTime <= sim.CurrentTime+cat.Wrath.DefaultCast.CastTime+core.GCDDefault)) || ((curCp < 5) && (curEnergy+cat.Wrath.DefaultCast.CastTime.Seconds()*regenRate > furorCap)) {
+		if !cat.HeartOfTheWildAura.IsActive() || (cat.HeartOfTheWildAura.RemainingDuration(sim) <= cat.Wrath.DefaultCast.CastTime) || !ripDot.IsActive() || (ripRefreshPending && (ripDot.ExpiresAt() <= sim.CurrentTime+cat.Wrath.DefaultCast.CastTime+core.GCDDefault)) || !rakeDot.IsActive() || (rakeRefreshPending && (rakeDot.ExpiresAt() <= sim.CurrentTime+cat.Wrath.DefaultCast.CastTime+core.GCDDefault)) || ((curCp < 2) && (curEnergy+cat.Wrath.DefaultCast.CastTime.Seconds()*regenRate > furorCap)) {
 			rotation.readyToShift = true
 		} else {
 			cat.Wrath.Cast(sim, cat.CurrentTarget)

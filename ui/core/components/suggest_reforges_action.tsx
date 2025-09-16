@@ -682,7 +682,7 @@ export class ReforgeOptimizer {
 
 		const tableRef = ref<HTMLTableElement>();
 		const content = (
-			<table className="d-none mb-2" ref={tableRef}>
+			<table className={clsx("mb-2", { 'd-none': !this.freezeItemSlots })} ref={tableRef}>
 				{slotsByRow.map(slots => {
 					const rowRef = ref<HTMLTableRowElement>();
 					const row = (
@@ -1307,7 +1307,7 @@ export class ReforgeOptimizer {
 			const numGemOptionsForStat = new Map<string, number>();
 			// Temporary fix to prevent single stat gems being selected
 			// whilst multi stat gems would be a better option
-			let maxGemOptionsForStat: number = this.isTankSpec ? 3 : 8;
+			let maxGemOptionsForStat: number = this.isTankSpec ? 3 : 4;
 
 			if (socketColor == GemColor.GemColorYellow) {
 				let foundCritOrHasteCap = false;
