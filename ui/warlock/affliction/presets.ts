@@ -29,7 +29,7 @@ export const APL_Default = PresetUtils.makePresetAPLRotation('Affliction', Defau
 export const P1_BIS_EP_PRESET = PresetUtils.makePresetEpWeights(
 	'Item Level < 512',
 	Stats.fromMap({
-		[Stat.StatIntellect]: 1.25,
+		[Stat.StatIntellect]: 1.23,
 		[Stat.StatSpellPower]: 1.0,
 		[Stat.StatHitRating]: 0.93,
 		[Stat.StatCritRating]: 0.54,
