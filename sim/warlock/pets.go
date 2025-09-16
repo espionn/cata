@@ -109,7 +109,7 @@ func (warlock *Warlock) setPetOptions(petAgent core.PetAgent, aaOptions *core.Au
 	pet.EnableEnergyBar(core.EnergyBarOptions{
 		MaxEnergy:             200,
 		UnitClass:             proto.Class_ClassWarlock,
-		HasHasteRatingScaling: false,
+		HasHasteRatingScaling: true,
 	})
 
 	warlock.AddPet(petAgent)

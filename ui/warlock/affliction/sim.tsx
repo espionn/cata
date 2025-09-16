@@ -19,7 +19,7 @@ const relevantDotBreakpoints = [
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('14-tick - Agony')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('11-tick - Corruption')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('15-tick - Agony')!,
-	Presets.AFFLICTION_BREAKPOINTS.presets.get('9-tick - Unstable Affliction')!,
+	// Presets.AFFLICTION_BREAKPOINTS.presets.get('9-tick - Unstable Affliction')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('12-tick - Corruption')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('16-tick - Agony')!,
 	Presets.AFFLICTION_BREAKPOINTS.presets.get('10-tick - Unstable Affliction')!,
@@ -28,33 +28,33 @@ const relevantDotBreakpoints = [
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('13-tick - Corruption')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('18-tick - Agony')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('14-tick - Corruption')!,
-	Presets.AFFLICTION_BREAKPOINTS.presets.get('11-tick - Unstable Affliction')!,
+	// Presets.AFFLICTION_BREAKPOINTS.presets.get('11-tick - Unstable Affliction')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('19-tick - Agony')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('15-tick - Corruption')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('7-tick - Doom')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('20-tick - Agony')!,
-	Presets.AFFLICTION_BREAKPOINTS.presets.get('12-tick - Unstable Affliction')!,
+	// Presets.AFFLICTION_BREAKPOINTS.presets.get('12-tick - Unstable Affliction')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('21-tick - Agony')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('16-tick - Corruption')!,
-	Presets.AFFLICTION_BREAKPOINTS.presets.get('13-tick - Unstable Affliction')!,
+	// Presets.AFFLICTION_BREAKPOINTS.presets.get('13-tick - Unstable Affliction')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('22-tick - Agony')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('17-tick - Corruption')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('8-tick - Doom')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('23-tick - Agony')!,
-	Presets.AFFLICTION_BREAKPOINTS.presets.get('14-tick - Unstable Affliction')!,
+	// Presets.AFFLICTION_BREAKPOINTS.presets.get('14-tick - Unstable Affliction')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('18-tick - Corruption')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('24-tick - Agony')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('25-tick - Agony')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('19-tick - Corruption')!,
-	Presets.AFFLICTION_BREAKPOINTS.presets.get('15-tick - Unstable Affliction')!,
+	// Presets.AFFLICTION_BREAKPOINTS.presets.get('15-tick - Unstable Affliction')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('26-tick - Agony')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('9-tick - Doom')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('20-tick - Corruption')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('27-tick - Agony')!,
-	Presets.AFFLICTION_BREAKPOINTS.presets.get('16-tick - Unstable Affliction')!,
+	// Presets.AFFLICTION_BREAKPOINTS.presets.get('16-tick - Unstable Affliction')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('21-tick - Corruption')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('28-tick - Agony')!,
-	Presets.AFFLICTION_BREAKPOINTS.presets.get('17-tick - Unstable Affliction')!,
+	// Presets.AFFLICTION_BREAKPOINTS.presets.get('17-tick - Unstable Affliction')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('29-tick - Agony')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('10-tick - Doom')!,
 	// Presets.AFFLICTION_BREAKPOINTS.presets.get('30-tick - Agony')!,
@@ -93,7 +93,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecAfflictionWarlock, {
 		gear: Presets.P1_PRESET.gear,
 
 		// Default EP weights for sorting gear in the gear picker.
-		epWeights: Presets.DEFAULT_EP_PRESET.epWeights,
+		epWeights: Presets.P1_BIS_EP_PRESET.epWeights,
 		// Default stat caps for the Reforge optimizer
 		statCaps: (() => {
 			return new Stats().withPseudoStat(PseudoStat.PseudoStatSpellHitPercent, 15);
@@ -101,9 +101,12 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecAfflictionWarlock, {
 		// Default soft caps for the Reforge optimizer
 		softCapBreakpoints: (() => {
 			const hasteSoftCapConfig = StatCap.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent, {
-				breakpoints: relevantDotBreakpoints,
-				capType: StatCapType.TypeThreshold,
-				postCapEPs: [(Presets.DEFAULT_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.05) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
+				breakpoints: [Presets.AFFLICTION_BREAKPOINTS.presets.get('10-tick - Unstable Affliction')!, 56.57],
+				capType: StatCapType.TypeSoftCap,
+				postCapEPs: [
+					(Presets.P1_BIS_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.05) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT,
+					(Presets.P1_BIS_EP_PRESET.epWeights.getStat(Stat.StatCritRating) - 0.01) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT,
+				],
 			});
 
 			return [hasteSoftCapConfig];
@@ -152,7 +155,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecAfflictionWarlock, {
 	},
 
 	presets: {
-		epWeights: [Presets.DEFAULT_EP_PRESET],
+		epWeights: [Presets.P1_BIS_EP_PRESET, Presets.P2_BIS_EP_PRESET],
 		// Preset talents that the user can quickly select.
 		talents: [Presets.AfflictionTalents],
 		// Preset rotations that the user can quickly select.
@@ -208,6 +211,17 @@ export class AfflictionWarlockSimUI extends IndividualSimUI<Spec.SpecAfflictionW
 		player.sim.waitForInit().then(() => {
 			new ReforgeOptimizer(this, {
 				statSelectionPresets,
+				getEPDefaults: player => {
+					if (this.sim.getUseCustomEPValues()) {
+						return player.getEpWeights();
+					}
+
+					const avgIlvl = player.getGear().getAverageItemLevel(false);
+					if (avgIlvl >= 512) {
+						return Presets.P2_BIS_EP_PRESET.epWeights;
+					}
+					return Presets.P1_BIS_EP_PRESET.epWeights;
+				},
 				// updateSoftCaps: softCaps => {
 				// 	const raidBuffs = player.getRaid()?.getBuffs();
 				// 	const hasBL = !!raidBuffs?.bloodlust;
