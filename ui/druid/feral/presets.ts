@@ -110,7 +110,7 @@ export const SIMPLE_ROTATION_DEFAULT = PresetUtils.makePresetSimpleRotation('Sin
 export const StandardTalents = {
 	name: 'Default',
 	data: SavedTalents.create({
-		talentsString: "000302",
+		talentsString: "100302",
 		glyphs: Glyphs.create({
 			major1: 40923,
 			major2: 40914,
