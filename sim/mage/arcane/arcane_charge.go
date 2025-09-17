@@ -44,12 +44,18 @@ func (arcane *ArcaneMage) registerArcaneCharges() {
 		},
 	}))
 
+	lastArcaneExplosionCast := core.NeverExpires
 	core.MakeProcTriggerAura(&arcane.Unit, core.ProcTrigger{
 		Name:           "Arcane Charge Arcane Explosion - Trigger",
 		ClassSpellMask: mage.MageSpellArcaneExplosion,
-		Callback:       core.CallbackOnCastComplete,
+		Callback:       core.CallbackOnSpellHitDealt,
 		Outcome:        core.OutcomeLanded,
 		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+			if lastArcaneExplosionCast == sim.CurrentTime {
+				return
+			}
+
+			lastArcaneExplosionCast = sim.CurrentTime
 			arcane.ArcaneChargesAura.Activate(sim)
 			if sim.Proc(.3, "ArcaneChargesProc") {
 				arcane.ArcaneChargesAura.AddStack(sim)
