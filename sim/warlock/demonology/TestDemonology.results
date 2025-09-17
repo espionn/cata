@@ -1959,6 +1959,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestDemonology-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 84923.42177
+  tps: 51752.86448
+  hps: 1120.42335
+ }
+}
+dps_results: {
  key: "TestDemonology-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 84923.42177

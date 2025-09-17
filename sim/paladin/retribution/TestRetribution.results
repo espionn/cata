@@ -1732,6 +1732,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestRetribution-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 146841.35179
+  tps: 138578.50967
+ }
+}
+dps_results: {
  key: "TestRetribution-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 146693.80487
@@ -2217,8 +2224,8 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 153614.94761
-  tps: 144766.10048
+  dps: 146828.31154
+  tps: 138565.46942
  }
 }
 dps_results: {

@@ -1732,6 +1732,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestSurvival-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 178871.04279
+  tps: 147337.44131
+ }
+}
+dps_results: {
  key: "TestSurvival-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 162255.72204
@@ -2217,8 +2224,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 167129.96948
-  tps: 137681.87005
+  dps: 162255.72204
+  tps: 133715.48734
  }
 }
 dps_results: {

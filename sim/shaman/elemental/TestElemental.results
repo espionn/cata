@@ -1753,6 +1753,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestElemental-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 123913.27068
+  tps: 91267.41656
+ }
+}
+dps_results: {
  key: "TestElemental-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 123913.27068

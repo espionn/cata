@@ -421,6 +421,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFrostTwoHand-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 151859.15864
+  tps: 139175.13398
+  hps: 2520.76774
+ }
+}
+dps_results: {
  key: "TestFrostTwoHand-AllItems-RuneofSpellbreaking-3595"
  value: {
   dps: 144788.97974
@@ -497,9 +505,9 @@ dps_results: {
 dps_results: {
  key: "TestFrostTwoHand-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 157456.87359
-  tps: 143647.85791
-  hps: 2704.28414
+  dps: 151669.33134
+  tps: 139000.89164
+  hps: 2520.76774
  }
 }
 dps_results: {

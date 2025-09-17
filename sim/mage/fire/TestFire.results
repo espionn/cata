@@ -1732,6 +1732,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFire-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 141312.43926
+  tps: 138261.45813
+ }
+}
+dps_results: {
  key: "TestFire-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 141260.49654
