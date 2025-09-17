@@ -1,6 +1,7 @@
 package druid
 
 import (
+	"math"
 	"time"
 
 	"github.com/wowsims/mop/sim/core"
@@ -9,6 +10,7 @@ import (
 
 func (druid *Druid) ApplyTalents() {
 	druid.registerFelineSwiftness()
+	druid.registerDisplacerBeast()
 
 	druid.registerYserasGift()
 	druid.registerRenewal()
@@ -26,6 +28,76 @@ func (druid *Druid) registerFelineSwiftness() {
 	}
 
 	druid.PseudoStats.MovementSpeedMultiplier *= 1.15
+}
+
+func (druid *Druid) registerDisplacerBeast() {
+	if !druid.Talents.DisplacerBeast || (druid.CatFormAura == nil) {
+		return
+	}
+
+	druid.DisplacerBeastAura = druid.RegisterAura(core.Aura{
+		Label:    "Displacer Beast",
+		ActionID: core.ActionID{SpellID: 137452},
+		Duration: time.Second * 4,
+	})
+
+	exclusiveSpeedEffect := druid.DisplacerBeastAura.NewActiveMovementSpeedEffect(0.5)
+
+	druid.DisplacerBeast = druid.RegisterSpell(Any, core.SpellConfig{
+		ActionID:        core.ActionID{SpellID: 102280},
+		RelatedSelfBuff: druid.DisplacerBeastAura,
+
+		Cast: core.CastConfig{
+			DefaultCast: core.Cast{
+				GCD: core.GCDDefault,
+			},
+
+			IgnoreHaste: true,
+
+			CD: core.Cooldown{
+				Timer:    druid.NewTimer(),
+				Duration: time.Second * 30,
+			},
+		},
+
+		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
+			if !druid.InForm(Cat) {
+				druid.CatFormAura.Activate(sim)
+			}
+
+			druid.DistanceFromTarget = math.Abs(druid.DistanceFromTarget - 20)
+			druid.MoveDuration(core.SpellBatchWindow, sim)
+
+			if !exclusiveSpeedEffect.Category.AnyActive() {
+				druid.DisplacerBeastAura.Activate(sim)
+			}
+
+			// Displacer Beast is a full swing timer reset based on in-game measurements.
+			if druid.DistanceFromTarget > core.MaxMeleeRange {
+				return
+			}
+
+			druid.AutoAttacks.CancelMeleeSwing(sim)
+			pa := sim.GetConsumedPendingActionFromPool()
+			pa.NextActionAt = sim.CurrentTime + druid.AutoAttacks.MainhandSwingSpeed()
+			pa.Priority = core.ActionPriorityDOT
+
+			pa.OnAction = func(sim *core.Simulation) {
+				druid.AutoAttacks.EnableMeleeSwing(sim)
+			}
+
+			sim.AddPendingAction(pa)
+		},
+	})
+
+	druid.AddMajorCooldown(core.MajorCooldown{
+		Spell: druid.DisplacerBeast.Spell,
+		Type:  core.CooldownTypeDPS,
+
+		ShouldActivate: func(_ *core.Simulation, character *core.Character) bool {
+			return (character.DistanceFromTarget >= 20 - core.MaxMeleeRange) && (character.GetAura("Nitro Boosts") == nil)
+		},
+	})
 }
 
 func (druid *Druid) registerHeartOfTheWild() {
