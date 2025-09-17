@@ -51,7 +51,7 @@ func (arcane *ArcaneMage) registerArcaneCharges() {
 		Outcome:        core.OutcomeLanded,
 		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			arcane.ArcaneChargesAura.Activate(sim)
-			if arcane.Env.ActiveTargetCount() > 1 && sim.Proc(.3, "ArcaneChargesProc") {
+			if sim.Proc(.3, "ArcaneChargesProc") {
 				arcane.ArcaneChargesAura.AddStack(sim)
 			}
 		},
