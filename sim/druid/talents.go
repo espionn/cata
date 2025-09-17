@@ -8,6 +8,8 @@ import (
 )
 
 func (druid *Druid) ApplyTalents() {
+	druid.registerFelineSwiftness()
+
 	druid.registerYserasGift()
 	druid.registerRenewal()
 	druid.registerCenarionWard()
@@ -16,6 +18,14 @@ func (druid *Druid) ApplyTalents() {
 
 	druid.registerHeartOfTheWild()
 	druid.registerNaturesVigil()
+}
+
+func (druid *Druid) registerFelineSwiftness() {
+	if !druid.Talents.FelineSwiftness {
+		return
+	}
+
+	druid.PseudoStats.MovementSpeedMultiplier *= 1.15
 }
 
 func (druid *Druid) registerHeartOfTheWild() {
