@@ -132,7 +132,7 @@ func (druid *Druid) RegisterCatFormAura() {
 		},
 	})
 
-	druid.CatFormAura.NewMovementSpeedEffect(0.25)
+	druid.CatFormAura.NewPassiveMovementSpeedEffect(0.25)
 }
 
 func (druid *Druid) registerCatFormSpell() {
