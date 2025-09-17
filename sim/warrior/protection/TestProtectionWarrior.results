@@ -2008,6 +2008,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestProtectionWarrior-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 113025.49922
+  tps: 710925.45291
+  dtps: 23251.77559
+ }
+}
+dps_results: {
  key: "TestProtectionWarrior-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 113722.7868
@@ -2570,9 +2578,9 @@ dps_results: {
 dps_results: {
  key: "TestProtectionWarrior-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 116447.47936
-  tps: 731989.89742
-  dtps: 22885.39198
+  dps: 113178.65338
+  tps: 711642.37257
+  dtps: 23233.55537
  }
 }
 dps_results: {

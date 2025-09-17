@@ -346,6 +346,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestArcane-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 144573.48203
+  tps: 141279.04901
+ }
+}
+dps_results: {
  key: "TestArcane-AllItems-SinisterPrimalDiamond"
  value: {
   dps: 156694.75584

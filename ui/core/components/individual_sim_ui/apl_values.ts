@@ -1,4 +1,5 @@
 import { Player } from '../../player.js';
+import { itemSwapEnabledSpecs } from '../../individual_sim_ui.js';
 import {
 	APLValue,
 	APLValueAllTrinketStatProcsActive,
@@ -105,6 +106,7 @@ import {
 	APLValueWarlockHauntInFlight,
 	APLValueAuraIsInactive,
 	APLValueAuraICDIsReady,
+	APLValueActiveItemSwapSet,
 } from '../../proto/apl.js';
 import { Class, Spec } from '../../proto/common.js';
 import { ShamanTotems_TotemType as TotemType } from '../../proto/shaman.js';
@@ -1537,5 +1539,13 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 				labelTooltip: 'Name of the variable placeholder to expose. This name will be used when referencing the group.',
 			}),
 		],
+	}),
+	activeItemSwapSet: inputBuilder({
+		label: 'Item Swap',
+		submenu: ['Misc'],
+		shortDescription: 'Returns <b>True</b> if the specified item swap set is currently active.',
+		includeIf: (player: Player<any>, _isPrepull: boolean) => itemSwapEnabledSpecs.includes(player.getSpec()),
+		newValue: APLValueActiveItemSwapSet.create,
+		fields: [AplHelpers.itemSwapSetFieldConfig('swapSet')],
 	}),
 };

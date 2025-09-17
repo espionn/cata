@@ -13,6 +13,8 @@ export const DODGE_RATING_PER_DODGE_PERCENT = 885.0;
 export const PARRY_RATING_PER_PARRY_PERCENT = 885.0;
 export const MASTERY_RATING_PER_MASTERY_POINT = 600.0;
 
+export const RAID_BUFF_MASTERY_RATING = 3000;
+
 // TODO: Adjust for MoP values
 // Mastery Ratings have various increments based on spec.
 export const masteryPercentPerPoint: Map<Spec, number> = new Map([

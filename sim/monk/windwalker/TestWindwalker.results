@@ -2007,6 +2007,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestWindwalker-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 159980.53815
+  tps: 148764.12741
+  hps: 8257.56402
+ }
+}
+dps_results: {
  key: "TestWindwalker-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 147659.19411
@@ -2545,9 +2553,9 @@ dps_results: {
 dps_results: {
  key: "TestWindwalker-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 150776.55977
-  tps: 140479.07539
-  hps: 7520.4406
+  dps: 147659.19411
+  tps: 137952.73824
+  hps: 7290.17145
  }
 }
 dps_results: {

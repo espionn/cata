@@ -421,6 +421,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestUnholy-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 133594.12503
+  tps: 96374.96265
+  hps: 1936.33816
+ }
+}
+dps_results: {
  key: "TestUnholy-AllItems-RuneofSpellbreaking-3595"
  value: {
   dps: 128538.94224
@@ -497,9 +505,9 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 143222.28636
-  tps: 103450.51416
-  hps: 2055.23652
+  dps: 133387.75894
+  tps: 96220.85462
+  hps: 1936.33816
  }
 }
 dps_results: {

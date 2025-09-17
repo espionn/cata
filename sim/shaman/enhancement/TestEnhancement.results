@@ -1767,6 +1767,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestEnhancement-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 136524.79075
+  tps: 115811.49366
+ }
+}
+dps_results: {
  key: "TestEnhancement-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 124018.5735
@@ -2245,8 +2252,8 @@ dps_results: {
 dps_results: {
  key: "TestEnhancement-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 130087.64059
-  tps: 110304.68784
+  dps: 124285.48338
+  tps: 105980.07008
  }
 }
 dps_results: {

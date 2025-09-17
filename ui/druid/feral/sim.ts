@@ -7,7 +7,11 @@ import { Player } from '../../core/player';
 import { PlayerClasses } from '../../core/player_classes';
 import { APLAction, APLListItem, APLPrepullAction, APLRotation, APLRotation_Type as APLRotationType } from '../../core/proto/apl';
 import { Cooldowns, Debuffs, Faction, IndividualBuffs, ItemSlot, PartyBuffs, PseudoStat, Race, RaidBuffs, Spec, Stat } from '../../core/proto/common';
-import { FeralDruid_Rotation as DruidRotation, FeralDruid_Rotation_AplType as FeralRotationType, FeralDruid_Rotation_HotwStrategy as HotwStrategy } from '../../core/proto/druid';
+import {
+	FeralDruid_Rotation as DruidRotation,
+	FeralDruid_Rotation_AplType as FeralRotationType,
+	FeralDruid_Rotation_HotwStrategy as HotwStrategy,
+} from '../../core/proto/druid';
 import * as AplUtils from '../../core/proto_utils/apl_utils';
 import { Stats, UnitStat } from '../../core/proto_utils/stats';
 import { defaultRaidBuffMajorDamageCooldowns } from '../../core/proto_utils/utils';
@@ -151,9 +155,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 		const blockZerk = APLAction.fromJsonString(`{"condition":{"const":{"val":"false"}},"castSpell":{"spellId":{"spellId":106952}}}`);
 		const blockNS = APLAction.fromJsonString(`{"condition":{"const":{"val":"false"}},"castSpell":{"spellId":{"spellId":132158}}}`);
 		const blockHotw = APLAction.fromJsonString(`{"condition":{"const":{"val":"false"}},"castSpell":{"spellId":{"spellId":108292}}}`);
-		const shouldUseHotw = player.getTalents().heartOfTheWild && (simple.hotwStrategy != HotwStrategy.PassivesOnly);
-		const shouldWrathWeave = shouldUseHotw && (simple.hotwStrategy == HotwStrategy.Wrath);
-		const doRotation = APLAction.fromJsonString(`{"catOptimalRotationAction":{"rotationType":${simple.rotationType},"manualParams":${simple.manualParams},"allowAoeBerserk":${simple.allowAoeBerserk},"bearWeave":${simple.bearWeave},"snekWeave":${simple.snekWeave},"useNs":${simple.useNs},"wrathWeave":${shouldWrathWeave},"minRoarOffset":${simple.minRoarOffset.toFixed(2)},"ripLeeway":${simple.ripLeeway.toFixed(2)},"useBite":${simple.useBite},"biteTime":${simple.biteTime.toFixed(2)},"berserkBiteTime":${simple.berserkBiteTime.toFixed(2)}}}`,
+		const shouldUseHotw = player.getTalents().heartOfTheWild && simple.hotwStrategy != HotwStrategy.PassivesOnly;
+		const shouldWrathWeave = shouldUseHotw && simple.hotwStrategy == HotwStrategy.Wrath;
+		const doRotation = APLAction.fromJsonString(
+			`{"catOptimalRotationAction":{"rotationType":${simple.rotationType},"manualParams":${simple.manualParams},"allowAoeBerserk":${simple.allowAoeBerserk},"bearWeave":${simple.bearWeave},"snekWeave":${simple.snekWeave},"useNs":${simple.useNs},"wrathWeave":${shouldWrathWeave},"minRoarOffset":${simple.minRoarOffset.toFixed(2)},"ripLeeway":${simple.ripLeeway.toFixed(2)},"useBite":${simple.useBite},"biteTime":${simple.biteTime.toFixed(2)},"berserkBiteTime":${simple.berserkBiteTime.toFixed(2)}}}`,
 		);
 
 		const singleTarget = simple.rotationType == FeralRotationType.SingleTarget;
@@ -180,7 +185,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 		prepullActions.push(
 			...([
 				player.getTalents().dreamOfCenarius ? healingTouch : null,
-				player.getTalents().dreamOfCenarius ? shiftCat: null,
+				player.getTalents().dreamOfCenarius ? shiftCat : null,
 				player.getMajorGlyphs().includes(40923) ? preRoar : null,
 			].filter(a => a) as Array<APLPrepullAction>),
 		);
@@ -232,7 +237,9 @@ export class FeralDruidSimUI extends IndividualSimUI<Spec.SpecFeralDruid> {
 	constructor(parentElem: HTMLElement, player: Player<Spec.SpecFeralDruid>) {
 		super(parentElem, player, SPEC_CONFIG);
 		player.sim.waitForInit().then(() => {
-			new ReforgeOptimizer(this);
+			new ReforgeOptimizer(this, {
+				defaultRelativeStatCap: Stat.StatMasteryRating,
+			});
 		});
 	}
 }

@@ -24,8 +24,10 @@ func (hunter *Hunter) RegisterStampedeSpell() {
 			},
 		},
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
+			varianceRoll := time.Duration(sim.Roll(000, 800))
+			summonDuration := time.Second*20 + time.Millisecond*varianceRoll
 			for _, pet := range hunter.StampedePet {
-				pet.EnableWithHastedTimeout(sim, pet, time.Millisecond*20500, time.Millisecond*300)
+				pet.EnableWithTimeout(sim, pet, summonDuration)
 			}
 		},
 	})
