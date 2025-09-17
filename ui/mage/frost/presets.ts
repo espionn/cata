@@ -23,7 +23,7 @@ export const ROTATION_PRESET_AOE = PresetUtils.makePresetAPLRotation('AOE', Fros
 
 // Preset options for EP weights
 export const P1_BIS_EP_PRESET = PresetUtils.makePresetEpWeights(
-	'Item Level > 500',
+	'Item Level >= 500',
 	Stats.fromMap({
 		[Stat.StatIntellect]: 1.0,
 		[Stat.StatSpellPower]: 0.98,
