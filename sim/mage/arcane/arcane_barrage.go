@@ -22,7 +22,7 @@ func (arcane *ArcaneMage) registerArcaneBarrageSpell() {
 		MissileSpeed:   24,
 
 		ManaCost: core.ManaCostOptions{
-			BaseCostPercent: 4,
+			BaseCostPercent: .5,
 		},
 
 		Cast: core.CastConfig{
