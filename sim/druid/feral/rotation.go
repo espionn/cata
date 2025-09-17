@@ -124,13 +124,17 @@ func (rotation *FeralDruidRotation) Execute(sim *core.Simulation) {
 	}
 
 	if cat.DistanceFromTarget > core.MaxMeleeRange {
-		// TODO: Wild Charge or Displacer Beast usage here
-		if sim.Log != nil {
-			cat.Log(sim, "Out of melee range (%.6fy) and cannot charge or teleport, initiating manual run-in...", cat.DistanceFromTarget)
-		}
+		// Try leaping if no boots
+		if !cat.GetAura("Nitro Boosts").IsActive() && cat.Talents.WildCharge && cat.CatCharge.CanCast(sim, cat.CurrentTarget) {
+			cat.CatCharge.Cast(sim, cat.CurrentTarget)
+		} else {
+			if sim.Log != nil {
+				cat.Log(sim, "Out of melee range (%.6fy) and cannot charge or teleport, initiating manual run-in...", cat.DistanceFromTarget)
+			}
 
-		cat.MoveTo(core.MaxMeleeRange-1, sim) // movement aura is discretized in 1 yard intervals, so need to overshoot to guarantee melee range
-		return
+			cat.MoveTo(core.MaxMeleeRange-1, sim) // movement aura is discretized in 1 yard intervals, so need to overshoot to guarantee melee range
+			return
+		}
 	}
 
 	if !cat.GCD.IsReady(sim) {

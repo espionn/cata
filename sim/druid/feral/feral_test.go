@@ -40,7 +40,7 @@ func TestFeral(t *testing.T) {
 		Talents: StandardTalents,
 		Glyphs:  StandardGlyphs,
 		OtherTalentSets: []core.TalentsCombo{
-			{Label: "WC-SotF-HotW", Talents: "000101", Glyphs: StandardGlyphs},
+			{Label: "WC-SotF-HotW", Talents: "300101", Glyphs: StandardGlyphs},
 			{Label: "DB-Incarn-NV", Talents: "200203", Glyphs: StandardGlyphs},
 		},
 
