@@ -47,11 +47,11 @@ func (arcane *ArcaneMage) registerArcaneCharges() {
 	core.MakeProcTriggerAura(&arcane.Unit, core.ProcTrigger{
 		Name:           "Arcane Charge Arcane Explosion - Trigger",
 		ClassSpellMask: mage.MageSpellArcaneExplosion,
-		Callback:       core.CallbackOnSpellHitDealt,
+		Callback:       core.CallbackOnCastComplete,
 		Outcome:        core.OutcomeLanded,
 		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			arcane.ArcaneChargesAura.Activate(sim)
-			if sim.Proc(.3, "ArcaneChargesProc") {
+			if arcane.Env.ActiveTargetCount() > 1 && sim.Proc(.3, "ArcaneChargesProc") {
 				arcane.ArcaneChargesAura.AddStack(sim)
 			}
 		},
