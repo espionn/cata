@@ -117,7 +117,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 		rotations: [Presets.SIMPLE_ROTATION_DEFAULT, Presets.APL_ROTATION_DEFAULT],
 		// Preset gear configurations that the user can quickly select.
 		gear: [Presets.PRERAID_PRESET, Presets.PREHOF_PRESET, Presets.PRETOES_PRESET, Presets.P1_PRESET],
-		itemSwaps: [],
+		itemSwaps: [Presets.ITEM_SWAP_PRESET],
 		builds: [
 			//Presets.PRESET_BUILD_DEFAULT,
 			//Presets.PRESET_BUILD_TENDON,
