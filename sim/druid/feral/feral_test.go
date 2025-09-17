@@ -40,8 +40,8 @@ func TestFeral(t *testing.T) {
 		Talents: StandardTalents,
 		Glyphs:  StandardGlyphs,
 		OtherTalentSets: []core.TalentsCombo{
-			{Label: "FS-SotF-HotW", Talents: "100101", Glyphs: StandardGlyphs},
-			{Label: "Incarn-NV", Talents: "000203", Glyphs: StandardGlyphs},
+			{Label: "WC-SotF-HotW", Talents: "000101", Glyphs: StandardGlyphs},
+			{Label: "DB-Incarn-NV", Talents: "200203", Glyphs: StandardGlyphs},
 		},
 
 		Consumables:      FullConsumesSpec,
@@ -96,7 +96,7 @@ func TestFeral(t *testing.T) {
 // 	core.RaidBenchmark(b, rsr)
 // }
 
-var StandardTalents = "200302"
+var StandardTalents = "100302"
 var StandardGlyphs = &proto.Glyphs{
 	Major1: 40923,
 	Major2: 40914,
