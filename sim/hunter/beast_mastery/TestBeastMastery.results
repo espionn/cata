@@ -1732,6 +1732,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBeastMastery-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 165851.41906
+  tps: 84307.2536
+ }
+}
+dps_results: {
  key: "TestBeastMastery-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 150925.68719
@@ -2217,8 +2224,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 155458.23207
-  tps: 79238.58088
+  dps: 150925.68719
+  tps: 76497.4766
  }
 }
 dps_results: {

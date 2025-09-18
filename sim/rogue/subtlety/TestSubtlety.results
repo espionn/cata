@@ -360,6 +360,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestSubtlety-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 111324.19276
+  tps: 78355.90391
+ }
+}
+dps_results: {
  key: "TestSubtlety-AllItems-SinisterPrimalDiamond"
  value: {
   dps: 101741.48252
@@ -397,8 +404,8 @@ dps_results: {
 dps_results: {
  key: "TestSubtlety-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 105373.25509
-  tps: 74025.80271
+  dps: 98729.80815
+  tps: 69565.654
  }
 }
 dps_results: {

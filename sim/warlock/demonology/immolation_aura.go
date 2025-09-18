@@ -36,6 +36,7 @@ func (demonology *DemonologyWarlock) registerImmolationAura() {
 
 			TickLength:           time.Second,
 			NumberOfTicks:        8,
+			AffectedByCastSpeed:  true,
 			HasteReducesDuration: true,
 			BonusCoefficient:     immolationAuraCoeff,
 			IsAOE:                true,
