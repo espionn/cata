@@ -98,6 +98,7 @@ type UnitMetrics struct {
 
 	// Aggregate values. These are updated after each iteration.
 	numItersDead int32
+	deathSeeds   []int64
 	oomTimeSum   float64
 	actions      map[ActionID]*ActionMetrics
 	resources    []*ResourceMetrics
@@ -496,6 +497,12 @@ func (unitMetrics *UnitMetrics) doneIteration(unit *Unit, sim *Simulation) {
 	unitMetrics.oomTimeSum += unitMetrics.OOMTime.Seconds()
 	if unitMetrics.Died {
 		unitMetrics.numItersDead++
+
+		if unitMetrics.deathSeeds == nil {
+			unitMetrics.deathSeeds = make([]int64, 0, sim.Options.Iterations)
+		}
+
+		unitMetrics.deathSeeds = append(unitMetrics.deathSeeds, sim.currentSeed)
 	}
 }
 
@@ -582,6 +589,7 @@ func (unitMetrics *UnitMetrics) ToProto() *proto.UnitMetrics {
 		Tto:           unitMetrics.tto.ToProto(),
 		SecondsOomAvg: unitMetrics.oomTimeSum / n,
 		ChanceOfDeath: float64(unitMetrics.numItersDead) / n,
+		DeathSeeds:    unitMetrics.deathSeeds,
 	}
 
 	protoMetrics.Actions = make([]*proto.ActionMetrics, 0, len(unitMetrics.actions))

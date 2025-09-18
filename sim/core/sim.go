@@ -26,8 +26,9 @@ type Simulation struct {
 
 	Options *proto.SimOptions
 
-	rand  Rand
-	rseed int64
+	rand        Rand
+	rseed       int64
+	currentSeed int64
 
 	// Used for testing only, see RandomFloat().
 	isTest    bool
@@ -245,6 +246,7 @@ func (sim *Simulation) labelRand(label string) Rand {
 
 func (sim *Simulation) reseedRands(i int64) {
 	rseed := sim.Options.RandomSeed + i
+	sim.currentSeed = rseed
 	sim.rand.Seed(rseed)
 
 	if sim.isTest {
