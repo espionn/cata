@@ -319,6 +319,11 @@ func (rotation *FeralDruidRotation) PickSingleTargetGCDAction(sim *core.Simulati
 	} else if isClearcast || !ripRefreshPending || !cat.tempSnapshotAura.IsActive() || (ripRefreshTime+cat.ReactionTime-sim.CurrentTime > core.GCDMin) {
 		fillerSpell := core.Ternary(rotation.ForceMangleFiller || ((curCp < 5) && !isClearcast && !isBerserk), cat.MangleCat, cat.Shred)
 
+		// Force Shred usage in opener.
+		if !rotation.ForceMangleFiller && cat.Berserk.IsReady(sim) && (sim.CurrentTime < cat.Berserk.CD.Duration) {
+			fillerSpell = cat.Shred
+		}
+
 		if cat.IncarnationAura.IsActive() || cat.StampedeAura.IsActive() {
 			fillerSpell = cat.Ravage
 		}
