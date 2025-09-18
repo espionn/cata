@@ -107,6 +107,7 @@ import {
 	APLValueAuraIsInactive,
 	APLValueAuraICDIsReady,
 	APLValueActiveItemSwapSet,
+	APLValueDotBaseDuration,
 } from '../../proto/apl.js';
 import { Class, Spec } from '../../proto/common.js';
 import { ShamanTotems_TotemType as TotemType } from '../../proto/shaman.js';
@@ -1400,6 +1401,13 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		shortDescription: 'The time between each tick.',
 		newValue: APLValueDotTickFrequency.create,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
+	}),
+	dotBaseDuration: inputBuilder({
+		label: 'Dot Base Duration',
+		submenu: ['DoT'],
+		shortDescription: 'The base duration of the DoT.',
+		newValue: APLValueDotBaseDuration.create,
+		fields: [AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
 	}),
 	dotPercentIncrease: inputBuilder({
 		label: 'Dot Damage Increase %',

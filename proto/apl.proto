@@ -98,7 +98,7 @@ message APLAction {
 }
 
 
-// NextIndex: 114
+// NextIndex: 115
 message APLValue {
 	UUID uuid = 85;
 
@@ -211,6 +211,7 @@ message APLValue {
         APLValueDotRemainingTime dot_remaining_time = 13;
         APLValueDotLowestRemainingTime dot_lowest_remaining_time = 104;
         APLValueDotTickFrequency dot_tick_frequency = 67;
+        APLValueDotBaseDuration dot_base_duration = 114;
 		APLValueDotPercentIncrease dot_percent_increase = 101;
 		APLValueDotPercentIncrease dot_crit_percent_increase = 109;
         APLValueDotPercentIncrease dot_tick_rate_percent_increase = 110;
@@ -754,6 +755,10 @@ message APLValueMonkCurrentChi {}
 message APLValueMonkMaxChi {}
 message APLValueBrewmasterMonkCurrentStaggerPercent {}
 message APLValueProtectionPaladinDamageTakenLastGlobal {}
+
+message APLValueDotBaseDuration {
+	ActionID spell_id = 1;
+}
 
 message APLValueDotPercentIncrease {
 	ActionID spell_id = 1;
