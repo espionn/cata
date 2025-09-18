@@ -96,7 +96,7 @@ func (druid *Druid) registerDisplacerBeast() {
 		Type:  core.CooldownTypeDPS,
 
 		ShouldActivate: func(_ *core.Simulation, character *core.Character) bool {
-			return (character.DistanceFromTarget >= 20 - core.MaxMeleeRange) && (character.GetAura("Nitro Boosts") == nil)
+			return (character.DistanceFromTarget >= 20-core.MaxMeleeRange) && (character.GetAura("Nitro Boosts") == nil)
 		},
 	})
 }
