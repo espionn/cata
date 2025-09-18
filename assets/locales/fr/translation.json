@@ -140,6 +140,11 @@
 			"melee_crit": "Critique de mêlée",
 			"melee_haste": "Hâte de mêlée",
 			"ranged_haste": "Hâte à distance"
+		},
+		"currency": {
+			"valorPoints": "Points de vaillance",
+			"justicePoints": "Points de justice",
+			"honorPoints": "Points d’honneur"
 		}
 	},
 	"sim": {
@@ -150,12 +155,82 @@
 		"title": "Équipement"
 	},
 	"settings": {
+		"buffs": {
+			"tooltip": "Tous les buffs de raid sélectionnés sont supposés être fournis par <strong>d'autres</strong> membres du raid que le joueur simulé."
+		},
+		"debuffs": {
+			"tooltip": "Tous les debuffs de raid sélectionnés sont supposés être appliqués par <strong>d'autres</strong> membres du raid que le joueur simulé."
+		},
 		"title": "Paramètres"
 	},
 	"talents": {
 		"title": "Talents"
 	},
 	"rotation": {
+		"apl": {
+			"actionGroups": {
+				"attributes": {
+					"actions": "Actions",
+					"name": "Nom"
+				},
+				"header": "Groupes d'actions",
+				"name": "Groupe d'actions",
+				"newGroupName": "Nouveau groupe d'actions",
+				"tooltips": {
+					"actions": "Actions dans ce groupe. Elles seront exécutées dans l'ordre lorsqu'un groupe est référencé.",
+					"name": "Nom de ce groupe d'actions (par exemple, 'careful_aim', 'cooldowns').",
+					"overview": "Groupes d'actions pouvant être référencés dans la Liste de Priorité d'Actions (APL). Utile pour organiser votre APL et réutiliser des séquences d'actions communes. Les actions sont effectuées de haut en bas dans un groupe."
+				}
+			},
+			"floatingActionBar": {
+				"new": "Nouveau {{itemName}}",
+				"reset": "Réinitialiser l'APL"
+			},
+			"listPicker": {
+				"delete": "Supprimer {{itemName}}",
+				"copy": "Copier vers Nouveau {{itemName}}",
+				"moveTooltip": "Déplacer (Glisser+Déposer)"
+			},
+			"prePullActions": {
+				"header": "Liste d'actions pré-pull",
+				"name": "Action pré-pull",
+				"tooltips": {
+					"overview": "Actions exécutées avant le début du combat, comme les buffs pré-pull ou les potions."
+				}
+			},
+			"priorityList": {
+				"header": "Liste de Priorité d'Actions (APL)",
+				"name": "Action",
+				"tooltips": {
+					"overview": "Une liste d'actions représentant les actions de votre personnage pendant le combat. Le sim évaluera la liste du haut (priorité la plus élevée) vers le bas (priorité la plus basse) et choisira la première action valide à exécuter à tout moment."
+				}
+			},
+			"tabs": {
+				"actionGroups": "Groupes d'actions",
+				"priorityList": "Liste de priorité",
+				"variables": "Variables"
+			},
+			"variables": {
+				"attributes": {
+					"name": "Nom",
+					"nameTooltip": "Nom de la variable (par exemple, 'my_dot_remains', 'boss_health_pct')",
+					"value": "Valeur",
+					"valueTooltip": "L'expression de valeur que représente cette variable."
+				},
+				"copyName": "{variableName} (Copie)",
+				"header": "Variables",
+				"name": "Variable",
+				"newVariableName": "Nouvelle variable",
+				"tooltips": {
+					"name": "Nom de la variable (par exemple, 'my_dot_remains', 'boss_health_pct')",
+					"overview": "Les variables peuvent être utilisées pour stocker des conditions complexes référencées dans l'APL. Utile pour stocker des valeurs dynamiques changeant pendant le combat, comme les timers de CD ou les ressources.",
+					"value": "L'expression de valeur que représente cette variable."
+				}
+			}
+		},
+		"auto": {
+			"description": "Utilisation automatique d'une rotation sauvegardée basée sur vos paramètres actuels."
+		},
 		"title": "Rotation"
 	},
 	"results": {

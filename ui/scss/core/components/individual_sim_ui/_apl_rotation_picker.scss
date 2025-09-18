@@ -1,52 +1,63 @@
-@import '../dropdown_picker';
-
-@import './apl_helpers';
-
 :root {
+	--apl-border: 1px solid color-mix(in srgb, var(--bs-border-color) 50%, transparent);
 	--apl-spacer: var(--spacer-2);
 }
 
-.apl-rotation-picker-root {
-	display: flex;
-	flex-direction: column;
-	gap: var(--section-spacer);
-
-	.apl-list-item-picker,
-	.apl-prepull-action-picker {
+#rotation-tab {
+	.apl-list-item-picker {
 		flex-wrap: wrap;
 		align-items: flex-start !important;
+		width: 100%;
 
-		.list-picker-title {
-			border: 0;
+		label {
 			margin: 0;
 		}
 
-		& > .list-picker-new-button {
-			width: 12rem;
-			margin: 0;
+		.input-root {
+			gap: var(--apl-spacer);
+		}
+
+		.list-picker-title {
+			border: 0;
 		}
 
 		.list-picker-items {
 			gap: var(--apl-spacer);
+			width: 100%;
 		}
 
 		> * > .list-picker-item-container {
 			background-color: color-mix(in srgb, var(--bs-body-bg) 80%, transparent);
 			padding: var(--apl-spacer);
+			border-radius: 0;
+			border: var(--apl-border);
+			transition: all 0.2s ease;
+
+			&:hover {
+				background-color: color-mix(in srgb, var(--bs-body-bg) 85%, transparent);
+				border-color: var(--bs-border-color);
+			}
 
 			.list-picker-item-header {
+				min-height: auto;
+				margin-left: auto;
+				flex: 0;
 				align-items: flex-start;
 				justify-content: flex-end;
+
+				.btn-group {
+					gap: calc(var(--apl-spacer) / 2);
+
+					.btn {
+						padding: calc(var(--apl-spacer) / 2);
+						font-size: 0.875rem;
+					}
+				}
 			}
 
 			& > .list-picker-item {
 				flex-grow: 1;
-				padding-right: var(--apl-spacer);
 			}
-		}
-
-		.form-label {
-			margin-bottom: 0;
 		}
 	}
 
@@ -61,8 +72,12 @@
 		display: none;
 	}
 
-	.adaptive-string-picker-root > input {
-		text-align: center;
+	.adaptive-string-picker-root {
+		justify-content: flex-start;
+
+		input {
+			text-align: center;
+		}
 	}
 
 	.boolean-picker-input {
@@ -145,7 +160,6 @@
 	}
 
 	.list-picker-new-button {
-		width: unset;
 		font-size: var(--content-font-size);
 		line-height: 1.5rem;
 	}
@@ -187,6 +201,13 @@
 				order: 1;
 				line-height: var(--spacer-4);
 			}
+		}
+	}
+
+	.dropdown-picker-root {
+		.dropdown-picker-button {
+			display: flex;
+			align-items: center;
 		}
 	}
 }

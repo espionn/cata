@@ -46,7 +46,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecArcaneMage, {
 		// Default equipped gear.
 		gear: Presets.P1_PREBIS.gear,
 		// Default EP weights for sorting gear in the gear picker.
-		epWeights: Presets.P1_EP_PRESET.epWeights,
+		epWeights: Presets.P1_BIS_EP_PRESET.epWeights,
 		// Default stat caps for the Reforge Optimizer
 		statCaps: (() => {
 			return new Stats().withPseudoStat(PseudoStat.PseudoStatSpellHitPercent, 15);
@@ -104,13 +104,13 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecArcaneMage, {
 	},
 
 	presets: {
-		epWeights: [Presets.P1_EP_PRESET],
+		epWeights: [Presets.P1_PREBIS_EP_PRESET, Presets.P1_BIS_EP_PRESET],
 		// Preset rotations that the user can quickly select.
 		rotations: [Presets.ROTATION_PRESET_DEFAULT],
 		// Preset talents that the user can quickly select.
 		talents: [Presets.ArcaneTalents, Presets.ArcaneTalentsCleave],
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.P1_PREBIS, Presets.P1_POST_MSV, Presets.P1_POST_HOF, Presets.P1_BIS],
+		gear: [Presets.P1_PREBIS, Presets.P1_BIS, Presets.P2_BIS],
 
 		builds: [Presets.P1_PRESET_BUILD_DEFAULT, Presets.P1_PRESET_BUILD_CLEAVE],
 	},
@@ -164,6 +164,17 @@ export class ArcaneMageSimUI extends IndividualSimUI<Spec.SpecArcaneMage> {
 			new ReforgeOptimizer(this, {
 				statSelectionPresets: statSelectionPresets,
 				enableBreakpointLimits: true,
+				getEPDefaults: player => {
+					if (this.sim.getUseCustomEPValues()) {
+						return player.getEpWeights();
+					}
+
+					const avgIlvl = player.getGear().getAverageItemLevel(false);
+					if (avgIlvl >= 500) {
+						return Presets.P1_BIS_EP_PRESET.epWeights;
+					}
+					return Presets.P1_PREBIS_EP_PRESET.epWeights;
+				},
 				updateSoftCaps: softCaps => {
 					const raidBuffs = player.getRaid()?.getBuffs();
 					const hasBL = !!raidBuffs?.bloodlust;
@@ -205,12 +216,20 @@ export class ArcaneMageSimUI extends IndividualSimUI<Spec.SpecArcaneMage> {
 						const hasBL = !!raidBuffs?.bloodlust;
 						const hasBerserking = player.getRace() === Race.RaceTroll;
 
-						if (hasBL || hasBerserking) {
-							let tooltip = 'Additional Living Bomb breakpoints have been created using the following cooldowns:\n';
-							if (hasBL) tooltip += '• Bloodlust\n';
-							if (hasBerserking) tooltip += '• Berserking\n';
-							return tooltip;
-						}
+						return (
+							<>
+								{(hasBL || hasBerserking) && (
+									<>
+										<p className="mb-0">Additional Living Bomb breakpoints have been created using the following cooldowns:</p>
+										<ul className="mb-0">
+											{<li>Dark Soul: Misery</li>}
+											{hasBL && <li>Bloodlust</li>}
+											{hasBerserking && <li>Berserking</li>}
+										</ul>
+									</>
+								)}
+							</>
+						);
 						return '';
 					},
 				},

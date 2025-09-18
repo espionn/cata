@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/wowsims/mop/sim/core"
-	"github.com/wowsims/mop/sim/core/proto"
 )
 
 // T14 - Shadow
@@ -17,14 +16,14 @@ var ItemSetRegaliaOfTheGuardianSperpent = core.NewItemSet(core.ItemSet{
 				Kind:       core.SpellMod_BonusCrit_Percent,
 				ClassMask:  PriestSpellShadowWordPain,
 				FloatValue: 10,
-			})
+			}).ExposeToAPL(123114)
 		},
 		4: func(agent core.Agent, setBonusAura *core.Aura) {
 			setBonusAura.AttachSpellMod(core.SpellModConfig{
 				Kind:      core.SpellMod_DotNumberOfTicks_Flat,
 				ClassMask: PriestSpellShadowWordPain | PriestSpellVampiricTouch,
 				IntValue:  1,
-			})
+			}).ExposeToAPL(123115)
 		},
 	},
 })
@@ -51,7 +50,7 @@ var ItemSetRegaliaOfTheExorcist = core.NewItemSet(core.ItemSet{
 						priest.VampiricTouch.Dot(result.Target).AddTick()
 					}
 				},
-			})
+			}).ExposeToAPL(138156)
 		},
 		4: func(agent core.Agent, setBonusAura *core.Aura) {
 			priest := agent.(PriestAgent).GetPriest()
@@ -65,7 +64,7 @@ var ItemSetRegaliaOfTheExorcist = core.NewItemSet(core.ItemSet{
 				Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 					priest.ShadowyApparition.Cast(sim, result.Target)
 				},
-			})
+			}).ExposeToAPL(138158)
 		},
 	},
 })
@@ -79,7 +78,7 @@ var ItemSetRegaliaOfTheTernionGlory = core.NewItemSet(core.ItemSet{
 				Kind:       core.SpellMod_CritMultiplier_Flat,
 				FloatValue: 0.4,
 				ClassMask:  PriestSpellShadowyRecall,
-			})
+			}).ExposeToAPL(145174)
 		},
 		4: func(agent core.Agent, setBonusAura *core.Aura) {
 			priest := agent.(PriestAgent).GetPriest()
@@ -114,7 +113,7 @@ var ItemSetRegaliaOfTheTernionGlory = core.NewItemSet(core.ItemSet{
 				},
 			})
 
-			core.MakeProcTriggerAura(&priest.Unit, core.ProcTrigger{
+			setBonusAura.AttachProcTrigger(core.ProcTrigger{
 				Name:           "Regalia of the Ternion Glory - 4P",
 				Outcome:        core.OutcomeLanded,
 				Callback:       core.CallbackOnSpellHitDealt,
@@ -122,25 +121,10 @@ var ItemSetRegaliaOfTheTernionGlory = core.NewItemSet(core.ItemSet{
 				Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 					aura.Activate(sim)
 				},
-			})
+			}).ExposeToAPL(145179)
 		},
 	},
 })
 
-var shaWeaponIDs = []int32{86990, 86865, 86227}
-
 func init() {
-	for _, id := range shaWeaponIDs {
-		core.NewItemEffect(id, func(agent core.Agent, _ proto.ItemLevelState) {
-			// Hidden effect for Priest only
-			if priestAgent, ok := agent.(PriestAgent); ok {
-				priest := priestAgent.GetPriest()
-				priest.AddStaticMod(core.SpellModConfig{
-					Kind:      core.SpellMod_GlobalCooldown_Flat,
-					TimeValue: -core.GCDDefault,
-					ClassMask: PriestSpellShadowFiend | PriestSpellMindBender,
-				})
-			}
-		})
-	}
 }

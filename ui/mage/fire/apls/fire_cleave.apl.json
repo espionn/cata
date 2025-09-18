@@ -1,4 +1,4 @@
- {
+{
       "type": "TypeAPL",
       "prepullActions": [
         {"action":{"castSpell":{"spellId":{"spellId":12051}}},"doAtValue":{"const":{"val":"-5s"}}},

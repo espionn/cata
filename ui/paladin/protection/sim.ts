@@ -63,9 +63,9 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionPaladin, {
 		Stat.StatParryRating,
 		Stat.StatMasteryRating,
 	],
-	epPseudoStats: [PseudoStat.PseudoStatMainHandDps, PseudoStat.PseudoStatPhysicalHitPercent, PseudoStat.PseudoStatSpellHitPercent],
+	epPseudoStats: [PseudoStat.PseudoStatMainHandDps],
 	// Reference stat against which to calculate EP. I think all classes use either spell power or attack power.
-	epReferenceStat: Stat.StatAttackPower,
+	epReferenceStat: Stat.StatStrength,
 	// Which stats to display in the Character Stats section, at the bottom of the left-hand sidebar.
 	displayStats: UnitStat.createDisplayStatArray(
 		[
@@ -99,28 +99,17 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionPaladin, {
 		epWeights: Presets.P1_BALANCED_EP_PRESET.epWeights,
 		// Default stat caps for the Reforge Optimizer
 		statCaps: (() => {
-			return new Stats();
+			const hitCap = new Stats().withPseudoStat(PseudoStat.PseudoStatPhysicalHitPercent, 7.5);
+			const expCap = new Stats().withStat(Stat.StatExpertiseRating, 15 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION);
+
+			return hitCap.add(expCap);
 		})(),
 		softCapBreakpoints: (() => {
-			const expertiseSoftCapConfig = StatCap.fromStat(Stat.StatExpertiseRating, {
+			return [StatCap.fromStat(Stat.StatExpertiseRating, {
 				breakpoints: [7.5 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION, 15 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION],
 				capType: StatCapType.TypeSoftCap,
-				postCapEPs: [3.51, 0],
-			});
-
-			const hitSoftCapConfig = StatCap.fromPseudoStat(PseudoStat.PseudoStatPhysicalHitPercent, {
-				breakpoints: [7.5],
-				capType: StatCapType.TypeSoftCap,
-				postCapEPs: [0],
-			});
-
-			const spellHitSoftCapConfig = StatCap.fromPseudoStat(PseudoStat.PseudoStatSpellHitPercent, {
-				breakpoints: [15],
-				capType: StatCapType.TypeSoftCap,
-				postCapEPs: [0],
-			});
-
-			return [expertiseSoftCapConfig, hitSoftCapConfig, spellHitSoftCapConfig];
+				postCapEPs: [0.57, 0],
+			})];
 		})(),
 		// Default consumes settings.
 		consumables: Presets.DefaultConsumables,
@@ -152,6 +141,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionPaladin, {
 		rotationType: APLRotation_Type.TypeAuto,
 	},
 
+	defaultBuild: Presets.PRESET_BUILD_DEFAULT,
 	// IconInputs to include in the 'Player' section on the settings tab.
 	playerIconInputs: [PaladinInputs.StartingSealSelection()],
 	// Buff and Debuff inputs to include/exclude, overriding the EP-based defaults.
@@ -183,8 +173,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionPaladin, {
 		// Preset rotations that the user can quickly select.
 		rotations: [Presets.APL_PRESET],
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.P1_BALANCED_GEAR_PRESET],
-		builds: [Presets.P1_BALANCED_BUILD_PRESET],
+		gear: [Presets.P1_BALANCED_GEAR_PRESET, Presets.P1_OFFENSIVE_GEAR_PRESET],
+		builds: [Presets.P1_BALANCED_BUILD_PRESET, Presets.PRESET_BUILD_SHA],
 	},
 
 	autoRotation: (_player: Player<Spec.SpecProtectionPaladin>): APLRotation => {

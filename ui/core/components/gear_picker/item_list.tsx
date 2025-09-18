@@ -394,7 +394,7 @@ export default class ItemList<T extends ItemListType> {
 			return true;
 		});
 
-		if ([ItemSlot.ItemSlotTrinket1, ItemSlot.ItemSlotTrinket2].includes(this.slot)) {
+		if ([ItemSlot.ItemSlotTrinket1, ItemSlot.ItemSlotTrinket2].includes(this.slot) || this.label === SelectorModalTabs.Upgrades) {
 			// Trinket EP is weird so just sort by ilvl instead.
 			this.sortBy = ItemListSortBy.ILVL;
 		} else {

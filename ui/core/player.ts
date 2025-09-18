@@ -1154,7 +1154,7 @@ export class Player<SpecType extends Spec> {
 			return this.upgradeEPCache.get(cacheKey)!;
 		}
 
-		const stats = equippedItem.withUpgrade(upgradeLevel).calcStats(slot);
+		const stats = equippedItem.withUpgrade(upgradeLevel).withDynamicStats().calcStats(slot);
 		const ep = this.computeStatsEP(stats);
 		this.upgradeEPCache.set(cacheKey, ep);
 
@@ -1260,6 +1260,7 @@ export class Player<SpecType extends Spec> {
 		[SourceFilterOption.SourceRaidRF]: DungeonDifficulty.DifficultyRaid25RF,
 		[SourceFilterOption.SourceRaid]: DungeonDifficulty.DifficultyRaid25,
 		[SourceFilterOption.SourceRaidH]: DungeonDifficulty.DifficultyRaid25H,
+		[SourceFilterOption.SourceRaidFlex]: DungeonDifficulty.DifficultyRaidFlex,
 	};
 
 	static readonly HEROIC_TO_NORMAL: Partial<Record<DungeonDifficulty, DungeonDifficulty>> = {
@@ -1327,6 +1328,9 @@ export class Player<SpecType extends Spec> {
 			);
 		}
 
+		if (!filters.sources.includes(SourceFilterOption.SourceSoldBy)) {
+			itemData = filterItems(itemData, item => !item.sources.some(itemSrc => itemSrc.source.oneofKind == 'soldBy'));
+		}
 		if (!filters.sources.includes(SourceFilterOption.SourceCrafting)) {
 			itemData = filterItems(itemData, item => !item.sources.some(itemSrc => itemSrc.source.oneofKind == 'crafted'));
 		}
@@ -1342,6 +1346,7 @@ export class Player<SpecType extends Spec> {
 
 		for (const [srcOptionStr, difficulty] of Object.entries(Player.DIFFICULTY_SRCS)) {
 			const srcOption = parseInt(srcOptionStr) as SourceFilterOption;
+
 			if (!filters.sources.includes(srcOption)) {
 				itemData = filterItems(
 					itemData,

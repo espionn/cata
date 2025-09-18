@@ -104,6 +104,7 @@ func (hunter *Hunter) NewDireBeastPet() *HunterPet {
 			hunter.AddFocus(sim, 5, focusMetrics)
 		},
 	})
+
 	return direBeastPet
 }
 
@@ -324,7 +325,7 @@ var DefaultPetConfigs = [...]PetConfig{
 	proto.HunterOptions_Rhino:        {Name: "Rhino", FocusDump: Bite, SpecialAbility: StampedeDebuff},
 	proto.HunterOptions_Scorpid:      {Name: "Scorpid", FocusDump: Bite},
 	proto.HunterOptions_Serpent:      {Name: "Serpent", FocusDump: Bite},
-	proto.HunterOptions_Silithid:     {Name: "Silithid", FocusDump: Claw, SpecialAbility: QirajiFortitude},
+	proto.HunterOptions_Silithid:     {Name: "Silithid", FocusDump: Claw},
 	proto.HunterOptions_Spider:       {Name: "Spider", FocusDump: Bite},
 	proto.HunterOptions_SpiritBeast:  {Name: "Spirit Beast", FocusDump: Claw, ExoticAbility: SpiritMend},
 	proto.HunterOptions_SporeBat:     {Name: "Spore Bat", FocusDump: Smack, SpecialAbility: SporeCloud},
@@ -335,7 +336,7 @@ var DefaultPetConfigs = [...]PetConfig{
 	proto.HunterOptions_WindSerpent:  {Name: "Wind Serpent", FocusDump: Bite, SpecialAbility: LightningBreath},
 	proto.HunterOptions_Wolf:         {Name: "Wolf", FocusDump: Bite},
 	proto.HunterOptions_Worm:         {Name: "Worm", FocusDump: Bite, SpecialAbility: AcidSpitDebuff, ExoticAbility: BurrowAttack},
-	proto.HunterOptions_ShaleSpider:  {Name: "Shale Spider", FocusDump: Bite, SpecialAbility: EmbraceOfTheShaleSpider},
+	proto.HunterOptions_ShaleSpider:  {Name: "Shale Spider", FocusDump: Bite},
 	proto.HunterOptions_Goat:         {Name: "Goat", FocusDump: Bite, SpecialAbility: Trample},
 	proto.HunterOptions_Porcupine:    {Name: "Porcupine", FocusDump: Bite},
 	proto.HunterOptions_Monkey:       {Name: "Monkey", FocusDump: Bite},

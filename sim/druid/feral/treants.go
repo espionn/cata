@@ -52,7 +52,7 @@ func (treant *FeralTreant) Initialize() {
 	// Raw parameter from spell database
 	const coefficient = 0.02999999933
 	const bonusCoefficientFromAP = 0.10000000149
-	
+
 	// Scaled parameters for spell code
 	flatBaseDamage := coefficient * treant.owner.ClassSpellScaling // ~32.8422
 
@@ -85,7 +85,7 @@ func (treant *FeralTreant) Initialize() {
 			TickLength:    time.Second * 3,
 
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, _ bool) {
-				dot.SnapshotPhysical(target, flatBaseDamage + bonusCoefficientFromAP * dot.Spell.MeleeAttackPower())
+				dot.SnapshotPhysical(target, flatBaseDamage+bonusCoefficientFromAP*dot.Spell.MeleeAttackPower())
 			},
 
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
@@ -94,8 +94,8 @@ func (treant *FeralTreant) Initialize() {
 		},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			baseDamage := flatBaseDamage + bonusCoefficientFromAP * spell.MeleeAttackPower()
-			spell.DamageMultiplier = 1.0 + BaseMasteryMod + MasteryModPerPoint * treant.GetMasteryPoints()
+			baseDamage := flatBaseDamage + bonusCoefficientFromAP*spell.MeleeAttackPower()
+			spell.DamageMultiplier = 1.0 + BaseMasteryMod + MasteryModPerPoint*treant.GetMasteryPoints()
 			result := spell.CalcAndDealDamage(sim, target, baseDamage, spell.OutcomeMeleeSpecialHitAndCrit)
 
 			if result.Landed() {

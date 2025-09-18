@@ -109,7 +109,7 @@ func (action *APLActionGuardianHotwDpsRotation) Execute(sim *core.Simulation) {
 		return
 	}
 
-	action.nextActionAt = sim.CurrentTime + poolingTime + bear.ReactionTime
+	action.nextActionAt = sim.CurrentTime + max(poolingTime, 0) + bear.ReactionTime
 	bear.WaitUntil(sim, action.nextActionAt)
 }
 
@@ -120,4 +120,7 @@ func (action *APLActionGuardianHotwDpsRotation) Reset(_ *core.Simulation) {
 
 func (action *APLActionGuardianHotwDpsRotation) String() string {
 	return "Execute Guardian HotW DPS Rotation()"
+}
+
+func (action *APLActionGuardianHotwDpsRotation) ReResolveVariableRefs(*core.APLRotation, map[string]*proto.APLValue) {
 }

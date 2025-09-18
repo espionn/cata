@@ -45,6 +45,7 @@ func init() {
 			DPM: character.NewRPPMProcManager(
 				4441,
 				true,
+				false,
 				core.ProcMaskDirect|core.ProcMaskProc,
 				core.RPPMConfig{
 					PPM: 2.2,
@@ -92,6 +93,7 @@ func init() {
 				DPM: character.NewRPPMProcManager(
 					4442,
 					true,
+					false,
 					core.ProcMaskDirect|core.ProcMaskProc,
 					core.RPPMConfig{
 						PPM: 2.2,
@@ -154,6 +156,7 @@ func init() {
 				DPM: character.NewRPPMProcManager(
 					effectId,
 					true,
+					false,
 					core.ProcMaskMelee|core.ProcMaskMeleeProc,
 					core.RPPMConfig{
 						PPM: 2.53,
@@ -195,6 +198,7 @@ func init() {
 			DPM: character.NewRPPMProcManager(
 				4445,
 				true,
+				false,
 				core.ProcMaskDirect|core.ProcMaskProc,
 				core.RPPMConfig{
 					PPM: 5.5,
@@ -229,6 +233,7 @@ func init() {
 			DPM: character.NewRPPMProcManager(
 				4446,
 				true,
+				false,
 				core.ProcMaskDirect|core.ProcMaskProc,
 				core.RPPMConfig{
 					PPM:         3.67,
@@ -271,6 +276,7 @@ func init() {
 			DPM: character.NewRPPMProcManager(
 				4443,
 				true,
+				false,
 				core.ProcMaskDirect|core.ProcMaskProc,
 				core.RPPMConfig{
 					PPM:         9.17,
@@ -354,15 +360,9 @@ func init() {
 			Label:    "Nitro Boosts",
 			ActionID: actionID,
 			Duration: time.Second * 5,
-
-			OnGain: func(aura *core.Aura, sim *core.Simulation) {
-				aura.Unit.MultiplyMovementSpeed(sim, 2.5)
-			},
-
-			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-				aura.Unit.MultiplyMovementSpeed(sim, 1.0/2.5)
-			},
 		})
+
+		exclusiveSpeedEffect := buffAura.NewActiveMovementSpeedEffect(1.5)
 
 		activationSpell := character.RegisterSpell(core.SpellConfig{
 			ActionID:        actionID,
@@ -373,6 +373,10 @@ func init() {
 					Timer:    character.NewTimer(),
 					Duration: time.Minute * 3,
 				},
+			},
+
+			ExtraCastCondition: func(_ *core.Simulation, _ *core.Unit) bool {
+				return !exclusiveSpeedEffect.Category.AnyActive()
 			},
 
 			ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {

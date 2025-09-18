@@ -14,6 +14,7 @@ import {
 	APLActionChangeTarget,
 	APLActionChannelSpell,
 	APLActionCustomRotation,
+	APLActionGroupReference,
 	APLActionGuardianHotwDpsRotation,
 	APLActionGuardianHotwDpsRotation_Strategy as HotwStrategy,
 	APLActionItemSwap,
@@ -40,6 +41,7 @@ import { Input, InputConfig } from '../input.js';
 import { TextDropdownPicker } from '../pickers/dropdown_picker.jsx';
 import { ListItemPickerConfig, ListPicker } from '../pickers/list_picker.jsx';
 import * as AplHelpers from './apl_helpers.js';
+import { itemSwapSetFieldConfig } from './apl_helpers.js';
 import * as AplValues from './apl_values.js';
 
 export interface APLActionPickerConfig extends InputConfig<Player<any>, APLAction> {}
@@ -62,6 +64,7 @@ export class APLActionPicker extends Input<Player<any>, APLAction> {
 
 	constructor(parent: HTMLElement, player: Player<any>, config: APLActionPickerConfig) {
 		super(parent, 'apl-action-picker-root', player, config);
+
 		this.conditionPicker = new AplValues.APLValuePicker(this.rootElem, this.modObject, {
 			label: 'If:',
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
@@ -194,9 +197,12 @@ export class APLActionPicker extends Input<Player<any>, APLAction> {
 			return;
 		}
 
-		this.conditionPicker.setInputValue(newValue.condition || APLValue.create({
-			uuid: { value: randomUUID() }
-		}));
+		this.conditionPicker.setInputValue(
+			newValue.condition ||
+				APLValue.create({
+					uuid: { value: randomUUID() },
+				}),
+		);
 
 		const newActionKind = newValue.action.oneofKind;
 		this.updateActionPicker(newActionKind);
@@ -259,30 +265,13 @@ type ActionKindConfig<T> = {
 	factory: (parent: HTMLElement, player: Player<any>, config: InputConfig<Player<any>, T>) => Input<Player<any>, T>;
 };
 
-function itemSwapSetFieldConfig(field: string): AplHelpers.APLPickerBuilderFieldConfig<any, any> {
-	return {
-		field: field,
-		newValue: () => ItemSwapSet.Swap1,
-		factory: (parent, player, config) =>
-			new TextDropdownPicker(parent, player, {
-				id: randomUUID(),
-				...config,
-				defaultLabel: 'None',
-				equals: (a, b) => a == b,
-				values: [
-					{ value: ItemSwapSet.Main, label: 'Main' },
-					{ value: ItemSwapSet.Swap1, label: 'Swapped' },
-				],
-			}),
-	};
-}
-
 function actionFieldConfig(field: string): AplHelpers.APLPickerBuilderFieldConfig<any, any> {
 	return {
 		field: field,
-		newValue: () => APLValue.create({
-			uuid: { value: randomUUID() }
-		}) ,
+		newValue: () =>
+			APLValue.create({
+				uuid: { value: randomUUID() },
+			}),
 		factory: (parent, player, config) => new APLActionPicker(parent, player, config),
 	};
 }
@@ -353,7 +342,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 		shortDescription: 'Casts a friendly spell if possible, i.e. resource/cooldown/GCD/etc requirements are all met.',
 		newValue: APLActionCastFriendlySpell.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'friendly_spells', ''), AplHelpers.unitFieldConfig('target', 'players')],
-		includeIf: (player: Player<any>, _isPrepull: boolean) => (player.getRaid()!.size() > 1) || player.shouldEnableTargetDummies(),
+		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getRaid()!.size() > 1 || player.shouldEnableTargetDummies(),
 	}),
 	['multidot']: inputBuilder({
 		label: 'Multi Dot',
@@ -387,7 +376,8 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 	['strictMultidot']: inputBuilder({
 		label: 'Strict Multi Dot',
 		submenu: ['Casting'],
-		shortDescription: 'Like a regular <b>Multi Dot</b>, except all Dots are applied immediately after each other. Keeps a DoT active on multiple targets by casting the specified spell. Will take Cast Time/GCD into account when refreshing subsequent DoTs.',
+		shortDescription:
+			'Like a regular <b>Multi Dot</b>, except all Dots are applied immediately after each other. Keeps a DoT active on multiple targets by casting the specified spell. Will take Cast Time/GCD into account when refreshing subsequent DoTs.',
 		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull,
 		newValue: () =>
 			APLActionStrictMultidot.create({
@@ -493,11 +483,7 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 				statType2: -1,
 				statType3: -1,
 			}),
-		fields: [
-			AplHelpers.statTypeFieldConfig('statType1'),
-			AplHelpers.statTypeFieldConfig('statType2'),
-			AplHelpers.statTypeFieldConfig('statType3'),
-		],
+		fields: [AplHelpers.statTypeFieldConfig('statType1'), AplHelpers.statTypeFieldConfig('statType2'), AplHelpers.statTypeFieldConfig('statType3')],
 	}),
 	['autocastOtherCooldowns']: inputBuilder({
 		label: 'Autocast Other Cooldowns',
@@ -614,13 +600,17 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 		submenu: ['Misc'],
 		shortDescription: 'Activates an aura with the specified number of stacks',
 		includeIf: (_, isPrepull: boolean) => isPrepull,
-		newValue: () => APLActionActivateAuraWithStacks.create({
-			numStacks: 1,
-		}),
-		fields: [AplHelpers.actionIdFieldConfig('auraId', 'stackable_auras'), AplHelpers.numberFieldConfig('numStacks', false, {
-			label: 'stacks',
-			labelTooltip: 'Desired number of initial aura stacks.',
-		})],
+		newValue: () =>
+			APLActionActivateAuraWithStacks.create({
+				numStacks: 1,
+			}),
+		fields: [
+			AplHelpers.actionIdFieldConfig('auraId', 'stackable_auras'),
+			AplHelpers.numberFieldConfig('numStacks', false, {
+				label: 'stacks',
+				labelTooltip: 'Desired number of initial aura stacks.',
+			}),
+		],
 	}),
 	['activateAllStatBuffProcAuras']: inputBuilder({
 		label: 'Activate All Stat Buff Proc Auras',
@@ -696,6 +686,30 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 		newValue: () => APLActionCustomRotation.create(),
 		fields: [],
 	}),
+	['groupReference']: inputBuilder({
+		label: 'Group Reference',
+		submenu: ['Groups'],
+		shortDescription: 'References an action group defined in the Groups section.',
+		fullDescription: `
+			<p>Executes all actions in the referenced group in order. Groups allow you to create reusable action sequences.</p>
+			<p>Example: If you have a group named "careful_aim" with actions [serpent_sting, chimera_shot, steady_shot],
+			referencing this group will execute those three actions in sequence.</p>
+		`,
+		newValue: () =>
+			APLActionGroupReference.create({
+				groupName: '',
+				variables: [],
+			}),
+		fields: [
+			AplHelpers.groupNameFieldConfig('groupName', {
+				labelTooltip: 'Name of the group to reference (must match a group defined in the Groups section)',
+			}),
+			AplHelpers.groupReferenceVariablesFieldConfig('variables', 'groupName', {
+				label: 'Group Variables',
+				labelTooltip: "Variables to pass to the group. These will override the group's internal variables.",
+			}),
+		],
+	}),
 
 	// Class/spec specific actions
 	['catOptimalRotationAction']: inputBuilder({
@@ -710,8 +724,8 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 				minRoarOffset: 40,
 				ripLeeway: 4,
 				useBite: true,
-				biteTime: 11,
-				berserkBiteTime: 7,
+				biteTime: 6,
+				berserkBiteTime: 5,
 				allowAoeBerserk: false,
 				bearWeave: true,
 				snekWeave: true,

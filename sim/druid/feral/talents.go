@@ -26,7 +26,7 @@ func (cat *FeralDruid) registerSoulOfTheForest() {
 
 	procSotf := func(sim *core.Simulation) {
 		if cpSnapshot > 0 {
-			cat.AddEnergy(sim, 4.0 * float64(cpSnapshot), energyMetrics)
+			cat.AddEnergy(sim, 4.0*float64(cpSnapshot), energyMetrics)
 			cpSnapshot = 0
 		}
 	}
@@ -115,7 +115,7 @@ func (cat *FeralDruid) registerIncarnation() {
 		Type:  core.CooldownTypeDPS,
 
 		ShouldActivate: func(sim *core.Simulation, _ *core.Character) bool {
-			return cat.BerserkCatAura.IsActive() && !cat.ClearcastingAura.IsActive() && (cat.CurrentEnergy() + cat.EnergyRegenPerSecond() < 100)
+			return cat.BerserkCatAura.IsActive() && !cat.ClearcastingAura.IsActive() && (cat.CurrentEnergy()+cat.EnergyRegenPerSecond() < 100)
 		},
 	})
 }
@@ -204,7 +204,7 @@ func (cat *FeralDruid) registerHeartOfTheWild() {
 		Type:  core.CooldownTypeDPS,
 
 		ShouldActivate: func(sim *core.Simulation, _ *core.Character) bool {
-			return !cat.BerserkCatAura.IsActive() && (cat.Berserk.TimeToReady(sim) > cat.HeartOfTheWildAura.Duration) && !cat.IncarnationAura.IsActive() && !cat.ClearcastingAura.IsActive() && ((cat.ComboPoints() == 5) || (cat.CurrentEnergy() + (cat.Wrath.DefaultCast.CastTime * 2 + core.GCDDefault).Seconds() * cat.EnergyRegenPerSecond() <= 100))
+			return (!cat.BerserkCatAura.IsActive() || (cat.BerserkCatAura.RemainingDuration(sim) < core.GCDMin)) && (cat.Berserk.TimeToReady(sim) > cat.HeartOfTheWildAura.Duration) && !cat.IncarnationAura.IsActive() && !cat.ClearcastingAura.IsActive() && ((cat.ComboPoints() == 5) || (cat.CurrentEnergy()+(cat.Wrath.DefaultCast.CastTime*2+core.GCDDefault).Seconds()*cat.EnergyRegenPerSecond() <= 100))
 		},
 	})
 }

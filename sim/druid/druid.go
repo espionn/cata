@@ -29,6 +29,8 @@ type Druid struct {
 	Barkskin              *DruidSpell
 	Berserk               *DruidSpell
 	CatCharge             *DruidSpell
+	Dash                  *DruidSpell
+	DisplacerBeast        *DruidSpell
 	FaerieFire            *DruidSpell
 	FerociousBite         *DruidSpell
 	ForceOfNature         *DruidSpell
@@ -58,21 +60,28 @@ type Druid struct {
 	WildMushrooms         *DruidSpell
 	WildMushroomsDetonate *DruidSpell
 
-	CatForm  *DruidSpell
-	BearForm *DruidSpell
+	CatForm     *DruidSpell
+	BearForm    *DruidSpell
+	MoonkinForm *DruidSpell
 
 	BarkskinAura             *core.Aura
 	BearFormAura             *core.Aura
 	BerserkBearAura          *core.Aura
 	BerserkCatAura           *core.Aura
 	CatFormAura              *core.Aura
-	WeakenedBlowsAuras       core.AuraArray
+	DashAura                 *core.Aura
+	DisplacerBeastAura       *core.Aura
 	FaerieFireAuras          core.AuraArray
 	FrenziedRegenerationAura *core.Aura
 	LunarEclipseProcAura     *core.Aura
 	MightOfUrsocAura         *core.Aura
+	MoonkinFormAura          *core.Aura
 	ProwlAura                *core.Aura
+	StampedeAura             *core.Aura
+	StampedePendingAura      *core.Aura
+	TigersFury4PT15Aura      *core.Aura
 	SurvivalInstinctsAura    *core.Aura
+	WeakenedBlowsAuras       core.AuraArray
 
 	form DruidForm
 
@@ -113,6 +122,7 @@ const (
 	DruidSpellSwipeCat
 	DruidSpellThrashBear
 	DruidSpellThrashCat
+	DruidSpellTigersFury
 	DruidSpellWildMushroom
 	DruidSpellWildMushroomDetonate
 	DruidSpellWrath
@@ -247,6 +257,7 @@ func (druid *Druid) RegisterFeralCatSpells() {
 	druid.registerBerserkCD()
 	// druid.registerCatCharge()
 	druid.registerCatFormSpell()
+	druid.registerDashCD()
 	druid.registerFerociousBiteSpell()
 	druid.registerLacerateSpell()
 	druid.registerMangleBearSpell()

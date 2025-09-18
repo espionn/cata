@@ -1,0 +1,20 @@
+.apl-group-editor-root {
+	.apl-action-picker-root {
+		width: 100%;
+		display: flex;
+	}
+
+	.list-picker-title {
+		font-weight: normal;
+	}
+
+	.list-picker-new-button {
+		width: unset !important;
+	}
+
+	.apl-group-name-picker {
+		input {
+			min-width: 8rem;
+		}
+	}
+}

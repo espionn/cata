@@ -189,17 +189,6 @@ var ItemAllowList = map[int32]struct{}{
 	2140: {},
 	2505: {},
 
-	//Shaman Dungeon Set 3 Tidefury
-	27510: {}, // Tidefury Gauntlets
-	27802: {}, // Tidefury Shoulderguards
-	27909: {}, // Tidefury Kilt
-	28231: {}, // Tidefury Chestpiece
-	28349: {}, // Tidefury Helm
-
-	29309: {}, // Band of the Eternal Restorer
-
-	34677: {}, // Shattered Sun Pendant of Restoration
-
 	45703: {}, // Spark of Hope
 }
 

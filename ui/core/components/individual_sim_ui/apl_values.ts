@@ -1,4 +1,5 @@
 import { Player } from '../../player.js';
+import { itemSwapEnabledSpecs } from '../../individual_sim_ui.js';
 import {
 	APLValue,
 	APLValueAllTrinketStatProcsActive,
@@ -100,10 +101,12 @@ import {
 	APLValueTrinketProcsMinRemainingTime,
 	APLValueUnitDistance,
 	APLValueUnitIsMoving,
+	APLValueVariablePlaceholder,
 	APLValueWarlockHandOfGuldanInFlight,
 	APLValueWarlockHauntInFlight,
 	APLValueAuraIsInactive,
 	APLValueAuraICDIsReady,
+	APLValueActiveItemSwapSet,
 } from '../../proto/apl.js';
 import { Class, Spec } from '../../proto/common.js';
 import { ShamanTotems_TotemType as TotemType } from '../../proto/shaman.js';
@@ -113,6 +116,7 @@ import { randomUUID } from '../../utils';
 import { Input, InputConfig } from '../input.js';
 import { TextDropdownPicker, TextDropdownValueConfig } from '../pickers/dropdown_picker.jsx';
 import { ListItemPickerConfig, ListPicker } from '../pickers/list_picker.jsx';
+import { AdaptiveStringPicker } from '../pickers/string_picker';
 import * as AplHelpers from './apl_helpers.js';
 
 export interface APLValuePickerConfig extends InputConfig<Player<any>, APLValue | undefined> {}
@@ -143,9 +147,10 @@ export class APLValuePicker extends Input<Player<any>, APLValue | undefined> {
 		super(parent, 'apl-value-picker-root', player, config);
 
 		const isPrepull = this.rootElem.closest('.apl-prepull-action-picker') != null;
+		const isGroup = this.rootElem.closest('.apl-groups-picker') != null;
 
 		const allValueKinds = (Object.keys(valueKindFactories) as ValidAPLValueKind[]).filter(
-			(valueKind): valueKind is ValidAPLValueKind => (!!valueKind && valueKindFactories[valueKind].includeIf?.(player, isPrepull)) ?? true,
+			(valueKind): valueKind is ValidAPLValueKind => (!!valueKind && valueKindFactories[valueKind].includeIf?.(player, isPrepull, isGroup)) ?? true,
 		);
 
 		if (this.rootElem.parentElement!.classList.contains('list-picker-item')) {
@@ -360,7 +365,7 @@ type ValueKindConfig<T> = {
 	shortDescription: string;
 	fullDescription?: string;
 	newValue: () => T;
-	includeIf?: (player: Player<any>, isPrepull: boolean) => boolean;
+	includeIf?: (player: Player<any>, isPrepull: boolean, isGroup: boolean) => boolean;
 	factory: (parent: HTMLElement, player: Player<any>, config: InputConfig<Player<any>, T>) => Input<Player<any>, T>;
 	dynamicStringResolver?: (value: string, player: Player<any>) => string;
 };
@@ -1403,6 +1408,20 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		newValue: APLValueDotPercentIncrease.create,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', '')],
 	}),
+	dotCritPercentIncrease: inputBuilder({
+		label: 'Dot Crit Chance Increase %',
+		submenu: ['DoT'],
+		shortDescription: "How much higher a new DoT's Critical Strike Chance would be compared to the old.",
+		newValue: APLValueDotPercentIncrease.create,
+		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', '')],
+	}),
+	dotTickRatePercentIncrease: inputBuilder({
+		label: 'Dot Tick Rate Increase %',
+		submenu: ['DoT'],
+		shortDescription: 'How much faster a new DoT would tick compared to the old.',
+		newValue: APLValueDotPercentIncrease.create,
+		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', '')],
+	}),
 	sequenceIsComplete: inputBuilder({
 		label: 'Sequence Is Complete',
 		submenu: ['Sequence'],
@@ -1497,5 +1516,36 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		newValue: APLValueProtectionPaladinDamageTakenLastGlobal.create,
 		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() === Spec.SpecProtectionPaladin,
 		fields: [],
+	}),
+	variableRef: inputBuilder({
+		label: 'Variable Reference',
+		submenu: ['Variables'],
+		shortDescription: 'Reference a named condition variable',
+		newValue: () => ({ name: '' }),
+		fields: [AplHelpers.variableNameFieldConfig('name')],
+	}),
+	variablePlaceholder: inputBuilder({
+		label: 'Variable Placeholder',
+		submenu: ['Variables'],
+		shortDescription: 'Placeholder value that gets replaced when group is referenced',
+		fullDescription: `
+			<p>Defines a placeholder value that must be set when this group is referenced. This allows groups to be parameterized.</p>
+			<p>Example: If you add a Variable Placeholder named "replace", then when referencing this group, you must provide a value for "replace".</p>
+		`,
+		includeIf: (_player: Player<any>, isPrepull: boolean, isGroup: boolean) => !isPrepull && isGroup, // Only show in groups, not prepull or priority list
+		newValue: () => ({ name: '' }),
+		fields: [
+			AplHelpers.stringFieldConfig('name', {
+				labelTooltip: 'Name of the variable placeholder to expose. This name will be used when referencing the group.',
+			}),
+		],
+	}),
+	activeItemSwapSet: inputBuilder({
+		label: 'Item Swap',
+		submenu: ['Misc'],
+		shortDescription: 'Returns <b>True</b> if the specified item swap set is currently active.',
+		includeIf: (player: Player<any>, _isPrepull: boolean) => itemSwapEnabledSpecs.includes(player.getSpec()),
+		newValue: APLValueActiveItemSwapSet.create,
+		fields: [AplHelpers.itemSwapSetFieldConfig('swapSet')],
 	}),
 };

@@ -54,6 +54,10 @@ func (impl DefaultAPLValueImpl) GetString(sim *Simulation) string {
 }
 
 func (rot *APLRotation) newAPLValue(config *proto.APLValue) APLValue {
+	return rot.newAPLValueWithContext(config, nil)
+}
+
+func (rot *APLRotation) newAPLValueWithContext(config *proto.APLValue, groupVariables map[string]*proto.APLValue) APLValue {
 	if config == nil {
 		return nil
 	}
@@ -69,19 +73,19 @@ func (rot *APLRotation) newAPLValue(config *proto.APLValue) APLValue {
 	case *proto.APLValue_Const:
 		value = rot.newValueConst(config.GetConst(), config.Uuid)
 	case *proto.APLValue_And:
-		value = rot.newValueAnd(config.GetAnd(), config.Uuid)
+		value = rot.newValueAnd(config.GetAnd(), config.Uuid, groupVariables)
 	case *proto.APLValue_Or:
-		value = rot.newValueOr(config.GetOr(), config.Uuid)
+		value = rot.newValueOr(config.GetOr(), config.Uuid, groupVariables)
 	case *proto.APLValue_Not:
-		value = rot.newValueNot(config.GetNot(), config.Uuid)
+		value = rot.newValueNot(config.GetNot(), config.Uuid, groupVariables)
 	case *proto.APLValue_Cmp:
-		value = rot.newValueCompare(config.GetCmp(), config.Uuid)
+		value = rot.newValueCompare(config.GetCmp(), config.Uuid, groupVariables)
 	case *proto.APLValue_Math:
-		value = rot.newValueMath(config.GetMath(), config.Uuid)
+		value = rot.newValueMath(config.GetMath(), config.Uuid, groupVariables)
 	case *proto.APLValue_Max:
-		value = rot.newValueMax(config.GetMax(), config.Uuid)
+		value = rot.newValueMax(config.GetMax(), config.Uuid, groupVariables)
 	case *proto.APLValue_Min:
-		value = rot.newValueMin(config.GetMin(), config.Uuid)
+		value = rot.newValueMin(config.GetMin(), config.Uuid, groupVariables)
 
 	// Encounter
 	case *proto.APLValue_CurrentTime:
@@ -265,6 +269,10 @@ func (rot *APLRotation) newAPLValue(config *proto.APLValue) APLValue {
 		value = rot.newValueDotTickFrequency(config.GetDotTickFrequency(), config.Uuid)
 	case *proto.APLValue_DotPercentIncrease:
 		value = rot.newValueDotPercentIncrease(config.GetDotPercentIncrease(), config.Uuid)
+	case *proto.APLValue_DotCritPercentIncrease:
+		value = rot.newValueDotCritPercentIncrease(config.GetDotCritPercentIncrease(), config.Uuid)
+	case *proto.APLValue_DotTickRatePercentIncrease:
+		value = rot.newValueDotTickRatePercentIncrease(config.GetDotTickRatePercentIncrease(), config.Uuid)
 
 	// Sequences
 	case *proto.APLValue_SequenceIsComplete:
@@ -279,6 +287,25 @@ func (rot *APLRotation) newAPLValue(config *proto.APLValue) APLValue {
 		value = rot.newValueChannelClipDelay(config.GetChannelClipDelay(), config.Uuid)
 	case *proto.APLValue_InputDelay:
 		value = rot.newValueInputDelay(config.GetInputDelay(), config.Uuid)
+
+	case *proto.APLValue_VariableRef:
+		value = rot.newValueVariableRef(config.GetVariableRef(), config.Uuid)
+
+	case *proto.APLValue_VariablePlaceholder:
+		// If we have group variables, replace the placeholder immediately
+		if groupVariables != nil {
+			placeholder := config.GetVariablePlaceholder()
+			if replacement, ok := groupVariables[placeholder.Name]; ok {
+				// Create a new value from the replacement
+				return rot.newAPLValueWithContext(replacement, groupVariables)
+			}
+		}
+		// Otherwise create the placeholder as normal
+		value = rot.newValueVariablePlaceholder(config.GetVariablePlaceholder(), config.Uuid)
+
+	// Item Swap
+	case *proto.APLValue_ActiveItemSwapSet:
+		value = rot.newValueActiveItemSwapSet(config.GetActiveItemSwapSet(), config.Uuid)
 
 	default:
 		value = nil

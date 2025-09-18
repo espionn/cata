@@ -109,7 +109,7 @@ func (warlock *Warlock) setPetOptions(petAgent core.PetAgent, aaOptions *core.Au
 	pet.EnableEnergyBar(core.EnergyBarOptions{
 		MaxEnergy:             200,
 		UnitClass:             proto.Class_ClassWarlock,
-		HasHasteRatingScaling: false,
+		HasHasteRatingScaling: true,
 	})
 
 	warlock.AddPet(petAgent)
@@ -170,7 +170,7 @@ func (warlock *Warlock) registerSuccubus() *WarlockPet {
 func (warlock *Warlock) registerSuccubusWithName(name string, enabledOnStart bool, isGuardian bool) *WarlockPet {
 	pet := warlock.RegisterPet(proto.WarlockOptions_Succubus, 3, 1.667, name, enabledOnStart, isGuardian)
 	pet.registerLashOfPainSpell()
-	pet.MinEnergy = 160
+	pet.MinEnergy = 60
 	return pet
 }
 
@@ -314,7 +314,7 @@ func (pet *WarlockPet) registerLashOfPainSpell() {
 		},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
+				GCD: time.Second,
 			},
 		},
 

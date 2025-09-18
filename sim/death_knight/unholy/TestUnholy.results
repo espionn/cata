@@ -73,8 +73,8 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-BattleplateoftheAll-ConsumingMaw"
  value: {
-  dps: 139711.48264
-  tps: 98134.57143
+  dps: 140053.5702
+  tps: 98212.28513
   hps: 2021.06359
  }
 }
@@ -89,8 +89,8 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 138767.67785
-  tps: 99525.05896
+  dps: 144667.85837
+  tps: 105359.46168
   hps: 1930.27674
  }
 }
@@ -217,8 +217,8 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 148447.75309
-  tps: 106420.91909
+  dps: 148162.38801
+  tps: 106051.42011
   hps: 1912.9929
  }
 }
@@ -249,9 +249,9 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 144507.55653
-  tps: 103468.13546
-  hps: 1973.24501
+  dps: 145266.43511
+  tps: 103865.75429
+  hps: 1984.04045
  }
 }
 dps_results: {
@@ -385,9 +385,9 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 133789.688
-  tps: 96614.09372
-  hps: 1928.28103
+  dps: 133870.35629
+  tps: 96702.10629
+  hps: 1925.96042
  }
 }
 dps_results: {
@@ -418,6 +418,14 @@ dps_results: {
  value: {
   dps: 130557.79798
   tps: 95000.64441
+ }
+}
+dps_results: {
+ key: "TestUnholy-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 133594.12503
+  tps: 96374.96265
+  hps: 1936.33816
  }
 }
 dps_results: {
@@ -465,8 +473,8 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 138767.67785
-  tps: 99525.05896
+  dps: 139882.66679
+  tps: 99336.3403
   hps: 1930.27674
  }
 }
@@ -497,9 +505,9 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 140308.4699
-  tps: 102106.96089
-  hps: 2032.55031
+  dps: 133387.75894
+  tps: 96220.85462
+  hps: 1936.33816
  }
 }
 dps_results: {

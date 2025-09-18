@@ -107,8 +107,8 @@ dps_results: {
 dps_results: {
  key: "TestAssassination-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 105216.47262
-  tps: 74014.95108
+  dps: 111844.18434
+  tps: 78723.45554
  }
 }
 dps_results: {
@@ -219,8 +219,8 @@ dps_results: {
 dps_results: {
  key: "TestAssassination-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 108542.68289
-  tps: 76300.72104
+  dps: 108606.73106
+  tps: 76342.53387
  }
 }
 dps_results: {
@@ -254,8 +254,8 @@ dps_results: {
 dps_results: {
  key: "TestAssassination-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 108296.54924
-  tps: 76175.63606
+  dps: 108933.09087
+  tps: 76612.46582
  }
 }
 dps_results: {
@@ -373,8 +373,8 @@ dps_results: {
 dps_results: {
  key: "TestAssassination-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 114701.47565
-  tps: 80535.79389
+  dps: 115457.02488
+  tps: 81050.17848
  }
 }
 dps_results: {
@@ -389,6 +389,13 @@ dps_results: {
  value: {
   dps: 105967.40213
   tps: 74544.54211
+ }
+}
+dps_results: {
+ key: "TestAssassination-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 114102.78339
+  tps: 80359.22751
  }
 }
 dps_results: {
@@ -429,8 +436,8 @@ dps_results: {
 dps_results: {
  key: "TestAssassination-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 105303.00759
-  tps: 74058.82281
+  dps: 102012.92283
+  tps: 71759.54476
  }
 }
 dps_results: {

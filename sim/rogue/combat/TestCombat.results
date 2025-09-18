@@ -75,8 +75,8 @@ dps_results: {
 dps_results: {
  key: "TestCombat-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 102570.56716
-  tps: 72336.79986
+  dps: 110750.36776
+  tps: 78130.72619
  }
 }
 dps_results: {
@@ -222,8 +222,8 @@ dps_results: {
 dps_results: {
  key: "TestCombat-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 105178.70219
-  tps: 74152.33248
+  dps: 107726.99864
+  tps: 75937.22723
  }
 }
 dps_results: {
@@ -341,8 +341,8 @@ dps_results: {
 dps_results: {
  key: "TestCombat-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 109806.85109
-  tps: 77421.55249
+  dps: 111983.89431
+  tps: 78955.14678
  }
 }
 dps_results: {
@@ -357,6 +357,13 @@ dps_results: {
  value: {
   dps: 103235.96668
   tps: 72807.45087
+ }
+}
+dps_results: {
+ key: "TestCombat-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 111871.23686
+  tps: 78850.1929
  }
 }
 dps_results: {
@@ -397,8 +404,8 @@ dps_results: {
 dps_results: {
  key: "TestCombat-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 103084.09349
-  tps: 72689.15079
+  dps: 101569.61585
+  tps: 71624.42405
  }
 }
 dps_results: {

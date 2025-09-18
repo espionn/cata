@@ -35,10 +35,10 @@ func (cat *FeralDruid) newActionCatOptimalRotationAction(config *proto.APLAction
 		rotation.RipLeeway = core.DurationFromSeconds(config.RipLeeway)
 	} else {
 		rotation.UseBite = true
-		rotation.BiteTime = core.TernaryDuration(rotation.UseHealingTouch, time.Second * 9, time.Second * 12)
-		rotation.BerserkBiteTime = time.Second * 7
+		rotation.BiteTime = core.TernaryDuration(rotation.UseHealingTouch, time.Second*4, time.Second*7)
+		rotation.BerserkBiteTime = core.TernaryDuration(rotation.UseHealingTouch, time.Second*3, time.Second*7)
 		rotation.MinRoarOffset = time.Second * 40
-		rotation.RipLeeway = core.TernaryDuration(rotation.UseHealingTouch, time.Second * 2, time.Second * 6)
+		rotation.RipLeeway = core.TernaryDuration(rotation.UseHealingTouch, time.Second*2, time.Second*5)
 	}
 
 	// Pre-allocate PoolingActions
@@ -48,7 +48,7 @@ func (cat *FeralDruid) newActionCatOptimalRotationAction(config *proto.APLAction
 	rotation.pendingPoolWeaves.create(3)
 
 	// Store relevant proc auras for snapshot timing.
-	rotation.itemProcAuras = cat.GetMatchingItemProcAuras([]stats.Stat{stats.Agility, stats.AttackPower, stats.MasteryRating}, time.Second * 30)
+	rotation.itemProcAuras = cat.GetMatchingItemProcAuras([]stats.Stat{stats.Agility, stats.AttackPower, stats.MasteryRating}, time.Second*30)
 
 	return rotation
 }
@@ -101,8 +101,8 @@ func (rotation *FeralDruidRotation) Execute(sim *core.Simulation) {
 	// player decision based on latency.
 	ccRefreshTime := cat.ClearcastingAura.ExpiresAt() - cat.ClearcastingAura.Duration
 
-	if ccRefreshTime >= sim.CurrentTime - cat.ReactionTime {
-		rotation.WaitUntil(sim, max(cat.NextGCDAt(), ccRefreshTime + cat.ReactionTime))
+	if ccRefreshTime >= sim.CurrentTime-cat.ReactionTime {
+		rotation.WaitUntil(sim, max(cat.NextGCDAt(), ccRefreshTime+cat.ReactionTime))
 	}
 
 	// Keep up Sunder debuff if not provided externally. Do this here since
@@ -124,13 +124,17 @@ func (rotation *FeralDruidRotation) Execute(sim *core.Simulation) {
 	}
 
 	if cat.DistanceFromTarget > core.MaxMeleeRange {
-		// TODO: Wild Charge or Displacer Beast usage here
-		if sim.Log != nil {
-			cat.Log(sim, "Out of melee range (%.6fy) and cannot charge or teleport, initiating manual run-in...", cat.DistanceFromTarget)
-		}
+		// Try leaping if no boots
+		if !cat.GetAura("Nitro Boosts").IsActive() && cat.Talents.WildCharge && cat.CatCharge.CanCast(sim, cat.CurrentTarget) {
+			cat.CatCharge.Cast(sim, cat.CurrentTarget)
+		} else {
+			if sim.Log != nil {
+				cat.Log(sim, "Out of melee range (%.6fy) and cannot charge or teleport, initiating manual run-in...", cat.DistanceFromTarget)
+			}
 
-		cat.MoveTo(core.MaxMeleeRange - 1, sim) // movement aura is discretized in 1 yard intervals, so need to overshoot to guarantee melee range
-		return
+			cat.MoveTo(core.MaxMeleeRange-1, sim) // movement aura is discretized in 1 yard intervals, so need to overshoot to guarantee melee range
+			return
+		}
 	}
 
 	if !cat.GCD.IsReady(sim) {
@@ -151,6 +155,15 @@ func (rotation *FeralDruidRotation) Execute(sim *core.Simulation) {
 		rotation.ShiftBearCat(sim)
 	} else if rotation.RotationType == proto.FeralDruid_Rotation_SingleTarget {
 		rotation.PickSingleTargetGCDAction(sim)
+
+		if !cat.GCD.IsReady(sim) && rotation.WrathWeave && cat.HeartOfTheWild.IsReady(sim) && cat.BerserkCatAura.IsActive() && (cat.BerserkCatAura.RemainingDuration(sim) < core.GCDDefault) {
+			cat.HeartOfTheWild.Cast(sim, nil)
+			cat.UpdateMajorCooldowns()
+		}
+
+		if !cat.GCD.IsReady(sim) && cat.ItemSwap.IsEnabled() && rotation.shouldWrathWeave(sim) && cat.CatFormAura.IsActive() {
+			cat.ItemSwap.SwapItems(sim, proto.APLActionItemSwap_Swap1, false)
+		}
 	} else {
 		panic("AoE rotation not yet supported!")
 	}
@@ -177,7 +190,7 @@ func (rotation *FeralDruidRotation) PickSingleTargetGCDAction(sim *core.Simulati
 
 	// Rip logic
 	ripRefreshTime := cat.calcBleedRefreshTime(sim, cat.Rip, ripDot, isExecutePhase, true)
-	ripNow := (curCp >= 5) && (!ripDot.IsActive() || ((sim.CurrentTime > ripRefreshTime) && (!isExecutePhase || (cat.Rip.NewSnapshotPower > cat.Rip.CurrentSnapshotPower + 0.001))) || (!isExecutePhase && (roarDur < rotation.RipLeeway) && (ripDot.ExpiresAt() < roarBuff.ExpiresAt() + rotation.RipLeeway))) && (fightDur > ripDot.BaseTickLength) && (!isClearcast || !anyBleedActive || cat.DreamOfCenariusAura.IsActive()) && !cat.shouldDelayBleedRefreshForTf(sim, ripDot, true)
+	ripNow := (curCp >= 5) && (!ripDot.IsActive() || ((sim.CurrentTime > ripRefreshTime) && (!isExecutePhase || (cat.Rip.NewSnapshotPower > cat.Rip.CurrentSnapshotPower+0.001))) || (!isExecutePhase && (roarDur < rotation.RipLeeway) && (ripDot.ExpiresAt() < roarBuff.ExpiresAt()+rotation.RipLeeway))) && (fightDur > ripDot.BaseTickLength) && (!isClearcast || !anyBleedActive || cat.DreamOfCenariusAura.IsActive()) && !cat.shouldDelayBleedRefreshForTf(sim, ripDot, true)
 
 	// Roar logic
 	newRoarDur := cat.SavageRoarDurationTable[curCp]
@@ -186,7 +199,7 @@ func (rotation *FeralDruidRotation) PickSingleTargetGCDAction(sim *core.Simulati
 
 	// Bite logic
 	biteTime := core.TernaryDuration(isBerserk, rotation.BerserkBiteTime, rotation.BiteTime)
-	shouldBite := (curCp >= 5) && ripDot.IsActive() && roarBuff.IsActive() && ((rotation.UseBite && (min(ripRefreshTime, roarRefreshTime) - sim.CurrentTime >= biteTime)) || isExecutePhase) && !isClearcast
+	shouldBite := (curCp >= 5) && ripDot.IsActive() && roarBuff.IsActive() && ((rotation.UseBite && (min(ripRefreshTime, roarRefreshTime)-sim.CurrentTime >= biteTime)) || isExecutePhase) && !isClearcast
 	shouldEmergencyBite := isExecutePhase && ripDot.IsActive() && (ripDur < ripDot.BaseTickLength) && (curCp >= 1)
 	biteNow := shouldBite || shouldEmergencyBite
 
@@ -195,9 +208,9 @@ func (rotation *FeralDruidRotation) PickSingleTargetGCDAction(sim *core.Simulati
 	rakeNow := (!rakeDot.IsActive() || (sim.CurrentTime > rakeRefreshTime)) && (fightDur > rakeDot.BaseTickLength) && (!isClearcast || !rakeDot.IsActive() || (rakeDur < time.Second) || cat.DreamOfCenariusAura.IsActive()) && !cat.shouldDelayBleedRefreshForTf(sim, rakeDot, false) && roarBuff.IsActive()
 
 	// Pooling calcs
-	ripRefreshPending := ripDot.IsActive() && (ripDur < fightDur - ripDot.BaseTickLength) && (curCp >= core.TernaryInt32(isExecutePhase, 1, 5))
-	rakeRefreshPending := rakeDot.IsActive() && (rakeDur < fightDur - rakeDot.BaseTickLength)
-	roarRefreshPending := roarBuff.IsActive() && (roarDur < fightDur - cat.ReactionTime) && (newRoarDur > 0)
+	ripRefreshPending := ripDot.IsActive() && (ripDur < fightDur-ripDot.BaseTickLength) && (curCp >= core.TernaryInt32(isExecutePhase, 1, 5))
+	rakeRefreshPending := rakeDot.IsActive() && (rakeDur < fightDur-rakeDot.BaseTickLength)
+	roarRefreshPending := roarBuff.IsActive() && (roarDur < fightDur-cat.ReactionTime) && (newRoarDur > 0)
 	rotation.pendingPool.reset()
 	rotation.pendingPoolWeaves.reset()
 
@@ -217,8 +230,8 @@ func (rotation *FeralDruidRotation) PickSingleTargetGCDAction(sim *core.Simulati
 	}
 
 	if rotation.UseHealingTouch && cat.PredatorySwiftnessAura.IsActive() && (cat.PredatorySwiftnessAura.RemainingDuration(sim) > cat.ReactionTime*2) {
-		rotation.pendingPool.addAction(cat.PredatorySwiftnessAura.ExpiresAt() - cat.ReactionTime*2, 0)
-		rotation.pendingPoolWeaves.addAction(cat.PredatorySwiftnessAura.ExpiresAt() - cat.ReactionTime*2, 0)
+		rotation.pendingPool.addAction(cat.PredatorySwiftnessAura.ExpiresAt()-cat.ReactionTime*2, 0)
+		rotation.pendingPoolWeaves.addAction(cat.PredatorySwiftnessAura.ExpiresAt()-cat.ReactionTime*2, 0)
 	}
 
 	rotation.pendingPool.sort()
@@ -227,11 +240,11 @@ func (rotation *FeralDruidRotation) PickSingleTargetGCDAction(sim *core.Simulati
 	excessE := curEnergy - floatingEnergy
 
 	// Check bear-weaving conditions.
-	furorCap := 100.0 - 1.5 * regenRate
+	furorCap := 100.0 - 1.5*regenRate
 	bearWeaveNow := rotation.BearWeave && cat.canBearWeave(sim, furorCap, regenRate, curEnergy, excessE, rotation.pendingPoolWeaves)
 
 	// Check Wrath-weaving conditions.
-	wrathWeaveNow := rotation.WrathWeave && cat.HeartOfTheWildAura.IsActive() && (cat.HeartOfTheWildAura.RemainingDuration(sim) > cat.Wrath.DefaultCast.CastTime) && !isClearcast && ((curCp == 5) || (curEnergy + cat.Wrath.DefaultCast.CastTime.Seconds() * 2 * regenRate <= furorCap)) && ripDot.IsActive() && (!ripRefreshPending || (ripRefreshTime > sim.CurrentTime + cat.Wrath.DefaultCast.CastTime + core.GCDDefault)) && rakeDot.IsActive() && (!rakeRefreshPending || (rakeRefreshTime > sim.CurrentTime + cat.Wrath.DefaultCast.CastTime + core.GCDDefault))
+	wrathWeaveNow := rotation.shouldWrathWeave(sim)
 
 	// Main decision tree starts here.
 	var timeToNextAction time.Duration
@@ -258,7 +271,7 @@ func (rotation *FeralDruidRotation) PickSingleTargetGCDAction(sim *core.Simulati
 			timeToNextAction = cat.ReactionTime
 		}
 	} else if !cat.CatFormAura.IsActive() {
-		if !cat.HeartOfTheWildAura.IsActive() || (cat.HeartOfTheWildAura.RemainingDuration(sim) <= cat.Wrath.DefaultCast.CastTime) || !ripDot.IsActive() || (ripRefreshPending && (ripRefreshTime <= sim.CurrentTime + cat.Wrath.DefaultCast.CastTime + core.GCDDefault)) || !rakeDot.IsActive() || (rakeRefreshPending && (rakeRefreshTime <= sim.CurrentTime + cat.Wrath.DefaultCast.CastTime + core.GCDDefault)) || ((curCp < 5) && (curEnergy + cat.Wrath.DefaultCast.CastTime.Seconds() * regenRate > furorCap)) {
+		if !cat.HeartOfTheWildAura.IsActive() || (cat.HeartOfTheWildAura.RemainingDuration(sim) <= cat.Wrath.DefaultCast.CastTime) || !ripDot.IsActive() || (ripRefreshPending && (ripDot.ExpiresAt() <= sim.CurrentTime+cat.Wrath.DefaultCast.CastTime+core.GCDDefault)) || !rakeDot.IsActive() || (rakeRefreshPending && (rakeDot.ExpiresAt() <= sim.CurrentTime+cat.Wrath.DefaultCast.CastTime+core.GCDDefault)) || ((curCp < 2) && (curEnergy+cat.Wrath.DefaultCast.CastTime.Seconds()*regenRate > furorCap)) {
 			rotation.readyToShift = true
 		} else {
 			cat.Wrath.Cast(sim, cat.CurrentTarget)
@@ -303,22 +316,27 @@ func (rotation *FeralDruidRotation) PickSingleTargetGCDAction(sim *core.Simulati
 	} else if (isClearcast || isBerserk) && (!thrashDot.IsActive() || (thrashDot.RemainingDuration(sim) < thrashDot.BaseTickLength) || (cat.DreamOfCenariusAura.IsActive() && ((curCp < 3) || (curCp == 5)))) {
 		cat.ThrashCat.Cast(sim, cat.CurrentTarget)
 		return
-	} else if isClearcast || !ripRefreshPending || !cat.tempSnapshotAura.IsActive() || (ripRefreshTime + cat.ReactionTime - sim.CurrentTime > core.GCDMin) {
+	} else if isClearcast || !ripRefreshPending || !cat.tempSnapshotAura.IsActive() || (ripRefreshTime+cat.ReactionTime-sim.CurrentTime > core.GCDMin) {
 		fillerSpell := core.Ternary(rotation.ForceMangleFiller || ((curCp < 5) && !isClearcast && !isBerserk), cat.MangleCat, cat.Shred)
 
-		if cat.IncarnationAura.IsActive() {
+		// Force Shred usage in opener.
+		if !rotation.ForceMangleFiller && cat.Berserk.IsReady(sim) && (sim.CurrentTime < cat.Berserk.CD.Duration) {
+			fillerSpell = cat.Shred
+		}
+
+		if cat.IncarnationAura.IsActive() || cat.StampedeAura.IsActive() {
 			fillerSpell = cat.Ravage
 		}
 
 		fillerDpc := fillerSpell.ExpectedInitialDamage(sim, cat.CurrentTarget)
 		rakeDpc := cat.Rake.ExpectedInitialDamage(sim, cat.CurrentTarget)
 
-		if ((fillerDpc < rakeDpc) || (!isBerserk && !isClearcast && (fillerDpc / fillerSpell.DefaultCast.Cost < rakeDpc / cat.Rake.DefaultCast.Cost))) && (cat.Rake.NewSnapshotPower > cat.Rake.CurrentSnapshotPower - 0.001) {
+		if ((fillerDpc < rakeDpc) || (!isBerserk && !isClearcast && (fillerDpc/fillerSpell.DefaultCast.Cost < rakeDpc/cat.Rake.DefaultCast.Cost))) && (cat.Rake.NewSnapshotPower > cat.Rake.CurrentSnapshotPower-0.001) && (!ripDot.IsActive() || (ripDur >= rotation.RipLeeway) || (ripDot.BaseTickCount == cat.RipMaxNumTicks)) {
 			fillerSpell = cat.Rake
 		}
 
 		// Force filler on Clearcasts or when about to Energy cap.
-		if isClearcast || (curEnergy > cat.MaximumEnergy() - regenRate * cat.ReactionTime.Seconds()) {
+		if isClearcast || (curEnergy > cat.MaximumEnergy()-regenRate*cat.ReactionTime.Seconds()) {
 			fillerSpell.Cast(sim, cat.CurrentTarget)
 			return
 		}
@@ -342,4 +360,7 @@ func (rotation *FeralDruidRotation) PickSingleTargetGCDAction(sim *core.Simulati
 	}
 
 	rotation.ProcessNextPlannedAction(sim, nextActionAt)
+}
+
+func (action *FeralDruidRotation) ReResolveVariableRefs(*core.APLRotation, map[string]*proto.APLValue) {
 }
