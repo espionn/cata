@@ -33,7 +33,7 @@ func NewDemonologyWarlock(character *core.Character, options *proto.Player) *Dem
 	}
 
 	demonology.Felguard = demonology.registerFelguard()
-	demonology.registerWildImp(10)
+	demonology.registerWildImp(15)
 	demonology.registerGrimoireOfService()
 	return demonology
 }
