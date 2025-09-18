@@ -1,6 +1,7 @@
 package druid
 
 import (
+	"math"
 	"time"
 
 	"github.com/wowsims/mop/sim/core"
@@ -8,6 +9,10 @@ import (
 )
 
 func (druid *Druid) ApplyTalents() {
+	druid.registerFelineSwiftness()
+	druid.registerDisplacerBeast()
+	druid.registerWildCharge()
+
 	druid.registerYserasGift()
 	druid.registerRenewal()
 	druid.registerCenarionWard()
@@ -16,6 +21,150 @@ func (druid *Druid) ApplyTalents() {
 
 	druid.registerHeartOfTheWild()
 	druid.registerNaturesVigil()
+}
+
+func (druid *Druid) registerFelineSwiftness() {
+	if !druid.Talents.FelineSwiftness {
+		return
+	}
+
+	druid.PseudoStats.MovementSpeedMultiplier *= 1.15
+}
+
+func (druid *Druid) registerDisplacerBeast() {
+	if !druid.Talents.DisplacerBeast || (druid.CatFormAura == nil) {
+		return
+	}
+
+	druid.DisplacerBeastAura = druid.RegisterAura(core.Aura{
+		Label:    "Displacer Beast",
+		ActionID: core.ActionID{SpellID: 137452},
+		Duration: time.Second * 4,
+	})
+
+	exclusiveSpeedEffect := druid.DisplacerBeastAura.NewActiveMovementSpeedEffect(0.5)
+
+	druid.DisplacerBeast = druid.RegisterSpell(Any, core.SpellConfig{
+		ActionID:        core.ActionID{SpellID: 102280},
+		RelatedSelfBuff: druid.DisplacerBeastAura,
+
+		Cast: core.CastConfig{
+			DefaultCast: core.Cast{
+				GCD: core.GCDDefault,
+			},
+
+			IgnoreHaste: true,
+
+			CD: core.Cooldown{
+				Timer:    druid.NewTimer(),
+				Duration: time.Second * 30,
+			},
+		},
+
+		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
+			if !druid.InForm(Cat) {
+				druid.CatFormAura.Activate(sim)
+			}
+
+			druid.DistanceFromTarget = math.Abs(druid.DistanceFromTarget - 20)
+			druid.MoveDuration(core.SpellBatchWindow, sim)
+
+			if !exclusiveSpeedEffect.Category.AnyActive() {
+				druid.DisplacerBeastAura.Activate(sim)
+			}
+
+			// Displacer Beast is a full swing timer reset based on in-game measurements.
+			if druid.DistanceFromTarget > core.MaxMeleeRange {
+				return
+			}
+
+			druid.AutoAttacks.CancelMeleeSwing(sim)
+			pa := sim.GetConsumedPendingActionFromPool()
+			pa.NextActionAt = sim.CurrentTime + druid.AutoAttacks.MainhandSwingSpeed()
+			pa.Priority = core.ActionPriorityDOT
+
+			pa.OnAction = func(sim *core.Simulation) {
+				druid.AutoAttacks.EnableMeleeSwing(sim)
+			}
+
+			sim.AddPendingAction(pa)
+		},
+	})
+
+	druid.AddMajorCooldown(core.MajorCooldown{
+		Spell: druid.DisplacerBeast.Spell,
+		Type:  core.CooldownTypeDPS,
+
+		ShouldActivate: func(_ *core.Simulation, character *core.Character) bool {
+			return (character.DistanceFromTarget >= 20 - core.MaxMeleeRange) && (character.GetAura("Nitro Boosts") == nil)
+		},
+	})
+}
+
+func (druid *Druid) registerWildCharge() {
+	if !druid.Talents.WildCharge {
+		return
+	}
+
+	sharedCD := core.Cooldown{
+		Timer:    druid.NewTimer(),
+		Duration: time.Second * 15,
+	}
+
+	if druid.CatFormAura != nil {
+		druid.registerCatCharge(sharedCD)
+	}
+
+	// TODO: Bear and Moonkin versions
+}
+
+func (druid *Druid) registerCatCharge(sharedCD core.Cooldown) {
+	druid.CatCharge = druid.RegisterSpell(Cat, core.SpellConfig{
+		ActionID: core.ActionID{SpellID: 49376},
+		Flags:    core.SpellFlagAPL,
+		MinRange: 8,
+		MaxRange: 25,
+
+		Cast: core.CastConfig{
+			SharedCD:    sharedCD,
+			IgnoreHaste: true,
+		},
+
+		ExtraCastCondition: func(_ *core.Simulation, _ *core.Unit) bool {
+			return !druid.PseudoStats.InFrontOfTarget && !druid.CannotShredTarget
+		},
+
+		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
+			// Leap speed is around 80 yards/second according to measurements
+			// from boЯsch. This is too fast to be modeled accurately using
+			// movement aura stacks, so do it directly here by setting the
+			// position to 0 instantaneously but introducing a GCD delay based
+			// on the distance traveled.
+			travelTime := core.DurationFromSeconds(druid.DistanceFromTarget / 80)
+			druid.ExtendGCDUntil(sim, max(druid.NextGCDAt(), sim.CurrentTime+travelTime))
+			druid.DistanceFromTarget = 0
+			druid.MoveDuration(travelTime, sim)
+
+			// Measurements from boЯsch indicate that while travel speed (and
+			// therefore special ability delays) is fairly consistent, there
+			// is an additional variable delay on auto-attacks after landing,
+			// likely due to the server needing to perform positional checks.
+			const minAutoDelaySeconds = 0.150
+			const autoDelaySpreadSeconds = 0.6
+
+			randomDelayTime := core.DurationFromSeconds(minAutoDelaySeconds + sim.RandomFloat("Cat Charge")*autoDelaySpreadSeconds)
+			druid.AutoAttacks.CancelMeleeSwing(sim)
+			pa := sim.GetConsumedPendingActionFromPool()
+			pa.NextActionAt = sim.CurrentTime + travelTime + randomDelayTime
+			pa.Priority = core.ActionPriorityDOT
+
+			pa.OnAction = func(sim *core.Simulation) {
+				druid.AutoAttacks.EnableMeleeSwing(sim)
+			}
+
+			sim.AddPendingAction(pa)
+		},
+	})
 }
 
 func (druid *Druid) registerHeartOfTheWild() {

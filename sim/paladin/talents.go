@@ -54,7 +54,7 @@ func (paladin *Paladin) registerSpeedOfLight() {
 		ActionID: actionID,
 		Duration: time.Second * 8,
 	})
-	speedOfLightAura.NewMovementSpeedEffect(0.7)
+	speedOfLightAura.NewActiveMovementSpeedEffect(0.7)
 
 	paladin.RegisterSpell(core.SpellConfig{
 		ActionID:    actionID,
@@ -95,7 +95,7 @@ func (paladin *Paladin) registerLongArmOfTheLaw() {
 		ActionID: core.ActionID{SpellID: 87173},
 		Duration: time.Second * 3,
 	}))
-	longArmOfTheLawAura.NewMovementSpeedEffect(0.45)
+	longArmOfTheLawAura.NewActiveMovementSpeedEffect(0.45)
 
 	core.MakeProcTriggerAura(&paladin.Unit, core.ProcTrigger{
 		Name:           "Long Arm of the Law Trigger" + paladin.Label,

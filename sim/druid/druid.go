@@ -29,6 +29,8 @@ type Druid struct {
 	Barkskin              *DruidSpell
 	Berserk               *DruidSpell
 	CatCharge             *DruidSpell
+	Dash                  *DruidSpell
+	DisplacerBeast        *DruidSpell
 	FaerieFire            *DruidSpell
 	FerociousBite         *DruidSpell
 	ForceOfNature         *DruidSpell
@@ -67,6 +69,8 @@ type Druid struct {
 	BerserkBearAura          *core.Aura
 	BerserkCatAura           *core.Aura
 	CatFormAura              *core.Aura
+	DashAura                 *core.Aura
+	DisplacerBeastAura       *core.Aura
 	FaerieFireAuras          core.AuraArray
 	FrenziedRegenerationAura *core.Aura
 	LunarEclipseProcAura     *core.Aura
@@ -253,6 +257,7 @@ func (druid *Druid) RegisterFeralCatSpells() {
 	druid.registerBerserkCD()
 	// druid.registerCatCharge()
 	druid.registerCatFormSpell()
+	druid.registerDashCD()
 	druid.registerFerociousBiteSpell()
 	druid.registerLacerateSpell()
 	druid.registerMangleBearSpell()

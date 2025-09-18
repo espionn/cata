@@ -117,7 +117,7 @@ func (dk *DeathKnight) registerUnholyPresence() {
 			dk.MultiplyAttackSpeed(sim, 1/hasteMulti)
 			dk.MultiplyCastSpeed(sim, 1/hasteMulti)
 		},
-	}).NewMovementSpeedEffect(0.15)
+	}).NewPassiveMovementSpeedEffect(0.15)
 	presenceAura.Aura.NewExclusiveEffect(presenceEffectCategory, true, core.ExclusiveEffect{})
 
 	dk.UnholyPresenceSpell = dk.RegisterSpell(core.SpellConfig{
