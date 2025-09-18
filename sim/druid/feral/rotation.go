@@ -331,7 +331,7 @@ func (rotation *FeralDruidRotation) PickSingleTargetGCDAction(sim *core.Simulati
 		fillerDpc := fillerSpell.ExpectedInitialDamage(sim, cat.CurrentTarget)
 		rakeDpc := cat.Rake.ExpectedInitialDamage(sim, cat.CurrentTarget)
 
-		if ((fillerDpc < rakeDpc) || (!isBerserk && !isClearcast && (fillerDpc/fillerSpell.DefaultCast.Cost < rakeDpc/cat.Rake.DefaultCast.Cost))) && (cat.Rake.NewSnapshotPower > cat.Rake.CurrentSnapshotPower-0.001) {
+		if ((fillerDpc < rakeDpc) || (!isBerserk && !isClearcast && (fillerDpc/fillerSpell.DefaultCast.Cost < rakeDpc/cat.Rake.DefaultCast.Cost))) && (cat.Rake.NewSnapshotPower > cat.Rake.CurrentSnapshotPower-0.001) && (!ripDot.IsActive() || (ripDur >= rotation.RipLeeway) || (ripDot.BaseTickCount == cat.RipMaxNumTicks)) {
 			fillerSpell = cat.Rake
 		}
 
