@@ -48,7 +48,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 		// Default equipped gear.
 		gear: Presets.PRERAID_PRESET.gear,
 		// Default EP weights for sorting gear in the gear picker.
-		epWeights: Presets.BEARWEAVE_EP_PRESET.epWeights,
+		epWeights: Presets.DOC_EP_PRESET.epWeights,
 		// Default stat caps for the Reforge Optimizer
 		statCaps: (() => {
 			const hitCap = new Stats().withPseudoStat(PseudoStat.PseudoStatPhysicalHitPercent, 7.5);
@@ -111,7 +111,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 	},
 
 	presets: {
-		epWeights: [Presets.BEARWEAVE_EP_PRESET, Presets.MONOCAT_EP_PRESET],
+		epWeights: [Presets.DOC_EP_PRESET, Presets.HOTW_EP_PRESET],
 		// Preset talents that the user can quickly select.
 		talents: [Presets.StandardTalents],
 		rotations: [Presets.SIMPLE_ROTATION_DEFAULT, Presets.APL_ROTATION_DEFAULT],
@@ -232,7 +232,17 @@ export class FeralDruidSimUI extends IndividualSimUI<Spec.SpecFeralDruid> {
 	constructor(parentElem: HTMLElement, player: Player<Spec.SpecFeralDruid>) {
 		super(parentElem, player, SPEC_CONFIG);
 		player.sim.waitForInit().then(() => {
-			new ReforgeOptimizer(this);
+			new ReforgeOptimizer(this, {
+				getEPDefaults: (player: Player<Spec.SpecFeralDruid>) => {
+					if (this.sim.getUseCustomEPValues()) {
+						return player.getEpWeights();
+					} else if (player.getTalents().heartOfTheWild) {
+						return Presets.HOTW_EP_PRESET.epWeights;
+					} else {
+						return Presets.DOC_EP_PRESET.epWeights;
+					}
+				},
+			});
 		});
 	}
 }
