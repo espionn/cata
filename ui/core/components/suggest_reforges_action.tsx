@@ -7,7 +7,7 @@ import i18n from '../../i18n/config.js';
 import * as Mechanics from '../constants/mechanics.js';
 import { IndividualSimUI } from '../individual_sim_ui';
 import { Player } from '../player';
-import { Class, GemColor, ItemSlot, Profession, PseudoStat, ReforgeStat, Spec, Stat } from '../proto/common';
+import { Class, GemColor, ItemSlot, Profession, PseudoStat, Race, ReforgeStat, Spec, Stat } from '../proto/common';
 import { UIGem as Gem, IndividualSimSettings, StatCapType } from '../proto/ui';
 import { isShaTouchedWeapon, isThroneOfThunderWeapon, ReforgeData } from '../proto_utils/equipped_item';
 import { Gear } from '../proto_utils/gear';
@@ -1390,6 +1390,10 @@ export class ReforgeOptimizer {
 
 	// Apply stat dependencies before setting optimization coefficients
 	applyReforgeStat(coefficients: YalpsCoefficients, stat: Stat, amount: number, preCapEPs: Stats) {
+		if (stat == Stat.StatSpirit && this.player.getRace() == Race.RaceHuman) {
+			amount *= 1.03;
+		}
+
 		// Handle Spirit to Spell Hit conversion for hybrid casters separately from standard dependencies
 		if ((stat == Stat.StatSpirit && this.isHybridCaster) || stat == Stat.StatExpertiseRating) {
 			this.setPseudoStatCoefficient(coefficients, PseudoStat.PseudoStatSpellHitPercent, amount / Mechanics.SPELL_HIT_RATING_PER_HIT_PERCENT);
