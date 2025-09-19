@@ -95,7 +95,7 @@ export class EquippedItem {
 		this._gems = gems || [];
 		this._randomSuffix = randomSuffix || null;
 		this._reforge = reforge || null;
-		this._upgrade = upgrade ?? ItemLevelState.Base;
+		this._upgrade = (this.hasUpgrade(upgrade) && upgrade) || ItemLevelState.Base;
 		this._challengeMode = challengeMode ?? false;
 
 		this.numPossibleSockets = this.numSockets(true);
@@ -526,6 +526,10 @@ export class EquippedItem {
 		// Make sure to always exclude Challenge Mode scaling options as those are handled globally
 		// and offset these options by 1 due to items always having a base option.
 		return !!Object.keys(this._item.scalingOptions).filter(upgradeStep => Number(upgradeStep) > 0).length;
+	}
+
+	hasUpgrade(upgrade?: ItemLevelState | null): boolean {
+		return !!(upgrade && this.getUpgrades()[upgrade]);
 	}
 
 	hasExtraGem(): boolean {
