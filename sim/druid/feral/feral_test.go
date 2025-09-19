@@ -30,16 +30,18 @@ func TestFeral(t *testing.T) {
 		Class:      proto.Class_ClassDruid,
 		Race:       proto.Race_RaceWorgen,
 		OtherRaces: []proto.Race{proto.Race_RaceTroll},
-		GearSet:    core.GetGearSet("../../../ui/druid/feral/gear_sets", "preraid"),
+
+		GearSet:     core.GetGearSet("../../../ui/druid/feral/gear_sets", "p1"),
+		ItemSwapSet: core.GetItemSwapGearSet("../../../ui/druid/feral/gear_sets", "p1_item_swap"),
 		OtherGearSets: []core.GearSetCombo{
-			core.GetGearSet("../../../ui/druid/feral/gear_sets", "p1"),
+			core.GetGearSet("../../../ui/druid/feral/gear_sets", "preraid"),
 		},
 
 		Talents: StandardTalents,
 		Glyphs:  StandardGlyphs,
 		OtherTalentSets: []core.TalentsCombo{
-			{Label: "SotF-HotW", Talents: "000101", Glyphs: StandardGlyphs},
-			{Label: "Incarn-NV", Talents: "000203", Glyphs: StandardGlyphs},
+			{Label: "WC-SotF-HotW", Talents: "300101", Glyphs: StandardGlyphs},
+			{Label: "DB-Incarn-NV", Talents: "200203", Glyphs: StandardGlyphs},
 		},
 
 		Consumables:      FullConsumesSpec,
@@ -94,7 +96,7 @@ func TestFeral(t *testing.T) {
 // 	core.RaidBenchmark(b, rsr)
 // }
 
-var StandardTalents = "000302"
+var StandardTalents = "100302"
 var StandardGlyphs = &proto.Glyphs{
 	Major1: 40923,
 	Major2: 40914,

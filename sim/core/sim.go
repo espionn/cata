@@ -26,8 +26,9 @@ type Simulation struct {
 
 	Options *proto.SimOptions
 
-	rand  Rand
-	rseed int64
+	rand        Rand
+	rseed       int64
+	currentSeed int64
 
 	// Used for testing only, see RandomFloat().
 	isTest    bool
@@ -201,8 +202,9 @@ func newSimWithEnv(env *Environment, simOptions *proto.SimOptions, signals simsi
 		Environment: env,
 		Options:     simOptions,
 
-		rand:  NewSplitMix(uint64(rseed)),
-		rseed: rseed,
+		rand:        NewSplitMix(uint64(rseed)),
+		rseed:       rseed,
+		currentSeed: rseed,
 
 		isTest:    simOptions.IsTest || simOptions.UseLabeledRands,
 		testRands: make(map[string]Rand),
@@ -245,6 +247,7 @@ func (sim *Simulation) labelRand(label string) Rand {
 
 func (sim *Simulation) reseedRands(i int64) {
 	rseed := sim.Options.RandomSeed + i
+	sim.currentSeed = rseed
 	sim.rand.Seed(rseed)
 
 	if sim.isTest {

@@ -194,6 +194,37 @@ func (value *APLValueDotTickFrequency) String() string {
 	return fmt.Sprintf("Dot Tick Frequency(%s)", value.dot.Get().Spell.ActionID)
 }
 
+type APLValueDotBaseDuration struct {
+	DefaultAPLValueImpl
+	baseDuration time.Duration
+	spell        *Spell
+}
+
+func (rot *APLRotation) newValueDotBaseDuration(config *proto.APLValueDotBaseDuration, _ *proto.UUID) APLValue {
+	dot := rot.GetAPLDot(rot.GetTargetUnit(&proto.UnitReference{
+		Type:  proto.UnitReference_Target,
+		Index: rot.unit.Index,
+	}), config.SpellId)
+
+	if dot == nil {
+		return nil
+	}
+	return &APLValueDotBaseDuration{
+		baseDuration: dot.BaseDuration(),
+		spell:        dot.Spell,
+	}
+}
+
+func (value *APLValueDotBaseDuration) Type() proto.APLValueType {
+	return proto.APLValueType_ValueTypeDuration
+}
+func (value *APLValueDotBaseDuration) GetDuration(_ *Simulation) time.Duration {
+	return value.baseDuration
+}
+func (value *APLValueDotBaseDuration) String() string {
+	return fmt.Sprintf("Dot Base Duration(%s)", value.spell.ActionID)
+}
+
 type APLValueDotIncreaseCheck struct {
 	DefaultAPLValueImpl
 	spell    *Spell

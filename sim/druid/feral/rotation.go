@@ -35,10 +35,10 @@ func (cat *FeralDruid) newActionCatOptimalRotationAction(config *proto.APLAction
 		rotation.RipLeeway = core.DurationFromSeconds(config.RipLeeway)
 	} else {
 		rotation.UseBite = true
-		rotation.BiteTime = core.TernaryDuration(rotation.UseHealingTouch, time.Second*9, time.Second*12)
-		rotation.BerserkBiteTime = time.Second * 7
+		rotation.BiteTime = core.TernaryDuration(rotation.UseHealingTouch, time.Second*4, time.Second*7)
+		rotation.BerserkBiteTime = core.TernaryDuration(rotation.UseHealingTouch, time.Second*3, time.Second*7)
 		rotation.MinRoarOffset = time.Second * 40
-		rotation.RipLeeway = core.TernaryDuration(rotation.UseHealingTouch, time.Second*2, time.Second*6)
+		rotation.RipLeeway = core.TernaryDuration(rotation.UseHealingTouch, time.Second*2, time.Second*5)
 	}
 
 	// Pre-allocate PoolingActions
@@ -124,13 +124,17 @@ func (rotation *FeralDruidRotation) Execute(sim *core.Simulation) {
 	}
 
 	if cat.DistanceFromTarget > core.MaxMeleeRange {
-		// TODO: Wild Charge or Displacer Beast usage here
-		if sim.Log != nil {
-			cat.Log(sim, "Out of melee range (%.6fy) and cannot charge or teleport, initiating manual run-in...", cat.DistanceFromTarget)
-		}
+		// Try leaping if no boots
+		if !cat.GetAura("Nitro Boosts").IsActive() && cat.Talents.WildCharge && cat.CatCharge.CanCast(sim, cat.CurrentTarget) {
+			cat.CatCharge.Cast(sim, cat.CurrentTarget)
+		} else {
+			if sim.Log != nil {
+				cat.Log(sim, "Out of melee range (%.6fy) and cannot charge or teleport, initiating manual run-in...", cat.DistanceFromTarget)
+			}
 
-		cat.MoveTo(core.MaxMeleeRange-1, sim) // movement aura is discretized in 1 yard intervals, so need to overshoot to guarantee melee range
-		return
+			cat.MoveTo(core.MaxMeleeRange-1, sim) // movement aura is discretized in 1 yard intervals, so need to overshoot to guarantee melee range
+			return
+		}
 	}
 
 	if !cat.GCD.IsReady(sim) {
@@ -315,6 +319,11 @@ func (rotation *FeralDruidRotation) PickSingleTargetGCDAction(sim *core.Simulati
 	} else if isClearcast || !ripRefreshPending || !cat.tempSnapshotAura.IsActive() || (ripRefreshTime+cat.ReactionTime-sim.CurrentTime > core.GCDMin) {
 		fillerSpell := core.Ternary(rotation.ForceMangleFiller || ((curCp < 5) && !isClearcast && !isBerserk), cat.MangleCat, cat.Shred)
 
+		// Force Shred usage in opener.
+		if !rotation.ForceMangleFiller && cat.Berserk.IsReady(sim) && (sim.CurrentTime < cat.Berserk.CD.Duration) {
+			fillerSpell = cat.Shred
+		}
+
 		if cat.IncarnationAura.IsActive() || cat.StampedeAura.IsActive() {
 			fillerSpell = cat.Ravage
 		}
@@ -322,7 +331,7 @@ func (rotation *FeralDruidRotation) PickSingleTargetGCDAction(sim *core.Simulati
 		fillerDpc := fillerSpell.ExpectedInitialDamage(sim, cat.CurrentTarget)
 		rakeDpc := cat.Rake.ExpectedInitialDamage(sim, cat.CurrentTarget)
 
-		if ((fillerDpc < rakeDpc) || (!isBerserk && !isClearcast && (fillerDpc/fillerSpell.DefaultCast.Cost < rakeDpc/cat.Rake.DefaultCast.Cost))) && (cat.Rake.NewSnapshotPower > cat.Rake.CurrentSnapshotPower-0.001) {
+		if ((fillerDpc < rakeDpc) || (!isBerserk && !isClearcast && (fillerDpc/fillerSpell.DefaultCast.Cost < rakeDpc/cat.Rake.DefaultCast.Cost))) && (cat.Rake.NewSnapshotPower > cat.Rake.CurrentSnapshotPower-0.001) && (!ripDot.IsActive() || (ripDur >= rotation.RipLeeway) || (ripDot.BaseTickCount == cat.RipMaxNumTicks)) {
 			fillerSpell = cat.Rake
 		}
 

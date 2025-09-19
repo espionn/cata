@@ -23,7 +23,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 	cssClass: 'feral-druid-sim-ui',
 	cssScheme: PlayerClasses.getCssClass(PlayerClasses.Druid),
 	// Override required talent rows - Feral only requires rows 3 and 5 instead of all rows
-	requiredTalentRows: [3, 5],
+	requiredTalentRows: [0, 3, 5],
 	// List any known bugs / issues here and they'll be shown on the site.
 	knownIssues: [],
 	warnings: [],
@@ -52,7 +52,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 		// Default equipped gear.
 		gear: Presets.PRERAID_PRESET.gear,
 		// Default EP weights for sorting gear in the gear picker.
-		epWeights: Presets.BEARWEAVE_EP_PRESET.epWeights,
+		epWeights: Presets.DOC_EP_PRESET.epWeights,
 		// Default stat caps for the Reforge Optimizer
 		statCaps: (() => {
 			const hitCap = new Stats().withPseudoStat(PseudoStat.PseudoStatPhysicalHitPercent, 7.5);
@@ -115,13 +115,13 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 	},
 
 	presets: {
-		epWeights: [Presets.BEARWEAVE_EP_PRESET, Presets.MONOCAT_EP_PRESET],
+		epWeights: [Presets.DOC_EP_PRESET, Presets.HOTW_EP_PRESET],
 		// Preset talents that the user can quickly select.
 		talents: [Presets.StandardTalents],
 		rotations: [Presets.SIMPLE_ROTATION_DEFAULT, Presets.APL_ROTATION_DEFAULT],
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.PRERAID_PRESET, Presets.PREHOF_PRESET, Presets.PRETOES_PRESET, Presets.P1_PRESET],
-		itemSwaps: [],
+		gear: [Presets.PRERAID_PRESET, Presets.P1_PRESET],
+		itemSwaps: [Presets.ITEM_SWAP_PRESET],
 		builds: [
 			//Presets.PRESET_BUILD_DEFAULT,
 			//Presets.PRESET_BUILD_TENDON,
@@ -238,6 +238,15 @@ export class FeralDruidSimUI extends IndividualSimUI<Spec.SpecFeralDruid> {
 		super(parentElem, player, SPEC_CONFIG);
 		player.sim.waitForInit().then(() => {
 			new ReforgeOptimizer(this, {
+				getEPDefaults: (player: Player<Spec.SpecFeralDruid>) => {
+					if (this.sim.getUseCustomEPValues()) {
+						return player.getEpWeights();
+					} else if (player.getTalents().heartOfTheWild) {
+						return Presets.HOTW_EP_PRESET.epWeights;
+					} else {
+						return Presets.DOC_EP_PRESET.epWeights;
+					}
+				},
 				defaultRelativeStatCap: Stat.StatMasteryRating,
 			});
 		});
