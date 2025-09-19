@@ -3,7 +3,7 @@ import tippy from 'tippy.js';
 import { ref } from 'tsx-vanilla';
 
 import { Player } from '../../player';
-import { GemColor, ItemLevelState, ItemQuality, ItemRandomSuffix, ItemSlot, Profession } from '../../proto/common';
+import { GemColor, ItemLevelState, temQuality, ItemRandomSuffix, ItemSlot, Profession, ItemQuality } from '../../proto/common';
 import { UIEnchant as Enchant, UIGem as Gem, UIItem as Item } from '../../proto/ui';
 import { ActionId } from '../../proto_utils/action_id';
 import { EquippedItem, ReforgeData } from '../../proto_utils/equipped_item';
@@ -14,7 +14,6 @@ import { SimUI } from '../../sim_ui';
 import { EventID, TypedEvent } from '../../typed_event';
 import { mod, randomUUID, sanitizeId } from '../../utils';
 import { BaseModal } from '../base_modal';
-import { ChallengeMode } from '../inputs/other_inputs';
 import GearPicker from './gear_picker';
 import ItemList, { GearData, ItemData, ItemListType } from './item_list';
 import { createGemContainer, getEmptySlotIconUrl } from './utils';
@@ -504,7 +503,10 @@ export default class SelectorModal extends BaseModal {
 			onRemove: (eventID: number) => {
 				const equippedItem = gearData.getEquippedItem();
 				if (equippedItem) {
-					gearData.equipItem(eventID, equippedItem.withItem(equippedItem.item).withRandomSuffix(equippedItem._randomSuffix).withUpgrade(equippedItem._upgrade));
+					gearData.equipItem(
+						eventID,
+						equippedItem.withItem(equippedItem.item).withRandomSuffix(equippedItem._randomSuffix).withUpgrade(equippedItem._upgrade),
+					);
 				}
 			},
 		});
@@ -639,7 +641,7 @@ export default class SelectorModal extends BaseModal {
 				const isItemChange = Item.is(item.item);
 				const newItem = gearData.getEquippedItem() || null;
 				const isRandomSuffixChange = prevItem?._randomSuffix?.id !== newItem?.randomSuffix?.id;
-				const isUpgradeChange = prevItem?.upgrade !== newItem?.upgrade;
+				const isUpgradeChange = prevItem?.id === newItem?.id && prevItem?.upgrade !== newItem?.upgrade;
 
 				// If the item changes, then gem slots and random suffix options will also change, so remove and recreate these tabs.
 				if (isItemChange || isRandomSuffixChange || isUpgradeChange) {
