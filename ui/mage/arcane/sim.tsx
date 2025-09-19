@@ -170,7 +170,7 @@ export class ArcaneMageSimUI extends IndividualSimUI<Spec.SpecArcaneMage> {
 					}
 
 					const avgIlvl = player.getGear().getAverageItemLevel(false);
-					if (avgIlvl >= 494) {
+					if (avgIlvl >= 495) {
 						return Presets.P1_BIS_EP_PRESET.epWeights;
 					}
 					return Presets.P1_PREBIS_EP_PRESET.epWeights;
