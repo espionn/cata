@@ -202,8 +202,9 @@ func newSimWithEnv(env *Environment, simOptions *proto.SimOptions, signals simsi
 		Environment: env,
 		Options:     simOptions,
 
-		rand:  NewSplitMix(uint64(rseed)),
-		rseed: rseed,
+		rand:        NewSplitMix(uint64(rseed)),
+		rseed:       rseed,
+		currentSeed: rseed,
 
 		isTest:    simOptions.IsTest || simOptions.UseLabeledRands,
 		testRands: make(map[string]Rand),

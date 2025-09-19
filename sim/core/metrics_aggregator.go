@@ -2,6 +2,7 @@ package core
 
 import (
 	"math"
+	"slices"
 	"time"
 
 	"github.com/wowsims/mop/sim/core/proto"
@@ -589,7 +590,11 @@ func (unitMetrics *UnitMetrics) ToProto() *proto.UnitMetrics {
 		Tto:           unitMetrics.tto.ToProto(),
 		SecondsOomAvg: unitMetrics.oomTimeSum / n,
 		ChanceOfDeath: float64(unitMetrics.numItersDead) / n,
-		DeathSeeds:    unitMetrics.deathSeeds,
+	}
+
+	if len(unitMetrics.deathSeeds) > 0 {
+		slices.Sort(unitMetrics.deathSeeds)
+		protoMetrics.DeathSeeds = unitMetrics.deathSeeds[:]
 	}
 
 	protoMetrics.Actions = make([]*proto.ActionMetrics, 0, len(unitMetrics.actions))
