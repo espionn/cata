@@ -5,6 +5,7 @@ import { DetailedResultsUpdate, SimRun, SimRunData } from '../proto/ui';
 import { SimResult } from '../proto_utils/sim_result';
 import { SimUI } from '../sim_ui';
 import { TypedEvent } from '../typed_event';
+import { isDevMode, sleep } from '../utils';
 import { Component } from './component';
 import { AuraMetricsTable } from './detailed_results/aura_metrics';
 import { CastMetricsTable } from './detailed_results/cast_metrics';
@@ -76,6 +77,8 @@ const tabs: Tab[] = [
 export abstract class DetailedResults extends Component {
 	protected readonly simUI: SimUI | null;
 	protected latestRun: SimRunData | null = null;
+	protected latestDeathSeeds: BigInt[] = [];
+	protected recentlyEditedSeed: boolean = false;
 
 	private currentSimResult: SimResult | null = null;
 	private resultsEmitter: TypedEvent<SimResultData | null> = new TypedEvent<SimResultData | null>();
@@ -287,6 +290,27 @@ export abstract class DetailedResults extends Component {
 
 	protected async setSimRunData(simRunData: SimRunData) {
 		this.latestRun = simRunData;
+		const latestSimResult = this.latestRun?.run?.result;
+		const playerMetrics = latestSimResult?.raidMetrics?.parties.map(party => party.players).flat();
+
+		if (isDevMode() && playerMetrics) {
+			console.log("Found player metrics:");
+			console.log(playerMetrics);
+		}
+
+		if (playerMetrics && (playerMetrics.length > 0)) {
+			const deathSeeds = playerMetrics[0].deathSeeds;
+
+			if (isDevMode() && (deathSeeds.length > 0)) {
+				console.log("Found death seeds:");
+				console.log(deathSeeds);
+			}
+
+			if ((deathSeeds.length > 1) || (this.latestDeathSeeds.length == 0)) {
+				this.latestDeathSeeds = deathSeeds;
+			}
+		}
+
 		await this.postMessage(
 			DetailedResultsUpdate.create({
 				data: {
@@ -299,6 +323,12 @@ export abstract class DetailedResults extends Component {
 
 	protected async updateSettings() {
 		if (!this.simUI) return;
+
+		if (this.recentlyEditedSeed) {
+			this.simUI.sim.setFixedRngSeed(TypedEvent.nextEventID(), 0);
+			this.recentlyEditedSeed = false;
+		}
+
 		await this.postMessage(
 			DetailedResultsUpdate.create({
 				data: {
@@ -378,6 +408,7 @@ export class EmbeddedDetailedResults extends DetailedResults {
 
 		const newTabButtonRef = ref<HTMLButtonElement>();
 		const simButtonRef = ref<HTMLButtonElement>();
+		const deathButtonRef = ref<HTMLButtonElement>();
 
 		this.rootElem.prepend(
 			<div className="detailed-results-controls-div">
@@ -394,6 +425,13 @@ export class EmbeddedDetailedResults extends DetailedResults {
 					disabled={simUI.disabled}
 				>
 					Sim 1 Iteration
+				</button>
+				<button
+					className="detailed-results-death-iteration-button btn btn-primary"
+					ref={deathButtonRef}
+					disabled={true}
+				>
+					Simulate a Death
 				</button>
 			</div>
 		);
@@ -425,11 +463,28 @@ export class EmbeddedDetailedResults extends DetailedResults {
 			(window.opener || window.parent)!.postMessage('runOnce', '*');
 		});
 
+		const deathButton = deathButtonRef.value!;
+		deathButton?.addEventListener('click', () => {
+			if (this.latestDeathSeeds.length > 1) {
+				this.simUI?.sim.setFixedRngSeed(TypedEvent.nextEventID(), Number(this.latestDeathSeeds.pop()));
+				this.recentlyEditedSeed = true;
+
+				if (isDevMode()) {
+					console.log("Setting fixed seed:")
+					console.log(this.simUI?.sim.getFixedRngSeed());
+				}
+			}
+
+			(window.opener || window.parent)!.postMessage('runOnce', '*');
+		});
+
 		simResultsManager.currentChangeEmitter.on(async () => {
 			const runData = simResultsManager.getRunData();
 			if (runData) {
 				await Promise.all([this.updateSettings(), this.setSimRunData(runData)]);
 			}
+
+			deathButton.disabled = (this.latestDeathSeeds.length < 2);
 		});
 	}
 
