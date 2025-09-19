@@ -8,7 +8,7 @@ import { UIEnchant as Enchant, UIGem as Gem, UIItem as Item } from '../../proto/
 import { ActionId } from '../../proto_utils/action_id';
 import { EquippedItem, ReforgeData } from '../../proto_utils/equipped_item';
 import { gemMatchesSocket, getEmptyGemSocketIconUrl } from '../../proto_utils/gems';
-import { shortSecondaryStatNames, slotNames } from '../../proto_utils/names';
+import { translateSlotName, translateStat } from '../../../i18n/localization';
 import { Stats } from '../../proto_utils/stats';
 import { SimUI } from '../../sim_ui';
 import { EventID, TypedEvent } from '../../typed_event';
@@ -18,6 +18,7 @@ import { ChallengeMode } from '../inputs/other_inputs';
 import GearPicker from './gear_picker';
 import ItemList, { GearData, ItemData, ItemListType } from './item_list';
 import { createGemContainer, getEmptySlotIconUrl } from './utils';
+import i18n from '../../../i18n/config';
 
 export enum SelectorModalTabs {
 	Items = 'Items',
@@ -29,6 +30,32 @@ export enum SelectorModalTabs {
 	Gem1 = 'Gem1',
 	Gem2 = 'Gem2',
 	Gem3 = 'Gem3',
+}
+
+// Helper function to get translated tab labels
+export function getTranslatedTabLabel(tab: SelectorModalTabs): string {
+	switch (tab) {
+		case SelectorModalTabs.Items:
+			return i18n.t('gear.gear_picker.tabs.items');
+		case SelectorModalTabs.RandomSuffixes:
+			return i18n.t('gear.gear_picker.tabs.random_suffix');
+		case SelectorModalTabs.Enchants:
+			return i18n.t('gear.gear_picker.tabs.enchants');
+		case SelectorModalTabs.Tinkers:
+			return i18n.t('gear.gear_picker.tabs.tinkers');
+		case SelectorModalTabs.Reforging:
+			return i18n.t('gear.gear_picker.tabs.reforging');
+		case SelectorModalTabs.Upgrades:
+			return i18n.t('gear.gear_picker.tabs.upgrades');
+		case SelectorModalTabs.Gem1:
+			return i18n.t('gear.gear_picker.tabs.gem1');
+		case SelectorModalTabs.Gem2:
+			return i18n.t('gear.gear_picker.tabs.gem2');
+		case SelectorModalTabs.Gem3:
+			return i18n.t('gear.gear_picker.tabs.gem3');
+		default:
+			return tab;
+	}
 }
 
 type SelectorModalOptions = {
@@ -82,18 +109,16 @@ export default class SelectorModal extends BaseModal {
 			<div className="d-flex align-items-center form-text">
 				<i className="fas fa-circle-exclamation fa-xl me-2"></i>
 				<span>
-					If gear is missing, check the selected phase and your gear filters.
+					{i18n.t('gear.gear_picker.missing_gear_message.title')}
 					<br />
-					If the problem persists, save any un-saved data, click the
-					<i className="fas fa-cog mx-1"></i>
-					to open your sim options, then click the "Restore Defaults".
+					{i18n.t('gear.gear_picker.missing_gear_message.description')}
 				</span>
 			</div>,
 		);
 	}
 
 	openTab(selectedSlot: ItemSlot, selectedTab: SelectorModalTabs, gearData: GearData) {
-		this.titleElem.textContent = slotNames.get(selectedSlot) ?? '';
+		this.titleElem.textContent = translateSlotName(selectedSlot) ?? '';
 		this.setData(selectedSlot, selectedTab, gearData);
 		this.setActiveItemSlotTab(selectedSlot);
 		this.open();
@@ -309,7 +334,7 @@ export default class SelectorModal extends BaseModal {
 					setItemData();
 					picker.onUpdate(() => setItemData());
 					tippy(anchorRef.value!, {
-						content: `Edit ${slotNames.get(picker.slot)}`,
+						content: `Edit ${translateSlotName(picker.slot)}`,
 						placement: 'left',
 					});
 					this.itemSlotTabElems.push(wrapper);
@@ -480,10 +505,10 @@ export default class SelectorModal extends BaseModal {
 					name: (
 						<div>
 							<span className="reforge-value negative">
-								{reforgeData.fromAmount} {shortSecondaryStatNames.get(reforgeData.fromStat)}
+								{reforgeData.fromAmount} {translateStat(reforgeData.fromStat)}
 							</span>
 							<span className="reforge-value positive">
-								+{reforgeData.toAmount} {shortSecondaryStatNames.get(reforgeData.toStat)}
+								+{reforgeData.toAmount} {translateStat(reforgeData.toStat)}
 							</span>
 						</div>
 					) as HTMLElement,
@@ -614,7 +639,7 @@ export default class SelectorModal extends BaseModal {
 		if (setTabContent) {
 			setTabContent(tabButton.value!);
 		} else {
-			tabButton.value!.textContent = label;
+			tabButton.value!.textContent = getTranslatedTabLabel(label);
 		}
 
 		const ilist = new ItemList(

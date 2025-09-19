@@ -10,12 +10,12 @@ import { IndividualSimUI } from '../individual_sim_ui';
 import { Player } from '../player.js';
 import { HandType, ItemSlot, PseudoStat, Race, RangedWeaponType, Spec, Stat, WeaponType } from '../proto/common.js';
 import { ActionId } from '../proto_utils/action_id';
-import { getStatName, masterySpellIDs, masterySpellNames } from '../proto_utils/names.js';
+import { getStatName, masterySpellIDs } from '../proto_utils/names.js';
 import { Stats, UnitStat } from '../proto_utils/stats.js';
-import { SimUI } from '../sim_ui';
 import { EventID, TypedEvent } from '../typed_event.js';
 import { Component } from './component.js';
 import { NumberPicker } from './pickers/number_picker.js';
+import { translateMasterySpellName } from '../../i18n/localization.js';
 
 export type StatMods = { base?: Stats; gear?: Stats; talents?: Stats; buffs?: Stats; consumes?: Stats; final?: Stats; stats?: Array<Stat> };
 export type StatWrites = { base: Stats; gear: Stats; talents: Stats; buffs: Stats; consumes: Stats; final: Stats; stats: Array<Stat> };
@@ -142,10 +142,10 @@ export class CharacterStats extends Component {
 						<td className="character-stats-table-label">
 							{statName}
 							{unitStat.equalsStat(Stat.StatMasteryRating) && (
-								<>
+								<div>
 									<br />
-									{masterySpellNames.get(this.player.getSpec())}
-								</>
+									{translateMasterySpellName(this.player.getSpec())}
+								</div>
 							)}
 						</td>
 						<td ref={valueRef} className="character-stats-table-value">
@@ -426,34 +426,34 @@ export class CharacterStats extends Component {
 				const critCapTooltipContent = (
 					<div>
 						<div className="character-stats-tooltip-row">
-							<span>Glancing:</span>
+							<span>{i18n.t('sidebar.character_stats.attack_table.glancing')}</span>
 							<span>{`${meleeCritCapInfo.glancing.toFixed(2)}%`}</span>
 						</div>
 						<div className="character-stats-tooltip-row">
-							<span>Suppression:</span>
+							<span>{i18n.t('sidebar.character_stats.attack_table.suppression')}</span>
 							<span>{`${meleeCritCapInfo.suppression.toFixed(2)}%`}</span>
 						</div>
 						<div className="character-stats-tooltip-row">
-							<span>To Hit Cap:</span>
+							<span>{i18n.t('sidebar.character_stats.attack_table.to_hit_cap')}</span>
 							<span>{`${meleeCritCapInfo.remainingMeleeHitCap.toFixed(2)}%`}</span>
 						</div>
 						<div className="character-stats-tooltip-row">
-							<span>To Exp Cap:</span>
+							<span>{i18n.t('sidebar.character_stats.attack_table.to_exp_cap')}</span>
 							<span>{`${meleeCritCapInfo.remainingExpertiseCap.toFixed(2)}%`}</span>
 						</div>
 						{meleeCritCapInfo.specSpecificOffset != 0 && (
 							<div className="character-stats-tooltip-row">
-								<span>Spec Offsets:</span>
+								<span>{i18n.t('sidebar.character_stats.attack_table.spec_offsets')}</span>
 								<span>{`${meleeCritCapInfo.specSpecificOffset.toFixed(2)}%`}</span>
 							</div>
 						)}
 						<div className="character-stats-tooltip-row">
-							<span>Final Crit Cap:</span>
+							<span>{i18n.t('sidebar.character_stats.attack_table.final_crit_cap')}</span>
 							<span>{`${meleeCritCapInfo.baseCritCap.toFixed(2)}%`}</span>
 						</div>
 						<hr />
 						<div className="character-stats-tooltip-row">
-							<span>Can Raise By:</span>
+							<span>{i18n.t('sidebar.character_stats.attack_table.can_raise_by')}</span>
 							<span>{`${(meleeCritCapInfo.remainingExpertiseCap + meleeCritCapInfo.remainingMeleeHitCap).toFixed(2)}%`}</span>
 						</div>
 					</div>

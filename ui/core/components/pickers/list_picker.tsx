@@ -2,6 +2,8 @@ import clsx from 'clsx';
 import i18n from '../../../i18n/config';
 import tippy, { Instance as TippyInstance } from 'tippy.js';
 
+import i18n from '../../../i18n/config.js';
+import { translateItemLabel } from '../../../i18n/localization';
 import { Player } from '../../player';
 import { APLValidation } from '../../proto/api';
 import { LogLevel } from '../../proto/common';
@@ -244,7 +246,7 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 
 				const deleteButtonTooltip = tippy(deleteButton, {
 					allowHTML: false,
-					content: i18n.t('rotation.apl.listPicker.delete', { itemName: this.config.itemLabel }),
+					content: i18n.t('common.list_picker.delete_item', { itemLabel: translateItemLabel(this.config.itemLabel) }),
 				});
 
 				deleteButton.addEventListener(
@@ -268,7 +270,7 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 			popover.appendChild(copyButton);
 			const copyButtonTooltip = tippy(copyButton, {
 				allowHTML: false,
-				content: i18n.t('rotation.apl.listPicker.copy', { itemName: this.config.itemLabel }),
+				content: i18n.t('common.list_picker.copy_to_new', { itemLabel: translateItemLabel(this.config.itemLabel) }),
 			});
 
 			copyButton.addEventListener(
@@ -297,7 +299,7 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 
 			const moveButtonTooltip = tippy(moveButton, {
 				allowHTML: false,
-				content: i18n.t('rotation.apl.listPicker.moveTooltip'),
+				content: i18n.t('common.list_picker.move_drag_drop'),
 			});
 
 			moveButton.addEventListener(
@@ -543,21 +545,21 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 			LogLevel.Information,
 			{
 				icon: 'fa-info-circle',
-				header: 'Additional Information&#58;',
+				header: i18n.t('common.list_picker.additional_information'),
 			},
 		],
 		[
 			LogLevel.Warning,
 			{
 				icon: 'fa-exclamation-triangle',
-				header: 'This action has warnings, and might not behave as expected.',
+				header: i18n.t('common.list_picker.action_has_warnings'),
 			},
 		],
 		[
 			LogLevel.Error,
 			{
 				icon: 'fa-exclamation-triangle',
-				header: 'This action has errors, and will not behave as expected.',
+				header: i18n.t('common.list_picker.action_has_errors'),
 			},
 		],
 	]);
@@ -567,7 +569,7 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 		validationElem.setAttribute('data-bs-html', 'true');
 		const validationTooltip = tippy(validationElem, {
 			theme: 'dropdown-tooltip',
-			content: 'Warnings',
+			content: i18n.t('common.list_picker.warnings'),
 		});
 
 		itemHeaderElem.appendChild(validationElem);
