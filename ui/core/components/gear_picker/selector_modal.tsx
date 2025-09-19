@@ -3,7 +3,7 @@ import tippy from 'tippy.js';
 import { ref } from 'tsx-vanilla';
 
 import { Player } from '../../player';
-import { GemColor, ItemLevelState, temQuality, ItemRandomSuffix, ItemSlot, Profession, ItemQuality } from '../../proto/common';
+import { GemColor, ItemLevelState, ItemRandomSuffix, ItemSlot, Profession, ItemQuality } from '../../proto/common';
 import { UIEnchant as Enchant, UIGem as Gem, UIItem as Item } from '../../proto/ui';
 import { ActionId } from '../../proto_utils/action_id';
 import { EquippedItem, ReforgeData } from '../../proto_utils/equipped_item';
