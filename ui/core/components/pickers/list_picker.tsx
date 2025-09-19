@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import i18n from '../../../i18n/config';
 import tippy, { Instance as TippyInstance } from 'tippy.js';
 
-import i18n from '../../../i18n/config.js';
 import { translateItemLabel } from '../../../i18n/localization';
 import { Player } from '../../player';
 import { APLValidation } from '../../proto/api';
