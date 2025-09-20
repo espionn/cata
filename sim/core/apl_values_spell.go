@@ -335,7 +335,7 @@ func (value *APLValueSpellGCDHastedDuration) Type() proto.APLValueType {
 	return proto.APLValueType_ValueTypeDuration
 }
 
-func (value *APLValueSpellGCDHastedDuration) GetDuration(sim *Simulation) time.Duration {
+func (value *APLValueSpellGCDHastedDuration) GetDuration(_ *Simulation) time.Duration {
 	gcdMin := TernaryDuration(value.spell.DefaultCast.GCDMin != 0, value.spell.DefaultCast.GCDMin, GCDMin)
 	return max(gcdMin, value.spell.Unit.ApplyCastSpeed(value.spell.DefaultCast.GCD).Round(time.Millisecond))
 }
