@@ -138,7 +138,7 @@ export class SimHeader extends Component {
 	private addKnownIssuesLink() {
 		return this.addToolbarLink({
 			parent: this.simToolbar,
-			text: 'Known Issues',
+			text: i18n.t('info.known_issues'),
 			tooltip: this.knownIssuesContent,
 			classes: 'known-issues link-danger hide',
 		});
@@ -159,7 +159,7 @@ export class SimHeader extends Component {
 			href: REPO_CHOOSE_NEW_ISSUE_URL,
 			parent: this.simToolbar,
 			icon: 'fas fa-bug fa-lg',
-			tooltip: 'Report a bug or<br>Request a feature',
+			tooltip: i18n.t('info.bug_report'),
 		});
 	}
 
@@ -204,7 +204,7 @@ export class SimHeader extends Component {
 		this.addToolbarLink({
 			parent: this.simToolbar,
 			icon: 'fas fa-cog fa-lg',
-			tooltip: 'Show Sim Options',
+			tooltip: i18n.t('info.sim_options'),
 			classes: 'sim-options',
 			onclick: () => settingsMenu.open(),
 		});

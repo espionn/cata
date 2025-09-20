@@ -12,7 +12,8 @@ import { UIGem as Gem, IndividualSimSettings, StatCapType } from '../proto/ui';
 import { isShaTouchedWeapon, isThroneOfThunderWeapon, ReforgeData } from '../proto_utils/equipped_item';
 import { Gear } from '../proto_utils/gear';
 import { gemMatchesSocket, gemMatchesStats } from '../proto_utils/gems';
-import { shortSecondaryStatNames, slotNames, statCapTypeNames } from '../proto_utils/names';
+import { statCapTypeNames } from '../proto_utils/names';
+import { translateSlotName, translateStat } from '../../i18n/localization';
 import { pseudoStatIsCapped, StatCap, statIsCapped, Stats, UnitStat, UnitStatPresets } from '../proto_utils/stats';
 import { Sim } from '../sim';
 import { ActionGroupItem } from '../sim_ui';
@@ -238,7 +239,7 @@ export class ReforgeOptimizer {
 		this.defaultRelativeStatCap = options?.defaultRelativeStatCap ?? null;
 
 		const startReforgeOptimizationEntry: ActionGroupItem = {
-			label: i18n.t('sidebar.buttons.suggest_reforges'),
+			label: i18n.t('sidebar.buttons.suggest_reforges.title'),
 			cssClass: 'suggest-reforges-action-button flex-grow-1',
 			onClick: async ({ currentTarget }) => {
 				const button = currentTarget as HTMLButtonElement;
@@ -306,7 +307,7 @@ export class ReforgeOptimizer {
 
 		tippy(contextMenuButton, {
 			placement: 'bottom',
-			content: 'Change Reforge Optimizer settings',
+			content: i18n.t('sidebar.buttons.suggest_reforges.tooltip'),
 		});
 
 		this.buildContextMenu(contextMenuButton);
@@ -441,7 +442,7 @@ export class ReforgeOptimizer {
 	buildReforgeButtonTooltip() {
 		return (
 			<>
-				<p>The following breakpoints have been implemented for this spec:</p>
+				<p>{i18n.t('sidebar.buttons.suggest_reforges.breakpoints_implemented')}</p>
 				<table className="w-100">
 					<tbody>
 						{this.softCapsConfigWithLimits?.map(({ unitStat, breakpoints, capType, postCapEPs }, index) => (
@@ -467,7 +468,7 @@ export class ReforgeOptimizer {
 										<em>%</em>
 									</th>
 									<th colSpan={2} className="text-nowrap text-end">
-										<em>Post cap EP</em>
+										<em>{i18n.t('sidebar.buttons.suggest_reforges.post_cap_ep')}</em>
 									</th>
 								</tr>
 								{breakpoints.map((breakpoint, breakpointIndex) => (
@@ -542,7 +543,7 @@ export class ReforgeOptimizer {
 				const useCustomEPValuesInput = new BooleanPicker(null, this.player, {
 					extraCssClasses: ['mb-2'],
 					id: 'reforge-optimizer-enable-custom-ep-weights',
-					label: 'Use custom EP Weights',
+					label: i18n.t('sidebar.buttons.stat_weights.ep_weights.use_custom'),
 					inline: true,
 					changedEvent: () => this.sim.useCustomEPValuesChangeEmitter,
 					getValue: () => this.sim.getUseCustomEPValues(),
@@ -551,11 +552,11 @@ export class ReforgeOptimizer {
 					},
 				});
 				let useSoftCapBreakpointsInput: BooleanPicker<Player<any>> | null = null;
-				if (!!this.softCapsConfig?.length) {
+				if (this.softCapsConfig?.length) {
 					useSoftCapBreakpointsInput = new BooleanPicker(null, this.player, {
 						extraCssClasses: ['mb-2'],
 						id: 'reforge-optimizer-enable-soft-cap-breakpoints',
-						label: 'Use soft cap breakpoints',
+						label: i18n.t('sidebar.buttons.suggest_reforges.use_soft_cap_breakpoints'),
 						inline: true,
 						changedEvent: () => this.sim.useSoftCapBreakpointsChangeEmitter,
 						getValue: () => this.sim.getUseSoftCapBreakpoints(),
@@ -568,10 +569,10 @@ export class ReforgeOptimizer {
 				const forcedProcInput = new EnumPicker(null, this.player, {
 					extraCssClasses: ['mb-2'],
 					id: 'reforge-optimizer-force-stat-proc',
-					label: 'Force RoRo proc',
+					label: i18n.t('sidebar.buttons.suggest_reforges.force_stat_proc'),
 					defaultValue: this.defaultRelativeStatCap ?? -1,
 					values: [
-						{ name: 'Any', value: -1 },
+						{ name: i18n.t('sidebar.buttons.suggest_reforges.any'), value: -1 },
 						...[...RelativeStatCap.relevantStats].map(stat => {
 							return {
 								name: UnitStat.fromStat(stat).getShortName(this.playerClass),
@@ -610,8 +611,8 @@ export class ReforgeOptimizer {
 				const includeGemsInput = new BooleanPicker(null, this.player, {
 					extraCssClasses: ['mb-2'],
 					id: 'reforge-optimizer-include-gems',
-					label: 'Include gems',
-					labelTooltip: 'Optimize gems and Reforges simultaneously.',
+					label: i18n.t('sidebar.buttons.stat_weights.ep_weights.options.include_gems'),
+					labelTooltip: i18n.t('sidebar.buttons.suggest_reforges.optimize_gems_tooltip'),
 					inline: true,
 					changedEvent: () => this.includeGemsChangeEmitter,
 					getValue: () => this.includeGems,
@@ -641,9 +642,8 @@ export class ReforgeOptimizer {
 				const freezeItemSlotsInput = new BooleanPicker(null, this.player, {
 					extraCssClasses: ['mb-2'],
 					id: 'reforge-optimizer-freeze-item-slots',
-					label: 'Freeze item slots',
-					labelTooltip:
-						'Flag one or more item slots to be "frozen", which will prevent the optimizer from changing the Reforge or gems in that slot from their current settings. This can be useful for hybrid classes who use the same gear piece for multiple raid roles.',
+					label: i18n.t('sidebar.buttons.stat_weights.ep_weights.options.freeze_item_slots'),
+					labelTooltip: i18n.t('sidebar.buttons.suggest_reforges.freeze_item_slots_tooltip'),
 					inline: true,
 					changedEvent: () => this.freezeItemSlotsChangeEmitter,
 					getValue: () => this.freezeItemSlots,
@@ -671,9 +671,9 @@ export class ReforgeOptimizer {
 					<>
 						{useCustomEPValuesInput.rootElem}
 						<div ref={descriptionRef} className={clsx('mb-0', this.sim.getUseCustomEPValues() && 'hide')}>
-							<p>This will enable modification of the default EP weights and setting custom stat caps.</p>
-							<p>Ep weights can be modified in the Stat Weights editor.</p>
-							<p>If you want to hard cap a stat make sure to put the EP for that stat higher.</p>
+							<p>{i18n.t('sidebar.buttons.stat_weights.ep_weights.description.enable_modification')}</p>
+							<p>{i18n.t('sidebar.buttons.stat_weights.ep_weights.description.modify_in_editor')}</p>
+							<p>{i18n.t('sidebar.buttons.stat_weights.ep_weights.description.hard_cap_info')}</p>
 						</div>
 						{this.buildCapsList({
 							useCustomEPValuesInput: useCustomEPValuesInput,
@@ -716,7 +716,7 @@ export class ReforgeOptimizer {
 							{slots.map(slot => {
 								const picker = new BooleanPicker(null, this.player, {
 									id: 'reforge-optimizer-freeze-' + ItemSlot[slot],
-									label: slotNames.get(slot),
+									label: translateSlotName(slot),
 									inline: true,
 									changedEvent: () => this.freezeItemSlotsChangeEmitter,
 									getValue: () => this.frozenItemSlots.get(slot) || false,
@@ -756,7 +756,7 @@ export class ReforgeOptimizer {
 					<tr>
 						<th colSpan={3} className="pb-3">
 							<div className="d-flex">
-								<h6 className="content-block-title mb-0 me-1">Edit stat caps</h6>
+								<h6 className="content-block-title mb-0 me-1">{i18n.t('sidebar.buttons.suggest_reforges.edit_stat_caps')}</h6>
 								<button ref={statCapTooltipRef} className="d-inline">
 									<i className="fa-regular fa-circle-question" />
 								</button>
@@ -767,7 +767,7 @@ export class ReforgeOptimizer {
 						</th>
 					</tr>
 					<tr>
-						<th>Stat</th>
+						<th>{i18n.t('sidebar.buttons.suggest_reforges.stat')}</th>
 						<th colSpan={2} className="text-end">
 							%
 						</th>
@@ -810,7 +810,7 @@ export class ReforgeOptimizer {
 									extraCssClasses: ['mb-0'],
 									label: '',
 									values: [
-										{ name: 'Select preset', value: 0 },
+										{ name: i18n.t('sidebar.buttons.suggest_reforges.select_preset'), value: 0 },
 										...[...statPresets.keys()].map(key => {
 											const percentValue = statPresets.get(key)!;
 
@@ -869,14 +869,13 @@ export class ReforgeOptimizer {
 
 		if (statCapTooltipRef.value) {
 			const tooltip = tippy(statCapTooltipRef.value, {
-				content:
-					'Stat caps are the maximum amount of a stat that can be gained from Reforging. If a stat exceeds its cap, the optimizer will attempt to reduce it to the cap value.',
+				content: i18n.t('sidebar.buttons.suggest_reforges.stat_caps_tooltip'),
 			});
 			useCustomEPValuesInput.addOnDisposeCallback(() => tooltip.destroy());
 		}
 		if (defaultStatCapsButtonRef.value) {
 			const tooltip = tippy(defaultStatCapsButtonRef.value, {
-				content: 'Reset to stat cap defaults',
+				content: i18n.t('sidebar.buttons.suggest_reforges.reset_to_defaults'),
 			});
 			useCustomEPValuesInput.addOnDisposeCallback(() => tooltip.destroy());
 		}
@@ -920,7 +919,7 @@ export class ReforgeOptimizer {
 							this.simUI.epWeightsModal?.open();
 							hideAll();
 						}}>
-						Edit weights
+						{i18n.t('sidebar.buttons.stat_weights.ep_weights.buttons.edit_weights')}
 					</button>
 				)}
 			</>
@@ -939,7 +938,7 @@ export class ReforgeOptimizer {
 					<tr>
 						<th colSpan={3} className="pb-3">
 							<div className="d-flex">
-								<h6 className="content-block-title mb-0 me-1">Breakpoint limit</h6>
+								<h6 className="content-block-title mb-0 me-1">{i18n.t('sidebar.buttons.suggest_reforges.breakpoint_limit')}</h6>
 								<button ref={breakpointsLimitTooltipRef} className="d-inline">
 									<i className="fa-regular fa-circle-question" />
 								</button>
@@ -966,7 +965,7 @@ export class ReforgeOptimizer {
 										extraCssClasses: ['mb-0'],
 										label: '',
 										values: [
-											{ name: 'No limit set', value: 0 },
+											{ name: i18n.t('sidebar.buttons.suggest_reforges.no_limit_set'), value: 0 },
 											...breakpoints.map(breakpoint => ({
 												name: `${this.breakpointValueToDisplayPercentage(breakpoint, unitStat)}%`,
 												value: breakpoint,
@@ -1003,7 +1002,7 @@ export class ReforgeOptimizer {
 
 		if (breakpointsLimitTooltipRef.value) {
 			const tooltip = tippy(breakpointsLimitTooltipRef.value, {
-				content: 'Allows you to set a custom breakpoint limit.',
+				content: i18n.t('sidebar.buttons.suggest_reforges.breakpoint_limit_tooltip'),
 			});
 			useSoftCapBreakpointsInput.addOnDisposeCallback(() => tooltip.destroy());
 		}
@@ -1757,21 +1756,25 @@ export class ReforgeOptimizer {
 		const copyButtonContainerRef = ref<HTMLDivElement>();
 		const changedReforgeMessage = (
 			<>
-				<p className="mb-0">The following items were reforged:</p>
+				<p className="mb-0">{i18n.t('gear.reforge_success.title')}</p>
 				<ul>
 					{[...changedSlots].map(([slot, reforge]) => {
 						if (reforge) {
-							const slotName = slotNames.get(slot);
+							const slotName = translateSlotName(slot);
 							const { fromStat, toStat } = reforge;
-							const fromText = shortSecondaryStatNames.get(fromStat);
-							const toText = shortSecondaryStatNames.get(toStat);
+							const fromText = translateStat(fromStat);
+							const toText = translateStat(toStat);
 							return (
 								<li>
 									{slotName}: {fromText} → {toText}
 								</li>
 							);
 						} else {
-							return <li>{slotNames.get(slot)}: Removed reforge</li>;
+							return (
+								<li>
+									{translateSlotName(slot)}: {i18n.t('gear.reforge_success.removed_reforge')}
+								</li>
+							);
 						}
 					})}
 				</ul>
@@ -1785,13 +1788,13 @@ export class ReforgeOptimizer {
 				new CopyButton(copyButtonContainerRef.value!, {
 					extraCssClasses: ['btn-outline-primary'],
 					getContent: () => JSON.stringify(settingsExport),
-					text: 'Copy to Reforge Lite',
+					text: i18n.t('gear.reforge_success.copy_to_reforge_lite'),
 				});
 		}
 
 		new Toast({
 			variant: 'success',
-			body: hasReforgeChanges ? changedReforgeMessage : <>No reforge changes were made!</>,
+			body: hasReforgeChanges ? changedReforgeMessage : <>{i18n.t('gear.reforge_success.no_changes')}</>,
 			delay: hasReforgeChanges ? 5000 : 3000,
 		});
 	}
@@ -1802,7 +1805,7 @@ export class ReforgeOptimizer {
 		if (this.previousGear) this.updateGear(this.previousGear);
 		new Toast({
 			variant: 'error',
-			body: 'Reforge optimization failed. Please try again, or report the issue if it persists.',
+			body: i18n.t('sidebar.buttons.suggest_reforges.reforge_optimization_failed'),
 		});
 	}
 }

@@ -2,6 +2,7 @@ import * as InputHelpers from '../core/components/input_helpers.js';
 import { RogueOptions_PoisonOptions as Poison } from '../core/proto/rogue.js';
 import { ActionId } from '../core/proto_utils/action_id.js';
 import { RogueSpecs } from '../core/proto_utils/utils';
+import i18n from '../i18n/config.js';
 
 // Configuration for class-specific UI elements on the settings tab.
 // These don't need to be in a separate file but it keeps things cleaner.
@@ -37,6 +38,6 @@ export const LethalPoison = <SpecType extends RogueSpecs>() =>
 export const ApplyPoisonsManually = <SpecType extends RogueSpecs>() =>
 	InputHelpers.makeClassOptionsBooleanInput<SpecType>({
 		fieldName: 'applyPoisonsManually',
-		label: 'Configure poisons manually',
-		labelTooltip: 'Prevent automatic poison configuration that is based on equipped weapons.',
+		label: i18n.t('rotation.options.rogue.apply_poisons_manually.label'),
+		labelTooltip: i18n.t('rotation.options.rogue.apply_poisons_manually.tooltip'),
 	});

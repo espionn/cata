@@ -32,7 +32,6 @@ import { addRaidSimAction, RaidSimResultsManager } from './components/raid_sim_a
 import { SavedDataConfig } from './components/saved_data_manager';
 import { addStatWeightsAction, EpWeightsMenu, StatWeightActionSettings } from './components/stat_weights_action';
 import { SimSettingCategories } from './constants/sim_settings';
-import * as Tooltips from './constants/tooltips';
 import { simLaunchStatuses } from './launched_sims';
 import { Player, PlayerConfig, registerSpecConfig as registerPlayerConfig } from './player';
 import { PlayerSpecs } from './player_specs';
@@ -263,7 +262,10 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 				}
 
 				const metaGem = this.player.getGear().getMetaGem()!;
-				return `Meta gem disabled (${metaGem.name}): ${getMetaGemConditionDescription(metaGem)}`;
+				return i18n.t('sidebar.warnings.meta_gem_disabled', {
+					gemName: metaGem.name,
+					description: getMetaGemConditionDescription(metaGem)
+				});
 			},
 		});
 		this.addWarning({
@@ -274,7 +276,10 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 					return '';
 				}
 
-				return failedProfReqs.map(fpr => `${fpr.name} requires ${professionNames.get(fpr.requiredProfession)!}, but it is not selected.`);
+				return failedProfReqs.map(fpr => i18n.t('sidebar.warnings.profession_requirement', {
+					itemName: fpr.name,
+					professionName: professionNames.get(fpr.requiredProfession)!
+				}));
 			},
 		});
 		this.addWarning({
@@ -285,7 +290,9 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 					return '';
 				}
 
-				return `Only 2 Jewelcrafting Gems are allowed, but ${jcGems.length} are equipped.`;
+				return i18n.t('sidebar.warnings.too_many_jc_gems', {
+					count: jcGems.length
+				});
 			},
 		});
 		this.addWarning({
@@ -300,7 +307,9 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 				} else if (!hasRequiredTalents(this.player.getSpecConfig(), this.player.getTalentsString())) {
 					const missingRows = getMissingTalentRows(this.player.getSpecConfig(), this.player.getTalentsString());
 					const missingRowNumbers = missingRows.map(row => row + 1).join(', ');
-					return `Missing required talent selections in row ${missingRowNumbers}.`;
+					return i18n.t('sidebar.warnings.unspent_talent_points', {
+						rowNumbers: missingRowNumbers
+					});
 				} else {
 					return '';
 				}
@@ -314,9 +323,9 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 				}
 
 				if (this.player.hasArmorSpecializationBonus()) {
-					return `Equip ${armorTypeNames.get(
-						this.player.armorSpecializationArmorType,
-					)} gear in each slot for the Armor Specialization (5% primary stat) effect.`;
+					return i18n.t('sidebar.warnings.armor_specialization', {
+						armorType: armorTypeNames.get(this.player.armorSpecializationArmorType)
+					});
 				} else {
 					return '';
 				}
@@ -331,7 +340,7 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 						this.player.getEquippedItem(ItemSlot.ItemSlotOffHand) != null) ||
 						this.player.getEquippedItem(ItemSlot.ItemSlotOffHand)?.item.handType == HandType.HandTypeTwoHand)
 				) {
-					return "Dual wielding two-handed weapon(s) without Titan's Grip spec.";
+					return i18n.t('sidebar.warnings.dual_wield_2h_without_titans_grip');
 				} else {
 					return '';
 				}
@@ -347,7 +356,7 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 				this.loadSettings();
 
 				if (this.player.getPlayerSpec().isHealingSpec && !isDevMode()) {
-					alert(Tooltips.HEALING_SIM_DISCLAIMER);
+					alert(i18n.t('sim.healing_sim_disclaimer'));
 				}
 			});
 		}

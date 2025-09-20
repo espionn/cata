@@ -5,10 +5,11 @@ import { IndividualSimSettings } from '../../../proto/ui';
 import { getEnumValues, jsonStringifyWithFlattenedPaths } from '../../../utils';
 import { IndividualImporter } from '../importers/individual_importer';
 import { IndividualExporter } from './individual_exporter';
+import i18n from '../../../../i18n/config';
 
 export class IndividualJsonExporter<SpecType extends Spec> extends IndividualExporter<SpecType> {
 	constructor(parent: HTMLElement, simUI: IndividualSimUI<SpecType>) {
-		super(parent, simUI, { title: 'JSON Export', allowDownload: true, selectCategories: true });
+		super(parent, simUI, { title: i18n.t('export.json.title'), allowDownload: true, selectCategories: true });
 	}
 
 	getData(): string {

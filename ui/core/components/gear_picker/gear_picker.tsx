@@ -8,7 +8,8 @@ import { UIEnchant as Enchant, UIGem as Gem } from '../../proto/ui';
 import { ActionId } from '../../proto_utils/action_id';
 import { getEnchantDescription } from '../../proto_utils/enchants';
 import { EquippedItem } from '../../proto_utils/equipped_item';
-import { shortSecondaryStatNames, slotNames } from '../../proto_utils/names';
+import { translateSlotName, translateStat } from '../../../i18n/localization';
+import i18n from '../../../i18n/config';
 import { SimUI } from '../../sim_ui';
 import { EventID } from '../../typed_event';
 import { Component } from '../component';
@@ -189,9 +190,14 @@ export class ItemRenderer extends Component {
 
 		const reforgeData = newItem.withDynamicStats().getReforgeData();
 		if (reforgeData) {
-			const fromText = shortSecondaryStatNames.get(reforgeData.reforge?.fromStat);
-			const toText = shortSecondaryStatNames.get(reforgeData.reforge?.toStat);
-			this.reforgeElem.innerText = `Reforged ${Math.abs(reforgeData.fromAmount)} ${fromText} → ${reforgeData.toAmount} ${toText}`;
+			const fromText = translateStat(reforgeData.reforge?.fromStat);
+			const toText = translateStat(reforgeData.reforge?.toStat);
+			this.reforgeElem.innerText = i18n.t('gear.gear_picker.reforge_text', {
+				fromAmount: Math.abs(reforgeData.fromAmount),
+				fromStat: fromText,
+				toAmount: reforgeData.toAmount,
+				toStat: toText
+			});
 			this.reforgeElem.classList.remove('hide');
 		} else {
 			this.reforgeElem.innerText = '';
@@ -368,7 +374,7 @@ export class ItemPicker extends Component {
 		this.itemElem.clear(this.slot);
 		// Clear quick swap gems array since gem sockets are rerendered every time
 		this.quickSwapGemPopover = [];
-		this.itemElem.nameElem.textContent = slotNames.get(this.slot) ?? '';
+		this.itemElem.nameElem.textContent = translateSlotName(this.slot);
 		setItemQualityCssClass(this.itemElem.nameElem, null);
 
 		if (!!newItem) {

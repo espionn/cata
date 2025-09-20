@@ -1,12 +1,13 @@
 import { Player } from '../../player.js';
 import { Stat } from '../../proto/common.js';
 import { IndividualSimSettings } from '../../proto/ui.js';
-import { shortSecondaryStatNames } from '../../proto_utils/names.js';
 import { TypedEvent } from '../../typed_event.js';
 import { Component } from '../component.js';
 import { ContentBlock } from '../content_block.jsx';
 import { CopyButton } from '../copy_button';
 import { IndividualSimUI } from '../../individual_sim_ui.jsx';
+import i18n from '../../../i18n/config';
+import { translateStat } from '../../../i18n/localization';
 
 type ReforgeSummaryTotal = {
 	[key in Stat]?: number;
@@ -26,7 +27,7 @@ export class ReforgeSummary extends Component {
 		this.player = player;
 
 		this.container = new ContentBlock(this.rootElem, 'summary-table-container', {
-			header: { title: 'Reforge Summary' },
+			header: { title: i18n.t('gear.reforge_summary.title') },
 			extraCssClasses: ['summary-table--reforge'],
 		});
 
@@ -62,7 +63,7 @@ export class ReforgeSummary extends Component {
 
 				body.appendChild(
 					<div className="summary-table-row d-flex align-items-center">
-						<div>{shortSecondaryStatNames.get(stat)}</div>
+						<div>{translateStat(stat)}</div>
 						<div className={`${value === 0 ? '' : value > 0 ? 'positive' : 'negative'}`}>{value}</div>
 					</div>,
 				);
@@ -91,7 +92,7 @@ export class ReforgeSummary extends Component {
 						return '';
 					}
 				},
-				text: 'Copy to Reforge Lite',
+				text: i18n.t('gear.reforge_summary.copy_to_reforge_lite'),
 			});
 
 			this.container.bodyElement.appendChild(footer);
@@ -106,7 +107,7 @@ export class ReforgeSummary extends Component {
 						this.player.setGear(TypedEvent.nextEventID(), gear);
 					}}>
 					<i className="fas fa-times me-1"></i>
-					Reset Reforges
+					{i18n.t('gear.reforge_summary.reset_reforges')}
 				</button>
 			);
 
