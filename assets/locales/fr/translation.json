@@ -3515,6 +3515,10 @@
 					"label": "Temps vers prochaine Charge",
 					"tooltip": "Le temps jusqu'à ce que la prochaine charge soit disponible. 0 si le sort a toutes les charges disponibles."
 				},
+				"gcd_hasted_duration": {
+					"label": "Durée du GCD",
+					"tooltip": "La durée du GCD si le spell est lancé avec le montant de hate actuel"
+				},
 				"channel_clip_delay": {
 					"label": "Délai de Coupure de Canalisation",
 					"tooltip": "La quantité de temps spécifiée par le paramètre <b>Délai de Coupure de Canalisation</b>."

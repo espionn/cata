@@ -314,3 +314,36 @@ func (value *APLValueSpellTimeToCharge) GetFloat(sim *Simulation) float64 {
 func (value *APLValueSpellTimeToCharge) String() string {
 	return fmt.Sprintf("SpellTimeToCharge(%s)", value.spell.ActionID)
 }
+
+// GCD duration
+type APLValueSpellGCDHastedDuration struct {
+	DefaultAPLValueImpl
+	spell *Spell
+}
+
+func (rot *APLRotation) newValueSpellGCDHastedDuration(config *proto.APLValueSpellGCDHastedDuration, _ *proto.UUID) APLValue {
+	spell := rot.GetAPLSpell(config.SpellId)
+	if spell == nil {
+		return nil
+	}
+	return &APLValueSpellGCDHastedDuration{
+		spell: spell,
+	}
+}
+
+func (value *APLValueSpellGCDHastedDuration) Type() proto.APLValueType {
+	return proto.APLValueType_ValueTypeDuration
+}
+
+func (value *APLValueSpellGCDHastedDuration) GetDuration(sim *Simulation) time.Duration {
+	gcdMin := TernaryDuration(value.spell.DefaultCast.GCDMin != 0, value.spell.DefaultCast.GCDMin, GCDMin)
+	return max(gcdMin, value.spell.Unit.ApplyCastSpeed(value.spell.DefaultCast.GCD).Round(time.Millisecond))
+}
+
+func (value *APLValueSpellGCDHastedDuration) GetFloat(sim *Simulation) float64 {
+	return value.GetDuration(sim).Seconds()
+}
+
+func (value *APLValueSpellGCDHastedDuration) String() string {
+	return fmt.Sprintf("SpellGCDHastedDuration(%s)", value.spell.ActionID)
+}
