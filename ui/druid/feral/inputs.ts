@@ -38,7 +38,7 @@ export const FeralDruidRotationConfig = {
 			label: 'Type',
 			values: [
 				{ name: 'Single Target', value: AplType.SingleTarget },
-				// { name: 'AOE', value: AplType.Aoe },
+				{ name: 'AOE', value: AplType.Aoe },
 			],
 		}),
 		InputHelpers.makeRotationBooleanInput<Spec.SpecFeralDruid>({
