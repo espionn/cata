@@ -33,6 +33,7 @@ jobs:
 
             - name: Test Locales 💬
               run: |
+                  npm ci
                   npm run test:locales
 
             - name: Build 🔧

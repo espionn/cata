@@ -1,950 +1,903 @@
 {
-    "$schema": "http://json-schema.org/draft-06/schema#",
-    "$ref": "#/definitions/Welcome",
-    "definitions": {
-        "Welcome": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "mage": {
-                    "$ref": "#/definitions/Mage"
-                },
-                "druid": {
-                    "$ref": "#/definitions/Druid"
-                },
-                "warrior": {
-                    "$ref": "#/definitions/Warrior"
-                },
-                "hunter": {
-                    "$ref": "#/definitions/Hunter"
-                },
-                "rogue": {
-                    "$ref": "#/definitions/Rogue"
-                },
-                "priest": {
-                    "$ref": "#/definitions/Priest"
-                },
-                "paladin": {
-                    "$ref": "#/definitions/Paladin"
-                },
-                "death_knight": {
-                    "$ref": "#/definitions/DeathKnight"
-                },
-                "monk": {
-                    "$ref": "#/definitions/Monk"
-                },
-                "shaman": {
-                    "$ref": "#/definitions/Shaman"
-                },
-                "warlock": {
-                    "$ref": "#/definitions/Warlock"
-                }
-            },
-            "required": [
-                "death_knight",
-                "druid",
-                "hunter",
-                "mage",
-                "monk",
-                "paladin",
-                "priest",
-                "rogue",
-                "shaman",
-                "warlock",
-                "warrior"
-            ],
-            "title": "Welcome"
+  "type": "object",
+  "properties": {
+    "mage": {
+      "type": "object",
+      "properties": {
+        "presenceOfMind": {
+          "type": "string"
         },
-        "DeathKnight": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "roilingBlood": {
-                    "type": "string"
-                },
-                "plagueLeech": {
-                    "type": "string"
-                },
-                "unholyBlight": {
-                    "type": "string"
-                },
-                "lichborne": {
-                    "type": "string"
-                },
-                "antimagicZone": {
-                    "type": "string"
-                },
-                "purgatory": {
-                    "type": "string"
-                },
-                "deathsAdvance": {
-                    "type": "string"
-                },
-                "chilblains": {
-                    "type": "string"
-                },
-                "asphyxiate": {
-                    "type": "string"
-                },
-                "deathPact": {
-                    "type": "string"
-                },
-                "deathSiphon": {
-                    "type": "string"
-                },
-                "conversion": {
-                    "type": "string"
-                },
-                "bloodTap": {
-                    "type": "string"
-                },
-                "runicEmpowerment": {
-                    "type": "string"
-                },
-                "runicCorruption": {
-                    "type": "string"
-                },
-                "gorefiendsGrasp": {
-                    "type": "string"
-                },
-                "remorselessWinter": {
-                    "type": "string"
-                },
-                "desecratedGround": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "antimagicZone",
-                "asphyxiate",
-                "bloodTap",
-                "chilblains",
-                "conversion",
-                "deathPact",
-                "deathSiphon",
-                "deathsAdvance",
-                "desecratedGround",
-                "gorefiendsGrasp",
-                "lichborne",
-                "plagueLeech",
-                "purgatory",
-                "remorselessWinter",
-                "roilingBlood",
-                "runicCorruption",
-                "runicEmpowerment",
-                "unholyBlight"
-            ],
-            "title": "DeathKnight"
+        "blazingSpeed": {
+          "type": "string"
         },
-        "Druid": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "felineSwiftness": {
-                    "type": "string"
-                },
-                "displacerBeast": {
-                    "type": "string"
-                },
-                "wildCharge": {
-                    "type": "string"
-                },
-                "yserasGift": {
-                    "type": "string"
-                },
-                "renewal": {
-                    "type": "string"
-                },
-                "cenarionWard": {
-                    "type": "string"
-                },
-                "faerieSwarm": {
-                    "type": "string"
-                },
-                "massEntanglement": {
-                    "type": "string"
-                },
-                "typhoon": {
-                    "type": "string"
-                },
-                "soulOfTheForest": {
-                    "type": "string"
-                },
-                "incarnation": {
-                    "type": "string"
-                },
-                "forceOfNature": {
-                    "type": "string"
-                },
-                "disorientingRoar": {
-                    "type": "string"
-                },
-                "ursolsVortex": {
-                    "type": "string"
-                },
-                "mightyBash": {
-                    "type": "string"
-                },
-                "heartOfTheWild": {
-                    "type": "string"
-                },
-                "dreamOfCenarius": {
-                    "type": "string"
-                },
-                "naturesVigil": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "cenarionWard",
-                "disorientingRoar",
-                "displacerBeast",
-                "dreamOfCenarius",
-                "faerieSwarm",
-                "felineSwiftness",
-                "forceOfNature",
-                "heartOfTheWild",
-                "incarnation",
-                "massEntanglement",
-                "mightyBash",
-                "naturesVigil",
-                "renewal",
-                "soulOfTheForest",
-                "typhoon",
-                "ursolsVortex",
-                "wildCharge",
-                "yserasGift"
-            ],
-            "title": "Druid"
+        "iceFloes": {
+          "type": "string"
         },
-        "Hunter": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "posthaste": {
-                    "type": "string"
-                },
-                "narrowEscape": {
-                    "type": "string"
-                },
-                "crouchingTigerHiddenChimera": {
-                    "type": "string"
-                },
-                "bindingShot": {
-                    "type": "string"
-                },
-                "wyvernSting": {
-                    "type": "string"
-                },
-                "intimidation": {
-                    "type": "string"
-                },
-                "exhilaration": {
-                    "type": "string"
-                },
-                "aspectOfTheIronHawk": {
-                    "type": "string"
-                },
-                "spiritBond": {
-                    "type": "string"
-                },
-                "fervor": {
-                    "type": "string"
-                },
-                "direBeast": {
-                    "type": "string"
-                },
-                "thrillOfTheHunt": {
-                    "type": "string"
-                },
-                "aMurderOfCrows": {
-                    "type": "string"
-                },
-                "blinkStrikes": {
-                    "type": "string"
-                },
-                "lynxRush": {
-                    "type": "string"
-                },
-                "glaiveToss": {
-                    "type": "string"
-                },
-                "powershot": {
-                    "type": "string"
-                },
-                "barrage": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "aMurderOfCrows",
-                "aspectOfTheIronHawk",
-                "barrage",
-                "bindingShot",
-                "blinkStrikes",
-                "crouchingTigerHiddenChimera",
-                "direBeast",
-                "exhilaration",
-                "fervor",
-                "glaiveToss",
-                "intimidation",
-                "lynxRush",
-                "narrowEscape",
-                "posthaste",
-                "powershot",
-                "spiritBond",
-                "thrillOfTheHunt",
-                "wyvernSting"
-            ],
-            "title": "Hunter"
+        "temporalShield": {
+          "type": "string"
         },
-        "Mage": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "presenceOfMind": {
-                    "type": "string"
-                },
-                "blazingSpeed": {
-                    "type": "string"
-                },
-                "iceFloes": {
-                    "type": "string"
-                },
-                "temporalShield": {
-                    "type": "string"
-                },
-                "flameglow": {
-                    "type": "string"
-                },
-                "iceBarrier": {
-                    "type": "string"
-                },
-                "ringOfFrost": {
-                    "type": "string"
-                },
-                "iceWard": {
-                    "type": "string"
-                },
-                "frostjaw": {
-                    "type": "string"
-                },
-                "greaterInvisibility": {
-                    "type": "string"
-                },
-                "cauterize": {
-                    "type": "string"
-                },
-                "coldSnap": {
-                    "type": "string"
-                },
-                "netherTempest": {
-                    "type": "string"
-                },
-                "livingBomb": {
-                    "type": "string"
-                },
-                "frostBomb": {
-                    "type": "string"
-                },
-                "invocation": {
-                    "type": "string"
-                },
-                "runeOfPower": {
-                    "type": "string"
-                },
-                "incantersWard": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "blazingSpeed",
-                "cauterize",
-                "coldSnap",
-                "flameglow",
-                "frostBomb",
-                "frostjaw",
-                "greaterInvisibility",
-                "iceBarrier",
-                "iceFloes",
-                "iceWard",
-                "incantersWard",
-                "invocation",
-                "livingBomb",
-                "netherTempest",
-                "presenceOfMind",
-                "ringOfFrost",
-                "runeOfPower",
-                "temporalShield"
-            ],
-            "title": "Mage"
+        "flameglow": {
+          "type": "string"
         },
-        "Monk": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "celerity": {
-                    "type": "string"
-                },
-                "tigersLust": {
-                    "type": "string"
-                },
-                "momentum": {
-                    "type": "string"
-                },
-                "chiWave": {
-                    "type": "string"
-                },
-                "zenSphere": {
-                    "type": "string"
-                },
-                "chiBurst": {
-                    "type": "string"
-                },
-                "powerStrikes": {
-                    "type": "string"
-                },
-                "ascension": {
-                    "type": "string"
-                },
-                "chiBrew": {
-                    "type": "string"
-                },
-                "ringOfPeace": {
-                    "type": "string"
-                },
-                "chargingOxWave": {
-                    "type": "string"
-                },
-                "legSweep": {
-                    "type": "string"
-                },
-                "healingElixirs": {
-                    "type": "string"
-                },
-                "dampenHarm": {
-                    "type": "string"
-                },
-                "diffuseMagic": {
-                    "type": "string"
-                },
-                "rushingJadeWind": {
-                    "type": "string"
-                },
-                "invokeXuenTheWhiteTiger": {
-                    "type": "string"
-                },
-                "chiTorpedo": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "ascension",
-                "celerity",
-                "chargingOxWave",
-                "chiBrew",
-                "chiBurst",
-                "chiTorpedo",
-                "chiWave",
-                "dampenHarm",
-                "diffuseMagic",
-                "healingElixirs",
-                "invokeXuenTheWhiteTiger",
-                "legSweep",
-                "momentum",
-                "powerStrikes",
-                "ringOfPeace",
-                "rushingJadeWind",
-                "tigersLust",
-                "zenSphere"
-            ],
-            "title": "Monk"
+        "iceBarrier": {
+          "type": "string"
         },
-        "Paladin": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "speedOfLight": {
-                    "type": "string"
-                },
-                "longArmOfTheLaw": {
-                    "type": "string"
-                },
-                "pursuitOfJustice": {
-                    "type": "string"
-                },
-                "fistOfJustice": {
-                    "type": "string"
-                },
-                "repentance": {
-                    "type": "string"
-                },
-                "evilIsAPointOfView": {
-                    "type": "string"
-                },
-                "selflessHealer": {
-                    "type": "string"
-                },
-                "eternalFlame": {
-                    "type": "string"
-                },
-                "sacredShield": {
-                    "type": "string"
-                },
-                "handOfPurity": {
-                    "type": "string"
-                },
-                "unbreakableSpirit": {
-                    "type": "string"
-                },
-                "clemency": {
-                    "type": "string"
-                },
-                "holyAvenger": {
-                    "type": "string"
-                },
-                "sanctifiedWrath": {
-                    "type": "string"
-                },
-                "divinePurpose": {
-                    "type": "string"
-                },
-                "holyPrism": {
-                    "type": "string"
-                },
-                "lightsHammer": {
-                    "type": "string"
-                },
-                "executionSentence": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "clemency",
-                "divinePurpose",
-                "eternalFlame",
-                "evilIsAPointOfView",
-                "executionSentence",
-                "fistOfJustice",
-                "handOfPurity",
-                "holyAvenger",
-                "holyPrism",
-                "lightsHammer",
-                "longArmOfTheLaw",
-                "pursuitOfJustice",
-                "repentance",
-                "sacredShield",
-                "sanctifiedWrath",
-                "selflessHealer",
-                "speedOfLight",
-                "unbreakableSpirit"
-            ],
-            "title": "Paladin"
+        "ringOfFrost": {
+          "type": "string"
         },
-        "Priest": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "voidTendrils": {
-                    "type": "string"
-                },
-                "psyfiend": {
-                    "type": "string"
-                },
-                "dominateMind": {
-                    "type": "string"
-                },
-                "bodyAndSoul": {
-                    "type": "string"
-                },
-                "angelicFeather": {
-                    "type": "string"
-                },
-                "phantasm": {
-                    "type": "string"
-                },
-                "fromDarknessComesLight": {
-                    "type": "string"
-                },
-                "mindbender": {
-                    "type": "string"
-                },
-                "solaceAndInsanity": {
-                    "type": "string"
-                },
-                "desperatePrayer": {
-                    "type": "string"
-                },
-                "spectralGuise": {
-                    "type": "string"
-                },
-                "angelicBulwark": {
-                    "type": "string"
-                },
-                "twistOfFate": {
-                    "type": "string"
-                },
-                "powerInfusion": {
-                    "type": "string"
-                },
-                "divineInsight": {
-                    "type": "string"
-                },
-                "cascade": {
-                    "type": "string"
-                },
-                "divineStar": {
-                    "type": "string"
-                },
-                "halo": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "angelicBulwark",
-                "angelicFeather",
-                "bodyAndSoul",
-                "cascade",
-                "desperatePrayer",
-                "divineInsight",
-                "divineStar",
-                "dominateMind",
-                "fromDarknessComesLight",
-                "halo",
-                "mindbender",
-                "phantasm",
-                "powerInfusion",
-                "psyfiend",
-                "solaceAndInsanity",
-                "spectralGuise",
-                "twistOfFate",
-                "voidTendrils"
-            ],
-            "title": "Priest"
+        "iceWard": {
+          "type": "string"
         },
-        "Rogue": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "nightstalker": {
-                    "type": "string"
-                },
-                "subterfuge": {
-                    "type": "string"
-                },
-                "shadowFocus": {
-                    "type": "string"
-                },
-                "deadlyThrow": {
-                    "type": "string"
-                },
-                "nerveStrike": {
-                    "type": "string"
-                },
-                "combatReadiness": {
-                    "type": "string"
-                },
-                "cheatDeath": {
-                    "type": "string"
-                },
-                "leechingPoison": {
-                    "type": "string"
-                },
-                "elusiveness": {
-                    "type": "string"
-                },
-                "cloakAndDagger": {
-                    "type": "string"
-                },
-                "shadowstep": {
-                    "type": "string"
-                },
-                "burstOfSpeed": {
-                    "type": "string"
-                },
-                "preyOnTheWeak": {
-                    "type": "string"
-                },
-                "paralyticPoison": {
-                    "type": "string"
-                },
-                "dirtyTricks": {
-                    "type": "string"
-                },
-                "shurikenToss": {
-                    "type": "string"
-                },
-                "markedForDeath": {
-                    "type": "string"
-                },
-                "anticipation": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "anticipation",
-                "burstOfSpeed",
-                "cheatDeath",
-                "cloakAndDagger",
-                "combatReadiness",
-                "deadlyThrow",
-                "dirtyTricks",
-                "elusiveness",
-                "leechingPoison",
-                "markedForDeath",
-                "nerveStrike",
-                "nightstalker",
-                "paralyticPoison",
-                "preyOnTheWeak",
-                "shadowFocus",
-                "shadowstep",
-                "shurikenToss",
-                "subterfuge"
-            ],
-            "title": "Rogue"
+        "frostjaw": {
+          "type": "string"
         },
-        "Shaman": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "naturesGuardian": {
-                    "type": "string"
-                },
-                "stoneBulwarkTotem": {
-                    "type": "string"
-                },
-                "astralShift": {
-                    "type": "string"
-                },
-                "frozenPower": {
-                    "type": "string"
-                },
-                "earthgrabTotem": {
-                    "type": "string"
-                },
-                "windwalkTotem": {
-                    "type": "string"
-                },
-                "callOfTheElements": {
-                    "type": "string"
-                },
-                "totemicPersistence": {
-                    "type": "string"
-                },
-                "totemicProjection": {
-                    "type": "string"
-                },
-                "elementalMastery": {
-                    "type": "string"
-                },
-                "ancestralSwiftness": {
-                    "type": "string"
-                },
-                "echoOfTheElements": {
-                    "type": "string"
-                },
-                "rushingStreams": {
-                    "type": "string"
-                },
-                "ancestralGuidance": {
-                    "type": "string"
-                },
-                "conductivity": {
-                    "type": "string"
-                },
-                "unleashedFury": {
-                    "type": "string"
-                },
-                "primalElementalist": {
-                    "type": "string"
-                },
-                "elementalBlast": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "ancestralGuidance",
-                "ancestralSwiftness",
-                "astralShift",
-                "callOfTheElements",
-                "conductivity",
-                "earthgrabTotem",
-                "echoOfTheElements",
-                "elementalBlast",
-                "elementalMastery",
-                "frozenPower",
-                "naturesGuardian",
-                "primalElementalist",
-                "rushingStreams",
-                "stoneBulwarkTotem",
-                "totemicPersistence",
-                "totemicProjection",
-                "unleashedFury",
-                "windwalkTotem"
-            ],
-            "title": "Shaman"
+        "greaterInvisibility": {
+          "type": "string"
         },
-        "Warlock": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "darkRegeneration": {
-                    "type": "string"
-                },
-                "soulLeech": {
-                    "type": "string"
-                },
-                "harvestLife": {
-                    "type": "string"
-                },
-                "demonicBreath": {
-                    "type": "string"
-                },
-                "mortalCoil": {
-                    "type": "string"
-                },
-                "shadowfury": {
-                    "type": "string"
-                },
-                "soulLink": {
-                    "type": "string"
-                },
-                "sacrificialPact": {
-                    "type": "string"
-                },
-                "darkBargain": {
-                    "type": "string"
-                },
-                "bloodHorror": {
-                    "type": "string"
-                },
-                "burningRush": {
-                    "type": "string"
-                },
-                "unboundWill": {
-                    "type": "string"
-                },
-                "grimoireOfSupremacy": {
-                    "type": "string"
-                },
-                "grimoireOfService": {
-                    "type": "string"
-                },
-                "grimoireOfSacrifice": {
-                    "type": "string"
-                },
-                "archimondesDarkness": {
-                    "type": "string"
-                },
-                "kiljaedensCunning": {
-                    "type": "string"
-                },
-                "mannorothsFury": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "archimondesDarkness",
-                "bloodHorror",
-                "burningRush",
-                "darkBargain",
-                "darkRegeneration",
-                "demonicBreath",
-                "grimoireOfSacrifice",
-                "grimoireOfService",
-                "grimoireOfSupremacy",
-                "harvestLife",
-                "kiljaedensCunning",
-                "mannorothsFury",
-                "mortalCoil",
-                "sacrificialPact",
-                "shadowfury",
-                "soulLeech",
-                "soulLink",
-                "unboundWill"
-            ],
-            "title": "Warlock"
+        "cauterize": {
+          "type": "string"
         },
-        "Warrior": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "juggernaut": {
-                    "type": "string"
-                },
-                "doubleTime": {
-                    "type": "string"
-                },
-                "warbringer": {
-                    "type": "string"
-                },
-                "enragedRegeneration": {
-                    "type": "string"
-                },
-                "secondWind": {
-                    "type": "string"
-                },
-                "impendingVictory": {
-                    "type": "string"
-                },
-                "staggeringShout": {
-                    "type": "string"
-                },
-                "piercingHowl": {
-                    "type": "string"
-                },
-                "disruptingShout": {
-                    "type": "string"
-                },
-                "bladestorm": {
-                    "type": "string"
-                },
-                "shockwave": {
-                    "type": "string"
-                },
-                "dragonRoar": {
-                    "type": "string"
-                },
-                "massSpellReflection": {
-                    "type": "string"
-                },
-                "safeguard": {
-                    "type": "string"
-                },
-                "vigilance": {
-                    "type": "string"
-                },
-                "avatar": {
-                    "type": "string"
-                },
-                "bloodbath": {
-                    "type": "string"
-                },
-                "stormBolt": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "avatar",
-                "bladestorm",
-                "bloodbath",
-                "disruptingShout",
-                "doubleTime",
-                "dragonRoar",
-                "enragedRegeneration",
-                "impendingVictory",
-                "juggernaut",
-                "massSpellReflection",
-                "piercingHowl",
-                "safeguard",
-                "secondWind",
-                "shockwave",
-                "staggeringShout",
-                "stormBolt",
-                "vigilance",
-                "warbringer"
-            ],
-            "title": "Warrior"
+        "coldSnap": {
+          "type": "string"
+        },
+        "netherTempest": {
+          "type": "string"
+        },
+        "livingBomb": {
+          "type": "string"
+        },
+        "frostBomb": {
+          "type": "string"
+        },
+        "invocation": {
+          "type": "string"
+        },
+        "runeOfPower": {
+          "type": "string"
+        },
+        "incantersWard": {
+          "type": "string"
         }
+      },
+      "additionalProperties": false,
+      "required": [
+        "presenceOfMind",
+        "blazingSpeed",
+        "iceFloes",
+        "temporalShield",
+        "flameglow",
+        "iceBarrier",
+        "ringOfFrost",
+        "iceWard",
+        "frostjaw",
+        "greaterInvisibility",
+        "cauterize",
+        "coldSnap",
+        "netherTempest",
+        "livingBomb",
+        "frostBomb",
+        "invocation",
+        "runeOfPower",
+        "incantersWard"
+      ]
+    },
+    "druid": {
+      "type": "object",
+      "properties": {
+        "felineSwiftness": {
+          "type": "string"
+        },
+        "displacerBeast": {
+          "type": "string"
+        },
+        "wildCharge": {
+          "type": "string"
+        },
+        "yserasGift": {
+          "type": "string"
+        },
+        "renewal": {
+          "type": "string"
+        },
+        "cenarionWard": {
+          "type": "string"
+        },
+        "faerieSwarm": {
+          "type": "string"
+        },
+        "massEntanglement": {
+          "type": "string"
+        },
+        "typhoon": {
+          "type": "string"
+        },
+        "soulOfTheForest": {
+          "type": "string"
+        },
+        "incarnation": {
+          "type": "string"
+        },
+        "forceOfNature": {
+          "type": "string"
+        },
+        "disorientingRoar": {
+          "type": "string"
+        },
+        "ursolsVortex": {
+          "type": "string"
+        },
+        "mightyBash": {
+          "type": "string"
+        },
+        "heartOfTheWild": {
+          "type": "string"
+        },
+        "dreamOfCenarius": {
+          "type": "string"
+        },
+        "naturesVigil": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "felineSwiftness",
+        "displacerBeast",
+        "wildCharge",
+        "yserasGift",
+        "renewal",
+        "cenarionWard",
+        "faerieSwarm",
+        "massEntanglement",
+        "typhoon",
+        "soulOfTheForest",
+        "incarnation",
+        "forceOfNature",
+        "disorientingRoar",
+        "ursolsVortex",
+        "mightyBash",
+        "heartOfTheWild",
+        "dreamOfCenarius",
+        "naturesVigil"
+      ]
+    },
+    "warrior": {
+      "type": "object",
+      "properties": {
+        "juggernaut": {
+          "type": "string"
+        },
+        "doubleTime": {
+          "type": "string"
+        },
+        "warbringer": {
+          "type": "string"
+        },
+        "enragedRegeneration": {
+          "type": "string"
+        },
+        "secondWind": {
+          "type": "string"
+        },
+        "impendingVictory": {
+          "type": "string"
+        },
+        "staggeringShout": {
+          "type": "string"
+        },
+        "piercingHowl": {
+          "type": "string"
+        },
+        "disruptingShout": {
+          "type": "string"
+        },
+        "bladestorm": {
+          "type": "string"
+        },
+        "shockwave": {
+          "type": "string"
+        },
+        "dragonRoar": {
+          "type": "string"
+        },
+        "massSpellReflection": {
+          "type": "string"
+        },
+        "safeguard": {
+          "type": "string"
+        },
+        "vigilance": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "bloodbath": {
+          "type": "string"
+        },
+        "stormBolt": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "juggernaut",
+        "doubleTime",
+        "warbringer",
+        "enragedRegeneration",
+        "secondWind",
+        "impendingVictory",
+        "staggeringShout",
+        "piercingHowl",
+        "disruptingShout",
+        "bladestorm",
+        "shockwave",
+        "dragonRoar",
+        "massSpellReflection",
+        "safeguard",
+        "vigilance",
+        "avatar",
+        "bloodbath",
+        "stormBolt"
+      ]
+    },
+    "hunter": {
+      "type": "object",
+      "properties": {
+        "posthaste": {
+          "type": "string"
+        },
+        "narrowEscape": {
+          "type": "string"
+        },
+        "crouchingTigerHiddenChimera": {
+          "type": "string"
+        },
+        "bindingShot": {
+          "type": "string"
+        },
+        "wyvernSting": {
+          "type": "string"
+        },
+        "intimidation": {
+          "type": "string"
+        },
+        "exhilaration": {
+          "type": "string"
+        },
+        "aspectOfTheIronHawk": {
+          "type": "string"
+        },
+        "spiritBond": {
+          "type": "string"
+        },
+        "fervor": {
+          "type": "string"
+        },
+        "direBeast": {
+          "type": "string"
+        },
+        "thrillOfTheHunt": {
+          "type": "string"
+        },
+        "aMurderOfCrows": {
+          "type": "string"
+        },
+        "blinkStrikes": {
+          "type": "string"
+        },
+        "lynxRush": {
+          "type": "string"
+        },
+        "glaiveToss": {
+          "type": "string"
+        },
+        "powershot": {
+          "type": "string"
+        },
+        "barrage": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "posthaste",
+        "narrowEscape",
+        "crouchingTigerHiddenChimera",
+        "bindingShot",
+        "wyvernSting",
+        "intimidation",
+        "exhilaration",
+        "aspectOfTheIronHawk",
+        "spiritBond",
+        "fervor",
+        "direBeast",
+        "thrillOfTheHunt",
+        "aMurderOfCrows",
+        "blinkStrikes",
+        "lynxRush",
+        "glaiveToss",
+        "powershot",
+        "barrage"
+      ]
+    },
+    "rogue": {
+      "type": "object",
+      "properties": {
+        "nightstalker": {
+          "type": "string"
+        },
+        "subterfuge": {
+          "type": "string"
+        },
+        "shadowFocus": {
+          "type": "string"
+        },
+        "deadlyThrow": {
+          "type": "string"
+        },
+        "nerveStrike": {
+          "type": "string"
+        },
+        "combatReadiness": {
+          "type": "string"
+        },
+        "cheatDeath": {
+          "type": "string"
+        },
+        "leechingPoison": {
+          "type": "string"
+        },
+        "elusiveness": {
+          "type": "string"
+        },
+        "cloakAndDagger": {
+          "type": "string"
+        },
+        "shadowstep": {
+          "type": "string"
+        },
+        "burstOfSpeed": {
+          "type": "string"
+        },
+        "preyOnTheWeak": {
+          "type": "string"
+        },
+        "paralyticPoison": {
+          "type": "string"
+        },
+        "dirtyTricks": {
+          "type": "string"
+        },
+        "shurikenToss": {
+          "type": "string"
+        },
+        "markedForDeath": {
+          "type": "string"
+        },
+        "anticipation": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "nightstalker",
+        "subterfuge",
+        "shadowFocus",
+        "deadlyThrow",
+        "nerveStrike",
+        "combatReadiness",
+        "cheatDeath",
+        "leechingPoison",
+        "elusiveness",
+        "cloakAndDagger",
+        "shadowstep",
+        "burstOfSpeed",
+        "preyOnTheWeak",
+        "paralyticPoison",
+        "dirtyTricks",
+        "shurikenToss",
+        "markedForDeath",
+        "anticipation"
+      ]
+    },
+    "priest": {
+      "type": "object",
+      "properties": {
+        "voidTendrils": {
+          "type": "string"
+        },
+        "psyfiend": {
+          "type": "string"
+        },
+        "dominateMind": {
+          "type": "string"
+        },
+        "bodyAndSoul": {
+          "type": "string"
+        },
+        "angelicFeather": {
+          "type": "string"
+        },
+        "phantasm": {
+          "type": "string"
+        },
+        "fromDarknessComesLight": {
+          "type": "string"
+        },
+        "mindbender": {
+          "type": "string"
+        },
+        "solaceAndInsanity": {
+          "type": "string"
+        },
+        "desperatePrayer": {
+          "type": "string"
+        },
+        "spectralGuise": {
+          "type": "string"
+        },
+        "angelicBulwark": {
+          "type": "string"
+        },
+        "twistOfFate": {
+          "type": "string"
+        },
+        "powerInfusion": {
+          "type": "string"
+        },
+        "divineInsight": {
+          "type": "string"
+        },
+        "cascade": {
+          "type": "string"
+        },
+        "divineStar": {
+          "type": "string"
+        },
+        "halo": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "voidTendrils",
+        "psyfiend",
+        "dominateMind",
+        "bodyAndSoul",
+        "angelicFeather",
+        "phantasm",
+        "fromDarknessComesLight",
+        "mindbender",
+        "solaceAndInsanity",
+        "desperatePrayer",
+        "spectralGuise",
+        "angelicBulwark",
+        "twistOfFate",
+        "powerInfusion",
+        "divineInsight",
+        "cascade",
+        "divineStar",
+        "halo"
+      ]
+    },
+    "paladin": {
+      "type": "object",
+      "properties": {
+        "speedOfLight": {
+          "type": "string"
+        },
+        "longArmOfTheLaw": {
+          "type": "string"
+        },
+        "pursuitOfJustice": {
+          "type": "string"
+        },
+        "fistOfJustice": {
+          "type": "string"
+        },
+        "repentance": {
+          "type": "string"
+        },
+        "evilIsAPointOfView": {
+          "type": "string"
+        },
+        "selflessHealer": {
+          "type": "string"
+        },
+        "eternalFlame": {
+          "type": "string"
+        },
+        "sacredShield": {
+          "type": "string"
+        },
+        "handOfPurity": {
+          "type": "string"
+        },
+        "unbreakableSpirit": {
+          "type": "string"
+        },
+        "clemency": {
+          "type": "string"
+        },
+        "holyAvenger": {
+          "type": "string"
+        },
+        "sanctifiedWrath": {
+          "type": "string"
+        },
+        "divinePurpose": {
+          "type": "string"
+        },
+        "holyPrism": {
+          "type": "string"
+        },
+        "lightsHammer": {
+          "type": "string"
+        },
+        "executionSentence": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "speedOfLight",
+        "longArmOfTheLaw",
+        "pursuitOfJustice",
+        "fistOfJustice",
+        "repentance",
+        "evilIsAPointOfView",
+        "selflessHealer",
+        "eternalFlame",
+        "sacredShield",
+        "handOfPurity",
+        "unbreakableSpirit",
+        "clemency",
+        "holyAvenger",
+        "sanctifiedWrath",
+        "divinePurpose",
+        "holyPrism",
+        "lightsHammer",
+        "executionSentence"
+      ]
+    },
+    "death_knight": {
+      "type": "object",
+      "properties": {
+        "roilingBlood": {
+          "type": "string"
+        },
+        "plagueLeech": {
+          "type": "string"
+        },
+        "unholyBlight": {
+          "type": "string"
+        },
+        "lichborne": {
+          "type": "string"
+        },
+        "antimagicZone": {
+          "type": "string"
+        },
+        "purgatory": {
+          "type": "string"
+        },
+        "deathsAdvance": {
+          "type": "string"
+        },
+        "chilblains": {
+          "type": "string"
+        },
+        "asphyxiate": {
+          "type": "string"
+        },
+        "deathPact": {
+          "type": "string"
+        },
+        "deathSiphon": {
+          "type": "string"
+        },
+        "conversion": {
+          "type": "string"
+        },
+        "bloodTap": {
+          "type": "string"
+        },
+        "runicEmpowerment": {
+          "type": "string"
+        },
+        "runicCorruption": {
+          "type": "string"
+        },
+        "gorefiendsGrasp": {
+          "type": "string"
+        },
+        "remorselessWinter": {
+          "type": "string"
+        },
+        "desecratedGround": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "roilingBlood",
+        "plagueLeech",
+        "unholyBlight",
+        "lichborne",
+        "antimagicZone",
+        "purgatory",
+        "deathsAdvance",
+        "chilblains",
+        "asphyxiate",
+        "deathPact",
+        "deathSiphon",
+        "conversion",
+        "bloodTap",
+        "runicEmpowerment",
+        "runicCorruption",
+        "gorefiendsGrasp",
+        "remorselessWinter",
+        "desecratedGround"
+      ]
+    },
+    "monk": {
+      "type": "object",
+      "properties": {
+        "celerity": {
+          "type": "string"
+        },
+        "tigersLust": {
+          "type": "string"
+        },
+        "momentum": {
+          "type": "string"
+        },
+        "chiWave": {
+          "type": "string"
+        },
+        "zenSphere": {
+          "type": "string"
+        },
+        "chiBurst": {
+          "type": "string"
+        },
+        "powerStrikes": {
+          "type": "string"
+        },
+        "ascension": {
+          "type": "string"
+        },
+        "chiBrew": {
+          "type": "string"
+        },
+        "ringOfPeace": {
+          "type": "string"
+        },
+        "chargingOxWave": {
+          "type": "string"
+        },
+        "legSweep": {
+          "type": "string"
+        },
+        "healingElixirs": {
+          "type": "string"
+        },
+        "dampenHarm": {
+          "type": "string"
+        },
+        "diffuseMagic": {
+          "type": "string"
+        },
+        "rushingJadeWind": {
+          "type": "string"
+        },
+        "invokeXuenTheWhiteTiger": {
+          "type": "string"
+        },
+        "chiTorpedo": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "celerity",
+        "tigersLust",
+        "momentum",
+        "chiWave",
+        "zenSphere",
+        "chiBurst",
+        "powerStrikes",
+        "ascension",
+        "chiBrew",
+        "ringOfPeace",
+        "chargingOxWave",
+        "legSweep",
+        "healingElixirs",
+        "dampenHarm",
+        "diffuseMagic",
+        "rushingJadeWind",
+        "invokeXuenTheWhiteTiger",
+        "chiTorpedo"
+      ]
+    },
+    "shaman": {
+      "type": "object",
+      "properties": {
+        "naturesGuardian": {
+          "type": "string"
+        },
+        "stoneBulwarkTotem": {
+          "type": "string"
+        },
+        "astralShift": {
+          "type": "string"
+        },
+        "frozenPower": {
+          "type": "string"
+        },
+        "earthgrabTotem": {
+          "type": "string"
+        },
+        "windwalkTotem": {
+          "type": "string"
+        },
+        "callOfTheElements": {
+          "type": "string"
+        },
+        "totemicPersistence": {
+          "type": "string"
+        },
+        "totemicProjection": {
+          "type": "string"
+        },
+        "elementalMastery": {
+          "type": "string"
+        },
+        "ancestralSwiftness": {
+          "type": "string"
+        },
+        "echoOfTheElements": {
+          "type": "string"
+        },
+        "rushingStreams": {
+          "type": "string"
+        },
+        "ancestralGuidance": {
+          "type": "string"
+        },
+        "conductivity": {
+          "type": "string"
+        },
+        "unleashedFury": {
+          "type": "string"
+        },
+        "primalElementalist": {
+          "type": "string"
+        },
+        "elementalBlast": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "naturesGuardian",
+        "stoneBulwarkTotem",
+        "astralShift",
+        "frozenPower",
+        "earthgrabTotem",
+        "windwalkTotem",
+        "callOfTheElements",
+        "totemicPersistence",
+        "totemicProjection",
+        "elementalMastery",
+        "ancestralSwiftness",
+        "echoOfTheElements",
+        "rushingStreams",
+        "ancestralGuidance",
+        "conductivity",
+        "unleashedFury",
+        "primalElementalist",
+        "elementalBlast"
+      ]
+    },
+    "warlock": {
+      "type": "object",
+      "properties": {
+        "darkRegeneration": {
+          "type": "string"
+        },
+        "soulLeech": {
+          "type": "string"
+        },
+        "harvestLife": {
+          "type": "string"
+        },
+        "demonicBreath": {
+          "type": "string"
+        },
+        "mortalCoil": {
+          "type": "string"
+        },
+        "shadowfury": {
+          "type": "string"
+        },
+        "soulLink": {
+          "type": "string"
+        },
+        "sacrificialPact": {
+          "type": "string"
+        },
+        "darkBargain": {
+          "type": "string"
+        },
+        "bloodHorror": {
+          "type": "string"
+        },
+        "burningRush": {
+          "type": "string"
+        },
+        "unboundWill": {
+          "type": "string"
+        },
+        "grimoireOfSupremacy": {
+          "type": "string"
+        },
+        "grimoireOfService": {
+          "type": "string"
+        },
+        "grimoireOfSacrifice": {
+          "type": "string"
+        },
+        "archimondesDarkness": {
+          "type": "string"
+        },
+        "kiljaedensCunning": {
+          "type": "string"
+        },
+        "mannorothsFury": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "darkRegeneration",
+        "soulLeech",
+        "harvestLife",
+        "demonicBreath",
+        "mortalCoil",
+        "shadowfury",
+        "soulLink",
+        "sacrificialPact",
+        "darkBargain",
+        "bloodHorror",
+        "burningRush",
+        "unboundWill",
+        "grimoireOfSupremacy",
+        "grimoireOfService",
+        "grimoireOfSacrifice",
+        "archimondesDarkness",
+        "kiljaedensCunning",
+        "mannorothsFury"
+      ]
     }
+  },
+  "additionalProperties": false,
+  "required": [
+    "mage",
+    "druid",
+    "warrior",
+    "hunter",
+    "rogue",
+    "priest",
+    "paladin",
+    "death_knight",
+    "monk",
+    "shaman",
+    "warlock"
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated Schema",
+  "description": "Auto-generated JSON Schema",
+  "definitions": {}
 }
