@@ -3,6 +3,7 @@ import { Player } from '../../core/player';
 import { Spec } from '../../core/proto/common.js';
 import { ShamanImbue, ShamanSyncType } from '../../core/proto/shaman.js';
 import { ActionId } from '../../core/proto_utils/action_id.js';
+import i18n from '../../i18n/config.js';
 import { TypedEvent } from '../../core/typed_event';
 
 // Configuration for spec-specific UI elements on the settings tab.
@@ -32,18 +33,12 @@ export const ShamanImbueOHSwap = InputHelpers.makeSpecOptionsEnumIconInput<Spec.
 
 export const SyncTypeInput = InputHelpers.makeSpecOptionsEnumInput<Spec.SpecEnhancementShaman, ShamanSyncType>({
 	fieldName: 'syncType',
-	label: 'Sync/Stagger Setting',
-	labelTooltip: `Choose your sync or stagger option Perfect
-		<ul>
-			<li><div>Auto: Will auto pick sync options based on your weapons attack speeds</div></li>
-			<li><div>None: No Sync or Staggering, used for mismatched weapon speeds</div></li>
-			<li><div>Perfect Sync: Makes your weapons always attack at the same time, for match weapon speeds</div></li>
-			<li><div>Delayed Offhand: Adds a slight delay to the offhand attacks while staying within the 0.5s flurry ICD window</div></li>
-		</ul>`,
+	label: i18n.t('settings.other.sync_type.label'),
+	labelTooltip: i18n.t('settings.other.sync_type.tooltip'),
 	values: [
-		{ name: 'Automatic', value: ShamanSyncType.Auto },
-		{ name: 'None', value: ShamanSyncType.NoSync },
-		{ name: 'Perfect Sync', value: ShamanSyncType.SyncMainhandOffhandSwings },
-		{ name: 'Delayed Offhand', value: ShamanSyncType.DelayOffhandSwings },
+		{ name: i18n.t('settings.other.sync_type.values.automatic'), value: ShamanSyncType.Auto },
+		{ name: i18n.t('settings.other.sync_type.values.none'), value: ShamanSyncType.NoSync },
+		{ name: i18n.t('settings.other.sync_type.values.perfect_sync'), value: ShamanSyncType.SyncMainhandOffhandSwings },
+		{ name: i18n.t('settings.other.sync_type.values.delayed_offhand'), value: ShamanSyncType.DelayOffhandSwings },
 	],
 });

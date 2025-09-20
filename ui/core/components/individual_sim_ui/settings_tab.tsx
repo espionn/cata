@@ -1,10 +1,9 @@
 import i18n from '../../../i18n/config';
-import * as Tooltips from '../../constants/tooltips.js';
 import { Encounter } from '../../encounter.js';
 import { IndividualSimUI, InputSection } from '../../individual_sim_ui.jsx';
 import { ConsumesSpec, Debuffs, HealingModel, IndividualBuffs, ItemSwap, PartyBuffs, Profession, RaidBuffs } from '../../proto/common.js';
 import { SavedEncounter, SavedSettings } from '../../proto/ui.js';
-import { professionNames, raceNames } from '../../proto_utils/names.js';
+import { translateRace, translateProfession } from '../../../i18n/localization.js';
 import { Stats } from '../../proto_utils/stats.js';
 import { EventID, TypedEvent } from '../../typed_event.js';
 import { getEnumValues } from '../../utils.js';
@@ -87,7 +86,7 @@ export class SettingsTab extends SimTab {
 
 	private buildEncounterSettings() {
 		const contentBlock = new ContentBlock(this.column1, 'encounter-settings', {
-			header: { title: 'Encounter' },
+			header: { title: i18n.t('settings.encounter.title') },
 		});
 
 		new EncounterPicker(contentBlock.bodyElement, this.simUI.sim.encounter, this.simUI.individualConfig.encounterPicker, this.simUI);
@@ -96,7 +95,7 @@ export class SettingsTab extends SimTab {
 	private buildPlayerSettings() {
 		const column = this.column1;
 		const contentBlock = new ContentBlock(column, 'player-settings', {
-			header: { title: 'Player' },
+			header: { title: i18n.t('settings.player.title') },
 		});
 
 		const playerIconGroup = Input.newGroupContainer();
@@ -112,10 +111,10 @@ export class SettingsTab extends SimTab {
 		const races = this.simUI.player.getPlayerClass().races;
 		const _racePicker = new EnumPicker(contentBlock.bodyElement, this.simUI.player, {
 			id: 'simui-race',
-			label: 'Race',
+			label: i18n.t('settings.player.race'),
 			values: races.map(race => {
 				return {
-					name: raceNames.get(race)!,
+					name: translateRace(race),
 					value: race,
 				};
 			}),
@@ -134,10 +133,10 @@ export class SettingsTab extends SimTab {
 		const professions = getEnumValues(Profession).filter(proff => proff != Profession.Archeology) as Array<Profession>;
 		const _profession1Picker = new EnumPicker(professionGroup, this.simUI.player, {
 			id: 'simui-profession1',
-			label: 'Profession 1',
+			label: i18n.t('settings.player.profession_1'),
 			values: professions.map(p => {
 				return {
-					name: professionNames.get(p)!,
+					name: translateProfession(p),
 					value: p,
 				};
 			}),
@@ -148,10 +147,10 @@ export class SettingsTab extends SimTab {
 
 		const _profession2Picker = new EnumPicker(professionGroup, this.simUI.player, {
 			id: 'simui-profession2',
-			label: 'Profession 2',
+			label: i18n.t('settings.player.profession_2'),
 			values: professions.map(p => {
 				return {
-					name: professionNames.get(p)!,
+					name: translateProfession(p),
 					value: p,
 				};
 			}),
@@ -171,7 +170,7 @@ export class SettingsTab extends SimTab {
 	private buildConsumesSection() {
 		const column = this.simUI.isWithinRaidSim ? this.column3 : this.column2;
 		const contentBlock = new ContentBlock(column, 'consumes-settings', {
-			header: { title: 'Consumables' },
+			header: { title: i18n.t('settings.consumables.title') },
 		});
 		ConsumesPicker.create(contentBlock.bodyElement, this, this.simUI);
 	}
@@ -182,8 +181,8 @@ export class SettingsTab extends SimTab {
 		const swapSlots = this.simUI.individualConfig.itemSwapSlots || [];
 		if (settings.length > 0 || swapSlots.length > 0) {
 			const contentBlock = new ContentBlock(this.column2, 'other-settings', {
-				header: { title: 'Other' },
-			});
+			header: { title: i18n.t('settings.other.title') },
+		});
 
 			if (settings.length > 0) {
 				this.configureInputSection(contentBlock.bodyElement, this.simUI.individualConfig.otherInputs);
@@ -202,8 +201,13 @@ export class SettingsTab extends SimTab {
 
 	private buildBuffsSettings() {
 		const contentBlock = new ContentBlock(this.column3, 'buffs-settings', {
-			header: { title: 'Raid Buffs', tooltip: i18n.t('settings.buffs.tooltip') },
+			header: { title: i18n.t('settings.raid_buffs.title'), tooltip: i18n.t('settings.raid_buffs.tooltip') },
 		});
+		contentBlock.headerElement?.appendChild(
+			<p className="fs-body">
+				{i18n.t('settings.raid_buffs.description')}
+			</p>,
+		);
 
 		const buffOptions = relevantStatOptions(BuffDebuffInputs.RAID_BUFFS_CONFIG, this.simUI);
 		this.configureIconSection(
@@ -218,7 +222,7 @@ export class SettingsTab extends SimTab {
 				this.simUI.player,
 				{
 					inputs: miscBuffOptions.map(option => option.config),
-					label: 'Misc',
+					label: i18n.t('settings.raid_buffs.misc.label'),
 				},
 				this.simUI,
 			);
@@ -229,7 +233,7 @@ export class SettingsTab extends SimTab {
 		const externalDamageCooldownOptions = relevantStatOptions(BuffDebuffInputs.RAID_BUFFS_EXTERNAL_DAMAGE_COOLDOWN, this.simUI);
 		if (externalDamageCooldownOptions.length > 0) {
 			const contentBlock = new ContentBlock(this.column3, 'buffs-settings', {
-				header: { title: 'External Damage Cooldowns', tooltip: Tooltips.EXTERNAL_DAMAGE_COOLDOWN_SECTION },
+				header: { title: i18n.t('settings.external_damage_cooldowns.title'), tooltip: i18n.t('settings.external_damage_cooldowns.tooltip') },
 			});
 
 			this.configureIconSection(
@@ -244,7 +248,7 @@ export class SettingsTab extends SimTab {
 		const externalDefensiveCooldownOptions = relevantStatOptions(BuffDebuffInputs.RAID_BUFFS_EXTERNAL_DEFENSIVE_COOLDOWN, this.simUI);
 		if (externalDefensiveCooldownOptions.length > 0) {
 			const contentBlock = new ContentBlock(this.column3, 'buffs-settings', {
-				header: { title: 'External Defensive Cooldowns', tooltip: Tooltips.EXTERNAL_DEFENSIVE_COOLDOWN_SECTION },
+				header: { title: i18n.t('settings.external_defensive_cooldowns.title'), tooltip: i18n.t('settings.external_defensive_cooldowns.tooltip') },
 			});
 
 			this.configureIconSection(
@@ -258,7 +262,7 @@ export class SettingsTab extends SimTab {
 
 	private buildDebuffsSettings() {
 		const contentBlock = new ContentBlock(this.column3, 'debuffs-settings', {
-			header: { title: 'Debuffs', tooltip: i18n.t('settings.debuffs.tooltip') },
+			header: { title: i18n.t('settings.debuffs.title'), tooltip: i18n.t('settings.debuffs.tooltip') },
 		});
 
 		const debuffOptions = relevantStatOptions(BuffDebuffInputs.DEBUFFS_CONFIG, this.simUI);
@@ -274,7 +278,7 @@ export class SettingsTab extends SimTab {
 				this.simUI.player,
 				{
 					inputs: miscDebuffOptions.map(options => options.config),
-					label: 'Misc',
+					label: i18n.t('settings.debuffs.misc.label'),
 				},
 				this.simUI,
 			);
@@ -287,8 +291,10 @@ export class SettingsTab extends SimTab {
 
 	private buildSavedDataPickers() {
 		const savedEncounterManager = new SavedDataManager<Encounter, SavedEncounter>(this.rightPanel, this.simUI.sim.encounter, {
-			label: 'Encounter',
-			header: { title: 'Saved Encounters' },
+			label: i18n.t('settings.saved_encounters.encounter'),
+			header: { title: i18n.t('settings.saved_encounters.title') },
+			nameLabel: i18n.t('settings.saved_encounters.encounter_name'),
+			saveButtonText: i18n.t('settings.saved_encounters.save_encounter'),
 			storageKey: this.simUI.getSavedEncounterStorageKey(),
 			getData: (encounter: Encounter) => SavedEncounter.create({ encounter: encounter.toProto() }),
 			setData: (eventID: EventID, encounter: Encounter, newEncounter: SavedEncounter) => encounter.fromProto(eventID, newEncounter.encounter!),
@@ -299,8 +305,10 @@ export class SettingsTab extends SimTab {
 		});
 
 		const savedSettingsManager = new SavedDataManager<IndividualSimUI<any>, SavedSettings>(this.rightPanel, this.simUI, {
-			label: 'Settings',
-			header: { title: 'Saved Settings' },
+			label: i18n.t('settings.saved_settings.settings'),
+			header: { title: i18n.t('settings.saved_settings.title') },
+			nameLabel: i18n.t('settings.saved_settings.settings_name'),
+			saveButtonText: i18n.t('settings.saved_settings.save_settings'),
 			storageKey: this.simUI.getSavedSettingsStorageKey(),
 			getData: () => {
 				return this.getCurrentSavedSettings();

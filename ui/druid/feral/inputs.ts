@@ -4,21 +4,22 @@ import { APLRotation_Type } from '../../core/proto/apl.js';
 import { Spec } from '../../core/proto/common.js';
 import { FeralDruid_Rotation_AplType as AplType, FeralDruid_Rotation_HotwStrategy as HotwType } from '../../core/proto/druid.js';
 import { TypedEvent } from '../../core/typed_event.js';
+import i18n from '../../i18n/config.js';
 
 // Configuration for spec-specific UI elements on the settings tab.
 // These don't need to be in a separate file but it keeps things cleaner.
 
 export const AssumeBleedActive = InputHelpers.makeSpecOptionsBooleanInput<Spec.SpecFeralDruid>({
 	fieldName: 'assumeBleedActive',
-	label: 'Assume Bleed Always Active',
-	labelTooltip: "Assume bleed always exists for 'Rend and Tear' calculations. Otherwise will only calculate based on own rip/rake/lacerate.",
+	label: i18n.t('settings.other.assume_bleed_active.label'),
+	labelTooltip: i18n.t('settings.other.assume_bleed_active.tooltip'),
 	extraCssClasses: ['within-raid-sim-hide'],
 });
 
 export const CannotShredTarget = InputHelpers.makeSpecOptionsBooleanInput<Spec.SpecFeralDruid>({
 	fieldName: 'cannotShredTarget',
-	label: 'Cannot Shred Target',
-	labelTooltip: 'Alternative to "In Front of Target" for modeling bosses that do not Parry or Block, but which you still cannot Shred.',
+	label: i18n.t('settings.other.cannot_shred_target.label'),
+	labelTooltip: i18n.t('settings.other.cannot_shred_target.tooltip'),
 });
 
 function ShouldShowAdvParamST(player: Player<Spec.SpecFeralDruid>): boolean {
@@ -35,82 +36,83 @@ export const FeralDruidRotationConfig = {
 	inputs: [
 		InputHelpers.makeRotationEnumInput<Spec.SpecFeralDruid, AplType>({
 			fieldName: 'rotationType',
-			label: 'Type',
+			label: i18n.t('rotation.options.druid.feral.target_type.label'),
 			values: [
-				{ name: 'Single Target', value: AplType.SingleTarget },
-				{ name: 'AOE', value: AplType.Aoe },
+				{ name: i18n.t('rotation.options.druid.feral.target_type.single_target'), value: AplType.SingleTarget },
+				{ name: i18n.t('rotation.options.druid.feral.target_type.aoe'), value: AplType.Aoe },
 			],
 		}),
 		InputHelpers.makeRotationBooleanInput<Spec.SpecFeralDruid>({
 			fieldName: 'bearWeave',
-			label: 'Enable bear-weaving',
-			labelTooltip: 'Weave into Bear Form while pooling Energy',
+			label: i18n.t('rotation.options.druid.feral.bear_weave.label'),
+			labelTooltip: i18n.t('rotation.options.druid.feral.bear_weave.tooltip'),
 		}),
 		InputHelpers.makeRotationBooleanInput<Spec.SpecFeralDruid>({
 			fieldName: 'snekWeave',
-			label: 'Use Albino Snake',
-			labelTooltip: 'Reset swing timer at the end of bear-weaves using Albino Snake pet',
+			label: i18n.t('rotation.options.druid.feral.snek_weave.label'),
+			labelTooltip: i18n.t('rotation.options.druid.feral.snek_weave.tooltip'),
 			showWhen: (player: Player<Spec.SpecFeralDruid>) => player.getSimpleRotation().bearWeave,
 		}),
 		InputHelpers.makeRotationBooleanInput<Spec.SpecFeralDruid>({
 			fieldName: 'useNs',
-			label: "Use Nature's Swiftness",
-			labelTooltip: "Use Nature's Swiftness to fill gaps in Predatory Swiftness uptime",
+			label: i18n.t('rotation.options.druid.feral.use_ns.label'),
+			labelTooltip: i18n.t('rotation.options.druid.feral.use_ns.tooltip'),
 			showWhen: (player: Player<Spec.SpecFeralDruid>) => player.getTalents().dreamOfCenarius,
 			changeEmitter: (player: Player<Spec.SpecFeralDruid>) => TypedEvent.onAny([player.rotationChangeEmitter, player.talentsChangeEmitter]),
 		}),
 		InputHelpers.makeRotationEnumInput<Spec.SpecFeralDruid, HotwType>({
 			fieldName: 'hotwStrategy',
-			label: 'Heart of the Wild usage',
+			label: i18n.t('rotation.options.druid.feral.hotw_strategy.label'),
+			labelTooltip: i18n.t('rotation.options.druid.feral.hotw_strategy.tooltip'),
 			values: [
-				{ name: 'Passives only', value: HotwType.PassivesOnly },
-				{ name: 'Enhanced bear-weaving', value: HotwType.Bear },
-				{ name: 'Wrath-weaving', value: HotwType.Wrath },
+				{ name: i18n.t('rotation.options.druid.feral.hotw_strategy.values.passives_only'), value: HotwType.PassivesOnly },
+				{ name: i18n.t('rotation.options.druid.feral.hotw_strategy.values.enhanced_bear_weaving'), value: HotwType.Bear },
+				{ name: i18n.t('rotation.options.druid.feral.hotw_strategy.values.wrath_weaving'), value: HotwType.Wrath },
 			],
 			showWhen: (player: Player<Spec.SpecFeralDruid>) => player.getTalents().heartOfTheWild,
 			changeEmitter: (player: Player<Spec.SpecFeralDruid>) => TypedEvent.onAny([player.rotationChangeEmitter, player.talentsChangeEmitter]),
 		}),
 		InputHelpers.makeRotationBooleanInput<Spec.SpecFeralDruid>({
 			fieldName: 'allowAoeBerserk',
-			label: 'Allow AoE Berserk',
-			labelTooltip: 'Allow Berserk usage in AoE rotation',
+			label: i18n.t('rotation.options.druid.feral.allow_aoe_berserk.label'),
+			labelTooltip: i18n.t('rotation.options.druid.feral.allow_aoe_berserk.tooltip'),
 			showWhen: (player: Player<Spec.SpecFeralDruid>) => player.getSimpleRotation().rotationType == AplType.Aoe,
 		}),
 		InputHelpers.makeRotationBooleanInput<Spec.SpecFeralDruid>({
 			fieldName: 'manualParams',
-			label: 'Manual Advanced Parameters',
-			labelTooltip: 'Manually specify advanced parameters, otherwise will use preset defaults',
+			label: i18n.t('rotation.options.druid.feral.manual_params.label'),
+			labelTooltip: i18n.t('rotation.options.druid.feral.manual_params.tooltip'),
 			showWhen: (player: Player<Spec.SpecFeralDruid>) => player.getSimpleRotation().rotationType == AplType.SingleTarget,
 		}),
 		InputHelpers.makeRotationNumberInput<Spec.SpecFeralDruid>({
 			fieldName: 'minRoarOffset',
-			label: 'Roar Offset',
-			labelTooltip: 'Minimum offset gained between current Rip and new Roar to allow a Roar clip',
+			label: i18n.t('rotation.options.druid.feral.roar_offset.label'),
+			labelTooltip: i18n.t('rotation.options.druid.feral.roar_offset.tooltip'),
 			showWhen: ShouldShowAdvParamST,
 		}),
 		InputHelpers.makeRotationNumberInput<Spec.SpecFeralDruid>({
 			fieldName: 'ripLeeway',
-			label: 'Rip Leeway',
-			labelTooltip: 'Minimum tolerated gap between current Rip and current Roar expiration times before kicking in emergency measures',
+			label: i18n.t('rotation.options.druid.feral.rip_leeway.label'),
+			labelTooltip: i18n.t('rotation.options.druid.feral.rip_leeway.tooltip'),
 			showWhen: ShouldShowAdvParamST,
 		}),
 		InputHelpers.makeRotationBooleanInput<Spec.SpecFeralDruid>({
 			fieldName: 'useBite',
-			label: 'Bite during rotation',
-			labelTooltip: 'Use Bite during rotation rather than just for Rip maintenance during Execute',
+			label: i18n.t('rotation.options.druid.feral.bite_during_rotation.label'),
+			labelTooltip: i18n.t('rotation.options.druid.feral.bite_during_rotation.tooltip'),
 			showWhen: ShouldShowAdvParamST,
 		}),
 		InputHelpers.makeRotationNumberInput<Spec.SpecFeralDruid>({
 			fieldName: 'biteTime',
-			label: 'Bite Time',
-			labelTooltip: 'Minimum seconds remaining before Rip or Roar should ideally be refreshed (including planned early clips) to allow a Bite',
+			label: i18n.t('rotation.options.druid.feral.bite_time.label'),
+			labelTooltip: i18n.t('rotation.options.druid.feral.bite_time.tooltip'),
 			showWhen: (player: Player<Spec.SpecFeralDruid>) =>
 				ShouldShowAdvParamST(player) && player.getSimpleRotation().useBite,
 		}),
 		InputHelpers.makeRotationNumberInput<Spec.SpecFeralDruid>({
 			fieldName: 'berserkBiteTime',
-			label: 'Bite Time during Berserk',
-			labelTooltip: 'More aggressive threshold when Berserk is active',
+			label: i18n.t('rotation.options.druid.feral.berserk_bite_time.label'),
+			labelTooltip: i18n.t('rotation.options.druid.feral.berserk_bite_time.tooltip'),
 			showWhen: (player: Player<Spec.SpecFeralDruid>) =>
 				ShouldShowAdvParamST(player) && player.getSimpleRotation().useBite,
 		}),

@@ -20,7 +20,6 @@ func (shaman *Shaman) registerChainLightningSpell() {
 func (shaman *Shaman) NewChainSpellConfig(config ShamSpellConfig) core.SpellConfig {
 	config.BaseCastTime = time.Second * 2
 	spellConfig := shaman.newElectricSpellConfig(config)
-	spellConfig.ClassSpellMask = core.TernaryInt64(config.IsElementalOverload, SpellMaskChainLightningOverload, SpellMaskChainLightning)
 	if !config.IsElementalOverload {
 		spellConfig.Cast.CD = core.Cooldown{
 			Timer:    shaman.NewTimer(),
@@ -29,10 +28,7 @@ func (shaman *Shaman) NewChainSpellConfig(config ShamSpellConfig) core.SpellConf
 	}
 	spellConfig.SpellSchool = config.SpellSchool
 
-	maxHits := int32(3)
-	if shaman.HasMajorGlyph(proto.ShamanMajorGlyph_GlyphOfChainLightning) {
-		maxHits += 2
-	}
+	maxHits := core.TernaryInt32((spellConfig.ClassSpellMask&(SpellMaskLavaBeam|SpellMaskLavaBeamOverload) > 0) || shaman.HasMajorGlyph(proto.ShamanMajorGlyph_GlyphOfChainLightning), 5, 3)
 	maxHits = min(maxHits, shaman.Env.TotalTargetCount())
 
 	spellConfig.ApplyEffects = func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
@@ -73,6 +69,7 @@ func (shaman *Shaman) newChainLightningSpell(isElementalOverload bool) *core.Spe
 		SpellSchool:         core.SpellSchoolNature,
 		Overloads:           &shaman.ChainLightningOverloads,
 		BounceReduction:     1.0,
+		ClassSpellMask:      core.TernaryInt64(isElementalOverload, SpellMaskChainLightningOverload, SpellMaskChainLightning),
 	}
 	spellConfig := shaman.NewChainSpellConfig(shamConfig)
 

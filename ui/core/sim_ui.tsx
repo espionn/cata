@@ -203,17 +203,17 @@ export abstract class SimUI extends Component {
 			resultsViewerElem.appendChild(
 				<div className="sim-ui-unlaunched-container d-flex flex-column align-items-center text-center mt-auto mb-auto ms-auto me-auto">
 					<i className="fas fa-ban fa-3x mb-2" />
-					<h6>This sim is currently not supported.</h6>
+					<h6>{i18n.t('sim.unlaunched.title')}</h6>
 					<p>
-						Want to contribute?
+						{i18n.t('sim.unlaunched.contribute_message')}
 						<br />
-						Make sure to join our <a href="https://discord.gg/p3DgvmnDCS" target="_blank">Discord</a>!
+						{i18n.t('sim.unlaunched.discord_message')} <a href="https://discord.gg/p3DgvmnDCS" target="_blank">Discord</a>!
 					</p>
 					{this.config.spec?.isHealingSpec && (
 						<p>
-							Looking for healing simulations?
+							{i18n.t('sim.unlaunched.healing_message')}
 							<br />
-							Check out <a href="https://questionablyepic.com/live/">QE Live</a>!
+							{i18n.t('sim.unlaunched.qe_live_message')} <a href="https://questionablyepic.com/live/">QE Live</a>!
 						</p>
 					)}
 				</div>
@@ -287,13 +287,13 @@ export abstract class SimUI extends Component {
 		let statusStr = '';
 		switch (config.simStatus.status) {
 			case LaunchStatus.Unlaunched:
-				statusStr = 'This sim is a WORK IN PROGRESS. It is not fully developed and should not be used for general purposes.';
+				statusStr = i18n.t('info.status.unlaunched');
 				break;
 			case LaunchStatus.Alpha:
-				statusStr = 'This sim is in ALPHA. Bugs are expected; please let us know if you find one!';
+				statusStr = i18n.t('info.status.alpha');
 				break;
 			case LaunchStatus.Beta:
-				statusStr = 'This sim is in BETA. There may still be a few bugs; please let us know if you find one!';
+				statusStr = i18n.t('info.status.beta');
 				break;
 		}
 
@@ -329,7 +329,7 @@ export abstract class SimUI extends Component {
 			if (!(result instanceof SimResult) && result.type == ErrorOutcomeType.ErrorOutcomeAborted) {
 				new Toast({
 					variant: 'info',
-					body: 'Raid sim cancelled.',
+					body: i18n.t('sim.notifications.raid_sim_cancelled'),
 				});
 			}
 		} catch (e) {
@@ -363,7 +363,7 @@ export abstract class SimUI extends Component {
 
 		new Toast({
 			variant: 'error',
-			body: 'The Simulation failed. Generated an error report.',
+			body: i18n.t('sim.notifications.simulation_failed'),
 		});
 
 		const errorStr = (error as SimError).errorStr;
@@ -374,7 +374,7 @@ export abstract class SimUI extends Component {
 			return;
 		}
 
-		if (window.confirm('Simulation Failure:\n' + errorStr + '\nPress Ok to file crash report')) {
+		if (window.confirm(i18n.t('sim.crash_report.confirm_title') + '\n' + errorStr + '\n' + i18n.t('sim.crash_report.confirm_message'))) {
 			// Splice out just the line numbers
 			const hash = this.hashCode(errorStr);
 			const link = this.toLink();
@@ -386,7 +386,7 @@ export abstract class SimUI extends Component {
 							window.open(issues.items[0].html_url, '_blank');
 						} else {
 							const url = new URL(REPO_NEW_ISSUE_URL);
-							url.searchParams.append('title', `Crash Report ${hash}`);
+							url.searchParams.append('title', `${i18n.t('sim.crash_report.report_title')} ${hash}`);
 							url.searchParams.append('assignees', '');
 							url.searchParams.append('labels', '');
 
@@ -414,7 +414,7 @@ export abstract class SimUI extends Component {
 					});
 				})
 				.catch(fetchErr => {
-					alert('Failed to file report... try again another time:' + fetchErr);
+					alert(i18n.t('sim.notifications.failed_to_file_report') + fetchErr);
 				});
 		}
 	}
@@ -435,14 +435,14 @@ export abstract class SimUI extends Component {
 
 class CrashModal extends BaseModal {
 	constructor(parent: HTMLElement, link: string) {
-		super(parent, 'crash', { title: 'Extra Crash Information' });
+		super(parent, 'crash', { title: i18n.t('sim.crash_modal.title') });
 		this.body.appendChild(
 			<div className="sim-crash-report">
 				<h3 className="sim-crash-report-header">
-					Please append the following complete link to the issue you just created. This will simplify debugging the issue.
+					{i18n.t('sim.crash_modal.header')}
 				</h3>
 				<textarea className="sim-crash-report-text form-control">{link}</textarea>
-			</div>,
+			</div>
 		);
 	}
 }

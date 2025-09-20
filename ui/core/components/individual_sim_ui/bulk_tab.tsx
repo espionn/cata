@@ -5,6 +5,7 @@ import { ref } from 'tsx-vanilla';
 
 import { REPO_RELEASES_URL } from '../../constants/other';
 import { IndividualSimUI } from '../../individual_sim_ui';
+import i18n from '../../../i18n/config';
 import { BulkSettings, ErrorOutcomeType, ProgressMetrics, TalentLoadout } from '../../proto/api';
 import { GemColor, ItemRandomSuffix, ItemSlot, ItemSpec, ReforgeStat, Spec } from '../../proto/common';
 import { ItemEffectRandPropPoints, SimDatabase, SimEnchant, SimGem, SimItem } from '../../proto/db';
@@ -74,7 +75,7 @@ export class BulkTab extends SimTab {
 	gemIconElements: HTMLImageElement[];
 
 	constructor(parentElem: HTMLElement, simUI: IndividualSimUI<any>) {
-		super(parentElem, simUI, { identifier: 'bulk-tab', title: 'Batch (<span class="text-success">New</span>)' });
+		super(parentElem, simUI, { identifier: 'bulk-tab', title: i18n.t('sim.bulk.title') });
 
 		this.simUI = simUI;
 		this.playerCanDualWield = this.simUI.player.getPlayerSpec().canDualWield;
@@ -109,7 +110,7 @@ export class BulkTab extends SimTab {
 										bsTarget: `#bulkSetupTab`,
 									}}
 									ref={setupTabBtnRef}>
-									Setup
+									{i18n.t('sim.bulk.tabs.setup')}
 								</button>
 							</li>
 							<li className="nav-item" attributes={{ role: 'presentation' }}>
@@ -127,14 +128,14 @@ export class BulkTab extends SimTab {
 										bsTarget: `#bulkResultsTab`,
 									}}
 									ref={resultsTabBtnRef}>
-									Results
+									{i18n.t('sim.bulk.tabs.results')}
 								</button>
 							</li>
 						</ul>
 						<div className="tab-content">
 							<div id="bulkSetupTab" className="tab-pane fade active show" ref={setupTabRef} />
 							<div id="bulkResultsTab" className="tab-pane fade show" ref={resultsTabRef}>
-								<div className="d-flex align-items-center justify-content-center p-gap">Run a simulation to view results</div>
+								<div className="d-flex align-items-center justify-content-center p-gap">{i18n.t('sim.bulk.results.run_simulation')}</div>
 							</div>
 						</div>
 					</div>
@@ -144,7 +145,7 @@ export class BulkTab extends SimTab {
 						<div className="bulk-settings-container" ref={settingsContainerRef}>
 							<div className="bulk-combinations-count h4" ref={combinationsElemRef} />
 							<button className="btn btn-primary bulk-settings-btn" ref={bulkSimBtnRef}>
-								Simulate Batch
+								{i18n.t('sim.bulk.actions.simulate_batch')}
 							</button>
 							<div className="bulk-boolean-settings-container" ref={booleanSettingsContainerRef}></div>
 						</div>
@@ -406,7 +407,7 @@ export class BulkTab extends SimTab {
 		if (idx < 0 || this.items.length < idx || !this.items[idx]) {
 			new Toast({
 				variant: 'error',
-				body: 'Failed to remove item, please report this issue.',
+				body: i18n.t('sim.bulk.notifications.failed_to_remove_item'),
 			});
 			return;
 		}
@@ -464,10 +465,10 @@ export class BulkTab extends SimTab {
 		try {
 			const result = await this.simUI.sim.runBulkSim(this.createBulkSettings(), this.createBulkItemsDatabase(), onProgress);
 			if (result.error?.type == ErrorOutcomeType.ErrorOutcomeAborted) {
-				new Toast({
-					variant: 'info',
-					body: 'Bulk sim cancelled.',
-				});
+							new Toast({
+				variant: 'info',
+				body: i18n.t('sim.bulk.notifications.bulk_sim_cancelled'),
+			});
 			}
 		} catch (e) {
 			this.isPending = false;
@@ -498,33 +499,25 @@ export class BulkTab extends SimTab {
 		this.setupTabElem.appendChild(
 			<>
 				{/* // TODO: Remove once we're more comfortable with the state of Batch sim */}
-				<p className="mb-0">
-					<span className="bold">Batch Simming</span> is a new feature akin to the <span className="bold">Top Gear</span> sim on{' '}
-					<a href="https://raidbots.com" target="_blank">
-						Raidbots.com
-					</a>{' '}
-					that allows you to select multiple items and sim them find the best combinations.
-					<br />
-					This is an <span className="text-brand">Alpha</span> feature, so if you have feedback or find a bug, please report it!
-				</p>
+				<p className="mb-0" innerHTML={i18n.t('sim.bulk.description')} />
 				{isExternal() && (
 					<p className="mb-0">
 						<a href={REPO_RELEASES_URL} target="_blank">
 							<i className="fas fa-gauge-high me-1" />
-							Download the local sim for faster results.
+							{i18n.t('sim.bulk.download_local')}
 						</a>
 					</p>
 				)}
 				<div className="bulk-gear-actions">
 					<button className="btn btn-secondary" ref={bagImportBtnRef}>
-						<i className="fa fa-download me-1" /> Import From Bags
+						<i className="fa fa-download me-1" /> {i18n.t('sim.bulk.actions.import_bags')}
 					</button>
 					<button className="btn btn-secondary" ref={favsImportBtnRef}>
-						<i className="fa fa-download me-1" /> Import Favorites
+						<i className="fa fa-download me-1" /> {i18n.t('sim.bulk.actions.import_favorites')}
 					</button>
 					<button className="btn btn-danger ms-auto" ref={clearBtnRef}>
 						<i className="fas fa-times me-1" />
-						Clear Items
+						{i18n.t('sim.bulk.actions.clear_items')}
 					</button>
 				</div>
 			</>,
@@ -650,8 +643,8 @@ export class BulkTab extends SimTab {
 		if (!isExternal()) {
 			new BooleanPicker<BulkTab>(this.booleanSettingsContainer, this, {
 				id: 'bulk-fast-mode',
-				label: 'Fast Mode',
-				labelTooltip: 'Fast mode reduces accuracy but will run faster.',
+				label: i18n.t('sim.bulk.settings.fast_mode.label'),
+				labelTooltip: i18n.t('sim.bulk.settings.fast_mode.tooltip'),
 				changedEvent: _modObj => this.settingsChangedEmitter,
 				getValue: _modObj => this.fastMode,
 				setValue: (_, _modObj, newValue: boolean) => {
@@ -661,9 +654,8 @@ export class BulkTab extends SimTab {
 		}
 		new BooleanPicker<BulkTab>(this.booleanSettingsContainer, this, {
 			id: 'bulk-combinations',
-			label: 'Combinations',
-			labelTooltip:
-				'When checked bulk simulator will create all possible combinations of the items. When disabled trinkets and rings will still run all combinations because they each have two slots to fill.',
+			label: i18n.t('sim.bulk.settings.combinations.label'),
+			labelTooltip: i18n.t('sim.bulk.settings.combinations.tooltip'),
 			changedEvent: _modObj => this.settingsChangedEmitter,
 			getValue: _modObj => this.doCombos,
 			setValue: (_, _modObj, newValue: boolean) => {
@@ -672,8 +664,8 @@ export class BulkTab extends SimTab {
 		});
 		new BooleanPicker<BulkTab>(this.booleanSettingsContainer, this, {
 			id: 'bulk-auto-enchant',
-			label: 'Auto Enchant',
-			labelTooltip: 'When checked bulk simulator apply the current enchant for a slot to each replacement item it can.',
+			label: i18n.t('sim.bulk.settings.auto_enchant.label'),
+			labelTooltip: i18n.t('sim.bulk.settings.auto_enchant.tooltip'),
 			changedEvent: (_obj: BulkTab) => this.settingsChangedEmitter,
 			getValue: _obj => this.autoEnchant,
 			setValue: (_, obj: BulkTab, value: boolean) => {
@@ -684,7 +676,7 @@ export class BulkTab extends SimTab {
 		const socketsContainerRef = ref<HTMLDivElement>();
 		const defaultGemDiv = (
 			<div className={clsx('default-gem-container', !this.autoGem && 'hide')}>
-				<h6>Default Gems</h6>
+				<h6>{i18n.t('sim.bulk.settings.default_gems')}</h6>
 				<div ref={socketsContainerRef} className="sockets-container"></div>
 			</div>
 		);
@@ -692,15 +684,15 @@ export class BulkTab extends SimTab {
 		const talentsContainerRef = ref<HTMLDivElement>();
 		const talentsToSimDiv = (
 			<div className={clsx('talents-picker-container', !this.simTalents && 'hide')}>
-				<h6>Talents to Sim</h6>
+				<h6>{i18n.t('sim.bulk.settings.talents_to_sim')}</h6>
 				<div ref={talentsContainerRef} className="talents-container"></div>
 			</div>
 		);
 
 		new BooleanPicker<BulkTab>(this.booleanSettingsContainer, this, {
 			id: 'bulk-auto-gem',
-			label: 'Auto Gem',
-			labelTooltip: 'When checked bulk simulator will fill any un-filled gem sockets with default gems.',
+			label: i18n.t('sim.bulk.settings.auto_gem.label'),
+			labelTooltip: i18n.t('sim.bulk.settings.auto_gem.tooltip'),
 			changedEvent: (_obj: BulkTab) => this.settingsChangedEmitter,
 			getValue: _obj => this.autoGem,
 			setValue: (_, obj: BulkTab, value: boolean) => {
@@ -711,8 +703,8 @@ export class BulkTab extends SimTab {
 
 		new BooleanPicker<BulkTab>(this.booleanSettingsContainer, this, {
 			id: 'bulk-sim-talents',
-			label: 'Sim Talents',
-			labelTooltip: 'When checked bulk simulator will sim chosen talent setups. Warning, it might cause the bulk sim to run for a lot longer',
+			label: i18n.t('sim.bulk.settings.sim_talents.label'),
+			labelTooltip: i18n.t('sim.bulk.settings.sim_talents.tooltip'),
 			changedEvent: (_obj: BulkTab) => this.settingsChangedEmitter,
 			getValue: _obj => this.simTalents,
 			setValue: (_, obj: BulkTab, value: boolean) => {
@@ -849,9 +841,9 @@ export class BulkTab extends SimTab {
 		const rtn = (
 			<>
 				<span className={clsx(this.showIterationsWarning() && 'text-danger')}>
-					{this.combinations === 1 ? '1 Combination' : `${this.combinations} Combinations`}
+					{this.combinations === 1 ? i18n.t('sim.bulk.settings.combination_singular') : i18n.t('sim.bulk.settings.combinations_count', { count: this.combinations })}
 					<br />
-					<small>{this.iterations} Iterations</small>
+					<small>{this.iterations} {i18n.t('sim.bulk.settings.iterations')}</small>
 				</span>
 				{this.showIterationsWarning() && (
 					<button className="warning link-warning" ref={warningRef}>
@@ -863,8 +855,7 @@ export class BulkTab extends SimTab {
 
 		if (!!warningRef.value) {
 			tippy(warningRef.value, {
-				content: `Simming over ${WEB_ITERATIONS_LIMIT} iterations in the web sim will take a long time or may not run at all.
-					For larger batch sims we recommend using Fast Mode or downloading the executable and running on your machine.`,
+				content: i18n.t('sim.bulk.warning.iterations_limit', { limit: WEB_ITERATIONS_LIMIT }),
 				placement: 'left',
 				popperOptions: {
 					modifiers: [
@@ -896,25 +887,17 @@ export class BulkTab extends SimTab {
 
 		this.pendingResults.setContent(
 			<div className="results-sim">
-				<div>{combinations} total combinations.</div>
+				<div>{i18n.t('sim.bulk.progress.total_combinations', { count: combinations })}</div>
 				<div>
 					{rounds > 0 && (
 						<>
-							{currentRound} / {rounds} refining rounds
+							{i18n.t('sim.bulk.progress.refining_rounds', { current: currentRound, total: rounds })}
 						</>
 					)}
 				</div>
-				<div>
-					{progress.completedSims} / {progress.totalSims}
-					<br />
-					simulations complete
-				</div>
-				<div>
-					{progress.completedIterations} / {progress.totalIterations}
-					<br />
-					iterations complete
-				</div>
-				<div>{secondsRemaining} seconds remaining.</div>
+				<div innerHTML={i18n.t('sim.bulk.progress.simulations_complete', { completed: progress.completedSims, total: progress.totalSims })} />
+				<div innerHTML={i18n.t('sim.bulk.progress.iterations_complete', { completed: progress.completedIterations, total: progress.totalIterations })} />
+				<div>{i18n.t('sim.bulk.progress.seconds_remaining', { seconds: secondsRemaining })}</div>
 			</div>,
 		);
 	}

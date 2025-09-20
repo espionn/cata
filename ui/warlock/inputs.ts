@@ -4,6 +4,7 @@ import { Spec } from '../core/proto/common.js';
 import { WarlockOptions_Summon as Summon } from '../core/proto/warlock.js';
 import { ActionId } from '../core/proto_utils/action_id.js';
 import { WarlockSpecs } from '../core/proto_utils/utils';
+import i18n from '../i18n/config.js';
 
 // Configuration for spec-specific UI elements on the settings tab.
 // These don't need to be in a separate file but it keeps things cleaner.
@@ -29,7 +30,7 @@ export const PetInput = <SpecType extends WarlockSpecs>() =>
 export const DetonateSeed = <SpecType extends WarlockSpecs>() =>
 	InputHelpers.makeClassOptionsBooleanInput<SpecType>({
 		fieldName: 'detonateSeed',
-		label: 'Detonate Seed on Cast',
-		labelTooltip: 'Simulates raid doing damage to targets such that seed detonates immediately on cast.',
+		label: i18n.t('settings.other.detonate_seed.label'),
+		labelTooltip: i18n.t('settings.other.detonate_seed.tooltip'),
 	});
 

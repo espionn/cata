@@ -5,6 +5,7 @@ import { Class, EquipmentSpec, Glyphs, ItemLevelState, ItemSlot, ItemSpec, Profe
 import { nameToClass, nameToRace } from '../../../proto_utils/names';
 import Toast from '../../toast';
 import { IndividualImporter } from './individual_importer';
+import i18n from '../../../../i18n/config';
 
 const i = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
@@ -190,33 +191,31 @@ function parseWowheadGearLink(link: string): WowheadGearPlannerImportJSON {
 
 export class IndividualWowheadGearPlannerImporter<SpecType extends Spec> extends IndividualImporter<SpecType> {
 	constructor(parent: HTMLElement, simUI: IndividualSimUI<SpecType>) {
-		super(parent, simUI, { title: 'Wowhead Import', allowFileUpload: true });
+		super(parent, simUI, { title: i18n.t('import.wowhead.title'), allowFileUpload: true });
 
 		const warningRef = ref<HTMLDivElement>();
 		this.descriptionElem.appendChild(
-			<>
+			<div>
 				<p>
-					Import settings from{' '}
+					{i18n.t('import.wowhead.description')}{' '}
 					<a href="https://www.wowhead.com/mop-classic/gear-planner" target="_blank">
-						Wowhead Gear Planner
+						{i18n.t('import.wowhead.gear_planner_link')}
 					</a>
 					.
 				</p>
-				<p>This feature imports gear, race, and (optionally) talents. It does NOT import buffs, debuffs, consumes, rotation, or custom stats.</p>
-				<p>To import, paste the gear planner link below and click, 'Import'.</p>
+				<p>{i18n.t('import.wowhead.feature_description')}</p>
+				<p>{i18n.t('import.wowhead.instructions')}</p>
 				<div ref={warningRef} />
-			</>,
+			</div>
 		);
 
 		if (warningRef.value)
 			new Toast({
-				title: 'Tinker issues',
+				title: i18n.t('import.wowhead.tinker_warning.title'),
 				body: (
-					<>
-						There are known issues importing tinkers from Wowhead.
-						<br />
-						Always make sure to double check your tinkers after importing.
-					</>
+					<div>
+						{i18n.t('import.wowhead.tinker_warning.message')}
+					</div>
 				),
 				additionalClasses: ['toast-import-warning'],
 				container: warningRef.value,
@@ -230,7 +229,7 @@ export class IndividualWowheadGearPlannerImporter<SpecType extends Spec> extends
 	async onImport(url: string) {
 		const match = url.match(/www\.wowhead\.com\/mop-classic\/gear-planner\/([a-z\-]+)\/([a-z\-]+)\/([a-zA-Z0-9_\-]+)/);
 		if (!match) {
-			throw new Error(`Invalid WCL URL ${url}, must look like "https://www.wowhead.com/mop-classic/gear-planner/CLASS/RACE/XXXX"`);
+			throw new Error(i18n.t('import.wowhead.error_invalid_url', { url }));
 		}
 		const missingItems: number[] = [];
 		const missingEnchants: number[] = [];
@@ -240,7 +239,7 @@ export class IndividualWowheadGearPlannerImporter<SpecType extends Spec> extends
 		const glyphIds = parsed.glyphs;
 		const charClass = nameToClass(parsed.classId.replaceAll('-', ''));
 		if (charClass == Class.ClassUnknown) {
-			throw new Error('Could not parse Class: ' + parsed.classId);
+			throw new Error(i18n.t('import.wowhead.error_cannot_parse_class', { classId: parsed.classId }));
 		}
 
 		const converWowheadRace = (raceId: string): string => {
@@ -251,7 +250,7 @@ export class IndividualWowheadGearPlannerImporter<SpecType extends Spec> extends
 
 		const race = nameToRace(converWowheadRace(parsed.raceId));
 		if (race == Race.RaceUnknown) {
-			throw new Error('Could not parse Race: ' + parsed.raceId);
+			throw new Error(i18n.t('import.wowhead.error_cannot_parse_race', { raceId: parsed.raceId }));
 		}
 
 		const equipmentSpec = EquipmentSpec.create();

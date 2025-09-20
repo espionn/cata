@@ -2,12 +2,11 @@ package elemental
 
 import (
 	"github.com/wowsims/mop/sim/core"
-	"github.com/wowsims/mop/sim/core/proto"
 	"github.com/wowsims/mop/sim/shaman"
 )
 
 func (ele *ElementalShaman) registerLavaBeamSpell() {
-	maxHits := min(core.TernaryInt32(ele.HasMajorGlyph(proto.ShamanMajorGlyph_GlyphOfChainLightning), 5, 3), ele.Env.TotalTargetCount())
+	maxHits := min(5, ele.Env.TotalTargetCount())
 	ele.LavaBeam = ele.newLavaBeamSpell(false)
 	ele.LavaBeamOverloads = [2][]*core.Spell{}
 
@@ -28,9 +27,9 @@ func (ele *ElementalShaman) newLavaBeamSpell(isElementalOverload bool) *core.Spe
 		SpellSchool:         core.SpellSchoolFire,
 		Overloads:           &ele.LavaBeamOverloads,
 		BounceReduction:     1.1,
+		ClassSpellMask:      core.TernaryInt64(isElementalOverload, shaman.SpellMaskLavaBeamOverload, shaman.SpellMaskLavaBeam),
 	}
 	spellConfig := ele.NewChainSpellConfig(shamConfig)
-	spellConfig.ClassSpellMask = core.TernaryInt64(isElementalOverload, shaman.SpellMaskLavaBeamOverload, shaman.SpellMaskLavaBeam)
 	spellConfig.ExtraCastCondition = func(sim *core.Simulation, target *core.Unit) bool {
 		return ele.AscendanceAura.IsActive()
 	}

@@ -5,14 +5,7 @@ const STORAGE_KEY = 'lang';
 
 export const supportedLanguages: Record<string, string> = {
 	'en': 'English',
-	'cn': '简体中文',
-	'de': 'Deutsch',
-	'es': 'Español',
 	'fr': 'Français',
-	'it': 'Italiano',
-	'ko': '한국어',
-	'pt': 'Português Brasileiro',
-	'ru': 'Русский',
 };
 
 export const getLang = (): string => {
