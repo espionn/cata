@@ -15,20 +15,23 @@
                 "sim": {
                     "$ref": "#/definitions/Sim"
                 },
-                "gear": {
-                    "$ref": "#/definitions/Gear"
+                "gear_tab": {
+                    "$ref": "#/definitions/GearTab"
                 },
-                "settings": {
-                    "$ref": "#/definitions/WelcomeSettings"
+                "settings_tab": {
+                    "$ref": "#/definitions/SettingsTab"
                 },
-                "talents": {
-                    "$ref": "#/definitions/Talents"
+                "talents_tab": {
+                    "$ref": "#/definitions/TalentsTab"
                 },
-                "rotation": {
-                    "$ref": "#/definitions/Rotation"
+                "bulk_tab": {
+                    "$ref": "#/definitions/BulkTab"
                 },
-                "results": {
-                    "$ref": "#/definitions/WelcomeResults"
+                "rotation_tab": {
+                    "$ref": "#/definitions/RotationTab"
+                },
+                "results_tab": {
+                    "$ref": "#/definitions/ResultsTab"
                 },
                 "import": {
                     "$ref": "#/definitions/Import"
@@ -44,20 +47,295 @@
                 }
             },
             "required": [
+                "bulk_tab",
                 "common",
                 "export",
-                "gear",
+                "gear_tab",
                 "import",
                 "info",
                 "landing",
-                "results",
-                "rotation",
-                "settings",
+                "results_tab",
+                "rotation_tab",
+                "settings_tab",
                 "sidebar",
                 "sim",
-                "talents"
+                "talents_tab"
             ],
             "title": "Welcome"
+        },
+        "BulkTab": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "download_local": {
+                    "type": "string"
+                },
+                "tabs": {
+                    "$ref": "#/definitions/BulkTabTabs"
+                },
+                "actions": {
+                    "$ref": "#/definitions/BulkTabActions"
+                },
+                "search": {
+                    "$ref": "#/definitions/Search"
+                },
+                "settings": {
+                    "$ref": "#/definitions/Settings"
+                },
+                "progress": {
+                    "$ref": "#/definitions/BulkTabProgress"
+                },
+                "notifications": {
+                    "$ref": "#/definitions/BulkTabNotifications"
+                },
+                "warning": {
+                    "$ref": "#/definitions/Warning"
+                },
+                "results": {
+                    "$ref": "#/definitions/BulkTabResults"
+                }
+            },
+            "required": [
+                "actions",
+                "description",
+                "download_local",
+                "notifications",
+                "progress",
+                "results",
+                "search",
+                "settings",
+                "tabs",
+                "title",
+                "warning"
+            ],
+            "title": "BulkTab"
+        },
+        "BulkTabActions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "import_bags": {
+                    "type": "string"
+                },
+                "import_favorites": {
+                    "type": "string"
+                },
+                "clear_items": {
+                    "type": "string"
+                },
+                "simulate_batch": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "clear_items",
+                "import_bags",
+                "import_favorites",
+                "simulate_batch"
+            ],
+            "title": "BulkTabActions"
+        },
+        "BulkTabNotifications": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "bulk_sim_cancelled": {
+                    "type": "string"
+                },
+                "failed_to_remove_item": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "bulk_sim_cancelled",
+                "failed_to_remove_item"
+            ],
+            "title": "BulkTabNotifications"
+        },
+        "BulkTabProgress": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "total_combinations": {
+                    "type": "string"
+                },
+                "refining_rounds": {
+                    "type": "string"
+                },
+                "simulations_complete": {
+                    "type": "string"
+                },
+                "iterations_complete": {
+                    "type": "string"
+                },
+                "seconds_remaining": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "iterations_complete",
+                "refining_rounds",
+                "seconds_remaining",
+                "simulations_complete",
+                "total_combinations"
+            ],
+            "title": "BulkTabProgress"
+        },
+        "BulkTabResults": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "run_simulation": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "run_simulation"
+            ],
+            "title": "BulkTabResults"
+        },
+        "Search": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "name_label": {
+                    "type": "string"
+                },
+                "clear_search": {
+                    "type": "string"
+                },
+                "min_ilvl": {
+                    "type": "string"
+                },
+                "max_ilvl": {
+                    "type": "string"
+                },
+                "no_results": {
+                    "type": "string"
+                },
+                "showing_results": {
+                    "type": "string"
+                },
+                "item_added": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "clear_search",
+                "item_added",
+                "max_ilvl",
+                "min_ilvl",
+                "name_label",
+                "no_results",
+                "showing_results",
+                "title"
+            ],
+            "title": "Search"
+        },
+        "Settings": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "combinations_count": {
+                    "type": "string"
+                },
+                "combination_singular": {
+                    "type": "string"
+                },
+                "iterations": {
+                    "type": "string"
+                },
+                "fast_mode": {
+                    "$ref": "#/definitions/AutoEnchantClass"
+                },
+                "combinations": {
+                    "$ref": "#/definitions/AutoEnchantClass"
+                },
+                "auto_enchant": {
+                    "$ref": "#/definitions/AutoEnchantClass"
+                },
+                "auto_gem": {
+                    "$ref": "#/definitions/AutoEnchantClass"
+                },
+                "sim_talents": {
+                    "$ref": "#/definitions/AutoEnchantClass"
+                },
+                "default_gems": {
+                    "type": "string"
+                },
+                "talents_to_sim": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "auto_enchant",
+                "auto_gem",
+                "combination_singular",
+                "combinations",
+                "combinations_count",
+                "default_gems",
+                "fast_mode",
+                "iterations",
+                "sim_talents",
+                "talents_to_sim"
+            ],
+            "title": "Settings"
+        },
+        "AutoEnchantClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "tooltip": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "label",
+                "tooltip"
+            ],
+            "title": "AutoEnchantClass"
+        },
+        "BulkTabTabs": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "setup": {
+                    "type": "string"
+                },
+                "results": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "results",
+                "setup"
+            ],
+            "title": "BulkTabTabs"
+        },
+        "Warning": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "iterations_limit": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "iterations_limit"
+            ],
+            "title": "Warning"
         },
         "WelcomeCommon": {
             "type": "object",
@@ -90,20 +368,8 @@
                 "status": {
                     "$ref": "#/definitions/Status"
                 },
-                "classes": {
-                    "$ref": "#/definitions/Classes"
-                },
-                "specs": {
-                    "$ref": "#/definitions/Specs"
-                },
                 "mob_types": {
                     "$ref": "#/definitions/MobTypes"
-                },
-                "races": {
-                    "$ref": "#/definitions/Races"
-                },
-                "professions": {
-                    "$ref": "#/definitions/Professions"
                 },
                 "sources": {
                     "$ref": "#/definitions/Sources"
@@ -144,7 +410,6 @@
             },
             "required": [
                 "armor_types",
-                "classes",
                 "copy_button",
                 "currency",
                 "custom",
@@ -155,14 +420,11 @@
                 "name",
                 "none",
                 "phases",
-                "professions",
-                "races",
                 "raids",
                 "ranged_weapon_types",
                 "resource_types",
                 "search",
                 "sources",
-                "specs",
                 "spell_schools",
                 "stats",
                 "status",
@@ -199,59 +461,6 @@
                 "unknown"
             ],
             "title": "ArmorTypes"
-        },
-        "Classes": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "death_knight": {
-                    "type": "string"
-                },
-                "druid": {
-                    "type": "string"
-                },
-                "hunter": {
-                    "type": "string"
-                },
-                "mage": {
-                    "type": "string"
-                },
-                "monk": {
-                    "type": "string"
-                },
-                "paladin": {
-                    "type": "string"
-                },
-                "priest": {
-                    "type": "string"
-                },
-                "rogue": {
-                    "type": "string"
-                },
-                "shaman": {
-                    "type": "string"
-                },
-                "warlock": {
-                    "type": "string"
-                },
-                "warrior": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "death_knight",
-                "druid",
-                "hunter",
-                "mage",
-                "monk",
-                "paladin",
-                "priest",
-                "rogue",
-                "shaman",
-                "warlock",
-                "warrior"
-            ],
-            "title": "Classes"
         },
         "CommonCopyButton": {
             "type": "object",
@@ -526,136 +735,6 @@
             ],
             "title": "MobTypes"
         },
-        "Professions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "unknown": {
-                    "type": "string"
-                },
-                "alchemy": {
-                    "type": "string"
-                },
-                "blacksmithing": {
-                    "type": "string"
-                },
-                "enchanting": {
-                    "type": "string"
-                },
-                "engineering": {
-                    "type": "string"
-                },
-                "herbalism": {
-                    "type": "string"
-                },
-                "inscription": {
-                    "type": "string"
-                },
-                "jewelcrafting": {
-                    "type": "string"
-                },
-                "leatherworking": {
-                    "type": "string"
-                },
-                "mining": {
-                    "type": "string"
-                },
-                "skinning": {
-                    "type": "string"
-                },
-                "tailoring": {
-                    "type": "string"
-                },
-                "archeology": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "alchemy",
-                "archeology",
-                "blacksmithing",
-                "enchanting",
-                "engineering",
-                "herbalism",
-                "inscription",
-                "jewelcrafting",
-                "leatherworking",
-                "mining",
-                "skinning",
-                "tailoring",
-                "unknown"
-            ],
-            "title": "Professions"
-        },
-        "Races": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "unknown": {
-                    "type": "string"
-                },
-                "blood_elf": {
-                    "type": "string"
-                },
-                "draenei": {
-                    "type": "string"
-                },
-                "dwarf": {
-                    "type": "string"
-                },
-                "gnome": {
-                    "type": "string"
-                },
-                "goblin": {
-                    "type": "string"
-                },
-                "human": {
-                    "type": "string"
-                },
-                "night_elf": {
-                    "type": "string"
-                },
-                "orc": {
-                    "type": "string"
-                },
-                "alliance_pandaren": {
-                    "type": "string"
-                },
-                "horde_pandaren": {
-                    "type": "string"
-                },
-                "tauren": {
-                    "type": "string"
-                },
-                "troll": {
-                    "type": "string"
-                },
-                "undead": {
-                    "type": "string"
-                },
-                "worgen": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "alliance_pandaren",
-                "blood_elf",
-                "draenei",
-                "dwarf",
-                "gnome",
-                "goblin",
-                "horde_pandaren",
-                "human",
-                "night_elf",
-                "orc",
-                "tauren",
-                "troll",
-                "undead",
-                "unknown",
-                "worgen"
-            ],
-            "title": "Races"
-        },
         "Raids": {
             "type": "object",
             "additionalProperties": false,
@@ -839,297 +918,6 @@
                 "unknown"
             ],
             "title": "Sources"
-        },
-        "Specs": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "death_knight": {
-                    "$ref": "#/definitions/RuneTypesClass"
-                },
-                "druid": {
-                    "$ref": "#/definitions/SpecsDruid"
-                },
-                "hunter": {
-                    "$ref": "#/definitions/SpecsHunter"
-                },
-                "mage": {
-                    "$ref": "#/definitions/SpecsMage"
-                },
-                "monk": {
-                    "$ref": "#/definitions/SpecsMonk"
-                },
-                "paladin": {
-                    "$ref": "#/definitions/SpecsPaladin"
-                },
-                "priest": {
-                    "$ref": "#/definitions/SpecsPriest"
-                },
-                "rogue": {
-                    "$ref": "#/definitions/SpecsRogue"
-                },
-                "shaman": {
-                    "$ref": "#/definitions/SpecsShaman"
-                },
-                "warlock": {
-                    "$ref": "#/definitions/SpecsWarlock"
-                },
-                "warrior": {
-                    "$ref": "#/definitions/SpecsWarrior"
-                }
-            },
-            "required": [
-                "death_knight",
-                "druid",
-                "hunter",
-                "mage",
-                "monk",
-                "paladin",
-                "priest",
-                "rogue",
-                "shaman",
-                "warlock",
-                "warrior"
-            ],
-            "title": "Specs"
-        },
-        "RuneTypesClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "blood": {
-                    "type": "string"
-                },
-                "frost": {
-                    "type": "string"
-                },
-                "unholy": {
-                    "type": "string"
-                },
-                "death": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "blood",
-                "frost",
-                "unholy"
-            ],
-            "title": "RuneTypesClass"
-        },
-        "SpecsDruid": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "balance": {
-                    "type": "string"
-                },
-                "feral": {
-                    "type": "string"
-                },
-                "guardian": {
-                    "type": "string"
-                },
-                "restoration": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "balance",
-                "feral",
-                "guardian",
-                "restoration"
-            ],
-            "title": "SpecsDruid"
-        },
-        "SpecsHunter": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "beast_mastery": {
-                    "type": "string"
-                },
-                "marksmanship": {
-                    "type": "string"
-                },
-                "survival": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "beast_mastery",
-                "marksmanship",
-                "survival"
-            ],
-            "title": "SpecsHunter"
-        },
-        "SpecsMage": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "arcane": {
-                    "type": "string"
-                },
-                "fire": {
-                    "type": "string"
-                },
-                "frost": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "arcane",
-                "fire",
-                "frost"
-            ],
-            "title": "SpecsMage"
-        },
-        "SpecsMonk": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "brewmaster": {
-                    "type": "string"
-                },
-                "mistweaver": {
-                    "type": "string"
-                },
-                "windwalker": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "brewmaster",
-                "mistweaver",
-                "windwalker"
-            ],
-            "title": "SpecsMonk"
-        },
-        "SpecsPaladin": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "holy": {
-                    "type": "string"
-                },
-                "protection": {
-                    "type": "string"
-                },
-                "retribution": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "holy",
-                "protection",
-                "retribution"
-            ],
-            "title": "SpecsPaladin"
-        },
-        "SpecsPriest": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "discipline": {
-                    "type": "string"
-                },
-                "holy": {
-                    "type": "string"
-                },
-                "shadow": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "discipline",
-                "holy",
-                "shadow"
-            ],
-            "title": "SpecsPriest"
-        },
-        "SpecsRogue": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "assassination": {
-                    "type": "string"
-                },
-                "combat": {
-                    "type": "string"
-                },
-                "subtlety": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "assassination",
-                "combat",
-                "subtlety"
-            ],
-            "title": "SpecsRogue"
-        },
-        "SpecsShaman": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "elemental": {
-                    "type": "string"
-                },
-                "enhancement": {
-                    "type": "string"
-                },
-                "restoration": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "elemental",
-                "enhancement",
-                "restoration"
-            ],
-            "title": "SpecsShaman"
-        },
-        "SpecsWarlock": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "affliction": {
-                    "type": "string"
-                },
-                "demonology": {
-                    "type": "string"
-                },
-                "destruction": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "affliction",
-                "demonology",
-                "destruction"
-            ],
-            "title": "SpecsWarlock"
-        },
-        "SpecsWarrior": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "arms": {
-                    "type": "string"
-                },
-                "fury": {
-                    "type": "string"
-                },
-                "protection": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "arms",
-                "fury",
-                "protection"
-            ],
-            "title": "SpecsWarrior"
         },
         "SpellSchools": {
             "type": "object",
@@ -1465,25 +1253,25 @@
             "additionalProperties": false,
             "properties": {
                 "gear": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "talents": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "rotation": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "consumes": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "external": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "miscellaneous": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "encounter": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 }
             },
             "required": [
@@ -1496,23 +1284,6 @@
                 "talents"
             ],
             "title": "Categories"
-        },
-        "ConsumesClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "label": {
-                    "type": "string"
-                },
-                "tooltip": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "label",
-                "tooltip"
-            ],
-            "title": "ConsumesClass"
         },
         "CLI": {
             "type": "object",
@@ -1546,7 +1317,7 @@
             ],
             "title": "CLI"
         },
-        "Gear": {
+        "GearTab": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -1585,7 +1356,7 @@
                 "slots",
                 "title"
             ],
-            "title": "Gear"
+            "title": "GearTab"
         },
         "GearPicker": {
             "type": "object",
@@ -2154,7 +1925,7 @@
                     "type": "string"
                 },
                 "reforge_warning": {
-                    "$ref": "#/definitions/Warning"
+                    "$ref": "#/definitions/ReforgeWarningClass"
                 }
             },
             "required": [
@@ -2169,7 +1940,7 @@
             ],
             "title": "Addon"
         },
-        "Warning": {
+        "ReforgeWarningClass": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -2184,7 +1955,7 @@
                 "message",
                 "title"
             ],
-            "title": "Warning"
+            "title": "ReforgeWarningClass"
         },
         "JSON": {
             "type": "object",
@@ -2245,7 +2016,7 @@
                     "type": "string"
                 },
                 "tinker_warning": {
-                    "$ref": "#/definitions/Warning"
+                    "$ref": "#/definitions/ReforgeWarningClass"
                 },
                 "error_invalid_url": {
                     "type": "string"
@@ -2324,7 +2095,7 @@
                     "$ref": "#/definitions/FixedRngSeed"
                 },
                 "language": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "feature_toggles": {
                     "$ref": "#/definitions/FeatureToggles"
@@ -2527,7 +2298,7 @@
             ],
             "title": "Simulations"
         },
-        "WelcomeResults": {
+        "ResultsTab": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -2542,7 +2313,7 @@
                 "details",
                 "title"
             ],
-            "title": "WelcomeResults"
+            "title": "ResultsTab"
         },
         "Details": {
             "type": "object",
@@ -2954,7 +2725,7 @@
             ],
             "title": "DetailsTooltips"
         },
-        "Rotation": {
+        "RotationTab": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -2962,7 +2733,7 @@
                     "type": "string"
                 },
                 "common": {
-                    "$ref": "#/definitions/RotationCommon"
+                    "$ref": "#/definitions/RotationTabCommon"
                 },
                 "apl": {
                     "$ref": "#/definitions/APL"
@@ -2980,7 +2751,7 @@
                     "$ref": "#/definitions/Saved"
                 },
                 "options": {
-                    "$ref": "#/definitions/RotationOptions"
+                    "$ref": "#/definitions/RotationTabOptions"
                 }
             },
             "required": [
@@ -2993,7 +2764,7 @@
                 "simple",
                 "title"
             ],
-            "title": "Rotation"
+            "title": "RotationTab"
         },
         "APL": {
             "type": "object",
@@ -3140,10 +2911,10 @@
             "additionalProperties": false,
             "properties": {
                 "cast": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "cast_at_player": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "multi_dot": {
                     "$ref": "#/definitions/MultiDot"
@@ -3164,16 +2935,16 @@
                     "$ref": "#/definitions/AutocastOtherCooldowns"
                 },
                 "wait": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "wait_until": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "scheduled_action": {
                     "$ref": "#/definitions/ScheduledAction"
                 },
                 "do_at": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "sequence": {
                     "$ref": "#/definitions/AutocastOtherCooldowns"
@@ -3185,37 +2956,37 @@
                     "$ref": "#/definitions/AutocastOtherCooldowns"
                 },
                 "change_target": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "activate_aura": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "activate_aura_with_stacks": {
                     "$ref": "#/definitions/ActivateAuraWithStacks"
                 },
                 "activate_all_stat_buff_proc_auras": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "cancel_aura": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "trigger_icd": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "item_swap": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "move": {
                     "$ref": "#/definitions/Move"
                 },
                 "custom_rotation": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "optimal_rotation_action": {
                     "$ref": "#/definitions/OptimalRotationAction"
                 },
                 "guardian_hotw_dps_rotation": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 }
             },
             "required": [
@@ -3308,10 +3079,10 @@
                     "type": "string"
                 },
                 "interrupt_if": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "recast": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 }
             },
             "required": [
@@ -3375,13 +3146,13 @@
                     "type": "string"
                 },
                 "max_dots": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "overlap": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "max_shields": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 }
             },
             "required": [
@@ -3402,7 +3173,7 @@
                     "type": "string"
                 },
                 "wrath_weave": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 }
             },
             "required": [
@@ -3423,7 +3194,7 @@
                     "type": "string"
                 },
                 "do_at": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 }
             },
             "required": [
@@ -3493,7 +3264,7 @@
                     "$ref": "#/definitions/EclipseTypes"
                 },
                 "rune_types": {
-                    "$ref": "#/definitions/RuneTypesClass"
+                    "$ref": "#/definitions/RuneTypes"
                 },
                 "rune_slots": {
                     "$ref": "#/definitions/RuneSlots"
@@ -3731,6 +3502,31 @@
             ],
             "title": "RuneSlots"
         },
+        "RuneTypes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "blood": {
+                    "type": "string"
+                },
+                "frost": {
+                    "type": "string"
+                },
+                "unholy": {
+                    "type": "string"
+                },
+                "death": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "blood",
+                "death",
+                "frost",
+                "unholy"
+            ],
+            "title": "RuneTypes"
+        },
         "UnitLabels": {
             "type": "object",
             "additionalProperties": false,
@@ -3882,7 +3678,7 @@
                     "type": "string"
                 },
                 "do_at": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "new_action": {
                     "type": "string"
@@ -4107,322 +3903,322 @@
                     "$ref": "#/definitions/Const"
                 },
                 "compare": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "math": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "max": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "min": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "all_of": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "any_of": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "not": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "current_time": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "current_time_percent": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "remaining_time": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "remaining_time_percent": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "is_execute_phase": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "num_targets": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "spell_is_casting": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "spell_time_to_ready": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "in_front_of_target": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "boss_cast": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "boss_cast_time_to_ready": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "unit_is_moving": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "distance_to_unit": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "current_health": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "current_health_percent": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "max_health": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "current_mana": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "current_mana_percent": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "current_rage": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "max_rage": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "current_focus": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "max_focus": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "focus_regen_per_second": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "estimated_time_to_target_focus": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "current_energy": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "max_energy": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "energy_regen_per_second": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "estimated_time_to_target_energy": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "current_combo_points": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "max_combo_points": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "current_chi": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "max_chi": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "current_runic_power": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "max_runic_power": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "solar_energy": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "lunar_energy": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "current_eclipse_phase": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "generic_resource": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "num_runes": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "num_non_death_runes": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "rune_is_ready": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "rune_is_death": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "rune_cooldown": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "next_rune_cooldown": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "rune_slot_cooldown": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "gcd_is_ready": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "gcd_time_to_ready": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "time_to_next_auto": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "spell_known": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "current_cost": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "can_cast": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "is_ready": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "time_to_ready": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "cast_time": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "travel_time": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "cpm": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "is_channeling": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "channeled_ticks": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "number_of_charges": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "time_to_next_charge": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "channel_clip_delay": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "input_delay": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "aura_known": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "aura_active": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "aura_active_with_reaction_time": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "aura_inactive": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "aura_inactive_with_reaction_time": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "aura_remaining_time": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "aura_num_stacks": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "aura_should_refresh": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "all_trinket_stat_procs_active": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "any_trinket_stat_procs_active": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "trinket_procs_min_remaining_time": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "trinket_procs_max_remaining_icd": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "num_equipped_stat_proc_trinkets": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "num_stat_buff_cooldowns": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "any_stat_buff_cooldowns_active": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "dot_is_active": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "dot_is_active_on_all_targets": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "dot_remaining_time": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "dot_lowest_remaining_time": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "dot_tick_frequency": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "dot_percent_increase": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "sequence_is_complete": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "sequence_is_ready": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "sequence_time_to_ready": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "totem_remaining_time": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "shaman_fire_elemental_duration": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "cat_excess_energy": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "cat_new_savage_roar_duration": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "warlock_hand_of_guldan_in_flight": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "warlock_haunt_in_flight": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "mage_current_combustion_dot_estimate": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "brewmaster_monk_current_stagger_percent": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "protection_paladin_damage_taken_last_global": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "aura_remaining_icd": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "aura_icd_is_ready": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "aura_icd_is_ready_with_reaction_time": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "overlap": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 }
             },
             "required": [
@@ -4652,7 +4448,7 @@
             ],
             "title": "Auto"
         },
-        "RotationCommon": {
+        "RotationTabCommon": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -4663,7 +4459,7 @@
             "required": [
                 "rotation_type"
             ],
-            "title": "RotationCommon"
+            "title": "RotationTabCommon"
         },
         "RotationType": {
             "type": "object",
@@ -4727,24 +4523,24 @@
             ],
             "title": "Cooldowns"
         },
-        "RotationOptions": {
+        "RotationTabOptions": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
                 "druid": {
-                    "$ref": "#/definitions/OptionsDruid"
+                    "$ref": "#/definitions/Druid"
                 },
                 "guardian": {
                     "$ref": "#/definitions/Guardian"
                 },
                 "rogue": {
-                    "$ref": "#/definitions/OptionsRogue"
+                    "$ref": "#/definitions/Rogue"
                 },
                 "shaman": {
-                    "$ref": "#/definitions/OptionsShaman"
+                    "$ref": "#/definitions/Shaman"
                 },
                 "hunter": {
-                    "$ref": "#/definitions/OptionsHunter"
+                    "$ref": "#/definitions/Hunter"
                 }
             },
             "required": [
@@ -4754,9 +4550,9 @@
                 "rogue",
                 "shaman"
             ],
-            "title": "RotationOptions"
+            "title": "RotationTabOptions"
         },
-        "OptionsDruid": {
+        "Druid": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -4767,7 +4563,7 @@
             "required": [
                 "feral"
             ],
-            "title": "OptionsDruid"
+            "title": "Druid"
         },
         "Feral": {
             "type": "object",
@@ -4777,37 +4573,37 @@
                     "$ref": "#/definitions/TargetType"
                 },
                 "bear_weave": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "snek_weave": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "use_ns": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "manual_params": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "hotw_strategy": {
                     "$ref": "#/definitions/HotwStrategy"
                 },
                 "allow_aoe_berserk": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "roar_offset": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "rip_leeway": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "bite_during_rotation": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "bite_time": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "berserk_bite_time": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 }
             },
             "required": [
@@ -4894,16 +4690,16 @@
             "additionalProperties": false,
             "properties": {
                 "maintain_faerie_fire": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "maintain_demo_roar": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "demo_roar_refresh_leeway": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "pulverize_refresh_leeway": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 }
             },
             "required": [
@@ -4914,7 +4710,7 @@
             ],
             "title": "Guardian"
         },
-        "OptionsHunter": {
+        "Hunter": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -4933,7 +4729,7 @@
                 "marksmanship",
                 "survival"
             ],
-            "title": "OptionsHunter"
+            "title": "Hunter"
         },
         "BeastMastery": {
             "type": "object",
@@ -4943,10 +4739,10 @@
                     "$ref": "#/definitions/Sting"
                 },
                 "trap_weave": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "multi_dot_serpent_sting": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 }
             },
             "required": [
@@ -4999,7 +4795,7 @@
             "additionalProperties": false,
             "properties": {
                 "multi_dot_serpent_sting": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 }
             },
             "required": [
@@ -5007,12 +4803,12 @@
             ],
             "title": "Survival"
         },
-        "OptionsRogue": {
+        "Rogue": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
                 "apply_poisons_manually": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "subtlety": {
                     "$ref": "#/definitions/Subtlety"
@@ -5022,14 +4818,14 @@
                 "apply_poisons_manually",
                 "subtlety"
             ],
-            "title": "OptionsRogue"
+            "title": "Rogue"
         },
         "Subtlety": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
                 "honor_of_thieves_crit_rate": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 }
             },
             "required": [
@@ -5037,7 +4833,7 @@
             ],
             "title": "Subtlety"
         },
-        "OptionsShaman": {
+        "Shaman": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -5048,14 +4844,14 @@
             "required": [
                 "elemental"
             ],
-            "title": "OptionsShaman"
+            "title": "Shaman"
         },
         "Elemental": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
                 "thunderstorm_in_range": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 }
             },
             "required": [
@@ -5143,7 +4939,7 @@
             ],
             "title": "Simple"
         },
-        "WelcomeSettings": {
+        "SettingsTab": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -5198,7 +4994,7 @@
                 "saved_settings",
                 "title"
             ],
-            "title": "WelcomeSettings"
+            "title": "SettingsTab"
         },
         "Consumables": {
             "type": "object",
@@ -5282,7 +5078,7 @@
                     "type": "string"
                 },
                 "misc": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "armor_reduction": {
                     "type": "string"
@@ -5323,49 +5119,49 @@
                     "$ref": "#/definitions/TargetInputs"
                 },
                 "duration": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "duration_variation": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "execute_duration_20": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "execute_duration_25": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "execute_duration_35": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "execute_duration_45": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "duration_below_high_hp": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "encounter_preset": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "advanced": {
                     "type": "string"
                 },
                 "use_health": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "target": {
                     "type": "string"
                 },
                 "num_allies": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "min_base_damage": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "npc": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "ai": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "level": {
                     "type": "string"
@@ -5374,25 +5170,25 @@
                     "type": "string"
                 },
                 "tanked_by": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "swing_speed": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "dual_wield": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "dual_wield_penalty": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "parry_haste": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "spell_school": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "damage_spread": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "suppress_dodge": {
                     "type": "string"
@@ -5445,10 +5241,10 @@
                     "type": "string"
                 },
                 "frenzy_time": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "spiritual_grasp_frequency": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 }
             },
             "required": [
@@ -5540,88 +5336,88 @@
                     "type": "string"
                 },
                 "challenge_mode": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "input_delay": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "channel_clip_delay": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "in_front_of_target": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "distance_from_target": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "tank_assignment": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "incoming_hps": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "healing_cadence": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "healing_cadence_variation": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "absorb_frac": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "burst_window": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "hp_percent_for_defensives": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "pet_uptime": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "glaive_toss_chance": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "detonate_seed": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "stance_snapshot": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "assume_bleed_active": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "cannot_shred_target": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "okf_uptime": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "sync_type": {
                     "$ref": "#/definitions/SyncType"
                 },
                 "show_1h_weapons": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "show_2h_weapons": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "show_matching_gems": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "show_ep_values": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "phase_selector": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "enable_item_swap": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "item_swap": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "assume_prepull_mastery_elixir": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "blessings": {
                     "$ref": "#/definitions/PresetConfigurations"
@@ -5746,7 +5542,7 @@
                     "type": "string"
                 },
                 "misc": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "stats": {
                     "type": "string"
@@ -6047,43 +5843,43 @@
                     "type": "string"
                 },
                 "dps_weight": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "dps_ep": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "hps_weight": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "hps_ep": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "tps_weight": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "tps_ep": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "dtps_weight": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "dtps_ep": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "tmi_weight": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "tmi_ep": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "death_weight": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "death_ep": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "current_ep": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "not_applicable": {
                     "type": "string"
@@ -6490,16 +6286,16 @@
             "additionalProperties": false,
             "properties": {
                 "dps": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "hps": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "tps": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "dtps": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "tmi": {
                     "$ref": "#/definitions/Cod"
@@ -6508,13 +6304,13 @@
                     "$ref": "#/definitions/Cod"
                 },
                 "dur": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "tto": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "oom": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 }
             },
             "required": [
@@ -6685,14 +6481,10 @@
                 },
                 "crash_report": {
                     "$ref": "#/definitions/CrashReport"
-                },
-                "bulk": {
-                    "$ref": "#/definitions/Bulk"
                 }
             },
             "required": [
                 "basic_bis_disclaimer",
-                "bulk",
                 "crash_modal",
                 "crash_report",
                 "description",
@@ -6703,263 +6495,6 @@
                 "unlaunched"
             ],
             "title": "Sim"
-        },
-        "Bulk": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "download_local": {
-                    "type": "string"
-                },
-                "tabs": {
-                    "$ref": "#/definitions/BulkTabs"
-                },
-                "actions": {
-                    "$ref": "#/definitions/BulkActions"
-                },
-                "search": {
-                    "$ref": "#/definitions/Search"
-                },
-                "settings": {
-                    "$ref": "#/definitions/BulkSettings"
-                },
-                "progress": {
-                    "$ref": "#/definitions/BulkProgress"
-                },
-                "notifications": {
-                    "$ref": "#/definitions/BulkNotifications"
-                },
-                "warning": {
-                    "$ref": "#/definitions/WarningClass"
-                },
-                "results": {
-                    "$ref": "#/definitions/BulkResults"
-                }
-            },
-            "required": [
-                "actions",
-                "description",
-                "download_local",
-                "notifications",
-                "progress",
-                "results",
-                "search",
-                "settings",
-                "tabs",
-                "title",
-                "warning"
-            ],
-            "title": "Bulk"
-        },
-        "BulkActions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "import_bags": {
-                    "type": "string"
-                },
-                "import_favorites": {
-                    "type": "string"
-                },
-                "clear_items": {
-                    "type": "string"
-                },
-                "simulate_batch": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "clear_items",
-                "import_bags",
-                "import_favorites",
-                "simulate_batch"
-            ],
-            "title": "BulkActions"
-        },
-        "BulkNotifications": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "bulk_sim_cancelled": {
-                    "type": "string"
-                },
-                "failed_to_remove_item": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "bulk_sim_cancelled",
-                "failed_to_remove_item"
-            ],
-            "title": "BulkNotifications"
-        },
-        "BulkProgress": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "total_combinations": {
-                    "type": "string"
-                },
-                "refining_rounds": {
-                    "type": "string"
-                },
-                "simulations_complete": {
-                    "type": "string"
-                },
-                "iterations_complete": {
-                    "type": "string"
-                },
-                "seconds_remaining": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "iterations_complete",
-                "refining_rounds",
-                "seconds_remaining",
-                "simulations_complete",
-                "total_combinations"
-            ],
-            "title": "BulkProgress"
-        },
-        "BulkResults": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "run_simulation": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "run_simulation"
-            ],
-            "title": "BulkResults"
-        },
-        "Search": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "title": {
-                    "type": "string"
-                },
-                "name_label": {
-                    "type": "string"
-                },
-                "clear_search": {
-                    "type": "string"
-                },
-                "min_ilvl": {
-                    "type": "string"
-                },
-                "max_ilvl": {
-                    "type": "string"
-                },
-                "no_results": {
-                    "type": "string"
-                },
-                "showing_results": {
-                    "type": "string"
-                },
-                "item_added": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "clear_search",
-                "item_added",
-                "max_ilvl",
-                "min_ilvl",
-                "name_label",
-                "no_results",
-                "showing_results",
-                "title"
-            ],
-            "title": "Search"
-        },
-        "BulkSettings": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "combinations_count": {
-                    "type": "string"
-                },
-                "combination_singular": {
-                    "type": "string"
-                },
-                "iterations": {
-                    "type": "string"
-                },
-                "fast_mode": {
-                    "$ref": "#/definitions/ConsumesClass"
-                },
-                "combinations": {
-                    "$ref": "#/definitions/ConsumesClass"
-                },
-                "auto_enchant": {
-                    "$ref": "#/definitions/ConsumesClass"
-                },
-                "auto_gem": {
-                    "$ref": "#/definitions/ConsumesClass"
-                },
-                "sim_talents": {
-                    "$ref": "#/definitions/ConsumesClass"
-                },
-                "default_gems": {
-                    "type": "string"
-                },
-                "talents_to_sim": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "auto_enchant",
-                "auto_gem",
-                "combination_singular",
-                "combinations",
-                "combinations_count",
-                "default_gems",
-                "fast_mode",
-                "iterations",
-                "sim_talents",
-                "talents_to_sim"
-            ],
-            "title": "BulkSettings"
-        },
-        "BulkTabs": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "setup": {
-                    "type": "string"
-                },
-                "results": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "results",
-                "setup"
-            ],
-            "title": "BulkTabs"
-        },
-        "WarningClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "iterations_limit": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "iterations_limit"
-            ],
-            "title": "WarningClass"
         },
         "CrashModal": {
             "type": "object",
@@ -7070,7 +6605,7 @@
             ],
             "title": "Unlaunched"
         },
-        "Talents": {
+        "TalentsTab": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -7078,7 +6613,7 @@
                     "type": "string"
                 },
                 "copy_button": {
-                    "$ref": "#/definitions/ConsumesClass"
+                    "$ref": "#/definitions/AutoEnchantClass"
                 },
                 "reset_button": {
                     "$ref": "#/definitions/ResetButton"
@@ -7088,9 +6623,6 @@
                 },
                 "saved_talents": {
                     "$ref": "#/definitions/Saved"
-                },
-                "tree": {
-                    "$ref": "#/definitions/Tree"
                 }
             },
             "required": [
@@ -7098,10 +6630,9 @@
                 "glyphs",
                 "reset_button",
                 "saved_talents",
-                "title",
-                "tree"
+                "title"
             ],
-            "title": "Talents"
+            "title": "TalentsTab"
         },
         "Glyphs": {
             "type": "object",
@@ -7118,62 +6649,15 @@
                 },
                 "empty": {
                     "type": "string"
-                },
-                "details": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/definitions/Detail"
-                    }
                 }
             },
             "required": [
-                "details",
                 "empty",
                 "major",
                 "minor",
                 "modal"
             ],
             "title": "Glyphs"
-        },
-        "Detail": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "major": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/definitions/Major"
-                    }
-                },
-                "minor": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/definitions/Major"
-                    }
-                }
-            },
-            "required": [
-                "major",
-                "minor"
-            ],
-            "title": "Detail"
-        },
-        "Major": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "description",
-                "name"
-            ],
-            "title": "Major"
         },
         "ResetButton": {
             "type": "object",
@@ -7187,950 +6671,6 @@
                 "tooltip"
             ],
             "title": "ResetButton"
-        },
-        "Tree": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "mage": {
-                    "$ref": "#/definitions/TreeMage"
-                },
-                "druid": {
-                    "$ref": "#/definitions/TreeDruid"
-                },
-                "warrior": {
-                    "$ref": "#/definitions/TreeWarrior"
-                },
-                "hunter": {
-                    "$ref": "#/definitions/TreeHunter"
-                },
-                "rogue": {
-                    "$ref": "#/definitions/TreeRogue"
-                },
-                "priest": {
-                    "$ref": "#/definitions/TreePriest"
-                },
-                "paladin": {
-                    "$ref": "#/definitions/TreePaladin"
-                },
-                "death_knight": {
-                    "$ref": "#/definitions/TreeDeathKnight"
-                },
-                "monk": {
-                    "$ref": "#/definitions/TreeMonk"
-                },
-                "shaman": {
-                    "$ref": "#/definitions/TreeShaman"
-                },
-                "warlock": {
-                    "$ref": "#/definitions/TreeWarlock"
-                }
-            },
-            "required": [
-                "death_knight",
-                "druid",
-                "hunter",
-                "mage",
-                "monk",
-                "paladin",
-                "priest",
-                "rogue",
-                "shaman",
-                "warlock",
-                "warrior"
-            ],
-            "title": "Tree"
-        },
-        "TreeDeathKnight": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "roilingBlood": {
-                    "type": "string"
-                },
-                "plagueLeech": {
-                    "type": "string"
-                },
-                "unholyBlight": {
-                    "type": "string"
-                },
-                "lichborne": {
-                    "type": "string"
-                },
-                "antimagicZone": {
-                    "type": "string"
-                },
-                "purgatory": {
-                    "type": "string"
-                },
-                "deathsAdvance": {
-                    "type": "string"
-                },
-                "chilblains": {
-                    "type": "string"
-                },
-                "asphyxiate": {
-                    "type": "string"
-                },
-                "deathPact": {
-                    "type": "string"
-                },
-                "deathSiphon": {
-                    "type": "string"
-                },
-                "conversion": {
-                    "type": "string"
-                },
-                "bloodTap": {
-                    "type": "string"
-                },
-                "runicEmpowerment": {
-                    "type": "string"
-                },
-                "runicCorruption": {
-                    "type": "string"
-                },
-                "gorefiendsGrasp": {
-                    "type": "string"
-                },
-                "remorselessWinter": {
-                    "type": "string"
-                },
-                "desecratedGround": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "antimagicZone",
-                "asphyxiate",
-                "bloodTap",
-                "chilblains",
-                "conversion",
-                "deathPact",
-                "deathSiphon",
-                "deathsAdvance",
-                "desecratedGround",
-                "gorefiendsGrasp",
-                "lichborne",
-                "plagueLeech",
-                "purgatory",
-                "remorselessWinter",
-                "roilingBlood",
-                "runicCorruption",
-                "runicEmpowerment",
-                "unholyBlight"
-            ],
-            "title": "TreeDeathKnight"
-        },
-        "TreeDruid": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "felineSwiftness": {
-                    "type": "string"
-                },
-                "displacerBeast": {
-                    "type": "string"
-                },
-                "wildCharge": {
-                    "type": "string"
-                },
-                "yserasGift": {
-                    "type": "string"
-                },
-                "renewal": {
-                    "type": "string"
-                },
-                "cenarionWard": {
-                    "type": "string"
-                },
-                "faerieSwarm": {
-                    "type": "string"
-                },
-                "massEntanglement": {
-                    "type": "string"
-                },
-                "typhoon": {
-                    "type": "string"
-                },
-                "soulOfTheForest": {
-                    "type": "string"
-                },
-                "incarnation": {
-                    "type": "string"
-                },
-                "forceOfNature": {
-                    "type": "string"
-                },
-                "disorientingRoar": {
-                    "type": "string"
-                },
-                "ursolsVortex": {
-                    "type": "string"
-                },
-                "mightyBash": {
-                    "type": "string"
-                },
-                "heartOfTheWild": {
-                    "type": "string"
-                },
-                "dreamOfCenarius": {
-                    "type": "string"
-                },
-                "naturesVigil": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "cenarionWard",
-                "disorientingRoar",
-                "displacerBeast",
-                "dreamOfCenarius",
-                "faerieSwarm",
-                "felineSwiftness",
-                "forceOfNature",
-                "heartOfTheWild",
-                "incarnation",
-                "massEntanglement",
-                "mightyBash",
-                "naturesVigil",
-                "renewal",
-                "soulOfTheForest",
-                "typhoon",
-                "ursolsVortex",
-                "wildCharge",
-                "yserasGift"
-            ],
-            "title": "TreeDruid"
-        },
-        "TreeHunter": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "posthaste": {
-                    "type": "string"
-                },
-                "narrowEscape": {
-                    "type": "string"
-                },
-                "crouchingTigerHiddenChimera": {
-                    "type": "string"
-                },
-                "bindingShot": {
-                    "type": "string"
-                },
-                "wyvernSting": {
-                    "type": "string"
-                },
-                "intimidation": {
-                    "type": "string"
-                },
-                "exhilaration": {
-                    "type": "string"
-                },
-                "aspectOfTheIronHawk": {
-                    "type": "string"
-                },
-                "spiritBond": {
-                    "type": "string"
-                },
-                "fervor": {
-                    "type": "string"
-                },
-                "direBeast": {
-                    "type": "string"
-                },
-                "thrillOfTheHunt": {
-                    "type": "string"
-                },
-                "aMurderOfCrows": {
-                    "type": "string"
-                },
-                "blinkStrikes": {
-                    "type": "string"
-                },
-                "lynxRush": {
-                    "type": "string"
-                },
-                "glaiveToss": {
-                    "type": "string"
-                },
-                "powershot": {
-                    "type": "string"
-                },
-                "barrage": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "aMurderOfCrows",
-                "aspectOfTheIronHawk",
-                "barrage",
-                "bindingShot",
-                "blinkStrikes",
-                "crouchingTigerHiddenChimera",
-                "direBeast",
-                "exhilaration",
-                "fervor",
-                "glaiveToss",
-                "intimidation",
-                "lynxRush",
-                "narrowEscape",
-                "posthaste",
-                "powershot",
-                "spiritBond",
-                "thrillOfTheHunt",
-                "wyvernSting"
-            ],
-            "title": "TreeHunter"
-        },
-        "TreeMage": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "presenceOfMind": {
-                    "type": "string"
-                },
-                "blazingSpeed": {
-                    "type": "string"
-                },
-                "iceFloes": {
-                    "type": "string"
-                },
-                "temporalShield": {
-                    "type": "string"
-                },
-                "flameglow": {
-                    "type": "string"
-                },
-                "iceBarrier": {
-                    "type": "string"
-                },
-                "ringOfFrost": {
-                    "type": "string"
-                },
-                "iceWard": {
-                    "type": "string"
-                },
-                "frostjaw": {
-                    "type": "string"
-                },
-                "greaterInvisibility": {
-                    "type": "string"
-                },
-                "cauterize": {
-                    "type": "string"
-                },
-                "coldSnap": {
-                    "type": "string"
-                },
-                "netherTempest": {
-                    "type": "string"
-                },
-                "livingBomb": {
-                    "type": "string"
-                },
-                "frostBomb": {
-                    "type": "string"
-                },
-                "invocation": {
-                    "type": "string"
-                },
-                "runeOfPower": {
-                    "type": "string"
-                },
-                "incantersWard": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "blazingSpeed",
-                "cauterize",
-                "coldSnap",
-                "flameglow",
-                "frostBomb",
-                "frostjaw",
-                "greaterInvisibility",
-                "iceBarrier",
-                "iceFloes",
-                "iceWard",
-                "incantersWard",
-                "invocation",
-                "livingBomb",
-                "netherTempest",
-                "presenceOfMind",
-                "ringOfFrost",
-                "runeOfPower",
-                "temporalShield"
-            ],
-            "title": "TreeMage"
-        },
-        "TreeMonk": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "celerity": {
-                    "type": "string"
-                },
-                "tigersLust": {
-                    "type": "string"
-                },
-                "momentum": {
-                    "type": "string"
-                },
-                "chiWave": {
-                    "type": "string"
-                },
-                "zenSphere": {
-                    "type": "string"
-                },
-                "chiBurst": {
-                    "type": "string"
-                },
-                "powerStrikes": {
-                    "type": "string"
-                },
-                "ascension": {
-                    "type": "string"
-                },
-                "chiBrew": {
-                    "type": "string"
-                },
-                "ringOfPeace": {
-                    "type": "string"
-                },
-                "chargingOxWave": {
-                    "type": "string"
-                },
-                "legSweep": {
-                    "type": "string"
-                },
-                "healingElixirs": {
-                    "type": "string"
-                },
-                "dampenHarm": {
-                    "type": "string"
-                },
-                "diffuseMagic": {
-                    "type": "string"
-                },
-                "rushingJadeWind": {
-                    "type": "string"
-                },
-                "invokeXuenTheWhiteTiger": {
-                    "type": "string"
-                },
-                "chiTorpedo": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "ascension",
-                "celerity",
-                "chargingOxWave",
-                "chiBrew",
-                "chiBurst",
-                "chiTorpedo",
-                "chiWave",
-                "dampenHarm",
-                "diffuseMagic",
-                "healingElixirs",
-                "invokeXuenTheWhiteTiger",
-                "legSweep",
-                "momentum",
-                "powerStrikes",
-                "ringOfPeace",
-                "rushingJadeWind",
-                "tigersLust",
-                "zenSphere"
-            ],
-            "title": "TreeMonk"
-        },
-        "TreePaladin": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "speedOfLight": {
-                    "type": "string"
-                },
-                "longArmOfTheLaw": {
-                    "type": "string"
-                },
-                "pursuitOfJustice": {
-                    "type": "string"
-                },
-                "fistOfJustice": {
-                    "type": "string"
-                },
-                "repentance": {
-                    "type": "string"
-                },
-                "evilIsAPointOfView": {
-                    "type": "string"
-                },
-                "selflessHealer": {
-                    "type": "string"
-                },
-                "eternalFlame": {
-                    "type": "string"
-                },
-                "sacredShield": {
-                    "type": "string"
-                },
-                "handOfPurity": {
-                    "type": "string"
-                },
-                "unbreakableSpirit": {
-                    "type": "string"
-                },
-                "clemency": {
-                    "type": "string"
-                },
-                "holyAvenger": {
-                    "type": "string"
-                },
-                "sanctifiedWrath": {
-                    "type": "string"
-                },
-                "divinePurpose": {
-                    "type": "string"
-                },
-                "holyPrism": {
-                    "type": "string"
-                },
-                "lightsHammer": {
-                    "type": "string"
-                },
-                "executionSentence": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "clemency",
-                "divinePurpose",
-                "eternalFlame",
-                "evilIsAPointOfView",
-                "executionSentence",
-                "fistOfJustice",
-                "handOfPurity",
-                "holyAvenger",
-                "holyPrism",
-                "lightsHammer",
-                "longArmOfTheLaw",
-                "pursuitOfJustice",
-                "repentance",
-                "sacredShield",
-                "sanctifiedWrath",
-                "selflessHealer",
-                "speedOfLight",
-                "unbreakableSpirit"
-            ],
-            "title": "TreePaladin"
-        },
-        "TreePriest": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "voidTendrils": {
-                    "type": "string"
-                },
-                "psyfiend": {
-                    "type": "string"
-                },
-                "dominateMind": {
-                    "type": "string"
-                },
-                "bodyAndSoul": {
-                    "type": "string"
-                },
-                "angelicFeather": {
-                    "type": "string"
-                },
-                "phantasm": {
-                    "type": "string"
-                },
-                "fromDarknessComesLight": {
-                    "type": "string"
-                },
-                "mindbender": {
-                    "type": "string"
-                },
-                "solaceAndInsanity": {
-                    "type": "string"
-                },
-                "desperatePrayer": {
-                    "type": "string"
-                },
-                "spectralGuise": {
-                    "type": "string"
-                },
-                "angelicBulwark": {
-                    "type": "string"
-                },
-                "twistOfFate": {
-                    "type": "string"
-                },
-                "powerInfusion": {
-                    "type": "string"
-                },
-                "divineInsight": {
-                    "type": "string"
-                },
-                "cascade": {
-                    "type": "string"
-                },
-                "divineStar": {
-                    "type": "string"
-                },
-                "halo": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "angelicBulwark",
-                "angelicFeather",
-                "bodyAndSoul",
-                "cascade",
-                "desperatePrayer",
-                "divineInsight",
-                "divineStar",
-                "dominateMind",
-                "fromDarknessComesLight",
-                "halo",
-                "mindbender",
-                "phantasm",
-                "powerInfusion",
-                "psyfiend",
-                "solaceAndInsanity",
-                "spectralGuise",
-                "twistOfFate",
-                "voidTendrils"
-            ],
-            "title": "TreePriest"
-        },
-        "TreeRogue": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "nightstalker": {
-                    "type": "string"
-                },
-                "subterfuge": {
-                    "type": "string"
-                },
-                "shadowFocus": {
-                    "type": "string"
-                },
-                "deadlyThrow": {
-                    "type": "string"
-                },
-                "nerveStrike": {
-                    "type": "string"
-                },
-                "combatReadiness": {
-                    "type": "string"
-                },
-                "cheatDeath": {
-                    "type": "string"
-                },
-                "leechingPoison": {
-                    "type": "string"
-                },
-                "elusiveness": {
-                    "type": "string"
-                },
-                "cloakAndDagger": {
-                    "type": "string"
-                },
-                "shadowstep": {
-                    "type": "string"
-                },
-                "burstOfSpeed": {
-                    "type": "string"
-                },
-                "preyOnTheWeak": {
-                    "type": "string"
-                },
-                "paralyticPoison": {
-                    "type": "string"
-                },
-                "dirtyTricks": {
-                    "type": "string"
-                },
-                "shurikenToss": {
-                    "type": "string"
-                },
-                "markedForDeath": {
-                    "type": "string"
-                },
-                "anticipation": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "anticipation",
-                "burstOfSpeed",
-                "cheatDeath",
-                "cloakAndDagger",
-                "combatReadiness",
-                "deadlyThrow",
-                "dirtyTricks",
-                "elusiveness",
-                "leechingPoison",
-                "markedForDeath",
-                "nerveStrike",
-                "nightstalker",
-                "paralyticPoison",
-                "preyOnTheWeak",
-                "shadowFocus",
-                "shadowstep",
-                "shurikenToss",
-                "subterfuge"
-            ],
-            "title": "TreeRogue"
-        },
-        "TreeShaman": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "naturesGuardian": {
-                    "type": "string"
-                },
-                "stoneBulwarkTotem": {
-                    "type": "string"
-                },
-                "astralShift": {
-                    "type": "string"
-                },
-                "frozenPower": {
-                    "type": "string"
-                },
-                "earthgrabTotem": {
-                    "type": "string"
-                },
-                "windwalkTotem": {
-                    "type": "string"
-                },
-                "callOfTheElements": {
-                    "type": "string"
-                },
-                "totemicPersistence": {
-                    "type": "string"
-                },
-                "totemicProjection": {
-                    "type": "string"
-                },
-                "elementalMastery": {
-                    "type": "string"
-                },
-                "ancestralSwiftness": {
-                    "type": "string"
-                },
-                "echoOfTheElements": {
-                    "type": "string"
-                },
-                "rushingStreams": {
-                    "type": "string"
-                },
-                "ancestralGuidance": {
-                    "type": "string"
-                },
-                "conductivity": {
-                    "type": "string"
-                },
-                "unleashedFury": {
-                    "type": "string"
-                },
-                "primalElementalist": {
-                    "type": "string"
-                },
-                "elementalBlast": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "ancestralGuidance",
-                "ancestralSwiftness",
-                "astralShift",
-                "callOfTheElements",
-                "conductivity",
-                "earthgrabTotem",
-                "echoOfTheElements",
-                "elementalBlast",
-                "elementalMastery",
-                "frozenPower",
-                "naturesGuardian",
-                "primalElementalist",
-                "rushingStreams",
-                "stoneBulwarkTotem",
-                "totemicPersistence",
-                "totemicProjection",
-                "unleashedFury",
-                "windwalkTotem"
-            ],
-            "title": "TreeShaman"
-        },
-        "TreeWarlock": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "darkRegeneration": {
-                    "type": "string"
-                },
-                "soulLeech": {
-                    "type": "string"
-                },
-                "harvestLife": {
-                    "type": "string"
-                },
-                "demonicBreath": {
-                    "type": "string"
-                },
-                "mortalCoil": {
-                    "type": "string"
-                },
-                "shadowfury": {
-                    "type": "string"
-                },
-                "soulLink": {
-                    "type": "string"
-                },
-                "sacrificialPact": {
-                    "type": "string"
-                },
-                "darkBargain": {
-                    "type": "string"
-                },
-                "bloodHorror": {
-                    "type": "string"
-                },
-                "burningRush": {
-                    "type": "string"
-                },
-                "unboundWill": {
-                    "type": "string"
-                },
-                "grimoireOfSupremacy": {
-                    "type": "string"
-                },
-                "grimoireOfService": {
-                    "type": "string"
-                },
-                "grimoireOfSacrifice": {
-                    "type": "string"
-                },
-                "archimondesDarkness": {
-                    "type": "string"
-                },
-                "kiljaedensCunning": {
-                    "type": "string"
-                },
-                "mannorothsFury": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "archimondesDarkness",
-                "bloodHorror",
-                "burningRush",
-                "darkBargain",
-                "darkRegeneration",
-                "demonicBreath",
-                "grimoireOfSacrifice",
-                "grimoireOfService",
-                "grimoireOfSupremacy",
-                "harvestLife",
-                "kiljaedensCunning",
-                "mannorothsFury",
-                "mortalCoil",
-                "sacrificialPact",
-                "shadowfury",
-                "soulLeech",
-                "soulLink",
-                "unboundWill"
-            ],
-            "title": "TreeWarlock"
-        },
-        "TreeWarrior": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "juggernaut": {
-                    "type": "string"
-                },
-                "doubleTime": {
-                    "type": "string"
-                },
-                "warbringer": {
-                    "type": "string"
-                },
-                "enragedRegeneration": {
-                    "type": "string"
-                },
-                "secondWind": {
-                    "type": "string"
-                },
-                "impendingVictory": {
-                    "type": "string"
-                },
-                "staggeringShout": {
-                    "type": "string"
-                },
-                "piercingHowl": {
-                    "type": "string"
-                },
-                "disruptingShout": {
-                    "type": "string"
-                },
-                "bladestorm": {
-                    "type": "string"
-                },
-                "shockwave": {
-                    "type": "string"
-                },
-                "dragonRoar": {
-                    "type": "string"
-                },
-                "massSpellReflection": {
-                    "type": "string"
-                },
-                "safeguard": {
-                    "type": "string"
-                },
-                "vigilance": {
-                    "type": "string"
-                },
-                "avatar": {
-                    "type": "string"
-                },
-                "bloodbath": {
-                    "type": "string"
-                },
-                "stormBolt": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "avatar",
-                "bladestorm",
-                "bloodbath",
-                "disruptingShout",
-                "doubleTime",
-                "dragonRoar",
-                "enragedRegeneration",
-                "impendingVictory",
-                "juggernaut",
-                "massSpellReflection",
-                "piercingHowl",
-                "safeguard",
-                "secondWind",
-                "shockwave",
-                "staggeringShout",
-                "stormBolt",
-                "vigilance",
-                "warbringer"
-            ],
-            "title": "TreeWarrior"
         }
     }
 }

@@ -22,17 +22,17 @@ export class AuraMetricsTable extends MetricsTable<AuraMetrics> {
 				};
 			}),
 			{
-				name: i18n.t('results.details.columns.procs'),
+				name: i18n.t('results_tab.details.columns.procs'),
 				getValue: (metric: AuraMetrics) => metric.averageProcs,
 				getDisplayString: (metric: AuraMetrics) => metric.averageProcs.toFixed(2),
 			},
 			{
-				name: i18n.t('results.details.columns.ppm'),
+				name: i18n.t('results_tab.details.columns.ppm'),
 				getValue: (metric: AuraMetrics) => metric.ppm,
 				getDisplayString: (metric: AuraMetrics) => metric.ppm.toFixed(2),
 			},
 			{
-				name: i18n.t('results.details.columns.uptime'),
+				name: i18n.t('results_tab.details.columns.uptime'),
 				sort: ColumnSortType.Descending,
 				getValue: (metric: AuraMetrics) => metric.uptimePercent,
 				getDisplayString: (metric: AuraMetrics) => metric.uptimePercent.toFixed(2) + '%',

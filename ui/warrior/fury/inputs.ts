@@ -9,18 +9,18 @@ import i18n from '../../i18n/config.js';
 
 export const SyncTypeInput = InputHelpers.makeSpecOptionsEnumInput<Spec.SpecFuryWarrior, WarriorSyncType>({
 	fieldName: 'syncType',
-	label: i18n.t('settings.other.sync_type.label'),
-	labelTooltip: i18n.t('settings.other.sync_type.tooltip'),
+	label: i18n.t('settings_tab.other.sync_type.label'),
+	labelTooltip: i18n.t('settings_tab.other.sync_type.tooltip'),
 	values: [
-		{ name: i18n.t('settings.other.sync_type.values.none'), value: WarriorSyncType.WarriorNoSync },
-		{ name: i18n.t('settings.other.sync_type.values.perfect_sync'), value: WarriorSyncType.WarriorSyncMainhandOffhandSwings },
+		{ name: i18n.t('settings_tab.other.sync_type.values.none'), value: WarriorSyncType.WarriorNoSync },
+		{ name: i18n.t('settings_tab.other.sync_type.values.perfect_sync'), value: WarriorSyncType.WarriorSyncMainhandOffhandSwings },
 	],
 });
 
 export const AssumePrepullMasteryElixir = InputHelpers.makeSpecOptionsBooleanInput<Spec.SpecFuryWarrior>({
 	fieldName: 'useItemSwapBonusStats',
-	label: i18n.t('settings.other.assume_prepull_mastery_elixir.label'),
-	labelTooltip: i18n.t('settings.other.assume_prepull_mastery_elixir.tooltip'),
+	label: i18n.t('settings_tab.other.assume_prepull_mastery_elixir.label'),
+	labelTooltip: i18n.t('settings_tab.other.assume_prepull_mastery_elixir.tooltip'),
 	getValue: player => player.getSpecOptions().useItemSwapBonusStats,
 	setValue: (eventID, player, newVal) => {
 		const newMessage = player.getSpecOptions();

@@ -38,6 +38,6 @@ export const LethalPoison = <SpecType extends RogueSpecs>() =>
 export const ApplyPoisonsManually = <SpecType extends RogueSpecs>() =>
 	InputHelpers.makeClassOptionsBooleanInput<SpecType>({
 		fieldName: 'applyPoisonsManually',
-		label: i18n.t('rotation.options.rogue.apply_poisons_manually.label'),
-		labelTooltip: i18n.t('rotation.options.rogue.apply_poisons_manually.tooltip'),
+		label: i18n.t('rotation_tab.options.rogue.apply_poisons_manually.label'),
+		labelTooltip: i18n.t('rotation_tab.options.rogue.apply_poisons_manually.tooltip'),
 	});

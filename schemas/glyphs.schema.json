@@ -1,0 +1,43 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"additionalProperties": {
+		"$ref": "#/definitions/WelcomeValue"
+	},
+	"definitions": {
+		"WelcomeValue": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"major": {
+					"type": "object",
+					"additionalProperties": {
+						"$ref": "#/definitions/Major"
+					}
+				},
+				"minor": {
+					"type": "object",
+					"additionalProperties": {
+						"$ref": "#/definitions/Major"
+					}
+				}
+			},
+			"required": ["major", "minor"],
+			"title": "WelcomeValue"
+		},
+		"Major": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"description": {
+					"type": "string"
+				}
+			},
+			"required": ["description", "name"],
+			"title": "Major"
+		}
+	}
+}

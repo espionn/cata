@@ -201,7 +201,7 @@ export class DropdownPicker<ModObject, T, V = T> extends Input<ModObject, T, V> 
 			let translatedText = submenuText;
 			if (typeof submenuText === 'string' && /^[a-z_]+$/.test(submenuText)) {
 				try {
-					translatedText = i18n.t(`rotation.apl.submenus.${submenuText}`);
+					translatedText = i18n.t(`rotation_tab.apl.submenus.${submenuText}`);
 				} catch (e) {
 					translatedText = submenuText;
 				}

@@ -24,8 +24,8 @@ export class APLGroupEditor extends Input<Player<any>, APLGroup> {
 		// Create the group name input within our container
 		this.namePicker = new AdaptiveStringPicker(container, this.modObject, {
 			id: randomUUID(),
-			label: i18n.t('rotation.apl.actionGroups.attributes.name'),
-			labelTooltip: i18n.t('rotation.apl.actionGroups.tooltips.name'),
+			label: i18n.t('rotation_tab.apl.actionGroups.attributes.name'),
+			labelTooltip: i18n.t('rotation_tab.apl.actionGroups.tooltips.name'),
 			extraCssClasses: ['apl-group-name-picker'],
 			inline: true,
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
@@ -45,9 +45,9 @@ export class APLGroupEditor extends Input<Player<any>, APLGroup> {
 		// Create the actions picker in the dedicated container with EXACT same styling as Priority List
 		this.actionsPicker = new ListPicker<Player<any>, APLListItem>(this.actionsContainer, this.modObject, {
 			extraCssClasses: ['apl-list-item-picker'], // Use SAME class as Priority List!
-			title: i18n.t('rotation.apl.actionGroups.attributes.actions'),
-			titleTooltip: i18n.t('rotation.apl.actionGroups.tooltips.actions'),
-			itemLabel: i18n.t('rotation.apl.priorityList.name'),
+			title: i18n.t('rotation_tab.apl.actionGroups.attributes.actions'),
+			titleTooltip: i18n.t('rotation_tab.apl.actionGroups.tooltips.actions'),
+			itemLabel: i18n.t('rotation_tab.apl.priorityList.name'),
 			actions: {
 				create: {
 					useIcon: true,

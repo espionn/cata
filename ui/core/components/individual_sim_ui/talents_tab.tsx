@@ -18,7 +18,7 @@ export class TalentsTab<SpecType extends Spec> extends SimTab {
 	readonly rightPanel: HTMLElement;
 
 	constructor(parentElem: HTMLElement, simUI: IndividualSimUI<SpecType>) {
-		super(parentElem, simUI, { identifier: 'talents-tab', title: i18n.t('talents.title') });
+		super(parentElem, simUI, { identifier: 'talents-tab', title: i18n.t('talents_tab.title') });
 		this.simUI = simUI;
 
 		this.leftPanel = (<div className="talents-tab-left tab-panel-left" />) as HTMLElement;
@@ -62,8 +62,8 @@ export class TalentsTab<SpecType extends Spec> extends SimTab {
 
 	private buildSavedTalentsPicker() {
 		const savedTalentsManager = new SavedDataManager<Player<any>, SavedTalents>(this.rightPanel, this.simUI.player, {
-			label: i18n.t('talents.saved_talents.label'),
-			header: { title: i18n.t('talents.saved_talents.title') },
+			label: i18n.t('talents_tab.saved_talents.label'),
+			header: { title: i18n.t('talents_tab.saved_talents.title') },
 			storageKey: this.simUI.getSavedTalentsStorageKey(),
 			getData: (player: Player<any>) =>
 				SavedTalents.create({
@@ -80,12 +80,12 @@ export class TalentsTab<SpecType extends Spec> extends SimTab {
 			equals: (a: SavedTalents, b: SavedTalents) => SavedTalents.equals(a, b),
 			toJson: (a: SavedTalents) => SavedTalents.toJson(a),
 			fromJson: (obj: any) => SavedTalents.fromJson(obj),
-			nameLabel: i18n.t('talents.saved_talents.name_label'),
-			saveButtonText: i18n.t('talents.saved_talents.save_button'),
-			deleteTooltip: i18n.t('talents.saved_talents.delete.tooltip'),
-			deleteConfirmMessage: i18n.t('talents.saved_talents.delete.confirm'),
-			chooseNameAlert: i18n.t('talents.saved_talents.alerts.choose_name'),
-			nameExistsAlert: i18n.t('talents.saved_talents.alerts.name_exists'),
+			nameLabel: i18n.t('talents_tab.saved_talents.name_label'),
+			saveButtonText: i18n.t('talents_tab.saved_talents.save_button'),
+			deleteTooltip: i18n.t('talents_tab.saved_talents.delete.tooltip'),
+			deleteConfirmMessage: i18n.t('talents_tab.saved_talents.delete.confirm'),
+			chooseNameAlert: i18n.t('talents_tab.saved_talents.alerts.choose_name'),
+			nameExistsAlert: i18n.t('talents_tab.saved_talents.alerts.name_exists'),
 		});
 
 		this.simUI.sim.waitForInit().then(() => {

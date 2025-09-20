@@ -109,7 +109,7 @@ export default defineConfig(({ command, mode }) => {
 	return {
 		...baseConfig,
 		plugins: [
-			i18nextLoader({ paths: ['assets/locales'] }),
+			i18nextLoader({ namespaceResolution: 'basename', paths: ['assets/locales'] }),
 			serveExternalAssets(),
 			checker({
 				root: BASE_PATH,

@@ -7,7 +7,7 @@ import i18n from '../../i18n/config.js';
 
 export const OkfUptime = InputHelpers.makeSpecOptionsNumberInput<Spec.SpecBalanceDruid>({
 	fieldName: 'okfUptime',
-	label: i18n.t('settings.other.okf_uptime.label'),
-	labelTooltip: i18n.t('settings.other.okf_uptime.tooltip'),
+	label: i18n.t('settings_tab.other.okf_uptime.label'),
+	labelTooltip: i18n.t('settings_tab.other.okf_uptime.tooltip'),
 	percent: true,
 });

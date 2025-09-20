@@ -40,7 +40,7 @@ export default class BulkItemSearch extends ContentBlock {
 	private maxIlvl = 0;
 
 	constructor(parent: HTMLElement, simUI: IndividualSimUI<any>, bulkUI: BulkTab) {
-		super(parent, 'bulk-item-search-root', { header: { title: i18n.t('sim.bulk.search.title') } });
+		super(parent, 'bulk-item-search-root', { header: { title: i18n.t('bulk_tab.search.title') } });
 
 		this.simUI = simUI;
 		this.bulkUI = bulkUI;
@@ -74,14 +74,14 @@ export default class BulkItemSearch extends ContentBlock {
 		this.cancelSearchElem = cancelSearchElemRef.value!;
 		this.searchResultElem = searchResultsRef.value!;
 
-		tippy(this.cancelSearchElem, { content: i18n.t('sim.bulk.search.clear_search') });
+		tippy(this.cancelSearchElem, { content: i18n.t('bulk_tab.search.clear_search') });
 		this.cancelSearchElem.addEventListener('click', () => {
 			this.searchString = '';
 		});
 
 		new NumberPicker(ilvlFiltersContainerRef.value!, this, {
 			id: 'bulkGearSearchMinIlvl',
-			label: i18n.t('sim.bulk.search.min_ilvl'),
+			label: i18n.t('bulk_tab.search.min_ilvl'),
 			showZeroes: false,
 			changedEvent: _ => this.filtersChangeEmitter,
 			getValue: _ => this.minIlvl,
@@ -95,7 +95,7 @@ export default class BulkItemSearch extends ContentBlock {
 
 		new NumberPicker(ilvlFiltersContainerRef.value!, this, {
 			id: 'bulkGearSearchMaxIlvl',
-			label: i18n.t('sim.bulk.search.max_ilvl'),
+			label: i18n.t('bulk_tab.search.max_ilvl'),
 			showZeroes: false,
 			changedEvent: _ => this.filtersChangeEmitter,
 			getValue: _ => this.maxIlvl,
@@ -211,7 +211,7 @@ export default class BulkItemSearch extends ContentBlock {
 							variant: 'success',
 							body: (
 								<>
-									<strong>{item.name}</strong> {i18n.t('sim.bulk.search.item_added', { itemName: item.name })}
+									<strong>{item.name}</strong> {i18n.t('bulk_tab.search.item_added', { itemName: item.name })}
 								</>
 							),
 						});
@@ -226,10 +226,10 @@ export default class BulkItemSearch extends ContentBlock {
 				{items}
 				{matchCount > MAX_SEARCH_RESULTS && (
 					<li className="bulk-item-search-item bulk-item-search-results-note">
-						{i18n.t('sim.bulk.search.showing_results', { max: MAX_SEARCH_RESULTS, total: matchCount })}
+						{i18n.t('bulk_tab.search.showing_results', { max: MAX_SEARCH_RESULTS, total: matchCount })}
 					</li>
 				)}
-				{matchCount === 0 && <li className="bulk-item-search-item bulk-item-search-results-note">{i18n.t('sim.bulk.search.no_results')}</li>}
+				{matchCount === 0 && <li className="bulk-item-search-item bulk-item-search-results-note">{i18n.t('bulk_tab.search.no_results')}</li>}
 			</>,
 		);
 

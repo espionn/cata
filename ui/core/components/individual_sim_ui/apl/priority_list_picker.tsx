@@ -15,10 +15,10 @@ export class APLPriorityListPicker extends Component{
 		super(container, 'apl-priority-list-picker-root');
 
 		const listPicker = new ListPicker<Player<any>, APLListItem>(this.rootElem, simUI.player, {
-			title: i18n.t('rotation.apl.priorityList.header'),
-			titleTooltip: i18n.t('rotation.apl.priorityList.tooltips.overview'),
+			title: i18n.t('rotation_tab.apl.priorityList.header'),
+			titleTooltip: i18n.t('rotation_tab.apl.priorityList.tooltips.overview'),
 			extraCssClasses: ['apl-list-item-picker'],
-			itemLabel: i18n.t('rotation.apl.priorityList.name'),
+			itemLabel: i18n.t('rotation_tab.apl.priorityList.name'),
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: (player: Player<any>) => player.aplRotation.priorityList,
 			setValue: (eventID: EventID, player: Player<any>, newValue: Array<APLListItem>) => {
@@ -37,7 +37,7 @@ export class APLPriorityListPicker extends Component{
 			inlineMenuBar: true,
 		});
 
-		new AplFloatingActionBar(this.rootElem,simUI,listPicker,i18n.t('rotation.apl.priorityList.name'));
+		new AplFloatingActionBar(this.rootElem,simUI,listPicker,i18n.t('rotation_tab.apl.priorityList.name'));
 	}
 }
 

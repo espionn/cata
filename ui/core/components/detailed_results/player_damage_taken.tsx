@@ -22,8 +22,8 @@ export class PlayerDamageTakenMetricsTable extends MetricsTable<UnitMetrics> {
 		super(config, [
 			MetricsTable.playerNameCellConfig(),
 			{
-				name: i18n.t('results.details.columns.amount'),
-				tooltip: i18n.t('results.details.tooltips.player_damage_taken'),
+				name: i18n.t('results_tab.details.columns.amount'),
+				tooltip: i18n.t('results_tab.details.tooltips.player_damage_taken'),
 				headerCellClass: 'amount-header-cell text-center',
 				fillCell: (player: UnitMetrics, cellElem: HTMLElement, rowElem: HTMLElement) => {
 					cellElem.classList.add('amount-cell');
@@ -69,8 +69,8 @@ export class PlayerDamageTakenMetricsTable extends MetricsTable<UnitMetrics> {
 				},
 			},
 			{
-				name: i18n.t('results.details.columns.dtps'),
-				tooltip: i18n.t('results.details.tooltips.dtps'),
+				name: i18n.t('results_tab.details.columns.dtps'),
+				tooltip: i18n.t('results_tab.details.tooltips.dtps'),
 				columnClass: 'dps-cell',
 				sort: ColumnSortType.Descending,
 				getValue: (player: UnitMetrics) => this.getPlayerDtps(player),

@@ -27,7 +27,7 @@ export class ReforgeSummary extends Component {
 		this.player = player;
 
 		this.container = new ContentBlock(this.rootElem, 'summary-table-container', {
-			header: { title: i18n.t('gear.reforge_summary.title') },
+			header: { title: i18n.t('gear_tab.reforge_summary.title') },
 			extraCssClasses: ['summary-table--reforge'],
 		});
 
@@ -92,7 +92,7 @@ export class ReforgeSummary extends Component {
 						return '';
 					}
 				},
-				text: i18n.t('gear.reforge_summary.copy_to_reforge_lite'),
+				text: i18n.t('gear_tab.reforge_summary.copy_to_reforge_lite'),
 			});
 
 			this.container.bodyElement.appendChild(footer);
@@ -107,7 +107,7 @@ export class ReforgeSummary extends Component {
 						this.player.setGear(TypedEvent.nextEventID(), gear);
 					}}>
 					<i className="fas fa-times me-1"></i>
-					{i18n.t('gear.reforge_summary.reset_reforges')}
+					{i18n.t('gear_tab.reforge_summary.reset_reforges')}
 				</button>
 			);
 
