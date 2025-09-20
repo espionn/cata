@@ -148,12 +148,12 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestProtection-AllItems-Brawler'sStatue-87571"
+ key: "TestProtection-AllItems-Brawler'sStatue-257885"
  value: {
-  dps: 114292.08261
-  tps: 747979.22504
-  dtps: 13411.86309
-  hps: 19380.31527
+  dps: 114211.87431
+  tps: 747714.34465
+  dtps: 13244.03728
+  hps: 19414.48883
  }
 }
 dps_results: {
@@ -274,12 +274,12 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestProtection-AllItems-Coren'sColdChromiumCoaster-87574"
+ key: "TestProtection-AllItems-Coren'sColdChromiumCoaster-257880"
  value: {
-  dps: 116564.05574
-  tps: 763602.93601
-  dtps: 13727.80584
-  hps: 19464.95994
+  dps: 117083.15035
+  tps: 766837.49178
+  dtps: 13717.4756
+  hps: 19504.6336
  }
 }
 dps_results: {
@@ -1831,10 +1831,10 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestProtection-AllItems-MithrilWristwatch-87572"
+ key: "TestProtection-AllItems-MithrilWristwatch-257884"
  value: {
-  dps: 115625.16546
-  tps: 757422.31782
+  dps: 115938.00321
+  tps: 759269.64619
   dtps: 13772.96108
   hps: 19294.62605
  }
@@ -2227,6 +2227,15 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestProtection-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 114015.92785
+  tps: 746800.06691
+  dtps: 13772.96108
+  hps: 19294.62605
+ }
+}
+dps_results: {
  key: "TestProtection-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 113900.52876
@@ -2569,10 +2578,10 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestProtection-AllItems-Thousand-YearPickledEgg-87573"
+ key: "TestProtection-AllItems-Thousand-YearPickledEgg-257881"
  value: {
-  dps: 114066.68635
-  tps: 747055.70127
+  dps: 114087.7278
+  tps: 747188.75524
   dtps: 13772.96108
   hps: 19294.62605
  }
@@ -2850,8 +2859,8 @@ dps_results: {
 dps_results: {
  key: "TestProtection-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 121424.24632
-  tps: 794035.93788
+  dps: 114159.96986
+  tps: 747678.61001
   dtps: 13772.96108
   hps: 19294.62605
  }

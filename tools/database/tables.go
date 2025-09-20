@@ -108,7 +108,7 @@ func LoadAndWriteRawItems(dbHelper *DBHelper, filter string, inputsDir string) (
 			s.StatModifier_bonusStat as bonusStat,
 			s.StatPercentEditor as StatPercentEditor,
 			s.SocketType as SocketTypes,
-			s.Field_1_15_7_59706_036 as SocketEnchantmentId,
+			s.Socket_match_enchantment_ID as SocketEnchantmentId,
 			s.Flags_0 as Flags_0,
 			s.Flags_1 as Flags_1,
 			s.Flags_2 as Flags_2,
@@ -396,7 +396,7 @@ func LoadAndWriteRawGems(dbHelper *DBHelper, inputsDir string) ([]dbc.Gem, error
 		s.Flags_0
 		FROM ItemSparse s
 		JOIN Item i ON s.ID = i.ID
-		JOIN GemProperties gp ON s.Field_1_15_7_59706_035  = gp.ID
+		JOIN GemProperties gp ON s.Gem_properties = gp.ID
 		JOIN SpellItemEnchantment sie ON gp.Enchant_ID = sie.ID
 		WHERE i.ClassID = 3 AND s.ItemLevel > 85 AND s.OverallQualityId > 2`
 	items, err := LoadRows(dbHelper.db, query, ScanGemTable)
@@ -991,7 +991,7 @@ func ScanGlyphs(rows *sql.Rows) (RawGlyph, error) {
 
 func LoadGlyphs(dbHelper *DBHelper) ([]RawGlyph, error) {
 	query := `
-SELECT DISTINCT i.ID, gp.SpellID, is2.Display_lang, glyphSpell.Description_lang, gp.Field_3_4_0_43659_001, i.SubclassID, sm.SpellIconFileDataID
+SELECT DISTINCT i.ID, gp.SpellID, is2.Display_lang, glyphSpell.Description_lang, gp.GlyphType, i.SubclassID, sm.SpellIconFileDataID
 FROM Item i
 LEFT JOIN ItemSparse is2 ON i.ID = is2.ID
 LEFT JOIN ItemEffect ie ON ie.ParentItemID  = i.ID

@@ -505,6 +505,19 @@ func init() {
 
 		core.NewItemEffect(itemID, func(agent core.Agent, state proto.ItemLevelState) {
 			character := agent.GetCharacter()
+			// @TODO: Old posts say that only Intellect users can proc this effect
+			switch {
+			case character.Class == proto.Class_ClassWarlock,
+				character.Class == proto.Class_ClassMage,
+				character.Class == proto.Class_ClassPriest,
+				character.Spec == proto.Spec_SpecBalanceDruid,
+				character.Spec == proto.Spec_SpecElementalShaman,
+				character.Spec == proto.Spec_SpecMistweaverMonk,
+				character.Spec == proto.Spec_SpecHolyPaladin:
+				// These are valid
+			default:
+				return
+			}
 
 			statBuffAura := character.NewTemporaryStatsAura(
 				fmt.Sprintf("%s %s", label, versionLabel),
@@ -531,6 +544,116 @@ func init() {
 
 			eligibleSlots := character.ItemSwap.EligibleSlotsForItem(itemID)
 			character.AddStatProcBuff(itemID, statBuffAura, false, eligibleSlots)
+			character.ItemSwap.RegisterProcWithSlots(itemID, triggerAura, eligibleSlots)
+		})
+	})
+
+	// Rune of Re-Origination
+	// When your attacks hit you have a chance to trigger Re-Origination.
+	// Re-Origination converts the lower two values of your Critical Strike, Haste, and Mastery
+	// into twice as much of the highest of those three attributes for 10 sec.
+	// (Approximately 1.17 procs per minute, 10 sec cooldown)
+	shared.ItemVersionMap{
+		shared.ItemVersionLFR:                 95802,
+		shared.ItemVersionNormal:              94532,
+		shared.ItemVersionHeroic:              96546,
+		shared.ItemVersionThunderforged:       96174,
+		shared.ItemVersionHeroicThunderforged: 96918,
+	}.RegisterAll(func(version shared.ItemVersion, itemID int32, versionLabel string) {
+		label := "Rune of Re-Origination"
+
+		core.NewItemEffect(itemID, func(agent core.Agent, state proto.ItemLevelState) {
+			character := agent.GetCharacter()
+			// @TODO: Old posts say that only Agility users can proc this effect
+			switch {
+			case character.Class == proto.Class_ClassRogue,
+				character.Class == proto.Class_ClassHunter,
+				character.Spec == proto.Spec_SpecFeralDruid,
+				character.Spec == proto.Spec_SpecGuardianDruid,
+				character.Spec == proto.Spec_SpecEnhancementShaman,
+				character.Spec == proto.Spec_SpecWindwalkerMonk,
+				character.Spec == proto.Spec_SpecBrewmasterMonk:
+				// These are valid
+			default:
+				return
+			}
+
+			duration := time.Second * 10
+			masteryRaidBuffs := character.GetExclusiveEffectCategory("MasteryRatingBuff")
+			var buffStats stats.Stats
+			buffedStatTypes := []stats.Stat{stats.CritRating, stats.HasteRating, stats.MasteryRating}
+
+			createStatBuffAura := func(label string, spellID int32) *core.StatBuffAura {
+				return &core.StatBuffAura{
+					Aura: character.RegisterAura(core.Aura{
+						Label:    fmt.Sprintf("Re-Origination - %s", label),
+						ActionID: core.ActionID{SpellID: spellID},
+						Duration: duration,
+						OnGain: func(aura *core.Aura, sim *core.Simulation) {
+							character.AddStatsDynamic(sim, buffStats)
+
+							for i := range character.OnTemporaryStatsChanges {
+								character.OnTemporaryStatsChanges[i](sim, aura, buffStats)
+							}
+						},
+						OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+							invertedBuffStats := buffStats.Invert()
+							character.AddStatsDynamic(sim, invertedBuffStats)
+
+							for i := range character.OnTemporaryStatsChanges {
+								character.OnTemporaryStatsChanges[i](sim, aura, invertedBuffStats)
+							}
+						},
+					}),
+					BuffedStatTypes: buffedStatTypes,
+				}
+			}
+
+			buffAuras := make(map[stats.Stat]*core.StatBuffAura, 3)
+			buffAuras[stats.CritRating] = createStatBuffAura("Crit", 139117)
+			buffAuras[stats.HasteRating] = createStatBuffAura("Haste", 139121)
+			buffAuras[stats.MasteryRating] = createStatBuffAura("Mastery", 139120)
+
+			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
+				Name:    label,
+				Harmful: true,
+				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskMeleeOrMeleeProc|core.ProcMaskRangedOrRangedProc, core.RPPMConfig{
+					PPM: 1.10000002384,
+				}.WithApproximateIlvlMod(1.0, 528)),
+				ICD:      duration,
+				Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
+				Handler: func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
+					for _, buffAura := range buffAuras {
+						buffAura.Deactivate(sim)
+					}
+
+					hasMasteryRaidBuff := masteryRaidBuffs.GetActiveAura().IsActive()
+					currentStats := character.GetStats()
+
+					if hasMasteryRaidBuff {
+						currentStats[stats.MasteryRating] -= core.MasteryRaidBuffStrength
+					}
+
+					highestStat := currentStats.GetHighestStatType(buffedStatTypes)
+
+					var buffStrength float64
+
+					for _, statType := range buffedStatTypes {
+						if statType != highestStat {
+							buffStrength += currentStats[statType] * 2
+							buffStats[statType] = -currentStats[statType]
+						}
+					}
+
+					buffStats[highestStat] = buffStrength
+					buffAuras[highestStat].Activate(sim)
+				},
+			})
+
+			eligibleSlots := character.ItemSwap.EligibleSlotsForItem(itemID)
+			for _, buffAura := range buffAuras {
+				character.AddStatProcBuff(itemID, buffAura, false, eligibleSlots)
+			}
 			character.ItemSwap.RegisterProcWithSlots(itemID, triggerAura, eligibleSlots)
 		})
 	})

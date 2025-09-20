@@ -43,10 +43,10 @@ func RegisterAllOnUseCds() {
 	// DodgeRating
 	shared.NewSimpleStatActive(79329) // Relic of Niuzao
 	shared.NewSimpleStatActive(81181) // Heart of Fire (H)
-	shared.NewSimpleStatActive(87571) // Brawler's Statue
 	shared.NewSimpleStatActive(94507) // Steadfast Talisman of the Shado-Pan Assault
 	shared.NewSimpleStatActive(103690) // Resolve of Niuzao
 	shared.NewSimpleStatActive(103990) // Resolve of Niuzao (Timeless)
+	shared.NewSimpleStatActive(257885) // Brawler's Statue
 
 	// HasteRating
 	shared.NewSimpleStatActive(86042) // Jade Charioteer Figurine

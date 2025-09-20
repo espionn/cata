@@ -8,6 +8,7 @@ import { SimUI } from '../../sim_ui';
 import { TypedEvent } from '../../typed_event';
 import { Component } from '../component';
 import { ContentBlock } from '../content_block';
+import i18n from '../../../i18n/config';
 
 interface GemSummaryData {
 	gem: Gem;
@@ -28,7 +29,7 @@ export class GemSummary extends Component {
 		this.player = player;
 
 		this.container = new ContentBlock(this.rootElem, 'summary-table-container', {
-			header: { title: 'Gem Summary', extraCssClasses: ['summary-table--gems'] },
+			header: { title: i18n.t('gear.gem_summary.title'), extraCssClasses: ['summary-table--gems'] },
 			extraCssClasses: ['summary-table--gems'],
 		});
 		player.gearChangeEmitter.on(() => this.updateTable());
@@ -93,7 +94,7 @@ export class GemSummary extends Component {
 						this.player.setGear(TypedEvent.nextEventID(), this.player.getGear().withoutGems(this.player.canDualWield2H()));
 					}}>
 					<i className="fas fa-times me-1"></i>
-					Reset gems
+					{i18n.t('gear.gem_summary.reset_gems')}
 				</button>
 			);
 

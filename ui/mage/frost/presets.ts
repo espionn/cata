@@ -7,17 +7,15 @@ import { Stats } from '../../core/proto_utils/stats';
 import FrostApl from './apls/frost.apl.json';
 import FrostAoeApl from './apls/frost_aoe.apl.json';
 import P1PreBISGear from './gear_sets/p1_prebis.gear.json';
-import P1PostMSVGear from './gear_sets/p1_post_msv.gear.json';
-import P1PostHOFGear from './gear_sets/p1_post_hof.gear.json';
 import P1BISGear from './gear_sets/p1_bis.gear.json';
+import P2BSISGear from './gear_sets/p2_bis.gear.json';
 // Preset options for this spec.
 // Eventually we will import these values for the raid sim too, so its good to
 // keep them in a separate file.
 
 export const P1_PREBIS = PresetUtils.makePresetGear('P1 - Pre-BIS', P1PreBISGear);
-export const P1_POST_MSV = PresetUtils.makePresetGear('P1 - Post-MSV', P1PostMSVGear);
-export const P1_POST_HOF = PresetUtils.makePresetGear('P1 - Post-HoF', P1PostHOFGear);
 export const P1_BIS = PresetUtils.makePresetGear('P1 - BIS', P1BISGear);
+export const P2_BIS = PresetUtils.makePresetGear('P2 - BIS', P2BSISGear);
 
 export const ROTATION_PRESET_DEFAULT = PresetUtils.makePresetAPLRotation('Default', FrostApl);
 export const ROTATION_PRESET_AOE = PresetUtils.makePresetAPLRotation('AOE', FrostAoeApl);
@@ -25,7 +23,7 @@ export const ROTATION_PRESET_AOE = PresetUtils.makePresetAPLRotation('AOE', Fros
 
 // Preset options for EP weights
 export const P1_BIS_EP_PRESET = PresetUtils.makePresetEpWeights(
-	'Item Level > 500',
+	'Item Level >= 500',
 	Stats.fromMap({
 		[Stat.StatIntellect]: 1.0,
 		[Stat.StatSpellPower]: 0.98,

@@ -318,6 +318,7 @@ message UnitMetrics {
 
 	// Chance (0-1) representing probability of death. Used for tank sims.
 	double chance_of_death = 12;
+       repeated int64 death_seeds = 2;
 
 	repeated ActionMetrics actions = 5;
 	repeated AuraMetrics auras = 6;
@@ -449,10 +450,14 @@ message UUIDValidations {
 	UUID uuid = 1;
 	repeated APLValidation validations = 2;
 }
+message APLGroupStats {
+	repeated APLActionStats actions = 1;
+}
 message APLStats {
 	repeated APLActionStats prepull_actions = 1;
 	repeated APLActionStats priority_list = 2;
 	repeated UUIDValidations uuid_validations = 3;
+	repeated APLGroupStats groups = 4;
 }
 message UnitMetadata {
 	string name = 3;

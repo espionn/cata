@@ -160,32 +160,7 @@ export class CombatRogueSimUI extends IndividualSimUI<Spec.SpecCombatRogue> {
 		super(parentElem, player, SPEC_CONFIG);
 
 		player.sim.waitForInit().then(() => {
-			new ReforgeOptimizer(this, {
-				updateGearStatsModifier: (baseStats: Stats) => {
-					// Human/Orc racials for MH. Maxing Expertise for OH is a DPS loss when the MH matches the racial.
-					const mhWepType = player.getEquippedItem(ItemSlot.ItemSlotMainHand)?.item.weaponType;
-					const ohWepType = player.getEquippedItem(ItemSlot.ItemSlotOffHand)?.item.weaponType;
-					const playerRace = player.getRace();
-					if (
-						(playerRace == Race.RaceHuman &&
-							(mhWepType == WeaponType.WeaponTypeSword || mhWepType == WeaponType.WeaponTypeMace) &&
-							ohWepType != WeaponType.WeaponTypeSword &&
-							ohWepType != WeaponType.WeaponTypeMace) ||
-						(playerRace == Race.RaceOrc &&
-							(mhWepType == WeaponType.WeaponTypeAxe || mhWepType == WeaponType.WeaponTypeFist) &&
-							ohWepType != WeaponType.WeaponTypeAxe &&
-							ohWepType != WeaponType.WeaponTypeFist) ||
-						(playerRace == Race.RaceGnome &&
-							(mhWepType == WeaponType.WeaponTypeDagger || mhWepType == WeaponType.WeaponTypeSword) &&
-							ohWepType != WeaponType.WeaponTypeDagger &&
-							ohWepType != WeaponType.WeaponTypeSword) ||
-						(playerRace == Race.RaceDwarf && mhWepType == WeaponType.WeaponTypeMace && ohWepType != WeaponType.WeaponTypeMace)
-					) {
-						return baseStats.addStat(Stat.StatExpertiseRating, 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION);
-					}
-					return baseStats;
-				},
-			});
+			new ReforgeOptimizer(this, {});
 		});
 
 		this.player.changeEmitter.on(c => {

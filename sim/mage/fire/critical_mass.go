@@ -18,11 +18,6 @@ func (fire *FireMage) registerCriticalMass() {
 		Kind:       core.SpellMod_BonusCrit_Percent,
 	})
 
-	fire.AddOnTemporaryStatsChange(func(sim *core.Simulation, buffAura *core.Aura, statsChangeWithoutDeps stats.Stats) {
-		critChance := getCritPercent()
-		criticalMassCritBuffMod.UpdateFloatValue(critChance)
-	})
-
 	core.MakePermanent(fire.RegisterAura(core.Aura{
 		Label: "Critical Mass",
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
@@ -32,5 +27,13 @@ func (fire *FireMage) registerCriticalMass() {
 			criticalMassCritBuffMod.Deactivate()
 		},
 	}))
+
+	fire.AddOnTemporaryStatsChange(func(sim *core.Simulation, buffAura *core.Aura, statsChangeWithoutDeps stats.Stats) {
+		criticalMassCritBuffMod.UpdateFloatValue(getCritPercent())
+	})
+
+	fire.RegisterResetEffect(func(sim *core.Simulation) {
+		criticalMassCritBuffMod.UpdateFloatValue(getCritPercent())
+	})
 
 }

@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/wowsims/mop/sim/core"
+	"github.com/wowsims/mop/sim/core/proto"
 	"github.com/wowsims/mop/sim/druid"
 )
 
@@ -94,6 +95,10 @@ func (rotation *FeralDruidRotation) ShiftBearCat(sim *core.Simulation) {
 		cat.BearForm.Cast(sim, nil)
 	} else {
 		cat.CatForm.Cast(sim, nil)
+
+		if cat.ItemSwap.IsEnabled() {
+			cat.ItemSwap.SwapItems(sim, proto.APLActionItemSwap_Main, false)
+		}
 
 		// Reset swing timer with Albino Snake when advantageous
 		if rotation.SnekWeave && (cat.AutoAttacks.NextAttackAt()-sim.CurrentTime > cat.AutoAttacks.MainhandSwingSpeed()) {
@@ -334,6 +339,48 @@ func (rotation *FeralDruidRotation) shouldTerminateBearWeave(sim *core.Simulatio
 	energyToDump := finalEnergy + 1.5*regenRate // need to include Cat Form GCD here
 	timeToDump := earliestWeaveEnd + core.DurationFromSeconds(math.Floor(energyToDump/cat.Shred.DefaultCast.Cost))
 	return (timeToDump >= sim.Duration) || cat.tfExpectedBefore(sim, timeToDump)
+}
+
+func (rotation *FeralDruidRotation) shouldWrathWeave(sim *core.Simulation) bool {
+	if !rotation.WrathWeave {
+		return false
+	}
+
+	cat := rotation.agent
+	remainingGCD := cat.GCD.TimeToReady(sim)
+	maxWrathCastTime := cat.Wrath.DefaultCast.CastTime
+
+	if !cat.HeartOfTheWildAura.IsActive() || (cat.HeartOfTheWildAura.RemainingDuration(sim) <= maxWrathCastTime+remainingGCD) {
+		return false
+	}
+
+	if cat.ClearcastingAura.IsActive() {
+		return false
+	}
+
+	regenRate := cat.EnergyRegenPerSecond()
+	furorCap := 100.0 - 1.5*regenRate
+	startingEnergy := cat.CurrentEnergy() + remainingGCD.Seconds()*regenRate
+	curCp := cat.ComboPoints()
+
+	if (curCp < 2) && (startingEnergy+maxWrathCastTime.Seconds()*2*regenRate > furorCap) {
+		return false
+	}
+
+	ripDot := cat.Rip.CurDot()
+	timeToNextCatSpecial := remainingGCD + maxWrathCastTime + cat.ReactionTime + core.GCDDefault
+
+	if !ripDot.IsActive() || ((curCp == 5) && (ripDot.RemainingDuration(sim) < timeToNextCatSpecial)) {
+		return false
+	}
+
+	rakeDot := cat.Rake.CurDot()
+
+	if !rakeDot.IsActive() || (rakeDot.RemainingDuration(sim) < timeToNextCatSpecial) {
+		return false
+	}
+
+	return true
 }
 
 func (rotation *FeralDruidRotation) ProcessNextPlannedAction(sim *core.Simulation, nextActionAt time.Duration) {

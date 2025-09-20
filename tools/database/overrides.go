@@ -688,6 +688,15 @@ var ItemDenyList = map[int32]struct{}{
 	87082: {}, // HC Trash Jade Charioteer Figurine - 502
 	87081: {}, // HC Trash Jade Courteasan Figurine - 502
 	87083: {}, // HC Trash Jade Warlord Figurine - 502
+
+	// MOP - Brewfest - Old items
+	87571:  {}, // Brawler's Statue
+	87572:  {}, // Mithril Wristwatch
+	87573:  {}, // Thousand-Year Pickled Egg
+	87574:  {}, // Coren's Cold Chromium Coaster
+	87575:  {}, // Bubbliest Brightbrew Charm
+	87576:  {}, // Bitterest Balebrew Charm
+	107217: {}, // Direbrew's Bloodied Shanker
 }
 
 // Item icons to include in the DB, so they don't need to be separately loaded in the UI.

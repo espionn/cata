@@ -157,11 +157,11 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestGuardian-AllItems-Brawler'sStatue-87571"
+ key: "TestGuardian-AllItems-Brawler'sStatue-257885"
  value: {
   dps: 106189.89786
   tps: 570911.4812
-  dtps: 13881.03142
+  dtps: 13851.58961
   hps: 11094.35611
  }
 }
@@ -283,12 +283,12 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestGuardian-AllItems-Coren'sColdChromiumCoaster-87574"
+ key: "TestGuardian-AllItems-Coren'sColdChromiumCoaster-257880"
  value: {
-  dps: 109397.73984
-  tps: 589363.56455
-  dtps: 14055.94487
-  hps: 10968.25649
+  dps: 110077.54722
+  tps: 593031.68368
+  dtps: 14160.03482
+  hps: 11009.7639
  }
 }
 dps_results: {
@@ -1858,12 +1858,12 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestGuardian-AllItems-MithrilWristwatch-87572"
+ key: "TestGuardian-AllItems-MithrilWristwatch-257884"
  value: {
-  dps: 108187.42875
-  tps: 581858.94494
-  dtps: 14097.84638
-  hps: 10960.96914
+  dps: 108575.94927
+  tps: 583791.26325
+  dtps: 14224.61877
+  hps: 11004.64321
  }
 }
 dps_results: {
@@ -2263,6 +2263,15 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestGuardian-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 119278.49964
+  tps: 636053.42612
+  dtps: 13734.38489
+  hps: 11056.32579
+ }
+}
+dps_results: {
  key: "TestGuardian-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 106286.12571
@@ -2605,12 +2614,12 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestGuardian-AllItems-Thousand-YearPickledEgg-87573"
+ key: "TestGuardian-AllItems-Thousand-YearPickledEgg-257881"
  value: {
-  dps: 107128.15621
-  tps: 572602.96703
-  dtps: 14047.26194
-  hps: 10958.41589
+  dps: 107721.15888
+  tps: 574850.68929
+  dtps: 13992.9912
+  hps: 11002.68395
  }
 }
 dps_results: {
@@ -2886,10 +2895,10 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 109828.38773
-  tps: 582064.01826
-  dtps: 14275.75388
-  hps: 11042.88741
+  dps: 107217.9172
+  tps: 572439.49937
+  dtps: 14267.06907
+  hps: 11107.9199
  }
 }
 dps_results: {

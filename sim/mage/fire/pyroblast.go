@@ -45,17 +45,23 @@ func (fire *FireMage) registerPyroblastSpell() {
 		ThreatMultiplier: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			if !fire.InstantPyroblastAura.IsActive() && fire.PresenceOfMindAura != nil {
+			hasInstantPyroblast := fire.InstantPyroblastAura.IsActive()
+			if !hasInstantPyroblast && fire.PresenceOfMindAura != nil {
 				fire.PresenceOfMindAura.Deactivate(sim)
 			}
 			baseDamage := fire.CalcAndRollDamageRange(sim, pyroblastScaling, pyroblastVariance)
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
-			if fire.InstantPyroblastAura.IsActive() {
+			if hasInstantPyroblast {
 				fire.InstantPyroblastAura.Deactivate(sim)
-				instantPyroblastDotMod.Activate()
 			}
 			fire.HeatingUpSpellHandler(sim, spell, result, func() {
+				if hasInstantPyroblast {
+					instantPyroblastDotMod.Activate()
+				}
 				spell.RelatedDotSpell.Cast(sim, target)
+				if hasInstantPyroblast {
+					instantPyroblastDotMod.Deactivate()
+				}
 				spell.DealDamage(sim, result)
 			})
 		},
@@ -90,7 +96,6 @@ func (fire *FireMage) registerPyroblastSpell() {
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			spell.Dot(target).Apply(sim)
-			instantPyroblastDotMod.Deactivate()
 		},
 	})
 }

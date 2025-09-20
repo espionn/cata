@@ -166,12 +166,12 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestBrewmaster-AllItems-Brawler'sStatue-87571"
+ key: "TestBrewmaster-AllItems-Brawler'sStatue-257885"
  value: {
-  dps: 114371.30918
-  tps: 643236.78234
-  dtps: 20361.20602
-  hps: 26149.56257
+  dps: 114508.12832
+  tps: 644034.51701
+  dtps: 20523.4465
+  hps: 26303.71062
  }
 }
 dps_results: {
@@ -292,12 +292,12 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestBrewmaster-AllItems-Coren'sColdChromiumCoaster-87574"
+ key: "TestBrewmaster-AllItems-Coren'sColdChromiumCoaster-257880"
  value: {
-  dps: 117628.27207
-  tps: 660391.45606
-  dtps: 20741.00549
-  hps: 27020.91977
+  dps: 117844.30351
+  tps: 661316.6307
+  dtps: 20724.33369
+  hps: 27152.27499
  }
 }
 dps_results: {
@@ -1885,12 +1885,12 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestBrewmaster-AllItems-MithrilWristwatch-87572"
+ key: "TestBrewmaster-AllItems-MithrilWristwatch-257884"
  value: {
-  dps: 116224.73349
-  tps: 653286.66321
-  dtps: 20690.47627
-  hps: 26697.97495
+  dps: 116089.23641
+  tps: 652087.6685
+  dtps: 20871.84358
+  hps: 26781.80488
  }
 }
 dps_results: {
@@ -2254,6 +2254,15 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBrewmaster-AllItems-RuneofRe-Origination-96918"
+ value: {
+  dps: 121266.87333
+  tps: 681792.81217
+  dtps: 20026.69678
+  hps: 26859.05093
+ }
+}
+dps_results: {
  key: "TestBrewmaster-AllItems-SI:7Operative'sManual-92784"
  value: {
   dps: 114719.05203
@@ -2596,12 +2605,12 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestBrewmaster-AllItems-Thousand-YearPickledEgg-87573"
+ key: "TestBrewmaster-AllItems-Thousand-YearPickledEgg-257881"
  value: {
-  dps: 114814.77044
-  tps: 645745.93501
-  dtps: 20783.1049
-  hps: 26084.4028
+  dps: 114757.00356
+  tps: 643695.17259
+  dtps: 20886.96035
+  hps: 26296.13676
  }
 }
 dps_results: {
@@ -2877,10 +2886,10 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 117909.73426
-  tps: 659373.51958
-  dtps: 20252.57972
-  hps: 27145.62445
+  dps: 114719.05203
+  tps: 644539.19606
+  dtps: 20862.49801
+  hps: 26490.83465
  }
 }
 dps_results: {

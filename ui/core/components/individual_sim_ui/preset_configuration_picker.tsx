@@ -2,6 +2,7 @@ import tippy from 'tippy.js';
 import { ref } from 'tsx-vanilla';
 
 import { IndividualSimUI } from '../../individual_sim_ui';
+import i18n from '../../../i18n/config';
 import { PresetBuild } from '../../preset_utils';
 import { ConsumesSpec, Debuffs, Encounter, EquipmentSpec, HealingModel, IndividualBuffs, ItemSwap, RaidBuffs, Spec } from '../../proto/common';
 import { SavedTalents } from '../../proto/ui';
@@ -40,8 +41,8 @@ export class PresetConfigurationPicker extends Component {
 
 		const contentBlock = new ContentBlock(this.rootElem, 'saved-data', {
 			header: {
-				title: 'Preset Configurations',
-				tooltip: 'Preset configurations can apply an optimal combination of gear, talents, rotation and encounter settings.',
+				title: i18n.t('gear.preset_configurations.title'),
+				tooltip: i18n.t('gear.preset_configurations.tooltip'),
 			},
 		});
 

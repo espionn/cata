@@ -7,7 +7,6 @@ Hey there! 👋 This guide will help you work with translations in our WoW sim p
 1. Create `{lang}/translation.json` in `assets/locales`. For example, `de/translation.json`.
 2. Vite will now automatically pickup the new translation and add it to the resources
 
-
 ## Adding New Text
 
 When you've added a new key you can update the translation schema using this URL: https://app.quicktype.io/#l=schema by pasting in the `en.json`.

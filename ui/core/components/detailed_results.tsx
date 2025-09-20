@@ -5,6 +5,7 @@ import { DetailedResultsUpdate, SimRun, SimRunData } from '../proto/ui';
 import { SimResult } from '../proto_utils/sim_result';
 import { SimUI } from '../sim_ui';
 import { TypedEvent } from '../typed_event';
+import { isDevMode } from '../utils';
 import { Component } from './component';
 import { AuraMetricsTable } from './detailed_results/aura_metrics';
 import { CastMetricsTable } from './detailed_results/cast_metrics';
@@ -21,6 +22,8 @@ import { ResultsFilter } from './detailed_results/results_filter';
 import { Timeline } from './detailed_results/timeline';
 import { ToplineResults } from './detailed_results/topline_results';
 import { RaidSimResultsManager } from './raid_sim_action';
+import { StickyToolbar } from './sticky_toolbar';
+import i18n from '../../i18n/config';
 
 type Tab = {
 	isActive?: boolean;
@@ -33,48 +36,50 @@ const tabs: Tab[] = [
 	{
 		isActive: true,
 		targetId: 'damageTab',
-		label: 'Damage',
+		label: i18n.t('results.details.tabs.damage'),
 		classes: ['damage-metrics-tab'],
 	},
 	{
 		targetId: 'healingTab',
-		label: 'Healing',
+		label: i18n.t('results.details.tabs.healing'),
 		classes: ['healing-metrics-tab'],
 	},
 	{
 		targetId: 'damageTakenTab',
-		label: 'Damage Taken',
+		label: i18n.t('results.details.tabs.damage_taken'),
 		classes: ['threat-metrics-tab'],
 	},
 	{
 		targetId: 'buffsTab',
-		label: 'Buffs',
+		label: i18n.t('results.details.tabs.buffs'),
 	},
 	{
 		targetId: 'debuffsTab',
-		label: 'Debuffs',
+		label: i18n.t('results.details.tabs.debuffs'),
 	},
 	{
 		targetId: 'castsTab',
-		label: 'Casts',
+		label: i18n.t('results.details.tabs.casts'),
 	},
 	{
 		targetId: 'resourcesTab',
-		label: 'Resources',
+		label: i18n.t('results.details.tabs.resources'),
 	},
 	{
 		targetId: 'timelineTab',
-		label: 'Timeline',
+		label: i18n.t('results.details.tabs.timeline'),
 	},
 	{
 		targetId: 'logTab',
-		label: 'Log',
+		label: i18n.t('results.details.tabs.log'),
 	},
 ];
 
 export abstract class DetailedResults extends Component {
 	protected readonly simUI: SimUI | null;
 	protected latestRun: SimRunData | null = null;
+	protected latestDeathSeeds: BigInt[] = [];
+	protected recentlyEditedSeed: boolean = false;
 
 	private currentSimResult: SimResult | null = null;
 	private resultsEmitter: TypedEvent<SimResultData | null> = new TypedEvent<SimResultData | null>();
@@ -86,9 +91,8 @@ export abstract class DetailedResults extends Component {
 
 		this.rootElem.appendChild(
 			<div className="dr-root dr-no-results">
-				<div className="dr-toolbar">
+				<div className="dr-toolbar sticky-toolbar">
 					<div className="results-filter"></div>
-					<div className="tabs-filler"></div>
 					<ul className="nav nav-tabs" attributes={{ role: 'tablist' }}>
 						{tabs.map(({ label, targetId, isActive, classes }) => (
 							<li className={`nav-item dr-tab-tab ${classes?.join(' ') || ''}`} attributes={{ role: 'presentation' }}>
@@ -113,7 +117,7 @@ export abstract class DetailedResults extends Component {
 				</div>
 				<div className="tab-content">
 					<div id="noResultsTab" className="tab-pane dr-tab-content fade active show">
-						Run a simulation to view results
+						{i18n.t('results.details.no_results')}
 					</div>
 					<div id="damageTab" className="tab-pane dr-tab-content damage-content fade active show">
 						<div className="dr-row topline-results" />
@@ -188,16 +192,7 @@ export abstract class DetailedResults extends Component {
 
 		// Allow styling the sticky toolbar
 		const toolbar = document.querySelector<HTMLElement>('.dr-toolbar')!;
-		new IntersectionObserver(
-			([e]) => {
-				e.target.classList.toggle('stuck', e.intersectionRatio < 1);
-			},
-			{
-				// Intersect with the sim header or top of the separate tab
-				rootMargin: this.simUI ? `-${this.simUI.simHeader.rootElem.offsetHeight + 1}px 0px 0px 0px` : '0px',
-				threshold: [1],
-			},
-		).observe(toolbar);
+		new StickyToolbar(toolbar, this.simUI);
 
 		this.resultsFilter = new ResultsFilter({
 			parent: this.rootElem.querySelector('.results-filter')!,
@@ -296,6 +291,27 @@ export abstract class DetailedResults extends Component {
 
 	protected async setSimRunData(simRunData: SimRunData) {
 		this.latestRun = simRunData;
+		const latestSimResult = this.latestRun?.run?.result;
+		const playerMetrics = latestSimResult?.raidMetrics?.parties.map(party => party.players).flat();
+
+		if (isDevMode() && playerMetrics) {
+			console.log('Found player metrics:');
+			console.log(playerMetrics);
+		}
+
+		if (playerMetrics?.length) {
+			const deathSeeds = playerMetrics[0].deathSeeds;
+
+			if (isDevMode() && deathSeeds.length > 0) {
+				console.log('Found death seeds:');
+				console.log(deathSeeds);
+			}
+
+			if (deathSeeds.length > 1 || this.latestDeathSeeds.length == 0) {
+				this.latestDeathSeeds = deathSeeds;
+			}
+		}
+
 		await this.postMessage(
 			DetailedResultsUpdate.create({
 				data: {
@@ -308,6 +324,12 @@ export abstract class DetailedResults extends Component {
 
 	protected async updateSettings() {
 		if (!this.simUI) return;
+
+		if (this.recentlyEditedSeed) {
+			this.simUI.sim.setFixedRngSeed(TypedEvent.nextEventID(), 0);
+			this.recentlyEditedSeed = false;
+		}
+
 		await this.postMessage(
 			DetailedResultsUpdate.create({
 				data: {
@@ -387,27 +409,23 @@ export class EmbeddedDetailedResults extends DetailedResults {
 
 		const newTabButtonRef = ref<HTMLButtonElement>();
 		const simButtonRef = ref<HTMLButtonElement>();
+		const deathButtonRef = ref<HTMLButtonElement>();
 
 		this.rootElem.prepend(
 			<div className="detailed-results-controls-div">
-				<button
-					className="detailed-results-new-tab-button btn btn-primary"
-					ref={newTabButtonRef}
-					disabled={simUI.disabled}
-				>
-					View in Separate Tab
+				<button className="detailed-results-new-tab-button btn btn-primary" ref={newTabButtonRef} disabled={simUI.disabled}>
+					{i18n.t('results.details.view_in_separate_tab')}
 				</button>
-				<button
-					className="detailed-results-1-iteration-button btn btn-primary"
-					ref={simButtonRef}
-					disabled={simUI.disabled}
-				>
-					Sim 1 Iteration
+				<button className="detailed-results-1-iteration-button btn btn-primary" ref={simButtonRef} disabled={simUI.disabled}>
+					{i18n.t('results.details.sim_1_iteration')}
 				</button>
-			</div>
+				<button className="detailed-results-death-iteration-button btn btn-primary" ref={deathButtonRef} disabled={true}>
+					{i18n.t('results.details.sim_1_death')}
+				</button>
+			</div>,
 		);
 
-		const url = new URL(`${window.location.protocol}//${window.location.host}/${REPO_NAME}/detailed_results/index.html`);
+		const url = new URL(`${window.location.protocol}//${window.location.host}/${REPO_NAME}/results/detailed/index.html`);
 		url.searchParams.append('cssClass', simUI.config.cssClass);
 
 		if (simUI.isIndividualSim()) {
@@ -434,11 +452,28 @@ export class EmbeddedDetailedResults extends DetailedResults {
 			(window.opener || window.parent)!.postMessage('runOnce', '*');
 		});
 
+		const deathButton = deathButtonRef.value!;
+		deathButton?.addEventListener('click', () => {
+			if (this.latestDeathSeeds.length > 1) {
+				this.simUI?.sim.setFixedRngSeed(TypedEvent.nextEventID(), Number(this.latestDeathSeeds.pop()));
+				this.recentlyEditedSeed = true;
+
+				if (isDevMode()) {
+					console.log('Setting fixed seed:');
+					console.log(this.simUI?.sim.getFixedRngSeed());
+				}
+			}
+
+			(window.opener || window.parent)!.postMessage('runOnce', '*');
+		});
+
 		simResultsManager.currentChangeEmitter.on(async () => {
 			const runData = simResultsManager.getRunData();
 			if (runData) {
 				await Promise.all([this.updateSettings(), this.setSimRunData(runData)]);
 			}
+
+			deathButton.disabled = this.latestDeathSeeds.length < 2;
 		});
 	}
 

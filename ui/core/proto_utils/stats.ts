@@ -1,4 +1,4 @@
-import { translatePseudoStat, translateStat } from '../../i18n/entity_mapping';
+import { translatePseudoStat, translateStat } from '../../i18n/localization';
 import * as Mechanics from '../constants/mechanics.js';
 import { CURRENT_API_VERSION } from '../constants/other.js';
 import { Class, PseudoStat, Stat, UnitStats } from '../proto/common.js';

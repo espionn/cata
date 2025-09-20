@@ -204,7 +204,7 @@ func (cat *FeralDruid) registerHeartOfTheWild() {
 		Type:  core.CooldownTypeDPS,
 
 		ShouldActivate: func(sim *core.Simulation, _ *core.Character) bool {
-			return !cat.BerserkCatAura.IsActive() && (cat.Berserk.TimeToReady(sim) > cat.HeartOfTheWildAura.Duration) && !cat.IncarnationAura.IsActive() && !cat.ClearcastingAura.IsActive() && ((cat.ComboPoints() == 5) || (cat.CurrentEnergy()+(cat.Wrath.DefaultCast.CastTime*2+core.GCDDefault).Seconds()*cat.EnergyRegenPerSecond() <= 100))
+			return (!cat.BerserkCatAura.IsActive() || (cat.BerserkCatAura.RemainingDuration(sim) < core.GCDMin)) && (cat.Berserk.TimeToReady(sim) > cat.HeartOfTheWildAura.Duration) && !cat.IncarnationAura.IsActive() && !cat.ClearcastingAura.IsActive() && ((cat.ComboPoints() == 5) || (cat.CurrentEnergy()+(cat.Wrath.DefaultCast.CastTime*2+core.GCDDefault).Seconds()*cat.EnergyRegenPerSecond() <= 100))
 		},
 	})
 }

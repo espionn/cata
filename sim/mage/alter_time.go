@@ -111,8 +111,9 @@ func (mage *Mage) registerAlterTimeCD() {
 			return mage.AlterTimeAura.IsActive()
 		},
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, spell *core.Spell) {
-			mage.AlterTimeAura.Deactivate(sim)
+			//Restore needs to happen before deactivating
 			restoreState(sim)
+			mage.AlterTimeAura.Deactivate(sim)
 		},
 	})
 

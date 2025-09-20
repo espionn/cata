@@ -13,21 +13,17 @@ import { SavedTalents } from '../../core/proto/ui';
 // Eventually we will import these values for the raid sim too, so its good to
 // keep them in a separate file.
 import PreraidGear from './gear_sets/preraid.gear.json';
-export const PRERAID_PRESET = PresetUtils.makePresetGear('Pre-MSV BiS', PreraidGear);
-import PreHof from './gear_sets/prehof.gear.json';
-export const PREHOF_PRESET = PresetUtils.makePresetGear('Pre-HoF BiS', PreHof);
-import PreToES from './gear_sets/pretoes.gear.json';
-export const PRETOES_PRESET = PresetUtils.makePresetGear('Pre-ToES BiS', PreToES);
+export const PRERAID_PRESET = PresetUtils.makePresetGear('Pre-Raid BiS', PreraidGear);
 import P1Gear from './gear_sets/p1.gear.json';
-export const P1_PRESET = PresetUtils.makePresetGear('P1', P1Gear);
+export const P1_PRESET = PresetUtils.makePresetGear('P1 BiS', P1Gear);
 import P2Gear from './gear_sets/p2.gear.json';
 export const P2_PRESET = PresetUtils.makePresetGear('P2', P2Gear);
 import P3Gear from './gear_sets/p3.gear.json';
 export const P3_PRESET = PresetUtils.makePresetGear('P3', P3Gear);
 import P4Gear from './gear_sets/p4.gear.json';
 export const P4_PRESET = PresetUtils.makePresetGear('P4', P4Gear);
-import P4ItemSwapGear from './gear_sets/p4_item_swap.gear.json';
-export const P4_ITEM_SWAP_PRESET = PresetUtils.makePresetItemSwapGear('P4', P4ItemSwapGear);
+import ItemSwapGear from './gear_sets/p1_item_swap.gear.json';
+export const ITEM_SWAP_PRESET = PresetUtils.makePresetItemSwapGear('HotW', ItemSwapGear);
 
 import DefaultApl from './apls/default.apl.json';
 export const APL_ROTATION_DEFAULT = PresetUtils.makePresetAPLRotation('APL List View', DefaultApl);
@@ -39,40 +35,40 @@ import { Stats } from '../../core/proto_utils/stats';
 //export const APL_ROTATION_TENDON = PresetUtils.makePresetAPLRotation('Tendon APL', TendonApl);
 
 // Preset options for EP weights
-export const BEARWEAVE_EP_PRESET = PresetUtils.makePresetEpWeights(
+export const DOC_EP_PRESET = PresetUtils.makePresetEpWeights(
 	'DoC Bear-Weave',
 	Stats.fromMap(
 		{
-			[Stat.StatStrength]: 0.40,
+			[Stat.StatStrength]: 0.39,
 			[Stat.StatAgility]: 1.0,
 			[Stat.StatAttackPower]: 0.38,
-			[Stat.StatHitRating]: 0.33,
-			[Stat.StatExpertiseRating]: 0.33,
-			[Stat.StatCritRating]: 0.32,
+			[Stat.StatHitRating]: 0.38,
+			[Stat.StatExpertiseRating]: 0.38,
+			[Stat.StatCritRating]: 0.35,
 			[Stat.StatHasteRating]: 0.22,
-			[Stat.StatMasteryRating]: 0.36,
+			[Stat.StatMasteryRating]: 0.39,
 		},
 		{
-			[PseudoStat.PseudoStatMainHandDps]: 0.81,
+			[PseudoStat.PseudoStatMainHandDps]: 0.82,
 		},
 	),
 );
 
-export const MONOCAT_EP_PRESET = PresetUtils.makePresetEpWeights(
-	'HotW Mono-Cat',
+export const HOTW_EP_PRESET = PresetUtils.makePresetEpWeights(
+	'HotW Wrath-Weave',
 	Stats.fromMap(
 		{
-			[Stat.StatStrength]: 0.38,
+			[Stat.StatStrength]: 0.35,
 			[Stat.StatAgility]: 1.0,
-			[Stat.StatAttackPower]: 0.36,
-			[Stat.StatHitRating]: 0.28,
-			[Stat.StatExpertiseRating]: 0.28,
-			[Stat.StatCritRating]: 0.30,
-			[Stat.StatHasteRating]: 0.23,
+			[Stat.StatAttackPower]: 0.33,
+			[Stat.StatHitRating]: 0.33,
+			[Stat.StatExpertiseRating]: 0.33,
+			[Stat.StatCritRating]: 0.34,
+			[Stat.StatHasteRating]: 0.25,
 			[Stat.StatMasteryRating]: 0.35,
 		},
 		{
-			[PseudoStat.PseudoStatMainHandDps]: 0.76,
+			[PseudoStat.PseudoStatMainHandDps]: 0.80,
 		},
 	),
 );
@@ -87,8 +83,8 @@ export const DefaultRotation = FeralDruidRotation.create({
 	minRoarOffset: 40,
 	ripLeeway: 4,
 	useBite: true,
-	biteTime: 11,
-	berserkBiteTime: 7,
+	biteTime: 6,
+	berserkBiteTime: 5,
 	hotwStrategy: FeralDruid_Rotation_HotwStrategy.Wrath,
 });
 
@@ -110,7 +106,7 @@ export const SIMPLE_ROTATION_DEFAULT = PresetUtils.makePresetSimpleRotation('Sin
 export const StandardTalents = {
 	name: 'Default',
 	data: SavedTalents.create({
-		talentsString: "000302",
+		talentsString: "100302",
 		glyphs: Glyphs.create({
 			major1: 40923,
 			major2: 40914,

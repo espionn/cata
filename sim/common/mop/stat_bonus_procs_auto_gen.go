@@ -759,37 +759,6 @@ func RegisterAllProcs() {
 		Harmful:  true,
 	})
 	
-	// Your harmful spells have a chance to increase your spell power by 2040 for 10s. ( 10% chance, 55 sec cooldown)
-	shared.NewProcStatBonusEffect(shared.ProcStatBonusEffect{
-		Name:     "Mithril Wristwatch",
-		ItemID:   87572,
-		Callback: core.CallbackOnSpellHitDealt,
-		ProcMask: core.ProcMaskSpellDamage | core.ProcMaskSpellDamageProc,
-		Outcome:  core.OutcomeLanded,
-		Harmful:  true,
-	})
-	
-	// Your direct healing and heal over time spells have a chance to increase your haste by 2040 for 10s. (
-	// 10% chance, 55 sec cooldown)
-	shared.NewProcStatBonusEffect(shared.ProcStatBonusEffect{
-		Name:     "Thousand-Year Pickled Egg",
-		ItemID:   87573,
-		Callback: core.CallbackOnHealDealt | core.CallbackOnPeriodicHealDealt,
-		ProcMask: core.ProcMaskSpellHealing,
-		Outcome:  core.OutcomeLanded,
-		Harmful:  true,
-	})
-	
-	// Chance on melee and ranged critical strike to increase your attack power by 4000 for 10s.
-	shared.NewProcStatBonusEffect(shared.ProcStatBonusEffect{
-		Name:     "Coren's Cold Chromium Coaster",
-		ItemID:   87574,
-		Callback: core.CallbackOnSpellHitDealt,
-		ProcMask: core.ProcMaskMeleeMHAuto | core.ProcMaskMeleeOHAuto | core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeOHSpecial | core.ProcMaskRangedAuto | core.ProcMaskRangedSpecial,
-		Outcome:  core.OutcomeCrit,
-		Harmful:  true,
-	})
-	
 	// When you deal damage you have a chance to gain 1287 Agility for 20s.
 	shared.NewProcStatBonusEffectWithVariants(shared.ProcStatBonusEffect{
 		Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
@@ -1463,5 +1432,36 @@ func RegisterAllProcs() {
 	}, []shared.ItemVariant{
 		{ItemID: 103689, ItemName: "Alacrity of Xuen"},
 		{ItemID: 103989, ItemName: "Alacrity of Xuen (Timeless)"},
+	})
+	
+	// Chance on melee and ranged critical strike to increase your attack power by 4000 for 10s.
+	shared.NewProcStatBonusEffect(shared.ProcStatBonusEffect{
+		Name:     "Coren's Cold Chromium Coaster",
+		ItemID:   257880,
+		Callback: core.CallbackOnSpellHitDealt,
+		ProcMask: core.ProcMaskMeleeMHAuto | core.ProcMaskMeleeOHAuto | core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeOHSpecial | core.ProcMaskRangedAuto | core.ProcMaskRangedSpecial,
+		Outcome:  core.OutcomeCrit,
+		Harmful:  true,
+	})
+	
+	// Your direct healing and heal over time spells have a chance to increase your haste by 2040 for 10s. (
+	// 10% chance, 55 sec cooldown)
+	shared.NewProcStatBonusEffect(shared.ProcStatBonusEffect{
+		Name:     "Thousand-Year Pickled Egg",
+		ItemID:   257881,
+		Callback: core.CallbackOnHealDealt | core.CallbackOnPeriodicHealDealt,
+		ProcMask: core.ProcMaskSpellHealing,
+		Outcome:  core.OutcomeLanded,
+		Harmful:  true,
+	})
+	
+	// Your harmful spells have a chance to increase your spell power by 2040 for 10s. ( 10% chance, 55 sec cooldown)
+	shared.NewProcStatBonusEffect(shared.ProcStatBonusEffect{
+		Name:     "Mithril Wristwatch",
+		ItemID:   257884,
+		Callback: core.CallbackOnSpellHitDealt,
+		ProcMask: core.ProcMaskSpellDamage | core.ProcMaskSpellDamageProc,
+		Outcome:  core.OutcomeLanded,
+		Harmful:  true,
 	})
 }

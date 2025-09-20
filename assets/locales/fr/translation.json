@@ -21,10 +21,24 @@
 		}
 	},
 	"common": {
+		"none": "Aucun",
+		"custom": "Personnalisé",
+		"name": "Nom",
+		"search": "Rechercher",
+		"filter": "Filtrer",
 		"phases": {
-			"1": "Phase 1 (T14)",
-			"2": "Phase 2 (T15)",
-			"3": "Phase 3 (T16)"
+			"1": "Phase 1 (5.0 - T14)",
+			"2": "Phase 2 (5.1)",
+			"3": "Phase 3 (5.2 - T15)",
+			"4": "Phase 4 (5.3)",
+			"5": "Phase 5 (5.4 - T16)"
+		},
+		"tanks": {
+			"title": "Tanks",
+			"main_tank": "Tank Principal",
+			"tank_2": "Tank 2",
+			"tank_3": "Tank 3",
+			"tank_4": "Tank 4"
 		},
 		"status": {
 			"unlaunched": "Pas Encore Supporté",
@@ -103,6 +117,122 @@
 				"protection": "Protection"
 			}
 		},
+		"mob_types": {
+			"unknown": "Aucun",
+			"beast": "Bête",
+			"demon": "Démon",
+			"dragonkin": "Draconien",
+			"elemental": "Élémentaire",
+			"giant": "Géant",
+			"humanoid": "Humanoïde",
+			"mechanical": "Mécanique",
+			"undead": "Mort-vivant"
+		},
+		"races": {
+			"unknown": "Aucun",
+			"blood_elf": "Elfe de sang",
+			"draenei": "Draenei",
+			"dwarf": "Nain",
+			"gnome": "Gnome",
+			"goblin": "Gobelin",
+			"human": "Humain",
+			"night_elf": "Elfe de la nuit",
+			"orc": "Orc",
+			"alliance_pandaren": "Pandaren (A)",
+			"horde_pandaren": "Pandaren (H)",
+			"tauren": "Tauren",
+			"troll": "Troll",
+			"undead": "Mort-vivant",
+			"worgen": "Worgen"
+		},
+		"professions": {
+			"unknown": "Aucun",
+			"alchemy": "Alchimie",
+			"blacksmithing": "Forge",
+			"enchanting": "Enchantement",
+			"engineering": "Ingénierie",
+			"herbalism": "Herboristerie",
+			"inscription": "Calligraphie",
+			"jewelcrafting": "Joaillerie",
+			"leatherworking": "Travail du cuir",
+			"mining": "Minage",
+			"skinning": "Dépeçage",
+			"tailoring": "Couture",
+			"archeology": "Archéologie"
+		},
+		"sources": {
+			"unknown": "Inconnu",
+			"crafting": "Artisanat",
+			"quest": "Quête",
+			"sold_by": "Vendu par",
+			"reputation": "Réputation",
+			"pvp": "JcJ",
+			"dungeon": "Donjon",
+			"dungeon_h": "Donjon (H)",
+			"raid": "Raid",
+			"raid_h": "Raid (H)",
+			"raid_rf": "Raid (RF)",
+			"raid_flex": "Raid (Dynamique)"
+		},
+		"raids": {
+			"unknown": "Inconnu",
+			"mogushan_vaults": "Caveaux de Mogu'shan",
+			"heart_of_fear": "Cœur de la Peur",
+			"terrace_of_endless_spring": "Terrasse du Printemps Éternel",
+			"throne_of_thunder": "Trône du Tonnerre",
+			"siege_of_orgrimmar": "Siège d'Orgrimmar"
+		},
+		"armor_types": {
+			"unknown": "Inconnu",
+			"cloth": "Tissu",
+			"leather": "Cuir",
+			"mail": "Maille",
+			"plate": "Plaques"
+		},
+		"weapon_types": {
+			"unknown": "Inconnu",
+			"axe": "Hache",
+			"dagger": "Dague",
+			"fist": "Poing",
+			"mace": "Masse",
+			"off_hand": "Main gauche",
+			"polearm": "Arme d'hast",
+			"shield": "Bouclier",
+			"staff": "Bâton",
+			"sword": "Épée"
+		},
+		"ranged_weapon_types": {
+			"unknown": "Inconnu",
+			"bow": "Arc",
+			"crossbow": "Arbalète",
+			"gun": "Arme à feu",
+			"thrown": "Lancé",
+			"wand": "Baguette"
+		},
+		"spell_schools": {
+			"physical": "Physique",
+			"arcane": "Arcanique",
+			"fire": "Feu",
+			"frost": "Givre",
+			"holy": "Sacré",
+			"nature": "Nature",
+			"shadow": "Ombre"
+		},
+		"resource_types": {
+			"health": "Santé",
+			"mana": "Mana",
+			"energy": "Énergie",
+			"rage": "Rage",
+			"focus": "Concentration",
+			"runic_power": "Puissance Runique",
+			"chi": "Chi",
+			"holy_power": "Puissance Sacrée",
+			"shadow_orbs": "Orbes d'Ombre",
+			"combo_points": "Points de Combo",
+			"maelstrom": "Maelström",
+			"demonic_fury": "Fureur Démoniaque",
+			"burning_embers": "Braises Ardentes"
+		},
 		"stats": {
 			"strength": "Force",
 			"agility": "Agilité",
@@ -127,7 +257,7 @@
 			"mana": "Mana",
 			"mp5": "MP5",
 			"main_hand_dps": "DPS main principale",
-			"off_hand_dps": "DPS main gauche",
+			"off_hand_dps": "DPS main secondaire",
 			"ranged_dps": "DPS à distance",
 			"block": "Blocage",
 			"melee_speed_multiplier": "Multiplicateur de vitesse de mêlée",
@@ -141,47 +271,4208 @@
 			"melee_haste": "Hâte de mêlée",
 			"ranged_haste": "Hâte à distance"
 		},
+		"mastery_spell_names": {
+			"unknown": "Inconnu",
+			"potent_poisons": "Poisons Puissants",
+			"main_gauche": "Main Gauche",
+			"executioner": "Bourreau",
+			"blood_shield": "Bouclier de Sang",
+			"frozen_heart": "Cœur Gelé",
+			"dreadblade": "Lame de Terreur",
+			"total_eclipse": "Éclipse Totale",
+			"razor_claws": "Griffes Acérées",
+			"natures_guardian": "Gardien de la Nature",
+			"harmony": "Harmonie",
+			"illuminated_healing": "Soins Illuminés",
+			"divine_bulwark": "Rempart Divin",
+			"hand_of_light": "Main de Lumière",
+			"elemental_overload": "Surcharge Élémentaire",
+			"enhanced_elements": "Éléments Améliorés",
+			"deep_healing": "Soins Profonds",
+			"master_of_beasts": "Maître des Bêtes",
+			"wild_quiver": "Carquois Sauvage",
+			"essence_of_the_viper": "Essence de la Vipère",
+			"strikes_of_opportunity": "Frappes d'Opportunité",
+			"unshackled_fury": "Fureur Déchaînée",
+			"critical_block": "Blocage Critique",
+			"mana_adept": "Adepte du Mana",
+			"ignite": "Brûlure Éclair",
+			"icicles": "Stalactites",
+			"shield_discipline": "Discipline du Bouclier",
+			"echo_of_light": "Écho de Lumière",
+			"shadow_orb_power": "Puissance de l'Orbe d'Ombre",
+			"potent_afflictions": "Afflictions Puissantes",
+			"master_demonologist": "Maître Démonologue",
+			"emberstorm": "Tempête de Braises",
+			"elusive_brawler": "Bagarreur Insaisissable",
+			"gift_of_the_serpent": "Don du Serpent",
+			"bottled_fury": "Fureur en Bouteille"
+		},
 		"currency": {
 			"valorPoints": "Points de vaillance",
 			"justicePoints": "Points de justice",
 			"honorPoints": "Points d’honneur"
+		},
+		"copy_button": {
+			"default_text": "Copier dans le presse-papiers",
+			"copied": "Copié"
+		},
+		"list_picker": {
+			"new_item": "Nouveau {{itemLabel}}",
+			"delete_item": "Supprimer {{itemLabel}}",
+			"copy_to_new": "Copier vers Nouveau {{itemLabel}}",
+			"move_drag_drop": "Déplacer (Glisser+Déposer)",
+			"warnings": "Avertissements",
+			"additional_information": "Informations supplémentaires :",
+			"action_has_warnings": "Cette action a des avertissements et pourrait ne pas se comporter comme prévu.",
+			"action_has_errors": "Cette action a des erreurs et ne se comportera pas comme prévu."
 		}
 	},
 	"sim": {
 		"title": "Simulateur {spec} {class} - Mists of Pandaria",
-		"description": "Simulations {spec} {class} pour World of Warcraft® Mists of Pandaria Classic."
+		"description": "Simulations {spec} {class} pour World of Warcraft® Mists of Pandaria Classic.",
+		"basic_bis_disclaimer": "<p>Les listes d'équipement prédéfinies sont destinées à être des approximations approximatives du BIS, et ne seront souvent pas la configuration DPS absolument la plus élevée pour vous. Votre configuration d'équipement optimale dépendra de nombreux facteurs ; c'est pourquoi nous avons un simulateur !</p><p>Les objets peuvent également être omis des préréglages s'ils sont très contestés et clairement mieux utilisés sur d'autres classes, pour encourager un équipement équitable pour le raid dans son ensemble.</p>",
+		"healing_sim_disclaimer": "*** AVERTISSEMENT - UTILISEZ À VOS PROPRES RISQUES ***\n\nLe concept entier d'un simulateur de soins est EXPÉRIMENTAL. Tous les résultats doivent être pris avec un grain de sel EXTREMEMENT important.\n\nCet outil est actuellement plus similaire à une feuille de calcul qu'à un véritable simulateur. Les options pour spécifier les profils de dégâts entrants afin d'avoir des rotations réactives appropriées n'ont pas encore été ajoutées.",
+		"notice_local_download": {
+			"title": "Le saviez-vous ?",
+			"message": "Vous pouvez télécharger notre simulateur local pour accélérer considérablement vos simulations ?",
+			"download_button": "Télécharger"
+		},
+		"crash_modal": {
+			"title": "Informations Supplémentaires sur le Plantage",
+			"header": "Veuillez ajouter le lien complet suivant au problème que vous venez de créer. Cela simplifiera le débogage du problème."
+		},
+		"unlaunched": {
+			"title": "Ce simulateur n'est actuellement pas pris en charge.",
+			"contribute_message": "Vous voulez contribuer ?",
+			"discord_message": "Assurez-vous de rejoindre notre Discord !",
+			"healing_message": "Vous cherchez des simulations de soins ?",
+			"qe_live_message": "Consultez QE Live !"
+		},
+		"notifications": {
+			"raid_sim_cancelled": "Simulation de raid annulée.",
+			"simulation_failed": "La simulation a échoué. Un rapport d'erreur a été généré.",
+			"failed_to_file_report": "Échec du rapport... réessayez une autre fois :"
+		},
+		"crash_report": {
+			"confirm_title": "Échec de la simulation :",
+			"confirm_message": "Appuyez sur Ok pour signaler le crash",
+			"report_title": "Rapport de crash"
+		},
+		"bulk": {
+			"title": "Lot (<span class=\"text-success\">Nouveau</span>)",
+			"description": "<span className=\"bold\">Simulation par lot</span> est une nouvelle fonctionnalité similaire à la simulation <span className=\"bold\">Top Gear</span> sur <a href=\"https://raidbots.com\" target=\"_blank\">Raidbots.com</a> qui vous permet de sélectionner plusieurs objets et de les simuler pour trouver les meilleures combinaisons.<br />C'est une fonctionnalité <span className=\"text-brand\">Alpha</span>, donc si vous avez des commentaires ou trouvez un bug, veuillez le signaler !",
+			"download_local": "Téléchargez le simulateur local pour des résultats plus rapides.",
+			"tabs": {
+				"setup": "Configuration",
+				"results": "Résultats"
+			},
+			"actions": {
+				"import_bags": "Importer depuis les sacs",
+				"import_favorites": "Importer les favoris",
+				"clear_items": "Effacer les objets",
+				"simulate_batch": "Simuler le lot"
+			},
+			"search": {
+				"title": "Recherche d'objets",
+				"name_label": "Nom",
+				"clear_search": "Effacer la recherche",
+				"min_ilvl": "ILvl min",
+				"max_ilvl": "ILvl max",
+				"no_results": "Aucun résultat trouvé.",
+				"showing_results": "Affichage de {max} sur {total} résultats totaux.",
+				"item_added": "{itemName} a été ajouté au lot."
+			},
+			"settings": {
+				"combinations_count": "{count} Combinaisons",
+				"combination_singular": "1 Combinaison",
+				"iterations": "Itérations",
+				"fast_mode": {
+					"label": "Mode rapide",
+					"tooltip": "Le mode rapide réduit la précision mais s'exécute plus rapidement."
+				},
+				"combinations": {
+					"label": "Combinaisons",
+					"tooltip": "Lorsqu'il est coché, le simulateur par lot créera toutes les combinaisons possibles des objets. Lorsqu'il est désactivé, les trinkets et anneaux exécuteront toujours toutes les combinaisons car chacun a deux emplacements à remplir."
+				},
+				"auto_enchant": {
+					"label": "Enchantement automatique",
+					"tooltip": "Lorsqu'il est coché, le simulateur par lot appliquera l'enchantement actuel d'un emplacement à chaque objet de remplacement qu'il peut."
+				},
+				"auto_gem": {
+					"label": "Gemme automatique",
+					"tooltip": "Lorsqu'il est coché, le simulateur par lot remplira tous les châsses de gemmes non remplis avec des gemmes par défaut."
+				},
+				"sim_talents": {
+					"label": "Simuler les talents",
+					"tooltip": "Lorsqu'il est coché, le simulateur par lot simulera les configurations de talents choisies. Attention, cela pourrait faire durer la simulation par lot beaucoup plus longtemps"
+				},
+				"default_gems": "Gemmes par défaut",
+				"talents_to_sim": "Talents à simuler"
+			},
+			"progress": {
+				"total_combinations": "{count} combinaisons totales.",
+				"refining_rounds": "{current} / {total} tours d'affinage",
+				"simulations_complete": "{completed} / {total}<br />simulations terminées",
+				"iterations_complete": "{completed} / {total}<br />itérations terminées",
+				"seconds_remaining": "{seconds} secondes restantes."
+			},
+			"notifications": {
+				"bulk_sim_cancelled": "Simulation par lot annulée.",
+				"failed_to_remove_item": "Échec de la suppression de l'objet, veuillez signaler ce problème."
+			},
+			"warning": {
+				"iterations_limit": "Simuler plus de {limit} itérations dans le simulateur web prendra beaucoup de temps ou ne fonctionnera peut-être pas du tout. Pour les simulations par lot plus importantes, nous recommandons d'utiliser le mode rapide ou de télécharger l'exécutable et de l'exécuter sur votre machine."
+			},
+			"results": {
+				"run_simulation": "Exécutez une simulation pour voir les résultats"
+			}
+		}
 	},
 	"gear": {
-		"title": "Équipement"
+		"title": "Équipement",
+		"slots": {
+			"head": "Tête",
+			"neck": "Cou",
+			"shoulder": "Épaule",
+			"back": "Dos",
+			"chest": "Poitrine",
+			"wrist": "Poignet",
+			"hands": "Mains",
+			"waist": "Taille",
+			"legs": "Jambes",
+			"feet": "Pieds",
+			"finger_1": "Doigt 1",
+			"finger_2": "Doigt 2",
+			"trinket_1": "Trinket 1",
+			"trinket_2": "Trinket 2",
+			"main_hand": "Main",
+			"off_hand": "Off Hand"
+		},
+		"gem_summary": {
+			"title": "Résumé des Gemmes",
+			"reset_gems": "Réinitialiser les gemmes"
+		},
+		"reforge_summary": {
+			"title": "Résumé des Reforges",
+			"reset_reforges": "Réinitialiser les Reforges",
+			"copy_to_reforge_lite": "Copier vers Reforge Lite"
+		},
+		"reforge_success": {
+			"title": "Les éléments suivants ont été reforgés :",
+			"removed_reforge": "Reforge supprimé",
+			"no_changes": "Aucun changement de reforge n'a été effectué !",
+			"copy_to_reforge_lite": "Copier vers Reforge Lite"
+		},
+		"gear_sets": {
+			"title": "Ensembles d'Équipement",
+			"gear_set": "Ensemble d'Équipement",
+			"gear_set_name": "Nom de l'Ensemble",
+			"save_gear_set": "Sauvegarder l'Ensemble"
+		},
+		"gear_picker": {
+			"tabs": {
+				"items": "Objet",
+				"random_suffix": "Suffixe Aléatoire",
+				"enchants": "Enchantements",
+				"tinkers": "Bricolages",
+				"reforging": "Reforge",
+				"upgrades": "Améliorations",
+				"gem1": "Gemme",
+				"gem2": "Gemme",
+				"gem3": "Gemme"
+			},
+			"remove_buttons": {
+				"remove_enchant": "Retirer l'Enchantement",
+				"remove_tinkers": "Retirer les Bricolages",
+				"remove_reforge": "Retirer la Reforge",
+				"remove_random_suffix": "Retirer le Suffixe Aléatoire",
+				"remove_upgrade": "Retirer l'Amélioration",
+				"remove_gem": "Retirer la Gemme"
+			},
+			"filters": {
+				"title": "Filtres",
+				"general": "Général",
+				"min_ilvl": "ILvl Min",
+				"max_ilvl": "ILvl Max",
+				"faction_restrictions": "Restrictions de Faction",
+				"source": "Source",
+				"raids": "Raids",
+				"faction_labels": {
+					"none": "Aucune",
+					"alliance_only": "Alliance uniquement",
+					"horde_only": "Horde uniquement"
+				}
+			},
+			"quick_popovers": {
+				"favorite_gems": {
+					"title": "Gemmes favorites",
+					"empty_message": "Ajouter des gemmes favorites.",
+					"open_gems": "Ouvrir les Gemmes"
+				},
+				"favorite_enchants": {
+					"title": "Enchantements Favoris",
+					"empty_message": "Ajouter des Enchantements favoris",
+					"open_enchants": "Ouvrir les Enchantements"
+				}
+			},
+			"missing_gear_message": {
+				"title": "Si l'équipement manque, vérifiez la phase sélectionnée et vos filtres d'équipement.",
+				"description": "Si le problème persiste, sauvegardez toutes les données non sauvegardées, cliquez sur l'icône d'équipement pour ouvrir vos options de simulation, puis cliquez sur \"Restaurer les paramètres par défaut\"."
+			},
+			"cooldowns": {
+				"title": "Cooldowns",
+				"tooltip": "Spécifiez les timings de cooldown, en secondes. Les cooldowns seront utilisés dès que possible après leurs timings spécifiés. Quand non spécifié, les cooldowns seront utilisés quand prêts et qu'il est raisonnable de le faire.<br><br>Plusieurs timings peuvent être fournis en séparant par des virgules. Toute utilisation de cooldown après le dernier timing fourni utilisera la logique par défaut."
+			},
+			"ep_tooltip": "EP (Points d'Équivalence) est une façon de comparer les objets en multipliant les stats brutes d'un objet avec vos poids de stats actuels. Plus d'EP ne signifie pas nécessairement plus de DPS, car EP ne prend pas en compte les plafonds de stats et les calculs de stats non linéaires.",
+			"filters_button": "Filtres",
+			"unequip_item": "Déséquiper l'Objet",
+			"table_headers": {
+				"ilvl": "ILvl",
+				"item": "Objet",
+				"source": "Source"
+			},
+			"show_ep": "Afficher EP",
+			"armor_type": "Type d'Armure",
+			"weapon_type": "Type d'Armes",
+			"weapon_speed": "Vitesse d'Armes",
+			"min_mh_speed": "Vitesse MH Min",
+			"max_mh_speed": "Vitesse MH Max",
+			"min_oh_speed": "Vitesse OH Min",
+			"max_oh_speed": "Vitesse OH Max",
+			"ranged_weapon_type": "Type d'Armes à Distance",
+			"ranged_weapon_speed": "Vitesse d'Armes à Distance",
+			"min_ranged_speed": "Vitesse à Distance Min",
+			"max_ranged_speed": "Vitesse à Distance Max",
+			"reforge_text": "Reforgé {fromAmount} {fromStat} → {toAmount} {toStat}"
+		},
+		"preset_configurations": {
+			"title": "Configurations Prédéfinies",
+			"tooltip": "Les configurations prédéfinies peuvent appliquer une combinaison optimale d'équipement, talents, rotation et paramètres d'affrontement."
+		}
 	},
 	"settings": {
-		"title": "Paramètres"
+		"title": "Paramètres",
+		"raid_buffs": {
+			"title": "Buffs de Raid",
+			"tooltip": "Buffs fournis par <strong>d'autres</strong> membres du groupe/raid.",
+			"description": "Tous les buffs/debuffs de raid sélectionnés sont supposés être fournis par d'autres membres du raid que le joueur simulé.",
+			"misc": {
+				"label": "Divers",
+				"tooltip": "Buffs de raid divers"
+			},
+			"stats": "Stats",
+			"attack_power": "Puissance d'Attaque",
+			"attack_speed": "Vitesse d'Attaque",
+			"spell_power": "Puissance des Sorts",
+			"spell_haste": "Hâte des Sorts",
+			"crit_percent": "Crit %",
+			"mastery": "Maîtrise",
+			"stamina": "Endurance"
+		},
+		"external_damage_cooldowns": {
+			"title": "Cooldowns de Dégâts Externes",
+			"tooltip": "Cooldowns de dégâts majeurs fournis par <strong>d'autres</strong> membres du groupe/raid.",
+			"bloodlust": "Furie Sanguinaire",
+			"skull_banner": "Bannière du Crâne",
+			"stormlash_totem": "Totem de Fouet de Tempête",
+			"tricks_of_the_trade": "Ruses du Métier",
+			"unholy_frenzy": "Frénésie Impie",
+			"shattering_throw": "Lancer Brisant"
+		},
+		"external_defensive_cooldowns": {
+			"title": "Cooldowns Défensifs Externes",
+			"tooltip": "Cooldowns défensifs majeurs fournis par <strong>d'autres</strong> membres du groupe/raid.",
+			"vigilance": "Vigilance",
+			"devotion_aura": "Aura de Dévotion",
+			"pain_suppression": "Suppression de la Douleur",
+			"rallying_cry": "Cri de Ralliement"
+		},
+		"debuffs": {
+			"title": "Debuffs",
+			"tooltip": "Debuffs appliqués par d'autres membres du raid.",
+			"misc": {
+				"label": "Divers",
+				"tooltip": "Debuffs divers"
+			},
+			"armor_reduction": "Réduction d'Armure",
+			"phys_dmg_reduction": "Réduction Dégâts Phys",
+			"cast_speed": "Vitesse de Sort",
+			"phys_dmg": "Dégâts Phys",
+			"spell_dmg": "Dégâts de Sort"
+		},
+		"other": {
+			"title": "Autre",
+			"challenge_mode": {
+				"label": "Mode Défi",
+				"tooltip": "Active le Mode Défi"
+			},
+			"input_delay": {
+				"label": "Délai de saisie",
+				"tooltip": "Délai de saisie du joueur, en millisecondes. Spécifie le délai maximum sur les actions qui ne peuvent pas être mises en file d'attente, comme les sorts qui attendent des gains de ressources ou l'expiration d'un temps de recharge. Utilisé également avec certaines valeurs APL (comme 'Aura Is Active With Reaction Time'). Modélise approximativement la somme du temps de réaction + la latence du serveur."
+			},
+			"channel_clip_delay": {
+				"label": "Délai de coupure de canal",
+				"tooltip": "Délai de coupure suivant les sorts canalisés, en millisecondes. Ce délai se produit après toute canalisation complète ou partielle se terminant après que le GCD devienne disponible, en raison de l'incapacité du joueur à mettre en file d'attente le sort suivant."
+			},
+			"in_front_of_target": {
+				"label": "Devant la cible",
+				"tooltip": "Se tenir devant la cible, causant l'inclusion des Blocages et Parades dans la table d'attaque."
+			},
+			"distance_from_target": {
+				"label": "Distance de la cible",
+				"tooltip": "Distance des cibles, en yards. Utilisé pour calculer le temps de trajet de certains sorts."
+			},
+			"tank_assignment": {
+				"label": "Attribution de tank",
+				"tooltip": "Détermine quels mobs seront tankés. La plupart des mobs ciblent par défaut le Tank Principal, mais dans les rencontres multi-cibles prédéfinies ce n'est pas toujours vrai."
+			},
+			"incoming_hps": {
+				"label": "HPS entrant",
+				"tooltip": "Quantité moyenne de soins reçus par seconde. Utilisé pour calculer la chance de mort. Si défini à 0, par défaut 25% des DPS de base de la cible principale."
+			},
+			"healing_cadence": {
+				"label": "Cadence de soins",
+				"tooltip": "À quelle fréquence le soin entrant 'tique', en secondes. Généralement, les durées plus longues favorisent les Points de Vie Effectifs (EHP) pour minimiser la Chance de Mort, tandis que les durées plus courtes favorisent l'évitement. Exemple : si HPS entrant est défini à 1000 et ceci à 1s, alors toutes les 1s un soin sera reçu pour 1000. Si ceci est défini à 2s, alors toutes les 2s un soin sera reçu pour 2000. Si défini à 0, les valeurs par défaut pour la Cadence de soins et Cadence +/- sont déduites des paramètres de dégâts du boss."
+			},
+			"healing_cadence_variation": {
+				"label": "Cadence +/-",
+				"tooltip": "Ampleur de la variation aléatoire dans les intervalles de soins, en secondes. Exemple : si la Cadence de soins est définie à 1s avec 0.5s de variation, alors l'intervalle entre les soins successifs variera uniformément entre 0.5 et 1.5s. Si la variation est définie à 2s, alors 50% des intervalles de soins tomberont entre 0s et 1s, et les autres 50% tomberont entre 1s et 3s. La quantité de soins par 'tique' est automatiquement mise à l'échelle en fonction du temps aléatoire depuis le dernier tic, afin de maintenir les HPS constants."
+			},
+			"absorb_frac": {
+				"label": "Absorption %",
+				"tooltip": "% de chaque 'tique' de soin entrant à modéliser comme un bouclier d'absorption plutôt que comme un soin direct."
+			},
+			"burst_window": {
+				"label": "Fenêtre d'éclatement TMI",
+				"tooltip": "Taille en secondes entières de la fenêtre d'éclatement pour calculer le TMI. Il est important d'utiliser un paramètre cohérent lors de la comparaison de cette métrique. Par défaut est de 6 secondes. Si défini à 0, les calculs TMI sont désactivés."
+			},
+			"hp_percent_for_defensives": {
+				"label": "% PV pour CDs défensifs",
+				"tooltip": "% de Santé Maximum, en dessous duquel les cooldowns défensifs sont autorisés à être utilisés. Si défini à 0, cette restriction est désactivée."
+			},
+			"pet_uptime": {
+				"label": "Temps de présence du familier (%)",
+				"tooltip": "Pourcentage de la durée du combat pendant lequel votre familier sera en vie."
+			},
+			"glaive_toss_chance": {
+				"label": "Chance de succès Lancer de Glaive %",
+				"tooltip": "La chance que Lancer de Glaive touche les cibles secondaires en pourcentages."
+			},
+			"detonate_seed": {
+				"label": "Détoner la Graine à la sortie",
+				"tooltip": "Simule le raid faisant des dégâts aux cibles de telle sorte que la graine détonne immédiatement à la sortie."
+			},
+			"stance_snapshot": {
+				"label": "Instantané de posture",
+				"tooltip": "La capacité qui est lancée en même temps que le changement de posture bénéficiera du bonus de la posture avant le changement."
+			},
+			"assume_bleed_active": {
+				"label": "Supposer saignement toujours actif",
+				"tooltip": "Suppose que le saignement existe toujours pour les calculs de 'Déchirer et Déchiqueter'. Sinon, ne calculera que sur la base de ses propres rip/rake/lacerate."
+			},
+			"cannot_shred_target": {
+				"label": "Ne peut pas Déchiqueter la cible",
+				"tooltip": "Alternative à \"Devant la cible\" pour modéliser les boss qui ne Parade ou Bloque pas, mais que vous ne pouvez toujours pas Déchiqueter."
+			},
+			"okf_uptime": {
+				"label": "Temps de présence Frénésie de Chouettard (%)",
+				"tooltip": "Pourcentage de temps de présence du combat pour la Frénésie de Chouettard"
+			},
+			"sync_type": {
+				"label": "Réglage Sync/Échelonnement",
+				"tooltip": "Choisissez votre option de synchronisation ou d'échelonnement. Auto : Choisira automatiquement les options de sync basées sur les vitesses d'attaque de vos armes. Aucun : Pas de Sync ou d'Échelonnement, utilisé pour les vitesses d'armes non assorties. Sync Parfait : Fait que vos armes attaquent toujours en même temps, pour les vitesses d'armes assorties. Main secondaire retardée : Ajoute un léger délai aux attaques de la main secondaire tout en restant dans la fenêtre ICD de 0.5s de Flurry.",
+				"values": {
+					"automatic": "Automatique",
+					"none": "Aucun",
+					"perfect_sync": "Sync Parfait",
+					"delayed_offhand": "Main secondaire retardée"
+				}
+			},
+			"show_1h_weapons": {
+				"label": "1M",
+				"tooltip": "Afficher les armes à une main"
+			},
+			"show_2h_weapons": {
+				"label": "2M",
+				"tooltip": "Afficher les armes à deux mains"
+			},
+			"show_matching_gems": {
+				"label": "Correspondance de châsses",
+				"tooltip": "Afficher uniquement les objets avec des couleurs de châsses correspondantes"
+			},
+			"show_ep_values": {
+				"label": "Afficher EP",
+				"tooltip": "Afficher les valeurs EP (Puissance Effective)"
+			},
+			"phase_selector": {
+				"label": "Phase",
+				"tooltip": "Sélectionner la phase de jeu pour la disponibilité des objets"
+			},
+			"enable_item_swap": {
+				"label": "Activer l'Échange d'Objets",
+				"tooltip": "Permet de configurer un Ensemble d'Échange d'Objets qui est utilisé avec l'action APL <b>Échange d'Objets</b>."
+			},
+			"item_swap": {
+				"label": "Échange d'Objets",
+				"tooltip": "Échanger avec les objets équipés"
+			},
+			"assume_prepull_mastery_elixir": {
+				"label": "Supposer Élixir de Maîtrise de Préparation",
+				"tooltip": "Activer ceci suppose que vous utilisez un Élixir de Maîtrise pendant la préparation."
+			},
+			"blessings": {
+				"title": "Bénédictions",
+				"tooltip": "Spécifiez les Bénédictions de Paladin pour chaque rôle, par ordre de priorité. Les Bénédictions dans la 1ère colonne seront utilisées s'il y a au moins 1 Paladin dans le raid, 2ème colonne s'il y en a au moins 2, etc."
+			}
+		},
+		"consumables": {
+			"title": "Consommables",
+			"potions": {
+				"title": "Potions",
+				"prepop": "Potion de préparation",
+				"combat": "Potion de combat"
+			},
+			"elixirs": {
+				"title": "Élixirs"
+			},
+			"food": {
+				"title": "Nourriture"
+			},
+			"engineering": {
+				"title": "Ingénierie",
+				"explosives": "Explosifs"
+			},
+			"pet": {
+				"title": "Familier"
+			}
+		},
+		"encounter": {
+			"title": "Rencontre",
+			"target_inputs": {
+				"label": "Entrée de Cible",
+				"frenzy_time": {
+					"label": "Temps de frénésie",
+					"tooltip": "Temps de simulation (en secondes) auquel désactiver les changements de tank et activer le buff de Frénésie du boss"
+				},
+				"spiritual_grasp_frequency": {
+					"label": "Fréquence de prise spirituelle",
+					"tooltip": "Temps moyen (en secondes) entre les coups de Saisie Spirituelle, suivant une distribution exponentielle"
+				}
+			},
+			"duration": {
+				"label": "Durée",
+				"tooltip": "La durée du combat pour chaque itération de simulation, en secondes."
+			},
+			"duration_variation": {
+				"label": "Durée +/-",
+				"tooltip": "Ajoute une quantité aléatoire de temps, en secondes, entre [valeur, -1 * valeur] à chaque itération de simulation. Par exemple, régler la Durée à 180 et Durée +/- à 10 donnera des durées aléatoires entre 170s et 190s."
+			},
+			"execute_duration_20": {
+				"label": "Durée d'Exécution 20 (%)",
+				"tooltip": "Pourcentage de la durée totale de la rencontre, pour laquelle les cibles seront considérées en phase d'exécution (< 20% PV) pour les effets comme Exécution du Guerrier ou Fureur Fondue du Mage."
+			},
+			"execute_duration_25": {
+				"label": "Durée d'Exécution 25 (%)",
+				"tooltip": "Pourcentage de la durée totale de la rencontre, pour laquelle les cibles seront considérées en phase d'exécution (< 25% PV) pour les effets comme Drain d'Âme du Démoniste."
+			},
+			"execute_duration_35": {
+				"label": "Durée d'Exécution 35 (%)",
+				"tooltip": "Pourcentage de la durée totale de la rencontre, pour laquelle les cibles seront considérées en phase d'exécution (< 35% PV) pour les effets comme Faucheur d'Âme du Chevalier de la Mort."
+			},
+			"execute_duration_45": {
+				"label": "Durée d'Exécution 45 (%)",
+				"tooltip": "Pourcentage de la durée totale de la rencontre, pour laquelle les cibles seront considérées en phase d'exécution (< 45% PV) pour les effets comme Faucheur d'Âme du Chevalier de la Mort avec 4pc DPS T15."
+			},
+			"duration_below_high_hp": {
+				"label": "Durée passée sous le régime HP élevé (%)",
+				"tooltip": "Pourcentage de la durée totale de la rencontre, pour laquelle les cibles sont considérées hors de portée pour les effets comme Visée Précise du Chasseur (<90% PV) ou Coups Prédateurs du Druide (<80% PV)."
+			},
+			"encounter_preset": {
+				"label": "Rencontre",
+				"tooltip": "Sélectionne une configuration de rencontre prédéfinie."
+			},
+			"advanced": "Avancé",
+			"use_health": {
+				"label": "Utiliser la Santé",
+				"tooltip": "Utilise une limite de dégâts au lieu d'une limite de durée. La limite de dégâts est égale à la somme de la santé de toutes les cibles."
+			},
+			"target": "Cible",
+			"num_allies": {
+				"label": "Nombre d'Alliés",
+				"tooltip": "Nombre de joueurs alliés dans le raid."
+			},
+			"min_base_damage": {
+				"label": "Dégâts de Base Min",
+				"tooltip": "Dégâts de base pour les attaques automatiques, c'est-à-dire le jet le plus bas avec 0 PA contre un Joueur à 0 armure."
+			},
+			"npc": {
+				"label": "PNJ",
+				"tooltip": "Sélectionne une configuration PNJ prédéfinie."
+			},
+			"ai": {
+				"label": "IA",
+				"tooltip": "Détermine la rotation de capacités de la cible. Notez que la plupart des rotations ne sont pas encore implémentées."
+			},
+			"level": "Niveau",
+			"mob_type": "Type de Créature",
+			"tanked_by": {
+				"label": "Tanké Par",
+				"tooltip": "Détermine quel joueur du raid cette cible ennemie attaquera. Si aucun joueur n'est assigné à l'emplacement de tank spécifié, cette cible n'attaquera pas."
+			},
+			"swing_speed": {
+				"label": "Vitesse d'Attaque",
+				"tooltip": "Temps en secondes entre les attaques automatiques. Réglez à 0 pour désactiver les attaques automatiques."
+			},
+			"dual_wield": {
+				"label": "Combat à Deux Mains",
+				"tooltip": "Utilise 2 armes séparées pour attaquer."
+			},
+			"dual_wield_penalty": {
+				"label": "Pénalité Combat à Deux Mains",
+				"tooltip": "Active la Pénalité d'Échec de Combat à Deux Mains (+19% de chance d'échec) si vous combattez à deux mains. Les boss dans Hyjal/BT/SWP ont généralement ceci désactivé pour empêcher les tanks d'empiler l'évitement."
+			},
+			"parry_haste": {
+				"label": "Hâte de Parade",
+				"tooltip": "Si cet ennemi gagnera la hâte de parade en parant les attaques."
+			},
+			"spell_school": {
+				"label": "École de Sort",
+				"tooltip": "Type de dégâts causés par les attaques automatiques. Ceci est généralement Physique, mais certains ennemis ont des attaques élémentaires."
+			},
+			"damage_spread": {
+				"label": "Écart de Dégâts",
+				"tooltip": "Écart fractionnel entre les dégâts minimum et maximum d'attaque automatique de cet ennemi à 0 Puissance d'Attaque."
+			},
+			"suppress_dodge": "Supprimer l'Esquive",
+			"second_tank_index": "Index du Second Tank",
+			"disabled_at_start": "Désactivé au Début"
+		},
+		"player": {
+			"title": "Joueur",
+			"race": "Race",
+			"profession_1": "Profession 1",
+			"profession_2": "Profession 2"
+		},
+		"saved_encounters": {
+			"title": "Rencontres Sauvegardées",
+			"encounter": "Rencontre",
+			"encounter_name": "Nom de la Rencontre",
+			"save_encounter": "Sauvegarder la Rencontre"
+		},
+		"saved_settings": {
+			"title": "Paramètres Sauvegardés",
+			"settings": "Paramètres",
+			"settings_name": "Nom des Paramètres",
+			"save_settings": "Sauvegarder les Paramètres"
+		},
+		"external_buffs": {
+			"title": "Buffs Externes",
+			"tooltip": "Buffs fournis par <strong>d'autres</strong> membres du groupe/raid."
+		}
 	},
 	"talents": {
-		"title": "Talents"
+		"title": "Talents",
+		"copy_button": {
+			"label": "Copier",
+			"tooltip": "Copier la chaîne de talents"
+		},
+		"reset_button": {
+			"tooltip": "Réinitialiser les points de talent"
+		},
+		"glyphs": {
+			"major": "Major Glyphs",
+			"minor": "Minor Glyphs",
+			"modal": {
+				"title": "Glyphs"
+			},
+			"empty": "Empty",
+			"details": {
+				"death_knight": {
+					"major": {
+						"glyph_of_anti_magic_shell": {
+							"name": "Anti-Magic Shell",
+							"description": "Causes your Anti-Magic Shell to absorb all incoming magical damage, up to the absorption limit."
+						},
+						"glyph_of_unholy_frenzy": {
+							"name": "Unholy Frenzy",
+							"description": "Causes your Unholy Frenzy to no longer deal damage to the affected target."
+						},
+						"glyph_of_icebound_fortitude": {
+							"name": "Icebound Fortitude",
+							"description": "Reduces the cooldown of your Icebound Fortitude by 50%, but also reduces its duration by 75%."
+						},
+						"glyph_of_chains_of_ice": {
+							"name": "Chains of Ice",
+							"description": "Your Chains of Ice also causes 143 Frost damage, with additional damage depending on your attack power."
+						},
+						"glyph_of_death_grip": {
+							"name": "Death Grip",
+							"description": "Increases the range of your Death Grip ability by 5 yards."
+						},
+						"glyph_of_death_and_decay": {
+							"name": "Death and Decay",
+							"description": "Your Death and Decay also reduces the movement speed of enemies within its radius by 50%."
+						},
+						"glyph_of_shifting_presences": {
+							"name": "Shifting Presences",
+							"description": "You retain 70% of your Runic Power when switching Presences."
+						},
+						"glyph_of_icy_touch": {
+							"name": "Icy Touch",
+							"description": "Your Icy Touch dispels one helpful Magic effect from the target."
+						},
+						"glyph_of_enduring_infection": {
+							"name": "Enduring Infection",
+							"description": "Your diseases are undispellable, but their damage dealt is reduced by 15%."
+						},
+						"glyph_of_pestilence": {
+							"name": "Pestilence",
+							"description": "Increases the radius of your Pestilence effect by 5 yards."
+						},
+						"glyph_of_mind_freeze": {
+							"name": "Mind Freeze",
+							"description": "Reduces the cooldown of your Mind Freeze ability by 1 sec, but also raises its cost by 10 Runic Power."
+						},
+						"glyph_of_strangulate": {
+							"name": "Strangulate",
+							"description": "Increases the Silence duration of your Strangulate ability by 2 sec when used on a target who is casting a spell."
+						},
+						"glyph_of_pillar_of_frost": {
+							"name": "Pillar of Frost",
+							"description": "Empowers your Pillar of Frost, making you immune to all effects that cause loss of control of your character, but also reduces your movement speed by 70% while the ability is active."
+						},
+						"glyph_of_vampiric_blood": {
+							"name": "Vampiric Blood",
+							"description": "Increases the bonus healing received while your Vampiric Blood is active by an additional 15%, but your Vampiric Blood no longer grants you health."
+						},
+						"glyph_of_unholy_command": {
+							"name": "Unholy Command",
+							"description": "Immediately finishes the cooldown of your Death Grip upon dealing a killing blow to a target that grants experience or honor."
+						},
+						"glyph_of_outbreak": {
+							"name": "Outbreak",
+							"description": "Your Outbreak spell no longer has a cooldown, but now costs 30 Runic Power."
+						},
+						"glyph_of_dancing_rune_weapon": {
+							"name": "Dancing Rune Weapon",
+							"description": "Increases your threat generation by 100% while your Dancing Rune Weapon is active, but reduces its damage dealt by 25%."
+						},
+						"glyph_of_dark_simulacrum": {
+							"name": "Dark Simulacrum",
+							"description": "Reduces the cooldown of Dark Simulacrum by 30 sec and increases its duration by 4 sec."
+						},
+						"glyph_of_death_coil": {
+							"name": "Death Coil",
+							"description": "Your Death Coil spell is now usable on all allies. When cast on a non-undead ally, Death Coil shrouds them with a protective barrier that absorbs up to 168 damage."
+						},
+						"glyph_of_dark_succor": {
+							"name": "Dark Succor",
+							"description": "When you kill an enemy that yields experience or honor, while in Frost or Unholy Presence, your next Death Strike within 15s is free and will restore at least 20% of your maximum health."
+						},
+						"glyph_of_swift_death": {
+							"name": "Swift Death",
+							"description": "The haste effect granted by Soul Reaper now also increases your movement speed by 30% for the duration."
+						},
+						"glyph_of_loud_horn": {
+							"name": "Loud Horn",
+							"description": "Your Horn of Winter now generates an additional 10 Runic Power, but the cooldown is increased by 100%."
+						},
+						"glyph_of_regenerative_magic": {
+							"name": "Regenerative Magic",
+							"description": "If Anti-Magic Shell expires after its full duration, the cooldown is reduced by up to 50%, based on the amount of damage absorbtion remaining."
+						},
+						"glyph_of_festering_blood": {
+							"name": "Festering Blood",
+							"description": "Blood Boil will now treat all targets as though they have Blood Plague or Frost Fever applied."
+						}
+					},
+					"minor": {
+						"glyph_of_the_geist": {
+							"name": "the Geist",
+							"description": "Your Raise Dead spell summons a geist instead of a ghoul."
+						},
+						"glyph_of_deaths_embrace": {
+							"name": "Death's Embrace",
+							"description": "Your Death Coil refunds 20 Runic Power when used to heal an allied minion, but will no longer trigger Blood Tap when used this way."
+						},
+						"glyph_of_horn_of_winter": {
+							"name": "Horn of Winter",
+							"description": "When used outside of combat, your Horn of Winter ability causes a brief, localized snow flurry."
+						},
+						"glyph_of_army_of_the_dead": {
+							"name": "Army of the Dead",
+							"description": "The ghouls summoned by your Army of the Dead no longer taunt their target."
+						},
+						"glyph_of_foul_menagerie": {
+							"name": "Foul Menagerie",
+							"description": "Causes your Army of the Dead spell to summon an assortment of undead minions."
+						},
+						"glyph_of_path_of_frost": {
+							"name": "Path of Frost",
+							"description": "Your Path of Frost ability allows you to fall from a greater distance without suffering damage."
+						},
+						"glyph_of_resilient_grip": {
+							"name": "Resilient Grip",
+							"description": "When your Death Grip ability fails because its target is immune, its cooldown is reset."
+						},
+						"glyph_of_death_gate": {
+							"name": "Death Gate",
+							"description": "Reduces the cast time of your Death Gate spell by 60%."
+						},
+						"glyph_of_corpse_explosion": {
+							"name": "Corpse Explosion",
+							"description": "Teaches you the ability Corpse Explosion."
+						},
+						"glyph_of_tranquil_grip": {
+							"name": "Tranquil Grip",
+							"description": "Your Death Grip spell no longer taunts the target."
+						},
+						"glyph_of_the_skeleton": {
+							"name": "the Skeleton",
+							"description": "Your Raise Dead spell summons a skeleton instead of a ghoul."
+						},
+						"glyph_of_the_long_winter": {
+							"name": "the Long Winter",
+							"description": "The effect of your Horn of Winter now lasts for 1 hour."
+						}
+					}
+				},
+				"druid": {
+					"major": {
+						"glyph_of_frenzied_regeneration": {
+							"name": "Frenzied Regeneration",
+							"description": "For 6s after activating Frenzied Regeneration, healing effects on you are 40% more powerful. However, your Frenzied Regeneration now always costs 50 Rage and no longer converts Rage into health."
+						},
+						"glyph_of_maul": {
+							"name": "Maul",
+							"description": "Your Maul ability now hits 1 additional target for 50% damage."
+						},
+						"glyph_of_omens": {
+							"name": "Omens",
+							"description": "While you are not in an Eclipse, the following abilities now grant 10 Solar or Lunar Energy: Entangling Roots, Cyclone, Faerie Fire, Faerie Swarm, Mass Entanglement, Typhoon, Disorienting Roar, Ursol's Vortex, and Mighty Bash."
+						},
+						"glyph_of_shred": {
+							"name": "Shred",
+							"description": "While Berserk or Tiger's Fury is active, Shred has no positional requirement."
+						},
+						"glyph_of_prowl": {
+							"name": "Prowl",
+							"description": "Reduces the movement penalty of Prowl by 100%."
+						},
+						"glyph_of_pounce": {
+							"name": "Pounce",
+							"description": "Increases the range of your Pounce by 8 yards."
+						},
+						"glyph_of_stampede": {
+							"name": "Stampede",
+							"description": "You can now cast Stampeding Roar without being in Bear Form or Cat Form."
+						},
+						"glyph_of_innervate": {
+							"name": "Innervate",
+							"description": "When Innervate is cast on a target other than the caster, both the caster and target will benefit, but at 40% reduced effect."
+						},
+						"glyph_of_rebirth": {
+							"name": "Rebirth",
+							"description": "Players resurrected by Rebirth are returned to life with 100% health."
+						},
+						"glyph_of_regrowth": {
+							"name": "Regrowth",
+							"description": "Increases the critical strike chance of your Regrowth by 40%, but removes the periodic component of the spell."
+						},
+						"glyph_of_rejuvenation": {
+							"name": "Rejuvenation",
+							"description": "When you have Rejuvenation active on three or more targets, the cast time of your Nourish spell is reduced by 30%."
+						},
+						"glyph_of_healing_touch": {
+							"name": "Healing Touch",
+							"description": "When you cast Healing Touch, the cooldown on your Nature's Swiftness is reduced by 3 sec."
+						},
+						"glyph_of_efflorescence": {
+							"name": "Efflorescence",
+							"description": "The Efflorescence effect is now caused by your Wild Mushroom instead of by Swiftmend, and lasts as long as the Wild Mushroom is active. Additionally, increases the healing done by Swiftmend by 20%."
+						},
+						"glyph_of_guided_stars": {
+							"name": "Guided Stars",
+							"description": "Your Starfall only hits targets affected by your Moonfire or Sunfire."
+						},
+						"glyph_of_hurricane": {
+							"name": "Hurricane",
+							"description": "Your Hurricane and Astral Storm abilities now also slow the movement speed of their victims by 50%."
+						},
+						"glyph_of_skull_bash": {
+							"name": "Skull Bash",
+							"description": "Increases the duration of your Skull Bash interrupt by 2 sec, but increases the cooldown by 5 sec."
+						},
+						"glyph_of_natures_grasp": {
+							"name": "Nature's Grasp",
+							"description": "Reduces the cooldown of Nature's Grasp by 45 sec."
+						},
+						"glyph_of_savagery": {
+							"name": "Savagery",
+							"description": "Savage Roar can now be used with 0 combo points, resulting in a 12s duration."
+						},
+						"glyph_of_entangling_roots": {
+							"name": "Entangling Roots",
+							"description": "Reduces the cast time of your Entangling Roots by 0.2 sec."
+						},
+						"glyph_of_blooming": {
+							"name": "Blooming",
+							"description": "Increases the bloom heal of your Lifebloom when it expires by 50%, but its duration is reduced by 5 sec and your Healing Touch, Nourish, and Regrowth abilities no longer refresh the duration."
+						},
+						"glyph_of_dash": {
+							"name": "Dash",
+							"description": "Reduces the cooldown of your Dash ability by 60 sec."
+						},
+						"glyph_of_master_shapeshifter": {
+							"name": "Master Shapeshifter",
+							"description": "Reduces the mana cost of all shapeshifts by 100%."
+						},
+						"glyph_of_survival_instincts": {
+							"name": "Survival Instincts",
+							"description": "Reduces the cooldown of Survival Instincts by 60 sec, but reduces its duration by 50%."
+						},
+						"glyph_of_wild_growth": {
+							"name": "Wild Growth",
+							"description": "Wild Growth can affect 1 additional target, but its cooldown is increased by 2 sec."
+						},
+						"glyph_of_might_of_ursoc": {
+							"name": "Might of Ursoc",
+							"description": "Increases the health gain from Might of Ursoc by 20%, but increases the cooldown by 2 min."
+						},
+						"glyph_of_stampeding_roar": {
+							"name": "Stampeding Roar",
+							"description": "Increases the radius of Stampeding Roar by 30 yards."
+						},
+						"glyph_of_cyclone": {
+							"name": "Cyclone",
+							"description": "Increases the range of your Cyclone spell by 5 yards."
+						},
+						"glyph_of_barkskin": {
+							"name": "Barkskin",
+							"description": "Reduces the chance you'll be critically hit by 25% while Barkskin is active."
+						},
+						"glyph_of_ferocious_bite": {
+							"name": "Ferocious Bite",
+							"description": "Your Ferocious Bite ability heals you for 2% of your maximum health for each 10 Energy used."
+						},
+						"glyph_of_fae_silence": {
+							"name": "Fae Silence",
+							"description": "Faerie Fire used in Bear Form also silences the target for 3s, but triggers a 15 sec cooldown."
+						},
+						"glyph_of_faerie_fire": {
+							"name": "Faerie Fire",
+							"description": "Increases the range of your Faerie Fire by 10 yds."
+						},
+						"glyph_of_cat_form": {
+							"name": "Cat Form",
+							"description": "Increases healing done to you by 20% while in Cat Form."
+						}
+					},
+					"minor": {
+						"glyph_of_the_stag": {
+							"name": "the Stag",
+							"description": "Your Travel Form can now be used as a mount by party members. This glyph is disabled while Glyph of the Cheetah is active."
+						},
+						"glyph_of_the_orca": {
+							"name": "the Orca",
+							"description": "Your Aquatic Form now appears as an Orca."
+						},
+						"glyph_of_aquatic_form": {
+							"name": "Aquatic Form",
+							"description": "Increases your swim speed by 50% while in Aquatic Form."
+						},
+						"glyph_of_grace": {
+							"name": "Grace",
+							"description": "Feline Grace reduces falling damage even while not in Cat Form."
+						},
+						"glyph_of_the_chameleon": {
+							"name": "the Chameleon",
+							"description": "Each time you shapeshift into Cat Form or Bear Form, your shapeshifted form will have a random hair color."
+						},
+						"glyph_of_charm_woodland_creature": {
+							"name": "Charm Woodland Creature",
+							"description": "Teaches you the ability Charm Woodland Creature. Allows the Druid to befriend an ambient creature, which will follow the Druid for 1hr."
+						},
+						"glyph_of_stars": {
+							"name": "Stars",
+							"description": "Your Moonkin Form now appears as Astral Form, conferring all the same benefits, but appearing as an astrally enhanced version of your normal humanoid form."
+						},
+						"glyph_of_the_predator": {
+							"name": "the Predator",
+							"description": "Your Track Humanoids ability now also tracks beasts."
+						},
+						"glyph_of_the_treant": {
+							"name": "the Treant",
+							"description": "Teaches you the ability Treant Form. Shapeshift into Treant Form."
+						},
+						"glyph_of_the_cheetah": {
+							"name": "the Cheetah",
+							"description": "Your Travel Form appears as a Cheetah. This glyph will prevent Glyph of the Stag from functioning."
+						},
+						"glyph_of_focus": {
+							"name": "Focus",
+							"description": "Reduces Starfall's radius by 50%."
+						},
+						"glyph_of_the_sprouting_mushroom": {
+							"name": "the Sprouting Mushroom",
+							"description": "Your Wild Mushroom spell can now be placed on the ground instead of underneath a target."
+						},
+						"glyph_of_one_with_nature": {
+							"name": "One with Nature",
+							"description": "Grants you the ability to teleport to a random natural location."
+						}
+					}
+				},
+				"hunter": {
+					"major": {
+						"glyph_of_camouflage": {
+							"name": "Camouflage",
+							"description": "Your Camouflage ability now provides stealth even while moving, but your movement speed while Camouflage is active is reduced by 50%."
+						},
+						"glyph_of_liberation": {
+							"name": "Liberation",
+							"description": "When you Disengage, you are healed for 5% of your total health."
+						},
+						"glyph_of_mending": {
+							"name": "Mending",
+							"description": "Your Mend Pet now heals every 1 sec, and heals for an additional 25% of your pet's health over its duration."
+						},
+						"glyph_of_distracting_shot": {
+							"name": "Distracting Shot",
+							"description": "Your Distracting Shot now distracts the target to attack your pet instead of you."
+						},
+						"glyph_of_endless_wrath": {
+							"name": "Endless Wrath",
+							"description": "While Bestial Wrath is active, your pet cannot be killed, but can still be damaged."
+						},
+						"glyph_of_deterrence": {
+							"name": "Deterrence",
+							"description": "Increases the damage reduction granted by Deterrence by 20%."
+						},
+						"glyph_of_disengage": {
+							"name": "Disengage",
+							"description": "Increases the distance you travel when you Disengage."
+						},
+						"glyph_of_freezing_trap": {
+							"name": "Freezing Trap",
+							"description": "When your Freezing Trap breaks, the victim's movement speed is reduced by 70% for 4s."
+						},
+						"glyph_of_ice_trap": {
+							"name": "Ice Trap",
+							"description": "Increases the radius of the effect from your Ice Trap by 2 yards."
+						},
+						"glyph_of_misdirection": {
+							"name": "Misdirection",
+							"description": "When you use Misdirection on your pet, the cooldown on your Misdirection is reset."
+						},
+						"glyph_of_explosive_trap": {
+							"name": "Explosive Trap",
+							"description": "Your Explosive Trap no longer deals damage, instead knocking enemies back from the trap when it explodes."
+						},
+						"glyph_of_animal_bond": {
+							"name": "Animal Bond",
+							"description": "While your pet is active, all healing done to you and your pet is increased by 10%."
+						},
+						"glyph_of_no_escape": {
+							"name": "No Escape",
+							"description": "Increases the ranged critical strike chance of all of your attacks on targets affected by your Freezing Trap by 100%."
+						},
+						"glyph_of_pathfinding": {
+							"name": "Pathfinding",
+							"description": "Increases the speed bonus of your Aspect of the Cheetah and Aspect of the Pack by 8%, and increases your speed while mounted by 10%. The mounted movement speed increase does not stack with other effects."
+						},
+						"glyph_of_snake_trap": {
+							"name": "Snake Trap",
+							"description": "Snakes from your Snake Trap take 90% reduced damage from area of effect attacks."
+						},
+						"glyph_of_aimed_shot": {
+							"name": "Aimed Shot",
+							"description": "Your Aimed Shot can now be used while moving."
+						},
+						"glyph_of_mend_pet": {
+							"name": "Mend Pet",
+							"description": "Gives your Mend Pet ability a 100% chance of cleansing 1 Curse, Disease, Magic or Poison effect from your pet each tick."
+						},
+						"glyph_of_solace": {
+							"name": "Solace",
+							"description": "Your Freezing Trap and Scatter Shot also remove all damage over time effects from their targets."
+						},
+						"glyph_of_chimera_shot": {
+							"name": "Chimera Shot",
+							"description": "Increases the healing you receive from Chimera Shot by an additional 2% of your maximum health."
+						},
+						"glyph_of_tranquilizing_shot": {
+							"name": "Tranquilizing Shot",
+							"description": "Your Tranquilizing Shot no longer costs Focus, but has a 10 sec cooldown."
+						},
+						"glyph_of_masters_call": {
+							"name": "Master's Call",
+							"description": "Increases the duration of your Master's Call by 4.0 sec."
+						},
+						"glyph_of_scatter_shot": {
+							"name": "Scatter Shot",
+							"description": "Increases the range of Scatter Shot by 3 yards."
+						},
+						"glyph_of_mirrored_blades": {
+							"name": "Mirrored Blades",
+							"description": "When attacked by a spell while in Deterrence, you have a 100% chance to reflect it back at the attacker."
+						},
+						"glyph_of_black_ice": {
+							"name": "Black Ice",
+							"description": "While you move through the area affected by your Ice Trap you gain 50% movement speed."
+						},
+						"glyph_of_the_lean_pack": {
+							"name": "the Lean Pack",
+							"description": "Reduces the radius of Aspect of the Pack by 33 yards."
+						},
+						"glyph_of_enduring_deceit": {
+							"name": "Enduring Deceit",
+							"description": "Camouflage also reduces spell damage taken by 10%."
+						}
+					},
+					"minor": {
+						"glyph_of_aspects": {
+							"name": "Aspects",
+							"description": "Each time you activate a new Aspect, an animal companion representing that Aspect will follow you for 15s."
+						},
+						"glyph_of_tame_beast": {
+							"name": "Tame Beast",
+							"description": "Reduces the time required to complete Tame Beast by 4 sec."
+						},
+						"glyph_of_revive_pet": {
+							"name": "Revive Pet",
+							"description": "Reduces the pushback suffered from damaging attacks while casting Revive Pet by 100%."
+						},
+						"glyph_of_lesser_proportion": {
+							"name": "Lesser Proportion",
+							"description": "Slightly reduces the size of your pet."
+						},
+						"glyph_of_fireworks": {
+							"name": "Fireworks",
+							"description": "Teaches you the ability Fireworks. Launch fireworks from your gun, bow or crossbow."
+						},
+						"glyph_of_aspect_of_the_pack": {
+							"name": "Aspect of the Pack",
+							"description": "Increases the range of your Aspect of the Pack ability by 15 yards."
+						},
+						"glyph_of_stampede": {
+							"name": "Stampede",
+							"description": "Your Stampede no longer summons pets from your stable, and instead uses copies of your current pet."
+						},
+						"glyph_of_aspect_of_the_cheetah": {
+							"name": "Aspect of the Cheetah",
+							"description": "Your Aspect of the Cheetah no longer causes you to be dazed when struck. Instead, the effect is cancelled and all your Aspects are placed on a 4 sec cooldown."
+						},
+						"glyph_of_aspect_of_the_beast": {
+							"name": "Aspect of the Beast",
+							"description": "Teaches you the ability Aspect of the Beast. The Hunter takes on the aspects of a beast, becoming untrackable. Only one Aspect can be active at a time."
+						},
+						"glyph_of_direction": {
+							"name": "Direction",
+							"description": "Causes your Misdirection target to appear larger."
+						},
+						"glyph_of_marking": {
+							"name": "Marking",
+							"description": "Your Hunter's Mark ability now places a bullseye on your target instead of its usual visual."
+						},
+						"glyph_of_fetch": {
+							"name": "Fetch",
+							"description": "Teaches you the ability Fetch. Command your pet to retrieve the loot from a nearby corpse within 40 yards."
+						},
+						"glyph_of_focused_fire": {
+							"name": "Focused Fire",
+							"description": "Focus Fire charges apply a visual to you for each charge active."
+						},
+						"glyph_of_chameleon": {
+							"name": "Chameleon",
+							"description": "Focus Fire charges apply a visual to you for each charge active."
+						}
+					}
+				},
+				"mage": {
+					"major": {
+						"glyph_of_arcane_explosion": {
+							"name": "Arcane Explosion",
+							"description": "Increases the radius of your Arcane Explosion by 5 yards."
+						},
+						"glyph_of_blink": {
+							"name": "Blink",
+							"description": "Increases the distance you travel with the Blink spell by 8 yards."
+						},
+						"glyph_of_evocation": {
+							"name": "Evocation",
+							"description": "Your Evocation ability also causes you to regain 60% of your health over its duration. With the Invocation talent, you instead gain 10% of your health upon completing an Evocation. With the Rune of Power talent, you gain 1% of your health per second while standing in your own Rune of Power."
+						},
+						"glyph_of_combustion": {
+							"name": "Combustion",
+							"description": "Increases the direct damage, the duration of the damage over time effect and the cooldown of Combustion by 100%."
+						},
+						"glyph_of_frost_nova": {
+							"name": "Frost Nova",
+							"description": "Reduces the cooldown of Frost Nova by 5 sec."
+						},
+						"glyph_of_ice_block": {
+							"name": "Ice Block",
+							"description": "When Ice Block terminates, it triggers an instant free Frost Nova and makes you immune to all spells for 3s."
+						},
+						"glyph_of_splitting_ice": {
+							"name": "Splitting Ice",
+							"description": "Your Ice Lance and Icicles now hit 1 additional target for 50% damage."
+						},
+						"glyph_of_cone_of_cold": {
+							"name": "Cone of Cold",
+							"description": "Increases the damage done by Cone of Cold by 200%."
+						},
+						"glyph_of_rapid_displacement": {
+							"name": "Rapid Displacement",
+							"description": "Blink now has 2 charges, gaining a charge every 15 sec, but no longer frees the caster from stuns and bonds."
+						},
+						"glyph_of_mana_gem": {
+							"name": "Mana Gem",
+							"description": "Your Conjure Mana Gem spell now creates a Brilliant Mana Gem, which holds up to 10 charges."
+						},
+						"glyph_of_polymorph": {
+							"name": "Polymorph",
+							"description": "Your Polymorph spell also removes all damage over time effects from the target."
+						},
+						"glyph_of_icy_veins": {
+							"name": "Icy Veins",
+							"description": "Your Icy Veins causes your Frostbolt, Frostfire Bolt, Ice Lance, and your Water Elemental's Waterbolt spells to split into 3 smaller bolts that each do 40% damage, instead of increasing spell casting speed."
+						},
+						"glyph_of_spellsteal": {
+							"name": "Spellsteal",
+							"description": "Spellsteal now also heals you for 5% of your maximum health when it successfully steals a spell."
+						},
+						"glyph_of_frostfire_bolt": {
+							"name": "Frostfire Bolt",
+							"description": "Reduces the cast time of Frostfire Bolt by 0.5 sec."
+						},
+						"glyph_of_remove_curse": {
+							"name": "Remove Curse",
+							"description": "Increases the damage you deal by 5% for 10s after you successfully remove a curse."
+						},
+						"glyph_of_arcane_power": {
+							"name": "Arcane Power",
+							"description": "Increases the duration and cooldown of Arcane Power by 100%."
+						},
+						"glyph_of_water_elemental": {
+							"name": "Water Elemental",
+							"description": "Increases the health of your Water Elemental by 40%, and allows it to cast while moving. When in Assist mode and in combat, commanding your Water Elemental to Follow will cause it to stay near you and autocast Waterbolt when your target is in range."
+						},
+						"glyph_of_slow": {
+							"name": "Slow",
+							"description": "Your Arcane Blast spell applies the Slow spell to any target it damages if no target is currently affected by your Slow."
+						},
+						"glyph_of_deep_freeze": {
+							"name": "Deep Freeze",
+							"description": "Your Deep Freeze spell is no longer on the global cooldown, but its duration is reduced by 1 sec."
+						},
+						"glyph_of_counterspell": {
+							"name": "Counterspell",
+							"description": "Your Counterspell can now be cast while casting or channeling other spells, but its cooldown is increased by 4 sec."
+						},
+						"glyph_of_inferno_blast": {
+							"name": "Inferno Blast",
+							"description": "Your Inferno Blast spell spreads Pyroblast, Ignite, and Combustion to 1 additional target."
+						},
+						"glyph_of_armors": {
+							"name": "Armors",
+							"description": "Reduces the cast time of your Frost Armor, Mage Armor, and Molten Armor spells by 1.5 sec, and increases the defensive effect of each Armor by an additional 10%."
+						}
+					},
+					"minor": {
+						"glyph_of_loose_mana": {
+							"name": "Loose Mana",
+							"description": "Your Mana Gem now restores mana over 6 sec, rather than instantly."
+						},
+						"glyph_of_momentum": {
+							"name": "Momentum",
+							"description": "Your Blink spell teleports you in the direction you are moving instead of the direction you are facing."
+						},
+						"glyph_of_crittermorph": {
+							"name": "Crittermorph",
+							"description": "When cast on critters, your Polymorph spells now last 24hrs and can be cast on multiple targets."
+						},
+						"glyph_of_the_porcupine": {
+							"name": "the Porcupine",
+							"description": "Your Polymorph spell polymorphs the target into a porcupine instead."
+						},
+						"glyph_of_conjure_familiar": {
+							"name": "Conjure Familiar",
+							"description": "Teaches you the ability Conjure Familiar. Conjures a familiar stone, containing either an Arcane, Fiery, or Icy Familiar."
+						},
+						"glyph_of_the_monkey": {
+							"name": "the Monkey",
+							"description": "Your Polymorph spell polymorphs the target into a monkey instead."
+						},
+						"glyph_of_the_penguin": {
+							"name": "the Penguin",
+							"description": "Your Polymorph spell polymorphs the target into a penguin instead."
+						},
+						"glyph_of_the_bear_cub": {
+							"name": "the Bear Cub",
+							"description": "Your Polymorph spell polymorphs the target into a polar bear cub instead."
+						},
+						"glyph_of_arcane_language": {
+							"name": "Arcane Language",
+							"description": "Your Arcane Brilliance spell allows you to comprehend your allies' racial languages."
+						},
+						"glyph_of_illusion": {
+							"name": "Illusion",
+							"description": "Teaches you the ability Illusion. Transforms the Mage to look like someone else for 2min."
+						},
+						"glyph_of_mirror_image": {
+							"name": "Mirror Image",
+							"description": "Your Mirror Images cast Arcane Blast or Fireball instead of Frostbolt depending on your primary talent tree."
+						},
+						"glyph_of_rapid_teleportation": {
+							"name": "Rapid Teleportation",
+							"description": "After casting a Mage Teleport spell, or entering a Mage Portal, your movement speed is increased by 70% for 1min."
+						},
+						"glyph_of_discreet_magic": {
+							"name": "Discreet Magic",
+							"description": "Your Nether Tempest, Living Bomb, Frost Bomb, Arcane Barrage, and Inferno Blast no longer affect targets more than 5 yds away from their primary target."
+						},
+						"glyph_of_the_unbound_elemental": {
+							"name": "the Unbound Elemental",
+							"description": "Your Water Elemental is replaced by an Unbound Water Elemental."
+						},
+						"glyph_of_evaporation": {
+							"name": "Evaporation",
+							"description": "Reduces the size of your Water Elemental by 40%."
+						},
+						"glyph_of_condensation": {
+							"name": "Condensation",
+							"description": "Increases the size of your Water Elemental by 40%."
+						}
+					}
+				},
+				"monk": {
+					"major": {
+						"glyph_of_rapid_rolling": {
+							"name": "Rapid Rolling",
+							"description": "For 5s seconds after using Roll or Chi Torpedo, your next Roll or Chi Torpedo will go 30% farther."
+						},
+						"glyph_of_transcendence": {
+							"name": "Transcendence",
+							"description": "Reduces the cooldown of your Transcendence: Transfer spell by 5 sec."
+						},
+						"glyph_of_breath_of_fire": {
+							"name": "Breath of Fire",
+							"description": "When you use Breath of Fire on targets afflicted with your Dizzying Haze, they become Disoriented for 3s."
+						},
+						"glyph_of_clash": {
+							"name": "Clash",
+							"description": "Increases the range of your Clash ability by 10 yards."
+						},
+						"glyph_of_enduring_healing_sphere": {
+							"name": "Enduring Healing Sphere",
+							"description": "Increases the duration of your Healing Spheres by 3 minutes."
+						},
+						"glyph_of_guard": {
+							"name": "Guard",
+							"description": "Increases the amount your Guard absorbs by 10%, but your Guard can only absorb magical damage."
+						},
+						"glyph_of_mana_tea": {
+							"name": "Mana Tea",
+							"description": "Your Mana Tea is instant instead of channeled and consumes two stacks when used, but causes a 10 sec cooldown."
+						},
+						"glyph_of_zen_meditation": {
+							"name": "Zen Meditation",
+							"description": "You can now channel Zen Meditation while moving."
+						},
+						"glyph_of_renewing_mists": {
+							"name": "Renewing Mists",
+							"description": "Your Renewing Mist travels to the furthest injured target within 40 yards rather than the closest injured target within 20 yards."
+						},
+						"glyph_of_spinning_crane_kick": {
+							"name": "Spinning Crane Kick",
+							"description": "You move at full speed while channeling Spinning Crane Kick."
+						},
+						"glyph_of_surging_mist": {
+							"name": "Surging Mist",
+							"description": "Your Surging Mist no longer requires a target, and instead heals the lowest health target within 40 yards."
+						},
+						"glyph_of_touch_of_death": {
+							"name": "Touch of Death",
+							"description": "Your Touch of Death no longer has a Chi cost, but the cooldown is increased by 2 minutes."
+						},
+						"glyph_of_nimble_brew": {
+							"name": "Nimble Brew",
+							"description": "Clearing an effect with Nimble Brew heals you for 10% of your maximum health."
+						},
+						"glyph_of_afterlife": {
+							"name": "Afterlife",
+							"description": "Increases the chance to summon a Healing Sphere when you kill an enemy while gaining experience or honor to 100%."
+						},
+						"glyph_of_fists_of_fury": {
+							"name": "Fists of Fury",
+							"description": "When channeling Fists of Fury, your parry chance is increased by 100%."
+						},
+						"glyph_of_fortifying_brew": {
+							"name": "Fortifying Brew",
+							"description": "Your Fortifying Brew reduces damage taken by an additional 5%, but increases your health by 10% rather than 20%."
+						},
+						"glyph_of_leer_of_the_ox": {
+							"name": "Leer of the Ox",
+							"description": "Teaches you the spell Leer of the Ox. |CFFFFFFFFLeer of the Ox|R Your Ox Statue stirs hatred in the target, reducing their movement speed by 50% and causing them to attack your Black Ox Statue for 8s. The statue must be within 40 yards of the target. Requires Black Ox Statue to be active."
+						},
+						"glyph_of_life_cocoon": {
+							"name": "Life Cocoon",
+							"description": "Life Cocoon can now be cast while stunned."
+						},
+						"glyph_of_fortuitous_spheres": {
+							"name": "Fortuitous Spheres",
+							"description": "Falling below 25% health will automatically summon a healing sphere near you at no cost. This effect cannot occur more often than once every 30 seconds."
+						},
+						"glyph_of_paralysis": {
+							"name": "Paralysis",
+							"description": "Your Paralysis ability also removes all damage over time effects from the target."
+						},
+						"glyph_of_sparring": {
+							"name": "Sparring",
+							"description": "While Sparring, you also have a 5% chance to deflect spells from attackers in front of you, stacking up to 3 times."
+						},
+						"glyph_of_detox": {
+							"name": "Detox",
+							"description": "Detox heals your target for 5% when it successfully removes a harmful effect."
+						},
+						"glyph_of_touch_of_karma": {
+							"name": "Touch of Karma",
+							"description": "Your Touch of Karma now has a 25 yard range."
+						},
+						"glyph_of_targeted_expulsion": {
+							"name": "Targeted Expulsion",
+							"description": "Outside of Battlegrounds and Arenas: Your Uplift no longer costs Chi, but instead costs 10% Mana. Inside of Battlegrounds and Arenas: Expel Harm can now be used on other allies, but the healing is reduced by 50% on them."
+						}
+					},
+					"minor": {
+						"glyph_of_spinning_fire_blossom": {
+							"name": "Spinning Fire Blossom",
+							"description": "Your Spinning Fire Blossom requires an enemy target rather than traveling in front of you, but is no longer capable of rooting targets."
+						},
+						"glyph_of_crackling_tiger_lightning": {
+							"name": "Crackling Tiger Lightning",
+							"description": "Your Crackling Jade Lightning visual is altered to the color of the White Tiger celestial."
+						},
+						"glyph_of_flying_serpent_kick": {
+							"name": "Flying Serpent Kick",
+							"description": "Your Flying Serpent Kick automatically ends when you fly into an enemy, triggering the area of effect damage and snare."
+						},
+						"glyph_of_honor": {
+							"name": "Honor",
+							"description": "You honorably bow after each successful Touch of Death."
+						},
+						"glyph_of_jab": {
+							"name": "Jab",
+							"description": "You always will attack with hands and fist with Jab, even with non-fist weapons equipped."
+						},
+						"glyph_of_rising_tiger_kick": {
+							"name": "Rising Tiger Kick",
+							"description": "Your Rising Sun Kick's visual is altered to the color of the White Tiger."
+						},
+						"glyph_of_spirit_roll": {
+							"name": "Spirit Roll",
+							"description": "You can cast Roll or Chi Torpedo while dead as a spirit."
+						},
+						"glyph_of_fighting_pose": {
+							"name": "Fighting Pose",
+							"description": "Your spirit now appears in a fighting pose when using Transcendence."
+						},
+						"glyph_of_water_roll": {
+							"name": "Water Roll",
+							"description": "You can Roll or Chi Torpedo over water."
+						},
+						"glyph_of_zen_flight": {
+							"name": "Zen Flight",
+							"description": "Teaches you the spell Zen Flight. Zen Flight requires a Flight Master's License in order to be cast. |CFFFFFFFFZen Flight|R You fly through the air at a quick speed on a meditative cloud."
+						},
+						"glyph_of_blackout_kick": {
+							"name": "Blackout Kick",
+							"description": "Your Blackout Kick always deals 20% additional damage over 4s regardless of positioning but you're unable to trigger the healing effect."
+						}
+					}
+				},
+				"paladin": {
+					"major": {
+						"glyph_of_double_jeopardy": {
+							"name": "Double Jeopardy",
+							"description": "Judging a target increases the damage of your next Judgment by 20%, but only if used on a different second target."
+						},
+						"glyph_of_devotion_aura": {
+							"name": "Devotion Aura",
+							"description": "Devotion Aura no longer affects party or raid members, but the cooldown is reduced by 60 sec."
+						},
+						"glyph_of_holy_wrath": {
+							"name": "Holy Wrath",
+							"description": "Your Holy Wrath now also stuns Elementals, Dragonkin, and Aberrations."
+						},
+						"glyph_of_divine_protection": {
+							"name": "Divine Protection",
+							"description": "Reduces the magical damage reduction of your Divine Protection to 20% but adds 20% physical damage reduction."
+						},
+						"glyph_of_templars_verdict": {
+							"name": "Templar's Verdict",
+							"description": "You take 10% less damage for 6s after dealing damage with Templar's Verdict or Exorcism."
+						},
+						"glyph_of_avenging_wrath": {
+							"name": "Avenging Wrath",
+							"description": "While Avenging Wrath is active, you are healed for 1% of your maximum health every 0.0 sec."
+						},
+						"glyph_of_consecration": {
+							"name": "Consecration",
+							"description": "You can now target Consecration anywhere within 25 yards."
+						},
+						"glyph_of_focused_shield": {
+							"name": "Focused Shield",
+							"description": "Your Avenger's Shield hits 2 fewer targets, but for 30% more damage."
+						},
+						"glyph_of_burden_of_guilt": {
+							"name": "Burden of Guilt",
+							"description": "Your Judgment hits fill your target with doubt and remorse, reducing movement speed by 50% for 2s."
+						},
+						"glyph_of_blinding_light": {
+							"name": "Blinding Light",
+							"description": "Your Blinding Light now knocks down targets for 3s instead of Blinding them."
+						},
+						"glyph_of_final_wrath": {
+							"name": "Final Wrath",
+							"description": "Your Holy Wrath does an additional 50% damage to targets with less than 20% health."
+						},
+						"glyph_of_word_of_glory": {
+							"name": "Word of Glory",
+							"description": "Increases your damage by 3% per Holy Power spent after you cast Word of Glory or Eternal Flame on a friendly target. Lasts 6s."
+						},
+						"glyph_of_illumination": {
+							"name": "Illumination",
+							"description": "Your Holy Shock criticals grant 1% mana return, but Holy Insight returns 10% less mana."
+						},
+						"glyph_of_harsh_words": {
+							"name": "Harsh Words",
+							"description": "Your Word of Glory can now also be used on enemy targets, causing Holy damage approximately equal to the amount it would have healed. Does not work with Eternal Flame."
+						},
+						"glyph_of_divinity": {
+							"name": "Divinity",
+							"description": "Increases the cooldown of your Lay on Hands by 0 min but causes it to give you 10% of your maximum mana."
+						},
+						"glyph_of_light_of_dawn": {
+							"name": "Light of Dawn",
+							"description": "Light of Dawn affects 2 fewer targets, but heals each target for 25% more."
+						},
+						"glyph_of_blessed_life": {
+							"name": "Blessed Life",
+							"description": "You have a 50% chance to gain a charge of Holy Power whenever you are affected by a Stun, Fear or Immobilize effect. This effect cannot occur more than once every 20 sec."
+						},
+						"glyph_of_flash_of_light": {
+							"name": "Flash of Light",
+							"description": "When you Flash of Light a target, it increases your next heal done to that target within 7s by 10%."
+						},
+						"glyph_of_denounce": {
+							"name": "Denounce",
+							"description": "Your Holy Shocks reduce the cast time of your next Denounce by 0.5 sec. This effect stacks up to 3 times."
+						},
+						"glyph_of_dazing_shield": {
+							"name": "Dazing Shield",
+							"description": "Your Avenger's Shield now also dazes targets for 10s."
+						},
+						"glyph_of_immediate_truth": {
+							"name": "Immediate Truth",
+							"description": "Increases the instant damage done by Seal of Truth by 40%, but decreases the damage done by Censure by 50%."
+						},
+						"glyph_of_beacon_of_light": {
+							"name": "Beacon of Light",
+							"description": "Removes the global cooldown on Beacon of Light."
+						},
+						"glyph_of_hammer_of_the_righteous": {
+							"name": "Hammer of the Righteous",
+							"description": "The physical damage reduction caused by Hammer of the Righteous now lasts 50% longer."
+						},
+						"glyph_of_divine_storm": {
+							"name": "Divine Storm",
+							"description": "Your Divine Storm also heals you for 5% of your maximum health."
+						},
+						"glyph_of_the_alabaster_shield": {
+							"name": "the Alabaster Shield",
+							"description": "Your successful blocks increase the damage of your next Shield of the Righteous by 10%. Stacks up to 1 times."
+						},
+						"glyph_of_divine_plea": {
+							"name": "Divine Plea",
+							"description": "Divine Plea returns 50% less mana but has a 50% shorter cooldown."
+						},
+						"glyph_of_holy_shock": {
+							"name": "Holy Shock",
+							"description": "Decreases the healing of Holy Shock by 50% but increases its damage by 50%."
+						},
+						"glyph_of_inquisition": {
+							"name": "Inquisition",
+							"description": "When you land a killing blow on an opponent that yields experience or honor, the duration of your Inquisition is increased by 30 sec."
+						},
+						"glyph_of_protector_of_the_innocent": {
+							"name": "Protector of the Innocent",
+							"description": "When you use Word of Glory to heal another target, it also heals you for 20% of the amount."
+						},
+						"glyph_of_the_battle_healer": {
+							"name": "the Battle Healer",
+							"description": "Melee attacks from Seal of Insight heal the most wounded member of your raid or party for 30% of the normal heal instead of you."
+						},
+						"glyph_of_mass_exorcism": {
+							"name": "Mass Exorcism",
+							"description": "Reduces the range of Exorcism to melee range, but causes 25% damage to all enemies within 8 yards of the primary target."
+						},
+						"glyph_of_divine_shield": {
+							"name": "Divine Shield",
+							"description": "Removing harmful effects with Divine Shield heals you for 10% for each effect removed. This heal cannot exceed 50% of your maximum health."
+						},
+						"glyph_of_hand_of_sacrifice": {
+							"name": "Hand of Sacrifice",
+							"description": "Hand of Sacrifice no longer redirects damage to the Paladin."
+						}
+					},
+					"minor": {
+						"glyph_of_the_luminous_charger": {
+							"name": "the Luminous Charger",
+							"description": "Your Paladin class mounts glow with holy light."
+						},
+						"glyph_of_the_mounted_king": {
+							"name": "the Mounted King",
+							"description": "Mounting one of your Paladin class mounts automatically casts Blessing of Kings on you."
+						},
+						"glyph_of_contemplation": {
+							"name": "Contemplation",
+							"description": "Teaches you the ability Contemplation. Allows you a moment of peace as you kneel in quiet contemplation to ponder the nature of the Light."
+						},
+						"glyph_of_winged_vengeance": {
+							"name": "Winged Vengeance",
+							"description": "Your Avenging Wrath depicts 4 wings."
+						},
+						"glyph_of_seal_of_blood": {
+							"name": "Seal of Blood",
+							"description": "Your Seal of Truth now uses the Seal of Blood visual."
+						},
+						"glyph_of_fire_from_the_heavens": {
+							"name": "Fire From the Heavens",
+							"description": "Your Judgment and Hammer of Wrath criticals call down fire from the sky."
+						},
+						"glyph_of_focused_wrath": {
+							"name": "Focused Wrath",
+							"description": "Holy Wrath only affects one target."
+						},
+						"glyph_of_the_falling_avenger": {
+							"name": "the Falling Avenger",
+							"description": "You slow fall during Avenging Wrath."
+						},
+						"glyph_of_the_righteous_retreat": {
+							"name": "the Righteous Retreat",
+							"description": "During Divine Shield, you can invoke your Hearthstone 50% faster."
+						},
+						"glyph_of_bladed_judgment": {
+							"name": "Bladed Judgment",
+							"description": "Your Judgment spell depicts an axe or sword instead of a hammer, if you have an axe or sword equipped."
+						},
+						"glyph_of_the_exorcist": {
+							"name": "the Exorcist",
+							"description": "Exorcism will now appear to remove the evil from its target."
+						},
+						"glyph_of_pillar_of_light": {
+							"name": "Pillar of Light",
+							"description": "Critical heals on other players display a small pillar of light at their location briefly."
+						}
+					}
+				},
+				"priest": {
+					"major": {
+						"glyph_of_circle_of_healing": {
+							"name": "Circle of Healing",
+							"description": "Your Circle of Healing spell heals 1 additional target, but its mana cost is increased by 35%."
+						},
+						"glyph_of_purify": {
+							"name": "Purify",
+							"description": "Your Purify spell also heals your target for 5% of maximum health when you successfully dispel a magical effect or disease."
+						},
+						"glyph_of_fade": {
+							"name": "Fade",
+							"description": "Your Fade ability now also reduces all damage taken by 10%."
+						},
+						"glyph_of_fear_ward": {
+							"name": "Fear Ward",
+							"description": "Reduces the cooldown of Fear Ward by 60 sec."
+						},
+						"glyph_of_inner_sanctum": {
+							"name": "Inner Sanctum",
+							"description": "Spell damage taken is reduced by 6% while within Inner Fire, and the movement speed bonus of your Inner Will is increased by 6%."
+						},
+						"glyph_of_holy_nova": {
+							"name": "Holy Nova",
+							"description": "Teaches you the ability Holy Nova. Causes an explosion of holy light around the caster, causing 2477 Holy damage to all enemy targets within 10 yards and healing up to 5 targets within 10 yards for 525. Healing is divided among the number of targets healed. These effects cause no threat."
+						},
+						"glyph_of_inner_fire": {
+							"name": "Inner Fire",
+							"description": "Increases the armor gained from your Inner Fire spell by 50%."
+						},
+						"glyph_of_deep_wells": {
+							"name": "Deep Wells",
+							"description": "Increases the total amount of charges of your Lightwell by 2."
+						},
+						"glyph_of_mass_dispel": {
+							"name": "Mass Dispel",
+							"description": "Causes your Mass Dispel to be potent enough to remove Magic effects that are normally undispellable."
+						},
+						"glyph_of_psychic_horror": {
+							"name": "Psychic Horror",
+							"description": "Reduces the cooldown of your Psychic Horror by -10.0 sec."
+						},
+						"glyph_of_holy_fire": {
+							"name": "Holy Fire",
+							"description": "Increases the range of your Holy Fire, Smite, and Power Word: Solace spells by 10 yards."
+						},
+						"glyph_of_weakened_soul": {
+							"name": "Weakened Soul",
+							"description": "Reduces the duration of the Weakened Soul effect caused by Power Word: Shield by 2 sec."
+						},
+						"glyph_of_power_word_shield": {
+							"name": "Power Word: Shield",
+							"description": "20% of the absorb from your Power Word: Shield spell is converted into healing."
+						},
+						"glyph_of_spirit_of_redemption": {
+							"name": "Spirit of Redemption",
+							"description": "Increases the duration of Spirit of Redemption by 10 sec."
+						},
+						"glyph_of_psychic_scream": {
+							"name": "Psychic Scream",
+							"description": "Targets of your Psychic Scream and your Psyfiend's Psychic Terror now tremble in place instead of fleeing in fear."
+						},
+						"glyph_of_renew": {
+							"name": "Renew",
+							"description": "Your Renew heals for 33% more each time it heals, but its duration is reduced by 3 sec."
+						},
+						"glyph_of_scourge_imprisonment": {
+							"name": "Scourge Imprisonment",
+							"description": "Reduces the cast time of your Shackle Undead by 1.0 sec."
+						},
+						"glyph_of_mind_blast": {
+							"name": "Mind Blast",
+							"description": "When you critically hit with your Mind Blast, you cause the target to be unable to move for 4s."
+						},
+						"glyph_of_dispel_magic": {
+							"name": "Dispel Magic",
+							"description": "Your Dispel Magic spell also damages your target for 4937 Holy damage when you successfully dispel a magical effect."
+						},
+						"glyph_of_smite": {
+							"name": "Smite",
+							"description": "Your Smite spell inflicts an additional 20% damage against targets afflicted by Power Word: Solace, but that additional damage does not get transferred by Atonement."
+						},
+						"glyph_of_prayer_of_mending": {
+							"name": "Prayer of Mending",
+							"description": "The first charge of your Prayer of Mending heals for an additional 60% but your Prayer of Mending has 1 fewer charge."
+						},
+						"glyph_of_levitate": {
+							"name": "Levitate",
+							"description": "Increases your movement speed while Levitating and for 10 sec afterward by 15%."
+						},
+						"glyph_of_reflective_shield": {
+							"name": "Reflective Shield",
+							"description": "Causes 70% of the damage you absorb with Power Word: Shield to reflect back at the attacker. This damage causes no threat."
+						},
+						"glyph_of_dispersion": {
+							"name": "Dispersion",
+							"description": "Reduces the cooldown on Dispersion by 15 sec."
+						},
+						"glyph_of_leap_of_faith": {
+							"name": "Leap of Faith",
+							"description": "Your Leap of Faith spell now also clears all movement impairing effects from your target."
+						},
+						"glyph_of_penance": {
+							"name": "Penance",
+							"description": "Increases the mana cost of Penance by 20% but allows Penance to be cast while moving."
+						},
+						"glyph_of_focused_mending": {
+							"name": "Focused Mending",
+							"description": "Causes your Prayer of Mending to only bounce between the target and the caster."
+						},
+						"glyph_of_mind_spike": {
+							"name": "Mind Spike",
+							"description": "Your successful non-instant Mind Spikes, reduce the cast time of your next Mind Blast within 9s by 50%. This effect can stack up to 2 times."
+						},
+						"glyph_of_binding_heal": {
+							"name": "Binding Heal",
+							"description": "Your Binding Heal spell now heals a third friendly target within 20 yards, but costs 35% more mana."
+						},
+						"glyph_of_mind_flay": {
+							"name": "Mind Flay",
+							"description": "Your Mind Flay spell no longer slows your victim's movement speed. Instead, each time Mind Flay deals damage you will be granted 15% increased movement speed for 5s, stacking up to 3 times."
+						},
+						"glyph_of_shadow_word_death": {
+							"name": "Shadow Word: Death",
+							"description": "Your Shadow Word: Death can now be cast at any time, but deals 25% damage against targets above 20% health and does not generate a Shadow Orb when used against them. Casting Shadow Word: Death now also does damage to you equivalent to the damage it would do to an enemy above 20% health."
+						},
+						"glyph_of_vampiric_embrace": {
+							"name": "Vampiric Embrace",
+							"description": "Your Vampiric Embrace converts an additional 50% of the damage you deal into healing, but the duration is reduced by 5 sec."
+						},
+						"glyph_of_lightspring": {
+							"name": "Lightspring",
+							"description": "Your Lightwell no longer automatically heals nearby targets, but can be clicked by players to deal 50% more healing than normal."
+						},
+						"glyph_of_lightwell": {
+							"name": "Lightwell",
+							"description": "Your Lightwell no longer automatically heals nearby targets, but can be clicked by players to deal 50% more healing than normal."
+						}
+					},
+					"minor": {
+						"glyph_of_shadow_ravens": {
+							"name": "Shadow Ravens",
+							"description": "Your Shadow Orbs now appear as Shadow Ravens."
+						},
+						"glyph_of_borrowed_time": {
+							"name": "Borrowed Time",
+							"description": "Your Borrowed Time is now displayed visually."
+						},
+						"glyph_of_shackle_undead": {
+							"name": "Shackle Undead",
+							"description": "Changes the appearance of your Shackle Undead."
+						},
+						"glyph_of_dark_archangel": {
+							"name": "Dark Archangel",
+							"description": "When you apply Devouring Plague to a target, you take on the form of a Dark Archangel for 8s."
+						},
+						"glyph_of_shadow": {
+							"name": "Shadow",
+							"description": "Alters the appearance of your Shadowform to be less transparent."
+						},
+						"glyph_of_the_heavens": {
+							"name": "the Heavens",
+							"description": "Your Levitate targets will appear to be riding on a cloud for the duration of the spell."
+						},
+						"glyph_of_confession": {
+							"name": "Confession",
+							"description": "Teaches you the ability Confession. Compels a friendly target to confess a secret."
+						},
+						"glyph_of_holy_resurrection": {
+							"name": "Holy Resurrection",
+							"description": "Your resurrection target appears bathed in holy light for the duration of the Resurrection cast."
+						},
+						"glyph_of_the_valkyr": {
+							"name": "the Val'kyr",
+							"description": "While Spirit of Redemption is active, you now appear as a Val'kyr."
+						},
+						"glyph_of_shadowy_friends": {
+							"name": "Shadowy Friends",
+							"description": "Your Shadowform extends to your non-combat pets."
+						},
+						"glyph_of_angels": {
+							"name": "Angels",
+							"description": "Your heal spells momentarily grant you angelic wings."
+						},
+						"glyph_of_the_sha": {
+							"name": "the Sha",
+							"description": "Transforms your Shadowfiend and Mindbender into a Sha Beast."
+						},
+						"glyph_of_shifted_appearances": {
+							"name": "Shifted Appearances",
+							"description": "Void Shift causes you and your target to exchange appearances for several seconds. Does not affect mounted players."
+						},
+						"glyph_of_inspired_hymns": {
+							"name": "Inspired Hymns",
+							"description": "While channeling Hymns, a spirit appears above you."
+						}
+					}
+				},
+				"rogue": {
+					"major": {
+						"glyph_of_shadow_walk": {
+							"name": "Shadow Walk",
+							"description": "Your Shadow Walk ability also increases your stealth detection while active."
+						},
+						"glyph_of_ambush": {
+							"name": "Ambush",
+							"description": "Increases the range of Ambush by 5 yards."
+						},
+						"glyph_of_blade_flurry": {
+							"name": "Blade Flurry",
+							"description": "Your attacks have a 30% higher chance of applying Non-Lethal poisons while Blade Flurry is active."
+						},
+						"glyph_of_sharp_knives": {
+							"name": "Sharp Knives",
+							"description": "Your Fan of Knives also damages the armor of its victims, applying 1 application of the Weakened Armor effect to each target."
+						},
+						"glyph_of_recuperate": {
+							"name": "Recuperate",
+							"description": "Increases the healing of your Recuperate ability by an additional 1.0% of your maximum health."
+						},
+						"glyph_of_evasion": {
+							"name": "Evasion",
+							"description": "Increases the duration of Evasion by 5 sec."
+						},
+						"glyph_of_recovery": {
+							"name": "Recovery",
+							"description": "While Recuperate is active, you receive 20% increased healing from other sources."
+						},
+						"glyph_of_expose_armor": {
+							"name": "Expose Armor",
+							"description": "Your Expose Armor ability causes three applications of Weakened Armor."
+						},
+						"glyph_of_feint": {
+							"name": "Feint",
+							"description": "Increases the duration of Feint by 2 sec."
+						},
+						"glyph_of_garrote": {
+							"name": "Garrote",
+							"description": "Increases the duration of your Garrote ability's silence effect by 1.0 sec."
+						},
+						"glyph_of_gouge": {
+							"name": "Gouge",
+							"description": "Your Gouge ability no longer requires that the target be facing you."
+						},
+						"glyph_of_smoke_bomb": {
+							"name": "Smoke Bomb",
+							"description": "Increases the duration of your Smoke Bomb by 2 sec."
+						},
+						"glyph_of_cheap_shot": {
+							"name": "Cheap Shot",
+							"description": "Increases the duration of your Cheap Shot by 0.5 sec."
+						},
+						"glyph_of_hemorraghing_veins": {
+							"name": "Hemorraghing Veins",
+							"description": "Your Sanguinary Veins ability now also increases damage done to targets affected by your Hemorrhage."
+						},
+						"glyph_of_kick": {
+							"name": "Kick",
+							"description": "Increases the cooldown of your Kick ability by 4 sec, but this cooldown is reduced by 6 sec when your Kick successfully interrupts a spell."
+						},
+						"glyph_of_redirect": {
+							"name": "Redirect",
+							"description": "Reduces the cooldown of Redirect by 50 seconds."
+						},
+						"glyph_of_shiv": {
+							"name": "Shiv",
+							"description": "Reduces the cooldown of your Shiv ability by 3 sec."
+						},
+						"glyph_of_sprint": {
+							"name": "Sprint",
+							"description": "Increases the movement speed of your Sprint ability by an additional 30%."
+						},
+						"glyph_of_vendetta": {
+							"name": "Vendetta",
+							"description": "Reduces the damage bonus of your Vendetta ability by 5% but increases its duration by 10 sec."
+						},
+						"glyph_of_stealth": {
+							"name": "Stealth",
+							"description": "Reduces the cooldown of your Stealth ability by 4 sec."
+						},
+						"glyph_of_deadly_momentum": {
+							"name": "Deadly Momentum",
+							"description": "When you land a killing blow on an opponent that yields experience or honor, your Slice and Dice and Recuperate abilities are refreshed to their original duration."
+						},
+						"glyph_of_cloak_of_shadows": {
+							"name": "Cloak of Shadows",
+							"description": "While Cloak of Shadows is active, you take 40% less physical damage."
+						},
+						"glyph_of_vanish": {
+							"name": "Vanish",
+							"description": "Increases the duration of your Vanish effect by 2 sec."
+						},
+						"glyph_of_blind": {
+							"name": "Blind",
+							"description": "Your Blind ability also removes all damage over time effects from the target that would cause Blind to break early."
+						}
+					},
+					"minor": {
+						"glyph_of_decoy": {
+							"name": "Decoy",
+							"description": "When you Vanish, you leave behind a brief illusion that very closely resembles you."
+						},
+						"glyph_of_detection": {
+							"name": "Detection",
+							"description": "Teaches you the ability Detection. Focus intently on trying to detect certain creatures."
+						},
+						"glyph_of_hemorrhage": {
+							"name": "Hemorrhage",
+							"description": "Your Hemorrhage ability only causes lingering damage over time to targets that were already afflicted by a Bleed effect."
+						},
+						"glyph_of_pick_pocket": {
+							"name": "Pick Pocket",
+							"description": "Increases the range of your Pick Pocket ability by 5 yards."
+						},
+						"glyph_of_distract": {
+							"name": "Distract",
+							"description": "Increases the range of your Distract ability by 5 yards."
+						},
+						"glyph_of_pick_lock": {
+							"name": "Pick Lock",
+							"description": "Reduces the cast time of your Pick Lock ability by 100%."
+						},
+						"glyph_of_safe_fall": {
+							"name": "Safe Fall",
+							"description": "Increases the distance your Safe Fall ability allows you to fall without taking damage."
+						},
+						"glyph_of_blurred_speed": {
+							"name": "Blurred Speed",
+							"description": "Enables you to walk on water while your Sprint ability is active."
+						},
+						"glyph_of_poisons": {
+							"name": "Poisons",
+							"description": "You apply poisons to your weapons 50% faster."
+						},
+						"glyph_of_killing_spree": {
+							"name": "Killing Spree",
+							"description": "Your Killing Spree returns you to your starting location when the effect ends."
+						},
+						"glyph_of_tricks_of_the_trade": {
+							"name": "Tricks of the Trade",
+							"description": "Your Tricks of the Trade ability no longer costs Energy, but also no longer increases the damage dealt by the target."
+						},
+						"glyph_of_disguise": {
+							"name": "Disguise",
+							"description": "When you Pick Pocket a humanoid enemy, you also copy their appearance for 5min. Your disguise will unravel upon entering combat."
+						},
+						"glyph_of_headhunting": {
+							"name": "Headhunting",
+							"description": "Your Throw and Deadly Throw abilities will now throw axes regardless of your currently equipped weapon."
+						},
+						"glyph_of_improved_distraction": {
+							"name": "Improved Distraction",
+							"description": "Distract now summons a decoy at the target location."
+						}
+					}
+				},
+				"shaman": {
+					"major": {
+						"glyph_of_unstable_earth": {
+							"name": "Unstable Earth",
+							"description": "Causes your Earthquake spell to also reduce the movement speed of affected targets by 40% for 3s."
+						},
+						"glyph_of_chain_lightning": {
+							"name": "Chain Lightning",
+							"description": "Your Chain Lightning spell now strikes 2 additional targets, but deals 10% less damage."
+						},
+						"glyph_of_spirit_walk": {
+							"name": "Spirit Walk",
+							"description": "Reduces the cooldown of your Spirit Walk ability by 25%."
+						},
+						"glyph_of_capacitor_totem": {
+							"name": "Capacitor Totem",
+							"description": "Reduces the charging time of your Capacitor Totem by 2 sec."
+						},
+						"glyph_of_purge": {
+							"name": "Purge",
+							"description": "Your Purge dispels 1 additional Magic effect but has a 6 sec cooldown."
+						},
+						"glyph_of_fire_elemental_totem": {
+							"name": "Fire Elemental Totem",
+							"description": "Reduces the cooldown and duration of your Fire Elemental Totem by 50%."
+						},
+						"glyph_of_fire_nova": {
+							"name": "Fire Nova",
+							"description": "Increases the radius of your Fire Nova spell by 5 yards."
+						},
+						"glyph_of_flame_shock": {
+							"name": "Flame Shock",
+							"description": "When your Flame Shock deals damage, it heals you for 30% of the damage dealt."
+						},
+						"glyph_of_wind_shear": {
+							"name": "Wind Shear",
+							"description": "Increases the school lockout duration of Wind Shear by 1 sec, but also increases the cooldown by 3 sec."
+						},
+						"glyph_of_healing_stream_totem": {
+							"name": "Healing Stream Totem",
+							"description": "When your Healing Stream Totem heals an ally, it also reduces their Fire, Frost, and Nature damage taken by 10% for 6s."
+						},
+						"glyph_of_healing_wave": {
+							"name": "Healing Wave",
+							"description": "Your Healing Wave also heals you for 20% of the healing effect when you heal someone else."
+						},
+						"glyph_of_totemic_recall": {
+							"name": "Totemic Recall",
+							"description": "Causes your Totemic Recall ability to return the full mana cost of any recalled totems."
+						},
+						"glyph_of_telluric_currents": {
+							"name": "Telluric Currents",
+							"description": "Causes your Lightning Bolt to restore 2% of your mana when it strikes an enemy."
+						},
+						"glyph_of_grounding_totem": {
+							"name": "Grounding Totem",
+							"description": "Instead of absorbing a spell, your Grounding Totem reflects the next harmful spell back at its caster, but the cooldown of your Grounding Totem is increased by 20 sec."
+						},
+						"glyph_of_spiritwalkers_grace": {
+							"name": "Spiritwalker's Grace",
+							"description": "Increases the duration of your Spiritwalker's Grace by 5 sec."
+						},
+						"glyph_of_water_shield": {
+							"name": "Water Shield",
+							"description": "Increases the mana generated reactively by your Water Shield when you are attacked by 50%, but reduces the passive mana generation by 15%."
+						},
+						"glyph_of_cleansing_waters": {
+							"name": "Cleansing Waters",
+							"description": "When you dispel a harmful Magic or Curse effect from an ally, you also heal the target for 5% of your maximum health."
+						},
+						"glyph_of_frost_shock": {
+							"name": "Frost Shock",
+							"description": "Decreases the cooldown incurred by your Frost Shock by 2 sec."
+						},
+						"glyph_of_chaining": {
+							"name": "Chaining",
+							"description": "Increases the jump distance of your Chain Heal spell by 100%, but gives the spell a 2 sec cooldown."
+						},
+						"glyph_of_healing_storm": {
+							"name": "Healing Storm",
+							"description": "Each application of Maelstrom Weapon also increases your direct healing done by 20%."
+						},
+						"glyph_of_ghost_wolf": {
+							"name": "Ghost Wolf",
+							"description": "While in Ghost Wolf form, you are less hindered by effects that would reduce movement speed."
+						},
+						"glyph_of_thunder": {
+							"name": "Thunder",
+							"description": "Reduces the cooldown on Thunderstorm by 10 sec."
+						},
+						"glyph_of_feral_spirit": {
+							"name": "Feral Spirit",
+							"description": "Increases the healing done by your Feral Spirits' Spirit Hunt by 40%."
+						},
+						"glyph_of_riptide": {
+							"name": "Riptide",
+							"description": "Removes the cooldown of Riptide, but reduces the initial direct healing by 75%."
+						},
+						"glyph_of_shamanistic_rage": {
+							"name": "Shamanistic Rage",
+							"description": "Activating your Shamanistic Rage ability also cleanses you of all dispellable harmful Magic effects."
+						},
+						"glyph_of_hex": {
+							"name": "Hex",
+							"description": "Reduces the cooldown of your Hex spell by 10 sec."
+						},
+						"glyph_of_totemic_vigor": {
+							"name": "Totemic Vigor",
+							"description": "Increases the health of your totems by 5% of your maximum health."
+						},
+						"glyph_of_lightning_shield": {
+							"name": "Lightning Shield",
+							"description": "When your Lightning Shield is triggered, you take 10% less damage for 6s."
+						},
+						"glyph_of_purging": {
+							"name": "Purging",
+							"description": "Successfully Purging a target now grants a stack of Maelstrom Weapon."
+						},
+						"glyph_of_eternal_earth": {
+							"name": "Eternal Earth",
+							"description": "Your Lightning Bolt has a chance to add a charge to your currently active Earth Shield. This cannot cause Earth Shield to exceed 9 charges."
+						}
+					},
+					"minor": {
+						"glyph_of_the_lakestrider": {
+							"name": "the Lakestrider",
+							"description": "You automatically gain Water Walking while you are in Ghost Wolf form."
+						},
+						"glyph_of_lava_lash": {
+							"name": "Lava Lash",
+							"description": "Your Lava Lash ability no longer spreads Flame Shock to nearby targets."
+						},
+						"glyph_of_astral_recall": {
+							"name": "Astral Recall",
+							"description": "Reduces the cooldown of your Astral Recall spell by 5 minutes."
+						},
+						"glyph_of_far_sight": {
+							"name": "Far Sight",
+							"description": "Your Far Sight spell may be used indoors."
+						},
+						"glyph_of_the_spectral_wolf": {
+							"name": "the Spectral Wolf",
+							"description": "Alters the appearance of your Ghost Wolf transformation, causing it to resemble a large, spectral wolf."
+						},
+						"glyph_of_totemic_encirclement": {
+							"name": "Totemic Encirclement",
+							"description": "When you cast a totem spell, you also place unempowered totems for any elements that are not currently active. These totems have 5 health and produce no other effects."
+						},
+						"glyph_of_thunderstorm": {
+							"name": "Thunderstorm",
+							"description": "Removes the knockback effect from your Thunderstorm spell."
+						},
+						"glyph_of_deluge": {
+							"name": "Deluge",
+							"description": "Your Chain Heal now has a watery appearance."
+						},
+						"glyph_of_spirit_raptors": {
+							"name": "Spirit Raptors",
+							"description": "Your Spirit Wolves are replaced with Spirit Raptors."
+						},
+						"glyph_of_lingering_ancestors": {
+							"name": "Lingering Ancestors",
+							"description": "Resurrecting someone with Ancestral Spirit causes a ghostly ancestor to follow them around for a short time."
+						},
+						"glyph_of_spirit_wolf": {
+							"name": "Spirit Wolf",
+							"description": "Ghost Wolf can be now be used while you are a ghost."
+						},
+						"glyph_of_flaming_serpent": {
+							"name": "Flaming Serpent",
+							"description": "Your Searing Totem now resembles Vol'jin's Serpent Ward."
+						},
+						"glyph_of_the_compy": {
+							"name": "the Compy",
+							"description": "Your Hex now transforms enemies into a Compy."
+						},
+						"glyph_of_elemental_familiars": {
+							"name": "Elemental Familiars",
+							"description": "Summons a random Fire, Water, or Nature familiar. Familiars of different types have a tendency to fight each other."
+						},
+						"glyph_of_astral_fixation": {
+							"name": "Astral Fixation",
+							"description": "Astral Recall now takes you to your capital's Earthshrine."
+						},
+						"glyph_of_rain_of_frogs": {
+							"name": "Rain of Frogs",
+							"description": "You summon a rain storm of frogs at your targeted location."
+						}
+					}
+				},
+				"warlock": {
+					"major": {
+						"glyph_of_conflagrate": {
+							"name": "Conflagrate",
+							"description": "Conflagrate no longer requires Immolate to snare the target."
+						},
+						"glyph_of_siphon_life": {
+							"name": "Siphon Life",
+							"description": "Your Immolate spell will heal you for 0.5% of your maximum health when dealing periodic damage."
+						},
+						"glyph_of_fear": {
+							"name": "Fear",
+							"description": "Your Fear causes the target to tremble in place instead of fleeing in fear."
+						},
+						"glyph_of_demon_training": {
+							"name": "Demon Training",
+							"description": "Improves your demon's special abilities: Your Fel Imp 's Firebolt cast time is reduced by 50% and fires in bursts of three. Increases your Voidlord 's total armor by 10%. Your Shivarra 's Mesmerizes ability also removes all damage over time effects from the target. When your Observer uses Clone Magic, you will also be healed for that amount. Increases your Wrathguard 's total health by 20%."
+						},
+						"glyph_of_healthstone": {
+							"name": "Healthstone",
+							"description": "You receive 100% more healing from using a healthstone, but the health is restored over 10 sec."
+						},
+						"glyph_of_curse_of_the_elements": {
+							"name": "Curse of the Elements",
+							"description": "Curse of the Elements hits 2 additional nearby targets."
+						},
+						"glyph_of_imp_swarm": {
+							"name": "Imp Swarm",
+							"description": "Teaches you the ability Imp Swarm. Requires Demonology. |Tinterface/icons/ability_warlock_impoweredimp.blp:24|t Imp Swarm Summons 4 Wild Imps from the Twisting Nether to attack the target. The Wild Imps passive effect is disabled while Imp Swarm is on cooldown. Imp Swarm's cooldown is reduced by spell haste. Also increases Wild Imp's cooldown by 4 sec."
+						},
+						"glyph_of_havoc": {
+							"name": "Havoc",
+							"description": "Havoc gains 3 additional charges, but the cooldown is increased by 35 seconds."
+						},
+						"glyph_of_soulstone": {
+							"name": "Soulstone",
+							"description": "Players resurrected by Soulstone are returned to life with 100% health."
+						},
+						"glyph_of_unstable_affliction": {
+							"name": "Unstable Affliction",
+							"description": "Reduces the cast time of Unstable Affliction by 25%."
+						},
+						"glyph_of_soul_consumption": {
+							"name": "Soul Consumption",
+							"description": "Your Drain Soul restores 20% of your total health after you kill a target that yields experience or honor. You restore 20% of your total health after you kill a target in Demon Form that yields experience or honor. You restore 20% of your total health after you kill a target with Chaos Bolt that yields experience or honor."
+						},
+						"glyph_of_curse_of_exhaustion": {
+							"name": "Curse of Exhaustion",
+							"description": "Curse of Exhaustion now reduces the targets movement speed by 30%, lasts half as long and has a 10 second cooldown."
+						},
+						"glyph_of_drain_life": {
+							"name": "Drain Life",
+							"description": "Increases the healing of your Drain Life by 30%."
+						},
+						"glyph_of_demon_hunting": {
+							"name": "Demon Hunting",
+							"description": "Requires Demonology. Teaches you the ability Dark Apotheosis. Dark Apotheosis You imbue yourself with demonic energies, reducing physical damage taken by 10.00%, reduces magic damage taken by 15%, and allows the use of various demonic abilities. In addition, Soulshatter becomes Provocation which taunts your target, Twilight Ward becomes Fury Ward which will absorb all schools of damage, Shadow Bolt becomes Demonic Slash, and Fear becomes Sleep."
+						},
+						"glyph_of_ember_tap": {
+							"name": "Ember Tap",
+							"description": "Ember Tap heals you for an additional 5% of your health, but the health is restored over 10 sec."
+						},
+						"glyph_of_demonic_circle": {
+							"name": "Demonic Circle",
+							"description": "Reduces the cooldown on Demonic Circle by 4 sec."
+						},
+						"glyph_of_unending_resolve": {
+							"name": "Unending Resolve",
+							"description": "The damage reduction of Unending Resolve is reduced by 20%, but the cooldown is reduced by 60 sec."
+						},
+						"glyph_of_life_tap": {
+							"name": "Life Tap",
+							"description": "Your Life Tap no longer consumes health, but instead absorbs 0 healing received. This effect stacks. The absorb lasts 30 sec."
+						},
+						"glyph_of_eternal_resolve": {
+							"name": "Eternal Resolve",
+							"description": "Outside of Battlegrounds and Arenas: Increases the duration of Unstable Affliction, Corruption, Doom, and Agony by 50%, and reduces their damage by 20%. Inside of Battlegrounds and Arenas: Unending Resolve can no longer be activated, but passively provides 10% damage reduction from all sources."
+						},
+						"glyph_of_supernova": {
+							"name": "Supernova",
+							"description": "When you are killed, all enemies within 8 yards take damage equal to 10% of your maximum health per Burning Ember held."
+						}
+					},
+					"minor": {
+						"glyph_of_hand_of_guldan": {
+							"name": "Hand of Gul'dan",
+							"description": "Your Hand of Gul'dan can now be targeted at a location."
+						},
+						"glyph_of_verdant_spheres": {
+							"name": "Verdant Spheres",
+							"description": "Your Soul Shards are transformed into Verdant Spheres."
+						},
+						"glyph_of_nightmares": {
+							"name": "Nightmares",
+							"description": "Your Felsteed and Dreadsteed can cross water while running and leave a trail of flames."
+						},
+						"glyph_of_felguard": {
+							"name": "Felguard",
+							"description": "Your Felguard will equip a random two-handed axe, sword or polearm from your backpack."
+						},
+						"glyph_of_health_funnel": {
+							"name": "Health Funnel",
+							"description": "Your Health Funnel instantly restores 15% of your demon's health, but has a 10 sec. cooldown."
+						},
+						"glyph_of_subtlety": {
+							"name": "Subtlety",
+							"description": "Your Soul Shards no longer display while out of combat."
+						},
+						"glyph_of_shadow_bolt": {
+							"name": "Shadow Bolt",
+							"description": "Splits your Shadow Bolt into three smaller attacks."
+						},
+						"glyph_of_carrion_swarm": {
+							"name": "Carrion Swarm",
+							"description": "Your Carrion Swarm no longer knocks targets back."
+						},
+						"glyph_of_falling_meteor": {
+							"name": "Falling Meteor",
+							"description": "If you use Demonic Leap while falling, you slam into the ground rapidly and will not die from falling damage."
+						},
+						"glyph_of_unending_breath": {
+							"name": "Unending Breath",
+							"description": "Increases the swim speed of targets affected by your Unending Breath spell by 20%."
+						},
+						"glyph_of_eye_of_kilrogg": {
+							"name": "Eye of Kilrogg",
+							"description": "Your Eye of Kilrogg is no longer stealthed and can now place your Demonic Circle. The casting Warlock must be within line of sight of the Eye of Kilrogg to place the Demonic Circle. In addition, the movement speed of your Eye of Kilrogg is increased by 50% and allows it to fly in areas where flying mounts are enabled."
+						},
+						"glyph_of_subjugate_demon": {
+							"name": "Subjugate Demon",
+							"description": "Reduces the cast time of your Subjugate Demon spell by 50%."
+						},
+						"glyph_of_soulwell": {
+							"name": "Soulwell",
+							"description": "Your soulwell glows with an eerie light."
+						},
+						"glyph_of_crimson_banish": {
+							"name": "Crimson Banish",
+							"description": "Your Banish spell is now red."
+						},
+						"glyph_of_gateway_attunement": {
+							"name": "Gateway Attunement",
+							"description": "Demonic Gateways will automatically activate when you step near them."
+						}
+					}
+				},
+				"warrior": {
+					"major": {
+						"glyph_of_long_charge": {
+							"name": "Long Charge",
+							"description": "Increases the range of your Charge ability by 5 yards."
+						},
+						"glyph_of_unending_rage": {
+							"name": "Unending Rage",
+							"description": "Increases your maximum Rage by 20.0."
+						},
+						"glyph_of_enraged_speed": {
+							"name": "Enraged Speed",
+							"description": "While Enraged, you move 20% faster."
+						},
+						"glyph_of_hindering_strikes": {
+							"name": "Hindering Strikes",
+							"description": "Your Heroic Strike and Cleave now also reduce the target's movement speed by 50% for 8s."
+						},
+						"glyph_of_heavy_repercussions": {
+							"name": "Heavy Repercussions",
+							"description": "While your Shield Block is active, your Shield Slam hits for an additional 50% damage."
+						},
+						"glyph_of_bloodthirst": {
+							"name": "Bloodthirst",
+							"description": "Increases the healing of Bloodthirst by 100%."
+						},
+						"glyph_of_rude_interruption": {
+							"name": "Rude Interruption",
+							"description": "Successfully interrupting a spell with Pummel increases your damage by 6% for 20s."
+						},
+						"glyph_of_gag_order": {
+							"name": "Gag Order",
+							"description": "Your Pummel and Heroic Throw also silence the target for 3s. Does not work against players."
+						},
+						"glyph_of_blitz": {
+							"name": "Blitz",
+							"description": "Your Charge also roots and snares an additional 2 nearby targets."
+						},
+						"glyph_of_mortal_strike": {
+							"name": "Mortal Strike",
+							"description": "When your Mortal Strike is affecting a target, healing effects on you are increased by 10%."
+						},
+						"glyph_of_die_by_the_sword": {
+							"name": "Die by the Sword",
+							"description": "While Die by the Sword is active, using Overpower increases its duration by 1 sec and using Wild Strike increases its duration by 0.5 sec per use."
+						},
+						"glyph_of_hamstring": {
+							"name": "Hamstring",
+							"description": "When you spend Rage to apply Hamstring, the Rage cost of your next Hamstring is reduced by 100%."
+						},
+						"glyph_of_hold_the_line": {
+							"name": "Hold the Line",
+							"description": "Improves the damage of your next Revenge by 50% following a successful parry."
+						},
+						"glyph_of_shield_slam": {
+							"name": "Shield Slam",
+							"description": "Your Shield Slam now dispels 1 magical effect."
+						},
+						"glyph_of_hoarse_voice": {
+							"name": "Hoarse Voice",
+							"description": "Reduces the cooldown and Rage generation of your Battle and Commanding Shout by 50%."
+						},
+						"glyph_of_sweeping_strikes": {
+							"name": "Sweeping Strikes",
+							"description": "When you hit a target with Sweeping Strikes, you gain 1.0 Rage."
+						},
+						"glyph_of_resonating_power": {
+							"name": "Resonating Power",
+							"description": "Increases the damage and cooldown of Thunder Clap by 50%."
+						},
+						"glyph_of_victory_rush": {
+							"name": "Victory Rush",
+							"description": "Increases the total healing provided by your Victory Rush by 50%. This glyph has no effect if combined with the Impending Victory talent."
+						},
+						"glyph_of_raging_wind": {
+							"name": "Raging Wind",
+							"description": "Your Raging Blow hits increase the damage of your next Whirlwind by 10%."
+						},
+						"glyph_of_whirlwind": {
+							"name": "Whirlwind",
+							"description": "Increases the radius of Whirlwind by 4 yards."
+						},
+						"glyph_of_death_from_above": {
+							"name": "Death From Above",
+							"description": "Reduces the cooldown on Heroic Leap by 15 sec."
+						},
+						"glyph_of_victorious_throw": {
+							"name": "Victorious Throw",
+							"description": "Increases the range of Victory Rush and Impending Victory by 15 yards."
+						},
+						"glyph_of_spell_reflection": {
+							"name": "Spell Reflection",
+							"description": "Reduces the cooldown on Spell Reflection by 5 sec."
+						},
+						"glyph_of_shield_wall": {
+							"name": "Shield Wall",
+							"description": "Shield Wall now reduces damage taken by an additional 20%, but its cooldown is increased by 2 min."
+						},
+						"glyph_of_colossus_smash": {
+							"name": "Colossus Smash",
+							"description": "Your Colossus Smash also applies the Sunder Armor effect to your target."
+						},
+						"glyph_of_bull_rush": {
+							"name": "Bull Rush",
+							"description": "Your Charge generates 15 additional Rage."
+						},
+						"glyph_of_recklessness": {
+							"name": "Recklessness",
+							"description": "Decreases the critical chance of Recklessness by 12% but increases its duration by 50%."
+						},
+						"glyph_of_incite": {
+							"name": "Incite",
+							"description": "Using Demoralizing Shout makes your next 3 Heroic Strike or Cleave abilities free."
+						},
+						"glyph_of_impaling_throws": {
+							"name": "Impaling Throws",
+							"description": "Heroic Throw now leaves an axe in the target, which can be retrieved by moving within 5 yards of the target to finish the cooldown of Heroic Throw. This effect will only occur when Heroic Throw is cast from more than 10 yards away from the target."
+						},
+						"glyph_of_the_executor": {
+							"name": "The Executor",
+							"description": "Killing an enemy with Execute grants you 30 rage."
+						}
+					},
+					"minor": {
+						"glyph_of_mystic_shout": {
+							"name": "Mystic Shout",
+							"description": "Your Battle Shout and Commanding Shout cause you to hover in the air for 1s."
+						},
+						"glyph_of_bloodcurdling_shout": {
+							"name": "Bloodcurdling Shout",
+							"description": "Your Battle Shout and Commanding Shout terrify small animals."
+						},
+						"glyph_of_gushing_wound": {
+							"name": "Gushing Wound",
+							"description": "Your Deep Wounds are even bloodier than normal."
+						},
+						"glyph_of_mighty_victory": {
+							"name": "Mighty Victory",
+							"description": "When your Victory Rush or Impending Victory heal you, you grow slightly larger."
+						},
+						"glyph_of_bloody_healing": {
+							"name": "Bloody Healing",
+							"description": "Increases the healing you receive from bandages by 20% while your Deep Wounds is active."
+						},
+						"glyph_of_intimidating_shout": {
+							"name": "Intimidating Shout",
+							"description": "All targets of your Intimidating Shout now tremble in place instead of fleeing in fear."
+						},
+						"glyph_of_thunder_strike": {
+							"name": "Thunder Strike",
+							"description": "Your Thunder Clap visual includes a lightning strike."
+						},
+						"glyph_of_crow_feast": {
+							"name": "Crow Feast",
+							"description": "Your Execute critical strikes summon a flock of carrion birds."
+						},
+						"glyph_of_burning_anger": {
+							"name": "Burning Anger",
+							"description": "You get so angry when Enraged that you catch on fire."
+						},
+						"glyph_of_the_blazing_trail": {
+							"name": "the Blazing Trail",
+							"description": "Your Charge leaves a trail of fire in its wake. If you're going to Charge why not do it with some style?"
+						},
+						"glyph_of_the_raging_whirlwind": {
+							"name": "the Raging Whirlwind",
+							"description": "Whirlwind gives you 15 rage over 6s, but for that time you no longer generate rage from autoattacks."
+						},
+						"glyph_of_the_subtle_defender": {
+							"name": "the Subtle Defender",
+							"description": "Removes the threat generation bonus from Defensive Stance."
+						},
+						"glyph_of_the_watchful_eye": {
+							"name": "the Watchful Eye",
+							"description": "Intervene will now target the party or raid member with the lowest health within 25 yards."
+						},
+						"glyph_of_the_weaponmaster": {
+							"name": "the Weaponmaster",
+							"description": "Your Shout abilities cause the appearance of your weapon to change to that of a random weapon from your primary bag for 10min."
+						}
+					}
+				}
+			}
+		},
+		"saved_talents": {
+			"title": "Talents Sauvegardés",
+			"label": "Talents",
+			"name_label": "Nom",
+			"save_button": "Sauvegarder les Talents",
+			"delete": {
+				"confirm": "Supprimer les talents sauvegardés '{{name}}' ?",
+				"tooltip": "Supprimer les talents sauvegardés"
+			},
+			"alerts": {
+				"choose_name": "Choisissez un nom pour vos talents sauvegardés !",
+				"name_exists": "Des talents avec le nom {{name}} existent déjà."
+			}
+		},
+		"tree": {
+			"mage": {
+				"presenceOfMind": "Présence d'esprit",
+				"blazingSpeed": "Vitesse ardente",
+				"iceFloes": "Flots de glace",
+				"temporalShield": "Bouclier temporel",
+				"flameglow": "Lueur de flamme",
+				"iceBarrier": "Barrière de glace",
+				"ringOfFrost": "Anneau de givre",
+				"iceWard": "Garde de glace",
+				"frostjaw": "Mâchoire de givre",
+				"greaterInvisibility": "Invisibilité supérieure",
+				"cauterize": "Cautérisation",
+				"coldSnap": "Saisie glaciale",
+				"netherTempest": "Tempête du Néant",
+				"livingBomb": "Bombe vivante",
+				"frostBomb": "Bombe de givre",
+				"invocation": "Invocation",
+				"runeOfPower": "Rune de puissance",
+				"incantersWard": "Protection de l’incantateur"
+			},
+			"druid": {
+				"felineSwiftness": "Rapidité féline",
+				"displacerBeast": "Bête déplaçante",
+				"wildCharge": "Charge sauvage",
+				"yserasGift": "Don d'Ysera",
+				"renewal": "Renouveau",
+				"cenarionWard": "Garde cénarienne",
+				"faerieSwarm": "Essaim de fées",
+				"massEntanglement": "Enchevêtrement de masse",
+				"typhoon": "Typhon",
+				"soulOfTheForest": "Âme de la forêt",
+				"incarnation": "Incarnation",
+				"forceOfNature": "Force de la nature",
+				"disorientingRoar": "Rugissement désorientant",
+				"ursolsVortex": "Vortex d'Ursol",
+				"mightyBash": "Coup puissant",
+				"heartOfTheWild": "Cœur du sauvage",
+				"dreamOfCenarius": "Rêve de Cénarius",
+				"naturesVigil": "Veille de la nature"
+			},
+			"warrior": {
+				"juggernaut": "Juggernaut",
+				"doubleTime": "Double temps",
+				"warbringer": "Porte-guerre",
+				"enragedRegeneration": "Régénération enragée",
+				"secondWind": "Second souffle",
+				"impendingVictory": "Victoire imminente",
+				"staggeringShout": "Cri étourdissant",
+				"piercingHowl": "Hurlement perçant",
+				"disruptingShout": "Cri perturbateur",
+				"bladestorm": "Tempête de lames",
+				"shockwave": "Onde de choc",
+				"dragonRoar": "Rugissement du dragon",
+				"massSpellReflection": "Reflet de sorts de masse",
+				"safeguard": "Sauvegarde",
+				"vigilance": "Vigilance",
+				"avatar": "Avatar",
+				"bloodbath": "Bain de sang",
+				"stormBolt": "Éclair de tempête"
+			},
+			"hunter": {
+				"posthaste": "En toute hâte",
+				"narrowEscape": "Échappée étroite",
+				"crouchingTigerHiddenChimera": "Tigre accroupi, Chimère cachée",
+				"bindingShot": "Tir de liaison",
+				"wyvernSting": "Piqûre de wyverne",
+				"intimidation": "Intimidation",
+				"exhilaration": "Exhilaration",
+				"aspectOfTheIronHawk": "Aspect du faucon de fer",
+				"spiritBond": "Lien spirituel",
+				"fervor": "Ferveur",
+				"direBeast": "Bête sinistre",
+				"thrillOfTheHunt": "Frisson de la chasse",
+				"aMurderOfCrows": "Un meurtre de corbeaux",
+				"blinkStrikes": "Frappes de téléportation",
+				"lynxRush": "Ruée du lynx",
+				"glaiveToss": "Lancer de glaive",
+				"powershot": "Tir puissant",
+				"barrage": "Barrage"
+			},
+			"rogue": {
+				"nightstalker": "Traqueur nocturne",
+				"subterfuge": "Subterfuge",
+				"shadowFocus": "Focus d'ombre",
+				"deadlyThrow": "Lancer mortel",
+				"nerveStrike": "Frappe nerveuse",
+				"combatReadiness": "Préparation au combat",
+				"cheatDeath": "Tricher la mort",
+				"leechingPoison": "Poison de sangsue",
+				"elusiveness": "Insaisissabilité",
+				"cloakAndDagger": "Cape et dague",
+				"shadowstep": "Pas de l'ombre",
+				"burstOfSpeed": "Explosion de vitesse",
+				"preyOnTheWeak": "Proie sur les faibles",
+				"paralyticPoison": "Poison paralysant",
+				"dirtyTricks": "Tours sales",
+				"shurikenToss": "Lancer de shuriken",
+				"markedForDeath": "Marqué pour la mort",
+				"anticipation": "Anticipation"
+			},
+			"priest": {
+				"voidTendrils": "Tentacules du Vide",
+				"psyfiend": "Psyfiend",
+				"dominateMind": "Domination mentale",
+				"bodyAndSoul": "Corps et âme",
+				"angelicFeather": "Plume angélique",
+				"phantasm": "Fantasmagorie",
+				"fromDarknessComesLight": "De l'obscurité vient la lumière",
+				"mindbender": "Tord-esprit",
+				"solaceAndInsanity": "Réconfort et folie",
+				"desperatePrayer": "Prière désespérée",
+				"spectralGuise": "Apparence spectrale",
+				"angelicBulwark": "Rempart angélique",
+				"twistOfFate": "Tournant du destin",
+				"powerInfusion": "Infusion de puissance",
+				"divineInsight": "Perspicacité divine",
+				"cascade": "Cascade",
+				"divineStar": "Étoile divine",
+				"halo": "Auréole"
+			},
+			"paladin": {
+				"speedOfLight": "Vitesse de la lumière",
+				"longArmOfTheLaw": "Long bras de la loi",
+				"pursuitOfJustice": "Poursuite de la justice",
+				"fistOfJustice": "Poing de la justice",
+				"repentance": "Repentir",
+				"evilIsAPointOfView": "Le mal est un point de vue",
+				"selflessHealer": "Soigneur altruiste",
+				"eternalFlame": "Flamme éternelle",
+				"sacredShield": "Bouclier sacré",
+				"handOfPurity": "Main de pureté",
+				"unbreakableSpirit": "Esprit indomptable",
+				"clemency": "Clémence",
+				"holyAvenger": "Vengeur sacré",
+				"sanctifiedWrath": "Colère sanctifiée",
+				"divinePurpose": "But divin",
+				"holyPrism": "Prisme sacré",
+				"lightsHammer": "Marteau de la lumière",
+				"executionSentence": "Sentence d'exécution"
+			},
+			"death_knight": {
+				"roilingBlood": "Sang bouillonnant",
+				"plagueLeech": "Sangsue de peste",
+				"unholyBlight": "Flétrissure impie",
+				"lichborne": "Nécro-né",
+				"antimagicZone": "Zone anti-magie",
+				"purgatory": "Purgatoire",
+				"deathsAdvance": "Avancée de la mort",
+				"chilblains": "Engelures",
+				"asphyxiate": "Asphyxier",
+				"deathPact": "Pacte de mort",
+				"deathSiphon": "Siphon de mort",
+				"conversion": "Conversion",
+				"bloodTap": "Robinet de sang",
+				"runicEmpowerment": "Renforcement runique",
+				"runicCorruption": "Corruption runique",
+				"gorefiendsGrasp": "Étreinte de Gorefiend",
+				"remorselessWinter": "Hiver impitoyable",
+				"desecratedGround": "Sol profané"
+			},
+			"monk": {
+				"celerity": "Célérité",
+				"tigersLust": "Luxure du tigre",
+				"momentum": "Élan",
+				"chiWave": "Vague de chi",
+				"zenSphere": "Sphère zen",
+				"chiBurst": "Explosion de chi",
+				"powerStrikes": "Frappes puissantes",
+				"ascension": "Ascension",
+				"chiBrew": "Brassage de chi",
+				"ringOfPeace": "Anneau de paix",
+				"chargingOxWave": "Vague de bœuf chargeur",
+				"legSweep": "Balayage de jambe",
+				"healingElixirs": "Élixirs de guérison",
+				"dampenHarm": "Atténuer les dégâts",
+				"diffuseMagic": "Diffuser la magie",
+				"rushingJadeWind": "Vent de jade précipité",
+				"invokeXuenTheWhiteTiger": "Invoquer Xuen, le Tigre blanc",
+				"chiTorpedo": "Torpille de chi"
+			},
+			"shaman": {
+				"naturesGuardian": "Gardien de la nature",
+				"stoneBulwarkTotem": "Totem de rempart de pierre",
+				"astralShift": "Décalage astral",
+				"frozenPower": "Puissance gelée",
+				"earthgrabTotem": "Totem de saisie terrestre",
+				"windwalkTotem": "Totem de marche-vent",
+				"callOfTheElements": "Appel des éléments",
+				"totemicPersistence": "Persistance totémique",
+				"totemicProjection": "Projection totémique",
+				"elementalMastery": "Maîtrise élémentaire",
+				"ancestralSwiftness": "Rapidité ancestrale",
+				"echoOfTheElements": "Écho des éléments",
+				"rushingStreams": "Courants précipités",
+				"ancestralGuidance": "Guide ancestral",
+				"conductivity": "Conductivité",
+				"unleashedFury": "Fureur déchaînée",
+				"primalElementalist": "Élémentaliste primitif",
+				"elementalBlast": "Explosion élémentaire"
+			},
+			"warlock": {
+				"darkRegeneration": "Régénération sombre",
+				"soulLeech": "Sangsue d'âme",
+				"harvestLife": "Récolte de vie",
+				"demonicBreath": "Souffle démoniaque",
+				"mortalCoil": "Lien mortel",
+				"shadowfury": "Ombre-fureur",
+				"soulLink": "Lien d'âme",
+				"sacrificialPact": "Pacte sacrificiel",
+				"darkBargain": "Marché sombre",
+				"bloodHorror": "Horreur de sang",
+				"burningRush": "Ruée brûlante",
+				"unboundWill": "Volonté déliée",
+				"grimoireOfSupremacy": "Grimoire de suprématie",
+				"grimoireOfService": "Grimoire de service",
+				"grimoireOfSacrifice": "Grimoire de sacrifice",
+				"archimondesDarkness": "Ténèbres d'Archimonde",
+				"kiljaedensCunning": "Ruse de Kil'jaeden",
+				"mannorothsFury": "Fureur de Mannoroth"
+			}
+		}
 	},
 	"rotation": {
-		"title": "Rotation"
+		"title": "Rotation",
+		"common": {
+			"rotation_type": {
+				"label": "Type",
+				"auto": "Auto",
+				"simple": "Simple",
+				"apl": "APL",
+				"single_target": "Cible Unique",
+				"aoe": "AoE",
+				"custom": "Personnalisé"
+			}
+		},
+		"apl": {
+			"actionGroups": {
+				"attributes": {
+					"actions": "Actions",
+					"name": "Nom"
+				},
+				"header": "Groupes d'actions",
+				"name": "Groupe d'actions",
+				"newGroupName": "Nouveau groupe d'actions",
+				"tooltips": {
+					"actions": "Actions dans ce groupe. Elles seront exécutées dans l'ordre lorsqu'un groupe est référencé.",
+					"name": "Nom de ce groupe d'actions (par exemple, 'careful_aim', 'cooldowns').",
+					"overview": "Groupes d'actions pouvant être référencés dans la Liste de Priorité d'Actions (APL). Utile pour organiser votre APL et réutiliser des séquences d'actions communes. Les actions sont effectuées de haut en bas dans un groupe."
+				}
+			},
+			"floatingActionBar": {
+				"new": "Nouveau {{itemName}}",
+				"reset": "Réinitialiser l'APL"
+			},
+			"prePullActions": {
+				"header": "Liste d'actions pré-pull",
+				"name": "Action pré-pull",
+				"tooltips": {
+					"overview": "Actions exécutées avant le début du combat, comme les buffs pré-pull ou les potions."
+				}
+			},
+			"priorityList": {
+				"header": "Liste de Priorité d'Actions (APL)",
+				"name": "Action",
+				"tooltips": {
+					"overview": "Une liste d'actions représentant les actions de votre personnage pendant le combat. Le sim évaluera la liste du haut (priorité la plus élevée) vers le bas (priorité la plus basse) et choisira la première action valide à exécuter à tout moment."
+				}
+			},
+			"tabs": {
+				"actionGroups": "Groupes d'actions",
+				"priorityList": "Liste de priorité",
+				"variables": "Variables"
+			},
+			"variables": {
+				"attributes": {
+					"name": "Nom",
+					"nameTooltip": "Nom de la variable (par exemple, 'my_dot_remains', 'boss_health_pct')",
+					"value": "Valeur",
+					"valueTooltip": "L'expression de valeur que représente cette variable."
+				},
+				"copyName": "{variableName} (Copie)",
+				"header": "Variables",
+				"name": "Variable",
+				"newVariableName": "Nouvelle variable",
+				"tooltips": {
+					"name": "Nom de la variable (par exemple, 'my_dot_remains', 'boss_health_pct')",
+					"overview": "Les variables peuvent être utilisées pour stocker des conditions complexes référencées dans l'APL. Utile pour stocker des valeurs dynamiques changeant pendant le combat, comme les timers de CD ou les ressources.",
+					"value": "L'expression de valeur que représente cette variable."
+				}
+			},
+			"prepull_actions": {
+				"title": "Actions de Préparation",
+				"tooltip": "Actions à effectuer avant le pull.",
+				"item_label": "Actions de Préparation",
+				"do_at": {
+					"label": "Faire À",
+					"tooltip": "Temps avant le pull pour faire l'action. Doit être négatif, et formaté comme '-1s' ou '-2500ms'."
+				},
+				"new_action": "Nouvelle Action"
+			},
+			"priority_list": {
+				"title": "Liste de Priorité",
+				"tooltip": "À chaque point de décision, la simulation effectuera la première action valide de cette liste.",
+				"item_label": "Action",
+				"if_label": "Si :",
+				"new_action": "Nouvelle Action"
+			},
+			"actions": {
+				"cast": {
+					"label": "Lancer",
+					"tooltip": "Lance le sort si possible, c'est-à-dire si toutes les exigences de ressources/temps de recharge/GCD/etc sont remplies."
+				},
+				"cast_at_player": {
+					"label": "Lancer sur le Joueur",
+					"tooltip": "Lance un sort amical si possible, c'est-à-dire si toutes les exigences de ressources/temps de recharge/GCD/etc sont remplies."
+				},
+				"multi_dot": {
+					"label": "Multi-DoT",
+					"tooltip": "Maintient un DoT actif sur plusieurs cibles en lançant le sort spécifié.",
+					"max_dots": {
+						"label": "DoTs Max",
+						"tooltip": "Nombre maximum de DoTs à appliquer simultanément."
+					},
+					"overlap": {
+						"label": "Chevauchement",
+						"tooltip": "Temps maximum avant l'expiration d'un DoT où il peut être rafraîchi."
+					}
+				},
+				"strict_multi_dot": {
+					"label": "Multi-DoT Strict",
+					"tooltip": "Maintient un DoT actif sur plusieurs cibles en lançant le sort spécifié. Ne rafraîchira pas les DoTs qui ne sont pas sur le point d'expirer.",
+					"max_dots": {
+						"label": "DoTs Max",
+						"tooltip": "Nombre maximum de DoTs à appliquer simultanément."
+					},
+					"overlap": {
+						"label": "Chevauchement",
+						"tooltip": "Temps maximum avant l'expiration d'un DoT où il peut être rafraîchi."
+					}
+				},
+				"multi_shield": {
+					"label": "Multi-Bouclier",
+					"tooltip": "Maintient un bouclier actif sur plusieurs cibles en lançant le sort spécifié.",
+					"max_shields": {
+						"label": "Boucliers Max",
+						"tooltip": "Nombre maximum de boucliers à appliquer simultanément."
+					},
+					"overlap": {
+						"label": "Chevauchement",
+						"tooltip": "Temps maximum avant l'expiration d'un bouclier où il peut être rafraîchi."
+					}
+				},
+				"channel": {
+					"label": "Canaliser",
+					"tooltip": "Canalise le sort si possible.",
+					"full": "\n\t\t\t<p>La différence entre canaliser un sort et lancer le sort est que les canalisations peuvent être interrompues. Si le paramètre <b>Interrompre Si</b> est vide, cette action est équivalente à <b>Lancer</b>.</p>\n\t\t\t<p>La canalisation sera interrompue seulement si toutes les conditions suivantes sont vraies :</p>\n\t\t\t<ul>\n\t\t\t\t<li>Immédiatement après un tic de la canalisation</li>\n\t\t\t\t<li>La condition <b>Interrompre Si</b> s'évalue à <b>Vrai</b></li>\n\t\t\t\t<li>Une autre action dans la liste APL est disponible</li>\n\t\t\t</ul>\n\t\t\t<p>Notez que si vous voulez simplement permettre à d'autres actions d'interrompre la canalisation, définissez <b>Interrompre Si</b> à <b>Vrai</b>.</p>\n\t\t\t",
+					"interrupt_if": {
+						"label": "Interrompre Si",
+						"tooltip": "Interrompre la canalisation si la condition est vraie."
+					},
+					"recast": {
+						"label": "Relancer",
+						"tooltip": "Si coché, les interruptions de cette canalisation relanceront le sort."
+					}
+				},
+				"cast_all_stat_buff_cooldowns": {
+					"label": "Lancer Tous les Cooldowns de Buff de Stats",
+					"tooltip": "Lance tous les cooldowns de buff de stats disponibles.",
+					"full": "\n\t\t\t<ul>\n\t\t\t\t<li>Ne lance pas les cooldowns qui sont déjà contrôlés par d'autres actions dans la liste de priorité.</li>\n\t\t\t\t<li>Par défaut, cette action lancera ces cooldowns de manière avide dès qu'ils deviennent disponibles. Cependant, lorsqu'elle est intégrée dans une séquence, l'action ne se déclenchera que lorsque TOUS les cooldowns correspondant au(x) type(s) de buff spécifié(s) sont prêts.</li>\n\t\t\t</ul>\n\t\t\t"
+				},
+				"autocast_other_cooldowns": {
+					"label": "Auto-lancer Autres Cooldowns",
+					"tooltip": "Lance automatiquement d'autres cooldowns quand disponibles.",
+					"full": "\n\t\t\t<ul>\n\t\t\t\t<li>Ne lance pas automatiquement les cooldowns qui sont déjà contrôlés par d'autres actions dans la liste de priorité.</li>\n\t\t\t\t<li>Les cooldowns sont généralement lancés immédiatement dès qu'ils sont prêts, mais il y a quelques vérifications intelligentes de base en place, par ex. ne pas utiliser les CDs de Mana quand près du mana plein.</li>\n\t\t\t</ul>\n\t\t\t"
+				},
+				"wait": {
+					"label": "Attendre",
+					"tooltip": "Attend pendant la durée spécifiée."
+				},
+				"wait_until": {
+					"label": "Attendre Jusqu'à",
+					"tooltip": "Attend jusqu'à ce que la condition spécifiée soit vraie."
+				},
+				"scheduled_action": {
+					"label": "Action Programmée",
+					"tooltip": "Effectue une action à un moment programmé.",
+					"do_at": {
+						"label": "Faire À",
+						"tooltip": "Liste de timings séparés par des virgules. L'action interne sera effectuée une fois à chaque timing."
+					}
+				},
+				"do_at": {
+					"label": "Faire À",
+					"tooltip": "Effectue une action à un moment spécifique."
+				},
+				"sequence": {
+					"label": "Séquence",
+					"tooltip": "Une liste de sous-actions à exécuter dans l'ordre spécifié.",
+					"full": "\n\t\t\t<p>Une fois qu'une des sous-actions a été effectuée, la prochaine sous-action ne sera pas nécessairement exécutée immédiatement après. Le système redémarrera au début de toute la liste d'actions (pas la séquence). Si la séquence est exécutée à nouveau, elle effectuera la prochaine sous-action.</p>\n\t\t\t<p>Quand toutes les actions ont été effectuées, la séquence ne se réinitialise PAS automatiquement ; au lieu de cela, elle sera ignorée à partir de maintenant. Utilisez l'action <b>Réinitialiser Séquence</b> pour la réinitialiser, si désiré.</p>\n\t\t\t"
+				},
+				"reset_sequence": {
+					"label": "Réinitialiser Séquence",
+					"tooltip": "Redémarre une séquence, de sorte que la prochaine fois qu'elle s'exécute, elle effectuera sa première sous-action.",
+					"full": "\n\t\t\t<p>Utilisez le champ <b>nom</b> pour faire référence à la séquence à réinitialiser. La séquence désirée doit avoir la même valeur (non vide) pour son <b>nom</b>.</p>\n\t\t\t"
+				},
+				"strict_sequence": {
+					"label": "Séquence Stricte",
+					"tooltip": "Comme une séquence régulière, sauf que toutes les sous-actions sont exécutées immédiatement l'une après l'autre et la séquence se réinitialise automatiquement à la fin.",
+					"full": "\n\t\t\t<p>Les séquences strictes ne commencent pas à moins que TOUTES les sous-actions soient prêtes.</p>\n\t\t\t"
+				},
+				"change_target": {
+					"label": "Changer de Cible",
+					"tooltip": "Définit la cible actuelle, qui est la cible des attaques automatiques et de la plupart des lancers par défaut."
+				},
+				"activate_aura": {
+					"label": "Activer Aura",
+					"tooltip": "Active une aura"
+				},
+				"activate_aura_with_stacks": {
+					"label": "Activer Aura Avec Piles",
+					"tooltip": "Active l'aura spécifiée avec le nombre de piles donné.",
+					"stacks": "piles",
+					"stacks_tooltip": "Nombre désiré de piles d'aura initiales."
+				},
+				"activate_all_stat_buff_proc_auras": {
+					"label": "Activer Toutes les Auras de Proc de Buff de Stats",
+					"tooltip": "Active toutes les auras de proc d'objet/enchantement qui buffent le(s) type(s) de stat spécifié(s) en utilisant l'ensemble d'objets spécifié."
+				},
+				"cancel_aura": {
+					"label": "Annuler Aura",
+					"tooltip": "Désactive une aura, équivalent à /cancelaura."
+				},
+				"trigger_icd": {
+					"label": "Déclencher ICD",
+					"tooltip": "Déclenche l'ICD interne spécifié."
+				},
+				"item_swap": {
+					"label": "Échange d'Objets",
+					"tooltip": "Échange les objets, en utilisant l'ensemble d'échange spécifié dans les Paramètres."
+				},
+				"move": {
+					"label": "Se Déplacer",
+					"tooltip": "Commence un déplacement vers la portée désirée de la cible.",
+					"to_range": "vers Portée",
+					"to_range_tooltip": "Portée désirée de la cible.",
+					"move_duration": "Durée de déplacement",
+					"duration": "Durée",
+					"duration_tooltip": "Quantité de temps que le personnage devrait se déplacer.",
+					"move_duration_tooltip": "Le personnage se déplace pendant la durée donnée."
+				},
+				"custom_rotation": {
+					"label": "Rotation Personnalisée",
+					"tooltip": "INTERNE UNIQUEMENT"
+				},
+				"optimal_rotation_action": {
+					"label": "Action de Rotation Optimale",
+					"tooltip": "Exécute la rotation DPS Féral optimisée en utilisant un algorithme codé en dur.",
+					"wrath_weave": {
+						"label": "Activer le Tissage de Colère",
+						"tooltip": "Lancer Colère quand possible pendant la fenêtre DPS Cœur de la Nature. Ignoré si HotW n'est pas talenté."
+					}
+				},
+				"guardian_hotw_dps_rotation": {
+					"label": "Rotation DPS HotW",
+					"tooltip": "Exécute la rotation DPS HotW optimisée en utilisant un algorithme codé en dur."
+				}
+			},
+			"values": {
+				"item_label": "Valeur",
+				"no_condition": "Aucune Condition",
+				"none": "<Aucun>",
+				"const": {
+					"label": "Const",
+					"tooltip": "Une valeur fixe.",
+					"full_description": "<p>Exemples :<ul><li><b>Nombre :</b> '123', '0.5', '-10'</li><li><b>Temps :</b> '100ms', '5s', '3m'</li><li><b>Pourcentage :</b> '30%'</li></ul></p>"
+				},
+				"compare": {
+					"label": "Comparer",
+					"tooltip": "Compare deux valeurs."
+				},
+				"math": {
+					"label": "Math",
+					"tooltip": "Effectue des calculs de base sur deux valeurs."
+				},
+				"max": {
+					"label": "Max",
+					"tooltip": "Retourne la plus grande valeur parmi les sous-valeurs."
+				},
+				"min": {
+					"label": "Min",
+					"tooltip": "Retourne la plus petite valeur parmi les sous-valeurs."
+				},
+				"all_of": {
+					"label": "Tous",
+					"tooltip": "Retourne Vrai si toutes les sous-valeurs sont Vraies, sinon Faux"
+				},
+				"any_of": {
+					"label": "N'importe lequel",
+					"tooltip": "Retourne Vrai si n'importe laquelle des sous-valeurs est Vraie, sinon Faux"
+				},
+				"not": {
+					"label": "Non",
+					"tooltip": "Retourne l'opposé de la valeur d'entrée."
+				},
+				"current_time": {
+					"label": "Temps Actuel",
+					"tooltip": "Temps actuel dans la rencontre."
+				},
+				"current_time_percent": {
+					"label": "Temps Actuel (%)",
+					"tooltip": "Temps écoulé de l'itération de simulation actuelle, en pourcentage."
+				},
+				"remaining_time": {
+					"label": "Temps Restant",
+					"tooltip": "Temps restant dans la rencontre."
+				},
+				"remaining_time_percent": {
+					"label": "Temps Restant (%)",
+					"tooltip": "Temps écoulé de l'itération de simulation restante, en pourcentage."
+				},
+				"is_execute_phase": {
+					"label": "Est Phase d'Exécution",
+					"tooltip": "Retourne vrai si la cible est en phase d'exécution."
+				},
+				"num_targets": {
+					"label": "Nombre de Cibles",
+					"tooltip": "Nombre de cibles dans la rencontre"
+				},
+				"spell_is_casting": {
+					"label": "Sort en Cours de Lancement",
+					"tooltip": "Vrai si le sort est actuellement en cours de lancement"
+				},
+				"spell_time_to_ready": {
+					"label": "Temps du Sort jusqu'à Prêt",
+					"tooltip": "Temps jusqu'à ce que le sort soit prêt"
+				},
+				"in_front_of_target": {
+					"label": "Devant la Cible",
+					"tooltip": "Vrai si nous sommes devant la cible"
+				},
+				"boss_cast": {
+					"label": "Sort du Boss",
+					"tooltip": "Vrai si le boss lance le sort spécifié"
+				},
+				"boss_cast_time_to_ready": {
+					"label": "Temps jusqu'au Sort du Boss Prêt",
+					"tooltip": "Temps jusqu'à ce que le sort du boss soit prêt"
+				},
+				"unit_is_moving": {
+					"label": "Unité en Mouvement",
+					"tooltip": "Vrai si l'unité se déplace"
+				},
+				"distance_to_unit": {
+					"label": "Distance à l'Unité",
+					"tooltip": "Distance à l'unité"
+				},
+				"current_health": {
+					"label": "Santé Actuelle",
+					"tooltip": "Quantité de santé actuellement disponible."
+				},
+				"current_health_percent": {
+					"label": "Santé Actuelle (%)",
+					"tooltip": "Quantité de santé actuellement disponible, en pourcentage."
+				},
+				"max_health": {
+					"label": "Santé Max",
+					"tooltip": "Quantité de santé maximum actuellement disponible."
+				},
+				"current_mana": {
+					"label": "Mana Actuel",
+					"tooltip": "Quantité de mana actuellement disponible."
+				},
+				"current_mana_percent": {
+					"label": "Mana Actuel (%)",
+					"tooltip": "Quantité de mana actuellement disponible, en pourcentage."
+				},
+				"current_rage": {
+					"label": "Rage Actuelle",
+					"tooltip": "Quantité de rage actuellement disponible."
+				},
+				"max_rage": {
+					"label": "Rage Max",
+					"tooltip": "Quantité de rage maximum disponible."
+				},
+				"current_focus": {
+					"label": "Focus Actuel",
+					"tooltip": "Quantité de focus actuellement disponible."
+				},
+				"max_focus": {
+					"label": "Focus Max",
+					"tooltip": "Quantité de focus maximum disponible."
+				},
+				"focus_regen_per_second": {
+					"label": "Régénération Focus Par Seconde",
+					"tooltip": "Régénération de focus par seconde."
+				},
+				"estimated_time_to_target_focus": {
+					"label": "Temps Estimé Vers Focus Cible",
+					"tooltip": "Temps estimé jusqu'à ce que le focus cible soit atteint, retournera 0 si à ou au-dessus de la cible."
+				},
+				"current_energy": {
+					"label": "Énergie Actuelle",
+					"tooltip": "Quantité d'énergie actuellement disponible."
+				},
+				"max_energy": {
+					"label": "Énergie Max",
+					"tooltip": "Quantité d'énergie maximum disponible."
+				},
+				"energy_regen_per_second": {
+					"label": "Régénération Énergie Par Seconde",
+					"tooltip": "Régénération d'énergie par seconde."
+				},
+				"estimated_time_to_target_energy": {
+					"label": "Temps Estimé Vers Énergie Cible",
+					"tooltip": "Temps estimé jusqu'à ce que l'énergie cible soit atteinte, retournera 0 si à ou au-dessus de la cible."
+				},
+				"current_combo_points": {
+					"label": "Points de Combo Actuels",
+					"tooltip": "Quantité de points de combo actuellement disponibles."
+				},
+				"max_combo_points": {
+					"label": "Points de Combo Max",
+					"tooltip": "Quantité de points de combo maximum disponibles."
+				},
+				"current_chi": {
+					"label": "Chi Actuel",
+					"tooltip": "Quantité de chi actuellement disponible."
+				},
+				"max_chi": {
+					"label": "Chi Max",
+					"tooltip": "Quantité de chi maximum disponible."
+				},
+				"current_runic_power": {
+					"label": "Puissance Runique Actuelle",
+					"tooltip": "Quantité de puissance runique actuellement disponible."
+				},
+				"max_runic_power": {
+					"label": "Puissance Runique Max",
+					"tooltip": "Quantité de puissance runique maximum disponible."
+				},
+				"solar_energy": {
+					"label": "Énergie Solaire",
+					"tooltip": "Quantité d'énergie solaire actuellement disponible."
+				},
+				"lunar_energy": {
+					"label": "Énergie Lunaire",
+					"tooltip": "Quantité d'énergie lunaire actuellement disponible"
+				},
+				"current_eclipse_phase": {
+					"label": "Phase d'Éclipse Actuelle",
+					"tooltip": "La phase d'éclipse dans laquelle le druide se trouve actuellement."
+				},
+				"generic_resource": {
+					"label": "{GENERIC_RESOURCE}",
+					"tooltip": "Quantité de {GENERIC_RESOURCE} actuellement disponible."
+				},
+				"num_runes": {
+					"label": "Nombre de Runes",
+					"tooltip": "Quantité de runes de type certain actuellement disponibles incluant la Mort."
+				},
+				"num_non_death_runes": {
+					"label": "Nombre de Runes Non-Mort",
+					"tooltip": "Quantité de runes de type certain actuellement disponibles en ignorant la Mort"
+				},
+				"rune_is_ready": {
+					"label": "Rune Est Prête",
+					"tooltip": "La rune d'un emplacement certain est-elle actuellement disponible."
+				},
+				"rune_is_death": {
+					"label": "Rune Est Mort",
+					"tooltip": "La rune d'un emplacement certain est-elle actuellement convertie en Mort."
+				},
+				"rune_cooldown": {
+					"label": "Temps de Recharge de Rune",
+					"tooltip": "Quantité de temps jusqu'à ce qu'une rune de type certain soit prête à utiliser.<br><b>NOTE:</b> Retourne 0 s'il y a une rune disponible"
+				},
+				"next_rune_cooldown": {
+					"label": "Prochain Temps de Recharge de Rune",
+					"tooltip": "Quantité de temps jusqu'à ce qu'une 2ème rune de type certain soit prête à utiliser.<br><b>NOTE:</b> Retourne 0 s'il y a 2 runes disponibles"
+				},
+				"rune_slot_cooldown": {
+					"label": "Temps de Recharge d'Emplacement de Rune",
+					"tooltip": "Quantité de temps jusqu'à ce qu'une rune d'emplacement certain soit prête à utiliser.<br><b>NOTE:</b> Retourne 0 si la rune est prête"
+				},
+				"gcd_is_ready": {
+					"label": "GCD Est Prêt",
+					"tooltip": "<b>Vrai</b> si le GCD n'est pas en temps de recharge, sinon <b>Faux</b>."
+				},
+				"gcd_time_to_ready": {
+					"label": "Temps GCD Vers Prêt",
+					"tooltip": "Quantité de temps restant avant que le GCD sorte du temps de recharge, ou <b>0</b> s'il n'est pas en temps de recharge."
+				},
+				"time_to_next_auto": {
+					"label": "Temps Vers Prochaine Auto",
+					"tooltip": "Quantité de temps restant avant la prochaine attaque de mêlée Main-gauche ou Main-droite, ou <b>0</b> si les attaques automatiques ne sont pas engagées."
+				},
+				"spell_known": {
+					"label": "Sort Connu",
+					"tooltip": "<b>Vrai</b> si le sort est actuellement connu, sinon <b>Faux</b>."
+				},
+				"current_cost": {
+					"label": "Coût Actuel",
+					"tooltip": "Retourne le coût de ressource actuel du sort"
+				},
+				"can_cast": {
+					"label": "Peut Lancer",
+					"tooltip": "<b>Vrai</b> si toutes les exigences pour lancer le sort sont actuellement remplies, sinon <b>Faux</b>."
+				},
+				"is_ready": {
+					"label": "Est Prêt",
+					"tooltip": "<b>Vrai</b> si le sort n'est pas en temps de recharge, sinon <b>Faux</b>."
+				},
+				"time_to_ready": {
+					"label": "Temps Vers Prêt",
+					"tooltip": "Quantité de temps restant avant que le sort sorte du temps de recharge, ou <b>0</b> s'il n'est pas en temps de recharge."
+				},
+				"cast_time": {
+					"label": "Temps de Lancement",
+					"tooltip": "Quantité de temps pour lancer le sort incluant toute hâte et ajustements de temps de lancement de sort."
+				},
+				"travel_time": {
+					"label": "Temps de Trajet",
+					"tooltip": "Quantité de temps pour que le sort voyage vers la cible."
+				},
+				"cpm": {
+					"label": "CPM",
+					"tooltip": "Lancers Par Minute pour le sort jusqu'à présent dans l'itération actuelle."
+				},
+				"is_channeling": {
+					"label": "Canalise",
+					"tooltip": "<b>Vrai</b> si ce sort est actuellement canalisé, sinon <b>Faux</b>."
+				},
+				"channeled_ticks": {
+					"label": "Tics Canalises",
+					"tooltip": "Le nombre de tics complétés dans la canalisation actuelle de ce sort, ou <b>0</b> si le sort n'est pas canalisé."
+				},
+				"number_of_charges": {
+					"label": "Nombre de Charges",
+					"tooltip": "Le nombre de charges qui sont actuellement disponibles pour le sort."
+				},
+				"time_to_next_charge": {
+					"label": "Temps vers prochaine Charge",
+					"tooltip": "Le temps jusqu'à ce que la prochaine charge soit disponible. 0 si le sort a toutes les charges disponibles."
+				},
+				"channel_clip_delay": {
+					"label": "Délai de Coupure de Canalisation",
+					"tooltip": "La quantité de temps spécifiée par le paramètre <b>Délai de Coupure de Canalisation</b>."
+				},
+				"input_delay": {
+					"label": "Délai de Saisie",
+					"tooltip": "La quantité de temps spécifiée par le paramètre <b>Délai de Saisie</b>."
+				},
+				"aura_known": {
+					"label": "Aura Connue",
+					"tooltip": "<b>Vrai</b> si l'aura est actuellement connue, sinon <b>Faux</b>."
+				},
+				"aura_active": {
+					"label": "Aura Active",
+					"tooltip": "<b>Vrai</b> si l'aura est actuellement active ET qu'elle a été active pendant au moins aussi longtemps que le temps de réaction du joueur (configuré dans Paramètres), sinon <b>Faux</b>."
+				},
+				"aura_active_with_reaction_time": {
+					"label": "[DÉPRÉCIÉ] Aura Active (avec Temps de Réaction)",
+					"tooltip": "Toutes les vérifications d'Aura contiennent maintenant la logique de Temps de Réaction, donc ceci n'est plus nécessaire. Utilisez <b>Aura Active</b> à la place."
+				},
+				"aura_inactive": {
+					"label": "Aura Inactive",
+					"tooltip": "<b>Vrai</b> si l'aura n'est pas actuellement active ET qu'elle a été inactive pendant au moins aussi longtemps que le temps de réaction du joueur (configuré dans Paramètres), sinon <b>Faux</b>."
+				},
+				"aura_inactive_with_reaction_time": {
+					"label": "[DÉPRÉCIÉ] Aura Inactive (avec Temps de Réaction)",
+					"tooltip": "Toutes les vérifications d'Aura contiennent maintenant la logique de Temps de Réaction, donc ceci n'est plus nécessaire. Utilisez <b>Aura Inactive</b> à la place."
+				},
+				"aura_remaining_time": {
+					"label": "Temps Restant d'Aura",
+					"tooltip": "Temps restant avant que cette aura expire, ou 0 si l'aura n'est pas actuellement active."
+				},
+				"aura_num_stacks": {
+					"label": "Nombre de Piles d'Aura",
+					"tooltip": "Nombre de piles de l'aura."
+				},
+				"aura_should_refresh": {
+					"label": "Aura Devrait Se Rafraîchir",
+					"tooltip": "Si cette aura devrait être rafraîchie, par ex. dans le but de maintenir un debuff."
+				},
+				"all_trinket_stat_procs_active": {
+					"label": "Tous les Buffs de Proc d'Objet Actifs",
+					"tooltip": "<b>Vrai</b> si tous les procs d'objet/enchantement qui buffent le(s) type(s) de stat spécifié(s) sont actuellement actifs, sinon <b>Faux</b>."
+				},
+				"any_trinket_stat_procs_active": {
+					"label": "N'importe Quel Buff de Proc d'Objet Actif",
+					"tooltip": "<b>Vrai</b> si n'importe quel proc d'objet/enchantement qui buffe le(s) type(s) de stat spécifié(s) est actuellement actif, sinon <b>Faux</b>."
+				},
+				"trinket_procs_min_remaining_time": {
+					"label": "Temps Restant Min des Procs d'Objets",
+					"tooltip": "Durée restante la plus courte sur n'importe quel proc d'objet/enchantement actif qui buffe le(s) type(s) de stat spécifié(s), ou infini si aucun n'est actuellement actif."
+				},
+				"trinket_procs_max_remaining_icd": {
+					"label": "ICD Restant Max des Procs d'Objets",
+					"tooltip": "ICD restant le plus long sur n'importe quel proc d'objet/enchantement inactif qui buffe le(s) type(s) de stat spécifié(s), ou 0 si tous sont actuellement actifs."
+				},
+				"num_equipped_stat_proc_trinkets": {
+					"label": "Nombre d'Effets de Proc de Stat Équipés",
+					"tooltip": "Nombre d'effets passifs d'objet/enchantement équipés qui buffent le(s) type(s) de stat spécifié(s) quand ils proc."
+				},
+				"num_stat_buff_cooldowns": {
+					"label": "Nombre de Cooldowns de Buff de Stat",
+					"tooltip": "Nombre de Cooldowns Majeurs enregistrés qui buffent le(s) type(s) de stat spécifié(s) quand ils sont lancés."
+				},
+				"any_stat_buff_cooldowns_active": {
+					"label": "N'importe Quel Cooldown de Buff de Stat Actif",
+					"tooltip": "<b>Vrai</b> si n'importe quel Cooldown Majeur enregistré qui buffe le(s) type(s) de stat spécifié(s) est actuellement actif, sinon <b>Faux</b>."
+				},
+				"dot_is_active": {
+					"label": "DoT Est Actif",
+					"tooltip": "<b>Vrai</b> si le dot spécifié tique actuellement, sinon <b>Faux</b>."
+				},
+				"dot_is_active_on_all_targets": {
+					"label": "DoT Est Actif Sur Toutes les Cibles",
+					"tooltip": "<b>Vrai</b> si le dot spécifié tique actuellement sur toutes les cibles, sinon <b>Faux</b>."
+				},
+				"dot_remaining_time": {
+					"label": "Temps Restant du DoT",
+					"tooltip": "Temps restant avant que le dernier tic de ce DoT se produise, ou 0 si le DoT ne tique pas actuellement."
+				},
+				"dot_lowest_remaining_time": {
+					"label": "Temps Restant le Plus Bas du DoT",
+					"tooltip": "Temps restant avant que le dernier tic de ce DoT sur n'importe quelle cible se produise, ou 0 si le DoT ne tique pas actuellement."
+				},
+				"dot_tick_frequency": {
+					"label": "Fréquence de Tic du DoT",
+					"tooltip": "Le temps entre chaque tic."
+				},
+				"dot_percent_increase": {
+					"label": "Augmentation de Dégâts DoT %",
+					"tooltip": "À quel point un nouveau DoT serait plus fort comparé à l'ancien."
+				},
+				"sequence_is_complete": {
+					"label": "Séquence Est Complète",
+					"tooltip": "<b>Vrai</b> s'il n'y a plus de sous-actions à exécuter dans la séquence, sinon <b>Faux</b>."
+				},
+				"sequence_is_ready": {
+					"label": "Séquence Est Prête",
+					"tooltip": "<b>Vrai</b> si la prochaine sous-action dans la séquence est prête à être exécutée, sinon <b>Faux</b>."
+				},
+				"sequence_time_to_ready": {
+					"label": "Temps de Séquence Vers Prêt",
+					"tooltip": "Retourne la quantité de temps restant jusqu'à ce que la prochaine sous-action dans la séquence soit prête."
+				},
+				"totem_remaining_time": {
+					"label": "Temps Restant du Totem",
+					"tooltip": "Retourne la quantité de temps restant jusqu'à ce que le totem expire."
+				},
+				"shaman_fire_elemental_duration": {
+					"label": "Durée Totale de l'Élémentaire de Feu",
+					"tooltip": "Retourne la durée totale du Totem d'Élémentaire de Feu"
+				},
+				"cat_excess_energy": {
+					"label": "Énergie Excédentaire",
+					"tooltip": "Retourne la quantité d'énergie excédentaire disponible, après avoir soustrait l'énergie qui sera nécessaire pour maintenir les DoTs."
+				},
+				"cat_new_savage_roar_duration": {
+					"label": "Nouvelle Durée de Rugissement Sauvage",
+					"tooltip": "Retourne la durée du rugissement sauvage basée sur les points de combo actuels"
+				},
+				"warlock_hand_of_guldan_in_flight": {
+					"label": "Main de Gul'dan en Vol",
+					"tooltip": "Retourne <b>Vrai</b> si l'impact de Main de Gul'dan est actuellement en vol."
+				},
+				"warlock_haunt_in_flight": {
+					"label": "Hantise en Vol",
+					"tooltip": "Retourne <b>Vrai</b> si Hantise est actuellement en vol."
+				},
+				"mage_current_combustion_dot_estimate": {
+					"label": "Valeur DoT de Combustion",
+					"tooltip": "Retourne la taille estimée actuelle de votre DoT de Combustion."
+				},
+				"brewmaster_monk_current_stagger_percent": {
+					"label": "Report Actuel (%)",
+					"tooltip": "Quantité de Report actuel, en pourcentage."
+				},
+				"protection_paladin_damage_taken_last_global": {
+					"label": "Dégâts Reçus Dernier Global",
+					"tooltip": "Quantité de dégâts reçus dans les dernières 1.5s."
+				},
+				"aura_remaining_icd": {
+					"label": "Temps Restant ICD Aura",
+					"tooltip": "Temps restant avant que le temps de recharge interne de cette aura soit prêt, ou 0 si l'ICD est prêt maintenant."
+				},
+				"aura_icd_is_ready": {
+					"label": "ICD Aura Prêt",
+					"tooltip": "<b>Vrai</b> si l'ICD de l'aura est actuellement prêt OU s'il a été mis en CD récemment, dans le temps de réaction du joueur (configuré dans Paramètres), sinon <b>Faux</b>."
+				},
+				"aura_icd_is_ready_with_reaction_time": {
+					"label": "[DÉPRÉCIÉ] ICD Aura Prêt (avec Temps de Réaction)",
+					"tooltip": "Toutes les vérifications d'Aura contiennent maintenant la logique de Temps de Réaction, donc ceci n'est plus nécessaire. Utilisez <b>ICD Aura Prêt</b> à la place."
+				},
+				"overlap": {
+					"label": "Chevauchement",
+					"tooltip": "Temps maximum avant l'expiration de l'aura où elle peut être rafraîchie."
+				}
+			},
+			"operators": {
+				"equals": "==",
+				"not_equals": "!=",
+				"greater_than_or_equal": ">=",
+				"greater_than": ">",
+				"less_than_or_equal": "<=",
+				"less_than": "<",
+				"add": "+",
+				"subtract": "-",
+				"multiply": "*",
+				"divide": "/"
+			},
+			"execute_phases": {
+				"e20": "20%",
+				"e25": "25%",
+				"e35": "35%",
+				"e45": "45%",
+				"e90": "90%"
+			},
+			"totem_types": {
+				"earth": "Terre",
+				"air": "Air",
+				"fire": "Feu",
+				"water": "Eau"
+			},
+			"submenus": {
+				"logic": "Logique",
+				"encounter": "Rencontre",
+				"boss": "Chef",
+				"unit": "Unité",
+				"resources": "Ressources",
+				"gcd": "TdR",
+				"auto": "Automatique",
+				"spell": "Sort",
+				"aura": "Aura",
+				"aura_sets": "Ensembles d'Auras",
+				"dot": "DoT",
+				"sequence": "Séquence",
+				"casting": "Lancement",
+				"timing": "Chronométrage",
+				"sequences": "Séquences",
+				"misc": "Divers",
+				"feral_druid": "Druide Farouche",
+				"guardian_druid": "Druide Gardien",
+				"shaman": "Chaman",
+				"warlock": "Démoniste",
+				"mage": "Mage",
+				"tank": "Tank",
+				"health": "Santé",
+				"mana": "Mana",
+				"rage": "Rage",
+				"focus": "Concentration",
+				"energy": "Énergie",
+				"combo_points": "Points de Combo",
+				"chi": "Chi",
+				"runic_power": "Puissance Runique",
+				"eclipse": "Éclipse",
+				"runes": "Runes",
+				"cooldowns": "Temps de Recharge",
+				"placeholders": "Espaces Réservés"
+			},
+			"item_swap_sets": {
+				"main": "Principal",
+				"swapped": "Échangé"
+			},
+			"helpers": {
+				"action_id_sets": {
+					"auras": "Aura",
+					"stackable_auras": "Aura",
+					"icd_auras": "Aura",
+					"exclusive_effect_auras": "Aura",
+					"spells": "Sort",
+					"castable_spells": "Sort",
+					"channel_spells": "Sort Canalisé",
+					"dot_spells": "Sort DoT",
+					"castable_dot_spells": "Sort DoT",
+					"shield_spells": "Sort Bouclier",
+					"non_instant_spells": "Sort Non-instantané",
+					"friendly_spells": "Sort Amical",
+					"expected_dot_spells": "Sort DoT"
+				},
+				"field_configs": {
+					"type": "Type",
+					"strategy": "Stratégie",
+					"buff_type": "Type de Buff",
+					"min_icd": "ICD Min",
+					"min_icd_tooltip": "Si non-zéro, filtre tous les procs qui n'ont pas d'ICD ou dont l'ICD est inférieur à la valeur spécifiée (en secondes). Cela peut être utile pour certaines vérifications de snapshot, car les procs avec des ICD faibles sont souvent trop faibles pour snapshot."
+				},
+				"eclipse_types": {
+					"lunar": "Lunaire",
+					"solar": "Solaire",
+					"neutral": "Neutre"
+				},
+				"rune_types": {
+					"blood": "Sang",
+					"frost": "Givre",
+					"unholy": "Impie",
+					"death": "Mort"
+				},
+				"rune_slots": {
+					"blood_left": "Sang Gauche",
+					"blood_right": "Sang Droite",
+					"frost_left": "Givre Gauche",
+					"frost_right": "Givre Droite",
+					"unholy_left": "Impie Gauche",
+					"unholy_right": "Impie Droite"
+				},
+				"rotation_types": {
+					"single_target": "Cible Unique",
+					"aoe": "AoE"
+				},
+				"hotw_strategies": {
+					"caster": "Lanceur de Sorts",
+					"cat": "Chat",
+					"hybrid": "Hybride"
+				},
+				"unit_labels": {
+					"self": "Soi",
+					"current_target": "Cible Actuelle",
+					"previous_target": "Cible Précédente",
+					"next_target": "Cible Suivante",
+					"player": "Joueur",
+					"target": "Cible",
+					"pet": "Familier"
+				},
+				"placeholder_tooltip": "La Potion de Préparation si CurrentTime < 0, ou la Potion de Combat si le combat a commencé.",
+				"buttons": {
+					"enable_action": "Activer l'Action",
+					"disable_action": "Désactiver l'Action",
+					"enable_disable": "Activer/Désactiver"
+				}
+			}
+		},
+		"auto": {
+			"description": "Utilisation automatique d'une rotation sauvegardée basée sur vos paramètres actuels."
+		},
+		"simple": {
+			"title": "Rotation"
+		},
+		"cooldowns": {
+			"title": "Temps de Recharge",
+			"tooltip": "Spécifiez les timings des temps de recharge, en secondes. Les temps de recharge seront utilisés dès que possible après leurs timings spécifiés. Quand non spécifiés, les temps de recharge seront utilisés quand ils sont prêts et qu'il est raisonnable de le faire.<br><br>Plusieurs timings peuvent être fournis en les séparant par des virgules. Toute utilisation de temps de recharge après le dernier timing fourni utilisera la logique par défaut.",
+			"delete_tooltip": "Supprimer le Temps de Recharge",
+			"timings_placeholder": "20, 40, ..."
+		},
+		"saved_rotations": {
+			"title": "Rotations Sauvegardées",
+			"label": "Rotation",
+			"name_label": "Nom de la Rotation",
+			"save_button": "Sauvegarder la Rotation",
+			"delete": {
+				"confirm": "Supprimer la rotation sauvegardée '{{name}}' ?",
+				"tooltip": "Supprimer la rotation sauvegardée"
+			},
+			"alerts": {
+				"choose_name": "Choisissez un nom pour votre rotation sauvegardée !",
+				"name_exists": "Une rotation avec le nom {{name}} existe déjà."
+			}
+		},
+		"options": {
+			"druid": {
+				"feral": {
+					"target_type": {
+						"label": "Type de Cible",
+						"single_target": "Cible Unique",
+						"aoe": "AoE"
+					},
+					"bear_weave": {
+						"label": "Activer le tissage ours",
+						"tooltip": "Tisser en Forme d'Ours tout en accumulant l'Énergie"
+					},
+					"snek_weave": {
+						"label": "Utiliser Serpent Albino",
+						"tooltip": "Réinitialiser le timer de swing à la fin des tissages ours en utilisant le familier Serpent Albino"
+					},
+					"use_ns": {
+						"label": "Utiliser Rapidité de la Nature",
+						"tooltip": "Utiliser Rapidité de la Nature pour combler les lacunes dans le temps de présence de Rapidité Prédatrice"
+					},
+					"manual_params": {
+						"label": "Paramètres Avancés Manuels",
+						"tooltip": "Spécifier manuellement les paramètres avancés, sinon utilisera les préréglages par défaut"
+					},
+					"hotw_strategy": {
+						"label": "Utilisation de Cœur de la Nature",
+						"tooltip": "Comment utiliser Cœur de la Nature",
+						"values": {
+							"passives_only": "Passifs uniquement",
+							"enhanced_bear_weaving": "Tissage ours amélioré",
+							"wrath_weaving": "Tissage de Colère"
+						}
+					},
+					"allow_aoe_berserk": {
+						"label": "Permettre Berserk AoE",
+						"tooltip": "Permettre l'utilisation de Berserk dans la rotation AoE"
+					},
+					"roar_offset": {
+						"label": "Décalage de Rugissement",
+						"tooltip": "Décalage minimum gagné entre le Déchirer actuel et le nouveau Rugissement pour permettre un clip de Rugissement"
+					},
+					"rip_leeway": {
+						"label": "Marge de Déchirer",
+						"tooltip": "Écart minimum toléré entre les temps d'expiration de Déchirer actuel et de Rugissement actuel avant de déclencher les mesures d'urgence"
+					},
+					"bite_during_rotation": {
+						"label": "Morsure pendant la rotation",
+						"tooltip": "Utiliser Morsure pendant la rotation plutôt que juste pour la maintenance de Déchirer pendant l'Exécution"
+					},
+					"bite_time": {
+						"label": "Temps de Morsure",
+						"tooltip": "Secondes minimum restantes avant que Déchirer ou Rugissement devrait idéalement être rafraîchi (incluant les clips précoces planifiés) pour permettre une Morsure"
+					},
+					"berserk_bite_time": {
+						"label": "Temps de Morsure pendant Berserk",
+						"tooltip": "Seuil plus agressif quand Berserk est actif"
+					}
+				}
+			},
+			"guardian": {
+				"maintain_faerie_fire": {
+					"label": "Maintenir Feu Follet",
+					"tooltip": "Maintenir le debuff Feu Follet. Remplace tous les effets de Sunder externes spécifiés dans les paramètres."
+				},
+				"maintain_demo_roar": {
+					"label": "Maintenir Rugissement Démo",
+					"tooltip": "Garder Rugissement Démoralisant actif sur la cible principale. Si un debuff plus fort est actif, ne lancera pas."
+				},
+				"demo_roar_refresh_leeway": {
+					"label": "Marge de rafraîchissement Rugissement Démo",
+					"tooltip": "Rafraîchir Rugissement Démoralisant quand la durée restante est inférieure à cette valeur (en secondes). Des valeurs plus grandes fournissent une marge de sécurité contre les échecs, mais au coût d'un DPS plus faible."
+				},
+				"pulverize_refresh_leeway": {
+					"label": "Marge de rafraîchissement Pulvériser",
+					"tooltip": "Rafraîchir Pulvériser quand la durée restante est inférieure à cette valeur (en secondes). Notez que l'utilisation de Mutiler, Fouet et Feu Follet à temps de recharge prend la priorité sur cette règle, sauf si Lacérer lui-même est sur le point de tomber."
+				}
+			},
+			"rogue": {
+				"apply_poisons_manually": {
+					"label": "Configurer les poisons manuellement",
+					"tooltip": "Empêcher la configuration automatique des poisons qui est basée sur les armes équipées."
+				},
+				"subtlety": {
+					"honor_of_thieves_crit_rate": {
+						"label": "Taux de Critique Honneur des Voleurs",
+						"tooltip": "Nombre de critiques que les autres membres du groupe génèrent en 100 secondes"
+					}
+				}
+			},
+			"shaman": {
+				"elemental": {
+					"thunderstorm_in_range": {
+						"label": "Tempête de Tonnerre en Portée",
+						"tooltip": "Quand défini à vrai, les lancers de Tempête de Tonnerre causeront des dégâts."
+					}
+				}
+			},
+			"hunter": {
+				"beast_mastery": {
+					"sting": {
+						"label": "Piqûre",
+						"tooltip": "Maintient la Piqûre sélectionnée sur la cible principale",
+						"values": {
+							"none": "Aucune",
+							"serpent_sting": "Piqûre de Serpent"
+						}
+					},
+					"trap_weave": {
+						"label": "Tissage de Piège",
+						"tooltip": "Utilise Piège Explosif aux moments appropriés. Notez que sélectionner ceci désactivera Flèche Noire car ils partagent un CD"
+					},
+					"multi_dot_serpent_sting": {
+						"label": "Multi-DoT Piqûre de Serpent",
+						"tooltip": "Lance Piqûre de Serpent sur plusieurs cibles"
+					}
+				},
+				"marksmanship": {
+					"sting": {
+						"label": "Piqûre",
+						"tooltip": "Maintient la Piqûre sélectionnée sur la cible principale",
+						"values": {
+							"none": "Aucune",
+							"serpent_sting": "Piqûre de Serpent"
+						}
+					},
+					"trap_weave": {
+						"label": "Tissage de Piège",
+						"tooltip": "Utilise Piège Explosif aux moments appropriés. Notez que sélectionner ceci désactivera Flèche Noire car ils partagent un CD"
+					},
+					"multi_dot_serpent_sting": {
+						"label": "Multi-DoT Piqûre de Serpent",
+						"tooltip": "Lance Piqûre de Serpent sur plusieurs cibles"
+					}
+				},
+				"survival": {
+					"multi_dot_serpent_sting": {
+						"label": "Multi-DoT Piqûre de Serpent",
+						"tooltip": "Lance Piqûre de Serpent sur plusieurs cibles"
+					}
+				}
+			}
+		}
 	},
 	"results": {
-		"title": "Résultats"
+		"title": "Résultats",
+		"details": {
+			"no_results": "Lancez une simulation pour voir les résultats",
+			"view_in_separate_tab": "Voir dans un onglet séparé",
+			"sim_1_iteration": "Sim 1 itération",
+			"sim_1_death": "Simuler une Mort",
+			"all_targets": "Toutes les cibles",
+			"all_players": "Tous les joueurs",
+			"target_number": "Cible {{number}}",
+			"damage": {
+				"dps_histogram": "Histogramme DPS"
+			},
+			"timeline": {
+				"disclaimer": "Les données de chronologie visualisent seulement 1 itération de simulation.",
+				"note": "Note : Vous pouvez déplacer la chronologie en maintenant Majuscule tout en faisant défiler, ou en cliquant et en faisant glisser.",
+				"chart_types": {
+					"rotation": "Rotation",
+					"dps": "DPS",
+					"threat": "Menace"
+				},
+				"chart_options": {
+					"time_axis": "Temps (s)",
+					"waiting_for_data": "En attente de données..."
+				},
+				"tooltips": {
+					"dps": "DPS",
+					"dtps": "DTPS",
+					"amount": "Montant",
+					"player_damage": "Dégâts du Joueur / Dégâts du Raid",
+					"player_damage_taken": "Dégâts Subis par le Joueur / Dégâts Subis par le Raid",
+					"before": "Avant",
+					"after": "Après",
+					"threat": "Menace",
+					"active_auras": "Auras Actives"
+				}
+			},
+			"logs": {
+				"top_button": "Haut",
+				"time_column": "Temps",
+				"event_column": "Événement",
+				"show_debug": "Afficher les Déclarations de Débogage"
+			},
+			"tabs": {
+				"damage": "Dégâts",
+				"healing": "Soins",
+				"damage_taken": "Dégâts Subis",
+				"buffs": "Buffs",
+				"debuffs": "Debuffs",
+				"casts": "Lancers",
+				"resources": "Ressources",
+				"timeline": "Chronologie",
+				"log": "Journal"
+			},
+			"columns": {
+				"damage_done": "Dégâts infligés",
+				"casts": "Lancers",
+				"avg_cast": "Lancer Moyen",
+				"hits": "Coups",
+				"avg_hit": "Coup Moyen",
+				"crit_percent": "Crit %",
+				"miss_percent": "Rate %",
+				"dpet": "DPET",
+				"dps": "DPS",
+				"healing_done": "Soins prodigués",
+				"cpm": "CPM",
+				"cast_time": "Temps de lancer",
+				"hpm": "SPS",
+				"hpet": "SPET",
+				"amount": "Montant",
+				"dtps": "DTPS",
+				"avg_heal": "Soin Moyen",
+				"hps": "SPS",
+				"damage_taken": "Dégâts Subis",
+				"overhealing": "Sur-soins",
+				"name": "Nom",
+				"duration": "Durée",
+				"uptime": "Temps d'activité",
+				"procs": "Procs",
+				"ppm": "PPM",
+				"casts_per_minute": "Lancers/min",
+				"mana_gain": "Gain de Mana",
+				"mana_cost": "Coût de Mana",
+				"rage_gain": "Gain de Rage",
+				"rage_cost": "Coût de Rage",
+				"energy_gain": "Gain d'Énergie",
+				"energy_cost": "Coût d'Énergie",
+				"focus_gain": "Gain de Concentration",
+				"focus_cost": "Coût de Concentration",
+				"runic_power_gain": "Gain de Puissance Runique",
+				"runic_power_cost": "Coût de Puissance Runique",
+				"chi_gain": "Gain de Chi",
+				"chi_cost": "Coût de Chi",
+				"holy_power_gain": "Gain de Puissance Sacrée",
+				"holy_power_cost": "Coût de Puissance Sacrée",
+				"shadow_orbs_gain": "Gain d'Orbes d'Ombre",
+				"shadow_orbs_cost": "Coût d'Orbes d'Ombre",
+				"combo_points_gain": "Gain de Points de Combo",
+				"combo_points_cost": "Coût de Points de Combo",
+				"maelstrom_gain": "Gain de Maelström",
+				"maelstrom_cost": "Coût de Maelström",
+				"demonic_fury_gain": "Gain de Fureur Démoniaque",
+				"demonic_fury_cost": "Coût de Fureur Démoniaque",
+				"burning_embers_gain": "Gain de Braises Ardentes",
+				"burning_embers_cost": "Coût de Braises Ardentes",
+				"gain": "Gain",
+				"gain_per_second": "Gain / s",
+				"avg_gain": "Gain Moyen",
+				"wasted_gain": "Gain Perdu"
+			},
+			"tooltips": {
+				"damage_avg_cast": "Dégâts moyens par lancer",
+				"player_damage": "Dégâts du Joueur / Dégâts du Raid",
+				"player_damage_taken": "Dégâts Subis par le Joueur / Dégâts Subis par le Raid",
+				"damage_taken_per_encounter": "Dégâts Subis / Durée de l'Affrontement",
+				"healing_per_encounter": "Soins / Durée de l'Affrontement",
+				"threat_per_encounter": "Menace / Durée de l'Affrontement",
+				"damage_taken": "Dégâts Subis",
+				"damage_per_encounter": "Dégâts / Durée de l'Affrontement",
+				"damage_avg_cast_tooltip": "Dégâts / Lancers et/ou Dégâts / Tics",
+				"healing_avg_cast_tooltip": "Soins / Lancers",
+				"healing_avg_hit_tooltip": "Soins / Coups et/ou Soins / (Tics + Tics Critiques)",
+				"healing_hits_tooltip": "Soins / (Coups + Crits + Glissants + Bloqués) et/ou Soins / Tics + Tics Critiques",
+				"hit_miss_percent_tooltip": "Rates / (Coups + Crits + Glissants + Bloqués)"
+			},
+			"attack_types": {
+				"hit": "Coup",
+				"critical_hit": "Coup Critique",
+				"tick": "Tic",
+				"critical_tick": "Tic Critique",
+				"glancing_blow": "Coup Glissant",
+				"blocked_glancing_blow": "Coup Glissant Bloqué",
+				"blocked_hit": "Coup Bloqué",
+				"blocked_critical_hit": "Coup Critique Bloqué",
+				"miss": "Rate",
+				"parry": "Parade",
+				"dodge": "Esquive",
+				"threat": "Menace"
+			},
+			"tooltip_table": {
+				"type": "Type",
+				"count": "Compte",
+				"average": "Moyenne",
+				"amount": "Montant"
+			}
+		}
 	},
 	"import": {
-		"title": "Importer"
+		"title": "Importer",
+		"json": {
+			"title": "Import JSON",
+			"description": "Importer les paramètres depuis un fichier JSON, qui peut être créé en utilisant la fonctionnalité d'export JSON.",
+			"instructions": "Pour importer, téléchargez le fichier ou collez le texte ci-dessous, puis cliquez sur 'Importer'.",
+			"upload_button": "Télécharger le fichier",
+			"import_button": "Importer",
+			"error_invalid_json": "Veuillez utiliser un objet JSON valide."
+		},
+		"wowhead": {
+			"title": "Import Wowhead",
+			"description": "Importer les paramètres depuis",
+			"gear_planner_link": "le Planificateur d'Équipement Wowhead",
+			"feature_description": "Cette fonctionnalité importe l'équipement, la race et (optionnellement) les talents. Elle n'importe PAS les buffs, debuffs, consommables, rotation ou stats personnalisées.",
+			"instructions": "Pour importer, collez le lien du planificateur d'équipement ci-dessous et cliquez sur 'Importer'.",
+			"upload_button": "Télécharger le fichier",
+			"import_button": "Importer",
+			"tinker_warning": {
+				"title": "Problèmes de bricolage",
+				"message": "Il y a des problèmes connus lors de l'importation des bricolages depuis Wowhead. Assurez-vous toujours de vérifier vos bricolages après l'importation."
+			},
+			"error_invalid_url": "URL WCL invalide {url}, doit ressembler à \"https://www.wowhead.com/mop-classic/gear-planner/CLASS/RACE/XXXX\"",
+			"error_cannot_parse_class": "Impossible de parser la classe : {classId}",
+			"error_cannot_parse_race": "Impossible de parser la race : {raceId}"
+		},
+		"addon": {
+			"title": "Import Addon",
+			"description": "Importer les paramètres depuis l'",
+			"addon_link": "Addon WoWSims Exporter In-Game",
+			"feature_description": "Cette fonctionnalité importe l'équipement, la race, les talents, les glyphes et les professions. Elle n'importe PAS les buffs, debuffs, consommables, rotation ou stats personnalisées.",
+			"instructions": "Pour importer, collez la sortie de l'addon ci-dessous et cliquez sur 'Importer'.",
+			"upload_button": "Télécharger le fichier",
+			"import_button": "Importer",
+			"reforge_warning": {
+				"title": "Problèmes de reforge",
+				"message": "Il y a des problèmes connus avec la Reforge lors de l'utilisation de l'addon WSE. Assurez-vous toujours de vérifier vos reforges après l'importation."
+			}
+		}
 	},
 	"export": {
-		"title": "Exporter"
+		"title": "Exporter",
+		"link": {
+			"title": "Export de Lien",
+			"description": "Exporter les paramètres sous forme de lien partageable.",
+			"instructions": "Copiez le lien ci-dessous pour partager vos paramètres avec d'autres.",
+			"copy_button": "Copier",
+			"copy_tooltip": "Copier dans le presse-papiers"
+		},
+		"json": {
+			"title": "Export JSON",
+			"description": "Exporter les paramètres sous forme de fichier JSON.",
+			"instructions": "Téléchargez le fichier JSON ou copiez le contenu ci-dessous.",
+			"copy_button": "Copier",
+			"copy_tooltip": "Copier dans le presse-papiers",
+			"download_button": "Télécharger"
+		},
+		"wowhead": {
+			"title": "Export WoWHead",
+			"description": "Exporter les paramètres vers le Planificateur d'Équipement WoWHead.",
+			"instructions": "Copiez le lien ci-dessous pour ouvrir votre configuration d'équipement dans WoWHead.",
+			"copy_button": "Copier",
+			"copy_tooltip": "Copier dans le presse-papiers"
+		},
+		"pawn_ep": {
+			"title": "Export PE Pawn",
+			"description": "Exporter les poids PE pour l'addon Pawn.",
+			"instructions": "Copiez la chaîne Pawn ci-dessous et importez-la dans votre addon Pawn.",
+			"copy_button": "Copier",
+			"copy_tooltip": "Copier dans le presse-papiers"
+		},
+		"cli": {
+			"title": "Export CLI",
+			"description": "Exporter les paramètres pour la simulation en ligne de commande.",
+			"instructions": "Copiez la commande ci-dessous pour exécuter des simulations depuis la ligne de commande.",
+			"copy_button": "Copier",
+			"copy_tooltip": "Copier dans le presse-papiers"
+		},
+		"categories": {
+			"gear": {
+				"label": "Équipement",
+				"tooltip": "Inclut également les stats bonus et les changements d'armes."
+			},
+			"talents": {
+				"label": "Talents",
+				"tooltip": "Talents et Glyphes."
+			},
+			"rotation": {
+				"label": "Rotation",
+				"tooltip": "Inclut tout ce qui se trouve dans l'onglet Rotation."
+			},
+			"consumes": {
+				"label": "Consommables",
+				"tooltip": "Flacons, potions, nourriture, etc."
+			},
+			"external": {
+				"label": "Buffs & Debuffs",
+				"tooltip": "Tous les paramètres qui sont appliqués par d'autres membres du raid."
+			},
+			"miscellaneous": {
+				"label": "Divers",
+				"tooltip": "Paramètres spécifiques à la spécialisation, devant/derrière la cible, distance de la cible, etc."
+			},
+			"encounter": {
+				"label": "Rencontre",
+				"tooltip": "Paramètres liés au combat."
+			}
+		}
+	},
+	"info": {
+		"known_issues": "Problèmes Connus",
+		"bug_report": "Signaler un bug ou Demander une fonctionnalité",
+		"sim_options": "Options de Simulation",
+		"discord": "Rejoignez-nous sur Discord",
+		"patreon": "Soutenez-nous sur Patreon",
+		"github": "Contribuer sur GitHub",
+		"status": {
+			"unlaunched": "Cette simulation est EN COURS DE DÉVELOPPEMENT. Elle n'est pas entièrement développée et ne devrait pas être utilisée à des fins générales.",
+			"alpha": "Cette simulation est en ALPHA. Des bugs sont attendus ; merci de nous informer si vous en trouvez un !",
+			"beta": "Cette simulation est en BÊTA. Il peut encore y avoir quelques bugs ; merci de nous informer si vous en trouvez un !"
+		},
+		"options": {
+			"title": "Options",
+			"fixed_rng_seed": {
+				"label": "Graine RNG Fixe",
+				"tooltip": "Valeur de graine pour le générateur de nombres aléatoires utilisé pendant les simulations, ou 0 pour utiliser une aléatoire différente à chaque exécution. Utilisez ceci pour partager des résultats de simulation exacts ou pour le débogage.",
+				"last_used": "Dernière graine RNG utilisée :"
+			},
+			"language": {
+				"label": "Langue",
+				"tooltip": "Contrôle la langue pour les infobulles Wowhead."
+			},
+			"feature_toggles": {
+				"show_threat_metrics": "Afficher les Options de Menace/Tank",
+				"show_experimental": "Afficher l'Expérimental",
+				"show_quick_swap": "Afficher l'interface de changement rapide"
+			},
+			"use_multiple_cpu_cores": {
+				"label": "Utiliser Plusieurs Cœurs CPU"
+			},
+			"restore_defaults": {
+				"button": "Restaurer les Défauts",
+				"tooltip": "Restaure tous les paramètres par défaut (équipement, consommables, buffs, talents, poids PE, etc). Les paramètres sauvegardés sont préservés.",
+				"success_message": "Paramètres par défaut restaurés."
+			}
+		}
 	},
 	"sidebar": {
 		"iterations": "Itérations",
+		"warnings": {
+			"meta_gem_disabled": "Gemme méta désactivée ({{gemName}}) : {{description}}",
+			"profession_requirement": "{{itemName}} nécessite {{professionName}}, mais elle n'est pas sélectionnée.",
+			"too_many_jc_gems": "Seulement 2 gemmes de joaillerie sont autorisées, mais {{count}} sont équipées.",
+			"unspent_talent_points": "Points de talent manquants dans les rangées {{rowNumbers}}.",
+			"armor_specialization": "Équipez de l'équipement {{armorType}} dans chaque emplacement pour l'effet de spécialisation d'armure (5% de statistique primaire).",
+			"dual_wield_2h_without_titans_grip": "Manier deux armes à deux mains sans la spécialisation Poigne de Titan."
+		},
 		"buttons": {
 			"simulate": "Simuler",
-			"stat_weights": "Poids des Statistiques",
-			"suggest_reforges": "Suggérer des Reforges"
+			"stat_weights": {
+				"title": "Poids des Statistiques",
+				"ep_weights": {
+					"use_custom": "Utiliser des poids PE personnalisés",
+					"description": {
+						"enable_modification": "Ceci permettra la modification des poids PE par défaut et la définition de plafonds de statistiques personnalisés.",
+						"modify_in_editor": "Les poids PE peuvent être modifiés dans l'éditeur de Poids des Statistiques.",
+						"hard_cap_info": "Si vous voulez plafonner une statistique, assurez-vous de définir le PE de cette statistique plus haut."
+					},
+					"buttons": {
+						"edit_weights": "Modifier les poids"
+					},
+					"options": {
+						"include_gems": "Inclure les gemmes",
+						"freeze_item_slots": "Verrouiller les emplacements d'objets"
+					}
+				},
+				"modal": {
+					"title": "Calculer les Poids des Statistiques",
+					"ep": "PE",
+					"weights": "Poids",
+					"show_all_stats": "Afficher Toutes les Statistiques",
+					"dps_tps_reference": "Référence DPS/TPS :",
+					"healing_reference": "Référence de soins :",
+					"mitigation_reference": "Référence d'atténuation :",
+					"reference_description": "Les sélecteurs de statistiques ci-dessus contrôlent quelle statistique de référence est utilisée pour la normalisation PE des différentes colonnes PE.",
+					"current_ep_description": "La colonne 'PE Actuel' affiche les valeurs actuellement utilisées par les sélecteurs d'objets pour trier les objets.",
+					"copy_icon_description": "Utilisez l'icône de copie au-dessus des PE pour utiliser les PE nouvellement calculés.",
+					"stat": "Statistique",
+					"update": "Mettre à jour",
+					"ep_ratio": "Ratio PE",
+					"update_ep": "Mettre à jour PE",
+					"calculate": "Calculer",
+					"compute_weighted_ep": "Calculer PE Pondéré",
+					"dps_weight": {
+						"label": "Poids DPS",
+						"tooltip": "Augmentation par point de DPS (Dégâts Par Seconde) pour chaque statistique."
+					},
+					"dps_ep": {
+						"label": "PE DPS",
+						"tooltip": "PE (Points d'Équivalence) pour DPS (Dégâts Par Seconde) pour chaque statistique."
+					},
+					"hps_weight": {
+						"label": "Poids SPS",
+						"tooltip": "Augmentation par point de SPS (Soins Par Seconde) pour chaque statistique."
+					},
+					"hps_ep": {
+						"label": "PE SPS",
+						"tooltip": "PE (Points d'Équivalence) pour SPS (Soins Par Seconde) pour chaque statistique."
+					},
+					"tps_weight": {
+						"label": "Poids TPS",
+						"tooltip": "Augmentation par point de TPS (Menace Par Seconde) pour chaque statistique."
+					},
+					"tps_ep": {
+						"label": "PE TPS",
+						"tooltip": "PE (Points d'Équivalence) pour TPS (Menace Par Seconde) pour chaque statistique."
+					},
+					"dtps_weight": {
+						"label": "Poids DTPS",
+						"tooltip": "Augmentation par point de DTPS (Dégâts Subis Par Seconde) pour chaque statistique."
+					},
+					"dtps_ep": {
+						"label": "PE DTPS",
+						"tooltip": "PE (Points d'Équivalence) pour DTPS (Dégâts Subis Par Seconde) pour chaque statistique."
+					},
+					"tmi_weight": {
+						"label": "Poids TMI",
+						"tooltip": "Diminution par point de TMI (Indice Theck-Meloree) pour chaque statistique."
+					},
+					"tmi_ep": {
+						"label": "PE TMI",
+						"tooltip": "PE (Points d'Équivalence) pour TMI (Indice Theck-Meloree) pour chaque statistique."
+					},
+					"death_weight": {
+						"label": "Poids Mort",
+						"tooltip": "Diminution par point de p(mort) pour chaque statistique."
+					},
+					"death_ep": {
+						"label": "PE Mort",
+						"tooltip": "PE (Points d'Équivalence) pour p(mort) pour chaque statistique."
+					},
+					"current_ep": {
+						"label": "PE Actuel",
+						"tooltip": "Poids PE actuels. Utilisés pour trier les menus de sélection d'équipement."
+					},
+					"not_applicable": "N/A",
+					"column_headers": {
+						"stat": "Statistique",
+						"update": "Mettre à jour",
+						"ep_ratio": "Ratio PE",
+						"update_ep_button": "Mettre à jour PE"
+					},
+					"tooltips": {
+						"normalized_by": "Normalisé par {refStatName}.",
+						"copy_to_current_ep": "Copier vers PE Actuel",
+						"restore_default_ep": "Restaurer PE par Défaut",
+						"compute_weighted_ep": "Calculer PE Pondéré"
+					},
+					"progress": {
+						"simulations_complete": "simulations terminées",
+						"iterations_complete": "itérations terminées"
+					}
+				},
+				"saved_ep_weights": {
+					"title": "Poids PE Sauvegardés"
+				}
+			},
+			"suggest_reforges": {
+				"title": "Suggérer des Reforges",
+				"tooltip": "Modifier les paramètres de l'Optimiseur de Reforge",
+				"use_soft_cap_breakpoints": "Utiliser les points de rupture de plafond souple",
+				"force_stat_proc": "Forcer le proc RoRo",
+				"any": "N'importe lequel",
+				"optimize_gems_tooltip": "Optimiser les gemmes et les Reforges simultanément.",
+				"freeze_item_slots_tooltip": "Marquer un ou plusieurs emplacements d'objets comme \"gelés\", ce qui empêchera l'optimiseur de modifier la Reforge ou les gemmes dans cet emplacement de leurs paramètres actuels. Cela peut être utile pour les classes hybrides qui utilisent la même pièce d'équipement pour plusieurs rôles de raid.",
+				"edit_stat_caps": "Modifier les plafonds de statistiques",
+				"stat_caps_tooltip": "Les plafonds de statistiques sont la quantité maximale d'une statistique qui peut être obtenue par la Reforge. Si une statistique dépasse son plafond, l'optimiseur tentera de la réduire à la valeur du plafond.",
+				"reset_to_defaults": "Réinitialiser aux plafonds par défaut",
+				"stat": "Statistique",
+				"select_preset": "Sélectionner un préréglage",
+				"breakpoint_limit": "Limite de point de rupture",
+				"breakpoint_limit_tooltip": "Permet de définir une limite de point de rupture personnalisée.",
+				"no_limit_set": "Aucune limite définie",
+				"breakpoints_implemented": "Les points de rupture suivants ont été implémentés pour cette spé :",
+				"post_cap_ep": "PE post-plafond",
+				"reforge_optimization_failed": "L'optimisation de la Reforge a échoué. Veuillez réessayer ou signaler le problème s'il persiste."
+			}
 		},
 		"header": {
 			"title": "WoWSims - Mists of Pandaria",
 			"phase": "{{phase}} - {{status}}"
+		},
+		"results": {
+			"progress": {
+				"presim_running": "pré-simulations en cours",
+				"iterations_complete": "itérations terminées"
+			},
+			"reference": {
+				"save_as_reference": "Sauvegarder comme Référence",
+				"use_as_reference": "Utiliser comme référence",
+				"swap": "Échanger",
+				"swap_reference_with_current": "Échanger la référence avec l'actuel",
+				"cancel": "Annuler",
+				"remove_reference": "Supprimer la référence",
+				"vs_ref": "vs réf"
+			},
+			"metrics": {
+				"dps": {
+					"label": "DPS",
+					"tooltip": "Dégâts Par Seconde"
+				},
+				"hps": {
+					"label": "SPS",
+					"tooltip": "Soins+Boucliers Par Seconde, incluant les soins excessifs."
+				},
+				"tps": {
+					"label": "TPS",
+					"tooltip": "Menace Par Seconde"
+				},
+				"dtps": {
+					"label": "DTPS",
+					"tooltip": "Dégâts Subis Par Seconde"
+				},
+				"tmi": {
+					"label": "TMI",
+					"tooltip": {
+						"title": "Indice Theck-Meloree (TMI)",
+						"description": "Une mesure de la régularité des dégâts entrants qui combine les avantages de l'esquive avec la santé effective.",
+						"note": "Plus bas est mieux. Ceci représente le % de vos PV à attendre dans une fenêtre d'éclatement de 6 secondes basée sur les paramètres de rencontre."
+					}
+				},
+				"cod": {
+					"label": "Chance de Mort",
+					"tooltip": {
+						"title": "Chance de Mort",
+						"description": "Le pourcentage d'itérations dans lesquelles le joueur est mort, basé sur les dégâts entrants des ennemis et les soins entrants (voir les options SPS Entrants et Cadence de Soins).",
+						"note": "DTPS seul n'est pas une bonne mesure de la résistance car il n'est pas affecté par la santé et ignore les pics de dégâts. La Chance de Mort tente de capturer la résistance globale."
+					}
+				},
+				"dur": {
+					"label": "DUR",
+					"tooltip": "Durée Moyenne de Combat"
+				},
+				"tto": {
+					"label": "TTO",
+					"tooltip": "Temps Vers OOM"
+				},
+				"oom": {
+					"label": "OOM",
+					"tooltip": "Temps passé Hors de Mana"
+				}
+			}
 		},
 		"character_stats": {
 			"title": "Statistiques",
@@ -201,6 +4492,15 @@
 				"spec_offsets": "Compensations de Spé :",
 				"final_crit_cap": "Plafond de Critique Final :",
 				"can_raise_by": "Peut Augmenter de :"
+			},
+			"attack_table": {
+				"glancing": "Éraflement :",
+				"suppression": "Suppression :",
+				"to_hit_cap": "Vers le cap de précision :",
+				"to_exp_cap": "Vers le cap d'expertise :",
+				"spec_offsets": "Compensations de spé :",
+				"final_crit_cap": "Cap de critique final :",
+				"can_raise_by": "Peut augmenter de :"
 			},
 			"crit_cap": {
 				"exact": "Exact",

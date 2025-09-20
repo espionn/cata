@@ -9,6 +9,8 @@ import (
 	"github.com/wowsims/mop/sim/core/stats"
 )
 
+const MasteryRaidBuffStrength = 3000
+
 type BuffConfig struct {
 	Label    string
 	ActionID ActionID
@@ -285,16 +287,16 @@ func applyStaminaBuffs(u *Unit, raidBuffs *proto.RaidBuffs) {
 //////// 3000 Mastery Rating
 
 func RoarOfCourageAura(u *Unit) *Aura {
-	return makeExclusiveBuff(u, BuffConfig{"Roar of Courage", ActionID{SpellID: 93435}, []StatConfig{{stats.MasteryRating, 3000, false}}})
+	return makeExclusiveBuff(u, BuffConfig{"Roar of Courage", ActionID{SpellID: 93435}, []StatConfig{{stats.MasteryRating, MasteryRaidBuffStrength, false}}})
 }
 func SpiritBeastBlessingAura(u *Unit) *Aura {
-	return makeExclusiveBuff(u, BuffConfig{"Spirit Beast Blessing", ActionID{SpellID: 128997}, []StatConfig{{stats.MasteryRating, 3000, false}}})
+	return makeExclusiveBuff(u, BuffConfig{"Spirit Beast Blessing", ActionID{SpellID: 128997}, []StatConfig{{stats.MasteryRating, MasteryRaidBuffStrength, false}}})
 }
 func BlessingOfMightAura(u *Unit) *Aura {
-	return makeExclusiveBuff(u, BuffConfig{"Blessing of Might", ActionID{SpellID: 19740}, []StatConfig{{stats.MasteryRating, 3000, false}}})
+	return makeExclusiveBuff(u, BuffConfig{"Blessing of Might", ActionID{SpellID: 19740}, []StatConfig{{stats.MasteryRating, MasteryRaidBuffStrength, false}}})
 }
 func GraceOfAirAura(u *Unit) *Aura {
-	return makeExclusiveBuff(u, BuffConfig{"Grace of Air", ActionID{SpellID: 116956}, []StatConfig{{stats.MasteryRating, 3000, false}}})
+	return makeExclusiveBuff(u, BuffConfig{"Grace of Air", ActionID{SpellID: 116956}, []StatConfig{{stats.MasteryRating, MasteryRaidBuffStrength, false}}})
 }
 
 ///////////////////////////////////////////////////////////////////////////

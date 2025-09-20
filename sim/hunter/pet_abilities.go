@@ -82,9 +82,9 @@ func (hp *HunterPet) NewPetAbility(abilityType PetAbilityType, isPrimary bool) *
 	case LavaBreath:
 		return hp.newPetDebuff(PetDebuffSpellConfig{SpellID: 58604, CD: time.Second * 8, School: core.SpellSchoolFire, DebuffAura: core.LavaBreathAura})
 	case DustCloud:
-		return hp.newPetDebuff(PetDebuffSpellConfig{SpellID: 50285, CD: time.Second * 6, School: core.SpellSchoolNature, DebuffAura: core.WeakenedArmorAura})
+		return hp.newPetDebuff(PetDebuffSpellConfig{SpellID: 50285, CD: time.Second * 25, School: core.SpellSchoolNature, DebuffAura: core.WeakenedArmorAura, Stacks: 3})
 	case TearArmor:
-		return hp.newPetDebuff(PetDebuffSpellConfig{SpellID: 50498, CD: time.Second * 25, School: core.SpellSchoolNature, DebuffAura: core.WeakenedArmorAura})
+		return hp.newPetDebuff(PetDebuffSpellConfig{SpellID: 50498, CD: time.Second * 6, School: core.SpellSchoolNature, DebuffAura: core.WeakenedArmorAura, Stacks: 1})
 	case BurrowAttack:
 		return hp.newBurrowAttack()
 	case FroststormBreathAoE:
@@ -110,6 +110,7 @@ func (hp *HunterPet) NewPetAbility(abilityType PetAbilityType, isPrimary bool) *
 
 type PetDebuffSpellConfig struct {
 	DebuffAura func(*core.Unit) *core.Aura
+	Stacks     int32
 	SpellID    int32
 	School     core.SpellSchool
 	GCD        time.Duration
@@ -171,7 +172,12 @@ func (hp *HunterPet) newPetDebuff(config PetDebuffSpellConfig) *core.Spell {
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			result := spell.CalcOutcome(sim, target, spell.OutcomeMagicHit)
 			if result.Landed() {
-				auraArray.Get(target).Activate(sim)
+				aura := auraArray.Get(target)
+				aura.Activate(sim)
+
+				if aura.MaxStacks > 0 && config.Stacks > 0 {
+					aura.AddStacks(sim, config.Stacks)
+				}
 			}
 
 			spell.DealOutcome(sim, result)

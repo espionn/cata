@@ -6,33 +6,42 @@ import { SavedTalents } from '../../core/proto/ui';
 import { Stats } from '../../core/proto_utils/stats';
 import ArcaneApl from './apls/default.apl.json';
 import ArcaneCleaveApl from './apls/arcane_cleave.apl.json';
-import P1PreBISRealisticGear from './gear_sets/p1_prebis_realistic.gear.json';
 import P1PreBISGear from './gear_sets/p1_prebis.gear.json';
-import P1PostMSVGear from './gear_sets/p1_post_msv.gear.json';
-import P1PostHOFGear from './gear_sets/p1_post_hof.gear.json';
 import P1BISGear from './gear_sets/p1_bis.gear.json';
+import P2BISGear from './gear_sets/p2_bis.gear.json';
 
 // Preset options for this spec.
 // Eventually we will import these values for the raid sim too, so its good to
 // keep them in a separate file.
 export const P1_PREBIS = PresetUtils.makePresetGear('P1 - Pre-BIS', P1PreBISGear);
-export const P1_POST_MSV = PresetUtils.makePresetGear('P1 - Post-MSV', P1PostMSVGear);
-export const P1_POST_HOF = PresetUtils.makePresetGear('P1 - Post-HoF', P1PostHOFGear);
 export const P1_BIS = PresetUtils.makePresetGear('P1 - BIS', P1BISGear);
+export const P2_BIS = PresetUtils.makePresetGear('P2 - BIS', P2BISGear);
 
 export const ROTATION_PRESET_DEFAULT = PresetUtils.makePresetAPLRotation('Default', ArcaneApl);
 // export const ROTATION_PRESET_CLEAVE = PresetUtils.makePresetAPLRotation('Cleave', ArcaneCleaveApl);
 
 // Preset options for EP weights
-export const P1_EP_PRESET = PresetUtils.makePresetEpWeights(
-	'Default',
+export const P1_BIS_EP_PRESET = PresetUtils.makePresetEpWeights(
+	'Item Level >= 495',
+	Stats.fromMap({
+		[Stat.StatIntellect]: 1.24,
+		[Stat.StatSpellPower]: 1,
+		[Stat.StatHitRating]: 1.45,
+		[Stat.StatCritRating]: 0.52,
+		[Stat.StatHasteRating]: 0.6,
+		[Stat.StatMasteryRating]: 0.63,
+	}),
+);
+
+export const P1_PREBIS_EP_PRESET = PresetUtils.makePresetEpWeights(
+	'Item Level < 495',
 	Stats.fromMap({
 		[Stat.StatIntellect]: 1.24,
 		[Stat.StatSpellPower]: 1,
 		[Stat.StatHitRating]: 1.31,
 		[Stat.StatCritRating]: 0.52,
-		[Stat.StatHasteRating]: 0.6,
-		[Stat.StatMasteryRating]: 0.62,
+		[Stat.StatHasteRating]: 0.62,
+		[Stat.StatMasteryRating]: 0.60,
 	}),
 );
 

@@ -95,7 +95,7 @@ export class EquippedItem {
 		this._gems = gems || [];
 		this._randomSuffix = randomSuffix || null;
 		this._reforge = reforge || null;
-		this._upgrade = upgrade ?? ItemLevelState.Base;
+		this._upgrade = (this.hasUpgrade(upgrade) && upgrade) || ItemLevelState.Base;
 		this._challengeMode = challengeMode ?? false;
 
 		this.numPossibleSockets = this.numSockets(true);
@@ -132,6 +132,10 @@ export class EquippedItem {
 	get gems(): Array<Gem | null> {
 		// Make a defensive copy
 		return this._gems.map(gem => (gem == null ? null : Gem.clone(gem)));
+	}
+	get gemSockets(): Array<GemColor> {
+		// Make a defensive copy
+		return [...this._item.gemSockets];
 	}
 	get upgrade(): ItemLevelState {
 		let upgradeLevel: ItemLevelState;
@@ -193,7 +197,7 @@ export class EquippedItem {
 	}
 
 	getMaxUpgradeCount(): number {
-		return Object.keys(this.getUpgrades()).length -1;
+		return Object.keys(this.getUpgrades()).length - 1;
 	}
 
 	equals(other: EquippedItem) {
@@ -524,6 +528,10 @@ export class EquippedItem {
 		return !!Object.keys(this._item.scalingOptions).filter(upgradeStep => Number(upgradeStep) > 0).length;
 	}
 
+	hasUpgrade(upgrade?: ItemLevelState | null): boolean {
+		return !!(upgrade && this.getUpgrades()[upgrade]);
+	}
+
 	hasExtraGem(): boolean {
 		return this._gems.length > this.item.gemSockets.length;
 	}
@@ -533,10 +541,10 @@ export class EquippedItem {
 	}
 
 	allSocketColors(): Array<GemColor> {
-		return this.couldHaveExtraSocket() ? this._item.gemSockets.concat([GemColor.GemColorPrismatic]) : this._item.gemSockets;
+		return this.couldHaveExtraSocket() ? this.gemSockets.concat([GemColor.GemColorPrismatic]) : this.gemSockets;
 	}
 	curSocketColors(isBlacksmithing: boolean): Array<GemColor> {
-		return this.hasExtraSocket(isBlacksmithing) ? this._item.gemSockets.concat([GemColor.GemColorPrismatic]) : this._item.gemSockets;
+		return this.hasExtraSocket(isBlacksmithing) ? this.gemSockets.concat([GemColor.GemColorPrismatic]) : this.gemSockets;
 	}
 
 	curGems(isBlacksmithing: boolean): Array<Gem | null> {
