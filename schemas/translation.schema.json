@@ -5463,6 +5463,22 @@
                     "tooltip"
                   ]
                 },
+                "gcd_hasted_duration": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "tooltip": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "tooltip"
+                  ]
+                },
                 "channel_clip_delay": {
                   "type": "object",
                   "properties": {
@@ -6161,6 +6177,7 @@
                 "channeled_ticks",
                 "number_of_charges",
                 "time_to_next_charge",
+                "gcd_hasted_duration",
                 "channel_clip_delay",
                 "input_delay",
                 "aura_known",

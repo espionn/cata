@@ -1322,6 +1322,10 @@
 					"label": "Time to next Charge",
 					"tooltip": "The time until the next charge is available. 0 if spell has all charges avaialable."
 				},
+				"gcd_hasted_duration": {
+					"label": "GCD Hasted Duration",
+					"tooltip": "The duration of the GCD induced by a cast with the current haste"
+				},
 				"channel_clip_delay": {
 					"label": "Channel Clip Delay",
 					"tooltip": "The amount of time specified by the <b>Channel Clip Delay</b> setting."

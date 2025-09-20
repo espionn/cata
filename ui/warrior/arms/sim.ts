@@ -109,13 +109,13 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecArmsWarrior, {
 	},
 
 	presets: {
-		epWeights: [Presets.P1_EP_PRESET],
+		epWeights: [Presets.P1_EP_PRESET, Presets.P2_EP_PRESET],
 		// Preset talents that the user can quickly select.
 		talents: [Presets.ArmsTalents],
 		// Preset rotations that the user can quickly select.
 		rotations: [Presets.ROTATION_ARMS],
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.P1_PREBIS_ARMS_RICH_PRESET, Presets.P1_PREBIS_ARMS_POOR_PRESET, Presets.P1_ARMS_BIS_PRESET],
+		gear: [Presets.P1_PREBIS_PRESET, Presets.P1_ARMS_BIS_PRESET, Presets.P2_ARMS_BIS_PRESET],
 	},
 
 	autoRotation: (_player: Player<Spec.SpecArmsWarrior>): APLRotation => {
@@ -152,7 +152,19 @@ export class ArmsWarriorSimUI extends IndividualSimUI<Spec.SpecArmsWarrior> {
 		super(parentElem, player, SPEC_CONFIG);
 
 		player.sim.waitForInit().then(() => {
-			new ReforgeOptimizer(this);
+			new ReforgeOptimizer(this, {
+				getEPDefaults: player => {
+					if (this.sim.getUseCustomEPValues()) {
+						return player.getEpWeights();
+					}
+
+					const avgIlvl = player.getGear().getAverageItemLevel(false);
+					if (avgIlvl >= 500) {
+						return Presets.P2_EP_PRESET.epWeights;
+					}
+					return Presets.P1_EP_PRESET.epWeights;
+				},
+			});
 		});
 	}
 }

@@ -22,8 +22,7 @@ func TestArms(t *testing.T) {
 
 			GearSet: core.GetGearSet("../../../ui/warrior/arms/gear_sets", "p1_arms_bis"),
 			OtherGearSets: []core.GearSetCombo{
-				core.GetGearSet("../../../ui/warrior/arms/gear_sets", "p1_prebis_rich"),
-				core.GetGearSet("../../../ui/warrior/arms/gear_sets", "p1_prebis_poor"),
+				core.GetGearSet("../../../ui/warrior/arms/gear_sets", "p1_prebis"),
 			},
 			Talents:     ArmsTalents,
 			Glyphs:      ArmsDefaultGlyphs,
@@ -36,7 +35,7 @@ func TestArms(t *testing.T) {
 	}))
 }
 
-var ArmsTalents = "113332"
+var ArmsTalents = "113132"
 var ArmsDefaultGlyphs = &proto.Glyphs{
 	Major1: int32(proto.WarriorMajorGlyph_GlyphOfBullRush),
 	Major2: int32(proto.WarriorMajorGlyph_GlyphOfUnendingRage),
