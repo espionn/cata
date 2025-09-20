@@ -265,6 +265,10 @@ func (effect *SpellEffect) ParseStatEffect(scalesWithIlvl bool, ilvl int) *stats
 		// if Coefficient is not set, we fall back to EffectBasePoints
 		effectStats[stat] = float64(effect.EffectBasePoints)
 	case effect.EffectAura == A_MOD_DAMAGE_DONE && effect.EffectType == E_APPLY_AURA:
+		if effect.Coefficient != 0 && effect.ScalingType != 0 {
+			effectStats[proto.Stat_StatSpellPower] = effect.CalcCoefficientStatValue(core.TernaryInt(scalesWithIlvl, ilvl, 0))
+			break
+		}
 		// Apply spell power, A_MOD_HEALING_DONE is also a possibility for healing power
 		effectStats[proto.Stat_StatSpellPower] = float64(effect.EffectBasePoints)
 
