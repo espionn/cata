@@ -42,8 +42,8 @@ func (shaman *Shaman) NewFireElemental(isGuardian bool) *FireElemental {
 		shamanOwner:       shaman,
 		fireBlastAutocast: shaman.FeleAutocast.AutocastFireblast || isGuardian,
 		fireNovaAutocast:  shaman.FeleAutocast.AutocastFirenova || isGuardian,
-		immolateAutocast:  shaman.FeleAutocast.AutocastImmolate,
-		empowerAutocast:   shaman.FeleAutocast.AutocastEmpower,
+		immolateAutocast:  shaman.FeleAutocast.AutocastImmolate && !isGuardian,
+		empowerAutocast:   shaman.FeleAutocast.AutocastEmpower && !isGuardian,
 	}
 	scalingDamage := shaman.CalcScalingSpellDmg(1.0)
 	baseMeleeDamage := core.TernaryFloat64(isGuardian, scalingDamage, scalingDamage*1.8)

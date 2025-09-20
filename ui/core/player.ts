@@ -42,6 +42,7 @@ import {
 	UnitStats,
 } from './proto/common';
 import { SimDatabase } from './proto/db';
+import { ShamanOptions } from './proto/shaman';
 import {
 	DungeonDifficulty,
 	RaidFilterOption,
