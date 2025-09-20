@@ -421,7 +421,6 @@ export class EmbeddedDetailedResults extends DetailedResults {
 				</button>
 				<button className="detailed-results-death-iteration-button btn btn-primary" ref={deathButtonRef} disabled={true}>
 					{i18n.t('results.details.sim_1_death')}
-					Simulate a Death
 				</button>
 			</div>,
 		);
