@@ -102,6 +102,7 @@ type Spell struct {
 	DefaultCast        Cast       // Default cast parameters with all static effects applied.
 	CD                 Cooldown
 	SharedCD           Cooldown
+	IgnoreHaste        bool
 	ExtraCastCondition CanCastCondition
 
 	// Optional range constraints. If supplied, these are used to modify the ExtraCastCondition above to additionally check for DistanceFromTarget.
@@ -224,6 +225,7 @@ func (unit *Unit) RegisterSpell(config SpellConfig) *Spell {
 		DefaultCast:        config.Cast.DefaultCast,
 		CD:                 config.Cast.CD,
 		SharedCD:           config.Cast.SharedCD,
+		IgnoreHaste:        config.Cast.IgnoreHaste,
 		ExtraCastCondition: config.ExtraCastCondition,
 
 		castTimeFn: config.Cast.CastTime,

@@ -4307,6 +4307,9 @@
                 "time_to_next_charge": {
                     "$ref": "#/definitions/ConsumesClass"
                 },
+                "gcd_hasted_duration": {
+                    "$ref": "#/definitions/ConsumesClass"
+                },
                 "channel_clip_delay": {
                     "$ref": "#/definitions/ConsumesClass"
                 },
@@ -4528,6 +4531,7 @@
                 "spell_time_to_ready",
                 "time_to_next_auto",
                 "time_to_next_charge",
+                "gcd_hasted_duration",
                 "time_to_ready",
                 "totem_remaining_time",
                 "travel_time",

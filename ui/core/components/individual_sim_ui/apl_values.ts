@@ -108,6 +108,7 @@ import {
 	APLValueAuraICDIsReady,
 	APLValueActiveItemSwapSet,
 	APLValueDotBaseDuration,
+	APLValueSpellGCDHastedDuration,
 } from '../../proto/apl.js';
 import { Class, Spec } from '../../proto/common.js';
 import { ShamanTotems_TotemType as TotemType } from '../../proto/shaman.js';
@@ -1093,6 +1094,13 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['spell'],
 		shortDescription: i18n.t('rotation.apl.values.time_to_next_charge.tooltip'),
 		newValue: APLValueSpellTimeToCharge.create,
+		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
+	}),
+	spellGcdHastedDuration: inputBuilder({
+		label: i18n.t('rotation.apl.values.gcd_hasted_duration.label'),
+		submenu: ['spell'],
+		shortDescription: i18n.t('rotation.apl.values.gcd_hasted_duration.tooltip'),
+		newValue: APLValueSpellGCDHastedDuration.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	channelClipDelay: inputBuilder({
