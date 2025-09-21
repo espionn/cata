@@ -232,7 +232,7 @@ export class SavedDataManager<ModObject, T> extends Component {
 		const saveInputRef = ref<HTMLInputElement>();
 		const savedDataCreateFragment = (
 			<div className="saved-data-create-container">
-				<label className="form-label">{this.config.label} {this.config.nameLabel || i18n.t('common.name')}</label>
+				<label className="form-label">{this.config.nameLabel || i18n.t('common.name')}</label>
 				<input ref={saveInputRef} className="saved-data-save-input form-control" type="text" placeholder={i18n.t('common.name')} />
 				<button ref={saveButtonRef} className="saved-data-save-button btn btn-primary">
 					{this.config.saveButtonText || `Save ${this.config.label}`}
