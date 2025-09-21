@@ -226,8 +226,8 @@
 		}
 	},
 	"sim": {
-		"title": "Simulateur {spec} {class} - Mists of Pandaria",
-		"description": "Simulations {spec} {class} pour World of Warcraft® Mists of Pandaria Classic.",
+		"title": "Simulateur {{spec}} {{class}} - Mists of Pandaria",
+		"description": "Simulations {{spec}} {{class}} pour World of Warcraft® Mists of Pandaria Classic.",
 		"basic_bis_disclaimer": "<p>Les listes d'équipement prédéfinies sont destinées à être des approximations approximatives du BIS, et ne seront souvent pas la configuration DPS absolument la plus élevée pour vous. Votre configuration d'équipement optimale dépendra de nombreux facteurs ; c'est pourquoi nous avons un simulateur !</p><p>Les objets peuvent également être omis des préréglages s'ils sont très contestés et clairement mieux utilisés sur d'autres classes, pour encourager un équipement équitable pour le raid dans son ensemble.</p>",
 		"healing_sim_disclaimer": "*** AVERTISSEMENT - UTILISEZ À VOS PROPRES RISQUES ***\n\nLe concept entier d'un simulateur de soins est EXPÉRIMENTAL. Tous les résultats doivent être pris avec un grain de sel EXTREMEMENT important.\n\nCet outil est actuellement plus similaire à une feuille de calcul qu'à un véritable simulateur. Les options pour spécifier les profils de dégâts entrants afin d'avoir des rotations réactives appropriées n'ont pas encore été ajoutées.",
 		"notice_local_download": {
@@ -783,18 +783,18 @@
 			"talents_to_sim": "Talents à simuler"
 		},
 		"progress": {
-			"total_combinations": "{count} combinaisons totales.",
-			"refining_rounds": "{current} / {total} tours d'affinage",
-			"simulations_complete": "{completed} / {total}<br />simulations terminées",
-			"iterations_complete": "{completed} / {total}<br />itérations terminées",
-			"seconds_remaining": "{seconds} secondes restantes."
+			"total_combinations": "{{count}} combinaisons totales.",
+			"refining_rounds": "{{current}} / {{total}} tours d'affinage",
+			"simulations_complete": "{{completed}} / {{total}}<br />simulations terminées",
+			"iterations_complete": "{{completed}} / {{total}}<br />itérations terminées",
+			"seconds_remaining": "{{seconds}} secondes restantes."
 		},
 		"notifications": {
 			"bulk_sim_cancelled": "Simulation par lot annulée.",
 			"failed_to_remove_item": "Échec de la suppression de l'objet, veuillez signaler ce problème."
 		},
 		"warning": {
-			"iterations_limit": "Simuler plus de {limit} itérations dans le simulateur web prendra beaucoup de temps ou ne fonctionnera peut-être pas du tout. Pour les simulations par lot plus importantes, nous recommandons d'utiliser le mode rapide ou de télécharger l'exécutable et de l'exécuter sur votre machine."
+			"iterations_limit": "Simuler plus de {{limit}} itérations dans le simulateur web prendra beaucoup de temps ou ne fonctionnera peut-être pas du tout. Pour les simulations par lot plus importantes, nous recommandons d'utiliser le mode rapide ou de télécharger l'exécutable et de l'exécuter sur votre machine."
 		},
 		"results": {
 			"run_simulation": "Exécutez une simulation pour voir les résultats"
@@ -1954,9 +1954,9 @@
 				"title": "Problèmes de bricolage",
 				"message": "Il y a des problèmes connus lors de l'importation des bricolages depuis Wowhead. Assurez-vous toujours de vérifier vos bricolages après l'importation."
 			},
-			"error_invalid_url": "URL WCL invalide {url}, doit ressembler à \"https://www.wowhead.com/mop-classic/gear-planner/CLASS/RACE/XXXX\"",
-			"error_cannot_parse_class": "Impossible de parser la classe : {classId}",
-			"error_cannot_parse_race": "Impossible de parser la race : {raceId}"
+			"error_invalid_url": "URL WCL invalide {{url}}, doit ressembler à \"https://www.wowhead.com/mop-classic/gear-planner/CLASS/RACE/XXXX\"",
+			"error_cannot_parse_class": "Impossible de parser la classe : {{classId}}",
+			"error_cannot_parse_race": "Impossible de parser la race : {{raceId}}"
 		},
 		"addon": {
 			"title": "Import Addon",
@@ -2185,7 +2185,7 @@
 						"update_ep_button": "Mettre à jour PE"
 					},
 					"tooltips": {
-						"normalized_by": "Normalisé par {refStatName}.",
+						"normalized_by": "Normalisé par {{refStatName}}.",
 						"copy_to_current_ep": "Copier vers PE Actuel",
 						"restore_default_ep": "Restaurer PE par Défaut",
 						"compute_weighted_ep": "Calculer PE Pondéré"
