@@ -1326,6 +1326,10 @@
 					"label": "GCD Hasted Duration",
 					"tooltip": "The duration of the GCD induced by a cast with the current haste"
 				},
+				"full_cooldown": {
+					"label": "Full Cooldown",
+					"tooltip": "The full cooldown duration of the spell"
+				},
 				"channel_clip_delay": {
 					"label": "Channel Clip Delay",
 					"tooltip": "The amount of time specified by the <b>Channel Clip Delay</b> setting."
