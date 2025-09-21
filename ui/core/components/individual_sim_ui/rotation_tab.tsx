@@ -63,7 +63,7 @@ export class RotationTab extends SimTab {
 		this.autoTab.appendChild(rightCol);
 
 		this.buildRotationTypePicker(leftCol);
-		leftCol.appendChild(<p>{i18n.t("rotation.auto.description")}</p>)
+		leftCol.appendChild(<p>{i18n.t('rotation_tab.auto.description')}</p>);
 
 		this.buildPresetConfigurationPicker(rightCol);
 		this.buildSavedDataPickers(rightCol);
@@ -120,9 +120,9 @@ export class RotationTab extends SimTab {
 		const leftCol = this.aplTab.appendChild(<div className="rotation-tab-col tab-panel-left tab-content" />) as HTMLElement;
 		const rightCol = this.aplTab.appendChild(<div className="rotation-tab-col tab-panel-right" />) as HTMLElement;
 
-		const priorityListTab = this.buildAPLTab(navTabs, leftCol, i18n.t("rotation.apl.tabs.priorityList"), 'apl-priority-list', true);
-		const actionGroupsTab = this.buildAPLTab(navTabs, leftCol, i18n.t("rotation.apl.tabs.actionGroups"), 'apl-action-groups');
-		const variablesTab = this.buildAPLTab(navTabs, leftCol, i18n.t("rotation.apl.tabs.variables"), 'apl-variables');
+		const priorityListTab = this.buildAPLTab(navTabs, leftCol, i18n.t('rotation_tab.apl.tabs.priorityList'), 'apl-priority-list', true);
+		const actionGroupsTab = this.buildAPLTab(navTabs, leftCol, i18n.t('rotation_tab.apl.tabs.actionGroups'), 'apl-action-groups');
+		const variablesTab = this.buildAPLTab(navTabs, leftCol, i18n.t('rotation_tab.apl.tabs.variables'), 'apl-variables');
 
 		new APLPrePullListPicker(priorityListTab, this.simUI);
 		new APLPriorityListPicker(priorityListTab, this.simUI);
@@ -141,7 +141,7 @@ export class RotationTab extends SimTab {
 				<button
 					className={clsx({
 						'nav-link': true,
-						'active': isActive,
+						active: isActive,
 					})}
 					type="button"
 					attributes={{
@@ -156,14 +156,17 @@ export class RotationTab extends SimTab {
 					}}>
 					{label}
 				</button>
-			</li>
+			</li>,
 		) as HTMLLIElement;
 
 		const tabContent = container.appendChild(
-			<div id={tabId} className={clsx({
-				'tab-pane fade': true,
-				'active show': isActive,
-			})} />
+			<div
+				id={tabId}
+				className={clsx({
+					'tab-pane fade': true,
+					'active show': isActive,
+				})}
+			/>,
 		) as HTMLElement;
 
 		return tabContent;
@@ -221,14 +224,16 @@ export class RotationTab extends SimTab {
 		new TextDropdownPicker(container, this.simUI.player, {
 			id: 'rotation-tab-rotation-type',
 			defaultLabel: '',
-			values: this.simUI.player.hasSimpleRotationGenerator() ? [
-				{ value: APLRotationType.TypeAuto, label: i18n.t('rotation_tab.common.rotation_type.auto') },
-				{ value: APLRotationType.TypeSimple, label: i18n.t('rotation_tab.common.rotation_type.simple') },
-				{ value: APLRotationType.TypeAPL, label: i18n.t('rotation_tab.common.rotation_type.apl') },
-			]: [
-				{ value: APLRotationType.TypeAuto, label: i18n.t('rotation_tab.common.rotation_type.auto') },
-				{ value: APLRotationType.TypeAPL, label: i18n.t('rotation_tab.common.rotation_type.apl') },
-			],
+			values: this.simUI.player.hasSimpleRotationGenerator()
+				? [
+						{ value: APLRotationType.TypeAuto, label: i18n.t('rotation_tab.common.rotation_type.auto') },
+						{ value: APLRotationType.TypeSimple, label: i18n.t('rotation_tab.common.rotation_type.simple') },
+						{ value: APLRotationType.TypeAPL, label: i18n.t('rotation_tab.common.rotation_type.apl') },
+					]
+				: [
+						{ value: APLRotationType.TypeAuto, label: i18n.t('rotation_tab.common.rotation_type.auto') },
+						{ value: APLRotationType.TypeAPL, label: i18n.t('rotation_tab.common.rotation_type.apl') },
+					],
 			equals: (a, b) => a === b,
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: (player: Player<any>) => player.getRotationType(),

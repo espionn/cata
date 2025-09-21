@@ -1097,9 +1097,9 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellGcdHastedDuration: inputBuilder({
-		label: i18n.t('rotation.apl.values.gcd_hasted_duration.label'),
+		label: i18n.t('rotation_tab.apl.values.gcd_hasted_duration.label'),
 		submenu: ['spell'],
-		shortDescription: i18n.t('rotation.apl.values.gcd_hasted_duration.tooltip'),
+		shortDescription: i18n.t('rotation_tab.apl.values.gcd_hasted_duration.tooltip'),
 		newValue: APLValueSpellGCDHastedDuration.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
