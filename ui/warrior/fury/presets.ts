@@ -1,10 +1,12 @@
 import { Player } from '../../core/player';
 import * as PresetUtils from '../../core/preset_utils';
-import { ConsumesSpec, Glyphs, HandType, ItemSlot, Profession, PseudoStat, Spec, Stat } from '../../core/proto/common';
+import { ConsumesSpec, Glyphs, HandType, ItemSlot, Profession, PseudoStat, Race, Spec, Stat } from '../../core/proto/common';
 import { SavedTalents } from '../../core/proto/ui';
 import { FuryWarrior_Options as WarriorOptions, WarriorMajorGlyph } from '../../core/proto/warrior';
 import { Stats } from '../../core/proto_utils/stats';
 import DefaultFuryApl from './apls/default.apl.json';
+import P2FurySMFGear from './gear_sets/p2_fury_smf.gear.json';
+import P2FuryTGGear from './gear_sets/p2_fury_tg.gear.json';
 import P1FurySMFGear from './gear_sets/p1_fury_smf.gear.json';
 import P1FuryTGGear from './gear_sets/p1_fury_tg.gear.json';
 import PreraidFurySMFGear from './gear_sets/preraid_fury_smf.gear.json';
@@ -48,6 +50,8 @@ export const P1_PRERAID_FURY_SMF_PRESET = PresetUtils.makePresetGear('Preraid - 
 export const P1_PRERAID_FURY_TG_PRESET = PresetUtils.makePresetGear('Preraid - TG', PreraidFuryTGGear, FURY_TG_PRESET_OPTIONS);
 export const P1_BIS_FURY_SMF_PRESET = PresetUtils.makePresetGear('P1 - SMF', P1FurySMFGear, FURY_SMF_PRESET_OPTIONS);
 export const P1_BIS_FURY_TG_PRESET = PresetUtils.makePresetGear('P1 - TG', P1FuryTGGear, FURY_TG_PRESET_OPTIONS);
+export const P2_BIS_FURY_SMF_PRESET = PresetUtils.makePresetGear('P2 - SMF', P2FurySMFGear, FURY_SMF_PRESET_OPTIONS);
+export const P2_BIS_FURY_TG_PRESET = PresetUtils.makePresetGear('P2 - TG', P2FuryTGGear, FURY_TG_PRESET_OPTIONS);
 
 export const FURY_DEFAULT_ROTATION = PresetUtils.makePresetAPLRotation('Default', DefaultFuryApl);
 
@@ -136,6 +140,7 @@ export const DefaultConsumables = ConsumesSpec.create({
 });
 
 export const OtherDefaults = {
+	race: Race.RaceOrc,
 	profession1: Profession.Engineering,
 	profession2: Profession.Blacksmithing,
 	distanceFromTarget: 15,

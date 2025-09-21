@@ -25,6 +25,10 @@
 					},
 					"reforging": {
 						"type": "integer"
+					},
+					"upgradeStep": {
+						"type": "string",
+						"enum": ["ChallengeMode", "UpgradeStepOne", "UpgradeStepTwo", "UpgradeStepThree", "UpgradeStepFour"]
 					}
 				},
 				"additionalProperties": false

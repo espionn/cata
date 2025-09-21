@@ -126,7 +126,14 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFuryWarrior, {
 		// Preset rotations that the user can quickly select.
 		rotations: [Presets.FURY_DEFAULT_ROTATION],
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.P1_PRERAID_FURY_SMF_PRESET, Presets.P1_PRERAID_FURY_TG_PRESET, Presets.P1_BIS_FURY_SMF_PRESET, Presets.P1_BIS_FURY_TG_PRESET],
+		gear: [
+			Presets.P1_PRERAID_FURY_SMF_PRESET,
+			Presets.P1_PRERAID_FURY_TG_PRESET,
+			Presets.P1_BIS_FURY_SMF_PRESET,
+			Presets.P1_BIS_FURY_TG_PRESET,
+			Presets.P2_BIS_FURY_SMF_PRESET,
+			Presets.P2_BIS_FURY_TG_PRESET,
+		],
 		builds: [Presets.P1_PRESET_BUILD_SMF, Presets.P1_PRESET_BUILD_TG],
 	},
 
