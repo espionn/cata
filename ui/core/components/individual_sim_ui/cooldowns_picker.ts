@@ -70,7 +70,7 @@ export class CooldownsPicker extends Component {
 				</button>
 			`;
 			const deleteButton = deleteButtonFragment.children[0] as HTMLElement;
-			const deleteButtonTooltip = tippy(deleteButton, { content: i18n.t('rotation.cooldowns.delete_tooltip') });
+			const deleteButtonTooltip = tippy(deleteButton, { content: i18n.t('rotation_tab.cooldowns.delete_tooltip') });
 			deleteButton.addEventListener('click', () => {
 				const newCooldowns = this.player.getSimpleCooldowns();
 				newCooldowns.cooldowns.splice(i, 1);
@@ -131,7 +131,7 @@ export class CooldownsPicker extends Component {
 		const actionPicker = new NumberListPicker(parentElem, this.player, {
 			id: `cooldown-timings-${cooldownIndex}`,
 			extraCssClasses: ['cooldown-timings-picker'],
-			placeholder: i18n.t('rotation.cooldowns.timings_placeholder'),
+			placeholder: i18n.t('rotation_tab.cooldowns.timings_placeholder'),
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: (player: Player<any>) => {
 				return player.getSimpleCooldowns().cooldowns[cooldownIndex]?.timings || [];

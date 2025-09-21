@@ -17,10 +17,10 @@ export class APLPrePullListPicker extends Component{
 		super(container, 'apl-pre-pull-list-picker-root');
 
 		new ListPicker<Player<any>, APLPrepullAction>(this.rootElem, simUI.player, {
-			title: i18n.t('rotation.apl.prePullActions.header'),
-			titleTooltip: i18n.t('rotation.apl.prePullActions.tooltips.overview'),
+			title: i18n.t('rotation_tab.apl.prePullActions.header'),
+			titleTooltip: i18n.t('rotation_tab.apl.prePullActions.tooltips.overview'),
 			extraCssClasses: ['apl-list-item-picker', 'apl-prepull-action-picker'],
-			itemLabel: i18n.t('rotation.apl.prePullActions.name'),
+			itemLabel: i18n.t('rotation_tab.apl.prePullActions.name'),
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: (player: Player<any>) => player.aplRotation.prepullActions,
 			setValue: (eventID: EventID, player: Player<any>, newValue: Array<APLPrepullAction>) => {

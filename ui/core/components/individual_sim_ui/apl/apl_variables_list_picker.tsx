@@ -16,10 +16,10 @@ export class APLVariablesListPicker extends Component {
 		super(container, 'apl-variables-list-picker-root');
 
 		const listPicker = new ListPicker<Player<any>, APLValueVariable>(this.rootElem, simUI.player, {
-			title: i18n.t('rotation.apl.variables.header'),
-			titleTooltip: i18n.t('rotation.apl.variables.tooltips.overview'),
+			title: i18n.t('rotation_tab.apl.variables.header'),
+			titleTooltip: i18n.t('rotation_tab.apl.variables.tooltips.overview'),
 			extraCssClasses: ['apl-list-item-picker', 'apl-value-variables-picker'],
-			itemLabel: i18n.t('rotation.apl.variables.name'),
+			itemLabel: i18n.t('rotation_tab.apl.variables.name'),
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: (player: Player<any>) => player.aplRotation.valueVariables || [],
 			setValue: (eventID: EventID, player: Player<any>, newValue: Array<APLValueVariable>) => {
@@ -43,19 +43,19 @@ export class APLVariablesListPicker extends Component {
 			inlineMenuBar: true,
 		});
 
-		new AplFloatingActionBar(this.rootElem, simUI, listPicker, i18n.t('rotation.apl.variables.name'))
+		new AplFloatingActionBar(this.rootElem, simUI, listPicker, i18n.t('rotation_tab.apl.variables.name'))
 	}
 
 	private createValueVariable(): APLValueVariable {
 		return APLValueVariable.create({
-			name: i18n.t('rotation.apl.variables.newVariableName'),
+			name: i18n.t('rotation_tab.apl.variables.newVariableName'),
 			value: undefined,
 		});
 	}
 
 	private copyValueVariable(oldItem: APLValueVariable): APLValueVariable {
 		return APLValueVariable.create({
-			name: i18n.t('rotation.apl.variables.copyName', { variableName: oldItem.name }),
+			name: i18n.t('rotation_tab.apl.variables.copyName', { variableName: oldItem.name }),
 			value: oldItem.value,
 		});
 	}
@@ -85,8 +85,8 @@ class APLValueVariablePicker extends Input<Player<any>, APLValueVariable> {
 
 		this.namePicker = new AdaptiveStringPicker(container, player, {
 			id: randomUUID(),
-			label: i18n.t('rotation.apl.variables.attributes.name'),
-			labelTooltip: i18n.t('rotation.apl.variables.attributes.nameTooltip'),
+			label: i18n.t('rotation_tab.apl.variables.attributes.name'),
+			labelTooltip: i18n.t('rotation_tab.apl.variables.attributes.nameTooltip'),
 			extraCssClasses: ['apl-variable-name-picker'],
 			inline: true,
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
@@ -100,8 +100,8 @@ class APLValueVariablePicker extends Input<Player<any>, APLValueVariable> {
 
 		this.valuePicker = new APLValuePicker(container, player, {
 			id: randomUUID(),
-			label: i18n.t('rotation.apl.variables.attributes.value'),
-			labelTooltip: i18n.t('rotation.apl.variables.attributes.valueTooltip'),
+			label: i18n.t('rotation_tab.apl.variables.attributes.value'),
+			labelTooltip: i18n.t('rotation_tab.apl.variables.attributes.valueTooltip'),
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: () => this.getSourceValue().value,
 			setValue: (eventID: EventID, player: Player<any>, newValue: any) => {

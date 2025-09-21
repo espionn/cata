@@ -84,13 +84,13 @@ export class ResultsFilter extends ResultComponent {
 		} else if (ref.type == UnitType.AllPlayers) {
 			return {
 				iconUrl: '',
-				text: i18n.t('results.details.all_players'),
+				text: i18n.t('results_tab.details.all_players'),
 				value: ref,
 			};
 		} else if (ref.type == UnitType.AllTargets) {
 			return {
 				iconUrl: '',
-				text: i18n.t('results.details.all_targets'),
+				text: i18n.t('results_tab.details.all_targets'),
 				value: ref,
 			};
 		} else if (this.hasLastSimResult()) {
@@ -105,7 +105,7 @@ export class ResultsFilter extends ResultComponent {
 			if (unit) {
 				let displayText = unit.label;
 				if (ref.type == UnitType.Target) {
-					displayText = i18n.t('results.details.target_number', { number: ref.index + 1 });
+					displayText = i18n.t('results_tab.details.target_number', { number: ref.index + 1 });
 				}
 				return {
 					iconUrl: unit.iconUrl || '',

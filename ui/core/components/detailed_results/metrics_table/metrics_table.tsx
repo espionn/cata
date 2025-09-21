@@ -210,7 +210,7 @@ export abstract class MetricsTable<T extends ActionMetrics | AuraMetrics | UnitM
 		} & Pick<MetricsColumnConfig<T>, 'columnClass' | 'headerCellClass'>,
 	): MetricsColumnConfig<T> {
 		return {
-			name: i18n.t('results.details.columns.name'),
+			name: i18n.t('results_tab.details.columns.name'),
 			fillCell: (metric: T, cellElem: HTMLElement, rowElem: HTMLElement) => {
 				const data = getData(metric);
 				const actionIdAsString = data.actionId.toString();
@@ -237,7 +237,7 @@ export abstract class MetricsTable<T extends ActionMetrics | AuraMetrics | UnitM
 
 	static playerNameCellConfig(): MetricsColumnConfig<UnitMetrics> {
 		return {
-			name: i18n.t('results.details.columns.name'),
+			name: i18n.t('results_tab.details.columns.name'),
 			columnClass: 'name-cell',
 			fillCell: (player: UnitMetrics, cellElem: HTMLElement, rowElem: HTMLElement) => {
 				cellElem.appendChild(

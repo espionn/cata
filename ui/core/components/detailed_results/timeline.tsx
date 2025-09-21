@@ -75,21 +75,21 @@ export class Timeline extends ResultComponent {
 				<div className="d-flex flex-column">
 					<p>
 						<i className="warning fa fa-exclamation-triangle fa-xl me-2"></i>
-						{i18n.t('results.details.timeline.disclaimer')}
+						{i18n.t('results_tab.details.timeline.disclaimer')}
 					</p>
 					<p>
-						{i18n.t('results.details.timeline.note')}
+						{i18n.t('results_tab.details.timeline.note')}
 					</p>
 				</div>
 				<select className="timeline-chart-picker form-select">
 					<option className="rotation-option" value="rotation">
-						{i18n.t('results.details.timeline.chart_types.rotation')}
+						{i18n.t('results_tab.details.timeline.chart_types.rotation')}
 					</option>
 					<option className="dps-option" value="dps">
-						{i18n.t('results.details.timeline.chart_types.dps')}
+						{i18n.t('results_tab.details.timeline.chart_types.dps')}
 					</option>
 					<option className="threat-option" value="threat">
-						{i18n.t('results.details.timeline.chart_types.threat')}
+						{i18n.t('results_tab.details.timeline.chart_types.threat')}
 					</option>
 				</select>
 			</div>,
@@ -130,11 +130,11 @@ export class Timeline extends ResultComponent {
 			series: [], // Set dynamically
 			xaxis: {
 				title: {
-					text: i18n.t('results.details.timeline.chart_options.time_axis'),
+					text: i18n.t('results_tab.details.timeline.chart_options.time_axis'),
 				},
 			},
 			noData: {
-				text: i18n.t('results.details.timeline.chart_options.waiting_for_data'),
+				text: i18n.t('results_tab.details.timeline.chart_options.waiting_for_data'),
 			},
 			stroke: {
 				width: 2,
@@ -369,13 +369,13 @@ export class Timeline extends ResultComponent {
 		const axisMax = Math.ceil(maxThreat / 10000) * 10000;
 		options.yaxis.push({
 			color: threatColor,
-			seriesName: i18n.t('results.details.timeline.tooltips.threat'),
+			seriesName: i18n.t('results_tab.details.timeline.tooltips.threat'),
 			min: 0,
 			max: axisMax,
 			tickAmount: 10,
 			decimalsInFloat: 0,
 			title: {
-				text: i18n.t('results.details.timeline.tooltips.threat'),
+				text: i18n.t('results_tab.details.timeline.tooltips.threat'),
 				style: {
 					color: threatColor,
 				},
@@ -481,7 +481,7 @@ export class Timeline extends ResultComponent {
 	private addThreatSeries(unit: UnitMetrics, options: any, colorOverride: string): TooltipHandler | null {
 		options.colors.push(colorOverride || threatColor);
 		options.series.push({
-			name: i18n.t('results.details.timeline.tooltips.threat'),
+			name: i18n.t('results_tab.details.timeline.tooltips.threat'),
 			type: 'line',
 			data: unit.threatLogs
 				.filter(log => log.timestamp >= 0)
@@ -933,7 +933,7 @@ export class Timeline extends ResultComponent {
 									<span>
 										{ddl.timestamp.toFixed(2)}s - {ddl.result()}
 									</span>
-																{ddl.source?.isTarget && <span className="threat-metrics"> ({ddl.threat.toFixed(1)} {i18n.t('results.details.timeline.tooltips.threat')})</span>}
+																{ddl.source?.isTarget && <span className="threat-metrics"> ({ddl.threat.toFixed(1)} {i18n.t('results_tab.details.timeline.tooltips.threat')})</span>}
 						</li>
 					))}
 				</ul>
@@ -970,7 +970,7 @@ export class Timeline extends ResultComponent {
 							<span>
 								{ddl.timestamp.toFixed(2)}s - {ddl.actionId!.name} {ddl.result()}
 							</span>
-							{ddl.source?.isTarget && <span className="threat-metrics"> ({ddl.threat.toFixed(1)} {i18n.t('results.details.timeline.tooltips.threat')})</span>}
+							{ddl.source?.isTarget && <span className="threat-metrics"> ({ddl.threat.toFixed(1)} {i18n.t('results_tab.details.timeline.tooltips.threat')})</span>}
 						</div>
 					);
 
@@ -1126,7 +1126,7 @@ export class Timeline extends ResultComponent {
 				<div className="timeline-tooltip-body">
 					<ul className="timeline-dps-events">{log.damageLogs.map(damageLog => this.tooltipLogItem(damageLog, damageLog.result()))}</ul>
 					<div className="timeline-tooltip-body-row">
-						<span className="series-color">{i18n.t('results.details.timeline.tooltips.dps')}: {log.dps.toFixed(2)}</span>
+						<span className="series-color">{i18n.t('results_tab.details.timeline.tooltips.dps')}: {log.dps.toFixed(2)}</span>
 					</div>
 				</div>
 				{this.tooltipAurasSection(log)}
@@ -1152,11 +1152,11 @@ export class Timeline extends ResultComponent {
 				</div>
 				<div className="timeline-tooltip-body">
 					<div className="timeline-tooltip-body-row">
-						<span className="series-color">{i18n.t('results.details.timeline.tooltips.before')}: {log.threatBefore.toFixed(1)}</span>
+						<span className="series-color">{i18n.t('results_tab.details.timeline.tooltips.before')}: {log.threatBefore.toFixed(1)}</span>
 					</div>
-					<ul className="timeline-threat-events">{log.logs.map(log => this.tooltipLogItem(log, <>{log.threat.toFixed(1)} {i18n.t('results.details.timeline.tooltips.threat')}</>))}</ul>
+					<ul className="timeline-threat-events">{log.logs.map(log => this.tooltipLogItem(log, <>{log.threat.toFixed(1)} {i18n.t('results_tab.details.timeline.tooltips.threat')}</>))}</ul>
 					<div className="timeline-tooltip-body-row">
-						<span className="series-color">{i18n.t('results.details.timeline.tooltips.after')}: {log.threatAfter.toFixed(1)}</span>
+						<span className="series-color">{i18n.t('results_tab.details.timeline.tooltips.after')}: {log.threatAfter.toFixed(1)}</span>
 					</div>
 				</div>
 				{includeAuras ? this.tooltipAurasSection(log) : null}
@@ -1176,13 +1176,13 @@ export class Timeline extends ResultComponent {
 				</div>
 				<div className="timeline-tooltip-body">
 					<div className="timeline-tooltip-body-row">
-						<span className="series-color">{i18n.t('results.details.timeline.tooltips.before')}: {valToDisplayString(log.valueBefore)}</span>
+						<span className="series-color">{i18n.t('results_tab.details.timeline.tooltips.before')}: {valToDisplayString(log.valueBefore)}</span>
 					</div>
 					<ul className="timeline-mana-events">
 						{log.logs.map(manaChangedLog => this.tooltipLogItemElem(manaChangedLog, <>{manaChangedLog.resultString()}</>))}
 					</ul>
 					<div className="timeline-tooltip-body-row">
-						<span className="series-color">{i18n.t('results.details.timeline.tooltips.after')}: {valToDisplayString(log.valueAfter)}</span>
+						<span className="series-color">{i18n.t('results_tab.details.timeline.tooltips.after')}: {valToDisplayString(log.valueAfter)}</span>
 					</div>
 				</div>
 				{includeAuras && this.tooltipAurasSectionElem(log)}
@@ -1223,7 +1223,7 @@ export class Timeline extends ResultComponent {
 		return (
 			<div className="timeline-tooltip-auras">
 				<div className="timeline-tooltip-body-row">
-					<span className="bold">{i18n.t('results.details.timeline.tooltips.active_auras')}</span>
+					<span className="bold">{i18n.t('results_tab.details.timeline.tooltips.active_auras')}</span>
 				</div>
 				<ul className="timeline-active-auras">
 					{log.activeAuras.map(auraLog => (

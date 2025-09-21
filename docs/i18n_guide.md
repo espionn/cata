@@ -9,7 +9,7 @@ Hey there! 👋 This guide will help you work with translations in our WoW sim p
 
 ## Adding New Text
 
-When you've added a new key you can update the translation schema using this URL: https://app.quicktype.io/#l=schema by pasting in the `en.json`.
+When you've added a new key you can update the translation schema using this URL: https://jsontoolhub.com/json-schema-generator by pasting in the `en.json`.
 The result you can paste in `schemsa/translation.schema.json`.
 
 This is done so you can see warnings in the translation files incase you've missed a new entry.

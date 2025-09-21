@@ -29,7 +29,7 @@ export class GemSummary extends Component {
 		this.player = player;
 
 		this.container = new ContentBlock(this.rootElem, 'summary-table-container', {
-			header: { title: i18n.t('gear.gem_summary.title'), extraCssClasses: ['summary-table--gems'] },
+			header: { title: i18n.t('gear_tab.gem_summary.title'), extraCssClasses: ['summary-table--gems'] },
 			extraCssClasses: ['summary-table--gems'],
 		});
 		player.gearChangeEmitter.on(() => this.updateTable());
@@ -94,7 +94,7 @@ export class GemSummary extends Component {
 						this.player.setGear(TypedEvent.nextEventID(), this.player.getGear().withoutGems(this.player.canDualWield2H()));
 					}}>
 					<i className="fas fa-times me-1"></i>
-					{i18n.t('gear.gem_summary.reset_gems')}
+					{i18n.t('gear_tab.gem_summary.reset_gems')}
 				</button>
 			);
 

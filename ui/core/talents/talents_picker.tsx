@@ -53,8 +53,8 @@ export class TalentsPicker<ModObject extends Player<any>, TalentsProto> extends 
 		new CopyButton(actionsContainerRef.value!, {
 			extraCssClasses: ['btn-sm', 'btn-outline-primary', 'copy-talents'],
 			getContent: () => modObject.getTalentsString(),
-			text: i18n.t('talents.copy_button.label'),
-			tooltip: i18n.t('talents.copy_button.tooltip'),
+			text: i18n.t('talents_tab.copy_button.label'),
+			tooltip: i18n.t('talents_tab.copy_button.tooltip'),
 		});
 
 		this.tree = new TalentTreePicker(talentsListContainer, this.config.tree, this, config.playerSpec);
@@ -123,7 +123,7 @@ class TalentTreePicker<TalentsProto> extends Component {
 		);
 
 		const resetBtn = resetButton.value!;
-		tippy(resetBtn, { content: i18n.t('talents.reset_button.tooltip') });
+		tippy(resetBtn, { content: i18n.t('talents_tab.reset_button.tooltip') });
 		resetBtn.addEventListener('click', _event => this.resetPoints());
 	}
 
@@ -180,7 +180,7 @@ class TalentPicker<TalentsProto> extends Component {
 			<>
 				<div ref={iconRef} className="talent-picker-icon"></div>
 				<div className="talent-picker-label" dataset={{ whtticon: false }}>
-					{i18n.t(`talents.tree.${getClassI18nKey(this.tree.picker.modObject.getClass())}.${String(config.fieldName)}`) || config.fancyName}
+					{i18n.t(`${getClassI18nKey(this.tree.picker.modObject.getClass())}.${String(config.fieldName)}`, { ns: 'talents' }) || config.fancyName}
 				</div>
 			</>,
 		);

@@ -30,7 +30,7 @@ export const PetInput = <SpecType extends WarlockSpecs>() =>
 export const DetonateSeed = <SpecType extends WarlockSpecs>() =>
 	InputHelpers.makeClassOptionsBooleanInput<SpecType>({
 		fieldName: 'detonateSeed',
-		label: i18n.t('settings.other.detonate_seed.label'),
-		labelTooltip: i18n.t('settings.other.detonate_seed.tooltip'),
+		label: i18n.t('settings_tab.other.detonate_seed.label'),
+		labelTooltip: i18n.t('settings_tab.other.detonate_seed.tooltip'),
 	});
 

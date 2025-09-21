@@ -8,7 +8,7 @@ import i18n from '../../i18n/config';
 
 export const HonorAmongThievesCritRate = InputHelpers.makeSpecOptionsNumberInput<Spec.SpecSubtletyRogue>({
 	fieldName: 'honorAmongThievesCritRate',
-	label: i18n.t('rotation.options.rogue.subtlety.honor_of_thieves_crit_rate.label'),
-	labelTooltip: i18n.t('rotation.options.rogue.subtlety.honor_of_thieves_crit_rate.tooltip'),
+	label: i18n.t('rotation_tab.options.rogue.subtlety.honor_of_thieves_crit_rate.label'),
+	labelTooltip: i18n.t('rotation_tab.options.rogue.subtlety.honor_of_thieves_crit_rate.tooltip'),
 	showWhen: (player: Player<Spec.SpecSubtletyRogue>) => false,
 });

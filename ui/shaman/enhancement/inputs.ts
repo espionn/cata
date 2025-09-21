@@ -33,12 +33,12 @@ export const ShamanImbueOHSwap = InputHelpers.makeSpecOptionsEnumIconInput<Spec.
 
 export const SyncTypeInput = InputHelpers.makeSpecOptionsEnumInput<Spec.SpecEnhancementShaman, ShamanSyncType>({
 	fieldName: 'syncType',
-	label: i18n.t('settings.other.sync_type.label'),
-	labelTooltip: i18n.t('settings.other.sync_type.tooltip'),
+	label: i18n.t('settings_tab.other.sync_type.label'),
+	labelTooltip: i18n.t('settings_tab.other.sync_type.tooltip'),
 	values: [
-		{ name: i18n.t('settings.other.sync_type.values.automatic'), value: ShamanSyncType.Auto },
-		{ name: i18n.t('settings.other.sync_type.values.none'), value: ShamanSyncType.NoSync },
-		{ name: i18n.t('settings.other.sync_type.values.perfect_sync'), value: ShamanSyncType.SyncMainhandOffhandSwings },
-		{ name: i18n.t('settings.other.sync_type.values.delayed_offhand'), value: ShamanSyncType.DelayOffhandSwings },
+		{ name: i18n.t('settings_tab.other.sync_type.values.automatic'), value: ShamanSyncType.Auto },
+		{ name: i18n.t('settings_tab.other.sync_type.values.none'), value: ShamanSyncType.NoSync },
+		{ name: i18n.t('settings_tab.other.sync_type.values.perfect_sync'), value: ShamanSyncType.SyncMainhandOffhandSwings },
+		{ name: i18n.t('settings_tab.other.sync_type.values.delayed_offhand'), value: ShamanSyncType.DelayOffhandSwings },
 	],
 });

@@ -75,7 +75,7 @@ export class BulkTab extends SimTab {
 	gemIconElements: HTMLImageElement[];
 
 	constructor(parentElem: HTMLElement, simUI: IndividualSimUI<any>) {
-		super(parentElem, simUI, { identifier: 'bulk-tab', title: i18n.t('sim.bulk.title') });
+		super(parentElem, simUI, { identifier: 'bulk-tab', title: i18n.t('bulk_tab.title') });
 
 		this.simUI = simUI;
 		this.playerCanDualWield = this.simUI.player.getPlayerSpec().canDualWield;
@@ -110,7 +110,7 @@ export class BulkTab extends SimTab {
 										bsTarget: `#bulkSetupTab`,
 									}}
 									ref={setupTabBtnRef}>
-									{i18n.t('sim.bulk.tabs.setup')}
+									{i18n.t('bulk_tab.tabs.setup')}
 								</button>
 							</li>
 							<li className="nav-item" attributes={{ role: 'presentation' }}>
@@ -128,14 +128,14 @@ export class BulkTab extends SimTab {
 										bsTarget: `#bulkResultsTab`,
 									}}
 									ref={resultsTabBtnRef}>
-									{i18n.t('sim.bulk.tabs.results')}
+									{i18n.t('bulk_tab.tabs.results')}
 								</button>
 							</li>
 						</ul>
 						<div className="tab-content">
 							<div id="bulkSetupTab" className="tab-pane fade active show" ref={setupTabRef} />
 							<div id="bulkResultsTab" className="tab-pane fade show" ref={resultsTabRef}>
-								<div className="d-flex align-items-center justify-content-center p-gap">{i18n.t('sim.bulk.results.run_simulation')}</div>
+								<div className="d-flex align-items-center justify-content-center p-gap">{i18n.t('bulk_tab.results.run_simulation')}</div>
 							</div>
 						</div>
 					</div>
@@ -145,7 +145,7 @@ export class BulkTab extends SimTab {
 						<div className="bulk-settings-container" ref={settingsContainerRef}>
 							<div className="bulk-combinations-count h4" ref={combinationsElemRef} />
 							<button className="btn btn-primary bulk-settings-btn" ref={bulkSimBtnRef}>
-								{i18n.t('sim.bulk.actions.simulate_batch')}
+								{i18n.t('bulk_tab.actions.simulate_batch')}
 							</button>
 							<div className="bulk-boolean-settings-container" ref={booleanSettingsContainerRef}></div>
 						</div>
@@ -407,7 +407,7 @@ export class BulkTab extends SimTab {
 		if (idx < 0 || this.items.length < idx || !this.items[idx]) {
 			new Toast({
 				variant: 'error',
-				body: i18n.t('sim.bulk.notifications.failed_to_remove_item'),
+				body: i18n.t('bulk_tab.notifications.failed_to_remove_item'),
 			});
 			return;
 		}
@@ -467,7 +467,7 @@ export class BulkTab extends SimTab {
 			if (result.error?.type == ErrorOutcomeType.ErrorOutcomeAborted) {
 							new Toast({
 				variant: 'info',
-				body: i18n.t('sim.bulk.notifications.bulk_sim_cancelled'),
+				body: i18n.t('bulk_tab.notifications.bulk_sim_cancelled'),
 			});
 			}
 		} catch (e) {
@@ -499,25 +499,25 @@ export class BulkTab extends SimTab {
 		this.setupTabElem.appendChild(
 			<>
 				{/* // TODO: Remove once we're more comfortable with the state of Batch sim */}
-				<p className="mb-0" innerHTML={i18n.t('sim.bulk.description')} />
+				<p className="mb-0" innerHTML={i18n.t('bulk_tab.description')} />
 				{isExternal() && (
 					<p className="mb-0">
 						<a href={REPO_RELEASES_URL} target="_blank">
 							<i className="fas fa-gauge-high me-1" />
-							{i18n.t('sim.bulk.download_local')}
+							{i18n.t('bulk_tab.download_local')}
 						</a>
 					</p>
 				)}
 				<div className="bulk-gear-actions">
 					<button className="btn btn-secondary" ref={bagImportBtnRef}>
-						<i className="fa fa-download me-1" /> {i18n.t('sim.bulk.actions.import_bags')}
+						<i className="fa fa-download me-1" /> {i18n.t('bulk_tab.actions.import_bags')}
 					</button>
 					<button className="btn btn-secondary" ref={favsImportBtnRef}>
-						<i className="fa fa-download me-1" /> {i18n.t('sim.bulk.actions.import_favorites')}
+						<i className="fa fa-download me-1" /> {i18n.t('bulk_tab.actions.import_favorites')}
 					</button>
 					<button className="btn btn-danger ms-auto" ref={clearBtnRef}>
 						<i className="fas fa-times me-1" />
-						{i18n.t('sim.bulk.actions.clear_items')}
+						{i18n.t('bulk_tab.actions.clear_items')}
 					</button>
 				</div>
 			</>,
@@ -643,8 +643,8 @@ export class BulkTab extends SimTab {
 		if (!isExternal()) {
 			new BooleanPicker<BulkTab>(this.booleanSettingsContainer, this, {
 				id: 'bulk-fast-mode',
-				label: i18n.t('sim.bulk.settings.fast_mode.label'),
-				labelTooltip: i18n.t('sim.bulk.settings.fast_mode.tooltip'),
+				label: i18n.t('bulk_tab.settings.fast_mode.label'),
+				labelTooltip: i18n.t('bulk_tab.settings.fast_mode.tooltip'),
 				changedEvent: _modObj => this.settingsChangedEmitter,
 				getValue: _modObj => this.fastMode,
 				setValue: (_, _modObj, newValue: boolean) => {
@@ -654,8 +654,8 @@ export class BulkTab extends SimTab {
 		}
 		new BooleanPicker<BulkTab>(this.booleanSettingsContainer, this, {
 			id: 'bulk-combinations',
-			label: i18n.t('sim.bulk.settings.combinations.label'),
-			labelTooltip: i18n.t('sim.bulk.settings.combinations.tooltip'),
+			label: i18n.t('bulk_tab.settings.combinations.label'),
+			labelTooltip: i18n.t('bulk_tab.settings.combinations.tooltip'),
 			changedEvent: _modObj => this.settingsChangedEmitter,
 			getValue: _modObj => this.doCombos,
 			setValue: (_, _modObj, newValue: boolean) => {
@@ -664,8 +664,8 @@ export class BulkTab extends SimTab {
 		});
 		new BooleanPicker<BulkTab>(this.booleanSettingsContainer, this, {
 			id: 'bulk-auto-enchant',
-			label: i18n.t('sim.bulk.settings.auto_enchant.label'),
-			labelTooltip: i18n.t('sim.bulk.settings.auto_enchant.tooltip'),
+			label: i18n.t('bulk_tab.settings.auto_enchant.label'),
+			labelTooltip: i18n.t('bulk_tab.settings.auto_enchant.tooltip'),
 			changedEvent: (_obj: BulkTab) => this.settingsChangedEmitter,
 			getValue: _obj => this.autoEnchant,
 			setValue: (_, obj: BulkTab, value: boolean) => {
@@ -676,7 +676,7 @@ export class BulkTab extends SimTab {
 		const socketsContainerRef = ref<HTMLDivElement>();
 		const defaultGemDiv = (
 			<div className={clsx('default-gem-container', !this.autoGem && 'hide')}>
-				<h6>{i18n.t('sim.bulk.settings.default_gems')}</h6>
+				<h6>{i18n.t('bulk_tab.settings.default_gems')}</h6>
 				<div ref={socketsContainerRef} className="sockets-container"></div>
 			</div>
 		);
@@ -684,15 +684,15 @@ export class BulkTab extends SimTab {
 		const talentsContainerRef = ref<HTMLDivElement>();
 		const talentsToSimDiv = (
 			<div className={clsx('talents-picker-container', !this.simTalents && 'hide')}>
-				<h6>{i18n.t('sim.bulk.settings.talents_to_sim')}</h6>
+				<h6>{i18n.t('bulk_tab.settings.talents_to_sim')}</h6>
 				<div ref={talentsContainerRef} className="talents-container"></div>
 			</div>
 		);
 
 		new BooleanPicker<BulkTab>(this.booleanSettingsContainer, this, {
 			id: 'bulk-auto-gem',
-			label: i18n.t('sim.bulk.settings.auto_gem.label'),
-			labelTooltip: i18n.t('sim.bulk.settings.auto_gem.tooltip'),
+			label: i18n.t('bulk_tab.settings.auto_gem.label'),
+			labelTooltip: i18n.t('bulk_tab.settings.auto_gem.tooltip'),
 			changedEvent: (_obj: BulkTab) => this.settingsChangedEmitter,
 			getValue: _obj => this.autoGem,
 			setValue: (_, obj: BulkTab, value: boolean) => {
@@ -703,8 +703,8 @@ export class BulkTab extends SimTab {
 
 		new BooleanPicker<BulkTab>(this.booleanSettingsContainer, this, {
 			id: 'bulk-sim-talents',
-			label: i18n.t('sim.bulk.settings.sim_talents.label'),
-			labelTooltip: i18n.t('sim.bulk.settings.sim_talents.tooltip'),
+			label: i18n.t('bulk_tab.settings.sim_talents.label'),
+			labelTooltip: i18n.t('bulk_tab.settings.sim_talents.tooltip'),
 			changedEvent: (_obj: BulkTab) => this.settingsChangedEmitter,
 			getValue: _obj => this.simTalents,
 			setValue: (_, obj: BulkTab, value: boolean) => {
@@ -841,9 +841,9 @@ export class BulkTab extends SimTab {
 		const rtn = (
 			<>
 				<span className={clsx(this.showIterationsWarning() && 'text-danger')}>
-					{this.combinations === 1 ? i18n.t('sim.bulk.settings.combination_singular') : i18n.t('sim.bulk.settings.combinations_count', { count: this.combinations })}
+					{this.combinations === 1 ? i18n.t('bulk_tab.settings.combination_singular') : i18n.t('bulk_tab.settings.combinations_count', { count: this.combinations })}
 					<br />
-					<small>{this.iterations} {i18n.t('sim.bulk.settings.iterations')}</small>
+					<small>{this.iterations} {i18n.t('bulk_tab.settings.iterations')}</small>
 				</span>
 				{this.showIterationsWarning() && (
 					<button className="warning link-warning" ref={warningRef}>
@@ -855,7 +855,7 @@ export class BulkTab extends SimTab {
 
 		if (!!warningRef.value) {
 			tippy(warningRef.value, {
-				content: i18n.t('sim.bulk.warning.iterations_limit', { limit: WEB_ITERATIONS_LIMIT }),
+				content: i18n.t('bulk_tab.warning.iterations_limit', { limit: WEB_ITERATIONS_LIMIT }),
 				placement: 'left',
 				popperOptions: {
 					modifiers: [
@@ -887,17 +887,17 @@ export class BulkTab extends SimTab {
 
 		this.pendingResults.setContent(
 			<div className="results-sim">
-				<div>{i18n.t('sim.bulk.progress.total_combinations', { count: combinations })}</div>
+				<div>{i18n.t('bulk_tab.progress.total_combinations', { count: combinations })}</div>
 				<div>
 					{rounds > 0 && (
 						<>
-							{i18n.t('sim.bulk.progress.refining_rounds', { current: currentRound, total: rounds })}
+							{i18n.t('bulk_tab.progress.refining_rounds', { current: currentRound, total: rounds })}
 						</>
 					)}
 				</div>
-				<div innerHTML={i18n.t('sim.bulk.progress.simulations_complete', { completed: progress.completedSims, total: progress.totalSims })} />
-				<div innerHTML={i18n.t('sim.bulk.progress.iterations_complete', { completed: progress.completedIterations, total: progress.totalIterations })} />
-				<div>{i18n.t('sim.bulk.progress.seconds_remaining', { seconds: secondsRemaining })}</div>
+				<div innerHTML={i18n.t('bulk_tab.progress.simulations_complete', { completed: progress.completedSims, total: progress.totalSims })} />
+				<div innerHTML={i18n.t('bulk_tab.progress.iterations_complete', { completed: progress.completedIterations, total: progress.totalIterations })} />
+				<div>{i18n.t('bulk_tab.progress.seconds_remaining', { seconds: secondsRemaining })}</div>
 			</div>,
 		);
 	}

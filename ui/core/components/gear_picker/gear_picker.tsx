@@ -192,7 +192,7 @@ export class ItemRenderer extends Component {
 		if (reforgeData) {
 			const fromText = translateStat(reforgeData.reforge?.fromStat);
 			const toText = translateStat(reforgeData.reforge?.toStat);
-			this.reforgeElem.innerText = i18n.t('gear.gear_picker.reforge_text', {
+			this.reforgeElem.innerText = i18n.t('gear_tab.gear_picker.reforge_text', {
 				fromAmount: Math.abs(reforgeData.fromAmount),
 				fromStat: fromText,
 				toAmount: reforgeData.toAmount,

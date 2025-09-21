@@ -13,15 +13,15 @@ export const PetTypeInput = <SpecType extends HunterSpecs>() => makePetTypeInput
 export const PetUptime = <SpecType extends HunterSpecs>() =>
 	InputHelpers.makeClassOptionsNumberInput<SpecType>({
 		fieldName: 'petUptime',
-		label: i18n.t('settings.other.pet_uptime.label'),
-		labelTooltip: i18n.t('settings.other.pet_uptime.tooltip'),
+		label: i18n.t('settings_tab.other.pet_uptime.label'),
+		labelTooltip: i18n.t('settings_tab.other.pet_uptime.tooltip'),
 		percent: true,
 	});
 
 export const GlaiveTossChance = <SpecType extends HunterSpecs>() =>
 	InputHelpers.makeClassOptionsNumberInput<SpecType>({
 		fieldName: 'glaiveTossSuccess',
-		label: i18n.t('settings.other.glaive_toss_chance.label'),
-		labelTooltip: i18n.t('settings.other.glaive_toss_chance.tooltip'),
+		label: i18n.t('settings_tab.other.glaive_toss_chance.label'),
+		labelTooltip: i18n.t('settings_tab.other.glaive_toss_chance.tooltip'),
 		percent: true,
 	});

@@ -53,7 +53,7 @@ export class DpsHistogram extends ResultComponent {
 				plugins: {
 					title: {
 						display: true,
-						text: i18n.t('results.details.damage.dps_histogram'),
+						text: i18n.t('results_tab.details.damage.dps_histogram'),
 					},
 					legend: {
 						display: false,

@@ -1756,7 +1756,7 @@ export class ReforgeOptimizer {
 		const copyButtonContainerRef = ref<HTMLDivElement>();
 		const changedReforgeMessage = (
 			<>
-				<p className="mb-0">{i18n.t('gear.reforge_success.title')}</p>
+				<p className="mb-0">{i18n.t('gear_tab.reforge_success.title')}</p>
 				<ul>
 					{[...changedSlots].map(([slot, reforge]) => {
 						if (reforge) {
@@ -1772,7 +1772,7 @@ export class ReforgeOptimizer {
 						} else {
 							return (
 								<li>
-									{translateSlotName(slot)}: {i18n.t('gear.reforge_success.removed_reforge')}
+									{translateSlotName(slot)}: {i18n.t('gear_tab.reforge_success.removed_reforge')}
 								</li>
 							);
 						}
@@ -1788,13 +1788,13 @@ export class ReforgeOptimizer {
 				new CopyButton(copyButtonContainerRef.value!, {
 					extraCssClasses: ['btn-outline-primary'],
 					getContent: () => JSON.stringify(settingsExport),
-					text: i18n.t('gear.reforge_success.copy_to_reforge_lite'),
+					text: i18n.t('gear_tab.reforge_success.copy_to_reforge_lite'),
 				});
 		}
 
 		new Toast({
 			variant: 'success',
-			body: hasReforgeChanges ? changedReforgeMessage : <>{i18n.t('gear.reforge_success.no_changes')}</>,
+			body: hasReforgeChanges ? changedReforgeMessage : <>{i18n.t('gear_tab.reforge_success.no_changes')}</>,
 			delay: hasReforgeChanges ? 5000 : 3000,
 		});
 	}

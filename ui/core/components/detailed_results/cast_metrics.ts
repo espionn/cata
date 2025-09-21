@@ -15,13 +15,13 @@ export class CastMetricsTable extends MetricsTable<ActionMetrics> {
 				};
 			}),
 			{
-				name: i18n.t('results.details.columns.casts'),
+				name: i18n.t('results_tab.details.columns.casts'),
 				sort: ColumnSortType.Descending,
 				getValue: (metric: ActionMetrics) => metric.casts,
 				getDisplayString: (metric: ActionMetrics) => metric.casts.toFixed(1),
 			},
 			{
-				name: i18n.t('results.details.columns.cpm'),
+				name: i18n.t('results_tab.details.columns.cpm'),
 				getValue: (metric: ActionMetrics) => metric.castsPerMinute,
 				getDisplayString: (metric: ActionMetrics) => metric.castsPerMinute.toFixed(1),
 			},

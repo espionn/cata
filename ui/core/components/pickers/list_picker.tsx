@@ -106,14 +106,14 @@ export class ListPicker<ModObject, ItemType> extends Input<ModObject, Array<Item
 				newItemButton = ListPicker.makeActionElem('link-success', 'fa-plus');
 				newButtonTooltip = tippy(newItemButton, {
 					allowHTML: false,
-					content: i18n.t('rotation.apl.floatingActionBar.new', { itemName: config.itemLabel }),
+					content: i18n.t('rotation_tab.apl.floatingActionBar.new', { itemName: config.itemLabel }),
 				});
 				this.addOnDisposeCallback(() => newButtonTooltip?.destroy());
 			} else {
 				newItemButton = (
 					<button className="btn btn-primary">
 						<i className="fa fa-plus me-2" />
-						{i18n.t('rotation.apl.floatingActionBar.new', { itemName: config.itemLabel })}
+						{i18n.t('rotation_tab.apl.floatingActionBar.new', { itemName: config.itemLabel })}
 					</button>
 				) as HTMLButtonElement;
 			}

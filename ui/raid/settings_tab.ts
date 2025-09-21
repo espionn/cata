@@ -26,7 +26,7 @@ export class SettingsTab extends SimTab {
 	readonly column3: HTMLElement = this.buildColumn(3, 'raid-settings-col');
 
 	constructor(parentElem: HTMLElement, simUI: RaidSimUI) {
-		super(parentElem, simUI, { identifier: 'raid-settings-tab', title: i18n.t('settings.title') });
+		super(parentElem, simUI, { identifier: 'raid-settings-tab', title: i18n.t('settings_tab.title') });
 		this.simUI = simUI;
 
 		this.leftPanel = document.createElement('div');
@@ -59,7 +59,7 @@ export class SettingsTab extends SimTab {
 
 	private buildEncounterSettings() {
 		const contentBlock = new ContentBlock(this.column1, 'encounter-settings', {
-			header: { title: i18n.t('settings.encounter.title') },
+			header: { title: i18n.t('settings_tab.encounter.title') },
 		});
 
 		new EncounterPicker(contentBlock.bodyElement, this.simUI.sim.encounter, { showExecuteProportion: true }, this.simUI);
@@ -67,7 +67,7 @@ export class SettingsTab extends SimTab {
 
 	private buildConsumesSettings() {
 		const contentBlock = new ContentBlock(this.column1, 'consumes-settings', {
-			header: { title: i18n.t('settings.consumables.title') },
+			header: { title: i18n.t('settings_tab.consumables.title') },
 		});
 
 		const container = document.createElement('div');
@@ -87,7 +87,7 @@ export class SettingsTab extends SimTab {
 
 	private buildOtherSettings() {
 		const contentBlock = new ContentBlock(this.column2, 'other-settings', {
-			header: { title: i18n.t('settings.other.title') },
+			header: { title: i18n.t('settings_tab.other.title') },
 		});
 
 		// new BooleanPicker(contentBlock.bodyElement, this.simUI.sim.raid, {
@@ -111,7 +111,7 @@ export class SettingsTab extends SimTab {
 
 	private buildAssignmentSettings() {
 		const contentBlock = new ContentBlock(this.column2, 'assignments-settings', {
-			header: { title: i18n.t('settings.external_buffs.title') },
+			header: { title: i18n.t('settings_tab.external_buffs.title') },
 		});
 
 		new AssignmentsPicker(contentBlock.bodyElement, this.simUI);
@@ -119,7 +119,7 @@ export class SettingsTab extends SimTab {
 
 	private buildBlessingsPicker() {
 		const contentBlock = new ContentBlock(this.column3, 'blessings-settings', {
-			header: { title: i18n.t('settings.blessings.title'), tooltip: i18n.t('settings.blessings.tooltip') },
+			header: { title: i18n.t('settings_tab.blessings.title'), tooltip: i18n.t('settings_tab.blessings.tooltip') },
 		});
 
 		this.simUI.blessingsPicker = new BlessingsPicker(contentBlock.bodyElement, this.simUI);
@@ -128,8 +128,8 @@ export class SettingsTab extends SimTab {
 
 	private buildSavedDataPickers() {
 		const savedEncounterManager = new SavedDataManager<Encounter, SavedEncounter>(this.rightPanel, this.simUI.sim.encounter, {
-			label: i18n.t('settings.saved_encounters.encounter'),
-			header: { title: i18n.t('settings.saved_encounters.title') },
+			label: i18n.t('settings_tab.saved_encounters.encounter'),
+			header: { title: i18n.t('settings_tab.saved_encounters.title') },
 			storageKey: this.simUI.getSavedEncounterStorageKey(),
 			getData: (encounter: Encounter) => SavedEncounter.create({ encounter: encounter.toProto() }),
 			setData: (eventID: EventID, encounter: Encounter, newEncounter: SavedEncounter) => encounter.fromProto(eventID, newEncounter.encounter!),
