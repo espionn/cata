@@ -1650,8 +1650,8 @@ dps_results: {
 dps_results: {
  key: "TestFire-AllItems-RegaliaoftheChromaticHydra"
  value: {
-  dps: 150230.98392
-  tps: 147035.32604
+  dps: 150230.95473
+  tps: 147035.29686
  }
 }
 dps_results: {
@@ -1818,8 +1818,8 @@ dps_results: {
 dps_results: {
  key: "TestFire-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 160826.40818
-  tps: 157363.52838
+  dps: 160826.35052
+  tps: 157363.47073
  }
 }
 dps_results: {
@@ -2371,8 +2371,8 @@ dps_results: {
 dps_results: {
  key: "TestFire-Settings-Troll-p1_bis-Row5_Talent1-Fire-fire-FullBuffs-0.0yards-LongMultiTarget"
  value: {
-  dps: 279551.90689
-  tps: 272466.44239
+  dps: 279748.41994
+  tps: 272662.95544
  }
 }
 dps_results: {
@@ -2392,8 +2392,8 @@ dps_results: {
 dps_results: {
  key: "TestFire-Settings-Troll-p1_bis-Row5_Talent1-Fire-fire-NoBuffs-0.0yards-LongMultiTarget"
  value: {
-  dps: 185918.94362
-  tps: 184257.9471
+  dps: 184236.56043
+  tps: 182575.56391
  }
 }
 dps_results: {
