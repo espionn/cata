@@ -380,7 +380,9 @@
 		},
 		"upgrade_summary": {
 			"title": "Remaining Upgrade Costs",
-			"gladiators_text": "Gladiator's"
+			"gladiators_text": "Gladiator's",
+			"upgrade_all_items": "Upgrade all items",
+			"reset_upgrades": "Reset Upgrades"
 		}
 	},
 	"settings_tab": {

@@ -1558,12 +1558,20 @@
             },
             "gladiators_text": {
               "type": "string"
+            },
+            "upgrade_all_items": {
+              "type": "string"
+            },
+            "reset_upgrades": {
+              "type": "string"
             }
           },
           "additionalProperties": false,
           "required": [
             "title",
-            "gladiators_text"
+            "gladiators_text",
+            "upgrade_all_items",
+            "reset_upgrades"
           ]
         }
       },
