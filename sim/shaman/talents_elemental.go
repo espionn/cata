@@ -10,9 +10,17 @@ import (
 
 func (shaman *Shaman) ApplyElementalTalents() {
 
-	//MoP Classic Changes "https://us.forums.blizzard.com/en/wow/t/feedback-mists-of-pandaria-class-changes/2117387/1"
+	// MoP Classic Changes "https://us.forums.blizzard.com/en/wow/t/feedback-mists-of-pandaria-class-changes/2117387/1"
+	// 5.5.1 : 10%->20%
 	shaman.AddStaticMod(core.SpellModConfig{
 		ClassMask:  SpellMaskLightningBolt | SpellMaskLightningBoltOverload,
+		Kind:       core.SpellMod_DamageDone_Pct,
+		FloatValue: 0.2,
+	})
+
+	// 5.5.1 changes
+	shaman.AddStaticMod(core.SpellModConfig{
+		ClassMask:  SpellMaskChainLightning | SpellMaskChainLightningOverload | SpellMaskFulmination,
 		Kind:       core.SpellMod_DamageDone_Pct,
 		FloatValue: 0.1,
 	})
