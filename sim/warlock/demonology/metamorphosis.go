@@ -10,7 +10,6 @@ import (
 func (demo *DemonologyWarlock) registerMetamorphosis() {
 	metaActionId := core.ActionID{SpellID: 103958}
 	var queueMetaCost func(sim *core.Simulation)
-	var soulFireManaCost core.ResourceCostImpl
 	var drainLifeManaCost core.ResourceCostImpl
 
 	metaAura := demo.RegisterAura(core.Aura{
@@ -21,13 +20,10 @@ func (demo *DemonologyWarlock) registerMetamorphosis() {
 			queueMetaCost(sim)
 
 			// update cast cost
-			soulFireManaCost = demo.Soulfire.Cost.ResourceCostImpl
 			drainLifeManaCost = demo.DrainLife.Cost
-			demo.Soulfire.Cost.ResourceCostImpl = NewDemonicFuryCost(160)
 			demo.DrainLife.Cost.ResourceCostImpl = NewDemonicFuryCost(0)
 		},
 		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			demo.Soulfire.Cost.ResourceCostImpl = soulFireManaCost
 			demo.DrainLife.Cost.ResourceCostImpl = drainLifeManaCost
 		},
 	}).AttachSpellMod(core.SpellModConfig{

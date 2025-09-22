@@ -43,7 +43,6 @@ type DemonologyWarlock struct {
 
 	DemonicFury   core.SecondaryResourceBar
 	Metamorphosis *core.Spell
-	Soulfire      *core.Spell
 	HandOfGuldan  *core.Spell
 	ChaosWave     *core.Spell
 
