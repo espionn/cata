@@ -188,6 +188,12 @@ func (spell *Spell) makeCastFunc(config CastConfig) CastSuccessFunc {
 						spell.Unit.Log(sim, "Completed cast %s", spell.ActionID)
 					}
 
+					if !spell.CanCompleteCast(sim, target, true) {
+						spell.Unit.Hardcast.Expires = sim.CurrentTime
+						spell.Unit.SetGCDTimer(sim, sim.CurrentTime+spell.Unit.ReactionTime)
+						return
+					}
+
 					if spell.Cost != nil {
 						spell.Cost.SpendCost(sim, spell)
 					}

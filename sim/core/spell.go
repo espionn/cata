@@ -576,20 +576,13 @@ func (spell *Spell) CanCast(sim *Simulation, target *Unit) bool {
 		return false
 	}
 
-	if target == nil || !target.IsEnabled() {
+	if !spell.CanCompleteCast(sim, target, false) {
 		return false
 	}
 
 	if spell.Flags.Matches(SpellFlagSwapped) {
 		//if sim.Log != nil {
 		//	sim.Log("Cant cast because of item swap")
-		//}
-		return false
-	}
-
-	if spell.ExtraCastCondition != nil && !spell.ExtraCastCondition(sim, target) {
-		//if sim.Log != nil {
-		//	sim.Log("Cant cast because of extra condition")
 		//}
 		return false
 	}
@@ -624,18 +617,59 @@ func (spell *Spell) CanCast(sim *Simulation, target *Unit) bool {
 		return false
 	}
 
+	// Spell uses charges but has none
+	if spell.MaxCharges > 0 && spell.charges == 0 {
+		return false
+	}
+
+	return true
+}
+
+// Returns whether the spell being cast can be completed.
+// Example: Metamorphosis drains 4 Demonic Fury every second.
+// This means at the end of the cast you could end up not meeting the casting requirements.
+func (spell *Spell) CanCompleteCast(sim *Simulation, target *Unit, logCastFailure bool) bool {
+	if !spell.Unit.IsEnabled() {
+		if logCastFailure {
+			return spell.castFailureHelper(sim, "unit is disabled")
+		}
+		return false
+	}
+
+	if target == nil {
+		if logCastFailure {
+			return spell.castFailureHelper(sim, "target is not set")
+		}
+		return false
+	}
+
+	if !target.IsEnabled() {
+		if logCastFailure {
+			return spell.castFailureHelper(sim, "target is disabled")
+		}
+		return false
+	}
+
+	if spell.ExtraCastCondition != nil && !spell.ExtraCastCondition(sim, target) {
+		//if sim.Log != nil {
+		//	sim.Log("Cant cast because of extra condition")
+		//}
+		if logCastFailure {
+			return spell.castFailureHelper(sim, "extra spell condition")
+		}
+		return false
+	}
+
 	if spell.Cost != nil {
 		if !spell.Cost.MeetsRequirement(sim, spell) {
 			//if sim.Log != nil {
 			//	sim.Log("Cant cast because of resource cost")
 			//}
+			if logCastFailure {
+				return spell.castFailureHelper(sim, spell.Cost.CostFailureReason(sim, spell))
+			}
 			return false
 		}
-	}
-
-	// Spell uses charges but has none
-	if spell.MaxCharges > 0 && spell.charges == 0 {
-		return false
 	}
 
 	return true
