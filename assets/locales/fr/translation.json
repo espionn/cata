@@ -377,6 +377,10 @@
 		"preset_configurations": {
 			"title": "Configurations Prédéfinies",
 			"tooltip": "Les configurations prédéfinies peuvent appliquer une combinaison optimale d'équipement, talents, rotation et paramètres d'affrontement."
+		},
+		"upgrade_summary": {
+			"title": "Coûts d'Amélioration Restants",
+			"gladiators_text": "Gladiateur"
 		}
 	},
 	"settings_tab": {

@@ -1549,6 +1549,22 @@
             "title",
             "tooltip"
           ]
+        },
+        "upgrade_summary": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "gladiators_text": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "gladiators_text"
+          ]
         }
       },
       "additionalProperties": false,
@@ -1560,7 +1576,8 @@
         "reforge_success",
         "gear_sets",
         "gear_picker",
-        "preset_configurations"
+        "preset_configurations",
+        "upgrade_summary"
       ]
     },
     "settings_tab": {

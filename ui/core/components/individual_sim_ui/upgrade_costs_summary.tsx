@@ -45,7 +45,7 @@ export class UpgradeCostsSummary extends Component {
 		this.player = player;
 
 		this.container = new ContentBlock(this.rootElem, 'summary-table-container', {
-			header: { title: 'Remaining Upgrade Costs' },
+			header: { title: i18n.t('gear_tab.upgrade_summary.title') },
 			extraCssClasses: ['summary-table--upgrade-costs'],
 		});
 
@@ -67,7 +67,7 @@ export class UpgradeCostsSummary extends Component {
 			const totals = itemsWithUpgrade.reduce<UpgradeSummaryTotal>(
 				(acc, item) => {
 					let key: keyof UpgradeSummaryTotal = 'justicePoints';
-					if (item._item.name.includes("Gladiator's")) {
+					if (item._item.name.includes(i18n.t('gear_tab.upgrade_summary.gladiators_text'))) {
 						key = 'honorPoints';
 					}
 
