@@ -71,13 +71,11 @@ func (mage *Mage) registerIceLanceSpell() {
 		DamageMultiplier: 1,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			// The target does not entirely appear to be random, but I was unable to determine how to tell which to target. IE: sat in front of 3 dummies it will always hit 2 specific ones.
 			randomTarget := mage.Env.NextActiveTargetUnit(target)
 			hasSplittingIce := hasGlyphSplittingIce && mage.Env.ActiveTargetCount() > 1
 			hasSplitBolts := mage.IcyVeinsAura.IsActive() && hasGlyphIcyVeins
 			numberOfSplitBolts := core.TernaryInt32(hasSplitBolts, 2, 0)
 			icyVeinsDamageMultiplier := core.TernaryFloat64(hasSplitBolts, 0.4, 1.0)
-			// Testing it does not appear to be exactly half, so I believe that this does its own damage calc with variance, it can also crit.
 
 			// Secondary Target hit
 			spell.DamageMultiplier *= icyVeinsDamageMultiplier
