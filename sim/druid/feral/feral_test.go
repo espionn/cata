@@ -104,6 +104,7 @@ var StandardTalents = "100302"
 var StandardGlyphs = &proto.Glyphs{
 	Major1: 40923,
 	Major2: 40914,
+	Major3: 40897,
 }
 
 var PlayerOptionsMonoCat = &proto.Player_FeralDruid{

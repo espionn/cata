@@ -104,12 +104,25 @@ export const SIMPLE_ROTATION_DEFAULT = PresetUtils.makePresetSimpleRotation('Sin
 // Default talents. Uses the wowhead calculator format, make the talents on
 // https://wowhead.com/mop-classic/talent-calc and copy the numbers in the url.
 export const StandardTalents = {
-	name: 'Default',
+	name: 'DoC',
 	data: SavedTalents.create({
 		talentsString: "100302",
 		glyphs: Glyphs.create({
 			major1: 40923,
 			major2: 40914,
+			major3: 40897,
+		}),
+	}),
+};
+
+export const HotWTalents = {
+	name: 'HotW',
+	data: SavedTalents.create({
+		talentsString: "100301",
+		glyphs: Glyphs.create({
+			major1: 40923,
+			major2: 40914,
+			major3: 40897,
 		}),
 	}),
 };
