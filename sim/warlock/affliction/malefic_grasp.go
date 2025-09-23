@@ -7,8 +7,8 @@ import (
 	"github.com/wowsims/mop/sim/warlock"
 )
 
-const maleficGraspScale = 0.132 * 1.5 // 2025.06.13 Changes to Beta - Malefic Damage increased by 50%
-const maleficGraspCoeff = 0.132 * 1.5
+const maleficGraspScale = 0.132
+const maleficGraspCoeff = 0.132
 
 func (affliction *AfflictionWarlock) registerMaleficGrasp() {
 	affliction.RegisterSpell(core.SpellConfig{
@@ -46,8 +46,7 @@ func (affliction *AfflictionWarlock) registerMaleficGrasp() {
 					return
 				}
 
-				// 2025.06.13 Changes to Beta - Malefic DoT component increased to 50%
-				affliction.ProcMaleficEffect(target, 0.5, sim)
+				affliction.ProcMaleficEffect(target, affliction.MaleficGraspMaleficEffectMultiplier, sim)
 			},
 		},
 

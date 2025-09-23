@@ -32,6 +32,9 @@ func NewAfflictionWarlock(character *core.Character, options *proto.Player) *Aff
 		Warlock: warlock.NewWarlock(character, options, affOptions.ClassOptions),
 	}
 
+	affliction.MaleficGraspMaleficEffectMultiplier = 0.3
+	affliction.DrainSoulMaleficEffectMultiplier = 0.6
+
 	return affliction
 }
 
@@ -41,11 +44,17 @@ type AfflictionWarlock struct {
 	SoulShards         core.SecondaryResourceBar
 	Agony              *core.Spell
 	UnstableAffliction *core.Spell
-	SoulBurnAura       *core.Aura
-	HauntDebuffAuras   core.AuraArray
-	LastCorruption     *core.Dot // Tracks the last corruption we've applied
-	ProcMaleficEffect  func(target *core.Unit, coeff float64, sim *core.Simulation)
-	HauntImpactTime    time.Duration
+
+	SoulBurnAura     *core.Aura
+	HauntDebuffAuras core.AuraArray
+
+	LastCorruption *core.Dot // Tracks the last corruption we've applied
+
+	DrainSoulMaleficEffectMultiplier    float64
+	MaleficGraspMaleficEffectMultiplier float64
+	ProcMaleficEffect                   func(target *core.Unit, coeff float64, sim *core.Simulation)
+
+	HauntImpactTime time.Duration
 }
 
 func (affliction AfflictionWarlock) getMasteryBonus() float64 {
@@ -69,14 +78,11 @@ func (affliction *AfflictionWarlock) Initialize() {
 
 	affliction.registerPotentAffliction()
 	affliction.registerHaunt()
-	corruption := affliction.RegisterCorruption(func(resultList core.SpellResultSlice, spell *core.Spell, sim *core.Simulation) {
+	affliction.RegisterCorruption(func(resultList core.SpellResultSlice, spell *core.Spell, sim *core.Simulation) {
 		if resultList[0].Landed() {
 			affliction.LastCorruption = spell.Dot(resultList[0].Target)
 		}
 	})
-
-	// June 16th Beta Changes +33% for affliction
-	corruption.DamageMultiplier *= 1.33
 
 	affliction.registerAgony()
 	affliction.registerNightfall()
@@ -90,6 +96,8 @@ func (affliction *AfflictionWarlock) Initialize() {
 	affliction.registerSoulSwap()
 
 	affliction.registerGlyphs()
+
+	affliction.registerHotfixes()
 }
 
 func (affliction *AfflictionWarlock) ApplyTalents() {
