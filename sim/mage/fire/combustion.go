@@ -52,8 +52,7 @@ func (fire *FireMage) registerCombustionSpell() {
 	})
 
 	calculatedDotTick := func(sim *core.Simulation, target *core.Unit) float64 {
-		spell := fire.Ignite
-		dot := spell.Dot(target)
+		dot := fire.Ignite.Dot(target)
 		if !dot.IsActive() {
 			return 0.0
 		}
@@ -125,4 +124,13 @@ func (fire *FireMage) registerCombustionSpell() {
 		updateCombustionTotalDamageEstimate()
 	})
 
+	core.MakeProcTriggerAura(&fire.Unit, core.ProcTrigger{
+		Name:     "Ignite Tracker",
+		Harmful:  true,
+		Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
+		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+			updateCombustionTickDamageEstimate(sim)
+			updateCombustionTotalDamageEstimate()
+		},
+	})
 }
