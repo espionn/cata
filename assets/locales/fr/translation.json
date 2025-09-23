@@ -1332,6 +1332,10 @@
 					"label": "Durée du GCD",
 					"tooltip": "La durée du GCD si le spell est lancé avec le montant de hate actuel"
 				},
+				"full_cooldown": {
+					"label": "Temps de Recharge Complet",
+					"tooltip": "La durée complète de recharge du sort"
+				},
 				"channel_clip_delay": {
 					"label": "Délai de Coupure de Canalisation",
 					"tooltip": "La quantité de temps spécifiée par le paramètre <b>Délai de Coupure de Canalisation</b>."

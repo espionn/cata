@@ -352,3 +352,31 @@ func (value *APLValueSpellGCDHastedDuration) GetFloat(sim *Simulation) float64 {
 func (value *APLValueSpellGCDHastedDuration) String() string {
 	return fmt.Sprintf("SpellGCDHastedDuration(%s)", value.spell.ActionID)
 }
+
+// Full Cooldown duration
+type APLValueSpellFullCooldown struct {
+	DefaultAPLValueImpl
+	spell *Spell
+}
+
+func (rot *APLRotation) newValueSpellFullCooldown(config *proto.APLValueSpellFullCooldown, _ *proto.UUID) APLValue {
+	spell := rot.GetAPLSpell(config.SpellId)
+	if spell == nil {
+		return nil
+	}
+	return &APLValueSpellFullCooldown{
+		spell: spell,
+	}
+}
+
+func (value *APLValueSpellFullCooldown) Type() proto.APLValueType {
+	return proto.APLValueType_ValueTypeDuration
+}
+
+func (value *APLValueSpellFullCooldown) GetDuration(sim *Simulation) time.Duration {
+	return value.spell.CD.Duration
+}
+
+func (value *APLValueSpellFullCooldown) String() string {
+	return fmt.Sprintf("SpellFullCooldown(%s)", value.spell.ActionID)
+}
