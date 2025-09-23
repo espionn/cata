@@ -189,10 +189,6 @@ func (spell *Spell) makeCastFunc(config CastConfig) CastSuccessFunc {
 					}
 
 					if !spell.CanCompleteCast(sim, target, true) {
-						if spell.Unit.IsEnabled() {
-							spell.Unit.Hardcast.Expires = sim.CurrentTime
-							spell.Unit.SetGCDTimer(sim, sim.CurrentTime+spell.Unit.ReactionTime)
-						}
 						return
 					}
 
