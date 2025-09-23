@@ -2455,8 +2455,8 @@ dps_results: {
 dps_results: {
  key: "TestElemental-Settings-AlliancePandaren-simtest-TalentsEMPrimal-Standard-aoe-FullBuffs-20.0yards-LongSingleTarget"
  value: {
-  dps: 52454.75299
-  tps: 37898.56385
+  dps: 52406.63893
+  tps: 37856.62992
  }
 }
 dps_results: {
@@ -2707,8 +2707,8 @@ dps_results: {
 dps_results: {
  key: "TestElemental-Settings-Draenei-simtest-TalentsEMPrimal-Standard-aoe-FullBuffs-20.0yards-LongSingleTarget"
  value: {
-  dps: 52456.36758
-  tps: 37899.66175
+  dps: 52408.25251
+  tps: 37857.72697
  }
 }
 dps_results: {
@@ -2959,8 +2959,8 @@ dps_results: {
 dps_results: {
  key: "TestElemental-Settings-Orc-simtest-TalentsEMPrimal-Standard-aoe-FullBuffs-20.0yards-LongSingleTarget"
  value: {
-  dps: 53464.54119
-  tps: 38342.9522
+  dps: 53413.62936
+  tps: 38298.58828
  }
 }
 dps_results: {

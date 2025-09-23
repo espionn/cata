@@ -320,8 +320,8 @@ dps_results: {
 dps_results: {
  key: "TestArcane-AllItems-RegaliaoftheChromaticHydra"
  value: {
-  dps: 141752.16831
-  tps: 138224.22714
+  dps: 141328.23527
+  tps: 137798.62669
  }
 }
 dps_results: {
@@ -355,8 +355,8 @@ dps_results: {
 dps_results: {
  key: "TestArcane-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 154766.77051
-  tps: 150525.17092
+  dps: 152459.44487
+  tps: 148211.00615
  }
 }
 dps_results: {

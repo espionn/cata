@@ -1881,9 +1881,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-AllItems-RegaliaoftheThousandfoldHells"
  value: {
-  dps: 109336.77942
-  tps: 81006.88379
-  hps: 976.02081
+  dps: 109320.6588
+  tps: 80943.45115
+  hps: 975.57534
  }
 }
 dps_results: {
@@ -2657,9 +2657,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Goblin-p1-prebis-Destruction Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 217221.62847
-  tps: 184055.5728
-  hps: 2266.77379
+  dps: 218825.30019
+  tps: 186799.382
+  hps: 2262.68482
  }
 }
 dps_results: {
@@ -2729,9 +2729,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Human-p1-prebis-Destruction Warlock-default-NoBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 142190.21031
-  tps: 123467.6619
-  hps: 1997.14884
+  dps: 146535.63679
+  tps: 128759.18703
+  hps: 2017.10632
  }
 }
 dps_results: {
@@ -2777,9 +2777,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Orc-p1-prebis-Destruction Warlock-default-NoBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 145349.95268
-  tps: 125998.32614
-  hps: 1997.22936
+  dps: 149785.46353
+  tps: 131370.81211
+  hps: 2017.18765
  }
 }
 dps_results: {
@@ -2801,9 +2801,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Troll-p1-prebis-Destruction Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 220631.65969
-  tps: 187390.09502
-  hps: 2321.04551
+  dps: 224053.10174
+  tps: 190994.5139
+  hps: 2323.27585
  }
 }
 dps_results: {
@@ -2825,9 +2825,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Troll-p1-prebis-Destruction Warlock-default-NoBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 142683.06029
-  tps: 121817.71714
-  hps: 2021.3079
+  dps: 142258.04928
+  tps: 120470.89266
+  hps: 2036.71368
  }
 }
 dps_results: {

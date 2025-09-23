@@ -2649,8 +2649,8 @@ dps_results: {
 dps_results: {
  key: "TestDemonology-Average-Default"
  value: {
-  dps: 97032.92394
-  tps: 58523.00686
+  dps: 97032.65306
+  tps: 58522.96734
   hps: 1134.83097
  }
 }
@@ -2737,17 +2737,17 @@ dps_results: {
 dps_results: {
  key: "TestDemonology-Settings-Human-preraid-Demonology Warlock-default-NoBuffs-25.0yards-LongSingleTarget"
  value: {
-  dps: 54885.32428
-  tps: 34833.3277
-  hps: 1070.70146
+  dps: 54929.9064
+  tps: 34854.69667
+  hps: 1070.0012
  }
 }
 dps_results: {
  key: "TestDemonology-Settings-Human-preraid-Demonology Warlock-default-NoBuffs-25.0yards-ShortSingleTarget"
  value: {
-  dps: 81086.43754
-  tps: 39865.42636
-  hps: 1011.87941
+  dps: 81078.9865
+  tps: 39837.01724
+  hps: 1008.3781
  }
 }
 dps_results: {
@@ -2785,17 +2785,17 @@ dps_results: {
 dps_results: {
  key: "TestDemonology-Settings-Orc-preraid-Demonology Warlock-default-NoBuffs-25.0yards-LongSingleTarget"
  value: {
-  dps: 57137.02949
-  tps: 35698.02452
-  hps: 1067.59332
+  dps: 57187.59329
+  tps: 35725.74244
+  hps: 1066.89303
  }
 }
 dps_results: {
  key: "TestDemonology-Settings-Orc-preraid-Demonology Warlock-default-NoBuffs-25.0yards-ShortSingleTarget"
  value: {
-  dps: 84939.87637
-  tps: 40820.50534
-  hps: 1011.92021
+  dps: 84932.31822
+  tps: 40792.09407
+  hps: 1008.41875
  }
 }
 dps_results: {

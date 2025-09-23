@@ -1818,8 +1818,8 @@ dps_results: {
 dps_results: {
  key: "TestFire-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 163296.62358
-  tps: 159776.08267
+  dps: 162592.06968
+  tps: 159071.52876
  }
 }
 dps_results: {
@@ -2350,8 +2350,8 @@ dps_results: {
 dps_results: {
  key: "TestFire-Settings-Troll-p1_bis-DefaultTalents-Fire-fire-NoBuffs-0.0yards-LongMultiTarget"
  value: {
-  dps: 281005.72314
-  tps: 279364.31461
+  dps: 280354.51212
+  tps: 278713.10359
  }
 }
 dps_results: {
@@ -2371,8 +2371,8 @@ dps_results: {
 dps_results: {
  key: "TestFire-Settings-Troll-p1_bis-Row5_Talent1-Fire-fire-FullBuffs-0.0yards-LongMultiTarget"
  value: {
-  dps: 294483.68576
-  tps: 287434.54501
+  dps: 293522.02954
+  tps: 286472.88879
  }
 }
 dps_results: {
@@ -2392,8 +2392,8 @@ dps_results: {
 dps_results: {
  key: "TestFire-Settings-Troll-p1_bis-Row5_Talent1-Fire-fire-NoBuffs-0.0yards-LongMultiTarget"
  value: {
-  dps: 191525.37458
-  tps: 189854.05845
+  dps: 191125.14041
+  tps: 189453.82427
  }
 }
 dps_results: {
