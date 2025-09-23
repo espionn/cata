@@ -19,10 +19,7 @@ func TestFrostMasterfrost(t *testing.T) {
 			Race:       proto.Race_RaceTroll,
 			OtherRaces: []proto.Race{proto.Race_RaceOrc, proto.Race_RaceWorgen},
 
-			GearSet: core.GetGearSet("../../../ui/death_knight/frost/gear_sets", "p1.masterfrost"),
-			OtherGearSets: []core.GearSetCombo{
-				core.GetGearSet("../../../ui/death_knight/frost/gear_sets", "prebis"),
-			},
+			GearSet:         core.GetGearSet("../../../ui/death_knight/frost/gear_sets", "p2.masterfrost"),
 			Talents:         DefaultTalents,
 			OtherTalentSets: OtherTalentSets,
 			Glyphs:          FrostDefaultGlyphs,
@@ -68,9 +65,10 @@ var OtherTalentSets = []core.TalentsCombo{
 }
 
 var FrostDefaultGlyphs = &proto.Glyphs{
-	Major1: int32(proto.DeathKnightMajorGlyph_GlyphOfAntiMagicShell),
-	Major2: int32(proto.DeathKnightMajorGlyph_GlyphOfRegenerativeMagic),
-	Major3: int32(proto.DeathKnightMajorGlyph_GlyphOfLoudHorn),
+	Major1: int32(proto.DeathKnightMajorGlyph_GlyphOfDarkSuccor),
+	Major2: int32(proto.DeathKnightMajorGlyph_GlyphOfPestilence),
+	Minor1: int32(proto.DeathKnightMinorGlyph_GlyphOfResilientGrip),
+	Minor2: int32(proto.DeathKnightMinorGlyph_GlyphOfTranquilGrip),
 }
 
 var PlayerOptionsFrost = &proto.Player_FrostDeathKnight{

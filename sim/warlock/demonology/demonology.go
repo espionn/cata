@@ -85,6 +85,8 @@ func (demonology *DemonologyWarlock) Initialize() {
 	demonology.registerVoidRay()
 	demonology.registerDarksoulKnowledge()
 	demonology.registerImpSwarm()
+
+	demonology.registerHotfixes()
 }
 
 func (demonology *DemonologyWarlock) ApplyTalents() {

@@ -7,8 +7,8 @@ import (
 	"github.com/wowsims/mop/sim/warlock"
 )
 
-const agonyScale = 0.0255 * 1.05
-const agonyCoeff = 0.0255 * 1.05
+const agonyScale = 0.0255
+const agonyCoeff = 0.0255
 
 func (affliction *AfflictionWarlock) registerAgony() {
 	affliction.Agony = affliction.RegisterSpell(core.SpellConfig{

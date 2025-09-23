@@ -59,6 +59,7 @@ func (frostMage *FrostMage) Initialize() {
 	frostMage.registerGlyphs()
 	frostMage.registerPassives()
 	frostMage.registerSpells()
+	frostMage.registerHotfixes()
 }
 
 func (frostMage *FrostMage) registerPassives() {

@@ -240,10 +240,10 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-CharmofTenSongs-84071"
  value: {
-  dps: 115933.71294
-  tps: 650799.32697
-  dtps: 21176.94734
-  hps: 27016.13096
+  dps: 115915.30574
+  tps: 650587.67375
+  dtps: 21287.43919
+  hps: 27079.45857
  }
 }
 dps_results: {
@@ -762,10 +762,10 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-EmblemofKypariZar-84077"
  value: {
-  dps: 115657.6111
-  tps: 651013.10033
-  dtps: 20489.31086
-  hps: 26969.7112
+  dps: 115516.64598
+  tps: 650016.55834
+  dtps: 20629.23605
+  hps: 26969.36715
  }
 }
 dps_results: {
@@ -861,10 +861,10 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-EssenceofTerror-87175"
  value: {
-  dps: 115919.16446
-  tps: 651414.75318
-  dtps: 20445.54634
-  hps: 26363.83946
+  dps: 115920.47357
+  tps: 651365.86103
+  dtps: 20473.30397
+  hps: 26351.19964
  }
 }
 dps_results: {
@@ -1464,10 +1464,10 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-JadeBanditFigurine-86772"
  value: {
-  dps: 116757.22026
-  tps: 656019.04616
-  dtps: 20612.44615
-  hps: 26667.61956
+  dps: 116811.12125
+  tps: 656476.5436
+  dtps: 20526.69098
+  hps: 26611.203
  }
 }
 dps_results: {
@@ -1482,8 +1482,8 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-JadeCharioteerFigurine-86771"
  value: {
-  dps: 115090.1337
-  tps: 645828.21562
+  dps: 115091.56051
+  tps: 645838.20327
   dtps: 20873.6374
   hps: 26567.91364
  }
@@ -2391,10 +2391,10 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-SpringrainIdolofDestruction-101023"
  value: {
-  dps: 114668.12525
-  tps: 645693.35406
-  dtps: 20900.42597
-  hps: 26915.31915
+  dps: 114642.5677
+  tps: 645514.45118
+  dtps: 20867.11552
+  hps: 26905.30293
  }
 }
 dps_results: {
@@ -2949,8 +2949,8 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-VolatileTalismanoftheShado-PanAssault-94510"
  value: {
-  dps: 114910.73181
-  tps: 646462.12293
+  dps: 114911.78919
+  tps: 646463.67917
   dtps: 21028.63267
   hps: 26398.91815
  }
@@ -3012,10 +3012,10 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-Average-Default"
  value: {
-  dps: 120366.50699
-  tps: 674475.32069
-  dtps: 19993.05385
-  hps: 26947.80613
+  dps: 120366.48043
+  tps: 674475.48098
+  dtps: 19993.05871
+  hps: 26947.80563
  }
 }
 dps_results: {

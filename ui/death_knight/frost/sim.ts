@@ -46,9 +46,9 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFrostDeathKnight, {
 	),
 	defaults: {
 		// Default equipped gear.
-		gear: Presets.P1_MASTERFROST_GEAR_PRESET.gear,
+		gear: Presets.P2_MASTERFROST_GEAR_PRESET.gear,
 		// Default EP weights for sorting gear in the gear picker.
-		epWeights: Presets.P1_MASTERFROST_EP_PRESET.epWeights,
+		epWeights: Presets.P1_P2_MASTERFROST_EP_PRESET.epWeights,
 		// Default stat caps for the Reforge Optimizer
 		statCaps: (() => {
 			return new Stats();
@@ -122,10 +122,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFrostDeathKnight, {
 	},
 
 	presets: {
-		epWeights: [Presets.P1_MASTERFROST_EP_PRESET, Presets.P1_2H_OBLITERATE_EP_PRESET],
+		epWeights: [Presets.P1_P2_MASTERFROST_EP_PRESET, Presets.P1_2H_OBLITERATE_EP_PRESET],
 		talents: [Presets.DefaultTalents],
 		rotations: [Presets.MASTERFROST_ROTATION_PRESET_DEFAULT, Presets.OBLITERATE_ROTATION_PRESET_DEFAULT],
-		gear: [Presets.PREBIS_MASTERFROST_GEAR_PRESET, Presets.P1_MASTERFROST_GEAR_PRESET, Presets.P1_2H_OBLITERATE_GEAR_PRESET],
+		gear: [Presets.PREBIS_MASTERFROST_GEAR_PRESET, Presets.P2_MASTERFROST_GEAR_PRESET, Presets.P1_2H_OBLITERATE_GEAR_PRESET],
 		builds: [Presets.PRESET_BUILD_PREBIS, Presets.PRESET_BUILD_MASTERFROST, Presets.PRESET_BUILD_2H_OBLITERATE],
 	},
 
@@ -143,10 +143,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFrostDeathKnight, {
 			defaultGear: {
 				[Faction.Unknown]: {},
 				[Faction.Alliance]: {
-					1: Presets.P1_MASTERFROST_GEAR_PRESET.gear,
+					1: Presets.P2_MASTERFROST_GEAR_PRESET.gear,
 				},
 				[Faction.Horde]: {
-					1: Presets.P1_MASTERFROST_GEAR_PRESET.gear,
+					1: Presets.P2_MASTERFROST_GEAR_PRESET.gear,
 				},
 			},
 			otherDefaults: Presets.OtherDefaults,
@@ -181,7 +181,7 @@ export class FrostDeathKnightSimUI extends IndividualSimUI<Spec.SpecFrostDeathKn
 					if (mainHand?.item?.handType === HandType.HandTypeTwoHand) {
 						return Presets.P1_2H_OBLITERATE_EP_PRESET.epWeights;
 					} else {
-						return Presets.P1_MASTERFROST_EP_PRESET.epWeights;
+						return Presets.P1_P2_MASTERFROST_EP_PRESET.epWeights;
 					}
 				},
 			});
