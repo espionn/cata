@@ -5,8 +5,10 @@ import { SavedTalents } from '../../core/proto/ui';
 import { Stats } from '../../core/proto_utils/stats';
 import DefaultApl from '../../death_knight/unholy/apls/default.apl.json';
 import P1Build from '../../death_knight/unholy/builds/p1.build.json';
+import P2Build from '../../death_knight/unholy/builds/p2.build.json';
 import PrebisBuild from '../../death_knight/unholy/builds/prebis.build.json';
 import P1Gear from '../../death_knight/unholy/gear_sets/p1.gear.json';
+import P2Gear from '../../death_knight/unholy/gear_sets/p2.gear.json';
 import PrebisGear from '../../death_knight/unholy/gear_sets/prebis.gear.json';
 
 // Preset options for this spec.
@@ -14,12 +16,13 @@ import PrebisGear from '../../death_knight/unholy/gear_sets/prebis.gear.json';
 // keep them in a separate file.
 export const PREBIS_GEAR_PRESET = PresetUtils.makePresetGear('Prebis', PrebisGear);
 export const P1_BIS_GEAR_PRESET = PresetUtils.makePresetGear('P1', P1Gear);
+export const P2_BIS_GEAR_PRESET = PresetUtils.makePresetGear('P2', P2Gear);
 
 export const DEFAULT_ROTATION_PRESET = PresetUtils.makePresetAPLRotation('Default', DefaultApl);
 
 // Preset options for EP weights
-export const P1_UNHOLY_EP_PRESET = PresetUtils.makePresetEpWeights(
-	'P1',
+export const P1_P2_UNHOLY_EP_PRESET = PresetUtils.makePresetEpWeights(
+	'P1/P2',
 	Stats.fromMap(
 		{
 			[Stat.StatStrength]: 1.0,
@@ -46,7 +49,7 @@ export const DefaultTalents = {
 		glyphs: Glyphs.create({
 			major1: DeathKnightMajorGlyph.GlyphOfAntiMagicShell,
 			major2: DeathKnightMajorGlyph.GlyphOfPestilence,
-			major3: DeathKnightMajorGlyph.GlyphOfLoudHorn,
+			major3: DeathKnightMajorGlyph.GlyphOfFesteringBlood,
 			minor1: DeathKnightMinorGlyph.GlyphOfArmyOfTheDead,
 			minor2: DeathKnightMinorGlyph.GlyphOfTranquilGrip,
 			minor3: DeathKnightMinorGlyph.GlyphOfDeathsEmbrace,
@@ -55,10 +58,13 @@ export const DefaultTalents = {
 };
 
 export const PREBIS_PRESET = PresetUtils.makePresetBuildFromJSON('Prebis', Spec.SpecUnholyDeathKnight, PrebisBuild, {
-	epWeights: P1_UNHOLY_EP_PRESET,
+	epWeights: P1_P2_UNHOLY_EP_PRESET,
 });
 export const P1_PRESET = PresetUtils.makePresetBuildFromJSON('P1', Spec.SpecUnholyDeathKnight, P1Build, {
-	epWeights: P1_UNHOLY_EP_PRESET,
+	epWeights: P1_P2_UNHOLY_EP_PRESET,
+});
+export const P2_PRESET = PresetUtils.makePresetBuildFromJSON('P2', Spec.SpecUnholyDeathKnight, P2Build, {
+	epWeights: P1_P2_UNHOLY_EP_PRESET,
 });
 
 export const DefaultOptions = UnholyDeathKnight_Options.create({
