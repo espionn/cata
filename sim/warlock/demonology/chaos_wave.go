@@ -7,8 +7,8 @@ import (
 	"github.com/wowsims/mop/sim/warlock"
 )
 
-const chaosWaveScale = 1 * 1.7 //  2025.07.01 Changes to Beta - Chaos Wave damage increase raised to 70% (was 50%).
-const chaosWaveCoeff = 1.167 * 1.7
+const chaosWaveScale = 1
+const chaosWaveCoeff = 1.167
 
 func (demonology *DemonologyWarlock) registerChaosWave() {
 	demonology.ChaosWave = demonology.RegisterSpell(core.SpellConfig{
