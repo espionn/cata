@@ -432,8 +432,8 @@ dps_results: {
 dps_results: {
  key: "TestArms-Settings-Orc-p1_arms_bis-Basic-arms-FullBuffs-9.0yards-LongMultiTarget"
  value: {
-  dps: 1.03831596465e+06
-  tps: 825349.60211
+  dps: 1.02913349117e+06
+  tps: 816167.12863
  }
 }
 dps_results: {
@@ -453,8 +453,8 @@ dps_results: {
 dps_results: {
  key: "TestArms-Settings-Orc-p1_arms_bis-Basic-arms-NoBuffs-9.0yards-LongMultiTarget"
  value: {
-  dps: 809590.97949
-  tps: 639319.69548
+  dps: 802327.53208
+  tps: 632056.24807
  }
 }
 dps_results: {
@@ -474,8 +474,8 @@ dps_results: {
 dps_results: {
  key: "TestArms-Settings-Orc-p1_prebis-Basic-arms-FullBuffs-9.0yards-LongMultiTarget"
  value: {
-  dps: 841545.18345
-  tps: 671737.82603
+  dps: 834364.78965
+  tps: 664557.43223
  }
 }
 dps_results: {
@@ -495,8 +495,8 @@ dps_results: {
 dps_results: {
  key: "TestArms-Settings-Orc-p1_prebis-Basic-arms-NoBuffs-9.0yards-LongMultiTarget"
  value: {
-  dps: 645433.06144
-  tps: 511440.76588
+  dps: 639969.60667
+  tps: 505977.31111
  }
 }
 dps_results: {
@@ -516,8 +516,8 @@ dps_results: {
 dps_results: {
  key: "TestArms-Settings-Worgen-p1_arms_bis-Basic-arms-FullBuffs-9.0yards-LongMultiTarget"
  value: {
-  dps: 1.02239561543e+06
-  tps: 812567.91571
+  dps: 1.01334121052e+06
+  tps: 803513.5108
  }
 }
 dps_results: {
@@ -537,8 +537,8 @@ dps_results: {
 dps_results: {
  key: "TestArms-Settings-Worgen-p1_arms_bis-Basic-arms-NoBuffs-9.0yards-LongMultiTarget"
  value: {
-  dps: 802235.43882
-  tps: 635026.02545
+  dps: 795070.11722
+  tps: 627860.70384
  }
 }
 dps_results: {
@@ -558,8 +558,8 @@ dps_results: {
 dps_results: {
  key: "TestArms-Settings-Worgen-p1_prebis-Basic-arms-FullBuffs-9.0yards-LongMultiTarget"
  value: {
-  dps: 826329.62594
-  tps: 661634.24163
+  dps: 819356.37547
+  tps: 654660.99116
  }
 }
 dps_results: {
@@ -579,8 +579,8 @@ dps_results: {
 dps_results: {
  key: "TestArms-Settings-Worgen-p1_prebis-Basic-arms-NoBuffs-9.0yards-LongMultiTarget"
  value: {
-  dps: 635075.93437
-  tps: 503605.98237
+  dps: 629649.88174
+  tps: 498179.92975
  }
 }
 dps_results: {
