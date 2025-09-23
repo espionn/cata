@@ -56,7 +56,8 @@ func (fire *FireMage) registerCombustionSpell() {
 		if !dot.IsActive() {
 			return 0.0
 		}
-		return dot.Spell.CalcPeriodicDamage(sim, target, dot.SnapshotBaseDamage, dot.OutcomeTick).Damage * .5
+
+		return dot.Spell.CalcPeriodicDamage(sim, target, dot.SnapshotBaseDamage, dot.OutcomeTick).Damage * fire.combustionDotDamageMultiplier
 	}
 
 	fire.Combustion.RelatedDotSpell = fire.RegisterSpell(core.SpellConfig{

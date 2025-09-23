@@ -38,7 +38,7 @@ func (arcane *ArcaneMage) registerArcaneMissilesSpell() {
 		ClassSpellMask: mage.MageSpellArcaneMissilesTick,
 		MissileSpeed:   20,
 
-		DamageMultiplier: 1 * 1.15, // 2025-07-01 - Arcane Missiles damage increase lowered to 15% (was 28%).
+		DamageMultiplier: 1,
 		CritMultiplier:   arcane.DefaultCritMultiplier(),
 		ThreatMultiplier: 1,
 		BonusCoefficient: arcaneMissilesCoefficient,

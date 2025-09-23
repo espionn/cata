@@ -616,7 +616,6 @@ func (spell *Spell) AttackerDamageMultiplier(attackTable *AttackTable, isDot boo
 	damageMultiplierAdditive := TernaryFloat64(isDot && !spell.Flags.Matches(SpellFlagIgnoreAttackerModifiers),
 		spell.DamageMultiplierAdditive+spell.Unit.PseudoStats.DotDamageMultiplierAdditive-1,
 		spell.DamageMultiplierAdditive)
-
 	return spell.attackerDamageMultiplierInternal(attackTable) *
 		spell.DamageMultiplier *
 		damageMultiplierAdditive

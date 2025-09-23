@@ -39,7 +39,7 @@ func (fire *FireMage) registerPyroblastSpell() {
 			},
 		},
 
-		DamageMultiplier: 1 * 1.30, // 2025-07-01 - Pyroblast's direct damage increase raised to 30% (was 11%).
+		DamageMultiplier: 1,
 		CritMultiplier:   fire.DefaultCritMultiplier(),
 		BonusCoefficient: pyroblastCoefficient,
 		ThreatMultiplier: 1,
