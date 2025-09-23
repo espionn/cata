@@ -123,8 +123,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 		gear: [Presets.PRERAID_PRESET, Presets.P1_PRESET],
 		itemSwaps: [Presets.ITEM_SWAP_PRESET],
 		builds: [
-			//Presets.PRESET_BUILD_DEFAULT,
-			//Presets.PRESET_BUILD_TENDON,
+			Presets.PRESET_BUILD_ST,
+			Presets.PRESET_BUILD_CLEAVE,
 		],
 	},
 
