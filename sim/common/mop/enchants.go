@@ -60,6 +60,7 @@ func init() {
 
 		for _, aura := range auras {
 			character.AddStatProcBuff(4441, aura, true, core.AllWeaponSlots())
+			character.ItemSwap.RegisterWeaponEnchantBuff(aura.Aura, 4441)
 		}
 	})
 
@@ -91,7 +92,7 @@ func init() {
 				ActionID: core.ActionID{SpellID: procEffectId},
 				ICD:      3 * time.Second,
 				DPM: character.NewRPPMProcManager(
-					4442,
+					effectId,
 					true,
 					false,
 					core.ProcMaskDirect|core.ProcMaskProc,
@@ -108,7 +109,8 @@ func init() {
 				},
 			})
 
-			character.AddStatProcBuff(4442, intellect, true, core.AllWeaponSlots())
+			character.AddStatProcBuff(effectId, intellect, true, core.AllWeaponSlots())
+			character.ItemSwap.RegisterWeaponEnchantBuff(intellect.Aura, effectId)
 		})
 	}
 
@@ -140,7 +142,7 @@ func init() {
 				)
 				for _, aura := range auras {
 					character.AddStatProcBuff(effectId, aura, true, []proto.ItemSlot{slot})
-					character.AddStatProcBuff(effectId, aura, true, []proto.ItemSlot{slot})
+					character.ItemSwap.RegisterWeaponEnchantBuff(aura.Aura, effectId)
 				}
 				return auras
 			}
@@ -209,6 +211,8 @@ func init() {
 				shield.Activate(sim)
 			},
 		})
+
+		character.ItemSwap.RegisterWeaponEnchantBuff(shield.Aura, 4445)
 	})
 
 	// Permanently enchants a melee weapon to sometimes increase your dodge by 1650 for 7s when dealing melee
@@ -245,6 +249,8 @@ func init() {
 				aura.Activate(sim)
 			},
 		})
+
+		character.ItemSwap.RegisterWeaponEnchantBuff(aura.Aura, 4446)
 	})
 
 	// Permanently enchants a melee weapon to sometimes inflict 3000 additional Elemental damage
