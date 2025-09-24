@@ -41,16 +41,16 @@ export class LogRunner extends ResultComponent {
 				<div ref={actionsRef} className="log-runner-actions">
 					<input ref={searchRef} type="text" className="form-control log-search-input" placeholder={i18n.t('common.filter')} />
 					<button ref={buttonToTopRef} className="btn btn-primary order-last log-runner-scroll-to-top-btn">
-						{i18n.t('results.details.logs.top_button')}
+						{i18n.t('results_tab.details.logs.top_button')}
 					</button>
 				</div>
 				<div ref={scrollContainerRef} className="log-runner-scroll">
 					<table className="metrics-table log-runner-table">
 						<thead>
 							<tr className="metrics-table-header-row">
-								<th>{i18n.t('results.details.logs.time_column')}</th>
+								<th>{i18n.t('results_tab.details.logs.time_column')}</th>
 								<th>
-									<div className="d-flex align-items-end">{i18n.t('results.details.logs.event_column')}</div>
+									<div className="d-flex align-items-end">{i18n.t('results_tab.details.logs.event_column')}</div>
 								</th>
 							</tr>
 						</thead>
@@ -79,7 +79,7 @@ export class LogRunner extends ResultComponent {
 		new BooleanPicker<LogRunner>(this.ui.actions, this, {
 			id: 'log-runner-show-debug',
 			extraCssClasses: ['show-debug-picker'],
-			label: i18n.t('results.details.logs.show_debug'),
+			label: i18n.t('results_tab.details.logs.show_debug'),
 			inline: true,
 			reverse: true,
 			changedEvent: () => this.showDebugChangeEmitter,

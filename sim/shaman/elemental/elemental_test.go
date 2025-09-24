@@ -20,7 +20,7 @@ func TestElemental(t *testing.T) {
 			Race:       proto.Race_RaceTroll,
 			OtherRaces: []proto.Race{proto.Race_RaceOrc, proto.Race_RaceDraenei, proto.Race_RaceAlliancePandaren},
 
-			GearSet: core.GetGearSet("../../../ui/shaman/elemental/gear_sets", "p1"),
+			GearSet: core.GetGearSet("../../../ui/shaman/elemental/gear_sets", "simtest"),
 			Talents: TalentsASEB,
 			Glyphs:  StandardGlyphs,
 			OtherTalentSets: []core.TalentsCombo{

@@ -13,10 +13,10 @@ export class APLGroupListPicker extends Component {
 		super(parent, 'apl-group-list-picker-root');
 
 		const listPicker = new ListPicker<Player<any>, APLGroup>(this.rootElem, simUI.player, {
-			title: i18n.t('rotation.apl.actionGroups.header'),
-			titleTooltip: i18n.t('rotation.apl.actionGroups.tooltips.overview'),
+			title: i18n.t('rotation_tab.apl.actionGroups.header'),
+			titleTooltip: i18n.t('rotation_tab.apl.actionGroups.tooltips.overview'),
 			extraCssClasses: ['apl-list-item-picker', 'apl-groups-picker'],
-			itemLabel: i18n.t('rotation.apl.actionGroups.name'),
+			itemLabel: i18n.t('rotation_tab.apl.actionGroups.name'),
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 			getValue: (player: Player<any>) => player.aplRotation.groups || [],
 			setValue: (eventID: EventID, player: Player<any>, newValue: Array<APLGroup>) => {
@@ -25,7 +25,7 @@ export class APLGroupListPicker extends Component {
 			},
 			newItem: () =>
 				APLGroup.create({
-					name: i18n.t('rotation.apl.actionGroups.newGroupName'),
+					name: i18n.t('rotation_tab.apl.actionGroups.newGroupName'),
 					actions: [],
 					variables: [],
 				}),
@@ -40,6 +40,6 @@ export class APLGroupListPicker extends Component {
 			inlineMenuBar: true,
 		});
 
-		new AplFloatingActionBar(this.rootElem, simUI, listPicker, i18n.t('rotation.apl.actionGroups.name'))
+		new AplFloatingActionBar(this.rootElem, simUI, listPicker, i18n.t('rotation_tab.apl.actionGroups.name'))
 	}
 }

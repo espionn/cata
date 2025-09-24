@@ -35,7 +35,7 @@ func (arcane *ArcaneMage) registerArcaneBarrageSpell() {
 			},
 		},
 
-		DamageMultiplier: 1 * 1.19, // 2025-07-01 - Arcane Barrage damage increase lowered to 19% (was 30%).
+		DamageMultiplier: 1,
 		CritMultiplier:   arcane.DefaultCritMultiplier(),
 		BonusCoefficient: float64(arcaneBarrageCoefficient),
 		ThreatMultiplier: 1,

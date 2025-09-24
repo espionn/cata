@@ -314,3 +314,69 @@ func (value *APLValueSpellTimeToCharge) GetFloat(sim *Simulation) float64 {
 func (value *APLValueSpellTimeToCharge) String() string {
 	return fmt.Sprintf("SpellTimeToCharge(%s)", value.spell.ActionID)
 }
+
+// GCD duration
+type APLValueSpellGCDHastedDuration struct {
+	DefaultAPLValueImpl
+	spell *Spell
+}
+
+func (rot *APLRotation) newValueSpellGCDHastedDuration(config *proto.APLValueSpellGCDHastedDuration, _ *proto.UUID) APLValue {
+	spell := rot.GetAPLSpell(config.SpellId)
+	if spell == nil {
+		return nil
+	}
+	return &APLValueSpellGCDHastedDuration{
+		spell: spell,
+	}
+}
+
+func (value *APLValueSpellGCDHastedDuration) Type() proto.APLValueType {
+	return proto.APLValueType_ValueTypeDuration
+}
+
+func (value *APLValueSpellGCDHastedDuration) GetDuration(_ *Simulation) time.Duration {
+	defaultCast := value.spell.DefaultCast
+	if value.spell.IgnoreHaste {
+		return defaultCast.GCD
+	}
+	gcdMin := TernaryDuration(defaultCast.GCDMin != 0, defaultCast.GCDMin, GCDMin)
+	hastedDuration := value.spell.Unit.ApplyCastSpeed(defaultCast.GCD).Round(time.Millisecond)
+	return max(gcdMin, hastedDuration)
+}
+
+func (value *APLValueSpellGCDHastedDuration) GetFloat(sim *Simulation) float64 {
+	return value.GetDuration(sim).Seconds()
+}
+
+func (value *APLValueSpellGCDHastedDuration) String() string {
+	return fmt.Sprintf("SpellGCDHastedDuration(%s)", value.spell.ActionID)
+}
+
+// Full Cooldown duration
+type APLValueSpellFullCooldown struct {
+	DefaultAPLValueImpl
+	spell *Spell
+}
+
+func (rot *APLRotation) newValueSpellFullCooldown(config *proto.APLValueSpellFullCooldown, _ *proto.UUID) APLValue {
+	spell := rot.GetAPLSpell(config.SpellId)
+	if spell == nil {
+		return nil
+	}
+	return &APLValueSpellFullCooldown{
+		spell: spell,
+	}
+}
+
+func (value *APLValueSpellFullCooldown) Type() proto.APLValueType {
+	return proto.APLValueType_ValueTypeDuration
+}
+
+func (value *APLValueSpellFullCooldown) GetDuration(sim *Simulation) time.Duration {
+	return value.spell.CD.Duration
+}
+
+func (value *APLValueSpellFullCooldown) String() string {
+	return fmt.Sprintf("SpellFullCooldown(%s)", value.spell.ActionID)
+}

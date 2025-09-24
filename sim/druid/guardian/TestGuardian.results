@@ -1860,8 +1860,8 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-MithrilWristwatch-257884"
  value: {
-  dps: 108575.94927
-  tps: 583791.26325
+  dps: 108816.5935
+  tps: 584030.7014
   dtps: 14224.61877
   hps: 11004.64321
  }

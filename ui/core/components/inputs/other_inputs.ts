@@ -12,7 +12,7 @@ export function makeShow1hWeaponsSelector(parent: HTMLElement, sim: Sim): Boolea
 	return new BooleanPicker<Sim>(parent, sim, {
 		id: 'show-1h-weapons-selector',
 		extraCssClasses: ['show-1h-weapons-selector', 'mb-0'],
-		label: i18n.t('settings.other.show_1h_weapons.label'),
+		label: i18n.t('settings_tab.other.show_1h_weapons.label'),
 		inline: true,
 		changedEvent: (sim: Sim) => sim.filtersChangeEmitter,
 		getValue: (sim: Sim) => sim.getFilters().oneHandedWeapons,
@@ -29,7 +29,7 @@ export function makeShow2hWeaponsSelector(parent: HTMLElement, sim: Sim): Boolea
 	return new BooleanPicker<Sim>(parent, sim, {
 		id: 'show-2h-weapons-selector',
 		extraCssClasses: ['show-2h-weapons-selector', 'mb-0'],
-		label: i18n.t('settings.other.show_2h_weapons.label'),
+		label: i18n.t('settings_tab.other.show_2h_weapons.label'),
 		inline: true,
 		changedEvent: (sim: Sim) => sim.filtersChangeEmitter,
 		getValue: (sim: Sim) => sim.getFilters().twoHandedWeapons,
@@ -45,7 +45,7 @@ export function makeShowMatchingGemsSelector(parent: HTMLElement, sim: Sim): Boo
 	return new BooleanPicker<Sim>(parent, sim, {
 		id: 'show-matching-gems-selector',
 		extraCssClasses: ['show-matching-gems-selector', 'input-inline', 'mb-0'],
-		label: i18n.t('settings.other.show_matching_gems.label'),
+		label: i18n.t('settings_tab.other.show_matching_gems.label'),
 		inline: true,
 		changedEvent: (sim: Sim) => sim.filtersChangeEmitter,
 		getValue: (sim: Sim) => sim.getFilters().matchingGemsOnly,
@@ -61,7 +61,7 @@ export function makeShowEPValuesSelector(parent: HTMLElement, sim: Sim): Boolean
 	return new BooleanPicker<Sim>(parent, sim, {
 		id: 'show-ep-values-selector',
 		extraCssClasses: ['show-ep-values-selector', 'input-inline', 'mb-0'],
-		label: i18n.t('settings.other.show_ep_values.label'),
+		label: i18n.t('settings_tab.other.show_ep_values.label'),
 		inline: true,
 		changedEvent: (sim: Sim) => sim.showEPValuesChangeEmitter,
 		getValue: (sim: Sim) => sim.getShowEPValues(),
@@ -93,8 +93,8 @@ export function makePhaseSelector(parent: HTMLElement, sim: Sim): EnumPicker<Sim
 export const InputDelay = {
 	id: 'input-delay',
 	type: 'number' as const,
-	label: i18n.t('settings.other.input_delay.label'),
-	labelTooltip: i18n.t('settings.other.input_delay.tooltip'),
+	label: i18n.t('settings_tab.other.input_delay.label'),
+	labelTooltip: i18n.t('settings_tab.other.input_delay.tooltip'),
 	changedEvent: (player: Player<any>) => player.miscOptionsChangeEmitter,
 	getValue: (player: Player<any>) => player.getReactionTime(),
 	setValue: (eventID: EventID, player: Player<any>, newValue: number) => {
@@ -105,8 +105,8 @@ export const InputDelay = {
 export const ChallengeMode = {
 	id: 'challenge-mode',
 	type: 'boolean' as const,
-	label: i18n.t('settings.other.challenge_mode.label'),
-	labelTooltip: i18n.t('settings.other.challenge_mode.tooltip'),
+	label: i18n.t('settings_tab.other.challenge_mode.label'),
+	labelTooltip: i18n.t('settings_tab.other.challenge_mode.tooltip'),
 	changedEvent: (player: Player<any>) => player.challengeModeChangeEmitter,
 	getValue: (player: Player<any>) => player.getChallengeModeEnabled(),
 	setValue: (eventID: EventID, player: Player<any>, value: boolean) => {
@@ -117,8 +117,8 @@ export const ChallengeMode = {
 export const ChannelClipDelay = {
 	id: 'channel-clip-delay',
 	type: 'number' as const,
-	label: i18n.t('settings.other.channel_clip_delay.label'),
-	labelTooltip: i18n.t('settings.other.channel_clip_delay.tooltip'),
+	label: i18n.t('settings_tab.other.channel_clip_delay.label'),
+	labelTooltip: i18n.t('settings_tab.other.channel_clip_delay.tooltip'),
 	changedEvent: (player: Player<any>) => player.miscOptionsChangeEmitter,
 	getValue: (player: Player<any>) => player.getChannelClipDelay(),
 	setValue: (eventID: EventID, player: Player<any>, newValue: number) => {
@@ -129,8 +129,8 @@ export const ChannelClipDelay = {
 export const InFrontOfTarget = {
 	id: 'in-front-of-target',
 	type: 'boolean' as const,
-	label: i18n.t('settings.other.in_front_of_target.label'),
-	labelTooltip: i18n.t('settings.other.in_front_of_target.tooltip'),
+	label: i18n.t('settings_tab.other.in_front_of_target.label'),
+	labelTooltip: i18n.t('settings_tab.other.in_front_of_target.tooltip'),
 	changedEvent: (player: Player<any>) => player.inFrontOfTargetChangeEmitter,
 	getValue: (player: Player<any>) => player.getInFrontOfTarget(),
 	setValue: (eventID: EventID, player: Player<any>, newValue: boolean) => {
@@ -141,8 +141,8 @@ export const InFrontOfTarget = {
 export const DistanceFromTarget = {
 	id: 'distance-from-target',
 	type: 'number' as const,
-	label: i18n.t('settings.other.distance_from_target.label'),
-	labelTooltip: i18n.t('settings.other.distance_from_target.tooltip'),
+	label: i18n.t('settings_tab.other.distance_from_target.label'),
+	labelTooltip: i18n.t('settings_tab.other.distance_from_target.tooltip'),
 	changedEvent: (player: Player<any>) => player.distanceFromTargetChangeEmitter,
 	getValue: (player: Player<any>) => player.getDistanceFromTarget(),
 	setValue: (eventID: EventID, player: Player<any>, newValue: number) => {
@@ -154,8 +154,8 @@ export const TankAssignment = {
 	id: 'tank-assignment',
 	type: 'enum' as const,
 	extraCssClasses: ['tank-selector', 'threat-metrics', 'within-raid-sim-hide'],
-	label: i18n.t('settings.other.tank_assignment.label'),
-	labelTooltip: i18n.t('settings.other.tank_assignment.tooltip'),
+	label: i18n.t('settings_tab.other.tank_assignment.label'),
+	labelTooltip: i18n.t('settings_tab.other.tank_assignment.tooltip'),
 	values: [
 		{ name: i18n.t('common.none'), value: -1 },
 		{ name: i18n.t('common.tanks.main_tank'), value: 0 },
@@ -180,8 +180,8 @@ export const TankAssignment = {
 export const IncomingHps = {
 	id: 'incoming-hps',
 	type: 'number' as const,
-	label: i18n.t('settings.other.incoming_hps.label'),
-	labelTooltip: i18n.t('settings.other.incoming_hps.tooltip'),
+	label: i18n.t('settings_tab.other.incoming_hps.label'),
+	labelTooltip: i18n.t('settings_tab.other.incoming_hps.tooltip'),
 	changedEvent: (player: Player<any>) => player.getRaid()!.changeEmitter,
 	getValue: (player: Player<any>) => player.getHealingModel().hps,
 	setValue: (eventID: EventID, player: Player<any>, newValue: number) => {
@@ -196,8 +196,8 @@ export const HealingCadence = {
 	id: 'healing-cadence',
 	type: 'number' as const,
 	float: true,
-	label: i18n.t('settings.other.healing_cadence.label'),
-	labelTooltip: i18n.t('settings.other.healing_cadence.tooltip'),
+	label: i18n.t('settings_tab.other.healing_cadence.label'),
+	labelTooltip: i18n.t('settings_tab.other.healing_cadence.tooltip'),
 	changedEvent: (player: Player<any>) => player.getRaid()!.changeEmitter,
 	getValue: (player: Player<any>) => player.getHealingModel().cadenceSeconds,
 	setValue: (eventID: EventID, player: Player<any>, newValue: number) => {
@@ -212,8 +212,8 @@ export const HealingCadenceVariation = {
 	id: 'healing-cadence-variation',
 	type: 'number' as const,
 	float: true,
-	label: i18n.t('settings.other.healing_cadence_variation.label'),
-	labelTooltip: i18n.t('settings.other.healing_cadence_variation.tooltip'),
+	label: i18n.t('settings_tab.other.healing_cadence_variation.label'),
+	labelTooltip: i18n.t('settings_tab.other.healing_cadence_variation.tooltip'),
 	changedEvent: (player: Player<any>) => player.getRaid()!.changeEmitter,
 	getValue: (player: Player<any>) => player.getHealingModel().cadenceVariation,
 	setValue: (eventID: EventID, player: Player<any>, newValue: number) => {
@@ -228,8 +228,8 @@ export const AbsorbFrac = {
 	id: 'healing-model-absorb-frac',
 	type: 'number' as const,
 	float: true,
-	label: i18n.t('settings.other.absorb_frac.label'),
-	labelTooltip: i18n.t('settings.other.absorb_frac.tooltip'),
+	label: i18n.t('settings_tab.other.absorb_frac.label'),
+	labelTooltip: i18n.t('settings_tab.other.absorb_frac.tooltip'),
 	changedEvent: (player: Player<any>) => player.healingModelChangeEmitter,
 	getValue: (player: Player<any>) => player.getHealingModel().absorbFrac * 100,
 	setValue: (eventID: EventID, player: Player<any>, newValue: number) => {
@@ -243,8 +243,8 @@ export const BurstWindow = {
 	id: 'burst-window',
 	type: 'number' as const,
 	float: false,
-	label: i18n.t('settings.other.burst_window.label'),
-	labelTooltip: i18n.t('settings.other.burst_window.tooltip'),
+	label: i18n.t('settings_tab.other.burst_window.label'),
+	labelTooltip: i18n.t('settings_tab.other.burst_window.tooltip'),
 	changedEvent: (player: Player<any>) => player.getRaid()!.changeEmitter,
 	getValue: (player: Player<any>) => player.getHealingModel().burstWindow,
 	setValue: (eventID: EventID, player: Player<any>, newValue: number) => {
@@ -259,8 +259,8 @@ export const HpPercentForDefensives = {
 	id: 'hp-percent-for-defensives',
 	type: 'number' as const,
 	float: true,
-	label: i18n.t('settings.other.hp_percent_for_defensives.label'),
-	labelTooltip: i18n.t('settings.other.hp_percent_for_defensives.tooltip'),
+	label: i18n.t('settings_tab.other.hp_percent_for_defensives.label'),
+	labelTooltip: i18n.t('settings_tab.other.hp_percent_for_defensives.tooltip'),
 	changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
 	getValue: (player: Player<any>) => player.getSimpleCooldowns().hpPercentForDefensives * 100,
 	setValue: (eventID: EventID, player: Player<any>, newValue: number) => {

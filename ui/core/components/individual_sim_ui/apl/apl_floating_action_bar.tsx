@@ -12,7 +12,7 @@ export class AplFloatingActionBar extends Component {
 		const newButton = this.rootElem.appendChild(
 			<button className="btn btn-primary">
 				<i className="fas fa-plus me-2" />
-				{i18n.t('rotation.apl.floatingActionBar.new', { itemName: itemName })}
+				{i18n.t('rotation_tab.apl.floatingActionBar.new', { itemName: itemName })}
 			</button>,
 		);
 
@@ -25,7 +25,7 @@ export class AplFloatingActionBar extends Component {
 		const resetButton = this.rootElem.appendChild(
 			<button className="btn btn-sm btn-link btn-reset ms-auto">
 				<i className="fas fa-times me-1"></i>
-				{i18n.t('rotation.apl.floatingActionBar.reset')}
+				{i18n.t('rotation_tab.apl.floatingActionBar.reset')}
 			</button>,
 		);
 

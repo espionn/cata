@@ -41,8 +41,8 @@ export class PresetConfigurationPicker extends Component {
 
 		const contentBlock = new ContentBlock(this.rootElem, 'saved-data', {
 			header: {
-				title: i18n.t('gear.preset_configurations.title'),
-				tooltip: i18n.t('gear.preset_configurations.tooltip'),
+				title: i18n.t('gear_tab.preset_configurations.title'),
+				tooltip: i18n.t('gear_tab.preset_configurations.tooltip'),
 			},
 		});
 

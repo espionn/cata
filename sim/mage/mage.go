@@ -133,6 +133,8 @@ func (mage *Mage) registerSpells() {
 	mage.registerIcyVeinsCD()
 	mage.registerHeatingUp()
 	mage.registerAlterTimeCD()
+
+	mage.registerHotfixes()
 }
 
 func (mage *Mage) registerMastery() {

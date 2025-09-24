@@ -35,23 +35,23 @@ export enum SelectorModalTabs {
 export function getTranslatedTabLabel(tab: SelectorModalTabs): string {
 	switch (tab) {
 		case SelectorModalTabs.Items:
-			return i18n.t('gear.gear_picker.tabs.items');
+			return i18n.t('gear_tab.gear_picker.tabs.items');
 		case SelectorModalTabs.RandomSuffixes:
-			return i18n.t('gear.gear_picker.tabs.random_suffix');
+			return i18n.t('gear_tab.gear_picker.tabs.random_suffix');
 		case SelectorModalTabs.Enchants:
-			return i18n.t('gear.gear_picker.tabs.enchants');
+			return i18n.t('gear_tab.gear_picker.tabs.enchants');
 		case SelectorModalTabs.Tinkers:
-			return i18n.t('gear.gear_picker.tabs.tinkers');
+			return i18n.t('gear_tab.gear_picker.tabs.tinkers');
 		case SelectorModalTabs.Reforging:
-			return i18n.t('gear.gear_picker.tabs.reforging');
+			return i18n.t('gear_tab.gear_picker.tabs.reforging');
 		case SelectorModalTabs.Upgrades:
-			return i18n.t('gear.gear_picker.tabs.upgrades');
+			return i18n.t('gear_tab.gear_picker.tabs.upgrades');
 		case SelectorModalTabs.Gem1:
-			return i18n.t('gear.gear_picker.tabs.gem1');
+			return i18n.t('gear_tab.gear_picker.tabs.gem1');
 		case SelectorModalTabs.Gem2:
-			return i18n.t('gear.gear_picker.tabs.gem2');
+			return i18n.t('gear_tab.gear_picker.tabs.gem2');
 		case SelectorModalTabs.Gem3:
-			return i18n.t('gear.gear_picker.tabs.gem3');
+			return i18n.t('gear_tab.gear_picker.tabs.gem3');
 		default:
 			return tab;
 	}
@@ -108,9 +108,9 @@ export default class SelectorModal extends BaseModal {
 			<div className="d-flex align-items-center form-text">
 				<i className="fas fa-circle-exclamation fa-xl me-2"></i>
 				<span>
-					{i18n.t('gear.gear_picker.missing_gear_message.title')}
+					{i18n.t('gear_tab.gear_picker.missing_gear_message.title')}
 					<br />
-					{i18n.t('gear.gear_picker.missing_gear_message.description')}
+					{i18n.t('gear_tab.gear_picker.missing_gear_message.description')}
 				</span>
 			</div>,
 		);

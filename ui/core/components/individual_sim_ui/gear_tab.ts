@@ -20,7 +20,7 @@ export class GearTab extends SimTab {
 	readonly rightPanel: HTMLElement;
 
 	constructor(parentElem: HTMLElement, simUI: IndividualSimUI<any>) {
-		super(parentElem, simUI, { identifier: 'gear-tab', title: i18n.t('gear.title') });
+		super(parentElem, simUI, { identifier: 'gear-tab', title: i18n.t('gear_tab.title') });
 		this.simUI = simUI;
 
 		this.leftPanel = document.createElement('div');
@@ -62,10 +62,10 @@ export class GearTab extends SimTab {
 
 	private buildSavedGearsetPicker() {
 		const savedGearManager = new SavedDataManager<Player<any>, SavedGearSet>(this.rightPanel, this.simUI.player, {
-			header: { title: i18n.t('gear.gear_sets.title') },
-			label: i18n.t('gear.gear_sets.gear_set'),
-			nameLabel: i18n.t('gear.gear_sets.gear_set_name'),
-			saveButtonText: i18n.t('gear.gear_sets.save_gear_set'),
+			header: { title: i18n.t('gear_tab.gear_sets.title') },
+			label: i18n.t('gear_tab.gear_sets.gear_set'),
+			nameLabel: i18n.t('gear_tab.gear_sets.gear_set_name'),
+			saveButtonText: i18n.t('gear_tab.gear_sets.save_gear_set'),
 			storageKey: this.simUI.getSavedGearStorageKey(),
 			getData: (player: Player<any>) => {
 				return SavedGearSet.create({

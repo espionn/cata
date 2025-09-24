@@ -59,8 +59,8 @@ export class ConsumesPicker extends Component {
 		if (this.simUI.player.getClass() !== Class.ClassWarrior && this.simUI.player.getSpec() !== Spec.SpecGuardianDruid) {
 			pots = pots.filter(pot => pot.id !== 13442);
 		}
-		const prePotOptions = ConsumablesInputs.makeConsumableInput(pots, { consumesFieldName: 'prepotId' }, i18n.t('settings.consumables.potions.prepop'));
-		const potionsOptions = ConsumablesInputs.makeConsumableInput(pots, { consumesFieldName: 'potId' }, i18n.t('settings.consumables.potions.combat'));
+		const prePotOptions = ConsumablesInputs.makeConsumableInput(pots, { consumesFieldName: 'prepotId' }, i18n.t('settings_tab.consumables.potions.prepop'));
+		const potionsOptions = ConsumablesInputs.makeConsumableInput(pots, { consumesFieldName: 'potId' }, i18n.t('settings_tab.consumables.potions.combat'));
 
 		const prePotPicker = buildIconInput(potionsElem, this.simUI.player, prePotOptions);
 
@@ -133,7 +133,7 @@ export class ConsumesPicker extends Component {
 		);
 		const engiConsumesElem = engiConsumesRef.value!;
 
-		const explosivesoptions = ConsumablesInputs.makeExplosivesInput(relevantStatOptions(ConsumablesInputs.EXPLOSIVE_CONFIG, this.simUI), i18n.t('settings.consumables.engineering.explosives'));
+		const explosivesoptions = ConsumablesInputs.makeExplosivesInput(relevantStatOptions(ConsumablesInputs.EXPLOSIVE_CONFIG, this.simUI), i18n.t('settings_tab.consumables.engineering.explosives'));
 		const explosivePicker = buildIconInput(engiConsumesElem, this.simUI.player, explosivesoptions);
 
 		const events = this.simUI.player.professionChangeEmitter.on(() => this.updateRow(row, [explosivePicker]));
@@ -166,7 +166,7 @@ export class ConsumesPicker extends Component {
 // A simple JSX stateless component for rows.
 const ConsumeRow = ({ label, children }: { label: string; children: JSX.Element }) => (
 	<div className="consumes-row input-root input-inline">
-		<label className="form-label">{i18n.t(`settings.consumables.${label.toLowerCase()}.title`)}</label>
+		<label className="form-label">{i18n.t(`settings_tab.consumables.${label.toLowerCase()}.title`)}</label>
 		{children}
 	</div>
 );

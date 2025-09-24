@@ -33,11 +33,11 @@ func (demonology *DemonologyWarlock) registerSoulfire() {
 			},
 		},
 
-		DamageMultiplierAdditive: 1,
-		CritMultiplier:           demonology.DefaultCritMultiplier(),
-		ThreatMultiplier:         1,
-		BonusCoefficient:         soulfireCoeff,
-		BonusCritPercent:         100,
+		DamageMultiplier: 1,
+		CritMultiplier:   demonology.DefaultCritMultiplier(),
+		ThreatMultiplier: 1,
+		BonusCoefficient: soulfireCoeff,
+		BonusCritPercent: 100,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			baseDamage := demonology.CalcAndRollDamageRange(sim, soulfireScale, soulfireVariance)

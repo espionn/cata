@@ -33,6 +33,22 @@
 		{
 			"fileMatch": ["assets/locales/**/translation.json"],
 			"url": "./schemas/translation.schema.json"
+		},
+		{
+			"fileMatch": ["assets/locales/**/talents.json"],
+			"url": "./schemas/talents.schema.json"
+		},
+		{
+			"fileMatch": ["assets/locales/**/glyphs.json"],
+			"url": "./schemas/glyphs.schema.json"
+		},
+		{
+			"fileMatch": ["assets/locales/**/character.json"],
+			"url": "./schemas/character.schema.json"
+		},
+		{
+			"fileMatch": ["assets/locales/**/stats.json"],
+			"url": "./schemas/stats.schema.json"
 		}
 	],
 	"Lua.diagnostics.globals": [

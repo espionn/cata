@@ -27,7 +27,7 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 				};
 			}),
 			{
-				name: i18n.t('results.details.columns.damage_taken'),
+				name: i18n.t('results_tab.details.columns.damage_taken'),
 				headerCellClass: 'text-center metrics-table-cell--primary-metric',
 				columnClass: 'metrics-table-cell--primary-metric',
 				getValue: (metric: ActionMetrics) => metric.avgDamage,
@@ -54,7 +54,7 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 					cellElem.appendChild(
 						<MetricsCombinedTooltipTable
 							tooltipElement={cellElem}
-							headerValues={[, i18n.t('results.details.tooltip_table.amount')]}
+							headerValues={[, i18n.t('results_tab.details.tooltip_table.amount')]}
 							groups={[
 								{
 									spellSchool: metric.spellSchool,
@@ -62,35 +62,35 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: i18n.t('results.details.attack_types.hit'),
+											name: i18n.t('results_tab.details.attack_types.hit'),
 											...hitValues,
 										},
 										{
-											name: i18n.t('results.details.attack_types.critical_hit'),
+											name: i18n.t('results_tab.details.attack_types.critical_hit'),
 											...critHitValues,
 										},
 										{
-											name: i18n.t('results.details.attack_types.tick'),
+											name: i18n.t('results_tab.details.attack_types.tick'),
 											...tickValues,
 										},
 										{
-											name: i18n.t('results.details.attack_types.critical_tick'),
+											name: i18n.t('results_tab.details.attack_types.critical_tick'),
 											...critTickValues,
 										},
 										{
-											name: i18n.t('results.details.attack_types.glancing_blow'),
+											name: i18n.t('results_tab.details.attack_types.glancing_blow'),
 											...glanceValues,
 										},
 										{
-											name: i18n.t('results.details.attack_types.blocked_glancing_blow'),
+											name: i18n.t('results_tab.details.attack_types.blocked_glancing_blow'),
 											...glanceBlockValues,
 										},
 										{
-											name: i18n.t('results.details.attack_types.blocked_hit'),
+											name: i18n.t('results_tab.details.attack_types.blocked_hit'),
 											...blockValues,
 										},
 										{
-											name: i18n.t('results.details.attack_types.blocked_critical_hit'),
+											name: i18n.t('results_tab.details.attack_types.blocked_critical_hit'),
 											...critBlockValues,
 										},
 									],
@@ -101,7 +101,7 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 				},
 			},
 			{
-				name: i18n.t('results.details.columns.casts'),
+				name: i18n.t('results_tab.details.columns.casts'),
 				getValue: (metric: ActionMetrics) => metric.casts,
 				fillCell: (metric: ActionMetrics, cellElem: HTMLElement) => {
 					cellElem.appendChild(<>{formatToNumber(metric.casts, { fallbackString: '-' })}</>);
@@ -118,22 +118,22 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: i18n.t('results.details.attack_types.hit') + 's',
+											name: i18n.t('results_tab.details.attack_types.hit') + 's',
 											value: metric.landedHits || metric.casts - metric.totalMisses,
 											percentage: relativeHitPercent,
 										},
 										{
-											name: i18n.t('results.details.attack_types.miss'),
+											name: i18n.t('results_tab.details.attack_types.miss'),
 											value: metric.misses,
 											percentage: metric.missPercent,
 										},
 										{
-											name: i18n.t('results.details.attack_types.parry'),
+											name: i18n.t('results_tab.details.attack_types.parry'),
 											value: metric.parries,
 											percentage: metric.parryPercent,
 										},
 										{
-											name: i18n.t('results.details.attack_types.dodge'),
+											name: i18n.t('results_tab.details.attack_types.dodge'),
 											value: metric.dodges,
 											percentage: metric.dodgePercent,
 										},
@@ -145,8 +145,8 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 				},
 			},
 			{
-				name: i18n.t('results.details.columns.avg_cast'),
-				tooltip: i18n.t('results.details.tooltips.damage_avg_cast_tooltip'),
+				name: i18n.t('results_tab.details.columns.avg_cast'),
+				tooltip: i18n.t('results_tab.details.tooltips.damage_avg_cast_tooltip'),
 				getValue: (metric: ActionMetrics) => {
 					if (metric.isPassiveAction) return 0;
 					return metric.avgCastHit || metric.avgCastTick;
@@ -161,7 +161,7 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 				},
 			},
 			{
-				name: i18n.t('results.details.columns.hits'),
+				name: i18n.t('results_tab.details.columns.hits'),
 				getValue: (metric: ActionMetrics) => metric.landedHits || metric.landedTicks,
 				fillCell: (metric: ActionMetrics, cellElem: HTMLElement) => {
 					cellElem.appendChild(
@@ -191,32 +191,32 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: i18n.t('results.details.attack_types.hit'),
+											name: i18n.t('results_tab.details.attack_types.hit'),
 											value: metric.hits,
 											percentage: relativeHitPercent,
 										},
 										{
-											name: i18n.t('results.details.attack_types.critical_hit'),
+											name: i18n.t('results_tab.details.attack_types.critical_hit'),
 											value: metric.crits,
 											percentage: relativeCritPercent,
 										},
 										{
-											name: i18n.t('results.details.attack_types.glancing_blow'),
+											name: i18n.t('results_tab.details.attack_types.glancing_blow'),
 											value: metric.glances,
 											percentage: relativeGlancePercent,
 										},
 										{
-											name: i18n.t('results.details.attack_types.blocked_glancing_blow'),
+											name: i18n.t('results_tab.details.attack_types.blocked_glancing_blow'),
 											value: metric.glanceBlocks,
 											percentage: relativeGlanceBlockPercent,
 										},
 										{
-											name: i18n.t('results.details.attack_types.blocked_hit'),
+											name: i18n.t('results_tab.details.attack_types.blocked_hit'),
 											value: metric.blocks,
 											percentage: relativeBlockPercent,
 										},
 										{
-											name: i18n.t('results.details.attack_types.blocked_critical_hit'),
+											name: i18n.t('results_tab.details.attack_types.blocked_critical_hit'),
 											value: metric.critBlocks,
 											percentage: relativeCritBlockPercent,
 										},
@@ -228,12 +228,12 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: 100,
 									data: [
 										{
-											name: i18n.t('results.details.attack_types.tick'),
+											name: i18n.t('results_tab.details.attack_types.tick'),
 											value: metric.ticks,
 											percentage: relativeTickPercent,
 										},
 										{
-											name: i18n.t('results.details.attack_types.critical_tick'),
+											name: i18n.t('results_tab.details.attack_types.critical_tick'),
 											value: metric.critTicks,
 											percentage: relativeCritTickPercent,
 										},
@@ -245,7 +245,7 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 				},
 			},
 			{
-				name: i18n.t('results.details.columns.avg_hit'),
+				name: i18n.t('results_tab.details.columns.avg_hit'),
 				getValue: (metric: ActionMetrics) => metric.avgHit || metric.avgTick,
 				fillCell: (metric: ActionMetrics, cellElem: HTMLElement) => {
 					cellElem.appendChild(
@@ -257,8 +257,8 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 				},
 			},
 			{
-				name: i18n.t('results.details.columns.miss_percent'),
-				tooltip: i18n.t('results.details.tooltips.hit_miss_percent_tooltip'),
+				name: i18n.t('results_tab.details.columns.miss_percent'),
+				tooltip: i18n.t('results_tab.details.tooltips.hit_miss_percent_tooltip'),
 				getValue: (metric: ActionMetrics) => metric.totalMissesPercent,
 				fillCell: (metric: ActionMetrics, cellElem: HTMLElement) => {
 					cellElem.appendChild(<>{formatToPercent(metric.totalMissesPercent, { fallbackString: '-' })}</>);
@@ -274,17 +274,17 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 									totalPercentage: metric.totalMissesPercent,
 									data: [
 										{
-											name: i18n.t('results.details.attack_types.miss'),
+											name: i18n.t('results_tab.details.attack_types.miss'),
 											value: metric.misses,
 											percentage: metric.missPercent,
 										},
 										{
-											name: i18n.t('results.details.attack_types.parry'),
+											name: i18n.t('results_tab.details.attack_types.parry'),
 											value: metric.parries,
 											percentage: metric.parryPercent,
 										},
 										{
-											name: i18n.t('results.details.attack_types.dodge'),
+											name: i18n.t('results_tab.details.attack_types.dodge'),
 											value: metric.dodges,
 											percentage: metric.dodgePercent,
 										},
@@ -296,7 +296,7 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 				},
 			},
 			{
-				name: i18n.t('results.details.columns.crit_percent'),
+				name: i18n.t('results_tab.details.columns.crit_percent'),
 				getValue: (metric: ActionMetrics) => metric.critPercent + metric.critBlockPercent || metric.critTickPercent,
 				getDisplayString: (metric: ActionMetrics) =>
 					`${formatToPercent(metric.critPercent + metric.critBlockPercent || metric.critTickPercent, { fallbackString: '-' })}${
@@ -304,7 +304,7 @@ export class DtpsMetricsTable extends MetricsTable<ActionMetrics> {
 					}`,
 			},
 			{
-				name: i18n.t('results.details.columns.dtps'),
+				name: i18n.t('results_tab.details.columns.dtps'),
 				sort: ColumnSortType.Descending,
 				headerCellClass: 'text-body',
 				columnClass: 'text-success',

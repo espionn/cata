@@ -36,42 +36,42 @@ const tabs: Tab[] = [
 	{
 		isActive: true,
 		targetId: 'damageTab',
-		label: i18n.t('results.details.tabs.damage'),
+		label: i18n.t('results_tab.details.tabs.damage'),
 		classes: ['damage-metrics-tab'],
 	},
 	{
 		targetId: 'healingTab',
-		label: i18n.t('results.details.tabs.healing'),
+		label: i18n.t('results_tab.details.tabs.healing'),
 		classes: ['healing-metrics-tab'],
 	},
 	{
 		targetId: 'damageTakenTab',
-		label: i18n.t('results.details.tabs.damage_taken'),
+		label: i18n.t('results_tab.details.tabs.damage_taken'),
 		classes: ['threat-metrics-tab'],
 	},
 	{
 		targetId: 'buffsTab',
-		label: i18n.t('results.details.tabs.buffs'),
+		label: i18n.t('results_tab.details.tabs.buffs'),
 	},
 	{
 		targetId: 'debuffsTab',
-		label: i18n.t('results.details.tabs.debuffs'),
+		label: i18n.t('results_tab.details.tabs.debuffs'),
 	},
 	{
 		targetId: 'castsTab',
-		label: i18n.t('results.details.tabs.casts'),
+		label: i18n.t('results_tab.details.tabs.casts'),
 	},
 	{
 		targetId: 'resourcesTab',
-		label: i18n.t('results.details.tabs.resources'),
+		label: i18n.t('results_tab.details.tabs.resources'),
 	},
 	{
 		targetId: 'timelineTab',
-		label: i18n.t('results.details.tabs.timeline'),
+		label: i18n.t('results_tab.details.tabs.timeline'),
 	},
 	{
 		targetId: 'logTab',
-		label: i18n.t('results.details.tabs.log'),
+		label: i18n.t('results_tab.details.tabs.log'),
 	},
 ];
 
@@ -117,7 +117,7 @@ export abstract class DetailedResults extends Component {
 				</div>
 				<div className="tab-content">
 					<div id="noResultsTab" className="tab-pane dr-tab-content fade active show">
-						{i18n.t('results.details.no_results')}
+						{i18n.t('results_tab.details.no_results')}
 					</div>
 					<div id="damageTab" className="tab-pane dr-tab-content damage-content fade active show">
 						<div className="dr-row topline-results" />
@@ -414,13 +414,13 @@ export class EmbeddedDetailedResults extends DetailedResults {
 		this.rootElem.prepend(
 			<div className="detailed-results-controls-div">
 				<button className="detailed-results-new-tab-button btn btn-primary" ref={newTabButtonRef} disabled={simUI.disabled}>
-					{i18n.t('results.details.view_in_separate_tab')}
+					{i18n.t('results_tab.details.view_in_separate_tab')}
 				</button>
 				<button className="detailed-results-1-iteration-button btn btn-primary" ref={simButtonRef} disabled={simUI.disabled}>
-					{i18n.t('results.details.sim_1_iteration')}
+					{i18n.t('results_tab.details.sim_1_iteration')}
 				</button>
 				<button className="detailed-results-death-iteration-button btn btn-primary" ref={deathButtonRef} disabled={true}>
-					{i18n.t('results.details.sim_1_death')}
+					{i18n.t('results_tab.details.sim_1_death')}
 				</button>
 			</div>,
 		);

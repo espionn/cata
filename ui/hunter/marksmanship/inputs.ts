@@ -9,10 +9,10 @@ export const MMRotationConfig = {
 	inputs: [
 		InputHelpers.makeRotationEnumInput<Spec.SpecMarksmanshipHunter, RotationType>({
 			fieldName: 'type',
-			label: i18n.t('rotation.common.rotation_type.label'),
+			label: i18n.t('rotation_tab.common.rotation_type.label'),
 			values: [
-				{ name: i18n.t('rotation.common.rotation_type.single_target'), value: RotationType.SingleTarget },
-				{ name: i18n.t('rotation.common.rotation_type.aoe'), value: RotationType.Aoe },
+				{ name: i18n.t('rotation_tab.common.rotation_type.single_target'), value: RotationType.SingleTarget },
+				{ name: i18n.t('rotation_tab.common.rotation_type.aoe'), value: RotationType.Aoe },
 			],
 		}),
 	],

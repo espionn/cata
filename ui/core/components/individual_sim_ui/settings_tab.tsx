@@ -35,7 +35,7 @@ export class SettingsTab extends SimTab {
 	readonly column4?: HTMLElement;
 
 	constructor(parentElem: HTMLElement, simUI: IndividualSimUI<any>) {
-		super(parentElem, simUI, { identifier: 'settings-tab', title: i18n.t('settings.title') });
+		super(parentElem, simUI, { identifier: 'settings-tab', title: i18n.t('settings_tab.title') });
 		this.simUI = simUI;
 
 		this.leftPanel = document.createElement('div');
@@ -86,7 +86,7 @@ export class SettingsTab extends SimTab {
 
 	private buildEncounterSettings() {
 		const contentBlock = new ContentBlock(this.column1, 'encounter-settings', {
-			header: { title: i18n.t('settings.encounter.title') },
+			header: { title: i18n.t('settings_tab.encounter.title') },
 		});
 
 		new EncounterPicker(contentBlock.bodyElement, this.simUI.sim.encounter, this.simUI.individualConfig.encounterPicker, this.simUI);
@@ -95,7 +95,7 @@ export class SettingsTab extends SimTab {
 	private buildPlayerSettings() {
 		const column = this.column1;
 		const contentBlock = new ContentBlock(column, 'player-settings', {
-			header: { title: i18n.t('settings.player.title') },
+			header: { title: i18n.t('settings_tab.player.title') },
 		});
 
 		const playerIconGroup = Input.newGroupContainer();
@@ -111,7 +111,7 @@ export class SettingsTab extends SimTab {
 		const races = this.simUI.player.getPlayerClass().races;
 		const _racePicker = new EnumPicker(contentBlock.bodyElement, this.simUI.player, {
 			id: 'simui-race',
-			label: i18n.t('settings.player.race'),
+			label: i18n.t('settings_tab.player.race'),
 			values: races.map(race => {
 				return {
 					name: translateRace(race),
@@ -133,7 +133,7 @@ export class SettingsTab extends SimTab {
 		const professions = getEnumValues(Profession).filter(proff => proff != Profession.Archeology) as Array<Profession>;
 		const _profession1Picker = new EnumPicker(professionGroup, this.simUI.player, {
 			id: 'simui-profession1',
-			label: i18n.t('settings.player.profession_1'),
+			label: i18n.t('settings_tab.player.profession_1'),
 			values: professions.map(p => {
 				return {
 					name: translateProfession(p),
@@ -147,7 +147,7 @@ export class SettingsTab extends SimTab {
 
 		const _profession2Picker = new EnumPicker(professionGroup, this.simUI.player, {
 			id: 'simui-profession2',
-			label: i18n.t('settings.player.profession_2'),
+			label: i18n.t('settings_tab.player.profession_2'),
 			values: professions.map(p => {
 				return {
 					name: translateProfession(p),
@@ -170,7 +170,7 @@ export class SettingsTab extends SimTab {
 	private buildConsumesSection() {
 		const column = this.simUI.isWithinRaidSim ? this.column3 : this.column2;
 		const contentBlock = new ContentBlock(column, 'consumes-settings', {
-			header: { title: i18n.t('settings.consumables.title') },
+			header: { title: i18n.t('settings_tab.consumables.title') },
 		});
 		ConsumesPicker.create(contentBlock.bodyElement, this, this.simUI);
 	}
@@ -181,7 +181,7 @@ export class SettingsTab extends SimTab {
 		const swapSlots = this.simUI.individualConfig.itemSwapSlots || [];
 		if (settings.length > 0 || swapSlots.length > 0) {
 			const contentBlock = new ContentBlock(this.column2, 'other-settings', {
-			header: { title: i18n.t('settings.other.title') },
+			header: { title: i18n.t('settings_tab.other.title') },
 		});
 
 			if (settings.length > 0) {
@@ -201,11 +201,11 @@ export class SettingsTab extends SimTab {
 
 	private buildBuffsSettings() {
 		const contentBlock = new ContentBlock(this.column3, 'buffs-settings', {
-			header: { title: i18n.t('settings.raid_buffs.title'), tooltip: i18n.t('settings.raid_buffs.tooltip') },
+			header: { title: i18n.t('settings_tab.raid_buffs.title'), tooltip: i18n.t('settings_tab.raid_buffs.tooltip') },
 		});
 		contentBlock.headerElement?.appendChild(
 			<p className="fs-body">
-				{i18n.t('settings.raid_buffs.description')}
+				{i18n.t('settings_tab.raid_buffs.description')}
 			</p>,
 		);
 
@@ -222,7 +222,7 @@ export class SettingsTab extends SimTab {
 				this.simUI.player,
 				{
 					inputs: miscBuffOptions.map(option => option.config),
-					label: i18n.t('settings.raid_buffs.misc.label'),
+					label: i18n.t('settings_tab.raid_buffs.misc.label'),
 				},
 				this.simUI,
 			);
@@ -233,7 +233,7 @@ export class SettingsTab extends SimTab {
 		const externalDamageCooldownOptions = relevantStatOptions(BuffDebuffInputs.RAID_BUFFS_EXTERNAL_DAMAGE_COOLDOWN, this.simUI);
 		if (externalDamageCooldownOptions.length > 0) {
 			const contentBlock = new ContentBlock(this.column3, 'buffs-settings', {
-				header: { title: i18n.t('settings.external_damage_cooldowns.title'), tooltip: i18n.t('settings.external_damage_cooldowns.tooltip') },
+				header: { title: i18n.t('settings_tab.external_damage_cooldowns.title'), tooltip: i18n.t('settings_tab.external_damage_cooldowns.tooltip') },
 			});
 
 			this.configureIconSection(
@@ -248,7 +248,7 @@ export class SettingsTab extends SimTab {
 		const externalDefensiveCooldownOptions = relevantStatOptions(BuffDebuffInputs.RAID_BUFFS_EXTERNAL_DEFENSIVE_COOLDOWN, this.simUI);
 		if (externalDefensiveCooldownOptions.length > 0) {
 			const contentBlock = new ContentBlock(this.column3, 'buffs-settings', {
-				header: { title: i18n.t('settings.external_defensive_cooldowns.title'), tooltip: i18n.t('settings.external_defensive_cooldowns.tooltip') },
+				header: { title: i18n.t('settings_tab.external_defensive_cooldowns.title'), tooltip: i18n.t('settings_tab.external_defensive_cooldowns.tooltip') },
 			});
 
 			this.configureIconSection(
@@ -262,7 +262,7 @@ export class SettingsTab extends SimTab {
 
 	private buildDebuffsSettings() {
 		const contentBlock = new ContentBlock(this.column3, 'debuffs-settings', {
-			header: { title: i18n.t('settings.debuffs.title'), tooltip: i18n.t('settings.debuffs.tooltip') },
+			header: { title: i18n.t('settings_tab.debuffs.title'), tooltip: i18n.t('settings_tab.debuffs.tooltip') },
 		});
 
 		const debuffOptions = relevantStatOptions(BuffDebuffInputs.DEBUFFS_CONFIG, this.simUI);
@@ -278,7 +278,7 @@ export class SettingsTab extends SimTab {
 				this.simUI.player,
 				{
 					inputs: miscDebuffOptions.map(options => options.config),
-					label: i18n.t('settings.debuffs.misc.label'),
+					label: i18n.t('settings_tab.debuffs.misc.label'),
 				},
 				this.simUI,
 			);
@@ -291,10 +291,10 @@ export class SettingsTab extends SimTab {
 
 	private buildSavedDataPickers() {
 		const savedEncounterManager = new SavedDataManager<Encounter, SavedEncounter>(this.rightPanel, this.simUI.sim.encounter, {
-			label: i18n.t('settings.saved_encounters.encounter'),
-			header: { title: i18n.t('settings.saved_encounters.title') },
-			nameLabel: i18n.t('settings.saved_encounters.encounter_name'),
-			saveButtonText: i18n.t('settings.saved_encounters.save_encounter'),
+			label: i18n.t('settings_tab.saved_encounters.encounter'),
+			header: { title: i18n.t('settings_tab.saved_encounters.title') },
+			nameLabel: i18n.t('settings_tab.saved_encounters.encounter_name'),
+			saveButtonText: i18n.t('settings_tab.saved_encounters.save_encounter'),
 			storageKey: this.simUI.getSavedEncounterStorageKey(),
 			getData: (encounter: Encounter) => SavedEncounter.create({ encounter: encounter.toProto() }),
 			setData: (eventID: EventID, encounter: Encounter, newEncounter: SavedEncounter) => encounter.fromProto(eventID, newEncounter.encounter!),
@@ -305,10 +305,10 @@ export class SettingsTab extends SimTab {
 		});
 
 		const savedSettingsManager = new SavedDataManager<IndividualSimUI<any>, SavedSettings>(this.rightPanel, this.simUI, {
-			label: i18n.t('settings.saved_settings.settings'),
-			header: { title: i18n.t('settings.saved_settings.title') },
-			nameLabel: i18n.t('settings.saved_settings.settings_name'),
-			saveButtonText: i18n.t('settings.saved_settings.save_settings'),
+			label: i18n.t('settings_tab.saved_settings.settings'),
+			header: { title: i18n.t('settings_tab.saved_settings.title') },
+			nameLabel: i18n.t('settings_tab.saved_settings.settings_name'),
+			saveButtonText: i18n.t('settings_tab.saved_settings.save_settings'),
 			storageKey: this.simUI.getSavedSettingsStorageKey(),
 			getData: () => {
 				return this.getCurrentSavedSettings();

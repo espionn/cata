@@ -12,8 +12,8 @@ import i18n from '../../i18n/config.js';
 export const InThunderstormRange = InputHelpers.makeSpecOptionsBooleanInput<Spec.SpecElementalShaman>({
 	fieldName: 'thunderstormRange',
 	// id: ActionId.fromSpellId(59159),
-	label: i18n.t('rotation.options.shaman.elemental.thunderstorm_in_range.label'),
-	labelTooltip: i18n.t('rotation.options.shaman.elemental.thunderstorm_in_range.tooltip'),
+	label: i18n.t('rotation_tab.options.shaman.elemental.thunderstorm_in_range.label'),
+	labelTooltip: i18n.t('rotation_tab.options.shaman.elemental.thunderstorm_in_range.tooltip'),
 	getValue: (player: Player<Spec.SpecElementalShaman>) => player.getSpecOptions().thunderstormRange == ElementalShaman_Options_ThunderstormRange.TSInRange,
 	setValue: (eventID: EventID, player: Player<Spec.SpecElementalShaman>, newValue: boolean) => {
 		const newOptions = player.getSpecOptions();

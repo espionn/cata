@@ -65,7 +65,7 @@ export const translatePseudoStat = (pseudoStat: PseudoStat): string => {
 export const translateTargetInputLabel = (label: string): string => {
 	try {
 		const key = getTargetInputI18nKey(label);
-		const translated = i18n.t(`settings.encounter.target_inputs.${key}.label`);
+		const translated = i18n.t(`settings_tab.encounter.target_inputs.${key}.label`);
 		if (translated === `settings.encounter.target_inputs.${key}.label`) {
 			return label;
 		}
@@ -78,7 +78,7 @@ export const translateTargetInputLabel = (label: string): string => {
 export const translateTargetInputTooltip = (label: string, tooltip: string): string => {
 	try {
 		const key = getTargetInputI18nKey(label);
-		const translated = i18n.t(`settings.encounter.target_inputs.${key}.tooltip`);
+		const translated = i18n.t(`settings_tab.encounter.target_inputs.${key}.tooltip`);
 		if (translated === `settings.encounter.target_inputs.${key}.tooltip`) {
 			return tooltip;
 		}
@@ -117,8 +117,8 @@ export const translateMobType = (mobType: MobType): string => {
 export const translateRace = (race: Race): string => {
 	try {
 		const key = getRaceI18nKey(race);
-		const translated = i18n.t(`common.races.${key}`);
-		if (translated === `common.races.${key}`) {
+		const translated = i18n.t(`races.${key}`, { ns: 'character' });
+		if (translated === `races.${key}`) {
 			return Race[race];
 		}
 		return translated;
@@ -130,8 +130,8 @@ export const translateRace = (race: Race): string => {
 export const translateProfession = (profession: Profession): string => {
 	try {
 		const key = getProfessionI18nKey(profession);
-		const translated = i18n.t(`common.professions.${key}`);
-		if (translated === `common.professions.${key}`) {
+		const translated = i18n.t(`professions.${key}`, { ns: 'character' });
+		if (translated === `professions.${key}`) {
 			return Profession[profession];
 		}
 		return translated;
@@ -248,8 +248,8 @@ export const translateClass = (className: string): string => {
 	try {
 		const normalizedClassName = className.toLowerCase().replace(/_/g, '');
 		const i18nKey = normalizedClassName === 'deathknight' ? 'death_knight' : normalizedClassName;
-		const translated = i18n.t(`common.classes.${i18nKey}`);
-		if (translated === `common.classes.${i18nKey}`) {
+		const translated = i18n.t(`classes.${i18nKey}`, { ns: 'character' });
+		if (translated === `classes.${i18nKey}`) {
 			return className;
 		}
 		return translated;
@@ -263,8 +263,8 @@ export const translateSpec = (className: string, specName: string): string => {
 		const normalizedClassName = className.toLowerCase().replace(/_/g, '');
 		const classKey = normalizedClassName === 'deathknight' ? 'death_knight' : normalizedClassName;
 		const specKey = specName.toLowerCase();
-		const translated = i18n.t(`common.specs.${classKey}.${specKey}`);
-		if (translated === `common.specs.${classKey}.${specKey}`) {
+		const translated = i18n.t(`specs.${classKey}.${specKey}`, { ns: 'character' });
+		if (translated === `specs.${classKey}.${specKey}`) {
 			return specName;
 		}
 		return translated;
@@ -349,8 +349,9 @@ export const updateLanguageDropdown = (): void => {
 export const updateDataI18nElements = (): void => {
 	document.querySelectorAll('[data-i18n]').forEach(element => {
 		const key = element.getAttribute('data-i18n');
+		const ns = element.getAttribute('data-i18n-ns');
 		if (key) {
-			element.textContent = i18n.t(key);
+			element.textContent = i18n.t(key, { ns: ns || undefined });
 		}
 	});
 };
@@ -363,11 +364,11 @@ export const updateSimPageMetadata = (): void => {
 
 	const translationData = {
 		class: translateClass(className),
-		spec: translateSpec(className, specName)
+		spec: translateSpec(className, specName),
 	};
 
-	document.querySelector('title')!.textContent = i18n.t('sim.title', translationData)
-	document.querySelector('meta[name="description"]')!.textContent = i18n.t('sim.description', translationData)
+	document.querySelector('title')!.textContent = i18n.t('sim.title', translationData);
+	document.querySelector('meta[name="description"]')!.textContent = i18n.t('sim.description', translationData);
 };
 
 export const updateSimLinks = (): void => {
@@ -428,7 +429,7 @@ export const translateResultMetricTooltip = (metricName: string): string => {
 
 export const translateSlotName = (slot: ItemSlot): string => {
 	const key = getSlotNameI18nKey(slot);
-	return i18n.t(`gear.slots.${key}`);
+	return i18n.t(`gear_tab.slots.${key}`);
 };
 
 /**

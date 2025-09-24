@@ -61,28 +61,28 @@ export class TypedResourceMetricsTable extends MetricsTable<ResourceMetrics> {
 				};
 			}),
 			{
-				name: i18n.t('results.details.columns.casts'),
+				name: i18n.t('results_tab.details.columns.casts'),
 				getValue: (metric: ResourceMetrics) => metric.events,
 				getDisplayString: (metric: ResourceMetrics) => metric.events.toFixed(1),
 			},
 			{
-				name: i18n.t('results.details.columns.gain'),
+				name: i18n.t('results_tab.details.columns.gain'),
 				sort: ColumnSortType.Descending,
 				getValue: (metric: ResourceMetrics) => metric.gain,
 				getDisplayString: (metric: ResourceMetrics) => metric.gain.toFixed(1),
 			},
 			{
-				name: i18n.t('results.details.columns.gain_per_second'),
+				name: i18n.t('results_tab.details.columns.gain_per_second'),
 				getValue: (metric: ResourceMetrics) => metric.gainPerSecond,
 				getDisplayString: (metric: ResourceMetrics) => metric.gainPerSecond.toFixed(1),
 			},
 			{
-				name: i18n.t('results.details.columns.avg_gain'),
+				name: i18n.t('results_tab.details.columns.avg_gain'),
 				getValue: (metric: ResourceMetrics) => metric.avgGain,
 				getDisplayString: (metric: ResourceMetrics) => metric.avgGain.toFixed(1),
 			},
 			{
-				name: i18n.t('results.details.columns.wasted_gain'),
+				name: i18n.t('results_tab.details.columns.wasted_gain'),
 				getValue: (metric: ResourceMetrics) => metric.wastedGain,
 				getDisplayString: (metric: ResourceMetrics) => metric.wastedGain.toFixed(1),
 			},

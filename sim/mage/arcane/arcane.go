@@ -63,6 +63,7 @@ func (arcane *ArcaneMage) Initialize() {
 
 	arcane.registerPassives()
 	arcane.registerSpells()
+	arcane.registerHotfixes()
 }
 
 func (arcane *ArcaneMage) registerPassives() {

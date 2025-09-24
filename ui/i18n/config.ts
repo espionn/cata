@@ -12,7 +12,7 @@ i18n.init({
 		escapeValue: false,
 	},
 	resources: Object.keys(resources).reduce<Resource>((acc, lang) => {
-		acc[lang] = { translation: resources[lang] };
+		acc[lang] = resources[lang];
 		return acc;
 	}, {}),
 });

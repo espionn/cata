@@ -10,7 +10,7 @@ import i18n from '../i18n/config.js';
 export const StanceSnapshot = <SpecType extends Spec.SpecArmsWarrior | Spec.SpecFuryWarrior>() =>
 	InputHelpers.makeSpecOptionsBooleanInput<SpecType>({
 		fieldName: 'stanceSnapshot',
-		label: i18n.t('settings.other.stance_snapshot.label'),
-		labelTooltip: i18n.t('settings.other.stance_snapshot.tooltip'),
+		label: i18n.t('settings_tab.other.stance_snapshot.label'),
+		labelTooltip: i18n.t('settings_tab.other.stance_snapshot.tooltip'),
 	});
 

@@ -25,7 +25,7 @@ export const StatsBuff = InputHelpers.makeMultiIconInput(
 		makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(90363), fieldName: 'embraceOfTheShaleSpider' }),
 		makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(115921), fieldName: 'legacyOfTheEmperor' }),
 	],
-	i18n.t('settings.raid_buffs.stats'),
+	i18n.t('settings_tab.raid_buffs.stats'),
 );
 
 export const AttackPowerBuff = InputHelpers.makeMultiIconInput(
@@ -34,7 +34,7 @@ export const AttackPowerBuff = InputHelpers.makeMultiIconInput(
 		makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(57330), fieldName: 'hornOfWinter' }),
 		makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(6673), fieldName: 'battleShout' }),
 	],
-	i18n.t('settings.raid_buffs.attack_power'),
+	i18n.t('settings_tab.raid_buffs.attack_power'),
 );
 
 export const AttackSpeedBuff = InputHelpers.makeMultiIconInput(
@@ -45,7 +45,7 @@ export const AttackSpeedBuff = InputHelpers.makeMultiIconInput(
 		makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(30809), fieldName: 'unleashedRage' }),
 		makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(128432), fieldName: 'cacklingHowl' }),
 	],
-	i18n.t('settings.raid_buffs.attack_speed'),
+	i18n.t('settings_tab.raid_buffs.attack_speed'),
 );
 
 export const SpellPowerBuff = InputHelpers.makeMultiIconInput(
@@ -55,7 +55,7 @@ export const SpellPowerBuff = InputHelpers.makeMultiIconInput(
 		makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(77747), fieldName: 'burningWrath' }),
 		makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(109773), fieldName: 'darkIntent' }),
 	],
-	i18n.t('settings.raid_buffs.spell_power'),
+	i18n.t('settings_tab.raid_buffs.spell_power'),
 );
 
 export const SpellHasteBuff = InputHelpers.makeMultiIconInput(
@@ -64,7 +64,7 @@ export const SpellHasteBuff = InputHelpers.makeMultiIconInput(
 		makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(49868), fieldName: 'mindQuickening' }),
 		makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(51470), fieldName: 'elementalOath' }),
 	],
-	i18n.t('settings.raid_buffs.spell_haste'),
+	i18n.t('settings_tab.raid_buffs.spell_haste'),
 );
 
 export const CritBuff = InputHelpers.makeMultiIconInput(
@@ -76,7 +76,7 @@ export const CritBuff = InputHelpers.makeMultiIconInput(
 		makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(1459), fieldName: 'arcaneBrilliance' }),
 		makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(126309), fieldName: 'stillWater' }),
 	],
-	i18n.t('settings.raid_buffs.crit_percent'),
+	i18n.t('settings_tab.raid_buffs.crit_percent'),
 );
 
 export const MasteryBuff = InputHelpers.makeMultiIconInput(
@@ -86,7 +86,7 @@ export const MasteryBuff = InputHelpers.makeMultiIconInput(
 		makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(128997), fieldName: 'spiritBeastBlessing' }),
 		makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(116956), fieldName: 'graceOfAir' }),
 	],
-	i18n.t('settings.raid_buffs.mastery'),
+	i18n.t('settings_tab.raid_buffs.mastery'),
 );
 
 export const StaminaBuff = InputHelpers.makeMultiIconInput(
@@ -96,42 +96,42 @@ export const StaminaBuff = InputHelpers.makeMultiIconInput(
 		makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(21562), fieldName: 'powerWordFortitude' }),
 		makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(90364), fieldName: 'qirajiFortitude' }),
 	],
-	i18n.t('settings.raid_buffs.stamina'),
+	i18n.t('settings_tab.raid_buffs.stamina'),
 );
 
 // Misc Buffs
 export const ManaTideTotem = makeMultistateRaidBuffInput({ actionId: ActionId.fromSpellId(16190), numStates: 5, fieldName: 'manaTideTotemCount' });
 
 // External Damage Cooldowns
-export const MajorHasteBuff = makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(2825), fieldName: 'bloodlust', label: i18n.t('settings.external_damage_cooldowns.bloodlust') });
+export const MajorHasteBuff = makeBooleanRaidBuffInput({ actionId: ActionId.fromSpellId(2825), fieldName: 'bloodlust', label: i18n.t('settings_tab.external_damage_cooldowns.bloodlust') });
 export const Skullbanner = makeMultistateRaidBuffInput({
 	actionId: ActionId.fromSpellId(114207),
 	numStates: 11,
 	fieldName: 'skullBannerCount',
-	label: i18n.t('settings.external_damage_cooldowns.skull_banner'),
+	label: i18n.t('settings_tab.external_damage_cooldowns.skull_banner'),
 });
 export const StormLashTotem = makeMultistateRaidBuffInput({
 	actionId: ActionId.fromSpellId(120668),
 	numStates: 11,
 	fieldName: 'stormlashTotemCount',
-	label: i18n.t('settings.external_damage_cooldowns.stormlash_totem'),
+	label: i18n.t('settings_tab.external_damage_cooldowns.stormlash_totem'),
 });
 export const TricksOfTheTrade = makeBooleanIndividualBuffInput({
 	actionId: ActionId.fromSpellId(57933),
 	fieldName: 'tricksOfTheTrade',
-	label: i18n.t('settings.external_damage_cooldowns.tricks_of_the_trade'),
+	label: i18n.t('settings_tab.external_damage_cooldowns.tricks_of_the_trade'),
 });
 export const UnholyFrenzy = makeMultistateIndividualBuffInput({
 	actionId: ActionId.fromSpellId(49016),
 	numStates: 11,
 	fieldName: 'unholyFrenzyCount',
-	label: i18n.t('settings.external_damage_cooldowns.unholy_frenzy'),
+	label: i18n.t('settings_tab.external_damage_cooldowns.unholy_frenzy'),
 });
 export const ShatteringThrow = makeMultistateIndividualBuffInput({
 	actionId: ActionId.fromSpellId(1249459),
 	numStates: 11,
 	fieldName: 'shatteringThrowCount',
-	label: i18n.t('settings.external_damage_cooldowns.shattering_throw'),
+	label: i18n.t('settings_tab.external_damage_cooldowns.shattering_throw'),
 });
 
 // External Defensive Cooldowns
@@ -140,34 +140,34 @@ export const VigilanceCount = makeMultistateIndividualBuffInput({
 	actionId: ActionId.fromSpellId(114030),
 	numStates: 11,
 	fieldName: 'vigilanceCount',
-	label: i18n.t('settings.external_defensive_cooldowns.vigilance'),
+	label: i18n.t('settings_tab.external_defensive_cooldowns.vigilance'),
 });
 export const DevotionAuraCount = makeMultistateIndividualBuffInput({
 	actionId: ActionId.fromSpellId(31821),
 	numStates: 11,
 	fieldName: 'devotionAuraCount',
-	label: i18n.t('settings.external_defensive_cooldowns.devotion_aura'),
+	label: i18n.t('settings_tab.external_defensive_cooldowns.devotion_aura'),
 });
 export const PainSuppressionCount = makeMultistateIndividualBuffInput({
 	actionId: ActionId.fromSpellId(33206),
 	numStates: 11,
 	fieldName: 'painSuppressionCount',
-	label: i18n.t('settings.external_defensive_cooldowns.pain_suppression'),
+	label: i18n.t('settings_tab.external_defensive_cooldowns.pain_suppression'),
 });
 // export const GuardianSpirits = makeMultistateIndividualBuffInput({ actionId: ActionId.fromSpellId(47788), numStates: 11, fieldName: 'guardianSpirits' });
 export const RallyingCryCount = makeMultistateIndividualBuffInput({
 	actionId: ActionId.fromSpellId(97462),
 	numStates: 11,
 	fieldName: 'rallyingCryCount',
-	label: i18n.t('settings.external_defensive_cooldowns.rallying_cry'),
+	label: i18n.t('settings_tab.external_defensive_cooldowns.rallying_cry'),
 });
 ///////////////////////////////////////////////////////////////////////////
 //                                 DEBUFFS
 ///////////////////////////////////////////////////////////////////////////
 
-export const MajorArmorDebuff = makeBooleanDebuffInput({ actionId: ActionId.fromSpellId(113746), fieldName: 'weakenedArmor', label: i18n.t('settings.debuffs.armor_reduction') });
+export const MajorArmorDebuff = makeBooleanDebuffInput({ actionId: ActionId.fromSpellId(113746), fieldName: 'weakenedArmor', label: i18n.t('settings_tab.debuffs.armor_reduction') });
 
-export const DamageReduction = makeBooleanDebuffInput({ actionId: ActionId.fromSpellId(115798), fieldName: 'weakenedBlows', label: i18n.t('settings.debuffs.phys_dmg_reduction') });
+export const DamageReduction = makeBooleanDebuffInput({ actionId: ActionId.fromSpellId(115798), fieldName: 'weakenedBlows', label: i18n.t('settings_tab.debuffs.phys_dmg_reduction') });
 
 export const CastSpeedDebuff = InputHelpers.makeMultiIconInput(
 	[
@@ -178,13 +178,13 @@ export const CastSpeedDebuff = InputHelpers.makeMultiIconInput(
 		makeBooleanDebuffInput({ actionId: ActionId.fromSpellId(31589), fieldName: 'slow' }),
 		makeBooleanDebuffInput({ actionId: ActionId.fromSpellId(109466), fieldName: 'curseOfEnfeeblement' }),
 	],
-	i18n.t('settings.debuffs.cast_speed'),
+	i18n.t('settings_tab.debuffs.cast_speed'),
 );
 
 export const PhysicalDamageDebuff = makeBooleanDebuffInput({
 	actionId: ActionId.fromSpellId(81326),
 	fieldName: 'physicalVulnerability',
-	label: i18n.t('settings.debuffs.phys_dmg'),
+	label: i18n.t('settings_tab.debuffs.phys_dmg'),
 });
 
 export const SpellDamageDebuff = InputHelpers.makeMultiIconInput(
@@ -194,7 +194,7 @@ export const SpellDamageDebuff = InputHelpers.makeMultiIconInput(
 		makeBooleanDebuffInput({ actionId: ActionId.fromSpellId(58410), fieldName: 'masterPoisoner' }),
 		makeBooleanDebuffInput({ actionId: ActionId.fromSpellId(34889), fieldName: 'fireBreath' }),
 	],
-	i18n.t('settings.debuffs.spell_dmg'),
+	i18n.t('settings_tab.debuffs.spell_dmg'),
 );
 
 ///////////////////////////////////////////////////////////////////////////
