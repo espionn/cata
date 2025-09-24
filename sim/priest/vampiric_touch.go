@@ -3,6 +3,7 @@ package priest
 import (
 	"time"
 
+	"github.com/wowsims/mop/sim/common/mop"
 	"github.com/wowsims/mop/sim/core"
 )
 
@@ -57,6 +58,16 @@ func (priest *Priest) registerVampiricTouchSpell() {
 			if result.Landed() {
 				spell.Dot(target).Apply(sim)
 				spell.DealOutcome(sim, result)
+
+				// Failsave for Unerring Vision custom code for shadow
+				unerringAura := priest.GetAuraByID(core.ActionID{SpellID: mop.UnerringVisionBuffId})
+				if unerringAura != nil && unerringAura.IsActive() {
+					priest.UnerringFaded[target.Index].VT = spell.Dot(target).ExpiresAt()
+				} else {
+					// make sure we reset here to not have edge cases where we refresh the dot before
+					// it's expiration and did not update the expiration time, so it will be decreased by 100%
+					priest.UnerringFaded[target.Index].VT = 1<<63 - 1
+				}
 			}
 		},
 		ExpectedTickDamage: func(sim *core.Simulation, target *core.Unit, spell *core.Spell, useSnapshot bool) *core.SpellResult {
