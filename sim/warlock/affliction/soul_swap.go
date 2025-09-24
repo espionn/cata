@@ -35,7 +35,7 @@ func (affliction *AfflictionWarlock) registerSoulSwap() {
 		},
 
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
-			return inhaleBuff.IsActive() && target != inhaleTarget
+			return inhaleBuff.IsActive() && target != inhaleTarget && !affliction.SoulBurnAura.IsActive()
 		},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
@@ -62,7 +62,7 @@ func (affliction *AfflictionWarlock) registerSoulSwap() {
 
 	// Inhale
 	affliction.RegisterSpell(core.SpellConfig{
-		ActionID:    core.ActionID{SpellID: 86121},
+		ActionID:    core.ActionID{SpellID: 86121}.WithTag(1),
 		Flags:       core.SpellFlagAPL,
 		ProcMask:    core.ProcMaskEmpty,
 		SpellSchool: core.SpellSchoolShadow,
@@ -78,18 +78,10 @@ func (affliction *AfflictionWarlock) registerSoulSwap() {
 		},
 
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
-			return (anyDoTActive(dotRefs, target) || affliction.SoulBurnAura.IsActive()) && !inhaleBuff.IsActive()
+			return anyDoTActive(dotRefs, target) && !inhaleBuff.IsActive() && !affliction.SoulBurnAura.IsActive()
 		},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			if affliction.SoulBurnAura.IsActive() {
-				affliction.Agony.Proc(sim, target)
-				affliction.Corruption.Proc(sim, target)
-				affliction.UnstableAffliction.Proc(sim, target)
-				affliction.SoulBurnAura.Deactivate(sim)
-				return
-			}
-
 			inhaleTarget = target
 			debuffState = map[int32]core.DotState{}
 
@@ -102,6 +94,54 @@ func (affliction *AfflictionWarlock) registerSoulSwap() {
 			}
 
 			inhaleBuff.Activate(sim)
+		},
+
+		ExpectedTickDamage: func(sim *core.Simulation, target *core.Unit, spell *core.Spell, useSnapshot bool) *core.SpellResult {
+			expectedDamage.Damage = 0
+			if useSnapshot {
+				for _, spellRef := range expectedDotRefs {
+					dot := (*spellRef).Dot(target)
+					expectedDamage.Damage += dot.Spell.ExpectedTickDamageFromCurrentSnapshot(sim, target)
+				}
+
+				return expectedDamage
+			}
+
+			for _, spellRef := range expectedDotRefs {
+				dot := (*spellRef).Dot(target)
+				expectedDamage.Damage += dot.Spell.ExpectedTickDamage(sim, target)
+			}
+
+			return expectedDamage
+		},
+	})
+
+	// Soulswap: Soulburn
+	affliction.RegisterSpell(core.SpellConfig{
+		ActionID:    core.ActionID{SpellID: 86121}.WithTag(2),
+		Flags:       core.SpellFlagAPL,
+		ProcMask:    core.ProcMaskEmpty,
+		SpellSchool: core.SpellSchoolShadow,
+
+		ThreatMultiplier: 1,
+		CritMultiplier:   affliction.DefaultCritMultiplier(),
+		DamageMultiplier: 1,
+
+		Cast: core.CastConfig{
+			DefaultCast: core.Cast{
+				GCD: core.GCDDefault,
+			},
+		},
+
+		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
+			return affliction.SoulBurnAura.IsActive()
+		},
+
+		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+			affliction.Agony.Proc(sim, target)
+			affliction.Corruption.Proc(sim, target)
+			affliction.UnstableAffliction.Proc(sim, target)
+			affliction.SoulBurnAura.Deactivate(sim)
 		},
 
 		ExpectedTickDamage: func(sim *core.Simulation, target *core.Unit, spell *core.Spell, useSnapshot bool) *core.SpellResult {
