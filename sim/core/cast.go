@@ -188,6 +188,10 @@ func (spell *Spell) makeCastFunc(config CastConfig) CastSuccessFunc {
 						spell.Unit.Log(sim, "Completed cast %s", spell.ActionID)
 					}
 
+					if !spell.CanCompleteCast(sim, target, true) {
+						return
+					}
+
 					if spell.Cost != nil {
 						spell.Cost.SpendCost(sim, spell)
 					}
