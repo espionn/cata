@@ -45,9 +45,9 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecUnholyDeathKnight, {
 	),
 	defaults: {
 		// Default equipped gear.
-		gear: Presets.P1_BIS_GEAR_PRESET.gear,
+		gear: Presets.P2_BIS_GEAR_PRESET.gear,
 		// Default EP weights for sorting gear in the gear picker.
-		epWeights: Presets.P1_UNHOLY_EP_PRESET.epWeights,
+		epWeights: Presets.P1_P2_UNHOLY_EP_PRESET.epWeights,
 		// Default stat caps for the Reforge Optimizer
 		statCaps: (() => {
 			const hitCap = new Stats().withPseudoStat(PseudoStat.PseudoStatPhysicalHitPercent, 7.5);
@@ -103,14 +103,14 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecUnholyDeathKnight, {
 	},
 
 	presets: {
-		epWeights: [Presets.P1_UNHOLY_EP_PRESET],
+		epWeights: [Presets.P1_P2_UNHOLY_EP_PRESET],
 		// Preset talents that the user can quickly select.
 		talents: [Presets.DefaultTalents],
 		// Preset rotations that the user can quickly select.
 		rotations: [Presets.DEFAULT_ROTATION_PRESET],
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.PREBIS_GEAR_PRESET, Presets.P1_BIS_GEAR_PRESET],
-		builds: [Presets.PREBIS_PRESET, Presets.P1_PRESET],
+		gear: [Presets.PREBIS_GEAR_PRESET, Presets.P1_BIS_GEAR_PRESET, Presets.P2_BIS_GEAR_PRESET],
+		builds: [Presets.PREBIS_PRESET, Presets.P1_PRESET, Presets.P2_PRESET],
 	},
 
 	raidSimPresets: [
@@ -127,10 +127,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecUnholyDeathKnight, {
 			defaultGear: {
 				[Faction.Unknown]: {},
 				[Faction.Alliance]: {
-					1: Presets.P1_BIS_GEAR_PRESET.gear,
+					1: Presets.P2_BIS_GEAR_PRESET.gear,
 				},
 				[Faction.Horde]: {
-					1: Presets.P1_BIS_GEAR_PRESET.gear,
+					1: Presets.P2_BIS_GEAR_PRESET.gear,
 				},
 			},
 			otherDefaults: Presets.OtherDefaults,
@@ -144,7 +144,7 @@ export class UnholyDeathKnightSimUI extends IndividualSimUI<Spec.SpecUnholyDeath
 		player.sim.waitForInit().then(() => {
 			new ReforgeOptimizer(this, {
 				getEPDefaults(_: Player<Spec.SpecUnholyDeathKnight>) {
-					return Presets.P1_UNHOLY_EP_PRESET.epWeights;
+					return Presets.P1_P2_UNHOLY_EP_PRESET.epWeights;
 				},
 			});
 		});

@@ -2,6 +2,7 @@ package core
 
 import (
 	"fmt"
+	"math"
 	"time"
 
 	"github.com/wowsims/mop/sim/core/proto"
@@ -270,7 +271,9 @@ func (value *APLValueDotPercentIncrease) GetFloat(sim *Simulation) float64 {
 	if expectedDamage == 0 {
 		return 1
 	}
-	return value.spell.ExpectedTickDamage(sim, value.target)/expectedDamage - 1
+
+	// Rounding this to effectively 3 decimal places as a percentage to avoid floating point errors
+	return math.Round((value.spell.ExpectedTickDamage(sim, value.target)/expectedDamage)*100000)/100000 - 1
 }
 
 type APLValueDotCritPercentIncrease struct {
