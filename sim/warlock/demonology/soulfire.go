@@ -58,6 +58,14 @@ func (demonology *DemonologyWarlock) registerSoulfire() {
 		}
 	}
 
+	getSoulFireCost := func() int32 {
+		baseCost := core.TernaryInt32(demonology.T15_2pc.IsActive(), 112, 160)
+		if demonology.MoltenCore.IsActive() {
+			baseCost /= 2
+		}
+		return baseCost
+	}
+
 	demonology.RegisterSpell(getSoulFireConfig(&core.SpellConfig{
 		ActionID: core.ActionID{SpellID: 6353},
 		ManaCost: core.ManaCostOptions{
@@ -74,10 +82,10 @@ func (demonology *DemonologyWarlock) registerSoulfire() {
 	demonology.RegisterSpell(getSoulFireConfig(&core.SpellConfig{
 		ActionID: core.ActionID{SpellID: 104027},
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
-			return demonology.IsInMeta() && demonology.DemonicFury.CanSpend(core.TernaryInt32(demonology.T15_2pc.IsActive(), 112, 160))
+			return demonology.IsInMeta() && demonology.DemonicFury.CanSpend(getSoulFireCost())
 		},
 	}, func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-		demonology.DemonicFury.Spend(sim, core.TernaryInt32(demonology.T15_2pc.IsActive(), 112, 160), spell.ActionID)
+		demonology.DemonicFury.Spend(sim, getSoulFireCost(), spell.ActionID)
 	}))
 
 }

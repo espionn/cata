@@ -30,9 +30,10 @@ func (demonology *DemonologyWarlock) registerHandOfGuldan() {
 				Label:     "Shadowflame",
 				MaxStacks: 2,
 			},
-			NumberOfTicks:    6,
-			TickLength:       time.Second,
-			BonusCoefficient: shadowFlameCoeff,
+			NumberOfTicks:       6,
+			TickLength:          time.Second,
+			AffectedByCastSpeed: true,
+			BonusCoefficient:    shadowFlameCoeff,
 			OnSnapshot: func(sim *core.Simulation, target *core.Unit, dot *core.Dot, isRollover bool) {
 				dot.Snapshot(target, 0)
 				stacks := math.Min(float64(dot.Aura.GetStacks())+1, 2)
