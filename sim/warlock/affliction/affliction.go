@@ -48,7 +48,8 @@ type AfflictionWarlock struct {
 	SoulBurnAura     *core.Aura
 	HauntDebuffAuras core.AuraArray
 
-	LastCorruption *core.Dot // Tracks the last corruption we've applied
+	LastCorruption   *core.Dot // Tracks the last corruption we've applied
+	LastInhaleTarget *core.Unit
 
 	DrainSoulMaleficEffectMultiplier    float64
 	MaleficGraspMaleficEffectMultiplier float64

@@ -7,7 +7,6 @@ import (
 )
 
 func (affliction *AfflictionWarlock) registerSoulSwap() {
-	var inhaleTarget *core.Unit
 	var debuffState map[int32]core.DotState
 	dotRefs := []**core.Spell{&affliction.Corruption, &affliction.Agony, &affliction.Seed, &affliction.UnstableAffliction}
 
@@ -35,7 +34,7 @@ func (affliction *AfflictionWarlock) registerSoulSwap() {
 		},
 
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
-			return inhaleBuff.IsActive() && target != inhaleTarget && !affliction.SoulBurnAura.IsActive()
+			return inhaleBuff.IsActive() && target != affliction.LastInhaleTarget && !affliction.SoulBurnAura.IsActive()
 		},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
@@ -82,7 +81,7 @@ func (affliction *AfflictionWarlock) registerSoulSwap() {
 		},
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			inhaleTarget = target
+			affliction.LastInhaleTarget = target
 			debuffState = map[int32]core.DotState{}
 
 			// store states
