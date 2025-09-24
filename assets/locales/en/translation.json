@@ -1055,6 +1055,10 @@
 				"guardian_hotw_dps_rotation": {
 					"label": "HotW DPS Rotation",
 					"tooltip": "Executes optimized HotW DPS rotation using hardcoded algorithm."
+				},
+				"warlock_next_exhale_target": {
+					"label": "Target Next Exhale Target",
+					"tooltip": "Targets the next valid exhale target. If the current target is not the inhale target or no inhale has been cast, the target will not change."
 				}
 			},
 			"values": {

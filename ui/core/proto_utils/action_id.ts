@@ -910,6 +910,13 @@ export class ActionId {
 					name += ' (Improved)';
 				}
 				break;
+			case 'Soul Swap':
+				if (tag == 1) {
+					name += ": Inhale"
+				} else if (tag == 2) {
+					name += ": Soulburn"
+				}
+				break;
 			default:
 				if (tag) {
 					name += ' (??)';

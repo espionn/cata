@@ -32,6 +32,7 @@ import {
 	APLActionWait,
 	APLActionWaitUntil,
 	APLValue,
+	APLActionWarlockNextExhaleTarget,
 } from '../../proto/apl.js';
 import { Spec } from '../../proto/common.js';
 import { FeralDruid_Rotation_AplType } from '../../proto/druid.js';
@@ -757,5 +758,15 @@ const actionKindFactories: { [f in NonNullable<APLActionKind>]: ActionKindConfig
 				strategy: HotwStrategy.Caster,
 			}),
 		fields: [AplHelpers.hotwStrategyFieldConfig('strategy')],
+	}),
+
+	['warlockNextExhaleTarget']: inputBuilder({
+		label: i18n.t('rotation_tab.apl.actions.warlock_next_exhale_target.label'),
+		submenu: ['warlock'],
+		shortDescription: i18n.t('rotation_tab.apl.actions.warlock_next_exhale_target.tooltip'),
+		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecAfflictionWarlock,
+		newValue: () =>
+			APLActionWarlockNextExhaleTarget.create({}),
+		fields: [],
 	}),
 };

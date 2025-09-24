@@ -1055,6 +1055,10 @@
 				"guardian_hotw_dps_rotation": {
 					"label": "Rotation DPS HotW",
 					"tooltip": "Exécute la rotation DPS HotW optimisée en utilisant un algorithme codé en dur."
+				},
+				"warlock_next_exhale_target": {
+					"label": "Cibler la prochaine cible d'Expiration",
+        			"tooltip": "Cible la prochaine cible valide d'Expiration. Si la cible actuelle n'est pas la cible de l'échange d'âme ou si l'échange d'âme n'a pas été lancé, la cible ne changera pas."
 				}
 			},
 			"values": {

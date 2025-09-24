@@ -4378,6 +4378,22 @@
                     "label",
                     "tooltip"
                   ]
+                },
+				"warlock_next_exhale_target": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "tooltip": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "tooltip"
+                  ]
                 }
               },
               "additionalProperties": false,
