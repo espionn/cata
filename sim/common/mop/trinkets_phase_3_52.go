@@ -10,6 +10,8 @@ import (
 	"github.com/wowsims/mop/sim/core/stats"
 )
 
+const UnerringVisionBuffId = 138963
+
 func init() {
 	// Renataki's Soul Charm
 	// Your attacks  have a chance to grant Blades of Renataki, granting 1592 Agility every 1 sec for 10 sec.  (Approximately 1.21 procs per minute)
@@ -521,7 +523,7 @@ func init() {
 
 			statBuffAura := character.NewTemporaryStatsAura(
 				fmt.Sprintf("%s %s", label, versionLabel),
-				core.ActionID{SpellID: 138963},
+				core.ActionID{SpellID: UnerringVisionBuffId},
 				stats.Stats{stats.PhysicalCritPercent: 100, stats.SpellCritPercent: 100},
 				time.Second*4,
 			)
