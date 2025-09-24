@@ -505,6 +505,11 @@ export class ActionId {
 					name += ' (Pre-Pull)';
 				}
 				break;
+			case 'Soul Fire':
+				if (this.spellId == 104027) {
+					name += ' (Demon form)';
+				}
+				break;
 			case 'Shadowflame':
 			case 'Moonfire':
 			case 'Sunfire':
