@@ -586,6 +586,18 @@
 				"spiritual_grasp_frequency": {
 					"label": "Spiritual Grasp frequency",
 					"tooltip": "Average time (in seconds) between Spiritual Grasp hits, following an exponential distribution"
+				},
+				"movement_interval": {
+					"label": "Movement Interval",
+					"tooltip": "How often the player will move in seconds"
+				},
+				"reaction_time": {
+					"label": "Reaction Time",
+					"tooltip": "How long the player can wait for casts to finish before moving in seconds"
+				},
+				"yards": {
+					"label": "Yards",
+					"tooltip": "How many yards the player moves"
 				}
 			},
 			"duration": {

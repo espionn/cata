@@ -586,6 +586,18 @@
 				"spiritual_grasp_frequency": {
 					"label": "Fréquence de prise spirituelle",
 					"tooltip": "Temps moyen (en secondes) entre les coups de Saisie Spirituelle, suivant une distribution exponentielle"
+				},
+				"movement_interval": {
+					"label": "Intervalle de Mouvement",
+					"tooltip": "À quelle fréquence le joueur se déplacera en secondes"
+				},
+				"reaction_time": {
+					"label": "Temps de Réaction",
+					"tooltip": "Combien de temps le joueur peut attendre que les sorts se terminent avant de se déplacer en secondes"
+				},
+				"yards": {
+					"label": "Yards",
+					"tooltip": "Combien de yards le joueur se déplace"
 				}
 			},
 			"duration": {
