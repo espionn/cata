@@ -46,6 +46,8 @@ type DemonologyWarlock struct {
 	HandOfGuldan  *core.Spell
 	ChaosWave     *core.Spell
 
+	MoltenCore *core.Aura
+
 	Felguard               *warlock.WarlockPet
 	WildImps               []*WildImpPet
 	HandOfGuldanImpactTime time.Duration
