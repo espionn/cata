@@ -14,6 +14,7 @@ func (mage *Mage) registerAlterTimeCD() {
 	actionID := core.ActionID{SpellID: 108978}
 	mageSavedMana := 0.0
 	mageSavedHitPoints := 0.0
+	mageSavedIcicles := []float64{}
 	manaMetrics := mage.NewManaMetrics(actionID.WithTag(1))
 	healthMetrics := mage.NewHealthMetrics(actionID.WithTag(1))
 
@@ -29,6 +30,8 @@ func (mage *Mage) registerAlterTimeCD() {
 		} else {
 			mage.GainHealth(sim, math.Abs(healthDiff), healthMetrics)
 		}
+
+		mage.Icicles = mageSavedIcicles
 
 		for _, aura := range allAuras {
 			state := auraState[aura.Label]
@@ -61,6 +64,7 @@ func (mage *Mage) registerAlterTimeCD() {
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
 			mageSavedMana = mage.CurrentMana()
 			mageSavedHitPoints = mage.CurrentHealth()
+			mageSavedIcicles = mage.Icicles
 			for _, aura := range allAuras {
 				if aura.IsActive() {
 					state := aura.SaveState(sim)

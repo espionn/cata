@@ -323,7 +323,7 @@ export const makePresetBuildFromJSON = (
 			);
 		}
 
-		if (simSettings.player?.rotation && simSettings.player?.rotation.type === APLRotationType.TypeAPL) {
+		if (simSettings.player?.rotation && simSettings.player?.rotation.type !== APLRotationType.TypeAuto) {
 			buildConfig.rotation = makePresetRotationHelper(name, SavedRotation.create({ rotation: simSettings.player.rotation }), options);
 		}
 	}

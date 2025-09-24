@@ -17,22 +17,22 @@ export const PRERAID_PRESET = PresetUtils.makePresetGear('Pre-Raid BiS', Preraid
 import P1Gear from './gear_sets/p1.gear.json';
 export const P1_PRESET = PresetUtils.makePresetGear('P1 BiS', P1Gear);
 import P2Gear from './gear_sets/p2.gear.json';
-export const P2_PRESET = PresetUtils.makePresetGear('P2', P2Gear);
+export const P2_PRESET = PresetUtils.makePresetGear('P2 BiS', P2Gear);
 import P3Gear from './gear_sets/p3.gear.json';
 export const P3_PRESET = PresetUtils.makePresetGear('P3', P3Gear);
 import P4Gear from './gear_sets/p4.gear.json';
 export const P4_PRESET = PresetUtils.makePresetGear('P4', P4Gear);
 import ItemSwapGear from './gear_sets/p1_item_swap.gear.json';
-export const ITEM_SWAP_PRESET = PresetUtils.makePresetItemSwapGear('HotW', ItemSwapGear);
+export const ITEM_SWAP_PRESET = PresetUtils.makePresetItemSwapGear('HotW Caster Weapon Swap', ItemSwapGear);
 
 import DefaultApl from './apls/default.apl.json';
 export const APL_ROTATION_DEFAULT = PresetUtils.makePresetAPLRotation('APL List View', DefaultApl);
+import SingleTargetBuild from './builds/single_target.build.json';
+export const PRESET_BUILD_ST = PresetUtils.makePresetBuildFromJSON("Single-Target Patchwerk", Spec.SpecFeralDruid, SingleTargetBuild);
+import SustainedCleaveBuild from './builds/sustained_cleave.build.json';
+export const PRESET_BUILD_CLEAVE = PresetUtils.makePresetBuildFromJSON("4-Target Cleave", Spec.SpecFeralDruid, SustainedCleaveBuild);
 
 import { Stats } from '../../core/proto_utils/stats';
-//import AoeApl from './apls/aoe.apl.json';
-//export const APL_ROTATION_AOE = PresetUtils.makePresetAPLRotation('APL AoE', AoeApl);
-//import TendonApl from './apls/tendon.apl.json';
-//export const APL_ROTATION_TENDON = PresetUtils.makePresetAPLRotation('Tendon APL', TendonApl);
 
 // Preset options for EP weights
 export const DOC_EP_PRESET = PresetUtils.makePresetEpWeights(
@@ -104,12 +104,25 @@ export const SIMPLE_ROTATION_DEFAULT = PresetUtils.makePresetSimpleRotation('Sin
 // Default talents. Uses the wowhead calculator format, make the talents on
 // https://wowhead.com/mop-classic/talent-calc and copy the numbers in the url.
 export const StandardTalents = {
-	name: 'Default',
+	name: 'DoC',
 	data: SavedTalents.create({
 		talentsString: "100302",
 		glyphs: Glyphs.create({
 			major1: 40923,
 			major2: 40914,
+			major3: 40897,
+		}),
+	}),
+};
+
+export const HotWTalents = {
+	name: 'HotW',
+	data: SavedTalents.create({
+		talentsString: "100301",
+		glyphs: Glyphs.create({
+			major1: 40923,
+			major2: 40914,
+			major3: 40897,
 		}),
 	}),
 };

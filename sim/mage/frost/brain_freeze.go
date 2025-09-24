@@ -35,12 +35,12 @@ func (frost *FrostMage) registerBrainFreeze() {
 
 	core.MakeProcTriggerAura(&frost.Unit, core.ProcTrigger{
 		Name:           "Brain Freeze - Trigger",
-		ClassSpellMask: mage.MageSpellLivingBombDot | mage.MageSpellLivingBombExplosion | mage.MageSpellFrostBombExplosion | mage.MageSpellNetherTempestDot,
+		ClassSpellMask: mage.MageSpellLivingBombDot | mage.MageSpellFrostBombExplosion | mage.MageSpellNetherTempestDot,
 		Callback:       core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
 		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			// https://github.com/simulationcraft/simc/blob/e1190fed141feec2ec7a489e80caec5138c3a6ab/engine/class_modules/sc_mage.cpp#L4169
 			var procChance float64
-			if spell.Matches(mage.MageSpellLivingBombDot | mage.MageSpellLivingBombExplosion) {
+			if spell.Matches(mage.MageSpellLivingBombDot) {
 				procChance = 0.25
 			} else if spell.Matches(mage.MageSpellFrostBombExplosion) {
 				procChance = 1.0
