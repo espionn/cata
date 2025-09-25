@@ -39,7 +39,7 @@ export const FeralDruidRotationConfig = {
 			label: i18n.t('rotation_tab.options.druid.feral.target_type.label'),
 			values: [
 				{ name: i18n.t('rotation_tab.options.druid.feral.target_type.single_target'), value: AplType.SingleTarget },
-				// { name: i18n.t('rotation_tab.options.druid.feral.target_type.aoe'), value: AplType.Aoe },
+				{ name: i18n.t('rotation_tab.options.druid.feral.target_type.aoe'), value: AplType.Aoe },
 			],
 		}),
 		InputHelpers.makeRotationBooleanInput<Spec.SpecFeralDruid>({

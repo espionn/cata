@@ -19,7 +19,7 @@ func TestUnholy(t *testing.T) {
 			Race:       proto.Race_RaceOrc,
 			OtherRaces: []proto.Race{proto.Race_RaceTroll, proto.Race_RaceWorgen},
 
-			GearSet: core.GetGearSet("../../../ui/death_knight/unholy/gear_sets", "p1"),
+			GearSet: core.GetGearSet("../../../ui/death_knight/unholy/gear_sets", "p2"),
 			OtherGearSets: []core.GearSetCombo{
 				core.GetGearSet("../../../ui/death_knight/unholy/gear_sets", "prebis"),
 			},
@@ -46,7 +46,7 @@ func TestUnholy(t *testing.T) {
 var UnholyDefaultGlyphs = &proto.Glyphs{
 	Major1: int32(proto.DeathKnightMajorGlyph_GlyphOfAntiMagicShell),
 	Major2: int32(proto.DeathKnightMajorGlyph_GlyphOfPestilence),
-	Major3: int32(proto.DeathKnightMajorGlyph_GlyphOfLoudHorn),
+	Major3: int32(proto.DeathKnightMajorGlyph_GlyphOfFesteringBlood),
 }
 
 var GlyphOfOutbreak = &proto.Glyphs{

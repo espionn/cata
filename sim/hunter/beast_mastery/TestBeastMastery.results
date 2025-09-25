@@ -635,8 +635,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-EnchantWeapon-SpiritofConquest-5124"
  value: {
-  dps: 158877.1846
-  tps: 79518.22073
+  dps: 158877.27074
+  tps: 79518.30687
  }
 }
 dps_results: {
@@ -2497,8 +2497,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-Settings-Dwarf-p1-Row6_Talent2-Basic-bm-NoBuffs-5.1yards-LongSingleTarget"
  value: {
-  dps: 112504.27195
-  tps: 60680.043
+  dps: 112506.98772
+  tps: 60715.06174
  }
 }
 dps_results: {
@@ -2707,8 +2707,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-Settings-Orc-p1-Row6_Talent2-Basic-bm-NoBuffs-5.1yards-LongSingleTarget"
  value: {
-  dps: 115482.82728
-  tps: 61494.87665
+  dps: 115481.16151
+  tps: 61531.37315
  }
 }
 dps_results: {

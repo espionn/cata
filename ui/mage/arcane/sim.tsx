@@ -222,7 +222,6 @@ export class ArcaneMageSimUI extends IndividualSimUI<Spec.SpecArcaneMage> {
 									<>
 										<p className="mb-0">Additional Living Bomb breakpoints have been created using the following cooldowns:</p>
 										<ul className="mb-0">
-											{<li>Dark Soul: Misery</li>}
 											{hasBL && <li>Bloodlust</li>}
 											{hasBerserking && <li>Berserking</li>}
 										</ul>
@@ -230,7 +229,6 @@ export class ArcaneMageSimUI extends IndividualSimUI<Spec.SpecArcaneMage> {
 								)}
 							</>
 						);
-						return '';
 					},
 				},
 			});

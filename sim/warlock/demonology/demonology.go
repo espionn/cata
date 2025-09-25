@@ -43,9 +43,10 @@ type DemonologyWarlock struct {
 
 	DemonicFury   core.SecondaryResourceBar
 	Metamorphosis *core.Spell
-	Soulfire      *core.Spell
 	HandOfGuldan  *core.Spell
 	ChaosWave     *core.Spell
+
+	MoltenCore *core.Aura
 
 	Felguard               *warlock.WarlockPet
 	WildImps               []*WildImpPet

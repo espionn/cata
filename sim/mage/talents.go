@@ -51,9 +51,6 @@ func (mage *Mage) registerPresenceOfMind() {
 				Duration: time.Second * 90,
 			},
 		},
-		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
-			return mage.GCD.IsReady(sim)
-		},
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
 			mage.PresenceOfMindAura.Activate(sim)
 		},
@@ -207,9 +204,6 @@ func (mage *Mage) registerRuneOfPower() {
 				GCD:      core.GCDDefault,
 				CastTime: time.Millisecond * 1500,
 			},
-		},
-		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
-			return mage.GCD.IsReady(sim)
 		},
 		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
 			mage.RuneOfPowerAura.Activate(sim)

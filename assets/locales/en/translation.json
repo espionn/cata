@@ -592,6 +592,18 @@
 				"spiritual_grasp_frequency": {
 					"label": "Spiritual Grasp frequency",
 					"tooltip": "Average time (in seconds) between Spiritual Grasp hits, following an exponential distribution"
+				},
+				"movement_interval": {
+					"label": "Movement Interval",
+					"tooltip": "How often the player will move in seconds"
+				},
+				"reaction_time": {
+					"label": "Reaction Time",
+					"tooltip": "How long the player can wait for casts to finish before moving in seconds"
+				},
+				"yards": {
+					"label": "Yards",
+					"tooltip": "How many yards the player moves"
 				}
 			},
 			"duration": {
@@ -1049,6 +1061,10 @@
 				"guardian_hotw_dps_rotation": {
 					"label": "HotW DPS Rotation",
 					"tooltip": "Executes optimized HotW DPS rotation using hardcoded algorithm."
+				},
+				"warlock_next_exhale_target": {
+					"label": "Target Next Exhale Target",
+					"tooltip": "Targets the next valid exhale target. If the current target is not the inhale target or no inhale has been cast, the target will not change."
 				}
 			},
 			"values": {

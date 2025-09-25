@@ -592,6 +592,18 @@
 				"spiritual_grasp_frequency": {
 					"label": "Fréquence de prise spirituelle",
 					"tooltip": "Temps moyen (en secondes) entre les coups de Saisie Spirituelle, suivant une distribution exponentielle"
+				},
+				"movement_interval": {
+					"label": "Intervalle de Mouvement",
+					"tooltip": "À quelle fréquence le joueur se déplacera en secondes"
+				},
+				"reaction_time": {
+					"label": "Temps de Réaction",
+					"tooltip": "Combien de temps le joueur peut attendre que les sorts se terminent avant de se déplacer en secondes"
+				},
+				"yards": {
+					"label": "Yards",
+					"tooltip": "Combien de yards le joueur se déplace"
 				}
 			},
 			"duration": {
@@ -1049,6 +1061,10 @@
 				"guardian_hotw_dps_rotation": {
 					"label": "Rotation DPS HotW",
 					"tooltip": "Exécute la rotation DPS HotW optimisée en utilisant un algorithme codé en dur."
+				},
+				"warlock_next_exhale_target": {
+					"label": "Cibler la prochaine cible d'Expiration",
+        			"tooltip": "Cible la prochaine cible valide d'Expiration. Si la cible actuelle n'est pas la cible de l'échange d'âme ou si l'échange d'âme n'a pas été lancé, la cible ne changera pas."
 				}
 			},
 			"values": {

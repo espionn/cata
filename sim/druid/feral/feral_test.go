@@ -44,9 +44,13 @@ func TestFeral(t *testing.T) {
 			{Label: "DB-Incarn-NV", Talents: "200203", Glyphs: StandardGlyphs},
 		},
 
+		Rotation: core.GetAplRotation("../../../ui/druid/feral/apls", "default"),
+		OtherRotations: []core.RotationCombo{
+			core.GetAplRotation("../../../ui/druid/feral/apls", "aoe"),
+		},
+
 		Consumables:      FullConsumesSpec,
 		SpecOptions:      core.SpecOptionsCombo{Label: "ExternalBleed", SpecOptions: PlayerOptionsMonoCat},
-		Rotation:         core.GetAplRotation("../../../ui/druid/feral/apls", "default"),
 		StartingDistance: 24,
 		ItemFilter:       FeralItemFilter,
 	}}))
@@ -100,6 +104,7 @@ var StandardTalents = "100302"
 var StandardGlyphs = &proto.Glyphs{
 	Major1: 40923,
 	Major2: 40914,
+	Major3: 40897,
 }
 
 var PlayerOptionsMonoCat = &proto.Player_FeralDruid{

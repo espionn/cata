@@ -33,9 +33,9 @@ character_stats_results: {
 dps_results: {
  key: "TestAffliction-AllItems-AgilePrimalDiamond"
  value: {
-  dps: 87990.30755
-  tps: 58382.1057
-  hps: 1578.34068
+  dps: 88089.51166
+  tps: 58446.86763
+  hps: 1578.71241
  }
 }
 dps_results: {
@@ -161,9 +161,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 87901.63606
-  tps: 58254.02397
-  hps: 1577.59724
+  dps: 87877.58323
+  tps: 58212.04002
+  hps: 1578.71241
  }
 }
 dps_results: {
@@ -177,9 +177,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-Cha-Ye'sEssenceofBrilliance-96888"
  value: {
-  dps: 99678.00329
-  tps: 66913.92213
-  hps: 1578.34068
+  dps: 99411.37008
+  tps: 66691.851
+  hps: 1580.57103
  }
 }
 dps_results: {
@@ -201,25 +201,25 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-CommunalStoneofDestruction-101171"
  value: {
-  dps: 93086.36386
-  tps: 62486.96156
-  hps: 1582.05793
+  dps: 92848.58009
+  tps: 62300.81203
+  hps: 1581.31448
  }
 }
 dps_results: {
  key: "TestAffliction-AllItems-CommunalStoneofWisdom-101183"
  value: {
-  dps: 94504.67117
-  tps: 63619.32073
-  hps: 1575.36689
+  dps: 94277.79695
+  tps: 63369.65353
+  hps: 1576.11034
  }
 }
 dps_results: {
  key: "TestAffliction-AllItems-ContemplationofChi-Ji-103688"
  value: {
-  dps: 88196.3903
-  tps: 58799.11824
-  hps: 1576.11034
+  dps: 88257.30493
+  tps: 58829.10641
+  hps: 1577.22551
  }
 }
 dps_results: {
@@ -449,9 +449,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-CutstitcherMedallion-93255"
  value: {
-  dps: 88291.35418
-  tps: 58784.33631
-  hps: 1573.50827
+  dps: 88364.96517
+  tps: 58816.47588
+  hps: 1573.87999
  }
 }
 dps_results: {
@@ -497,9 +497,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-DestructivePrimalDiamond"
  value: {
-  dps: 88025.84259
-  tps: 58341.11731
-  hps: 1577.59724
+  dps: 88001.78976
+  tps: 58299.13336
+  hps: 1578.71241
  }
 }
 dps_results: {
@@ -713,9 +713,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-EnchantWeapon-SpiritofConquest-5124"
  value: {
-  dps: 84372.58382
-  tps: 55635.78898
-  hps: 1583.1731
+  dps: 88759.97607
+  tps: 58888.61611
+  hps: 1582.80137
  }
 }
 dps_results: {
@@ -729,9 +729,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-EnigmaticPrimalDiamond"
  value: {
-  dps: 88025.84259
-  tps: 58341.11731
-  hps: 1577.59724
+  dps: 88001.78976
+  tps: 58299.13336
+  hps: 1578.71241
  }
 }
 dps_results: {
@@ -833,9 +833,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-FleetPrimalDiamond"
  value: {
-  dps: 88152.14128
-  tps: 58496.76934
-  hps: 1578.34068
+  dps: 88250.05431
+  tps: 58560.80724
+  hps: 1578.71241
  }
 }
 dps_results: {
@@ -1177,9 +1177,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-HeartwarmerMedallion-93260"
  value: {
-  dps: 88291.35418
-  tps: 58784.33631
-  hps: 1573.50827
+  dps: 88364.96517
+  tps: 58816.47588
+  hps: 1573.87999
  }
 }
 dps_results: {
@@ -1193,17 +1193,17 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-Horridon'sLastGasp-96757"
  value: {
-  dps: 90639.18945
-  tps: 60381.50769
-  hps: 1577.96896
+  dps: 90644.1278
+  tps: 60347.50281
+  hps: 1580.1993
  }
 }
 dps_results: {
  key: "TestAffliction-AllItems-ImpassivePrimalDiamond"
  value: {
-  dps: 88025.84259
-  tps: 58341.11731
-  hps: 1577.59724
+  dps: 88001.78976
+  tps: 58299.13336
+  hps: 1578.71241
  }
 }
 dps_results: {
@@ -1281,17 +1281,17 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-JadeCourtesanFigurine-86045"
  value: {
-  dps: 88014.82218
-  tps: 58601.26546
-  hps: 1573.50827
+  dps: 88088.25201
+  tps: 58633.32223
+  hps: 1573.87999
  }
 }
 dps_results: {
  key: "TestAffliction-AllItems-JadeCourtesanFigurine-86774"
  value: {
-  dps: 87520.72071
-  tps: 58269.74961
-  hps: 1573.50827
+  dps: 87592.71573
+  tps: 58300.53731
+  hps: 1573.87999
  }
 }
 dps_results: {
@@ -1641,9 +1641,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-MountainsageStoneofDestruction-101072"
  value: {
-  dps: 92978.95685
-  tps: 62501.46918
-  hps: 1580.1993
+  dps: 92839.61968
+  tps: 62339.06264
+  hps: 1582.80137
  }
 }
 dps_results: {
@@ -1865,9 +1865,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-Qin-xi'sPolarizingSeal-87075"
  value: {
-  dps: 89958.06516
-  tps: 59827.10197
-  hps: 1583.1731
+  dps: 89921.63564
+  tps: 59835.49898
+  hps: 1583.54482
  }
 }
 dps_results: {
@@ -1881,9 +1881,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-RegaliaoftheThousandfoldHells"
  value: {
-  dps: 99888.08917
-  tps: 67075.83483
-  hps: 1850.41036
+  dps: 99757.18517
+  tps: 66962.70423
+  hps: 1849.96491
  }
 }
 dps_results: {
@@ -1953,17 +1953,17 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-ReverberatingPrimalDiamond"
  value: {
-  dps: 87990.30755
-  tps: 58382.1057
-  hps: 1578.34068
+  dps: 88089.51166
+  tps: 58446.86763
+  hps: 1578.71241
  }
 }
 dps_results: {
  key: "TestAffliction-AllItems-RevitalizingPrimalDiamond"
  value: {
-  dps: 87990.30755
-  tps: 58382.1057
-  hps: 1578.34068
+  dps: 88089.51166
+  tps: 58446.86763
+  hps: 1578.71241
  }
 }
 dps_results: {
@@ -1985,9 +1985,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-ScrollofReveredAncestors-89080"
  value: {
-  dps: 88014.82218
-  tps: 58601.26546
-  hps: 1573.50827
+  dps: 88088.25201
+  tps: 58633.32223
+  hps: 1573.87999
  }
 }
 dps_results: {
@@ -2081,9 +2081,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 95731.63073
-  tps: 64358.95142
-  hps: 1757.88344
+  dps: 95783.23654
+  tps: 64393.52112
+  hps: 1760.85724
  }
 }
 dps_results: {
@@ -2121,9 +2121,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-SpringrainStoneofDestruction-101026"
  value: {
-  dps: 93222.32206
-  tps: 62629.58747
-  hps: 1571.64965
+  dps: 93219.33941
+  tps: 62600.90538
+  hps: 1572.3931
  }
 }
 dps_results: {
@@ -2137,8 +2137,8 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-SpringrainStoneofWisdom-101041"
  value: {
-  dps: 94211.48395
-  tps: 63170.56629
+  dps: 93995.06845
+  tps: 62994.16885
   hps: 1576.11034
  }
 }
@@ -2201,9 +2201,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-StreamtalkerStoneofWisdom-101250"
  value: {
-  dps: 95328.94721
-  tps: 64380.41253
-  hps: 1576.85379
+  dps: 95008.22466
+  tps: 64127.4691
+  hps: 1577.59724
  }
 }
 dps_results: {
@@ -2249,9 +2249,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-SunsoulStoneofWisdom-101138"
  value: {
-  dps: 95204.89396
-  tps: 64343.43393
-  hps: 1567.18896
+  dps: 94978.44647
+  tps: 64001.38591
+  hps: 1569.79103
  }
 }
 dps_results: {
@@ -2297,9 +2297,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-Thousand-YearPickledEgg-257881"
  value: {
-  dps: 91128.99581
-  tps: 60964.87562
-  hps: 1637.44482
+  dps: 91071.22891
+  tps: 60934.79225
+  hps: 1632.98413
  }
 }
 dps_results: {
@@ -2521,9 +2521,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-TyrannicalGladiator'sInsigniaofDominance-100152"
  value: {
-  dps: 92085.69842
-  tps: 60910.81035
-  hps: 1582.80137
+  dps: 91903.58718
+  tps: 60698.82647
+  hps: 1585.03172
  }
 }
 dps_results: {
@@ -2569,9 +2569,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-VialofIchorousBlood-100963"
  value: {
-  dps: 86355.49315
-  tps: 57276.49658
-  hps: 1576.85379
+  dps: 86418.5376
+  tps: 57307.28877
+  hps: 1577.96896
  }
 }
 dps_results: {
@@ -2617,9 +2617,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-Wushoolay'sFinalChoice-96785"
  value: {
-  dps: 98391.8
-  tps: 66035.35546
-  hps: 1561.98482
+  dps: 97867.19103
+  tps: 65606.70469
+  hps: 1567.18896
  }
 }
 dps_results: {
@@ -2641,9 +2641,9 @@ dps_results: {
 dps_results: {
  key: "TestAffliction-AllItems-ZenAlchemistStone-75274"
  value: {
-  dps: 92957.34813
-  tps: 62268.427
-  hps: 1594.32482
+  dps: 92930.46608
+  tps: 62216.51966
+  hps: 1595.43999
  }
 }
 dps_results: {

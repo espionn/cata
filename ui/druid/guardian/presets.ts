@@ -15,7 +15,7 @@ export const HOF_PRESET = PresetUtils.makePresetGear('Pre-ToES BiS', HofGear);
 import P1Gear from './gear_sets/p1.gear.json';
 export const P1_PRESET = PresetUtils.makePresetGear('P1/P2', P1Gear);
 import P2Gear from './gear_sets/p2.gear.json';
-export const P2_PRESET = PresetUtils.makePresetGear('P2', P2Gear);
+export const P2_PRESET = PresetUtils.makePresetGear('P2 Farm BiS', P2Gear);
 import P3Gear from './gear_sets/p3.gear.json';
 export const P3_PRESET = PresetUtils.makePresetGear('P3', P3Gear);
 import P4Gear from './gear_sets/p4.gear.json';

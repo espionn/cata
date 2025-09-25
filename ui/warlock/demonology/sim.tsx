@@ -1,14 +1,20 @@
 import * as BuffDebuffInputs from '../../core/components/inputs/buffs_debuffs';
 import * as OtherInputs from '../../core/components/inputs/other_inputs';
+import * as Mechanics from '../../core/constants/mechanics';
 import { ReforgeOptimizer } from '../../core/components/suggest_reforges_action';
 import { IndividualSimUI, registerSpecConfig } from '../../core/individual_sim_ui';
 import { Player } from '../../core/player';
 import { PlayerClasses } from '../../core/player_classes';
 import { APLRotation } from '../../core/proto/apl';
 import { Faction, ItemSlot, PartyBuffs, PseudoStat, Race, Spec, Stat } from '../../core/proto/common';
-import { DEFAULT_CASTER_GEM_STATS, Stats, UnitStat } from '../../core/proto_utils/stats';
+import { StatCapType } from '../../core/proto/ui';
+import { DEFAULT_CASTER_GEM_STATS, StatCap, Stats, UnitStat } from '../../core/proto_utils/stats';
 import * as WarlockInputs from '../inputs';
+import { WARLOCK_BREAKPOINTS } from '../presets';
 import * as Presets from './presets';
+import { formatToNumber } from '../../core/utils';
+
+const hasteBreakpoints = WARLOCK_BREAKPOINTS.presets;
 
 const SPEC_CONFIG = registerSpecConfig(Spec.SpecDemonologyWarlock, {
 	cssClass: 'demonology-warlock-sim-ui',
@@ -38,13 +44,35 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecDemonologyWarlock, {
 
 	defaults: {
 		// Default equipped gear.
-		gear: Presets.PRERAID_PRESET.gear,
+		gear: Presets.P1_PRESET.gear,
 
 		// Default EP weights for sorting gear in the gear picker.
 		epWeights: Presets.DEFAULT_EP_PRESET.epWeights,
-		// Default stat caps for the Reforge optimizer
+		// Default stat caps for the RPeforge optimizer
 		statCaps: (() => {
 			return new Stats().withPseudoStat(PseudoStat.PseudoStatSpellHitPercent, 15);
+		})(),
+		// Default soft caps for the Reforge optimizer
+		softCapBreakpoints: (() => {
+			const hasteSoftCapConfig = StatCap.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent, {
+				breakpoints: [
+					hasteBreakpoints.get('7-tick - Shadowflame')!,
+					hasteBreakpoints.get('5-tick - Doom')!,
+					hasteBreakpoints.get('8-tick - Shadowflame')!,
+					hasteBreakpoints.get('6-tick - Doom')!,
+					hasteBreakpoints.get('9-tick - Shadowflame')!,
+					hasteBreakpoints.get('10-tick - Shadowflame')!,
+					hasteBreakpoints.get('7-tick - Doom')!,
+					hasteBreakpoints.get('11-tick - Shadowflame')!,
+					hasteBreakpoints.get('8-tick - Doom')!,
+					hasteBreakpoints.get('12-tick - Shadowflame')!,
+					hasteBreakpoints.get('9-tick - Doom')!,
+				],
+				capType: StatCapType.TypeThreshold,
+				postCapEPs: [(Presets.DEFAULT_EP_PRESET.epWeights.getStat(Stat.StatCritRating) - 0.01) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
+			});
+
+			return [hasteSoftCapConfig];
 		})(),
 		// Default consumes settings.
 		consumables: Presets.DefaultConsumables,
@@ -91,7 +119,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecDemonologyWarlock, {
 		rotations: [Presets.APL_Default],
 
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.PRERAID_PRESET, Presets.P1_PRESET],
+		gear: [Presets.PRERAID_PRESET, Presets.P1_PRESET, Presets.P2_PRESET],
 		itemSwaps: [],
 
 		builds: [Presets.PRSET_BUILD_P1],
@@ -142,6 +170,63 @@ export class DemonologyWarlockSimUI extends IndividualSimUI<Spec.SpecDemonologyW
 		player.sim.waitForInit().then(() => {
 			new ReforgeOptimizer(this, {
 				statSelectionPresets,
+				enableBreakpointLimits: true,
+				updateSoftCaps: softCaps => {
+					const raidBuffs = player.getRaid()?.getBuffs();
+					const hasBL = !!raidBuffs?.bloodlust;
+					const hasBerserking = player.getRace() === Race.RaceTroll;
+
+					const modifyHaste = (oldHastePercent: number, modifier: number) =>
+						Number(formatToNumber(((oldHastePercent / 100 + 1) / modifier - 1) * 100, { maximumFractionDigits: 5 }));
+
+					this.individualConfig.defaults.softCapBreakpoints!.forEach(softCap => {
+						const softCapToModify = softCaps.find(sc => sc.unitStat.equals(softCap.unitStat));
+						if (softCap.unitStat.equalsPseudoStat(PseudoStat.PseudoStatSpellHastePercent) && softCapToModify) {
+							const adjustedHasteBreakpoints = new Set([...softCap.breakpoints]);
+							const hasCloseMatchingValue = (value: number) =>
+								[...adjustedHasteBreakpoints.values()].find(bp => bp.toFixed(2) === value.toFixed(2));
+
+							softCap.breakpoints.forEach(breakpoint => {
+								if (hasBL) {
+									const blBreakpoint = modifyHaste(breakpoint, 1.3);
+
+									if (blBreakpoint > 0) {
+										if (!hasCloseMatchingValue(blBreakpoint)) adjustedHasteBreakpoints.add(blBreakpoint);
+										if (hasBerserking) {
+											const berserkingBreakpoint = modifyHaste(blBreakpoint, 1.2);
+											if (berserkingBreakpoint > 0 && !hasCloseMatchingValue(berserkingBreakpoint)) {
+												adjustedHasteBreakpoints.add(berserkingBreakpoint);
+											}
+										}
+									}
+								}
+							});
+							softCapToModify.breakpoints = [...adjustedHasteBreakpoints].sort((a, b) => a - b);
+						}
+					});
+					return softCaps;
+				},
+				additionalSoftCapTooltipInformation: {
+					[Stat.StatHasteRating]: () => {
+						const raidBuffs = player.getRaid()?.getBuffs();
+						const hasBL = !!raidBuffs?.bloodlust;
+						const hasBerserking = player.getRace() === Race.RaceTroll;
+
+						return (
+							<>
+								{(hasBL || hasBerserking) && (
+									<>
+										<p className="mb-0">Additional Doom/Shadowflame breakpoints have been created using the following cooldowns:</p>
+										<ul className="mb-0">
+											{hasBL && <li>Bloodlust</li>}
+											{hasBerserking && <li>Berserking</li>}
+										</ul>
+									</>
+								)}
+							</>
+						);
+					},
+				},
 			});
 		});
 	}

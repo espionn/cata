@@ -399,3 +399,53 @@ func (rotation *FeralDruidRotation) ProcessNextPlannedAction(sim *core.Simulatio
 		rotation.WaitUntil(sim, nextActionAt)
 	}
 }
+
+func (rotation *FeralDruidRotation) shouldAoeRake(sim *core.Simulation, roarNow bool, shouldSingleTargetRake bool) (bool, *core.Unit) {
+	if roarNow {
+		return false, nil
+	}
+
+	cat := rotation.agent
+
+	if rotation.RotationType == proto.FeralDruid_Rotation_SingleTarget {
+		return shouldSingleTargetRake, cat.CurrentTarget
+	}
+
+	if cat.ClearcastingAura.IsActive() || !cat.ThrashCat.CurDot().IsActive() {
+		return false, nil
+	}
+
+	var shouldRake bool
+	var rakeTarget *core.Unit
+	var rakeDot *core.Dot
+
+	for _, aoeTarget := range sim.Encounter.ActiveTargetUnits {
+		rakeDot = cat.Rake.Dot(aoeTarget)
+
+		if !rakeDot.IsActive() || (rakeDot.RemainingDuration(sim) < rakeDot.BaseTickLength) {
+			shouldRake = true
+			rakeTarget = aoeTarget
+			break
+		}
+	}
+
+	if !shouldRake {
+		return false, nil
+	}
+
+	// Compare DPE versus Swipe to see if it's worth casting
+	potentialRakeTicks := min(rakeDot.BaseTickCount, int32(sim.GetRemainingDuration()/rakeDot.BaseTickLength))
+	expectedRakeDamage := cat.Rake.ExpectedInitialDamage(sim, rakeTarget) + cat.Rake.ExpectedTickDamage(sim, rakeTarget)*float64(potentialRakeTicks)
+	rakeDPE := expectedRakeDamage / cat.Rake.DefaultCast.Cost
+
+	var expectedSwipeDamage float64
+
+	for _, aoeTarget := range sim.Encounter.ActiveTargetUnits {
+		expectedSwipeDamage += cat.SwipeCat.ExpectedInitialDamage(sim, aoeTarget)
+	}
+
+	swipeDPE := expectedSwipeDamage / cat.SwipeCat.DefaultCast.Cost
+	shouldRake = core.Ternary(cat.BerserkCatAura.IsActive(), expectedRakeDamage > expectedSwipeDamage, rakeDPE > swipeDPE)
+
+	return shouldRake, rakeTarget
+}

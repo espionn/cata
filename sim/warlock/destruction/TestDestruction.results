@@ -713,9 +713,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-AllItems-EnchantWeapon-SpiritofConquest-5124"
  value: {
-  dps: 93700.74367
-  tps: 69130.73317
-  hps: 797.38158
+  dps: 96629.08022
+  tps: 71137.76812
+  hps: 796.6381
  }
 }
 dps_results: {
@@ -785,8 +785,8 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-AllItems-FelsoulIdolofDestruction-101263"
  value: {
-  dps: 95316.68737
-  tps: 70359.72465
+  dps: 95252.78954
+  tps: 70301.09916
   hps: 818.57074
  }
 }
@@ -1401,9 +1401,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-AllItems-LightoftheCosmos-87065"
  value: {
-  dps: 100294.03618
-  tps: 73904.76867
-  hps: 821.54466
+  dps: 100248.37843
+  tps: 73831.13096
+  hps: 821.9164
  }
 }
 dps_results: {
@@ -1865,9 +1865,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-AllItems-Qin-xi'sPolarizingSeal-87075"
  value: {
-  dps: 96136.95763
-  tps: 70640.94211
-  hps: 802.2142
+  dps: 96227.36744
+  tps: 70743.40175
+  hps: 801.84246
  }
 }
 dps_results: {
@@ -1881,9 +1881,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-AllItems-RegaliaoftheThousandfoldHells"
  value: {
-  dps: 109379.05837
-  tps: 81020.89469
-  hps: 976.02081
+  dps: 109320.6588
+  tps: 80943.45115
+  hps: 975.57534
  }
 }
 dps_results: {
@@ -2201,8 +2201,8 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-AllItems-StreamtalkerStoneofWisdom-101250"
  value: {
-  dps: 99144.38159
-  tps: 73060.30177
+  dps: 99266.98364
+  tps: 73204.07453
   hps: 799.98376
  }
 }
@@ -2657,9 +2657,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Goblin-p1-prebis-Destruction Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 217974.18952
-  tps: 185799.19625
-  hps: 2254.13516
+  dps: 218825.30019
+  tps: 186799.382
+  hps: 2262.68482
  }
 }
 dps_results: {
@@ -2706,7 +2706,7 @@ dps_results: {
  key: "TestDestruction-Settings-Human-p1-prebis-Destruction Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
   dps: 223037.91233
-  tps: 189867.83071
+  tps: 189882.55865
   hps: 2231.45999
  }
 }
@@ -2729,16 +2729,16 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Human-p1-prebis-Destruction Warlock-default-NoBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 143744.25093
-  tps: 123998.3474
-  hps: 2004.5016
+  dps: 146535.63679
+  tps: 128759.18703
+  hps: 2017.10632
  }
 }
 dps_results: {
  key: "TestDestruction-Settings-Human-p1-prebis-Destruction Warlock-default-NoBuffs-25.0yards-LongSingleTarget"
  value: {
-  dps: 61592.42046
-  tps: 45225.24217
+  dps: 61582.93935
+  tps: 45219.51106
   hps: 712.51716
  }
 }
@@ -2754,7 +2754,7 @@ dps_results: {
  key: "TestDestruction-Settings-Orc-p1-prebis-Destruction Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
   dps: 227610.51604
-  tps: 193402.89265
+  tps: 193417.6206
   hps: 2231.18147
  }
 }
@@ -2777,16 +2777,16 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Orc-p1-prebis-Destruction Warlock-default-NoBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 146650.04407
-  tps: 125989.03113
-  hps: 2003.53198
+  dps: 149785.46353
+  tps: 131370.81211
+  hps: 2017.18765
  }
 }
 dps_results: {
  key: "TestDestruction-Settings-Orc-p1-prebis-Destruction Warlock-default-NoBuffs-25.0yards-LongSingleTarget"
  value: {
-  dps: 63107.93989
-  tps: 46205.74334
+  dps: 63098.45988
+  tps: 46200.01333
   hps: 712.89603
  }
 }
@@ -2801,9 +2801,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Troll-p1-prebis-Destruction Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 223934.51756
-  tps: 190480.71541
-  hps: 2324.76275
+  dps: 224053.10174
+  tps: 190994.5139
+  hps: 2323.27585
  }
 }
 dps_results: {
@@ -2825,8 +2825,8 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Troll-p1-prebis-Destruction Warlock-default-NoBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 140015.54388
-  tps: 125183.60227
+  dps: 142258.04928
+  tps: 120470.89266
   hps: 2036.71368
  }
 }

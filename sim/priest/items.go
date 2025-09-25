@@ -43,10 +43,20 @@ var ItemSetRegaliaOfTheExorcist = core.NewItemSet(core.ItemSet{
 				Callback:       core.CallbackOnSpellHitDealt,
 				Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 					if priest.ShadowWordPain != nil && priest.ShadowWordPain.Dot(result.Target).IsActive() {
+						if priest.UnerringFaded[result.Target.Index].Swp <= sim.CurrentTime {
+							priest.ShadowWordPain.Dot(result.Target).SnapshotCritChance -= 1
+							priest.UnerringFaded[result.Target.Index].Swp = 1<<63 - 1
+						}
+
 						priest.ShadowWordPain.Dot(result.Target).AddTick()
 					}
 
 					if priest.VampiricTouch != nil && priest.VampiricTouch.Dot(result.Target).IsActive() {
+						if priest.UnerringFaded[result.Target.Index].VT <= sim.CurrentTime {
+							priest.VampiricTouch.Dot(result.Target).SnapshotCritChance -= 1
+							priest.UnerringFaded[result.Target.Index].VT = 1<<63 - 1
+						}
+
 						priest.VampiricTouch.Dot(result.Target).AddTick()
 					}
 				},
