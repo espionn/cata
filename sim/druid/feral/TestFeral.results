@@ -2327,14 +2327,6 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestFeral-AllItems-TheGloamingBlade-88149"
- value: {
-  dps: 161532.88144
-  tps: 287292.56257
-  hps: 11513.93508
- }
-}
-dps_results: {
  key: "TestFeral-AllItems-Thousand-YearPickledEgg-257881"
  value: {
   dps: 149155.62639
@@ -2676,14 +2668,6 @@ dps_results: {
   dps: 159383.37313
   tps: 274437.18715
   hps: 12121.99054
- }
-}
-dps_results: {
- key: "TestFeral-AllItems-YaungolFireCarrier-86518"
- value: {
-  dps: 163437.96276
-  tps: 291220.67149
-  hps: 11545.53451
  }
 }
 dps_results: {
