@@ -97,7 +97,7 @@ func (action *APLActionGuardianHotwDpsRotation) Execute(sim *core.Simulation) {
 		} else {
 			poolingTime = core.DurationFromSeconds((bear.CurrentRakeCost() - curEnergy) / regenRate)
 		}
-	} else if (curCp < 5) || (action.strategy == proto.APLActionGuardianHotwDpsRotation_Cat) {
+	} else if ((curCp < 5) && (curEnergy + (bear.Wrath.DefaultCast.CastTime*2 + core.GCDDefault).Seconds() * regenRate > 100) && bear.CatFormAura.IsActive()) || (action.strategy == proto.APLActionGuardianHotwDpsRotation_Cat) {
 		if bear.MangleCat.CanCast(sim, bear.CurrentTarget) {
 			bear.MangleCat.Cast(sim, bear.CurrentTarget)
 			return
