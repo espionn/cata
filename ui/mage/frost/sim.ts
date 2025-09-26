@@ -74,12 +74,9 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFrostMage, {
 			});
 
 			const critSoftCapConfig = StatCap.fromPseudoStat(PseudoStat.PseudoStatSpellCritPercent, {
-				breakpoints: [23.34, 26.8],
+				breakpoints: [28],
 				capType: StatCapType.TypeSoftCap,
-				postCapEPs: [
-					(Presets.P1_BIS_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.01) * Mechanics.CRIT_RATING_PER_CRIT_PERCENT,
-					(Presets.P1_BIS_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) / 2) * Mechanics.CRIT_RATING_PER_CRIT_PERCENT,
-				],
+				postCapEPs: [(Presets.P1_BIS_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) / 2) * Mechanics.CRIT_RATING_PER_CRIT_PERCENT],
 			});
 
 			return [critSoftCapConfig, hasteSoftCapConfig];
