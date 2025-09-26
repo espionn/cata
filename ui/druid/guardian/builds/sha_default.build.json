@@ -23,7 +23,7 @@
   },
   "player": {
     "name": "Player",
-    "race": "RaceWorgen",
+    "race": "RaceTroll",
     "class": "ClassDruid",
     "equipment": {
       "items": [
@@ -57,47 +57,8 @@
       "stats": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       "pseudoStats": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     },
-    "itemSwap": {
-      "items": [
-        {
-        },
-        {
-        },
-        {
-        },
-        {
-        },
-        {
-        },
-        {
-        },
-        {
-        },
-        {
-        },
-        {
-        },
-        {
-        },
-        {
-        },
-        {
-        },
-        {
-        },
-        {
-        },
-        {
-        },
-        {
-        }
-      ],
-      "prepullBonusStats": {
-        "apiVersion": 1,
-        "stats": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        "pseudoStats": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-      }
-    },
+    "enableItemSwap": true,
+    "itemSwap": {"items":[{},{},{},{},{},{},{},{},{},{},{},{},{},{},{"id":87170,"enchant":4442,"gems":[89873,76692],"upgradeStep":"UpgradeStepTwo"},{}],"prepullBonusStats":{"apiVersion":1,"stats":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"pseudoStats":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}},
     "buffs": {
       "vigilanceCount": 2
     },
@@ -134,7 +95,7 @@
         {"action":{"condition":{"and":{"vals":[{"auraIsActive":{"sourceUnit":{"type":"Target"},"auraId":{"spellId":132007},"includeReactionTime":true}},{"auraIsInactive":{"auraId":{"spellId":120669},"includeReactionTime":true}}]}},"castSpell":{"spellId":{"spellId":114030,"tag":-1}}}},
         {"action":{"condition":{"auraIsActive":{"auraId":{"spellId":120669},"includeReactionTime":true}},"castSpell":{"spellId":{"spellId":108293}}}},
         {"action":{"condition":{"and":{"vals":[{"auraIsKnown":{"auraId":{"spellId":108293}}},{"auraIsActive":{"auraId":{"spellId":108293}}}]}},"guardianHotwDpsRotation":{"strategy":"Hybrid"}}},
-        {"action":{"condition":{"and":{"vals":[{"auraIsKnown":{"auraId":{"spellId":108293}}},{"auraIsInactive":{"auraId":{"spellId":108293},"includeReactionTime":true}},{"auraIsInactive":{"auraId":{"spellId":5487},"includeReactionTime":true}}]}},"castSpell":{"spellId":{"spellId":5487}}}},
+        {"action":{"condition":{"and":{"vals":[{"auraIsKnown":{"auraId":{"spellId":108293}}},{"auraIsInactive":{"auraId":{"spellId":108293},"includeReactionTime":true}},{"auraIsInactive":{"auraId":{"spellId":5487},"includeReactionTime":true}}]}},"strictSequence":{"actions":[{"castSpell":{"spellId":{"spellId":5487}}},{"itemSwap":{"swapSet":"Main"}}]}}},
         {"action":{"autocastOtherCooldowns":{}}},
         {"action":{"condition":{"not":{"val":{"auraIsActive":{"sourceUnit":{"type":"Target"},"auraId":{"spellId":115798}}}}},"castSpell":{"spellId":{"spellId":77758},"target":{"type":"Target"}}}},
         {"action":{"condition":{"not":{"val":{"auraIsActive":{"sourceUnit":{"type":"Target"},"auraId":{"spellId":113746}}}}},"castSpell":{"spellId":{"spellId":770},"target":{"type":"Target"}}}},
