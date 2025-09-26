@@ -912,9 +912,9 @@ export class ActionId {
 				break;
 			case 'Soul Swap':
 				if (tag == 1) {
-					name += ": Inhale"
+					name += ': Inhale';
 				} else if (tag == 2) {
-					name += ": Soulburn"
+					name += ': Soulburn';
 				}
 				break;
 			default:
@@ -1348,4 +1348,6 @@ export const buffAuraToSpellIdMap: Record<number, ActionId> = {
 
 	132403: ActionId.fromSpellId(53600), // Shield of the Righteous
 	138169: ActionId.fromSpellId(85256), // Paladin T15 Ret 4P Templar's Verdict
+
+	131900: ActionId.fromSpellId(131894), // A Murder of Crows
 };
