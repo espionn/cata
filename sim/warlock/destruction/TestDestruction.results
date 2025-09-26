@@ -2657,9 +2657,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Goblin-p1-prebis-Destruction Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 218825.30019
-  tps: 186799.382
-  hps: 2262.68482
+  dps: 218987.30415
+  tps: 187367.06843
+  hps: 2306.54827
  }
 }
 dps_results: {
@@ -2681,9 +2681,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Goblin-p1-prebis-Destruction Warlock-default-NoBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 134647.33198
-  tps: 114499.0442
-  hps: 2026.55987
+  dps: 140530.64347
+  tps: 122450.21104
+  hps: 2063.32365
  }
 }
 dps_results: {
@@ -2705,9 +2705,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Human-p1-prebis-Destruction Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 223037.91233
-  tps: 189882.55865
-  hps: 2231.45999
+  dps: 215803.64109
+  tps: 184779.78588
+  hps: 2287.59034
  }
 }
 dps_results: {
@@ -2729,9 +2729,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Human-p1-prebis-Destruction Warlock-default-NoBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 146535.63679
-  tps: 128759.18703
-  hps: 2017.10632
+  dps: 135380.91971
+  tps: 119951.98537
+  hps: 2048.61814
  }
 }
 dps_results: {
@@ -2753,9 +2753,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Orc-p1-prebis-Destruction Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 227610.51604
-  tps: 193417.6206
-  hps: 2231.18147
+  dps: 220785.70164
+  tps: 188852.4828
+  hps: 2288.80112
  }
 }
 dps_results: {
@@ -2777,9 +2777,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Orc-p1-prebis-Destruction Warlock-default-NoBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 149785.46353
-  tps: 131370.81211
-  hps: 2017.18765
+  dps: 138588.51399
+  tps: 122414.51295
+  hps: 2048.70074
  }
 }
 dps_results: {
@@ -2801,9 +2801,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Troll-p1-prebis-Destruction Warlock-default-FullBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 224053.10174
-  tps: 190994.5139
-  hps: 2323.27585
+  dps: 225784.77912
+  tps: 191345.75432
+  hps: 2305.80482
  }
 }
 dps_results: {
@@ -2825,9 +2825,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-Settings-Troll-p1-prebis-Destruction Warlock-default-NoBuffs-25.0yards-LongMultiTarget"
  value: {
-  dps: 142258.04928
-  tps: 120470.89266
-  hps: 2036.71368
+  dps: 148344.45682
+  tps: 130425.16158
+  hps: 2036.36354
  }
 }
 dps_results: {
