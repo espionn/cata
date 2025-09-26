@@ -120,7 +120,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFrostMage, {
 	},
 
 	presets: {
-		epWeights: [Presets.P1_PREBIS_EP_PRESET, Presets.P1_BIS_EP_PRESET],
+		epWeights: [Presets.P1_PREBIS_EP_PRESET, Presets.P1_BIS_EP_PRESET, Presets.P3_BIS_EP_PRESET],
 		// Preset rotations that the user can quickly select.
 		rotations: [Presets.ROTATION_PRESET_DEFAULT, Presets.ROTATION_PRESET_AOE],
 		// Preset talents that the user can quickly select.
@@ -181,7 +181,9 @@ export class FrostMageSimUI extends IndividualSimUI<Spec.SpecFrostMage> {
 					}
 
 					const avgIlvl = player.getGear().getAverageItemLevel(false);
-					if (avgIlvl > 500) {
+					if (avgIlvl >= 517) {
+						return Presets.P3_BIS_EP_PRESET.epWeights;
+					} else if (avgIlvl >= 500) {
 						return Presets.P1_BIS_EP_PRESET.epWeights;
 					}
 					return Presets.P1_PREBIS_EP_PRESET.epWeights;

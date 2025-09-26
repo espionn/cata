@@ -23,6 +23,18 @@ export const ROTATION_PRESET_DEFAULT = PresetUtils.makePresetAPLRotation('Defaul
 // export const ROTATION_PRESET_CLEAVE = PresetUtils.makePresetAPLRotation('Cleave', ArcaneCleaveApl);
 
 // Preset options for EP weights
+export const P3_BIS_EP_PRESET = PresetUtils.makePresetEpWeights(
+	'Item Level >= 525',
+	Stats.fromMap({
+		[Stat.StatIntellect]: 1.23,
+		[Stat.StatSpellPower]: 1,
+		[Stat.StatHitRating]: 1.71,
+		[Stat.StatCritRating]: 0.51,
+		[Stat.StatHasteRating]: 0.59,
+		[Stat.StatMasteryRating]: 0.74,
+	}),
+);
+
 export const P1_BIS_EP_PRESET = PresetUtils.makePresetEpWeights(
 	'Item Level >= 495',
 	Stats.fromMap({

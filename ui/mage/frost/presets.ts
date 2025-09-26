@@ -24,6 +24,18 @@ export const ROTATION_PRESET_AOE = PresetUtils.makePresetAPLRotation('AOE', Fros
 // export const ROTATION_PRESET_CLEAVE = PresetUtils.makePresetAPLRotation('Cleave', FrostCleaveApl);
 
 // Preset options for EP weights
+export const P3_BIS_EP_PRESET = PresetUtils.makePresetEpWeights(
+	'Item Level >= 517',
+	Stats.fromMap({
+		[Stat.StatIntellect]: 1.21,
+		[Stat.StatSpellPower]: 1,
+		[Stat.StatHitRating]: 1.47,
+		[Stat.StatCritRating]: 0.40,
+		[Stat.StatHasteRating]: 0.74,
+		[Stat.StatMasteryRating]: 0.71,
+	}),
+);
+
 export const P1_BIS_EP_PRESET = PresetUtils.makePresetEpWeights(
 	'Item Level >= 500',
 	Stats.fromMap({
@@ -109,6 +121,13 @@ export const DefaultFrostOptions = MageOptions.create({
 	},
 });
 
+export const OtherDefaults = {
+	distanceFromTarget: 20,
+	profession1: Profession.Engineering,
+	profession2: Profession.Tailoring,
+	race: Race.RaceOrc,
+};
+
 export const ENCOUNTER_SINGLE_TARGET = PresetUtils.makePresetEncounter('Single Target', Encounter.defaultEncounterProto());
 export const ENCOUNTER_CLEAVE = PresetUtils.makePresetEncounter('Cleave', Encounter.defaultEncounterProto(2));
 export const ENCOUNTER_AOE = PresetUtils.makePresetEncounter('AoE (5+)', Encounter.defaultEncounterProto(5));
@@ -130,10 +149,3 @@ export const P1_PRESET_BUILD_AOE = PresetUtils.makePresetBuild('AoE (5+)', {
 	rotation: ROTATION_PRESET_AOE,
 	encounter: ENCOUNTER_AOE,
 });
-
-export const OtherDefaults = {
-	distanceFromTarget: 20,
-	profession1: Profession.Engineering,
-	profession2: Profession.Tailoring,
-	race: Race.RaceOrc,
-};

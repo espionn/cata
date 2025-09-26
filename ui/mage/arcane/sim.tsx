@@ -104,7 +104,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecArcaneMage, {
 	},
 
 	presets: {
-		epWeights: [Presets.P1_PREBIS_EP_PRESET, Presets.P1_BIS_EP_PRESET],
+		epWeights: [Presets.P1_PREBIS_EP_PRESET, Presets.P1_BIS_EP_PRESET, Presets.P3_BIS_EP_PRESET],
 		// Preset rotations that the user can quickly select.
 		rotations: [Presets.ROTATION_PRESET_DEFAULT],
 		// Preset talents that the user can quickly select.
@@ -170,7 +170,9 @@ export class ArcaneMageSimUI extends IndividualSimUI<Spec.SpecArcaneMage> {
 					}
 
 					const avgIlvl = player.getGear().getAverageItemLevel(false);
-					if (avgIlvl >= 495) {
+					if (avgIlvl >= 525) {
+						return Presets.P3_BIS_EP_PRESET.epWeights;
+					} else if (avgIlvl >= 495) {
 						return Presets.P1_BIS_EP_PRESET.epWeights;
 					}
 					return Presets.P1_PREBIS_EP_PRESET.epWeights;

@@ -302,7 +302,7 @@ export const masterySpellNamesI18nKeys: Record<Spec, string> = {
 	[Spec.SpecFuryWarrior]: 'unshackled_fury',
 	[Spec.SpecProtectionWarrior]: 'critical_block',
 	[Spec.SpecArcaneMage]: 'mana_adept',
-	[Spec.SpecFireMage]: 'flashburn',
+	[Spec.SpecFireMage]: 'ignite',
 	[Spec.SpecFrostMage]: 'icicles',
 	[Spec.SpecDisciplinePriest]: 'shield_discipline',
 	[Spec.SpecHolyPriest]: 'echo_of_light',
