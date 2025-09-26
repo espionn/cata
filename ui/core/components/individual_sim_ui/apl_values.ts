@@ -1154,7 +1154,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 	}),
 	auraIsInactive: inputBuilder({
 		label: i18n.t('rotation_tab.apl.values.aura_inactive.label'),
-		submenu: ['Aura'],
+		submenu: ['aura'],
 		shortDescription: i18n.t('rotation_tab.apl.values.aura_inactive.tooltip'),
 		newValue: () => APLValueAuraIsInactive.create({ includeReactionTime: true }),
 		fields: [
@@ -1165,7 +1165,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 	}),
 	auraIsInactiveWithReactionTime: inputBuilder({
 		label: i18n.t('rotation_tab.apl.values.aura_inactive_with_reaction_time.label'),
-		submenu: ['Aura'],
+		submenu: ['aura'],
 		shortDescription: i18n.t('rotation_tab.apl.values.aura_inactive_with_reaction_time.tooltip'),
 		newValue: () => APLValueAuraIsInactive.create({ includeReactionTime: true }),
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
