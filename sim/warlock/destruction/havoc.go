@@ -92,7 +92,8 @@ func (destruction *DestructionWarlock) registerHavoc() {
 		ManaCost: core.ManaCostOptions{BaseCostPercent: 4},
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
-				GCD: core.GCDDefault,
+				GCDMin: time.Millisecond * 500,
+				GCD:    core.GCDMin,
 			},
 			CD: core.Cooldown{
 				Timer:    destruction.NewTimer(),
