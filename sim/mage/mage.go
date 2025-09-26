@@ -142,8 +142,6 @@ func (mage *Mage) registerMastery() {
 }
 
 func (mage *Mage) Reset(sim *core.Simulation) {
-	mage.T15_4PC_ArcaneChargeEffect = 1.0
-	mage.T15_4PC_FrostboltProcChance = 0
 	mage.Icicles = make([]float64, 0)
 }
 
