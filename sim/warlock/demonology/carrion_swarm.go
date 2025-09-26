@@ -21,7 +21,7 @@ func (demonology *DemonologyWarlock) registerCarrionSwarm() {
 		Cast: core.CastConfig{
 			DefaultCast: core.Cast{
 				GCDMin: time.Millisecond * 500,
-				GCD:    time.Millisecond * 1000,
+				GCD:    core.GCDMin,
 			},
 			CD: core.Cooldown{
 				Timer:    demonology.NewTimer(),
