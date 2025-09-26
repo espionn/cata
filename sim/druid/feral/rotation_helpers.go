@@ -434,8 +434,8 @@ func (rotation *FeralDruidRotation) shouldAoeRake(sim *core.Simulation, roarNow 
 	}
 
 	// Compare DPE versus Swipe to see if it's worth casting
-	potentialRakeTicks := min(rakeDot.BaseTickCount, int32(sim.GetRemainingDuration() / rakeDot.BaseTickLength))
-	expectedRakeDamage := cat.Rake.ExpectedInitialDamage(sim, rakeTarget) + cat.Rake.ExpectedTickDamage(sim, rakeTarget) * float64(potentialRakeTicks)
+	potentialRakeTicks := min(rakeDot.BaseTickCount, int32(sim.GetRemainingDuration()/rakeDot.BaseTickLength))
+	expectedRakeDamage := cat.Rake.ExpectedInitialDamage(sim, rakeTarget) + cat.Rake.ExpectedTickDamage(sim, rakeTarget)*float64(potentialRakeTicks)
 	rakeDPE := expectedRakeDamage / cat.Rake.DefaultCast.Cost
 
 	var expectedSwipeDamage float64

@@ -377,6 +377,11 @@
 		"preset_configurations": {
 			"title": "Configurations Prédéfinies",
 			"tooltip": "Les configurations prédéfinies peuvent appliquer une combinaison optimale d'équipement, talents, rotation et paramètres d'affrontement."
+		},
+		"upgrade_summary": {
+			"title": "Coûts d'Amélioration Restants",
+			"upgrade_all_items": "Améliorer tous les objets",
+			"reset_upgrades": "Réinitialiser les Améliorations"
 		}
 	},
 	"settings_tab": {

@@ -27,7 +27,7 @@ export class UpgradeCostsSummary extends Component {
 		this.player = player;
 
 		this.container = new ContentBlock(this.rootElem, 'summary-table-container', {
-			header: { title: 'Remaining Upgrade Costs' },
+			header: { title: i18n.t('gear_tab.upgrade_summary.title') },
 			extraCssClasses: ['summary-table--upgrade-costs'],
 		});
 
@@ -87,7 +87,7 @@ export class UpgradeCostsSummary extends Component {
 								this.player.setGear(TypedEvent.nextEventID(), curGear);
 							}}>
 							<i className="fas fa-arrow-up me-1"></i>
-							Upgrade all items
+							{i18n.t('gear_tab.upgrade_summary.upgrade_all_items')}
 						</button>
 					</div>
 				</div>,
@@ -103,7 +103,7 @@ export class UpgradeCostsSummary extends Component {
 						this.player.setGear(TypedEvent.nextEventID(), gear);
 					}}>
 					<i className="fas fa-times me-1"></i>
-					Reset Upgrades
+					{i18n.t('gear_tab.upgrade_summary.reset_upgrades')}
 				</button>
 			);
 

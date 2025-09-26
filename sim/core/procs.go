@@ -266,7 +266,7 @@ func (character *Character) NewRPPMProcManager(effectID int32, isEnchant bool, i
 
 	// Keep track of the lastProc and lastCheck values when weapon swapping.
 	lastProc := -time.Second * 120
-	lastCheck :=  -time.Second * 10
+	lastCheck := -time.Second * 10
 	isFirstProc := true
 
 	character.RegisterItemSwapCallback(slotList, func(_ *Simulation, _ proto.ItemSlot) {

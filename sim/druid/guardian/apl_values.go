@@ -117,7 +117,7 @@ func (action *APLActionGuardianHotwDpsRotation) Execute(sim *core.Simulation) {
 		} else {
 			poolingTime = core.DurationFromSeconds((bear.CurrentRakeCost() - curEnergy) / regenRate)
 		}
-	} else if ((curCp < 5) && (curEnergy + (bear.Wrath.DefaultCast.CastTime*2 + core.GCDDefault).Seconds() * regenRate > 100) && bear.CatFormAura.IsActive()) || (action.strategy == proto.APLActionGuardianHotwDpsRotation_Cat) {
+	} else if ((curCp < 5) && (curEnergy+(bear.Wrath.DefaultCast.CastTime*2+core.GCDDefault).Seconds()*regenRate > 100) && bear.CatFormAura.IsActive()) || (action.strategy == proto.APLActionGuardianHotwDpsRotation_Cat) {
 		if bear.MangleCat.CanCast(sim, bear.CurrentTarget) {
 			bear.MangleCat.Cast(sim, bear.CurrentTarget)
 
@@ -147,17 +147,17 @@ func (action *APLActionGuardianHotwDpsRotation) WrathWeaveNext(sim *core.Simulat
 	curCp := bear.ComboPoints()
 	ripDot := bear.Rip.CurDot()
 
-	if (curCp == 5) && (!ripDot.IsActive() || (ripDot.RemainingDuration(sim) - core.GCDDefault < ripDot.BaseTickLength)) {
+	if (curCp == 5) && (!ripDot.IsActive() || (ripDot.RemainingDuration(sim)-core.GCDDefault < ripDot.BaseTickLength)) {
 		return false
 	}
 
 	rakeDot := bear.Rake.CurDot()
 
-	if !rakeDot.IsActive() || (rakeDot.RemainingDuration(sim) - core.GCDDefault < rakeDot.BaseTickLength) {
+	if !rakeDot.IsActive() || (rakeDot.RemainingDuration(sim)-core.GCDDefault < rakeDot.BaseTickLength) {
 		return false
 	}
 
-	return (curCp == 5) || (bear.CurrentEnergy() + (core.GCDDefault + bear.Wrath.DefaultCast.CastTime*2 + core.GCDDefault).Seconds() * bear.EnergyRegenPerSecond() <= 100)
+	return (curCp == 5) || (bear.CurrentEnergy()+(core.GCDDefault+bear.Wrath.DefaultCast.CastTime*2+core.GCDDefault).Seconds()*bear.EnergyRegenPerSecond() <= 100)
 }
 
 func (action *APLActionGuardianHotwDpsRotation) Reset(_ *core.Simulation) {

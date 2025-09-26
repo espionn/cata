@@ -377,6 +377,11 @@
 		"preset_configurations": {
 			"title": "Preset Configurations",
 			"tooltip": "Preset configurations can apply an optimal combination of gear, talents, rotation and encounter settings."
+		},
+		"upgrade_summary": {
+			"title": "Remaining Upgrade Costs",
+			"upgrade_all_items": "Upgrade all items",
+			"reset_upgrades": "Reset Upgrades"
 		}
 	},
 	"settings_tab": {
