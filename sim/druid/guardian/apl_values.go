@@ -54,6 +54,11 @@ func (action *APLActionGuardianHotwDpsRotation) Execute(sim *core.Simulation) {
 
 	if bear.HeartOfTheWildAura.RemainingDuration(sim) < core.GCDDefault {
 		bear.BearForm.Cast(sim, nil)
+
+		if bear.ItemSwap.IsEnabled() {
+			bear.ItemSwap.SwapItems(sim, proto.APLActionItemSwap_Main, false)
+		}
+
 		return
 	}
 
@@ -75,6 +80,11 @@ func (action *APLActionGuardianHotwDpsRotation) Execute(sim *core.Simulation) {
 
 	if !bear.CatFormAura.IsActive() && (ripNow || rakeNow) {
 		bear.CatForm.Cast(sim, nil)
+
+		if bear.ItemSwap.IsEnabled() {
+			bear.ItemSwap.SwapItems(sim, proto.APLActionItemSwap_Main, false)
+		}
+
 		return
 	}
 
@@ -86,6 +96,11 @@ func (action *APLActionGuardianHotwDpsRotation) Execute(sim *core.Simulation) {
 	if ripNow {
 		if bear.Rip.CanCast(sim, bear.CurrentTarget) {
 			bear.Rip.Cast(sim, bear.CurrentTarget)
+
+			if bear.ItemSwap.IsEnabled() && action.WrathWeaveNext(sim) {
+				bear.ItemSwap.SwapItems(sim, proto.APLActionItemSwap_Swap1, false)
+			}
+
 			return
 		} else {
 			poolingTime = core.DurationFromSeconds((bear.CurrentRipCost() - curEnergy) / regenRate)
@@ -93,13 +108,23 @@ func (action *APLActionGuardianHotwDpsRotation) Execute(sim *core.Simulation) {
 	} else if rakeNow {
 		if bear.Rake.CanCast(sim, bear.CurrentTarget) {
 			bear.Rake.Cast(sim, bear.CurrentTarget)
+
+			if bear.ItemSwap.IsEnabled() && action.WrathWeaveNext(sim) {
+				bear.ItemSwap.SwapItems(sim, proto.APLActionItemSwap_Swap1, false)
+			}
+
 			return
 		} else {
 			poolingTime = core.DurationFromSeconds((bear.CurrentRakeCost() - curEnergy) / regenRate)
 		}
-	} else if (curCp < 5) || (action.strategy == proto.APLActionGuardianHotwDpsRotation_Cat) {
+	} else if ((curCp < 5) && (curEnergy+(bear.Wrath.DefaultCast.CastTime*2+core.GCDDefault).Seconds()*regenRate > 100) && bear.CatFormAura.IsActive()) || (action.strategy == proto.APLActionGuardianHotwDpsRotation_Cat) {
 		if bear.MangleCat.CanCast(sim, bear.CurrentTarget) {
 			bear.MangleCat.Cast(sim, bear.CurrentTarget)
+
+			if bear.ItemSwap.IsEnabled() && action.WrathWeaveNext(sim) {
+				bear.ItemSwap.SwapItems(sim, proto.APLActionItemSwap_Swap1, false)
+			}
+
 			return
 		} else {
 			poolingTime = core.DurationFromSeconds((bear.CurrentMangleCatCost() - curEnergy) / regenRate)
@@ -111,6 +136,28 @@ func (action *APLActionGuardianHotwDpsRotation) Execute(sim *core.Simulation) {
 
 	action.nextActionAt = sim.CurrentTime + max(poolingTime, 0) + bear.ReactionTime
 	bear.WaitUntil(sim, action.nextActionAt)
+}
+
+func (action *APLActionGuardianHotwDpsRotation) WrathWeaveNext(sim *core.Simulation) bool {
+	if action.strategy == proto.APLActionGuardianHotwDpsRotation_Cat {
+		return false
+	}
+
+	bear := action.bear
+	curCp := bear.ComboPoints()
+	ripDot := bear.Rip.CurDot()
+
+	if (curCp == 5) && (!ripDot.IsActive() || (ripDot.RemainingDuration(sim)-core.GCDDefault < ripDot.BaseTickLength)) {
+		return false
+	}
+
+	rakeDot := bear.Rake.CurDot()
+
+	if !rakeDot.IsActive() || (rakeDot.RemainingDuration(sim)-core.GCDDefault < rakeDot.BaseTickLength) {
+		return false
+	}
+
+	return (curCp == 5) || (bear.CurrentEnergy()+(core.GCDDefault+bear.Wrath.DefaultCast.CastTime*2+core.GCDDefault).Seconds()*bear.EnergyRegenPerSecond() <= 100)
 }
 
 func (action *APLActionGuardianHotwDpsRotation) Reset(_ *core.Simulation) {

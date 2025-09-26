@@ -1556,9 +1556,6 @@
 				"title": {
 					"type": "string"
 				},
-				"gladiators_text": {
-					"type": "string"
-				},
 				"upgrade_all_items": {
 					"type": "string"
 				},
@@ -1567,7 +1564,7 @@
 				}
 			},
 			"additionalProperties": false,
-			"required": ["title", "gladiators_text", "upgrade_all_items", "reset_upgrades"]
+			"required": ["title", "upgrade_all_items", "reset_upgrades"]
 		}
       },
       "additionalProperties": false,

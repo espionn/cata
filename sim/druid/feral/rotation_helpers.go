@@ -363,7 +363,7 @@ func (rotation *FeralDruidRotation) shouldWrathWeave(sim *core.Simulation) bool 
 	startingEnergy := cat.CurrentEnergy() + remainingGCD.Seconds()*regenRate
 	curCp := cat.ComboPoints()
 
-	if (curCp < 2) && (startingEnergy+maxWrathCastTime.Seconds()*2*regenRate > furorCap) {
+	if (curCp < 3) && (startingEnergy+maxWrathCastTime.Seconds()*2*regenRate > furorCap) {
 		return false
 	}
 
