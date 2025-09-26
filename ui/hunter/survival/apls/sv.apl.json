@@ -49,7 +49,9 @@
 		{
 			"name": "Cooldowns",
 			"actions": [
+				{ "action": { "castAllStatBuffCooldowns": { "statType1": 1, "statType2": -1, "statType3": -1 } } },
 				{ "action": { "castSpell": { "spellId": { "spellId": 126734 } } } },
+				{ "action": { "castAllStatBuffCooldowns": { "statType1": 6, "statType2": 7, "statType3": 11 } } },
 				{ "action": { "castSpell": { "spellId": { "spellId": 53401 } } } },
 				{
 					"action": {
