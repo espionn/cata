@@ -297,6 +297,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFrost-AllItems-PurifiedBindingsofImmerseus-105422"
+ value: {
+  dps: 172969.03466
+  tps: 119537.48856
+ }
+}
+dps_results: {
  key: "TestFrost-AllItems-Qian-Le,CourageofNiuzao-102245"
  value: {
   dps: 157398.7635

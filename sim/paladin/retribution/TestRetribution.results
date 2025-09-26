@@ -1634,6 +1634,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestRetribution-AllItems-PurifiedBindingsofImmerseus-105422"
+ value: {
+  dps: 152065.0481
+  tps: 143739.42764
+ }
+}
+dps_results: {
  key: "TestRetribution-AllItems-Qian-Le,CourageofNiuzao-102245"
  value: {
   dps: 155150.10544

@@ -351,6 +351,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBalance-AllItems-PurifiedBindingsofImmerseus-105422"
+ value: {
+  dps: 102008.15634
+  tps: 103175.96001
+  hps: 15320.0896
+ }
+}
+dps_results: {
  key: "TestBalance-AllItems-Qian-Le,CourageofNiuzao-102245"
  value: {
   dps: 91664.22588

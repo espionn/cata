@@ -325,6 +325,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestSubtlety-AllItems-PurifiedBindingsofImmerseus-105422"
+ value: {
+  dps: 101012.44934
+  tps: 71164.55187
+ }
+}
+dps_results: {
  key: "TestSubtlety-AllItems-Qian-Le,CourageofNiuzao-102245"
  value: {
   dps: 110782.61732

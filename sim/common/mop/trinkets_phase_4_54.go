@@ -165,4 +165,63 @@ func init() {
 			proto.Spec_SpecProtectionWarrior: 145992,
 		},
 	})
+
+	// Purified Bindings of Immerseus
+	// Your attacks have a chance to grant 606 Intellect for 20 sec.
+	// (Proc chance: 15%, 1.917m cooldown)
+	// Amplifies your Critical Strike damage and healing, Haste, Mastery, and Spirit by 1%.
+	shared.ItemVersionMap{
+		shared.ItemVersionLFR:             104924,
+		shared.ItemVersionNormal:          102293,
+		shared.ItemVersionHeroic:          104426,
+		shared.ItemVersionWarforged:       105173,
+		shared.ItemVersionHeroicWarforged: 105422,
+		shared.ItemVersionFlexible:        104675,
+	}.RegisterAll(func(version shared.ItemVersion, itemID int32, versionLabel string) {
+		label := "Purified Bindings of Immerseus"
+
+		core.NewItemEffect(itemID, func(agent core.Agent, state proto.ItemLevelState) {
+			character := agent.GetCharacter()
+			statValue := core.GetItemEffectScaling(itemID, 2.97300004959, state)
+
+			critDamageValue := 1 + core.GetItemEffectScaling(itemID, 0.00088499999, state)/100
+			hasteValue := 1 + core.GetItemEffectScaling(itemID, 0.00176999997, state)/100
+			masteryValue := 1 + core.GetItemEffectScaling(itemID, 0.00176999997, state)/100
+			spiritValue := 1 + core.GetItemEffectScaling(itemID, 0.00176999997, state)/100
+
+			statAura := core.MakePermanent(character.RegisterAura(core.Aura{
+				Label:      fmt.Sprintf("Amplification %s", versionLabel),
+				ActionID:   core.ActionID{SpellID: 146051},
+				BuildPhase: core.CharacterBuildPhaseGear,
+			})).
+				AttachStatDependency(character.NewDynamicMultiplyStat(stats.HasteRating, hasteValue)).
+				AttachStatDependency(character.NewDynamicMultiplyStat(stats.MasteryRating, masteryValue)).
+				AttachStatDependency(character.NewDynamicMultiplyStat(stats.Spirit, spiritValue)).
+				AttachMultiplicativePseudoStatBuff(&character.PseudoStats.CritDamageMultiplier, critDamageValue)
+
+			aura := character.NewTemporaryStatsAura(
+				fmt.Sprintf("Expanded Mind %s", versionLabel),
+				core.ActionID{SpellID: 146046},
+				stats.Stats{stats.Intellect: statValue},
+				time.Second*20,
+			)
+
+			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
+				Name:       label,
+				Harmful:    true,
+				ICD:        time.Second * 115,
+				ProcChance: 0.15,
+				Outcome:    core.OutcomeCrit,
+				Callback:   core.CallbackOnSpellHitDealt,
+				Handler: func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
+					aura.Activate(sim)
+				},
+			})
+
+			eligibleSlots := character.ItemSwap.EligibleSlotsForItem(itemID)
+			character.AddStatProcBuff(itemID, aura, false, eligibleSlots)
+			character.ItemSwap.RegisterProcWithSlots(itemID, triggerAura, eligibleSlots)
+			character.ItemSwap.RegisterProcWithSlots(itemID, statAura, eligibleSlots)
+		})
+	})
 }

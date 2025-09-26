@@ -1904,6 +1904,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestProtectionWarrior-AllItems-PurifiedBindingsofImmerseus-105422"
+ value: {
+  dps: 114722.46063
+  tps: 720616.06743
+  dtps: 23152.43844
+ }
+}
+dps_results: {
  key: "TestProtectionWarrior-AllItems-Qian-Le,CourageofNiuzao-102245"
  value: {
   dps: 113093.73514

@@ -367,6 +367,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestUnholy-AllItems-PurifiedBindingsofImmerseus-105422"
+ value: {
+  dps: 147582.37719
+  tps: 107390.81972
+  hps: 2068.06414
+ }
+}
+dps_results: {
  key: "TestUnholy-AllItems-Qian-Le,CourageofNiuzao-102245"
  value: {
   dps: 149316.80599

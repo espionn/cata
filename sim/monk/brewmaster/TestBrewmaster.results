@@ -2137,6 +2137,15 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBrewmaster-AllItems-PurifiedBindingsofImmerseus-105422"
+ value: {
+  dps: 116283.13725
+  tps: 654361.66126
+  dtps: 21144.51703
+  hps: 26645.62451
+ }
+}
+dps_results: {
  key: "TestBrewmaster-AllItems-Qian-Le,CourageofNiuzao-102245"
  value: {
   dps: 121907.5166
