@@ -267,6 +267,7 @@ export class EquippedItem {
 			enchant: newEnchant,
 			tinker: newTinker,
 			gems: newGems,
+			upgrade: this._upgrade,
 			challengeMode: this._challengeMode,
 		});
 	}
