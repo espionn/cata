@@ -7,11 +7,13 @@ import { defaultRaidBuffMajorDamageCooldowns } from '../../core/proto_utils/util
 import StandardApl from './apls/standard.apl.json';
 import PreraidGear from './gear_sets/preraid.gear.json';
 import T14Gear from './gear_sets/t14.gear.json';
+import T14UpgradedGear from './gear_sets/t14-upgraded.gear.json';
 import T15Gear from './gear_sets/t15.gear.json';
 import T16Gear from './gear_sets/t16.gear.json';
 
 export const PreraidPresetGear = PresetUtils.makePresetGear('Pre-raid', PreraidGear);
 export const T14PresetGear = PresetUtils.makePresetGear('T14', T14Gear);
+export const T14UpgradedPresetGear = PresetUtils.makePresetGear('T14 - Upgraded', T14UpgradedGear);
 export const T15PresetGear = PresetUtils.makePresetGear('T15', T15Gear);
 export const T16PresetGear = PresetUtils.makePresetGear('T16', T16Gear);
 
@@ -20,13 +22,13 @@ export const StandardRotation = PresetUtils.makePresetAPLRotation('Standard', St
 export const StandardEPWeights = PresetUtils.makePresetEpWeights(
 	'Standard',
 	Stats.fromMap({
-		[Stat.StatIntellect]: 1.3,
+		[Stat.StatIntellect]: 1,
 		[Stat.StatSpirit]: 1.27,
 		[Stat.StatSpellPower]: 1,
 		[Stat.StatHitRating]: 1.27,
-		[Stat.StatCritRating]: 0.56,
-		[Stat.StatHasteRating]: 0.8,
-		[Stat.StatMasteryRating]: 0.41,
+		[Stat.StatCritRating]: 0.61,
+		[Stat.StatHasteRating]: 0.63,
+		[Stat.StatMasteryRating]: 0.38,
 	}),
 );
 
@@ -89,7 +91,7 @@ export const PresetPreraidBuild = PresetUtils.makePresetBuild('Balance Pre-raid'
 });
 
 export const T14PresetBuild = PresetUtils.makePresetBuild('Balance T14', {
-	gear: T14PresetGear,
+	gear: T14UpgradedPresetGear,
 	talents: StandardTalents,
 	rotation: StandardRotation,
 	epWeights: StandardEPWeights,
