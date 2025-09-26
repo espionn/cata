@@ -126,7 +126,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFrostMage, {
 		// Preset talents that the user can quickly select.
 		talents: [Presets.FrostDefaultTalents, Presets.FrostTalentsCleave, Presets.FrostTalentsAoE],
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.P1_PREBIS, Presets.P1_BIS, Presets.P2_BIS],
+		gear: [Presets.P1_PREBIS, Presets.P1_BIS, Presets.P2_BIS, Presets.P3_BIS],
 
 		builds: [Presets.P1_PRESET_BUILD_DEFAULT, Presets.P1_PRESET_BUILD_CLEAVE, Presets.P1_PRESET_BUILD_AOE],
 	},
@@ -151,8 +151,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFrostMage, {
 			otherDefaults: Presets.OtherDefaults,
 			defaultFactionRaces: {
 				[Faction.Unknown]: Race.RaceUnknown,
-				[Faction.Alliance]: Race.RaceGnome,
-				[Faction.Horde]: Race.RaceTroll,
+				[Faction.Alliance]: Race.RaceAlliancePandaren,
+				[Faction.Horde]: Race.RaceOrc,
 			},
 			defaultGear: {
 				[Faction.Unknown]: {},
