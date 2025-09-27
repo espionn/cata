@@ -44,12 +44,8 @@ export const ITEM_NOTICES = new Map<number, ItemNoticeData>([
 	]),
 	...[
 		...MISSING_ITEM_EFFECTS,
-		// Spark of Zandalar
-		...[94526, 95654, 96026, 96398, 96770],
 		// Fusion-Fire Core
 		...[102295, 104463, 104712, 104961, 105210, 105459],
-		// Soul Barrier
-		96927,
 	].map((itemID): [number, ItemNoticeData] => [
 		itemID,
 		{
