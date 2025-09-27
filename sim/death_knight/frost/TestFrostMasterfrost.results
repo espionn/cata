@@ -480,6 +480,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFrostMasterfrost-AllItems-SoothingTalismanoftheShado-PanAssault-94509"
+ value: {
+  dps: 162025.25949
+  tps: 149883.25497
+  hps: 1670.74114
+ }
+}
+dps_results: {
  key: "TestFrostMasterfrost-AllItems-SynapseSprings(MarkII)-4898"
  value: {
   dps: 166098.88864

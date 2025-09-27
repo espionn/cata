@@ -2143,6 +2143,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFeral-AllItems-SoothingTalismanoftheShado-PanAssault-94509"
+ value: {
+  dps: 148448.14997
+  tps: 256312.05454
+  hps: 11327.58432
+ }
+}
+dps_results: {
  key: "TestFeral-AllItems-SpiritsoftheSun-87163"
  value: {
   dps: 148448.14997

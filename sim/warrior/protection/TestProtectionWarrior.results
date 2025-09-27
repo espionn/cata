@@ -2128,6 +2128,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestProtectionWarrior-AllItems-SoothingTalismanoftheShado-PanAssault-94509"
+ value: {
+  dps: 113178.65338
+  tps: 711642.37257
+  dtps: 23233.55537
+ }
+}
+dps_results: {
  key: "TestProtectionWarrior-AllItems-SpiritsoftheSun-87163"
  value: {
   dps: 113178.65338

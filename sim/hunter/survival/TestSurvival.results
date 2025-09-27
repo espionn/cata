@@ -1837,6 +1837,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestSurvival-AllItems-SoothingTalismanoftheShado-PanAssault-94509"
+ value: {
+  dps: 162255.72204
+  tps: 133715.48734
+ }
+}
+dps_results: {
  key: "TestSurvival-AllItems-SpiritsoftheSun-87163"
  value: {
   dps: 162255.72204

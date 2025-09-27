@@ -2130,10 +2130,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-PurifiedBindingsofImmerseus-105422"
  value: {
-  dps: 99733.94775
-  tps: 565177.949
-  dtps: 35783.45335
-  hps: 38283.95666
+  dps: 100429.00977
+  tps: 564789.51294
+  dtps: 35826.97593
+  hps: 38771.75668
  }
 }
 dps_results: {
@@ -2458,6 +2458,15 @@ dps_results: {
   tps: 570183.68029
   dtps: 35038.84008
   hps: 37233.35631
+ }
+}
+dps_results: {
+ key: "TestBlood-AllItems-SoothingTalismanoftheShado-PanAssault-94509"
+ value: {
+  dps: 99015.31733
+  tps: 558126.06444
+  dtps: 35732.32318
+  hps: 37689.75606
  }
 }
 dps_results: {

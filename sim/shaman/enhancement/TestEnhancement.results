@@ -1872,6 +1872,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestEnhancement-AllItems-SoothingTalismanoftheShado-PanAssault-94509"
+ value: {
+  dps: 124229.95733
+  tps: 105936.19649
+ }
+}
+dps_results: {
  key: "TestEnhancement-AllItems-SpiritsoftheSun-87163"
  value: {
   dps: 124204.02185

@@ -374,6 +374,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFury-AllItems-SoothingTalismanoftheShado-PanAssault-94509"
+ value: {
+  dps: 146803.29351
+  tps: 95028.49276
+ }
+}
+dps_results: {
  key: "TestFury-AllItems-SynapseSprings(MarkII)-4898"
  value: {
   dps: 150390.89136

@@ -2389,6 +2389,15 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBrewmaster-AllItems-SoothingTalismanoftheShado-PanAssault-94509"
+ value: {
+  dps: 114719.05203
+  tps: 644539.19606
+  dtps: 20862.49801
+  hps: 26490.83465
+ }
+}
+dps_results: {
  key: "TestBrewmaster-AllItems-SpiritsoftheSun-87163"
  value: {
   dps: 114719.05203

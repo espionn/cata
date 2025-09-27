@@ -2103,6 +2103,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestAffliction-AllItems-SoothingTalismanoftheShado-PanAssault-94509"
+ value: {
+  dps: 89695.203
+  tps: 59747.48176
+  hps: 1581.6862
+ }
+}
+dps_results: {
  key: "TestAffliction-AllItems-SpiritsoftheSun-87163"
  value: {
   dps: 88580.39305

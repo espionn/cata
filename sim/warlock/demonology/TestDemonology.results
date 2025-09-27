@@ -2095,6 +2095,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestDemonology-AllItems-SoothingTalismanoftheShado-PanAssault-94509"
+ value: {
+  dps: 98733.10206
+  tps: 61265.16369
+  hps: 1185.84953
+ }
+}
+dps_results: {
  key: "TestDemonology-AllItems-SpiritsoftheSun-87163"
  value: {
   dps: 97748.40986

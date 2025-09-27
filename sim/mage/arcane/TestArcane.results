@@ -367,6 +367,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestArcane-AllItems-SoothingTalismanoftheShado-PanAssault-94509"
+ value: {
+  dps: 153808.4908
+  tps: 150011.25236
+ }
+}
+dps_results: {
  key: "TestArcane-AllItems-SynapseSprings(MarkII)-4898"
  value: {
   dps: 151157.83095
