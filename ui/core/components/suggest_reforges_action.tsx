@@ -1291,6 +1291,8 @@ export class ReforgeOptimizer {
 					// Force non-tank specs to use exclusively primary stat JC gems to speed up calculations.
 					// May need to revisit this approximation at higher ilvls.
 					(isJC && !this.isTankSpec && !gemMatchesStats(gem, [Stat.StatStrength, Stat.StatAgility, Stat.StatIntellect])) ||
+					// Remove Hit gems for Hybrid casters as they can use Spirit as well and this speeds up calculations
+					(this.isHybridCaster && !!gem.stats[Stat.StatHitRating]) ||
 					gem.name.includes('Perfect') ||
 					!gemMatchesSocket(gem, socketColor)
 				) {
