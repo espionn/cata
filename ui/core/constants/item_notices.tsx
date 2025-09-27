@@ -42,7 +42,17 @@ export const ITEM_NOTICES = new Map<number, ItemNoticeData>([
 			[Spec.SpecUnknown]: TENTATIVE_IMPLEMENTATION_WARNING,
 		},
 	]),
-	...MISSING_ITEM_EFFECTS.map((itemID): [number, ItemNoticeData] => [
+	...[
+		...MISSING_ITEM_EFFECTS,
+		// Spark of Zandalar
+		...[94526, 95654, 96026, 96398, 96770],
+		// Fusion-Fire Core
+		...[102295, 104463, 104712, 104961, 105210, 105459],
+		// Soothing Talisman of the Shado-Pan Assault
+		94509,
+		// Soul Barrier
+		96927,
+	].map((itemID): [number, ItemNoticeData] => [
 		itemID,
 		{
 			[Spec.SpecUnknown]: MISSING_IMPLEMENTATION_WARNING,
