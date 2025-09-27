@@ -1844,6 +1844,20 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFire-AllItems-SoulBarrier-96927"
+ value: {
+  dps: 142380.27782
+  tps: 139387.3889
+ }
+}
+dps_results: {
+ key: "TestFire-AllItems-SparkofZandalar-96770"
+ value: {
+  dps: 147067.45182
+  tps: 143977.52366
+ }
+}
+dps_results: {
  key: "TestFire-AllItems-SpiritsoftheSun-87163"
  value: {
   dps: 150636.16603

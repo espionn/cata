@@ -2136,6 +2136,22 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestProtectionWarrior-AllItems-SoulBarrier-96927"
+ value: {
+  dps: 112512.71371
+  tps: 708555.85182
+  dtps: 23004.37119
+ }
+}
+dps_results: {
+ key: "TestProtectionWarrior-AllItems-SparkofZandalar-96770"
+ value: {
+  dps: 117192.14958
+  tps: 738984.97269
+  dtps: 22229.76034
+ }
+}
+dps_results: {
  key: "TestProtectionWarrior-AllItems-SpiritsoftheSun-87163"
  value: {
   dps: 113178.65338

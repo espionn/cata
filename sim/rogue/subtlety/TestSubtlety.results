@@ -388,6 +388,20 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestSubtlety-AllItems-SoulBarrier-96927"
+ value: {
+  dps: 98729.80815
+  tps: 69565.654
+ }
+}
+dps_results: {
+ key: "TestSubtlety-AllItems-SparkofZandalar-96770"
+ value: {
+  dps: 104242.60293
+  tps: 73504.07609
+ }
+}
+dps_results: {
  key: "TestSubtlety-AllItems-SynapseSprings(MarkII)-4898"
  value: {
   dps: 106693.68226

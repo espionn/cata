@@ -2111,6 +2111,22 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestAffliction-AllItems-SoulBarrier-96927"
+ value: {
+  dps: 83570.12158
+  tps: 55595.98694
+  hps: 1747.90061
+ }
+}
+dps_results: {
+ key: "TestAffliction-AllItems-SparkofZandalar-96770"
+ value: {
+  dps: 87161.50999
+  tps: 58454.5205
+  hps: 1635.5862
+ }
+}
+dps_results: {
  key: "TestAffliction-AllItems-SpiritsoftheSun-87163"
  value: {
   dps: 88580.39305

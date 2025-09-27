@@ -2371,6 +2371,24 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestProtection-AllItems-SoulBarrier-96927"
+ value: {
+  dps: 113894.88386
+  tps: 745677.42656
+  dtps: 13645.9237
+  hps: 19308.76958
+ }
+}
+dps_results: {
+ key: "TestProtection-AllItems-SparkofZandalar-96770"
+ value: {
+  dps: 120456.3599
+  tps: 789983.35502
+  dtps: 12723.46494
+  hps: 21300.36095
+ }
+}
+dps_results: {
  key: "TestProtection-AllItems-SpiritsoftheSun-87163"
  value: {
   dps: 114090.40965

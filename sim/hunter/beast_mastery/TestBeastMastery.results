@@ -1844,6 +1844,20 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBeastMastery-AllItems-SoulBarrier-96927"
+ value: {
+  dps: 150925.68719
+  tps: 76497.4766
+ }
+}
+dps_results: {
+ key: "TestBeastMastery-AllItems-SparkofZandalar-96770"
+ value: {
+  dps: 153155.32392
+  tps: 77989.52117
+ }
+}
+dps_results: {
  key: "TestBeastMastery-AllItems-SpiritsoftheSun-87163"
  value: {
   dps: 150925.68719

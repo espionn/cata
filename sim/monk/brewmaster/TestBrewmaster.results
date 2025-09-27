@@ -2398,6 +2398,24 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBrewmaster-AllItems-SoulBarrier-96927"
+ value: {
+  dps: 114018.72312
+  tps: 642280.66228
+  dtps: 21243.88647
+  hps: 26012.27232
+ }
+}
+dps_results: {
+ key: "TestBrewmaster-AllItems-SparkofZandalar-96770"
+ value: {
+  dps: 116820.97329
+  tps: 656752.68646
+  dtps: 20870.77949
+  hps: 26796.68047
+ }
+}
+dps_results: {
  key: "TestBrewmaster-AllItems-SpiritsoftheSun-87163"
  value: {
   dps: 114719.05203

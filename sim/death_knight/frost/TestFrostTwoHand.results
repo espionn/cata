@@ -495,6 +495,22 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFrostTwoHand-AllItems-SoulBarrier-96927"
+ value: {
+  dps: 151671.84365
+  tps: 139004.26154
+  hps: 2731.97738
+ }
+}
+dps_results: {
+ key: "TestFrostTwoHand-AllItems-SparkofZandalar-96770"
+ value: {
+  dps: 163941.93543
+  tps: 150156.60258
+  hps: 2574.69674
+ }
+}
+dps_results: {
  key: "TestFrostTwoHand-AllItems-SynapseSprings(MarkII)-4898"
  value: {
   dps: 154765.59597

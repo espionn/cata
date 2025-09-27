@@ -2151,6 +2151,22 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFeral-AllItems-SoulBarrier-96927"
+ value: {
+  dps: 148448.14997
+  tps: 256312.09745
+  hps: 11077.33581
+ }
+}
+dps_results: {
+ key: "TestFeral-AllItems-SparkofZandalar-96770"
+ value: {
+  dps: 157724.79451
+  tps: 267323.88009
+  hps: 11140.29014
+ }
+}
+dps_results: {
  key: "TestFeral-AllItems-SpiritsoftheSun-87163"
  value: {
   dps: 148448.14997

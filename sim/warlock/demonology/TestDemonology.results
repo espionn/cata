@@ -2103,6 +2103,22 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestDemonology-AllItems-SoulBarrier-96927"
+ value: {
+  dps: 91976.45468
+  tps: 57398.64773
+  hps: 1340.78141
+ }
+}
+dps_results: {
+ key: "TestDemonology-AllItems-SparkofZandalar-96770"
+ value: {
+  dps: 95365.44718
+  tps: 59587.99021
+  hps: 1243.46918
+ }
+}
+dps_results: {
  key: "TestDemonology-AllItems-SpiritsoftheSun-87163"
  value: {
   dps: 97748.40986

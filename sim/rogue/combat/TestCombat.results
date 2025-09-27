@@ -388,6 +388,20 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestCombat-AllItems-SoulBarrier-96927"
+ value: {
+  dps: 99741.50554
+  tps: 70342.98257
+ }
+}
+dps_results: {
+ key: "TestCombat-AllItems-SparkofZandalar-96770"
+ value: {
+  dps: 106719.71092
+  tps: 75261.83269
+ }
+}
+dps_results: {
  key: "TestCombat-AllItems-SynapseSprings(MarkII)-4898"
  value: {
   dps: 106870.76704

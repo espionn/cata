@@ -488,6 +488,22 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFrostMasterfrost-AllItems-SoulBarrier-96927"
+ value: {
+  dps: 162025.25949
+  tps: 149883.25497
+  hps: 1810.5918
+ }
+}
+dps_results: {
+ key: "TestFrostMasterfrost-AllItems-SparkofZandalar-96770"
+ value: {
+  dps: 176478.88323
+  tps: 163216.23968
+  hps: 1726.34291
+ }
+}
+dps_results: {
  key: "TestFrostMasterfrost-AllItems-SynapseSprings(MarkII)-4898"
  value: {
   dps: 166098.88864

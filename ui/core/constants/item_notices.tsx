@@ -42,11 +42,7 @@ export const ITEM_NOTICES = new Map<number, ItemNoticeData>([
 			[Spec.SpecUnknown]: TENTATIVE_IMPLEMENTATION_WARNING,
 		},
 	]),
-	...[
-		...MISSING_ITEM_EFFECTS,
-		// Fusion-Fire Core
-		...[102295, 104463, 104712, 104961, 105210, 105459],
-	].map((itemID): [number, ItemNoticeData] => [
+	...MISSING_ITEM_EFFECTS.map((itemID): [number, ItemNoticeData] => [
 		itemID,
 		{
 			[Spec.SpecUnknown]: MISSING_IMPLEMENTATION_WARNING,
