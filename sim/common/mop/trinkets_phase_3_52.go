@@ -659,4 +659,46 @@ func init() {
 			character.ItemSwap.RegisterProcWithSlots(itemID, triggerAura, eligibleSlots)
 		})
 	})
+
+	// Soothing Talisman of the Shado-Pan Assault
+	// Use: Gain 29805 mana. (3 Min Cooldown)
+	core.NewItemEffect(94509, func(agent core.Agent, state proto.ItemLevelState) {
+		character := agent.GetCharacter()
+		actionId := core.ActionID{SpellID: 138724, ItemID: 94509}
+
+		manaValue := core.GetItemEffectScaling(94509, 10.05900001526, state)
+		manaMetrics := character.NewManaMetrics(actionId)
+
+		spell := character.RegisterSpell(core.SpellConfig{
+			ActionID:    actionId,
+			SpellSchool: core.SpellSchoolPhysical,
+			ProcMask:    core.ProcMaskEmpty,
+
+			Cast: core.CastConfig{
+				CD: core.Cooldown{
+					Timer:    character.NewTimer(),
+					Duration: time.Minute * 3,
+				},
+			},
+
+			CritMultiplier:   character.DefaultCritMultiplier(),
+			DamageMultiplier: 1,
+
+			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+				if character.HasManaBar() {
+					character.AddMana(sim, manaValue, manaMetrics)
+				}
+			},
+		})
+
+		character.AddMajorCooldown(core.MajorCooldown{
+			Spell:    spell,
+			Priority: core.CooldownPriorityDefault,
+			Type:     core.CooldownTypeMana,
+			ShouldActivate: func(sim *core.Simulation, character *core.Character) bool {
+				return character.MaxMana()-character.CurrentMana() >= manaValue
+			},
+		})
+	})
+
 }
