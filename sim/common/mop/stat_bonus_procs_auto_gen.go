@@ -13,25 +13,6 @@ func RegisterAllProcs() {
 	//       This can be ignored if the effect has already been implemented.
 	//       With next db run the item will be removed if implemented.
 	//
-	// Your attacks have a chance to grant 1 Intellect for 20s. ( 15% chance, 115 sec cooldown)
-	// shared.NewProcStatBonusEffectWithVariants(shared.ProcStatBonusEffect{
-	//	Callback: core.CallbackOnSpellHitDealt,
-	//	ProcMask: core.ProcMaskMeleeMHAuto | core.ProcMaskMeleeOHAuto | core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeOHSpecial | core.ProcMaskRangedAuto | core.ProcMaskRangedSpecial | core.ProcMaskSpellDamage | core.ProcMaskMeleeProc | core.ProcMaskRangedProc | core.ProcMaskSpellDamageProc,
-	//	Outcome:  core.OutcomeLanded,
-	//	Harmful:  true,
-	// }, []shared.ItemVariant{
-	//	{ItemID: 102293, ItemName: "Purified Bindings of Immerseus (N)"},
-	//	{ItemID: 104426, ItemName: "Purified Bindings of Immerseus (H)"},
-	//	{ItemID: 104675, ItemName: "Purified Bindings of Immerseus (Flexible)"},
-	//	{ItemID: 104924, ItemName: "Purified Bindings of Immerseus (LFR) (Celestial)"},
-	//	{ItemID: 105173, ItemName: "Purified Bindings of Immerseus (Warforged)"},
-	//	{ItemID: 105422, ItemName: "Purified Bindings of Immerseus (Heroic Warforged)"},
-	// })
-	
-	// TODO: Manual implementation required
-	//       This can be ignored if the effect has already been implemented.
-	//       With next db run the item will be removed if implemented.
-	//
 	// Your heals have a 0.1% chance to trigger Multistrike, which causes instant additional healing to your
 	// target equal to 33% of the original healing done.
 	// shared.NewProcStatBonusEffectWithVariants(shared.ProcStatBonusEffect{
