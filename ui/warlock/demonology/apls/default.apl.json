@@ -1,8 +1,8 @@
 {
 	"type": "TypeAPL",
 	"prepullActions": [
-		{"action":{"castSpell":{"spellId":{"otherId":"OtherActionPotion"}}},"doAtValue":{"const":{"val":"-4"}},"hide":true},
-		{"action":{"castSpell":{"spellId":{"spellId":6353}}},"doAtValue":{"const":{"val":"-4"}},"hide":true},
+		{"action":{"castSpell":{"spellId":{"otherId":"OtherActionPotion"}}},"doAtValue":{"const":{"val":"-4s"}},"hide":true},
+		{"action":{"castSpell":{"spellId":{"spellId":6353}}},"doAtValue":{"const":{"val":"-4s"}}},
 		{"action":{"castSpell":{"spellId":{"otherId":"OtherActionPotion"}}},"doAtValue":{"const":{"val":"-1.0s"}}},
 		{"action":{"castSpell":{"spellId":{"spellId":105174}}},"doAtValue":{"const":{"val":"-1.0s"}}}
 	],
