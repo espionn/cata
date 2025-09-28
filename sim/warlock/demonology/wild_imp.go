@@ -180,14 +180,15 @@ func (warlock *DemonologyWarlock) SpawnImp(sim *core.Simulation) {
 }
 
 func (demonology *DemonologyWarlock) registerWildImpPassive() {
-	demonology.DemonicCalling = core.MakeProcTriggerAura(&demonology.Unit, core.ProcTrigger{
+	var trigger *core.Aura
+	trigger = core.MakeProcTriggerAura(&demonology.Unit, core.ProcTrigger{
 		MetricsActionID: core.ActionID{SpellID: 114925},
 		Name:            "Demonic Calling",
 		Callback:        core.CallbackOnCastComplete,
 		ClassSpellMask:  warlock.WarlockSpellShadowBolt | warlock.WarlockSpellSoulFire | warlock.WarlockSpellTouchOfChaos,
 		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			demonology.SpawnImp(sim)
-			demonology.DemonicCalling.Deactivate(sim)
+			trigger.Deactivate(sim)
 		},
 	})
 
@@ -202,7 +203,7 @@ func (demonology *DemonologyWarlock) registerWildImpPassive() {
 	var controllerImpSpawn func(sim *core.Simulation)
 	controllerImpSpawn = func(sim *core.Simulation) {
 		if demonology.ImpSwarm == nil || demonology.ImpSwarm.CD.IsReady(sim) {
-			demonology.DemonicCalling.Activate(sim)
+			trigger.Activate(sim)
 		}
 
 		triggerAction = sim.GetConsumedPendingActionFromPool()
@@ -224,7 +225,20 @@ func (demonology *DemonologyWarlock) registerWildImpPassive() {
 			triggerAction.OnAction = controllerImpSpawn
 			sim.AddPendingAction(triggerAction)
 		},
-	}))
+	})).ApplyOnEncounterStart(func(aura *core.Aura, sim *core.Simulation) {
+		// If you pre-cast and activate Demonic Calling it is activated
+		// at the start of the fight with a 1-2.5s delay
+		if !trigger.IsActive() {
+			cd := time.Duration(sim.Roll(float64(time.Second), float64(time.Millisecond*2500)))
+			triggerAction = sim.GetConsumedPendingActionFromPool()
+			triggerAction.NextActionAt = sim.CurrentTime + cd
+			triggerAction.Priority = core.ActionPriorityAuto
+			triggerAction.OnAction = func(sim *core.Simulation) {
+				trigger.Activate(sim)
+			}
+			sim.AddPendingAction(triggerAction)
+		}
+	})
 
 	core.MakeProcTriggerAura(&demonology.Unit, core.ProcTrigger{
 		Name:           "Wild Imp - Doom Monitor",

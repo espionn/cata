@@ -46,8 +46,7 @@ type DemonologyWarlock struct {
 	HandOfGuldan  *core.Spell
 	ChaosWave     *core.Spell
 
-	MoltenCore     *core.Aura
-	DemonicCalling *core.Aura
+	MoltenCore *core.Aura
 
 	Felguard               *warlock.WarlockPet
 	WildImps               []*WildImpPet
@@ -109,19 +108,6 @@ func (demonology *DemonologyWarlock) Reset(sim *core.Simulation) {
 func (demonology *DemonologyWarlock) OnEncounterStart(sim *core.Simulation) {
 	demonology.DemonicFury.ResetBarTo(sim, DefaultDemonicFury)
 	demonology.Warlock.OnEncounterStart(sim)
-
-	// If you pre-cast and activate Demonic Calling it is activated
-	// at the start of the fight with a 1-2.5s delay
-	if !demonology.DemonicCalling.IsActive() {
-		cd := time.Duration(sim.Roll(float64(time.Second), float64(time.Millisecond*2500)))
-		triggerAction := sim.GetConsumedPendingActionFromPool()
-		triggerAction.NextActionAt = sim.CurrentTime + cd
-		triggerAction.Priority = core.ActionPriorityAuto
-		triggerAction.OnAction = func(sim *core.Simulation) {
-			demonology.DemonicCalling.Activate(sim)
-		}
-		sim.AddPendingAction(triggerAction)
-	}
 }
 
 func NewDemonicFuryCost(cost int) *warlock.SecondaryResourceCost {

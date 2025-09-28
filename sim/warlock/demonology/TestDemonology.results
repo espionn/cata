@@ -1841,9 +1841,9 @@ dps_results: {
 dps_results: {
  key: "TestDemonology-AllItems-PurifiedBindingsofImmerseus-105422"
  value: {
-  dps: 108946.9033
-  tps: 68323.63386
-  hps: 1182.50387
+  dps: 108260.32624
+  tps: 66788.12999
+  hps: 1195.8865
  }
 }
 dps_results: {
@@ -2097,25 +2097,25 @@ dps_results: {
 dps_results: {
  key: "TestDemonology-AllItems-SoothingTalismanoftheShado-PanAssault-94509"
  value: {
-  dps: 98733.10206
-  tps: 61265.16369
-  hps: 1185.84953
+  dps: 97727.8883
+  tps: 59914.07361
+  hps: 1201.83434
  }
 }
 dps_results: {
  key: "TestDemonology-AllItems-SoulBarrier-96927"
  value: {
-  dps: 91976.45468
-  tps: 57398.64773
-  hps: 1340.78141
+  dps: 90582.96716
+  tps: 55521.54435
+  hps: 1343.2567
  }
 }
 dps_results: {
  key: "TestDemonology-AllItems-SparkofZandalar-96770"
  value: {
-  dps: 95365.44718
-  tps: 59587.99021
-  hps: 1243.46918
+  dps: 94520.76163
+  tps: 57935.61421
+  hps: 1265.40182
  }
 }
 dps_results: {
