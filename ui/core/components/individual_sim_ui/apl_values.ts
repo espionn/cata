@@ -1392,7 +1392,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 	}),
 	dotBaseDuration: inputBuilder({
 		label: 'Dot Base Duration',
-		submenu: ['DoT'],
+		submenu: ['dot'],
 		shortDescription: 'The base duration of the DoT.',
 		newValue: APLValueDotBaseDuration.create,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
@@ -1402,21 +1402,33 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['dot'],
 		shortDescription: i18n.t('rotation_tab.apl.values.dot_percent_increase.tooltip'),
 		newValue: APLValueDotPercentIncrease.create,
-		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', '')],
+		fields: [
+			AplHelpers.unitFieldConfig('targetUnit', 'targets'),
+			AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', ''),
+			AplHelpers.useDotBaseValueCheckbox(),
+		],
 	}),
 	dotCritPercentIncrease: inputBuilder({
 		label: 'Dot Crit Chance Increase %',
-		submenu: ['DoT'],
+		submenu: ['dot'],
 		shortDescription: "How much higher a new DoT's Critical Strike Chance would be compared to the old.",
 		newValue: APLValueDotPercentIncrease.create,
-		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', '')],
+		fields: [
+			AplHelpers.unitFieldConfig('targetUnit', 'targets'),
+			AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', ''),
+			AplHelpers.useDotBaseValueCheckbox(),
+		],
 	}),
 	dotTickRatePercentIncrease: inputBuilder({
 		label: 'Dot Tick Rate Increase %',
-		submenu: ['DoT'],
+		submenu: ['dot'],
 		shortDescription: 'How much faster a new DoT would tick compared to the old.',
 		newValue: APLValueDotPercentIncrease.create,
-		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', '')],
+		fields: [
+			AplHelpers.unitFieldConfig('targetUnit', 'targets'),
+			AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', ''),
+			AplHelpers.useDotBaseValueCheckbox(),
+		],
 	}),
 	sequenceIsComplete: inputBuilder({
 		label: i18n.t('rotation_tab.apl.values.sequence_is_complete.label'),

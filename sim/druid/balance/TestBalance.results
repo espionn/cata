@@ -351,6 +351,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBalance-AllItems-PurifiedBindingsofImmerseus-105422"
+ value: {
+  dps: 102008.15634
+  tps: 103175.96001
+  hps: 15320.0896
+ }
+}
+dps_results: {
  key: "TestBalance-AllItems-Qian-Le,CourageofNiuzao-102245"
  value: {
   dps: 91664.22588
@@ -428,6 +436,30 @@ dps_results: {
   dps: 102992.48796
   tps: 104348.75477
   hps: 15530.85239
+ }
+}
+dps_results: {
+ key: "TestBalance-AllItems-SoothingTalismanoftheShado-PanAssault-94509"
+ value: {
+  dps: 95439.67353
+  tps: 96627.98974
+  hps: 15151.73824
+ }
+}
+dps_results: {
+ key: "TestBalance-AllItems-SoulBarrier-96927"
+ value: {
+  dps: 89280.12611
+  tps: 90503.23782
+  hps: 15413.00214
+ }
+}
+dps_results: {
+ key: "TestBalance-AllItems-SparkofZandalar-96770"
+ value: {
+  dps: 92818.77208
+  tps: 94191.4749
+  hps: 14550.9033
  }
 }
 dps_results: {
