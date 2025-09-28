@@ -33,17 +33,25 @@ func (demonology *DemonologyWarlock) registerWildImp(count int) {
 }
 
 func (demonology *DemonologyWarlock) buildWildImp(counter int) *WildImpPet {
+	wildImpStatInheritance := func() core.PetStatInheritance {
+		return func(ownerStats stats.Stats) stats.Stats {
+			defaultInheritance := demonology.SimplePetStatInheritanceWithScale(0)(ownerStats)
+			defaultInheritance[stats.HasteRating] = 0
+			return defaultInheritance
+		}
+	}
+
 	pet := &WildImpPet{
 		Pet: core.NewPet(core.PetConfig{
 			Name:                            "Wild Imp",
 			Owner:                           &demonology.Character,
 			BaseStats:                       stats.Stats{stats.Health: 48312.8, stats.Armor: 19680},
-			NonHitExpStatInheritance:        demonology.SimplePetStatInheritanceWithScale(0),
+			NonHitExpStatInheritance:        wildImpStatInheritance(),
 			EnabledOnStart:                  false,
 			IsGuardian:                      true,
-			HasDynamicMeleeSpeedInheritance: true,
-			HasDynamicCastSpeedInheritance:  true,
-			HasResourceRegenInheritance:     true,
+			HasDynamicMeleeSpeedInheritance: false,
+			HasDynamicCastSpeedInheritance:  false,
+			HasResourceRegenInheritance:     false,
 		}),
 	}
 
@@ -53,6 +61,24 @@ func (demonology *DemonologyWarlock) buildWildImp(counter int) *WildImpPet {
 		MaxEnergy:  10,
 		HasNoRegen: true,
 	})
+
+	oldEnable := pet.OnPetEnable
+	pet.OnPetEnable = func(sim *core.Simulation) {
+		if oldEnable != nil {
+			oldEnable(sim)
+		}
+
+		pet.MultiplyCastSpeed(sim, pet.Owner.PseudoStats.CastSpeedMultiplier)
+	}
+
+	oldDisable := pet.OnPetDisable
+	pet.OnPetDisable = func(sim *core.Simulation) {
+		if oldDisable != nil {
+			oldDisable(sim)
+		}
+
+		pet.MultiplyCastSpeed(sim, 1/pet.PseudoStats.CastSpeedMultiplier)
+	}
 
 	pet.registerFireboltSpell()
 	return pet
@@ -66,15 +92,13 @@ func (pet *WildImpPet) Reset(sim *core.Simulation) {
 }
 
 func (pet *WildImpPet) OnEncounterStart(sim *core.Simulation) {
-	if pet.IsActive() {
-		pet.Disable(sim)
-	}
 }
 
 func (pet *WildImpPet) ExecuteCustomRotation(sim *core.Simulation) {
 	spell := pet.Fireball
 	if spell.CanCast(sim, pet.CurrentTarget) {
 		spell.Cast(sim, pet.CurrentTarget)
+		pet.WaitUntil(sim, sim.CurrentTime+time.Millisecond*100)
 		return
 	}
 
@@ -156,15 +180,14 @@ func (warlock *DemonologyWarlock) SpawnImp(sim *core.Simulation) {
 }
 
 func (demonology *DemonologyWarlock) registerWildImpPassive() {
-	var trigger *core.Aura
-	trigger = core.MakeProcTriggerAura(&demonology.Unit, core.ProcTrigger{
+	demonology.DemonicCalling = core.MakeProcTriggerAura(&demonology.Unit, core.ProcTrigger{
 		MetricsActionID: core.ActionID{SpellID: 114925},
 		Name:            "Demonic Calling",
 		Callback:        core.CallbackOnCastComplete,
 		ClassSpellMask:  warlock.WarlockSpellShadowBolt | warlock.WarlockSpellSoulFire | warlock.WarlockSpellTouchOfChaos,
 		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			demonology.SpawnImp(sim)
-			trigger.Deactivate(sim)
+			demonology.DemonicCalling.Deactivate(sim)
 		},
 	})
 
@@ -179,7 +202,7 @@ func (demonology *DemonologyWarlock) registerWildImpPassive() {
 	var controllerImpSpawn func(sim *core.Simulation)
 	controllerImpSpawn = func(sim *core.Simulation) {
 		if demonology.ImpSwarm == nil || demonology.ImpSwarm.CD.IsReady(sim) {
-			trigger.Activate(sim)
+			demonology.DemonicCalling.Activate(sim)
 		}
 
 		triggerAction = sim.GetConsumedPendingActionFromPool()
