@@ -1224,6 +1224,12 @@ export function reactionTimeCheckbox(): APLPickerBuilderFieldConfig<any, any> {
 	});
 }
 
+export function useDotBaseValueCheckbox(): APLPickerBuilderFieldConfig<any, any> {
+	return booleanFieldConfig('useBaseValue', 'Use base value', {
+		labelTooltip: 'If checked, will compare the current DoT to the the base value (on encounter start) of the DoT.',
+	});
+}
+
 export function itemSwapSetFieldConfig(field: string): APLPickerBuilderFieldConfig<any, any> {
 	return {
 		field: field,
