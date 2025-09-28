@@ -43,7 +43,7 @@ export const simLaunchStatuses: Record<Spec, SimStatus> = {
 	},
 	// Druid
 	[Spec.SpecBalanceDruid]: {
-		phase: Phase.Phase1,
+		phase: Phase.Phase2,
 		status: LaunchStatus.Alpha,
 	},
 	[Spec.SpecFeralDruid]: {
@@ -73,15 +73,15 @@ export const simLaunchStatuses: Record<Spec, SimStatus> = {
 	},
 	// Mage
 	[Spec.SpecArcaneMage]: {
-		phase: Phase.Phase1,
+		phase: Phase.Phase2,
 		status: LaunchStatus.Alpha,
 	},
 	[Spec.SpecFireMage]: {
-		phase: Phase.Phase1,
+		phase: Phase.Phase2,
 		status: LaunchStatus.Alpha,
 	},
 	[Spec.SpecFrostMage]: {
-		phase: Phase.Phase1,
+		phase: Phase.Phase2,
 		status: LaunchStatus.Alpha,
 	},
 	// Monk
@@ -138,7 +138,7 @@ export const simLaunchStatuses: Record<Spec, SimStatus> = {
 	},
 	// Shaman
 	[Spec.SpecElementalShaman]: {
-		phase: Phase.Phase1,
+		phase: Phase.Phase2,
 		status: LaunchStatus.Alpha,
 	},
 	[Spec.SpecEnhancementShaman]: {
@@ -151,15 +151,15 @@ export const simLaunchStatuses: Record<Spec, SimStatus> = {
 	},
 	// Warlock
 	[Spec.SpecAfflictionWarlock]: {
-		phase: Phase.Phase1,
+		phase: Phase.Phase2,
 		status: LaunchStatus.Alpha,
 	},
 	[Spec.SpecDemonologyWarlock]: {
-		phase: Phase.Phase1,
+		phase: Phase.Phase2,
 		status: LaunchStatus.Alpha,
 	},
 	[Spec.SpecDestructionWarlock]: {
-		phase: Phase.Phase1,
+		phase: Phase.Phase2,
 		status: LaunchStatus.Alpha,
 	},
 	// Warrior
