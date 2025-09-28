@@ -8,7 +8,9 @@ import DefensiveApl from './apls/default.apl.json';
 import DefautlApl from './apls/garajal.apl.json';
 import DefaultBuild from './builds/garajal_default.build.json';
 import P1BISGear from './gear_sets/p1_bis.gear.json';
+import P2BISGear from './gear_sets/p2_bis.gear.json';
 import P1BISItemSwapGear from './gear_sets/p1_bis_item_swap.gear.json';
+import P2BISItemSwapGear from './gear_sets/p2_bis_item_swap.gear.json';
 import PreRaidItemSwapGear from './gear_sets/p1_preraid_item_swap.gear.json';
 import PreraidBISGear from './gear_sets/preraid.gear.json';
 
@@ -18,9 +20,11 @@ import PreraidBISGear from './gear_sets/preraid.gear.json';
 
 export const PRERAID_BALANCED_PRESET = PresetUtils.makePresetGear('Pre-raid', PreraidBISGear);
 export const P1_BALANCED_PRESET = PresetUtils.makePresetGear('P1 - BIS', P1BISGear);
+export const P2_BALANCED_PRESET = PresetUtils.makePresetGear('P2 - BIS', P2BISGear);
 
 export const PRERAID_ITEM_SWAP = PresetUtils.makePresetItemSwapGear('Pre-raid - Item Swap', PreRaidItemSwapGear);
 export const P1_ITEM_SWAP = PresetUtils.makePresetItemSwapGear('P1 - Item Swap', P1BISItemSwapGear);
+export const P2_ITEM_SWAP = PresetUtils.makePresetItemSwapGear('P2 - Item Swap', P2BISItemSwapGear);
 
 export const ROTATION_DEFENSIVE = PresetUtils.makePresetAPLRotation('Defensive', DefensiveApl);
 export const ROTATION_DEFAULT = PresetUtils.makePresetAPLRotation("Gara'jal", DefautlApl);
@@ -82,10 +86,10 @@ export const OtherDefaults = {
 };
 
 export const PRESET_BUILD_DEFAULT = PresetUtils.makePresetBuildFromJSON("Pre-Raid - Gara'jal", Spec.SpecProtectionWarrior, DefaultBuild);
-export const PRESET_BUILD_DEFENSIVE = PresetUtils.makePresetBuild('P1 - BIS (Defensive)', {
+export const PRESET_BUILD_DEFENSIVE = PresetUtils.makePresetBuild('P2 - BIS (Defensive)', {
 	talents: StandardTalents,
 	rotation: ROTATION_DEFENSIVE,
-	gear: P1_BALANCED_PRESET,
-	itemSwap: P1_ITEM_SWAP,
+	gear: P2_BALANCED_PRESET,
+	itemSwap: P2_ITEM_SWAP,
 	encounter: PresetUtils.makePresetEncounter('Defensive', Encounter.defaultEncounterProto()),
 });
