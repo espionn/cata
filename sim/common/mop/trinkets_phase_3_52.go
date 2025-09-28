@@ -765,7 +765,7 @@ func init() {
 				Harmful:  true,
 				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
 					PPM: 11.10000038147,
-				}.WithHasteMod()),
+				}),
 				Outcome:  core.OutcomeLanded,
 				Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
 				Handler: func(sim *core.Simulation, _ *core.Spell, _ *core.SpellResult) {
