@@ -10,6 +10,8 @@ import OffensiveApl from './apls/offensive.apl.json';
 import GarajalBuild from './builds/garajal_default.build.json';
 import P1BIS2HGear from './gear_sets/p1_bis_2h.gear.json';
 import P1BISDWGear from './gear_sets/p1_bis_dw.gear.json';
+import P2BIS2HGear from './gear_sets/p2_bis_2h.gear.json';
+import P2BISDWGear from './gear_sets/p2_bis_dw.gear.json';
 import P1BISTierless2HGear from './gear_sets/p1_bis_tierless_2h.gear.json';
 import P1BISTierlessDWGear from './gear_sets/p1_bis_tierless_dw.gear.json';
 import P1PreBISGear from './gear_sets/p1_prebis.gear.json';
@@ -25,6 +27,9 @@ export const P1_BIS_2H_GEAR_PRESET = PresetUtils.makePresetGear('P1 - BIS 2H', P
 
 export const P1_BIS_TIERLESS_DW_GEAR_PRESET = PresetUtils.makePresetGear('P1 - BIS DW (no-Tier)', P1BISTierlessDWGear);
 export const P1_BIS_TIERLESS_2H_GEAR_PRESET = PresetUtils.makePresetGear('P1 - BIS 2H (no-Tier)', P1BISTierless2HGear);
+
+export const P2_BIS_DW_GEAR_PRESET = PresetUtils.makePresetGear('P2 - BIS DW', P2BISDWGear);
+export const P2_BIS_2H_GEAR_PRESET = PresetUtils.makePresetGear('P2 - BIS 2H', P2BIS2HGear);
 
 export const ROTATION_PRESET = PresetUtils.makePresetAPLRotation('Default', DefaultApl);
 export const ROTATION_GARAJAL_PRESET = PresetUtils.makePresetAPLRotation("Gara'jal", GarajalApl);
