@@ -367,6 +367,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestUnholy-AllItems-PurifiedBindingsofImmerseus-105422"
+ value: {
+  dps: 147582.37719
+  tps: 107390.81972
+  hps: 2068.06414
+ }
+}
+dps_results: {
  key: "TestUnholy-AllItems-Qian-Le,CourageofNiuzao-102245"
  value: {
   dps: 149316.80599
@@ -476,6 +484,30 @@ dps_results: {
   dps: 151882.61474
   tps: 108203.99092
   hps: 2040.68979
+ }
+}
+dps_results: {
+ key: "TestUnholy-AllItems-SoothingTalismanoftheShado-PanAssault-94509"
+ value: {
+  dps: 144216.04841
+  tps: 104284.80872
+  hps: 2037.08512
+ }
+}
+dps_results: {
+ key: "TestUnholy-AllItems-SoulBarrier-96927"
+ value: {
+  dps: 144216.04841
+  tps: 104284.80872
+  hps: 2205.87512
+ }
+}
+dps_results: {
+ key: "TestUnholy-AllItems-SparkofZandalar-96770"
+ value: {
+  dps: 164818.49568
+  tps: 118878.91507
+  hps: 2081.05422
  }
 }
 dps_results: {
