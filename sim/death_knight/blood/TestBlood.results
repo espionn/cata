@@ -2481,10 +2481,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-SparkofZandalar-96770"
  value: {
-  dps: 104526.08526
-  tps: 588455.59071
-  dtps: 34903.70589
-  hps: 38625.50032
+  dps: 104400.91956
+  tps: 588957.83143
+  dtps: 34828.37512
+  hps: 38270.73789
  }
 }
 dps_results: {
