@@ -347,7 +347,7 @@ export class Gear extends BaseGear {
 			if (item && !ignoreSlots?.get(slot)) {
 				curGear = curGear.withEquippedItem(
 					slot,
-					item.withItem(item.item).withUpgrade(item._upgrade).withRandomSuffix(item._randomSuffix),
+					item.withItem(item.item).withRandomSuffix(item._randomSuffix),
 					canDualWield2H,
 				);
 			}

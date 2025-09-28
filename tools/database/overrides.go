@@ -1158,6 +1158,7 @@ var GemDenyList = map[int32]struct{}{
 	77141: {},
 	77138: {},
 	77136: {},
+	76655: {},
 }
 
 var EnchantDenyList = map[int32]struct{}{

@@ -363,7 +363,7 @@ func (rotation *FeralDruidRotation) shouldWrathWeave(sim *core.Simulation) bool 
 	startingEnergy := cat.CurrentEnergy() + remainingGCD.Seconds()*regenRate
 	curCp := cat.ComboPoints()
 
-	if (curCp < 2) && (startingEnergy+maxWrathCastTime.Seconds()*2*regenRate > furorCap) {
+	if (curCp < 3) && (startingEnergy+maxWrathCastTime.Seconds()*2*regenRate > furorCap) {
 		return false
 	}
 
@@ -434,8 +434,8 @@ func (rotation *FeralDruidRotation) shouldAoeRake(sim *core.Simulation, roarNow 
 	}
 
 	// Compare DPE versus Swipe to see if it's worth casting
-	potentialRakeTicks := min(rakeDot.BaseTickCount, int32(sim.GetRemainingDuration() / rakeDot.BaseTickLength))
-	expectedRakeDamage := cat.Rake.ExpectedInitialDamage(sim, rakeTarget) + cat.Rake.ExpectedTickDamage(sim, rakeTarget) * float64(potentialRakeTicks)
+	potentialRakeTicks := min(rakeDot.BaseTickCount, int32(sim.GetRemainingDuration()/rakeDot.BaseTickLength))
+	expectedRakeDamage := cat.Rake.ExpectedInitialDamage(sim, rakeTarget) + cat.Rake.ExpectedTickDamage(sim, rakeTarget)*float64(potentialRakeTicks)
 	rakeDPE := expectedRakeDamage / cat.Rake.DefaultCast.Cost
 
 	var expectedSwipeDamage float64

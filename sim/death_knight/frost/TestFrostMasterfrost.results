@@ -367,6 +367,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFrostMasterfrost-AllItems-PurifiedBindingsofImmerseus-105422"
+ value: {
+  dps: 168256.38922
+  tps: 156074.93135
+  hps: 1694.24976
+ }
+}
+dps_results: {
  key: "TestFrostMasterfrost-AllItems-Qian-Le,CourageofNiuzao-102245"
  value: {
   dps: 161783.14352
@@ -469,6 +477,30 @@ dps_results: {
   dps: 162160.14718
   tps: 149956.7945
   hps: 1683.52472
+ }
+}
+dps_results: {
+ key: "TestFrostMasterfrost-AllItems-SoothingTalismanoftheShado-PanAssault-94509"
+ value: {
+  dps: 162025.25949
+  tps: 149883.25497
+  hps: 1670.74114
+ }
+}
+dps_results: {
+ key: "TestFrostMasterfrost-AllItems-SoulBarrier-96927"
+ value: {
+  dps: 162025.25949
+  tps: 149883.25497
+  hps: 1810.5918
+ }
+}
+dps_results: {
+ key: "TestFrostMasterfrost-AllItems-SparkofZandalar-96770"
+ value: {
+  dps: 176478.88323
+  tps: 163216.23968
+  hps: 1726.34291
  }
 }
 dps_results: {

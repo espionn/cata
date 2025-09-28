@@ -9,6 +9,7 @@ import ArcaneCleaveApl from './apls/arcane_cleave.apl.json';
 import P1PreBISGear from './gear_sets/p1_prebis.gear.json';
 import P1BISGear from './gear_sets/p1_bis.gear.json';
 import P2BISGear from './gear_sets/p2_bis.gear.json';
+import P3BISGear from './gear_sets/p3_bis.gear.json';
 
 // Preset options for this spec.
 // Eventually we will import these values for the raid sim too, so its good to
@@ -16,11 +17,24 @@ import P2BISGear from './gear_sets/p2_bis.gear.json';
 export const P1_PREBIS = PresetUtils.makePresetGear('P1 - Pre-BIS', P1PreBISGear);
 export const P1_BIS = PresetUtils.makePresetGear('P1 - BIS', P1BISGear);
 export const P2_BIS = PresetUtils.makePresetGear('P2 - BIS', P2BISGear);
+export const P3_BIS = PresetUtils.makePresetGear('P3 - BIS', P3BISGear);
 
 export const ROTATION_PRESET_DEFAULT = PresetUtils.makePresetAPLRotation('Default', ArcaneApl);
 // export const ROTATION_PRESET_CLEAVE = PresetUtils.makePresetAPLRotation('Cleave', ArcaneCleaveApl);
 
 // Preset options for EP weights
+export const P3_BIS_EP_PRESET = PresetUtils.makePresetEpWeights(
+	'Item Level >= 525',
+	Stats.fromMap({
+		[Stat.StatIntellect]: 1.23,
+		[Stat.StatSpellPower]: 1,
+		[Stat.StatHitRating]: 1.71,
+		[Stat.StatCritRating]: 0.51,
+		[Stat.StatHasteRating]: 0.59,
+		[Stat.StatMasteryRating]: 0.74,
+	}),
+);
+
 export const P1_BIS_EP_PRESET = PresetUtils.makePresetEpWeights(
 	'Item Level >= 495',
 	Stats.fromMap({
@@ -54,7 +68,7 @@ export const ArcaneTalents = {
 		glyphs: Glyphs.create({
 			major1: MajorGlyph.GlyphOfArcanePower,
 			major2: MajorGlyph.GlyphOfRapidDisplacement,
-			major3: MajorGlyph.GlyphOfConeOfCold,
+			major3: MajorGlyph.GlyphOfManaGem,
 			minor1: MageMinorGlyph.GlyphOfMomentum,
 			minor2: MageMinorGlyph.GlyphOfRapidTeleportation,
 			minor3: MageMinorGlyph.GlyphOfLooseMana,
@@ -69,7 +83,7 @@ export const ArcaneTalentsCleave = {
 		glyphs: Glyphs.create({
 			major1: MajorGlyph.GlyphOfArcanePower,
 			major2: MajorGlyph.GlyphOfRapidDisplacement,
-			major3: MajorGlyph.GlyphOfConeOfCold,
+			major3: MajorGlyph.GlyphOfManaGem,
 			minor1: MageMinorGlyph.GlyphOfMomentum,
 			minor2: MageMinorGlyph.GlyphOfRapidTeleportation,
 			minor3: MageMinorGlyph.GlyphOfLooseMana,

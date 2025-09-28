@@ -15,9 +15,6 @@ func init() {
 
 var FeralItemFilter = core.ItemFilter{
 	WeaponTypes: []proto.WeaponType{
-		proto.WeaponType_WeaponTypeDagger,
-		proto.WeaponType_WeaponTypeMace,
-		proto.WeaponType_WeaponTypeOffHand,
 		proto.WeaponType_WeaponTypeStaff,
 		proto.WeaponType_WeaponTypePolearm,
 	},

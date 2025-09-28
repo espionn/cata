@@ -28,7 +28,7 @@ func TestGuardian(t *testing.T) {
 			Class: proto.Class_ClassDruid,
 			Race:  proto.Race_RaceWorgen,
 
-			GearSet: core.GetGearSet("../../../ui/druid/guardian/gear_sets", "preraid"),
+			GearSet: core.GetGearSet("../../../ui/druid/guardian/gear_sets", "p2"),
 
 			Talents: StandardTalents,
 			Glyphs:  StandardGlyphs,
@@ -79,9 +79,6 @@ func TestGuardian(t *testing.T) {
 
 var ItemFilter = core.ItemFilter{
 	WeaponTypes: []proto.WeaponType{
-		proto.WeaponType_WeaponTypeDagger,
-		proto.WeaponType_WeaponTypeMace,
-		proto.WeaponType_WeaponTypeOffHand,
 		proto.WeaponType_WeaponTypeStaff,
 		proto.WeaponType_WeaponTypePolearm,
 	},

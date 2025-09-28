@@ -261,8 +261,34 @@ func (character *Character) NewRPPMProcManager(effectID int32, isEnchant bool, i
 	}
 
 	dpm := builder()
+
+	// Keep track of the lastProc and lastCheck values when weapon swapping.
+	lastProc := -RppmLastProcResetValue
+	lastCheck := -RppmLastCheckCap
+	isFirstProc := true
+
 	character.RegisterItemSwapCallback(slotList, func(_ *Simulation, _ proto.ItemSlot) {
+		for _, proc := range dpm.procChances {
+			resolvedProc := proc.(*RPPMProc)
+			lastProc = max(lastProc, resolvedProc.lastProc)
+			lastCheck = max(lastCheck, resolvedProc.lastCheck)
+			isFirstProc = isFirstProc && resolvedProc.isFirstProc
+		}
+
 		dpm = builder()
+
+		for _, proc := range dpm.procChances {
+			resolvedProc := proc.(*RPPMProc)
+			resolvedProc.lastProc = lastProc
+			resolvedProc.lastCheck = lastCheck
+			resolvedProc.isFirstProc = isFirstProc
+		}
+	})
+
+	character.RegisterResetEffect(func(_ *Simulation) {
+		lastProc = -RppmLastProcResetValue
+		lastCheck = -RppmLastCheckCap
+		isFirstProc = true
 	})
 
 	return &dpm

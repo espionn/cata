@@ -74,12 +74,9 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFrostMage, {
 			});
 
 			const critSoftCapConfig = StatCap.fromPseudoStat(PseudoStat.PseudoStatSpellCritPercent, {
-				breakpoints: [23.34, 26.8],
+				breakpoints: [28],
 				capType: StatCapType.TypeSoftCap,
-				postCapEPs: [
-					(Presets.P1_BIS_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.01) * Mechanics.CRIT_RATING_PER_CRIT_PERCENT,
-					(Presets.P1_BIS_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) / 2) * Mechanics.CRIT_RATING_PER_CRIT_PERCENT,
-				],
+				postCapEPs: [(Presets.P1_BIS_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) / 2) * Mechanics.CRIT_RATING_PER_CRIT_PERCENT],
 			});
 
 			return [critSoftCapConfig, hasteSoftCapConfig];
@@ -123,13 +120,13 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFrostMage, {
 	},
 
 	presets: {
-		epWeights: [Presets.P1_PREBIS_EP_PRESET, Presets.P1_BIS_EP_PRESET],
+		epWeights: [Presets.P1_PREBIS_EP_PRESET, Presets.P1_BIS_EP_PRESET, Presets.P3_BIS_EP_PRESET],
 		// Preset rotations that the user can quickly select.
 		rotations: [Presets.ROTATION_PRESET_DEFAULT, Presets.ROTATION_PRESET_AOE],
 		// Preset talents that the user can quickly select.
 		talents: [Presets.FrostDefaultTalents, Presets.FrostTalentsCleave, Presets.FrostTalentsAoE],
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.P1_PREBIS, Presets.P1_BIS, Presets.P2_BIS],
+		gear: [Presets.P1_PREBIS, Presets.P1_BIS, Presets.P2_BIS, Presets.P3_BIS],
 
 		builds: [Presets.P1_PRESET_BUILD_DEFAULT, Presets.P1_PRESET_BUILD_CLEAVE, Presets.P1_PRESET_BUILD_AOE],
 	},
@@ -154,8 +151,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFrostMage, {
 			otherDefaults: Presets.OtherDefaults,
 			defaultFactionRaces: {
 				[Faction.Unknown]: Race.RaceUnknown,
-				[Faction.Alliance]: Race.RaceGnome,
-				[Faction.Horde]: Race.RaceTroll,
+				[Faction.Alliance]: Race.RaceAlliancePandaren,
+				[Faction.Horde]: Race.RaceOrc,
 			},
 			defaultGear: {
 				[Faction.Unknown]: {},
@@ -184,7 +181,9 @@ export class FrostMageSimUI extends IndividualSimUI<Spec.SpecFrostMage> {
 					}
 
 					const avgIlvl = player.getGear().getAverageItemLevel(false);
-					if (avgIlvl > 500) {
+					if (avgIlvl >= 517) {
+						return Presets.P3_BIS_EP_PRESET.epWeights;
+					} else if (avgIlvl >= 500) {
 						return Presets.P1_BIS_EP_PRESET.epWeights;
 					}
 					return Presets.P1_PREBIS_EP_PRESET.epWeights;

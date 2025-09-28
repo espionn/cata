@@ -624,7 +624,7 @@ func init() {
 				}.WithApproximateIlvlMod(1.0, 528)),
 				ICD:      duration,
 				Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
-				Handler: func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
+				Handler: func(sim *core.Simulation, _ *core.Spell, _ *core.SpellResult) {
 					for _, buffAura := range buffAuras {
 						buffAura.Deactivate(sim)
 					}
@@ -657,6 +657,168 @@ func init() {
 				character.AddStatProcBuff(itemID, buffAura, false, eligibleSlots)
 			}
 			character.ItemSwap.RegisterProcWithSlots(itemID, triggerAura, eligibleSlots)
+		})
+	})
+
+	// Soul Barrier
+	// Use: Absorbs up to 13377 damage every time you take physical damage, up to a maximum of 66885 damage absorbed. (2 Min Cooldown)
+	shared.ItemVersionMap{
+		shared.ItemVersionLFR:                 95811,
+		shared.ItemVersionNormal:              94528,
+		shared.ItemVersionHeroic:              96555,
+		shared.ItemVersionThunderforged:       96183,
+		shared.ItemVersionHeroicThunderforged: 96927,
+	}.RegisterAll(func(version shared.ItemVersion, itemID int32, versionLabel string) {
+		label := "Soul Barrier"
+
+		core.NewItemEffect(itemID, func(agent core.Agent, state proto.ItemLevelState) {
+			character := agent.GetCharacter()
+			actionId := core.ActionID{SpellID: 138979, ItemID: itemID}
+			absorbPerHitValue := core.GetItemEffectScaling(itemID, 3.78200006485, state)
+
+			damageAbsorptionAura := character.NewDamageAbsorptionAura(core.AbsorptionAuraConfig{
+				Aura: core.Aura{
+					Label:    fmt.Sprintf("%s %s", label, versionLabel),
+					ActionID: actionId,
+					Duration: time.Second * 20,
+				},
+				MaxAbsorbPerHit: absorbPerHitValue,
+				ShouldApplyToResult: func(_ *core.Simulation, spell *core.Spell, _ *core.SpellResult, _ bool) bool {
+					return spell.SpellSchool.Matches(core.SpellSchoolPhysical)
+				},
+				ShieldStrengthCalculator: func(_ *core.Unit) float64 {
+					return absorbPerHitValue * 5
+				},
+			})
+
+			spell := character.RegisterSpell(core.SpellConfig{
+				ActionID:    actionId,
+				SpellSchool: core.SpellSchoolPhysical,
+				ProcMask:    core.ProcMaskEmpty,
+
+				Cast: core.CastConfig{
+					CD: core.Cooldown{
+						Timer:    character.NewTimer(),
+						Duration: time.Minute * 3,
+					},
+				},
+
+				CritMultiplier:   character.DefaultCritMultiplier(),
+				DamageMultiplier: 1,
+
+				ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
+					damageAbsorptionAura.Activate(sim)
+				},
+			})
+
+			character.AddMajorCooldown(core.MajorCooldown{
+				Spell: spell,
+				Type:  core.CooldownTypeSurvival,
+				ShouldActivate: func(_ *core.Simulation, character *core.Character) bool {
+					return character.CurrentHealthPercent() < 0.4
+				},
+			})
+		})
+	})
+
+	// Spark of Zandalar
+	// Your attacks have a chance to grant you a Spark of Zandalar.
+	// Once you have accumulated 10 Sparks, you will transform into a Zandalari Warrior and gain 700 Strength for 10 sec.
+	// (Approximately 11.10 procs per minute)
+	shared.ItemVersionMap{
+		shared.ItemVersionLFR:                 95654,
+		shared.ItemVersionNormal:              94526,
+		shared.ItemVersionHeroic:              96398,
+		shared.ItemVersionThunderforged:       96026,
+		shared.ItemVersionHeroicThunderforged: 96770,
+	}.RegisterAll(func(version shared.ItemVersion, itemID int32, versionLabel string) {
+		label := "Spark of Zandalar"
+
+		core.NewItemEffect(itemID, func(agent core.Agent, state proto.ItemLevelState) {
+			character := agent.GetCharacter()
+
+			strengthValue := core.GetItemEffectScaling(itemID, 2.47499990463, state)
+
+			buffAura := character.NewTemporaryStatsAura(
+				fmt.Sprintf("Zandalari Warrior %s", versionLabel),
+				core.ActionID{SpellID: 138960},
+				stats.Stats{stats.Strength: strengthValue},
+				time.Second*10,
+			)
+
+			stackingAura := character.RegisterAura(core.Aura{
+				ActionID:  core.ActionID{SpellID: 138958},
+				Label:     fmt.Sprintf("%s %s", label, versionLabel),
+				Duration:  time.Minute * 1,
+				MaxStacks: 10,
+				OnStacksChange: func(aura *core.Aura, sim *core.Simulation, _ int32, newStacks int32) {
+					if newStacks == aura.MaxStacks {
+						buffAura.Activate(sim)
+						aura.Deactivate(sim)
+					}
+				},
+			})
+
+			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
+				ActionID: core.ActionID{SpellID: 138957},
+				Name:     label,
+				Harmful:  true,
+				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
+					PPM: 11.10000038147,
+				}.WithHasteMod()),
+				Outcome:  core.OutcomeLanded,
+				Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
+				Handler: func(sim *core.Simulation, _ *core.Spell, _ *core.SpellResult) {
+					stackingAura.Activate(sim)
+					stackingAura.AddStack(sim)
+				},
+			}).ApplyOnExpire(func(_ *core.Aura, sim *core.Simulation) {
+				buffAura.Deactivate(sim)
+				stackingAura.Deactivate(sim)
+			})
+
+			character.ItemSwap.RegisterProc(itemID, triggerAura)
+		})
+	})
+
+	// Soothing Talisman of the Shado-Pan Assault
+	// Use: Gain 29805 mana. (3 Min Cooldown)
+	core.NewItemEffect(94509, func(agent core.Agent, state proto.ItemLevelState) {
+		character := agent.GetCharacter()
+		actionId := core.ActionID{SpellID: 138724, ItemID: 94509}
+
+		manaValue := core.GetItemEffectScaling(94509, 10.05900001526, state)
+		manaMetrics := character.NewManaMetrics(actionId)
+
+		spell := character.RegisterSpell(core.SpellConfig{
+			ActionID:    actionId,
+			SpellSchool: core.SpellSchoolPhysical,
+			ProcMask:    core.ProcMaskEmpty,
+
+			Cast: core.CastConfig{
+				CD: core.Cooldown{
+					Timer:    character.NewTimer(),
+					Duration: time.Minute * 3,
+				},
+			},
+
+			CritMultiplier:   character.DefaultCritMultiplier(),
+			DamageMultiplier: 1,
+
+			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
+				if character.HasManaBar() {
+					character.AddMana(sim, manaValue, manaMetrics)
+				}
+			},
+		})
+
+		character.AddMajorCooldown(core.MajorCooldown{
+			Spell:    spell,
+			Priority: core.CooldownPriorityDefault,
+			Type:     core.CooldownTypeMana,
+			ShouldActivate: func(sim *core.Simulation, character *core.Character) bool {
+				return character.MaxMana()-character.CurrentMana() >= manaValue
+			},
 		})
 	})
 }

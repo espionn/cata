@@ -1549,7 +1549,23 @@
             "title",
             "tooltip"
           ]
-        }
+        },
+		"upgrade_summary": {
+			"type": "object",
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"upgrade_all_items": {
+					"type": "string"
+				},
+				"reset_upgrades": {
+					"type": "string"
+				}
+			},
+			"additionalProperties": false,
+			"required": ["title", "upgrade_all_items", "reset_upgrades"]
+		}
       },
       "additionalProperties": false,
       "required": [

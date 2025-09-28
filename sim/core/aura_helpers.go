@@ -591,6 +591,7 @@ type ShieldShouldApplyCondition func(sim *Simulation, spell *Spell, result *Spel
 type AbsorptionAuraConfig struct {
 	Aura                     Aura
 	DamageMultiplier         float64
+	MaxAbsorbPerHit          float64
 	ShieldStrengthCalculator ShieldStrengthCalculator
 	OnDamageAbsorbed         OnDamageAbsorbedCallback
 	ShouldApplyToResult      ShieldShouldApplyCondition
@@ -641,6 +642,10 @@ func (unit *Unit) NewDamageAbsorptionAura(config AbsorptionAuraConfig) *DamageAb
 	unit.AddDynamicDamageTakenModifier(func(sim *Simulation, spell *Spell, result *SpellResult, isPeriodic bool) {
 		if aura.Aura.IsActive() && (result.Damage > 0) && extraSpellCheck(sim, spell, result, isPeriodic) {
 			absorbedDamage := min(aura.ShieldStrength, result.Damage*config.DamageMultiplier)
+			if config.MaxAbsorbPerHit > 0 {
+				absorbedDamage = min(config.MaxAbsorbPerHit, absorbedDamage)
+			}
+
 			result.Damage -= absorbedDamage
 			aura.ShieldStrength -= absorbedDamage
 

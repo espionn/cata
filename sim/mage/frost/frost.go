@@ -75,7 +75,17 @@ func (frostMage *FrostMage) registerSpells() {
 }
 
 func (frostMage *FrostMage) GetFrozenCritPercentage() float64 {
-	return frostMage.GetStat(stats.SpellCritPercent) + 50
+	baseCritPercent := frostMage.GetStat(stats.SpellCritPercent)
+
+	suppressionPercent := 0.0
+	if frostMage.CurrentTarget != nil &&
+		int(frostMage.CurrentTarget.UnitIndex) < len(frostMage.AttackTables) &&
+		frostMage.AttackTables[frostMage.CurrentTarget.UnitIndex] != nil {
+		attackTable := frostMage.AttackTables[frostMage.CurrentTarget.UnitIndex]
+		suppressionPercent = attackTable.SpellCritSuppression * 100
+	}
+
+	return baseCritPercent - suppressionPercent + 50
 }
 
 func (frostMage *FrostMage) registerMastery() {
