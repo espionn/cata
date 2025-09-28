@@ -26,6 +26,7 @@ import {
 	resourceTypeI18nKeys,
 	getStatusI18nKey,
 	getSlotNameI18nKey,
+	protoStatNameI18nKeys,
 } from './entity_mapping';
 import { getLang, setLang, supportedLanguages } from './locale_service';
 
@@ -43,6 +44,18 @@ export const translateStat = (stat: Stat): string => {
 		return translated;
 	} catch {
 		return Stat[stat];
+	}
+};
+export const translateProtoStatName = (statName: string): string => {
+	try {
+		const key = protoStatNameI18nKeys[statName] || statName.toLowerCase();
+		const translated = i18n.t(`common.stats.${key}`);
+		if (translated === `common.stats.${key}`) {
+			return statName;
+		}
+		return translated;
+	} catch {
+		return statName;
 	}
 };
 
