@@ -87,5 +87,5 @@ export const OtherDefaults = {
 	race: Race.RaceOrc,
 	profession1: Profession.Engineering,
 	profession2: Profession.Blacksmithing,
-	distanceFromTarget: 12,
+	distanceFromTarget: 25,
 };

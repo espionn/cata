@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/wowsims/mop/sim/core"
+	"github.com/wowsims/mop/sim/core/proto"
 	"github.com/wowsims/mop/sim/core/stats"
 	"github.com/wowsims/mop/sim/warrior"
 )
@@ -46,19 +47,47 @@ func (war *ArmsWarrior) registerMastery() {
 
 func (war *ArmsWarrior) registerSeasonedSoldier() {
 	actionID := core.ActionID{SpellID: 12712}
-	core.MakePermanent(war.RegisterAura(core.Aura{
+
+	hasValidWeaponType := func() bool {
+		weapon := war.GetMHWeapon()
+		if weapon == nil || weapon.HandType != proto.HandType_HandTypeTwoHand {
+			return false
+		}
+
+		switch weapon.WeaponType {
+		case proto.WeaponType_WeaponTypeAxe,
+			proto.WeaponType_WeaponTypeMace,
+			proto.WeaponType_WeaponTypeSword:
+			return true
+		}
+		return false
+	}
+
+	aura := war.RegisterAura(core.Aura{
 		Label:    "Seasoned Soldier",
 		ActionID: actionID,
 		Duration: core.NeverExpires,
 	}).AttachMultiplicativePseudoStatBuff(
 		&war.PseudoStats.SchoolDamageDealtMultiplier[stats.SchoolIndexPhysical], 1.25,
-	))
-
-	war.AddStaticMod(core.SpellModConfig{
+	).AttachSpellMod(core.SpellModConfig{
 		ClassMask: warrior.SpellMaskThunderClap | warrior.SpellMaskWhirlwind,
 		Kind:      core.SpellMod_PowerCost_Flat,
 		IntValue:  -10,
 	})
+
+	if hasValidWeaponType() {
+		core.MakePermanent(aura)
+	}
+
+	war.RegisterItemSwapCallback([]proto.ItemSlot{proto.ItemSlot_ItemSlotMainHand},
+		func(sim *core.Simulation, _ proto.ItemSlot) {
+			if hasValidWeaponType() {
+				aura.Activate(sim)
+			} else {
+				aura.Deactivate(sim)
+			}
+		})
+
 }
 
 func (war *ArmsWarrior) registerSuddenDeath() {
