@@ -1181,7 +1181,7 @@ export class ReforgeOptimizer {
 				this.applyReforgeStat(socketBonusAsCoeff, stat, value, preCapEPs);
 			}
 
-			if (ReforgeOptimizer.includesCappedStat(socketBonusAsCoeff, reforgeCaps, reforgeSoftCaps)) {
+			if (ReforgeOptimizer.includesCappedStat(socketBonusAsCoeff, reforgeCaps, reforgeSoftCaps) && (socketBonusNormalization > 1)) {
 				forceSocketBonus = true;
 			}
 
@@ -1215,7 +1215,7 @@ export class ReforgeOptimizer {
 
 			const scoredDummyVariables = this.updateReforgeScores(dummyVariables, preCapEPs);
 
-			if (scoredDummyVariables.get('matched')!.get('score')! > scoredDummyVariables.get('unmatched')!.get('score')!) {
+			if ((scoredDummyVariables.get('matched')!.get('score')! > scoredDummyVariables.get('unmatched')!.get('score')!) && ((socketBonusNormalization > 1) || !ReforgeOptimizer.includesCappedStat(scoredDummyVariables.get('matched')!, reforgeCaps, reforgeSoftCaps))) {
 				forceSocketBonus = true;
 			}
 
