@@ -1291,6 +1291,11 @@ export class ReforgeOptimizer {
 		]) {
 			const allGemsOfColor = this.player.getGems(socketColor);
 			const filteredGemDataForColor = new Array<GemData>();
+			let weightsForSorting = preCapEPs;
+
+			if (this.relativeStatCap) {
+				weightsForSorting = weightsForSorting.withUnitStat(this.relativeStatCap.forcedHighestStat, weightsForSorting.getUnitStat(this.relativeStatCap.constrainedStats[0]));
+			}
 
 			for (const gem of allGemsOfColor) {
 				const isJC = gem.requiredProfession == Profession.Jewelcrafting;
@@ -1320,7 +1325,7 @@ export class ReforgeOptimizer {
 						break;
 					}
 
-					this.applyReforgeStat(coefficients, statIdx, statValue, preCapEPs);
+					this.applyReforgeStat(coefficients, statIdx, statValue, weightsForSorting);
 				}
 
 				if (!allStatsValid) {
@@ -1329,7 +1334,7 @@ export class ReforgeOptimizer {
 
 				// Create single-entry map to re-use scoring code.
 				const gemVariableMap = new Map<string, YalpsCoefficients>([['temp', coefficients]]);
-				const scoredGemVariableMap = this.updateReforgeScores(gemVariableMap, preCapEPs);
+				const scoredGemVariableMap = this.updateReforgeScores(gemVariableMap, weightsForSorting);
 				filteredGemDataForColor.push({
 					gem,
 					isJC,
@@ -1341,11 +1346,6 @@ export class ReforgeOptimizer {
 			filteredGemDataForColor.sort((a, b) => b.coefficients.get('score')! - a.coefficients.get('score')!);
 
 			// Go down the list and include all gems until we find the highest EP option with zero capped stats.
-			const includedGemDataForColor = new Array<GemData>();
-			let foundUncappedJCGem = false;
-			const numGemOptionsForStat = new Map<string, number>();
-			// Temporary fix to prevent single stat gems being selected
-			// whilst multi stat gems would be a better option
 			let maxGemOptionsForStat: number = this.isTankSpec ? 3 : 4;
 
 			if ((socketColor == GemColor.GemColorYellow) && !this.relativeStatCap) {
@@ -1364,6 +1364,12 @@ export class ReforgeOptimizer {
 				}
 			}
 
+			const includedGemDataForColor = new Array<GemData>();
+			let foundUncappedJCGem = false;
+			let foundUncappedNormalGem = false;
+			let numUncappedNormalGems = 0;
+			const numGemOptionsForStat = new Map<string, number>();
+
 			for (const gemData of filteredGemDataForColor) {
 				const cappedStatKeys = ReforgeOptimizer.getCappedStatKeys(gemData.coefficients, reforgeCaps, reforgeSoftCaps);
 				let isRedundantGem: boolean = false;
@@ -1378,7 +1384,7 @@ export class ReforgeOptimizer {
 					}
 				}
 
-				if ((!gemData.isJC || !foundUncappedJCGem) && !isRedundantGem) {
+				if ((!gemData.isJC || !foundUncappedJCGem) && !isRedundantGem && ((cappedStatKeys.length == 0) || !foundUncappedNormalGem)) {
 					includedGemDataForColor.push(gemData);
 				}
 
@@ -1386,7 +1392,12 @@ export class ReforgeOptimizer {
 					if (gemData.isJC) {
 						foundUncappedJCGem = true;
 					} else {
-						break;
+						foundUncappedNormalGem = true;
+						numUncappedNormalGems++;
+
+						if (!this.relativeStatCap || (numUncappedNormalGems == 3)) {
+							break;
+						}
 					}
 				}
 			}
