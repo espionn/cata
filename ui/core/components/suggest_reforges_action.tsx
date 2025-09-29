@@ -435,8 +435,6 @@ export class ReforgeOptimizer {
 				if (statIsCapped(statKey, reforgeCaps, reforgeSoftCaps)) {
 					cappedStatKeys.push(coefficientKey);
 				}
-			} else if (coefficientKey.includes('Minus')) {
-				cappedStatKeys.push(coefficientKey);
 			}
 		}
 
@@ -1350,7 +1348,7 @@ export class ReforgeOptimizer {
 			// whilst multi stat gems would be a better option
 			let maxGemOptionsForStat: number = this.isTankSpec ? 3 : 4;
 
-			if (socketColor == GemColor.GemColorYellow) {
+			if ((socketColor == GemColor.GemColorYellow) && !this.relativeStatCap) {
 				let foundCritOrHasteCap = false;
 
 				for (const parentStat of [Stat.StatCritRating, Stat.StatHasteRating]) {
