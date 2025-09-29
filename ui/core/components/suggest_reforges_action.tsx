@@ -212,6 +212,8 @@ export class ReforgeOptimizer {
 	protected frozenItemSlots = new Map<ItemSlot, boolean>();
 	readonly includeTimeoutChangeEmitter = new TypedEvent<void>();
 	protected includeTimeout = true;
+	readonly undershootCapsChangeEmitter = new TypedEvent<void>();
+	protected undershootCaps = new Stats();
 	protected previousGear: Gear | null = null;
 	protected previousReforges = new Map<ItemSlot, ReforgeData>();
 	protected currentReforges = new Map<ItemSlot, ReforgeData>();
@@ -756,7 +758,7 @@ export class ReforgeOptimizer {
 			<table ref={tableRef} className={clsx('reforge-optimizer-stat-cap-table mb-2', !this.sim.getUseCustomEPValues() && 'hide')}>
 				<thead>
 					<tr>
-						<th colSpan={3} className="pb-3">
+						<th colSpan={4} className="pb-3">
 							<div className="d-flex">
 								<h6 className="content-block-title mb-0 me-1">{i18n.t('sidebar.buttons.suggest_reforges.edit_stat_caps')}</h6>
 								<button ref={statCapTooltipRef} className="d-inline">
@@ -770,8 +772,11 @@ export class ReforgeOptimizer {
 					</tr>
 					<tr>
 						<th>{i18n.t('sidebar.buttons.suggest_reforges.stat')}</th>
-						<th colSpan={2} className="text-end">
+						<th colSpan={3} className="text-end">
 							%
+						</th>
+						<th colSpan={1} className="text-start">
+							Max?
 						</th>
 					</tr>
 				</thead>
@@ -804,6 +809,18 @@ export class ReforgeOptimizer {
 							...sharedInputConfig,
 							...sharedStatInputConfig,
 						});
+
+						const undershootPicker = new BooleanPicker(null, this.player, {
+							id: `reforge-optimizer-${statName}-undershoot`,
+							label: '',
+							inline: false,
+							changedEvent: () => this.undershootCapsChangeEmitter,
+							getValue: () => this.undershootCaps.getUnitStat(unitStat) > 0,
+							setValue: (_eventID, _player, newValue) => {
+								this.undershootCaps = this.undershootCaps.withUnitStat(unitStat, newValue ? 1 : 0);
+							},
+						});
+
 						const statPresets = this.statSelectionPresets?.find(entry => entry.unitStat.equals(unitStat))?.presets;
 
 						const presets = !!statPresets
@@ -844,12 +861,13 @@ export class ReforgeOptimizer {
 											)}
 										</div>
 									</td>
-									<td colSpan={2}>{percentagePicker.rootElem}</td>
+									<td colSpan={3}>{percentagePicker.rootElem}</td>
+									<td colSpan={1} className="text-end">{undershootPicker.rootElem}</td>
 								</tr>
 								{presets && (
 									<tr>
 										<td></td>
-										<td colSpan={2}>{presets.rootElem}</td>
+										<td colSpan={3}>{presets.rootElem}</td>
 									</tr>
 								)}
 							</>
@@ -891,6 +909,7 @@ export class ReforgeOptimizer {
 		useCustomEPValuesInput.addOnDisposeCallback(() => {
 			content.remove();
 			event.dispose();
+			this.undershootCaps = new Stats();
 		});
 
 		return content;
@@ -1681,12 +1700,16 @@ export class ReforgeOptimizer {
 			const statName = unitStat.getKey();
 
 			if (cap !== 0 && value > cap && !constraints.has(statName)) {
-				updatedConstraints.set(statName, greaterEq(cap));
 				anyCapsExceeded = true;
 				if (isDevMode()) console.log('Cap exceeded for: %s', statName);
 
-				// Set EP to 0 for hard capped stats
-				updatedWeights = updatedWeights.withUnitStat(unitStat, 0);
+				// Set EP to 0 for hard capped stats unless they are treated as upper bounds.
+				if (this.undershootCaps.getUnitStat(unitStat)) {
+					updatedConstraints.set(statName, lessEq(cap));
+				} else {
+					updatedConstraints.set(statName, greaterEq(cap));
+					updatedWeights = updatedWeights.withUnitStat(unitStat, 0);
+				}
 			}
 		}
 
