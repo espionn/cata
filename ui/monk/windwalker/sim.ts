@@ -48,7 +48,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecWindwalkerMonk, {
 
 	defaults: {
 		// Default equipped gear.
-		gear: Presets.P1_PREBIS_GEAR_PRESET.gear,
+		gear: Presets.P1_BIS_GEAR_PRESET.gear,
 		// Default EP weights for sorting gear in the gear picker.
 		epWeights: Presets.P1_PREBIS_EP_PRESET.epWeights,
 		// Stat caps for reforge optimizer
@@ -124,7 +124,13 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecWindwalkerMonk, {
 		// Preset rotations that the user can quickly select.
 		rotations: [Presets.ROTATION_PRESET],
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.P1_PREBIS_GEAR_PRESET, Presets.P1_PREHOF_GEAR_PRESET, Presets.P1_PRETOES_GEAR_PRESET, Presets.P1_BIS_GEAR_PRESET],
+		gear: [
+			Presets.P1_PREBIS_GEAR_PRESET,
+			Presets.P1_PREHOF_GEAR_PRESET,
+			Presets.P1_PRETOES_GEAR_PRESET,
+			Presets.P1_BIS_GEAR_PRESET,
+			Presets.P2_BIS_GEAR_PRESET,
+		],
 	},
 
 	autoRotation: (_: Player<Spec.SpecWindwalkerMonk>): APLRotation => {
