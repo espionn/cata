@@ -195,12 +195,12 @@ func init() {
 
 			statBuffAura, aura := character.NewTemporaryStatBuffWithStacks(core.TemporaryStatBuffWithStacksConfig{
 				AuraLabel:            fmt.Sprintf("%s %s", label, versionLabel),
-				ActionID:             core.ActionID{SpellID: 138790},
+				ActionID:             core.ActionID{SpellID: 138758},
 				Duration:             time.Second * 10,
 				MaxStacks:            10,
 				TimePerStack:         time.Second * 1,
 				BonusPerStack:        stats.Stats{stats.Strength: statValue},
-				StackingAuraActionID: core.ActionID{SpellID: 138758},
+				StackingAuraActionID: core.ActionID{SpellID: 138759},
 				StackingAuraLabel:    fmt.Sprintf("Item - Proc Stacking Strength %s", versionLabel),
 				TickImmediately:      true,
 			})
@@ -209,11 +209,11 @@ func init() {
 				Name:    label,
 				Harmful: true,
 				ICD:     time.Second * 10,
-				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskSpellOrSpellProc, core.RPPMConfig{
+				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
 					PPM: 1.21000003815,
 				}),
 				Outcome:  core.OutcomeLanded,
-				Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
+				Callback: core.CallbackOnSpellHitDealt,
 				Handler: func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
 					aura.Activate(sim)
 				},
