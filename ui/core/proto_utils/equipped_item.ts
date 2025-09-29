@@ -429,7 +429,7 @@ export class EquippedItem {
 	withDynamicStats() {
 		const item = this.item;
 		const scalingOptions = item.scalingOptions[this.upgrade];
-		item.stats = item.stats.map((stat, index) => scalingOptions.stats[index] || stat);
+		item.stats = new Stats().asProtoArray().map((_, index) => scalingOptions.stats[index] || 0);
 		item.weaponDamageMin = scalingOptions.weaponDamageMin;
 		item.weaponDamageMax = scalingOptions.weaponDamageMax;
 		item.randPropPoints = scalingOptions.randPropPoints;
