@@ -411,6 +411,8 @@ export class ReforgeOptimizer {
 				if (statIsCapped(statKey, reforgeCaps, reforgeSoftCaps)) {
 					return true;
 				}
+			} else if (coefficientKey.includes('Minus')) {
+				return true;
 			}
 		}
 
@@ -433,6 +435,8 @@ export class ReforgeOptimizer {
 				if (statIsCapped(statKey, reforgeCaps, reforgeSoftCaps)) {
 					cappedStatKeys.push(coefficientKey);
 				}
+			} else if (coefficientKey.includes('Minus')) {
+				cappedStatKeys.push(coefficientKey);
 			}
 		}
 
@@ -1163,7 +1167,13 @@ export class ReforgeOptimizer {
 				socketColors.pop();
 			}
 
-			const distributedSocketBonus = new Stats(scaledItem.item.socketBonus).scale(1.0 / (socketColors.length || 1)).getBuffedStats();
+			let socketBonusNormalization: number = socketColors.length || 1;
+
+			if ((socketBonusNormalization > 1) && (socketColors[0] === GemColor.GemColorMeta)) {
+				socketBonusNormalization -= 1;
+			}
+
+			const distributedSocketBonus = new Stats(scaledItem.item.socketBonus).scale(1.0 / socketBonusNormalization).getBuffedStats();
 
 			// First determine whether the socket bonus should be obviously matched in order to save on brute force computation.
 			let forceSocketBonus: boolean = false;
