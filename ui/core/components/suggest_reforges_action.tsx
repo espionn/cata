@@ -570,7 +570,7 @@ export class ReforgeOptimizer {
 					extraCssClasses: ['mb-2'],
 					id: 'reforge-optimizer-force-stat-proc',
 					label: i18n.t('sidebar.buttons.suggest_reforges.force_stat_proc'),
-					defaultValue: this.defaultRelativeStatCap ?? -1,
+					defaultValue: this.relativeStatCap?.forcedHighestStat.getStat() ?? this.defaultRelativeStatCap ?? -1,
 					values: [
 						{ name: i18n.t('sidebar.buttons.suggest_reforges.any'), value: -1 },
 						...[...RelativeStatCap.relevantStats].map(stat => {
