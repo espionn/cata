@@ -80,7 +80,7 @@ func (ww *WindwalkerMonk) registerTigereyeBrew() {
 			},
 			CD: core.Cooldown{
 				Timer:    ww.NewTimer(),
-				Duration: time.Second * 5,
+				Duration: time.Second * 1,
 			},
 		},
 

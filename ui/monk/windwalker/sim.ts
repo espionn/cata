@@ -1,6 +1,6 @@
 import * as BuffDebuffInputs from '../../core/components/inputs/buffs_debuffs';
 import * as OtherInputs from '../../core/components/inputs/other_inputs';
-import { ReforgeOptimizer } from '../../core/components/suggest_reforges_action';
+import { ReforgeOptimizer, RelativeStatCap } from '../../core/components/suggest_reforges_action';
 import * as Mechanics from '../../core/constants/mechanics.js';
 import { IndividualSimUI, registerSpecConfig } from '../../core/individual_sim_ui';
 import { Player } from '../../core/player';
@@ -50,7 +50,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecWindwalkerMonk, {
 		// Default equipped gear.
 		gear: Presets.P1_BIS_GEAR_PRESET.gear,
 		// Default EP weights for sorting gear in the gear picker.
-		epWeights: Presets.P1_PREBIS_EP_PRESET.epWeights,
+		epWeights: Presets.P1_BIS_EP_PRESET.epWeights,
 		// Stat caps for reforge optimizer
 		statCaps: (() => {
 			const expCap = new Stats().withStat(Stat.StatExpertiseRating, 7.5 * 4 * Mechanics.EXPERTISE_PER_QUARTER_PERCENT_REDUCTION);
@@ -63,14 +63,14 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecWindwalkerMonk, {
 				breakpoints: [34.02, 43.5],
 				capType: StatCapType.TypeSoftCap,
 				postCapEPs: [
-					(Presets.P1_PREBIS_EP_PRESET.epWeights.getStat(Stat.StatCritRating) - 0.05) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT,
-					(Presets.P1_PREBIS_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.1) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT,
+					(Presets.P1_BIS_EP_PRESET.epWeights.getStat(Stat.StatCritRating) - 0.05) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT,
+					(Presets.P1_BIS_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.1) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT,
 				],
 			});
 			const critSoftCapConfig = StatCap.fromPseudoStat(PseudoStat.PseudoStatPhysicalCritPercent, {
 				breakpoints: [58],
 				capType: StatCapType.TypeSoftCap,
-				postCapEPs: [(Presets.P1_PREBIS_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.05) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
+				postCapEPs: [(Presets.P1_BIS_EP_PRESET.epWeights.getStat(Stat.StatMasteryRating) - 0.05) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
 			});
 
 			return [hasteSoftCapConfig, critSoftCapConfig];
@@ -118,7 +118,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecWindwalkerMonk, {
 	},
 
 	presets: {
-		epWeights: [Presets.P1_PREBIS_EP_PRESET],
+		epWeights: [Presets.P1_BIS_EP_PRESET, Presets.RORO_BIS_EP_PRESET],
 		// Preset talents that the user can quickly select.
 		talents: [Presets.DefaultTalents],
 		// Preset rotations that the user can quickly select.
@@ -130,6 +130,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecWindwalkerMonk, {
 			Presets.P1_PRETOES_GEAR_PRESET,
 			Presets.P1_BIS_GEAR_PRESET,
 			Presets.P2_BIS_GEAR_PRESET,
+			Presets.P3_BIS_GEAR_PRESET,
 		],
 	},
 
@@ -175,7 +176,10 @@ const getActiveEPWeight = (player: Player<Spec.SpecWindwalkerMonk>, sim: Sim): S
 	if (sim.getUseCustomEPValues()) {
 		return player.getEpWeights();
 	} else {
-		return Presets.P1_PREBIS_EP_PRESET.epWeights;
+		if (RelativeStatCap.hasRoRo(player)) {
+			return Presets.RORO_BIS_EP_PRESET.epWeights;
+		}
+		return Presets.P1_BIS_EP_PRESET.epWeights;
 	}
 };
 
