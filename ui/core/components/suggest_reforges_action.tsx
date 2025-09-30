@@ -176,9 +176,11 @@ export class RelativeStatCap {
 
 	updateWeights(statWeights: Stats) {
 		const averagedWeight = 0.5 * (statWeights.getUnitStat(this.constrainedStats[0]) + statWeights.getUnitStat(this.constrainedStats[1]));
+		const secondaryGemmingThreshold = 0.5 * statWeights.getStat(Stat.StatAgility) + 0.01;
+		const highestStatWeight = (averagedWeight > secondaryGemmingThreshold) ? secondaryGemmingThreshold : 0;
 
 		for (const stat of RelativeStatCap.relevantStats) {
-			statWeights = statWeights.withStat(stat, this.forcedHighestStat.equalsStat(stat) ? 0 : averagedWeight);
+			statWeights = statWeights.withStat(stat, this.forcedHighestStat.equalsStat(stat) ? highestStatWeight : averagedWeight);
 		}
 
 		return statWeights;
@@ -1105,7 +1107,7 @@ export class ReforgeOptimizer {
 		const constraints = this.buildYalpsConstraints(baseGear, baseStats);
 
 		// Solve in multiple passes to enforce caps
-		await this.solveModel(baseGear, validatedWeights, reforgeCaps, reforgeSoftCaps, variables, constraints, 50000, this.includeTimeout ? 30 : 3600);
+		await this.solveModel(baseGear, validatedWeights, reforgeCaps, reforgeSoftCaps, variables, constraints, 5000000, this.includeTimeout ? (this.relativeStatCap ? 120 : 30) : 3600);
 		this.currentReforges = this.player.getGear().getAllReforges();
 	}
 
