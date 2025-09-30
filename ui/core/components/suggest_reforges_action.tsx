@@ -176,9 +176,11 @@ export class RelativeStatCap {
 
 	updateWeights(statWeights: Stats) {
 		const averagedWeight = 0.5 * (statWeights.getUnitStat(this.constrainedStats[0]) + statWeights.getUnitStat(this.constrainedStats[1]));
+		const secondaryGemmingThreshold = 0.5 * statWeights.getStat(Stat.StatAgility) + 0.01;
+		const highestStatWeight = (averagedWeight > secondaryGemmingThreshold) ? secondaryGemmingThreshold : 0;
 
 		for (const stat of RelativeStatCap.relevantStats) {
-			statWeights = statWeights.withStat(stat, this.forcedHighestStat.equalsStat(stat) ? 0 : averagedWeight);
+			statWeights = statWeights.withStat(stat, this.forcedHighestStat.equalsStat(stat) ? highestStatWeight : averagedWeight);
 		}
 
 		return statWeights;
@@ -1105,7 +1107,7 @@ export class ReforgeOptimizer {
 		const constraints = this.buildYalpsConstraints(baseGear, baseStats);
 
 		// Solve in multiple passes to enforce caps
-		await this.solveModel(baseGear, validatedWeights, reforgeCaps, reforgeSoftCaps, variables, constraints, 50000, this.includeTimeout ? 30 : 3600);
+		await this.solveModel(baseGear, validatedWeights, reforgeCaps, reforgeSoftCaps, variables, constraints, 5000000, this.includeTimeout ? (this.relativeStatCap ? 120 : 30) : 3600);
 		this.currentReforges = this.player.getGear().getAllReforges();
 	}
 
@@ -1549,7 +1551,13 @@ export class ReforgeOptimizer {
 
 		if (isNaN(solution.result) || (solution.status == 'timedout' && maxIterations < 4000000 && elapsedSeconds < maxSeconds)) {
 			if (maxIterations > 4000000 || elapsedSeconds > maxSeconds) {
-				throw solution;
+				if (solution.status == 'infeasible') {
+					throw 'The specified stat caps are impossible to achieve. Consider changing any upper bound stat caps to lower bounds instead.';
+				} else if ((solution.status == 'timedout') && this.includeTimeout) {
+					throw 'Solver timed out before finding a feasible solution. Consider un-checking "Limit execution time" in the Reforge settings.';
+				} else {
+					throw solution.status;
+				}
 			} else {
 				if (isDevMode()) console.log('No optimal solution was found, doubling max iterations...');
 				return await this.solveModel(
@@ -1849,7 +1857,8 @@ export class ReforgeOptimizer {
 		if (this.previousGear) this.updateGear(this.previousGear);
 		new Toast({
 			variant: 'error',
-			body: i18n.t('sidebar.buttons.suggest_reforges.reforge_optimization_failed'),
+			body: <>{i18n.t('sidebar.buttons.suggest_reforges.reforge_optimization_failed')}<p></p><p><b>Reason for failure:</b> <i>{error}</i></p></>,
+			delay: 10000,
 		});
 	}
 }
