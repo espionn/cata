@@ -1551,7 +1551,13 @@ export class ReforgeOptimizer {
 
 		if (isNaN(solution.result) || (solution.status == 'timedout' && maxIterations < 4000000 && elapsedSeconds < maxSeconds)) {
 			if (maxIterations > 4000000 || elapsedSeconds > maxSeconds) {
-				throw solution;
+				if (solution.status == 'infeasible') {
+					throw 'The specified stat caps are impossible to achieve. Consider changing any upper bound stat caps to lower bounds instead.';
+				} else if ((solution.status == 'timedout') && this.includeTimeout) {
+					throw 'Solver timed out before finding a feasible solution. Consider un-checking "Limit execution time" in the Reforge settings.';
+				} else {
+					throw solution.status;
+				}
 			} else {
 				if (isDevMode()) console.log('No optimal solution was found, doubling max iterations...');
 				return await this.solveModel(
@@ -1851,7 +1857,8 @@ export class ReforgeOptimizer {
 		if (this.previousGear) this.updateGear(this.previousGear);
 		new Toast({
 			variant: 'error',
-			body: i18n.t('sidebar.buttons.suggest_reforges.reforge_optimization_failed'),
+			body: <>{i18n.t('sidebar.buttons.suggest_reforges.reforge_optimization_failed')}<p></p><p><b>Reason for failure:</b> <i>{error}</i></p></>,
+			delay: 10000,
 		});
 	}
 }
