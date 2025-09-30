@@ -57,7 +57,8 @@ func (war *ArmsWarrior) registerSeasonedSoldier() {
 		switch weapon.WeaponType {
 		case proto.WeaponType_WeaponTypeAxe,
 			proto.WeaponType_WeaponTypeMace,
-			proto.WeaponType_WeaponTypeSword:
+			proto.WeaponType_WeaponTypeSword,
+			proto.WeaponType_WeaponTypePolearm:
 			return true
 		}
 		return false
