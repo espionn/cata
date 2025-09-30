@@ -84,7 +84,7 @@ export type ReforgeOptimizerOptions = {
 };
 
 // Used to force a particular proc from trinkets like Matrix Restabilizer and Apparatus of Khaz'goroth.
-class RelativeStatCap {
+export class RelativeStatCap {
 	readonly player: Player<any>;
 	static relevantStats: Stat[] = [Stat.StatCritRating, Stat.StatHasteRating, Stat.StatMasteryRating];
 	readonly forcedHighestStat: UnitStat;
