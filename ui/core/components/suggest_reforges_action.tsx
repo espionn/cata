@@ -212,6 +212,8 @@ export class ReforgeOptimizer {
 	protected frozenItemSlots = new Map<ItemSlot, boolean>();
 	readonly includeTimeoutChangeEmitter = new TypedEvent<void>();
 	protected includeTimeout = true;
+	readonly undershootCapsChangeEmitter = new TypedEvent<void>();
+	protected undershootCaps = new Stats();
 	protected previousGear: Gear | null = null;
 	protected previousReforges = new Map<ItemSlot, ReforgeData>();
 	protected currentReforges = new Map<ItemSlot, ReforgeData>();
@@ -411,6 +413,8 @@ export class ReforgeOptimizer {
 				if (statIsCapped(statKey, reforgeCaps, reforgeSoftCaps)) {
 					return true;
 				}
+			} else if (coefficientKey.includes('Minus')) {
+				return true;
 			}
 		}
 
@@ -754,7 +758,7 @@ export class ReforgeOptimizer {
 			<table ref={tableRef} className={clsx('reforge-optimizer-stat-cap-table mb-2', !this.sim.getUseCustomEPValues() && 'hide')}>
 				<thead>
 					<tr>
-						<th colSpan={3} className="pb-3">
+						<th colSpan={4} className="pb-3">
 							<div className="d-flex">
 								<h6 className="content-block-title mb-0 me-1">{i18n.t('sidebar.buttons.suggest_reforges.edit_stat_caps')}</h6>
 								<button ref={statCapTooltipRef} className="d-inline">
@@ -768,8 +772,11 @@ export class ReforgeOptimizer {
 					</tr>
 					<tr>
 						<th>{i18n.t('sidebar.buttons.suggest_reforges.stat')}</th>
-						<th colSpan={2} className="text-end">
+						<th colSpan={3} className="text-end">
 							%
+						</th>
+						<th colSpan={1} className="text-start">
+							Max?
 						</th>
 					</tr>
 				</thead>
@@ -802,6 +809,18 @@ export class ReforgeOptimizer {
 							...sharedInputConfig,
 							...sharedStatInputConfig,
 						});
+
+						const undershootPicker = new BooleanPicker(null, this.player, {
+							id: `reforge-optimizer-${statName}-undershoot`,
+							label: '',
+							inline: false,
+							changedEvent: () => this.undershootCapsChangeEmitter,
+							getValue: () => this.undershootCaps.getUnitStat(unitStat) > 0,
+							setValue: (_eventID, _player, newValue) => {
+								this.undershootCaps = this.undershootCaps.withUnitStat(unitStat, newValue ? 1 : 0);
+							},
+						});
+
 						const statPresets = this.statSelectionPresets?.find(entry => entry.unitStat.equals(unitStat))?.presets;
 
 						const presets = !!statPresets
@@ -842,12 +861,13 @@ export class ReforgeOptimizer {
 											)}
 										</div>
 									</td>
-									<td colSpan={2}>{percentagePicker.rootElem}</td>
+									<td colSpan={3}>{percentagePicker.rootElem}</td>
+									<td colSpan={1} className="text-end">{undershootPicker.rootElem}</td>
 								</tr>
 								{presets && (
 									<tr>
 										<td></td>
-										<td colSpan={2}>{presets.rootElem}</td>
+										<td colSpan={3}>{presets.rootElem}</td>
 									</tr>
 								)}
 							</>
@@ -889,6 +909,7 @@ export class ReforgeOptimizer {
 		useCustomEPValuesInput.addOnDisposeCallback(() => {
 			content.remove();
 			event.dispose();
+			this.undershootCaps = new Stats();
 		});
 
 		return content;
@@ -1163,7 +1184,13 @@ export class ReforgeOptimizer {
 				socketColors.pop();
 			}
 
-			const distributedSocketBonus = new Stats(scaledItem.item.socketBonus).scale(1.0 / (socketColors.length || 1)).getBuffedStats();
+			let socketBonusNormalization: number = socketColors.length || 1;
+
+			if ((socketBonusNormalization > 1) && (socketColors[0] === GemColor.GemColorMeta)) {
+				socketBonusNormalization -= 1;
+			}
+
+			const distributedSocketBonus = new Stats(scaledItem.item.socketBonus).scale(1.0 / socketBonusNormalization).getBuffedStats();
 
 			// First determine whether the socket bonus should be obviously matched in order to save on brute force computation.
 			let forceSocketBonus: boolean = false;
@@ -1173,7 +1200,7 @@ export class ReforgeOptimizer {
 				this.applyReforgeStat(socketBonusAsCoeff, stat, value, preCapEPs);
 			}
 
-			if (ReforgeOptimizer.includesCappedStat(socketBonusAsCoeff, reforgeCaps, reforgeSoftCaps)) {
+			if (ReforgeOptimizer.includesCappedStat(socketBonusAsCoeff, reforgeCaps, reforgeSoftCaps) && (socketBonusNormalization > 1)) {
 				forceSocketBonus = true;
 			}
 
@@ -1207,7 +1234,7 @@ export class ReforgeOptimizer {
 
 			const scoredDummyVariables = this.updateReforgeScores(dummyVariables, preCapEPs);
 
-			if (scoredDummyVariables.get('matched')!.get('score')! > scoredDummyVariables.get('unmatched')!.get('score')!) {
+			if ((scoredDummyVariables.get('matched')!.get('score')! > scoredDummyVariables.get('unmatched')!.get('score')!) && ((socketBonusNormalization > 1) || !ReforgeOptimizer.includesCappedStat(scoredDummyVariables.get('matched')!, reforgeCaps, reforgeSoftCaps))) {
 				forceSocketBonus = true;
 			}
 
@@ -1283,6 +1310,11 @@ export class ReforgeOptimizer {
 		]) {
 			const allGemsOfColor = this.player.getGems(socketColor);
 			const filteredGemDataForColor = new Array<GemData>();
+			let weightsForSorting = preCapEPs;
+
+			if (this.relativeStatCap) {
+				weightsForSorting = weightsForSorting.withUnitStat(this.relativeStatCap.forcedHighestStat, weightsForSorting.getUnitStat(this.relativeStatCap.constrainedStats[0]));
+			}
 
 			for (const gem of allGemsOfColor) {
 				const isJC = gem.requiredProfession == Profession.Jewelcrafting;
@@ -1312,7 +1344,7 @@ export class ReforgeOptimizer {
 						break;
 					}
 
-					this.applyReforgeStat(coefficients, statIdx, statValue, preCapEPs);
+					this.applyReforgeStat(coefficients, statIdx, statValue, weightsForSorting);
 				}
 
 				if (!allStatsValid) {
@@ -1321,7 +1353,7 @@ export class ReforgeOptimizer {
 
 				// Create single-entry map to re-use scoring code.
 				const gemVariableMap = new Map<string, YalpsCoefficients>([['temp', coefficients]]);
-				const scoredGemVariableMap = this.updateReforgeScores(gemVariableMap, preCapEPs);
+				const scoredGemVariableMap = this.updateReforgeScores(gemVariableMap, weightsForSorting);
 				filteredGemDataForColor.push({
 					gem,
 					isJC,
@@ -1333,14 +1365,9 @@ export class ReforgeOptimizer {
 			filteredGemDataForColor.sort((a, b) => b.coefficients.get('score')! - a.coefficients.get('score')!);
 
 			// Go down the list and include all gems until we find the highest EP option with zero capped stats.
-			const includedGemDataForColor = new Array<GemData>();
-			let foundUncappedJCGem = false;
-			const numGemOptionsForStat = new Map<string, number>();
-			// Temporary fix to prevent single stat gems being selected
-			// whilst multi stat gems would be a better option
 			let maxGemOptionsForStat: number = this.isTankSpec ? 3 : 4;
 
-			if (socketColor == GemColor.GemColorYellow) {
+			if ((socketColor == GemColor.GemColorYellow) && !this.relativeStatCap) {
 				let foundCritOrHasteCap = false;
 
 				for (const parentStat of [Stat.StatCritRating, Stat.StatHasteRating]) {
@@ -1356,6 +1383,12 @@ export class ReforgeOptimizer {
 				}
 			}
 
+			const includedGemDataForColor = new Array<GemData>();
+			let foundUncappedJCGem = false;
+			let foundUncappedNormalGem = false;
+			let numUncappedNormalGems = 0;
+			const numGemOptionsForStat = new Map<string, number>();
+
 			for (const gemData of filteredGemDataForColor) {
 				const cappedStatKeys = ReforgeOptimizer.getCappedStatKeys(gemData.coefficients, reforgeCaps, reforgeSoftCaps);
 				let isRedundantGem: boolean = false;
@@ -1370,7 +1403,7 @@ export class ReforgeOptimizer {
 					}
 				}
 
-				if ((!gemData.isJC || !foundUncappedJCGem) && !isRedundantGem) {
+				if ((!gemData.isJC || !foundUncappedJCGem) && !isRedundantGem && ((cappedStatKeys.length == 0) || !foundUncappedNormalGem)) {
 					includedGemDataForColor.push(gemData);
 				}
 
@@ -1378,7 +1411,12 @@ export class ReforgeOptimizer {
 					if (gemData.isJC) {
 						foundUncappedJCGem = true;
 					} else {
-						break;
+						foundUncappedNormalGem = true;
+						numUncappedNormalGems++;
+
+						if (!this.relativeStatCap || (numUncappedNormalGems == 3)) {
+							break;
+						}
 					}
 				}
 			}
@@ -1662,12 +1700,16 @@ export class ReforgeOptimizer {
 			const statName = unitStat.getKey();
 
 			if (cap !== 0 && value > cap && !constraints.has(statName)) {
-				updatedConstraints.set(statName, greaterEq(cap));
 				anyCapsExceeded = true;
 				if (isDevMode()) console.log('Cap exceeded for: %s', statName);
 
-				// Set EP to 0 for hard capped stats
-				updatedWeights = updatedWeights.withUnitStat(unitStat, 0);
+				// Set EP to 0 for hard capped stats unless they are treated as upper bounds.
+				if (this.undershootCaps.getUnitStat(unitStat)) {
+					updatedConstraints.set(statName, lessEq(cap));
+				} else {
+					updatedConstraints.set(statName, greaterEq(cap));
+					updatedWeights = updatedWeights.withUnitStat(unitStat, 0);
+				}
 			}
 		}
 
