@@ -58,17 +58,17 @@ export const HOTW_EP_PRESET = PresetUtils.makePresetEpWeights(
 	'HotW Wrath-Weave',
 	Stats.fromMap(
 		{
-			[Stat.StatStrength]: 0.35,
+			[Stat.StatStrength]: 0.34,
 			[Stat.StatAgility]: 1.0,
-			[Stat.StatAttackPower]: 0.33,
-			[Stat.StatHitRating]: 0.33,
-			[Stat.StatExpertiseRating]: 0.33,
-			[Stat.StatCritRating]: 0.34,
+			[Stat.StatAttackPower]: 0.32,
+			[Stat.StatHitRating]: 0.37,
+			[Stat.StatExpertiseRating]: 0.37,
+			[Stat.StatCritRating]: 0.36,
 			[Stat.StatHasteRating]: 0.25,
-			[Stat.StatMasteryRating]: 0.35,
+			[Stat.StatMasteryRating]: 0.37,
 		},
 		{
-			[PseudoStat.PseudoStatMainHandDps]: 0.80,
+			[PseudoStat.PseudoStatMainHandDps]: 0.72,
 		},
 	),
 );
