@@ -69,8 +69,8 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-AssuranceofConsequence-105472"
  value: {
-  dps: 98606.40349
-  tps: 555653.91202
+  dps: 98751.99843
+  tps: 556269.16321
   dtps: 35708.78332
   hps: 37788.6803
  }
@@ -843,10 +843,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-EnchantWeapon-Windsong-4441"
  value: {
-  dps: 97434.45024
-  tps: 549239.92291
-  dtps: 36819.98893
-  hps: 36519.1523
+  dps: 97251.58907
+  tps: 548155.62551
+  dtps: 36817.82328
+  hps: 36826.5852
  }
 }
 dps_results: {
@@ -879,19 +879,19 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-EvilEyeofGalakras-105491"
  value: {
-  dps: 99247.42975
-  tps: 543461.72852
-  dtps: 34292.89206
-  hps: 36836.54441
+  dps: 99413.53472
+  tps: 544926.6905
+  dtps: 34316.03612
+  hps: 36796.38361
  }
 }
 dps_results: {
  key: "TestBlood-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 102425.6291
-  tps: 575371.36418
-  dtps: 34877.08356
-  hps: 37346.0472
+  dps: 103171.83832
+  tps: 578812.56333
+  dtps: 34892.24521
+  hps: 37416.49987
  }
 }
 dps_results: {
@@ -2121,10 +2121,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-Primordius'TalismanofRage-96873"
  value: {
-  dps: 103982.13151
-  tps: 584818.2652
-  dtps: 34862.22343
-  hps: 38017.15763
+  dps: 103441.69729
+  tps: 581241.90771
+  dtps: 34889.17434
+  hps: 37808.32615
  }
 }
 dps_results: {
@@ -2220,10 +2220,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 98660.16595
-  tps: 555217.5937
-  dtps: 35873.17657
-  hps: 38038.12882
+  dps: 98999.1683
+  tps: 558161.71794
+  dtps: 35835.24726
+  hps: 37957.12078
  }
 }
 dps_results: {
@@ -2481,10 +2481,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-SparkofZandalar-96770"
  value: {
-  dps: 104400.91956
-  tps: 588957.83143
-  dtps: 34828.37512
-  hps: 38270.73789
+  dps: 104718.35354
+  tps: 590713.0228
+  dtps: 35008.53156
+  hps: 38482.76254
  }
 }
 dps_results: {
@@ -2697,10 +2697,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-TalismanofBloodlust-96864"
  value: {
-  dps: 100831.10859
-  tps: 568341.48215
-  dtps: 35723.14354
-  hps: 38449.95857
+  dps: 101745.54309
+  tps: 572398.19897
+  dtps: 35751.99141
+  hps: 38196.30121
  }
 }
 dps_results: {
@@ -3093,8 +3093,8 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-Xing-Ho,BreathofYu'lon-102246"
  value: {
-  dps: 98084.35869
-  tps: 550861.83533
+  dps: 98101.68188
+  tps: 550952.09961
   dtps: 36569.22415
   hps: 40920.92191
  }
@@ -3111,10 +3111,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-ZenAlchemistStone-75274"
  value: {
-  dps: 99794.55947
-  tps: 561726.77541
-  dtps: 35041.01774
-  hps: 38046.46086
+  dps: 99986.92801
+  tps: 562768.47594
+  dtps: 35049.11101
+  hps: 38061.39282
  }
 }
 dps_results: {

@@ -186,8 +186,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-EnchantWeapon-Windsong-4441"
  value: {
-  dps: 156116.6765
-  tps: 144613.17145
+  dps: 156272.49402
+  tps: 144759.58183
  }
 }
 dps_results: {
@@ -209,16 +209,16 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-EvilEyeofGalakras-105491"
  value: {
-  dps: 175776.31761
-  tps: 162473.95505
+  dps: 175782.92291
+  tps: 162480.19119
   hps: 1694.91582
  }
 }
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 176568.16117
-  tps: 162409.81476
+  dps: 176982.35377
+  tps: 162780.35808
   hps: 1723.92544
  }
 }
@@ -361,8 +361,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-Primordius'TalismanofRage-96873"
  value: {
-  dps: 174310.62698
-  tps: 160922.84867
+  dps: 174077.12887
+  tps: 160694.80618
   hps: 1717.86243
  }
 }
@@ -393,8 +393,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 162210.75773
-  tps: 150021.81218
+  dps: 162261.46171
+  tps: 150069.72865
   hps: 1670.74114
  }
 }
@@ -498,8 +498,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-SparkofZandalar-96770"
  value: {
-  dps: 174329.71434
-  tps: 161421.48088
+  dps: 174076.32324
+  tps: 161162.60346
   hps: 1726.34291
  }
 }
@@ -514,9 +514,9 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-TalismanofBloodlust-96864"
  value: {
-  dps: 166363.60394
-  tps: 153737.4734
-  hps: 1731.17784
+  dps: 166420.53108
+  tps: 153798.6017
+  hps: 1721.50797
  }
 }
 dps_results: {
@@ -546,8 +546,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-Xing-Ho,BreathofYu'lon-102246"
  value: {
-  dps: 164065.89185
-  tps: 151968.13444
+  dps: 164105.52222
+  tps: 152009.95145
   hps: 1811.94565
  }
 }
@@ -562,9 +562,9 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-ZenAlchemistStone-75274"
  value: {
-  dps: 171524.90229
-  tps: 158438.05155
-  hps: 1682.82848
+  dps: 171484.17464
+  tps: 158399.49319
+  hps: 1680.41102
  }
 }
 dps_results: {

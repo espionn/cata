@@ -41,8 +41,8 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-AssuranceofConsequence-105472"
  value: {
-  dps: 144822.30758
-  tps: 104629.45874
+  dps: 144561.74388
+  tps: 104290.08022
   hps: 2034.64294
  }
 }
@@ -186,8 +186,8 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-EnchantWeapon-Windsong-4441"
  value: {
-  dps: 140877.97553
-  tps: 101471.02993
+  dps: 141255.5017
+  tps: 102109.68494
  }
 }
 dps_results: {
@@ -209,17 +209,17 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-EvilEyeofGalakras-105491"
  value: {
-  dps: 163962.32897
-  tps: 112875.70225
-  hps: 2053.17424
+  dps: 163526.34982
+  tps: 112421.17795
+  hps: 2048.28987
  }
 }
 dps_results: {
  key: "TestUnholy-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 162182.60267
-  tps: 116035.8117
-  hps: 2017.54764
+  dps: 162235.32561
+  tps: 115720.49807
+  hps: 2015.10546
  }
 }
 dps_results: {
@@ -361,9 +361,9 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-Primordius'TalismanofRage-96873"
  value: {
-  dps: 158782.26323
-  tps: 113931.98784
-  hps: 2102.67244
+  dps: 158331.81162
+  tps: 113737.72725
+  hps: 2100.23026
  }
 }
 dps_results: {
@@ -393,9 +393,9 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 144616.21854
-  tps: 104167.57618
-  hps: 2032.20075
+  dps: 144796.94636
+  tps: 104391.0758
+  hps: 2034.64294
  }
 }
 dps_results: {
@@ -481,8 +481,8 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 152336.59423
-  tps: 108224.75769
+  dps: 152197.29618
+  tps: 108291.34174
   hps: 2038.2476
  }
 }
@@ -505,9 +505,9 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-SparkofZandalar-96770"
  value: {
-  dps: 158180.44117
-  tps: 114712.44085
-  hps: 2075.16367
+  dps: 158183.36024
+  tps: 114363.64908
+  hps: 2066.25458
  }
 }
 dps_results: {
@@ -521,9 +521,9 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-TalismanofBloodlust-96864"
  value: {
-  dps: 147719.51297
-  tps: 106075.45895
-  hps: 2088.52731
+  dps: 147778.06051
+  tps: 106027.59867
+  hps: 2087.95095
  }
 }
 dps_results: {
@@ -553,17 +553,17 @@ dps_results: {
 dps_results: {
  key: "TestUnholy-AllItems-Xing-Ho,BreathofYu'lon-102246"
  value: {
-  dps: 150910.32328
-  tps: 109006.42533
+  dps: 150677.99185
+  tps: 108774.0939
   hps: 2169.07832
  }
 }
 dps_results: {
  key: "TestUnholy-AllItems-ZenAlchemistStone-75274"
  value: {
-  dps: 156227.44194
-  tps: 111772.58022
-  hps: 1988.52471
+  dps: 156361.43475
+  tps: 111900.44291
+  hps: 1995.9978
  }
 }
 dps_results: {

@@ -41,7 +41,7 @@ dps_results: {
 dps_results: {
  key: "TestFrostTwoHand-AllItems-AssuranceofConsequence-105472"
  value: {
-  dps: 151746.77836
+  dps: 151748.09528
   tps: 139058.81555
   hps: 2512.85011
  }
@@ -186,8 +186,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostTwoHand-AllItems-EnchantWeapon-Windsong-4441"
  value: {
-  dps: 145841.74038
-  tps: 133905.50705
+  dps: 145993.76602
+  tps: 134056.9496
  }
 }
 dps_results: {
@@ -209,16 +209,16 @@ dps_results: {
 dps_results: {
  key: "TestFrostTwoHand-AllItems-EvilEyeofGalakras-105491"
  value: {
-  dps: 162226.24068
-  tps: 148372.12073
+  dps: 162341.43252
+  tps: 148450.88571
   hps: 2510.12117
  }
 }
 dps_results: {
  key: "TestFrostTwoHand-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 162090.81426
-  tps: 147417.20846
+  dps: 162576.12487
+  tps: 147724.97094
   hps: 2512.85011
  }
 }
@@ -361,8 +361,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostTwoHand-AllItems-Primordius'TalismanofRage-96873"
  value: {
-  dps: 161284.87365
-  tps: 147334.08651
+  dps: 161933.29919
+  tps: 147940.91115
   hps: 2588.55492
  }
 }
@@ -393,8 +393,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostTwoHand-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 151852.04428
-  tps: 139139.51841
+  dps: 151846.76993
+  tps: 139132.66368
   hps: 2512.85011
  }
 }
@@ -505,8 +505,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostTwoHand-AllItems-SparkofZandalar-96770"
  value: {
-  dps: 161949.64907
-  tps: 148543.10722
+  dps: 162563.242
+  tps: 149067.65503
   hps: 2574.69674
  }
 }
@@ -521,9 +521,9 @@ dps_results: {
 dps_results: {
  key: "TestFrostTwoHand-AllItems-TalismanofBloodlust-96864"
  value: {
-  dps: 154999.54384
-  tps: 141841.97224
-  hps: 2568.96041
+  dps: 155633.75041
+  tps: 142466.01315
+  hps: 2571.28093
  }
 }
 dps_results: {
@@ -545,24 +545,24 @@ dps_results: {
 dps_results: {
  key: "TestFrostTwoHand-AllItems-Wushoolay'sFinalChoice-96785"
  value: {
-  dps: 151668.37158
-  tps: 139000.78948
+  dps: 151668.97874
+  tps: 139001.39664
   hps: 2512.85011
  }
 }
 dps_results: {
  key: "TestFrostTwoHand-AllItems-Xing-Ho,BreathofYu'lon-102246"
  value: {
-  dps: 153270.25925
-  tps: 140609.6873
+  dps: 153210.57494
+  tps: 140550.00299
   hps: 2714.33361
  }
 }
 dps_results: {
  key: "TestFrostTwoHand-AllItems-ZenAlchemistStone-75274"
  value: {
-  dps: 158430.56336
-  tps: 144739.23021
+  dps: 158437.33088
+  tps: 144757.44522
   hps: 2512.85011
  }
 }

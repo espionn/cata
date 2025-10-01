@@ -61,8 +61,8 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-AssuranceofConsequence-105472"
  value: {
-  dps: 146112.17213
-  tps: 137896.04552
+  dps: 146095.68596
+  tps: 137879.55934
  }
 }
 dps_results: {
@@ -670,15 +670,15 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-EvilEyeofGalakras-105491"
  value: {
-  dps: 165941.93662
-  tps: 157392.98456
+  dps: 166209.10431
+  tps: 157681.20903
  }
 }
 dps_results: {
  key: "TestRetribution-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 158855.98806
-  tps: 149217.31585
+  dps: 158355.33817
+  tps: 148771.22846
  }
 }
 dps_results: {
@@ -1636,8 +1636,8 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-PurifiedBindingsofImmerseus-105422"
  value: {
-  dps: 152863.819
-  tps: 144323.65363
+  dps: 153043.66156
+  tps: 144474.03806
  }
 }
 dps_results: {
@@ -1706,8 +1706,8 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 146190.22737
-  tps: 137966.86283
+  dps: 146216.09822
+  tps: 137986.03118
  }
 }
 dps_results: {
@@ -1825,8 +1825,8 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 156470.58229
-  tps: 147196.55993
+  dps: 156782.68096
+  tps: 147544.4813
  }
 }
 dps_results: {
@@ -2357,15 +2357,15 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-Wushoolay'sFinalChoice-96785"
  value: {
-  dps: 146060.65673
-  tps: 137869.34521
+  dps: 146027.23393
+  tps: 137825.44022
  }
 }
 dps_results: {
  key: "TestRetribution-AllItems-Xing-Ho,BreathofYu'lon-102246"
  value: {
-  dps: 166290.80478
-  tps: 157319.38084
+  dps: 175570.96804
+  tps: 166603.94123
  }
 }
 dps_results: {
@@ -2378,8 +2378,8 @@ dps_results: {
 dps_results: {
  key: "TestRetribution-AllItems-ZenAlchemistStone-75274"
  value: {
-  dps: 154194.59149
-  tps: 145335.42624
+  dps: 153685.82634
+  tps: 144950.65043
  }
 }
 dps_results: {

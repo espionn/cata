@@ -61,8 +61,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-AssuranceofConsequence-105472"
  value: {
-  dps: 177541.41548
-  tps: 86176.0959
+  dps: 177708.91673
+  tps: 86119.70803
  }
 }
 dps_results: {
@@ -621,8 +621,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-EnchantWeapon-JadeSpirit-4442"
  value: {
-  dps: 159042.36666
-  tps: 79468.33849
+  dps: 159042.3859
+  tps: 79468.35772
  }
 }
 dps_results: {
@@ -635,15 +635,15 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-EnchantWeapon-SpiritofConquest-5124"
  value: {
-  dps: 159042.53894
-  tps: 79468.51076
+  dps: 159042.4772
+  tps: 79468.44902
  }
 }
 dps_results: {
  key: "TestBeastMastery-AllItems-EnchantWeapon-Windsong-4441"
  value: {
-  dps: 160564.9985
-  tps: 80038.49102
+  dps: 160271.65339
+  tps: 79903.0167
  }
 }
 dps_results: {
@@ -670,15 +670,15 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-EvilEyeofGalakras-105491"
  value: {
-  dps: 150724.67913
-  tps: 76362.56573
+  dps: 150724.87347
+  tps: 76362.76007
  }
 }
 dps_results: {
  key: "TestBeastMastery-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 150724.99815
-  tps: 76362.88475
+  dps: 150724.77192
+  tps: 76362.65853
  }
 }
 dps_results: {
@@ -1636,8 +1636,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-PurifiedBindingsofImmerseus-105422"
  value: {
-  dps: 153764.77939
-  tps: 78235.37867
+  dps: 153764.82837
+  tps: 78235.42766
  }
 }
 dps_results: {
@@ -1706,8 +1706,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 166393.07806
-  tps: 82308.7568
+  dps: 168202.29589
+  tps: 83040.34049
  }
 }
 dps_results: {
@@ -1741,8 +1741,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-RuneofRe-Origination-96918"
  value: {
-  dps: 165687.0556
-  tps: 84143.26094
+  dps: 165015.69734
+  tps: 83887.59707
  }
 }
 dps_results: {
@@ -1825,8 +1825,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-SinisterPrimalDiamond"
  value: {
-  dps: 161955.40645
-  tps: 79890.51956
+  dps: 161955.32031
+  tps: 79890.43342
  }
 }
 dps_results: {
@@ -2021,8 +2021,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-TalismanofBloodlust-96864"
  value: {
-  dps: 165855.70493
-  tps: 82952.21128
+  dps: 165352.56107
+  tps: 82482.71901
  }
 }
 dps_results: {
@@ -2322,8 +2322,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-Wushoolay'sFinalChoice-96785"
  value: {
-  dps: 150724.77192
-  tps: 76362.65853
+  dps: 150662.42308
+  tps: 76299.48628
  }
 }
 dps_results: {
@@ -2357,8 +2357,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-ZenAlchemistStone-75274"
  value: {
-  dps: 161744.90513
-  tps: 80135.33312
+  dps: 161711.519
+  tps: 80023.16068
  }
 }
 dps_results: {

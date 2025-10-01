@@ -61,8 +61,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-AssuranceofConsequence-105472"
  value: {
-  dps: 178063.44895
-  tps: 141936.72679
+  dps: 178116.376
+  tps: 142033.09985
  }
 }
 dps_results: {
@@ -642,8 +642,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-EnchantWeapon-Windsong-4441"
  value: {
-  dps: 170123.68469
-  tps: 139599.19519
+  dps: 169912.07627
+  tps: 139390.98471
  }
 }
 dps_results: {
@@ -1706,8 +1706,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 180416.57342
-  tps: 147556.24996
+  dps: 180815.38765
+  tps: 147729.49483
  }
 }
 dps_results: {
@@ -1741,8 +1741,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-RuneofRe-Origination-96918"
  value: {
-  dps: 178920.97756
-  tps: 147373.41818
+  dps: 178616.7001
+  tps: 147165.22339
  }
 }
 dps_results: {
@@ -1853,8 +1853,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-SparkofZandalar-96770"
  value: {
-  dps: 164687.80677
-  tps: 134981.41416
+  dps: 164687.74663
+  tps: 134981.35402
  }
 }
 dps_results: {
@@ -2021,8 +2021,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-TalismanofBloodlust-96864"
  value: {
-  dps: 176777.95869
-  tps: 144588.75771
+  dps: 176472.50328
+  tps: 144439.03178
  }
 }
 dps_results: {
@@ -2322,15 +2322,15 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-Wushoolay'sFinalChoice-96785"
  value: {
-  dps: 162299.37934
-  tps: 133762.36083
+  dps: 162295.96811
+  tps: 133759.38278
  }
 }
 dps_results: {
  key: "TestSurvival-AllItems-Xing-Ho,BreathofYu'lon-102246"
  value: {
-  dps: 170215.54242
-  tps: 139605.24211
+  dps: 170299.19014
+  tps: 139688.88983
  }
 }
 dps_results: {
@@ -2357,8 +2357,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-ZenAlchemistStone-75274"
  value: {
-  dps: 173174.87515
-  tps: 142176.22321
+  dps: 173218.92938
+  tps: 142223.92346
  }
 }
 dps_results: {

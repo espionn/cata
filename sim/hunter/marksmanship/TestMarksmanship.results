@@ -61,8 +61,8 @@ dps_results: {
 dps_results: {
  key: "TestMarksmanship-AllItems-AssuranceofConsequence-105472"
  value: {
-  dps: 174060.3897
-  tps: 138496.0978
+  dps: 173982.76925
+  tps: 138440.69114
  }
 }
 dps_results: {
@@ -642,8 +642,8 @@ dps_results: {
 dps_results: {
  key: "TestMarksmanship-AllItems-EnchantWeapon-Windsong-4441"
  value: {
-  dps: 168162.84718
-  tps: 138107.41855
+  dps: 166968.28494
+  tps: 137026.95492
  }
 }
 dps_results: {
@@ -1706,8 +1706,8 @@ dps_results: {
 dps_results: {
  key: "TestMarksmanship-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 172768.49408
-  tps: 140505.67427
+  dps: 172018.52645
+  tps: 139950.20167
  }
 }
 dps_results: {
@@ -1741,8 +1741,8 @@ dps_results: {
 dps_results: {
  key: "TestMarksmanship-AllItems-RuneofRe-Origination-96918"
  value: {
-  dps: 173745.57544
-  tps: 142391.70263
+  dps: 173867.45205
+  tps: 142466.9328
  }
 }
 dps_results: {
@@ -2021,8 +2021,8 @@ dps_results: {
 dps_results: {
  key: "TestMarksmanship-AllItems-TalismanofBloodlust-96864"
  value: {
-  dps: 172972.28904
-  tps: 141456.21787
+  dps: 172853.13137
+  tps: 141399.26308
  }
 }
 dps_results: {
@@ -2357,8 +2357,8 @@ dps_results: {
 dps_results: {
  key: "TestMarksmanship-AllItems-ZenAlchemistStone-75274"
  value: {
-  dps: 168383.09374
-  tps: 137834.32276
+  dps: 168271.07874
+  tps: 137801.14443
  }
 }
 dps_results: {
