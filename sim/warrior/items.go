@@ -98,12 +98,13 @@ var ItemSetBattleplateOfTheLastMogu = core.NewItemSet(core.ItemSet{
 				FloatValue: 35,
 			})
 
-			war.OnSpellRegistered(func(spell *core.Spell) {
-				if !spell.Matches(SpellMaskSkullBanner) {
-					return
-				}
-
-				war.SkullBannerAura.AttachDependentAura(aura)
+			setBonusAura.AttachProcTrigger(core.ProcTrigger{
+				Name:           "Item - Warrior T15 DPS 4P Bonus",
+				ClassSpellMask: SpellMaskSkullBanner,
+				Callback:       core.CallbackOnCastComplete,
+				Handler: func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
+					aura.Activate(sim)
+				},
 			})
 
 			setBonusAura.ExposeToAPL(138126)

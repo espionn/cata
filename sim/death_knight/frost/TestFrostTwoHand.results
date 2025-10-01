@@ -217,8 +217,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostTwoHand-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 161769.12911
-  tps: 147422.82445
+  dps: 162090.81426
+  tps: 147417.20846
   hps: 2512.85011
  }
 }
@@ -505,8 +505,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostTwoHand-AllItems-SparkofZandalar-96770"
  value: {
-  dps: 163941.93543
-  tps: 150156.60258
+  dps: 161949.64907
+  tps: 148543.10722
   hps: 2574.69674
  }
 }

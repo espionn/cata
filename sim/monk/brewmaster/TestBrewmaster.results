@@ -888,10 +888,10 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 117272.4464
-  tps: 660230.49407
-  dtps: 21129.10297
-  hps: 26717.02018
+  dps: 117143.57643
+  tps: 658596.10625
+  dtps: 21262.77132
+  hps: 27123.93725
  }
 }
 dps_results: {
@@ -2409,10 +2409,10 @@ dps_results: {
 dps_results: {
  key: "TestBrewmaster-AllItems-SparkofZandalar-96770"
  value: {
-  dps: 116820.97329
-  tps: 656752.68646
-  dtps: 20870.77949
-  hps: 26796.68047
+  dps: 116365.34899
+  tps: 654827.09842
+  dtps: 20879.85893
+  hps: 26684.49042
  }
 }
 dps_results: {

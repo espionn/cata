@@ -888,10 +888,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 102298.05652
-  tps: 575767.43432
-  dtps: 34642.54364
-  hps: 37112.1847
+  dps: 102425.6291
+  tps: 575371.36418
+  dtps: 34877.08356
+  hps: 37346.0472
  }
 }
 dps_results: {
@@ -2481,10 +2481,10 @@ dps_results: {
 dps_results: {
  key: "TestBlood-AllItems-SparkofZandalar-96770"
  value: {
-  dps: 104526.08526
-  tps: 588455.59071
-  dtps: 34903.70589
-  hps: 38625.50032
+  dps: 104400.91956
+  tps: 588957.83143
+  dtps: 34828.37512
+  hps: 38270.73789
  }
 }
 dps_results: {

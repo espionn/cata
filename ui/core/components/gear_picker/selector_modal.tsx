@@ -8,7 +8,7 @@ import { UIEnchant as Enchant, UIGem as Gem, UIItem as Item } from '../../proto/
 import { ActionId } from '../../proto_utils/action_id';
 import { EquippedItem, ReforgeData } from '../../proto_utils/equipped_item';
 import { gemMatchesSocket, getEmptyGemSocketIconUrl } from '../../proto_utils/gems';
-import { translateSlotName, translateStat } from '../../../i18n/localization';
+import { translateProtoStatName, translateSlotName, translateStat } from '../../../i18n/localization';
 import { Stats } from '../../proto_utils/stats';
 import { SimUI } from '../../sim_ui';
 import { EventID, TypedEvent } from '../../typed_event';
@@ -459,7 +459,7 @@ export default class SelectorModal extends BaseModal {
 					item: randomSuffix,
 					id: randomSuffix.id,
 					actionId: ActionId.fromRandomSuffix(itemProto, randomSuffix),
-					name: randomSuffix.name,
+					name: translateProtoStatName(randomSuffix.name),
 					quality: itemProto.quality,
 					phase: itemProto.phase,
 					nameDescription: '',

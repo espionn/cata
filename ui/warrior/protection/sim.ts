@@ -65,8 +65,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionWarrior, {
 
 	defaults: {
 		// Default equipped gear.
-		gear: Presets.PRERAID_BALANCED_PRESET.gear,
-		itemSwap: Presets.PRERAID_ITEM_SWAP.itemSwap,
+		gear: Presets.P1_BALANCED_PRESET.gear,
+		itemSwap: Presets.P1_ITEM_SWAP.itemSwap,
 		// Default EP weights for sorting gear in the gear picker.
 		epWeights: Presets.P1_EP_PRESET.epWeights,
 		// Default stat caps for the Reforge Optimizer
@@ -138,8 +138,8 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecProtectionWarrior, {
 		// Preset rotations that the user can quickly select.
 		rotations: [Presets.ROTATION_DEFENSIVE, Presets.ROTATION_DEFAULT],
 		// Preset gear configurations that the user can quickly select.
-		gear: [Presets.PRERAID_BALANCED_PRESET, Presets.P1_BALANCED_PRESET],
-		itemSwaps: [Presets.PRERAID_ITEM_SWAP, Presets.P1_ITEM_SWAP],
+		gear: [Presets.PRERAID_BALANCED_PRESET, Presets.P1_BALANCED_PRESET, Presets.P2_BALANCED_PRESET],
+		itemSwaps: [Presets.PRERAID_ITEM_SWAP, Presets.P1_ITEM_SWAP, Presets.P2_ITEM_SWAP],
 		builds: [Presets.PRESET_BUILD_DEFAULT, Presets.PRESET_BUILD_DEFENSIVE],
 	},
 
