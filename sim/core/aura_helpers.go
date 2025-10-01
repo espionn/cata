@@ -32,23 +32,23 @@ type ProcHandler func(sim *Simulation, spell *Spell, result *SpellResult)
 type ProcExtraCondition func(sim *Simulation, spell *Spell, result *SpellResult) bool
 
 type ProcTrigger struct {
-	Name              string
-	ActionID          ActionID
-	MetricsActionID   ActionID
-	Duration          time.Duration
-	Callback          AuraCallback
-	ProcMask          ProcMask
-	ProcMaskExclude   ProcMask
-	SpellFlags        SpellFlag
-	SpellFlagsExclude SpellFlag
-	Outcome           HitOutcome
-	Harmful           bool
-	ProcChance        float64
-	DPM               *DynamicProcManager
-	ICD               time.Duration
-	Handler           ProcHandler
-	ClassSpellMask    int64
-	ExtraCondition    ProcExtraCondition
+	Name               string
+	ActionID           ActionID
+	MetricsActionID    ActionID
+	Duration           time.Duration
+	Callback           AuraCallback
+	ProcMask           ProcMask
+	ProcMaskExclude    ProcMask
+	SpellFlags         SpellFlag
+	SpellFlagsExclude  SpellFlag
+	Outcome            HitOutcome
+	RequireDamageDealt bool
+	ProcChance         float64
+	DPM                *DynamicProcManager
+	ICD                time.Duration
+	Handler            ProcHandler
+	ClassSpellMask     int64
+	ExtraCondition     ProcExtraCondition
 }
 
 func ApplyProcTriggerCallback(unit *Unit, procAura *Aura, config ProcTrigger) {
@@ -87,7 +87,7 @@ func ApplyProcTriggerCallback(unit *Unit, procAura *Aura, config ProcTrigger) {
 		if config.Outcome != OutcomeEmpty && !result.Outcome.Matches(config.Outcome) {
 			return
 		}
-		if config.Harmful && result.Damage == 0 {
+		if config.RequireDamageDealt && result.Damage == 0 {
 			return
 		}
 		if icd.Duration != 0 && !icd.IsReady(sim) {

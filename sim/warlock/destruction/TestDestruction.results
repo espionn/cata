@@ -1849,9 +1849,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-AllItems-PurifiedBindingsofImmerseus-105422"
  value: {
-  dps: 106610.96932
-  tps: 79101.80086
-  hps: 801.47072
+  dps: 110319.99446
+  tps: 81705.08718
+  hps: 798.4968
  }
 }
 dps_results: {
@@ -2657,9 +2657,9 @@ dps_results: {
 dps_results: {
  key: "TestDestruction-AllItems-Xing-Ho,BreathofYu'lon-102246"
  value: {
-  dps: 122309.42446
-  tps: 95346.02806
-  hps: 882.96483
+  dps: 122438.88679
+  tps: 95639.64911
+  hps: 883.36672
  }
 }
 dps_results: {
