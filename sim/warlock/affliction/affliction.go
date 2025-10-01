@@ -83,7 +83,7 @@ func (affliction *AfflictionWarlock) Initialize() {
 		if resultList[0].Landed() {
 			affliction.LastCorruption = spell.Dot(resultList[0].Target)
 		}
-	})
+	}, nil)
 
 	affliction.registerAgony()
 	affliction.registerNightfall()
