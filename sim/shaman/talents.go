@@ -220,7 +220,6 @@ func (shaman *Shaman) ApplyUnleashedFury() {
 		Name:            "Unleashed Fury WF Proc Aura",
 		MetricsActionID: core.ActionID{SpellID: 118472},
 		Callback:        core.CallbackOnSpellHitDealt,
-		ProcMask:        core.ProcMaskMeleeWhiteHit,
 		Outcome:         core.OutcomeLanded,
 		Duration:        time.Second * 8,
 		ProcChance:      0.45,
@@ -228,6 +227,9 @@ func (shaman *Shaman) ApplyUnleashedFury() {
 			return shaman.SelfBuffs.Shield == proto.ShamanShield_LightningShield
 		},
 		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+			if spell.Matches(SpellMaskWindLash) || (!spell.Matches(SpellMaskWindfuryWeapon) && !spell.ProcMask.Matches(core.ProcMaskMeleeWhiteHit)) {
+				return
+			}
 			shaman.LightningShieldDamage.Cast(sim, result.Target)
 		},
 	})
