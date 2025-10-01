@@ -349,11 +349,11 @@ func (war *Warrior) registerBloodbath() {
 		ParentAura:     aura,
 
 		ProcTrigger: core.ProcTrigger{
-			Name:     "Bloodbath - Trigger",
-			Callback: core.CallbackOnSpellHitDealt,
-			ProcMask: core.ProcMaskMeleeSpecial,
-			Outcome:  core.OutcomeLanded,
-			Harmful:  true,
+			Name:               "Bloodbath - Trigger",
+			Callback:           core.CallbackOnSpellHitDealt,
+			ProcMask:           core.ProcMaskMeleeSpecial,
+			Outcome:            core.OutcomeLanded,
+			RequireDamageDealt: true,
 		},
 
 		DamageCalculator: func(result *core.SpellResult) float64 {

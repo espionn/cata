@@ -49,14 +49,14 @@ func RegisterAllProcs() {
 		Callback: {{ .ProcInfo.Callback | asCoreCallback }},
 		ProcMask: {{ .ProcInfo.ProcMask | asCoreProcMask }},
 		Outcome:  {{ .ProcInfo.Outcome | asCoreOutcome }},
-		Harmful:  {{ .Harmful }},
+		RequireDamageDealt:  {{ .ProcInfo.RequireDamageDealt }},
 	})
 	{{- else }}
 	shared.NewProcStatBonusEffectWithVariants(shared.ProcStatBonusEffect{
 		Callback: {{ .ProcInfo.Callback | asCoreCallback }},
 		ProcMask: {{ .ProcInfo.ProcMask | asCoreProcMask }},
 		Outcome:  {{ .ProcInfo.Outcome | asCoreOutcome }},
-		Harmful:  {{ .Harmful }},
+		RequireDamageDealt:  {{ .ProcInfo.RequireDamageDealt }},
 	}, []shared.ItemVariant{
 		{{- range .Variants }}
 		{ItemID: {{.ID}}, ItemName: "{{.Name}}"},
@@ -73,14 +73,14 @@ func RegisterAllProcs() {
 	//	Callback: {{ .ProcInfo.Callback | asCoreCallback }},
 	//	ProcMask: {{ .ProcInfo.ProcMask | asCoreProcMask }},
 	//	Outcome:  {{ .ProcInfo.Outcome | asCoreOutcome }},
-	//	Harmful:  {{ .Harmful }}
+	//	RequireDamageDealt:  {{ .ProcInfo.RequireDamageDealt }}
 	// })
 	{{- else }}
 	// shared.NewProcStatBonusEffectWithVariants(shared.ProcStatBonusEffect{
 	//	Callback: {{ .ProcInfo.Callback | asCoreCallback }},
 	//	ProcMask: {{ .ProcInfo.ProcMask | asCoreProcMask }},
 	//	Outcome:  {{ .ProcInfo.Outcome | asCoreOutcome }},
-	//	Harmful:  {{ .Harmful }},
+	//	RequireDamageDealt:  {{ .ProcInfo.RequireDamageDealt }},
 	// }, []shared.ItemVariant{
 		{{- range .Variants }}
 	//	{ItemID: {{.ID}}, ItemName: "{{.Name}}"},
@@ -123,7 +123,7 @@ func RegisterAllEnchants() {
 		Callback:  {{ .ProcInfo.Callback | asCoreCallback }},
 		ProcMask:  {{ .ProcInfo.ProcMask | asCoreProcMask }},
 		Outcome:   {{ .ProcInfo.Outcome | asCoreOutcome }},
-		Harmful:   {{ .Harmful }},
+		RequireDamageDealt:   {{ .ProcInfo.RequireDamageDealt }},
 	})
 	{{- else}}
 	// shared.NewProcStatBonusEffect(shared.ProcStatBonusEffect{
@@ -134,7 +134,7 @@ func RegisterAllEnchants() {
 	//	Callback:  {{ .ProcInfo.Callback | asCoreCallback }},
 	//	ProcMask:  {{ .ProcInfo.ProcMask | asCoreProcMask }},
 	//	Outcome:   {{ .ProcInfo.Outcome | asCoreOutcome }},
-	//	Harmful:   {{ .Harmful }},
+	//	RequireDamageDealt:   {{ .ProcInfo.RequireDamageDealt }},
 	// })
 	{{- end}}
 {{- end }}

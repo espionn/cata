@@ -69,11 +69,11 @@ func init() {
 		})
 
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-			Name:     "Lightning Strike Charges Trigger",
-			ActionID: core.ActionID{SpellID: 137595},
-			Harmful:  true,
-			Callback: core.CallbackOnSpellHitDealt,
-			Outcome:  core.OutcomeLanded,
+			Name:               "Lightning Strike Charges Trigger",
+			ActionID:           core.ActionID{SpellID: 137595},
+			RequireDamageDealt: true,
+			Callback:           core.CallbackOnSpellHitDealt,
+			Outcome:            core.OutcomeLanded,
 			DPM: character.NewRPPMProcManager(95346, false, true, core.ProcMaskMeleeOrRanged, core.RPPMConfig{
 				PPM: 19.27000045776,
 			}.WithHasteMod().
@@ -121,12 +121,12 @@ func init() {
 			AttachMultiplyCastSpeed(hasteMulti)
 
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-			Name:     "Haste Trigger",
-			ActionID: core.ActionID{SpellID: 137592},
-			Harmful:  true,
-			Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
-			Outcome:  core.OutcomeLanded,
-			ICD:      time.Second * 3,
+			Name:               "Haste Trigger",
+			ActionID:           core.ActionID{SpellID: 137592},
+			RequireDamageDealt: true,
+			Callback:           core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
+			Outcome:            core.OutcomeLanded,
+			ICD:                time.Second * 3,
 			DPM: character.NewRPPMProcManager(95347, false, true, core.ProcMaskSpellOrSpellProc, core.RPPMConfig{
 				PPM: 1.35000002384,
 			}.
@@ -164,12 +164,12 @@ func init() {
 			AttachMultiplicativePseudoStatBuff(&character.PseudoStats.DamageTakenMultiplier, 0.8)
 
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-			Name:     "Fortitude Trigger",
-			ActionID: core.ActionID{SpellID: 137594},
-			Harmful:  true,
-			Callback: core.CallbackOnSpellHitTaken,
-			Outcome:  core.OutcomeLanded,
-			ICD:      time.Second * 3,
+			Name:               "Fortitude Trigger",
+			ActionID:           core.ActionID{SpellID: 137594},
+			RequireDamageDealt: true,
+			Callback:           core.CallbackOnSpellHitTaken,
+			Outcome:            core.OutcomeLanded,
+			ICD:                time.Second * 3,
 			DPM: character.NewRPPMProcManager(95344, false, true, core.ProcMaskMeleeOrMeleeProc, core.RPPMConfig{
 				PPM: 2.56999993324,
 			}),

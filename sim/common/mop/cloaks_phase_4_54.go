@@ -56,8 +56,8 @@ func init() {
 		})
 
 		proctrigger := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-			Name:    label,
-			Harmful: true,
+			Name:               label,
+			RequireDamageDealt: true,
 			DPM: character.NewRPPMProcManager(102246, false, false, core.ProcMaskSpellOrSpellProc, core.RPPMConfig{
 				PPM: 2.61100006104,
 			}.WithHasteMod().
@@ -129,10 +129,10 @@ func init() {
 			})
 
 			procTrigger := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-				Name:     fmt.Sprintf("%s - Trigger", label),
-				ActionID: core.ActionID{SpellID: 146195},
-				Harmful:  true,
-				ICD:      time.Second * 3,
+				Name:               fmt.Sprintf("%s - Trigger", label),
+				ActionID:           core.ActionID{SpellID: 146195},
+				RequireDamageDealt: true,
+				ICD:                time.Second * 3,
 				DPM: character.NewRPPMProcManager(itemID,
 					false,
 					false,
