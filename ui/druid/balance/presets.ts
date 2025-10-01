@@ -111,31 +111,27 @@ export const T16PresetBuild = PresetUtils.makePresetBuild('Balance T16', {
 	epWeights: StandardEPWeights,
 });
 
-export const BALANCE_BREAKPOINTS: UnitStatPresets[] = [
-	{
-		unitStat: UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent),
-		presets: new Map([
-			['9-tick MF/SF', 5.5618],
-			['10-tick MF/SF', 18.0272],
-			['11-tick MF/SF', 30.4347],
-			['12-tick MF/SF', 42.8444],
-			['13-tick MF/SF', 55.3489],
-			['14-tick MF/SF', 67.627],
-		]),
-	},
-];
+export const BALANCE_BREAKPOINTS: UnitStatPresets = {
+	unitStat: UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent),
+	presets: new Map([
+		['9-tick MF/SF', 5.5618],
+		['10-tick MF/SF', 18.0272],
+		['11-tick MF/SF', 30.4347],
+		['12-tick MF/SF', 42.8444],
+		['13-tick MF/SF', 55.3489],
+		['14-tick MF/SF', 67.627],
+	]),
+};
 
-export const BALANCE_T14_4P_BREAKPOINTS: UnitStatPresets[] = [
-	{
-		unitStat: UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent),
-		presets: new Map([
-			['10-tick MF/SF', 3.2431],
-			['11-tick MF/SF', 14.1536],
-			['12-tick MF/SF', 24.9824],
-			['13-tick MF/SF', 35.9227],
-			['14-tick MF/SF', 46.7002],
-			['15-tick MF/SF', 57.6013],
-			['16-tick MF/SF', 68.4388],
-		]),
-	},
-];
+export const BALANCE_T14_4P_BREAKPOINTS: UnitStatPresets = {
+	unitStat: UnitStat.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent),
+	presets: new Map([
+		['10-tick MF/SF', 3.2431],
+		['11-tick MF/SF', 14.1536],
+		['12-tick MF/SF', 24.9824],
+		['13-tick MF/SF', 35.9227],
+		['14-tick MF/SF', 46.7002],
+		['15-tick MF/SF', 57.6013],
+		['16-tick MF/SF', 68.4388],
+	]),
+};

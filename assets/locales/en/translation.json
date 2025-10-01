@@ -2228,7 +2228,7 @@
 				"title": "Suggest Reforges",
 				"tooltip": "Change Reforge Optimizer settings",
 				"use_soft_cap_breakpoints": "Use soft cap breakpoints",
-				"force_stat_proc": "Force RoRO proc",
+				"force_stat_proc": "Force RoRo proc",
 				"any": "Any",
 				"optimize_gems_tooltip": "Optimize gems and Reforges simultaneously.",
 				"freeze_item_slots_tooltip": "Flag one or more item slots to be \"frozen\", which will prevent the optimizer from changing the Reforge or gems in that slot from their current settings. This can be useful for hybrid classes who use the same gear piece for multiple raid roles.",

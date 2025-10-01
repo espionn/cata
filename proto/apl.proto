@@ -775,6 +775,7 @@ message APLValueDotBaseDuration {
 message APLValueDotPercentIncrease {
 	ActionID spell_id = 1;
 	UnitReference target_unit = 2;
+	bool use_base_value = 3;
 }
 
 message APLActionGroupReference {

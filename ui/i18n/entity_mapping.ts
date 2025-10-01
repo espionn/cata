@@ -28,6 +28,31 @@ export const statI18nKeys: Record<Stat, string> = {
 	[Stat.StatMP5]: 'mp5',
 };
 
+export const protoStatNameI18nKeys: Record<string, string> = {
+	['Strength']: 'strength',
+	['Agility']: 'agility',
+	['Stamina']: 'stamina',
+	['Intellect']: 'intellect',
+	['Spirit']: 'spirit',
+	['HitRating']: 'hit',
+	['CritRating']: 'crit',
+	['HasteRating']: 'haste',
+	['ExpertiseRating']: 'expertise',
+	['DodgeRating']: 'dodge',
+	['ParryRating']: 'parry',
+	['MasteryRating']: 'mastery',
+	['AttackPower']: 'attack_power',
+	['RangedAttackPower']: 'ranged_attack_power',
+	['SpellPower']: 'spell_power',
+	['PvpResilienceRating']: 'pvp_resilience',
+	['PvpPowerRating']: 'pvp_power',
+	['Armor']: 'armor',
+	['BonusArmor']: 'bonus_armor',
+	['Health']: 'health',
+	['Mana']: 'mana',
+	['MP5']: 'mp5',
+};
+
 export const pseudoStatI18nKeys: Record<PseudoStat, string> = {
 	[PseudoStat.PseudoStatMainHandDps]: 'main_hand_dps',
 	[PseudoStat.PseudoStatOffHandDps]: 'off_hand_dps',
@@ -356,7 +381,8 @@ export const getArmorTypeI18nKey = (armorType: ArmorType): string => armorTypeI1
 
 export const getWeaponTypeI18nKey = (weaponType: WeaponType): string => weaponTypeI18nKeys[weaponType] || WeaponType[weaponType].toLowerCase();
 
-export const getRangedWeaponTypeI18nKey = (rangedWeaponType: RangedWeaponType): string => rangedWeaponTypeI18nKeys[rangedWeaponType] || RangedWeaponType[rangedWeaponType].toLowerCase();
+export const getRangedWeaponTypeI18nKey = (rangedWeaponType: RangedWeaponType): string =>
+	rangedWeaponTypeI18nKeys[rangedWeaponType] || RangedWeaponType[rangedWeaponType].toLowerCase();
 
 export const getMasterySpellNameI18nKey = (spec: Spec): string => masterySpellNamesI18nKeys[spec] || Spec[spec].toLowerCase();
 

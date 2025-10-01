@@ -105,9 +105,9 @@ dps_results: {
 dps_results: {
  key: "TestProtectionWarrior-AllItems-BattleplateoftheLastMogu"
  value: {
-  dps: 121093.07029
-  tps: 763306.92217
-  dtps: 22908.62231
+  dps: 117054.80552
+  tps: 737345.70812
+  dtps: 22796.58483
  }
 }
 dps_results: {
@@ -785,9 +785,9 @@ dps_results: {
 dps_results: {
  key: "TestProtectionWarrior-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 115090.34442
-  tps: 724305.71539
-  dtps: 22393.63982
+  dps: 116450.70939
+  tps: 732893.46886
+  dtps: 22222.24462
  }
 }
 dps_results: {
@@ -2146,9 +2146,9 @@ dps_results: {
 dps_results: {
  key: "TestProtectionWarrior-AllItems-SparkofZandalar-96770"
  value: {
-  dps: 117192.14958
-  tps: 738984.97269
-  dtps: 22229.76034
+  dps: 116681.27089
+  tps: 736897.36389
+  dtps: 22523.84456
  }
 }
 dps_results: {

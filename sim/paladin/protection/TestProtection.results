@@ -870,10 +870,10 @@ dps_results: {
 dps_results: {
  key: "TestProtection-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 118749.8302
-  tps: 778465.14429
-  dtps: 12868.31051
-  hps: 20216.00266
+  dps: 118967.72722
+  tps: 779240.24274
+  dtps: 13230.5717
+  hps: 20225.79441
  }
 }
 dps_results: {
@@ -2382,10 +2382,10 @@ dps_results: {
 dps_results: {
  key: "TestProtection-AllItems-SparkofZandalar-96770"
  value: {
-  dps: 120456.3599
-  tps: 789983.35502
-  dtps: 12723.46494
-  hps: 21300.36095
+  dps: 118813.41293
+  tps: 779456.61239
+  dtps: 13099.71148
+  hps: 20865.29219
  }
 }
 dps_results: {
