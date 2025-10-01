@@ -38,10 +38,9 @@ func init() {
 		auras := []*core.StatBuffAura{haste, crit, mastery}
 
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-			Name:               "Enchant Weapon - Windsong",
-			Callback:           core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt | core.CallbackOnHealDealt | core.CallbackOnPeriodicHealDealt,
-			RequireDamageDealt: true,
-			ActionID:           core.ActionID{SpellID: 104561},
+			Name:     "Enchant Weapon - Windsong",
+			Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt | core.CallbackOnHealDealt | core.CallbackOnPeriodicHealDealt,
+			ActionID: core.ActionID{SpellID: 104561},
 			DPM: character.NewRPPMProcManager(
 				4441,
 				true,
@@ -86,11 +85,10 @@ func init() {
 			)
 
 			core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-				Name:               "Enchant Weapon - " + name,
-				Callback:           core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt | core.CallbackOnHealDealt | core.CallbackOnPeriodicHealDealt,
-				RequireDamageDealt: true,
-				ActionID:           core.ActionID{SpellID: procEffectId},
-				ICD:                3 * time.Second,
+				Name:     "Enchant Weapon - " + name,
+				Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt | core.CallbackOnHealDealt | core.CallbackOnPeriodicHealDealt,
+				ActionID: core.ActionID{SpellID: procEffectId},
+				ICD:      3 * time.Second,
 				DPM: character.NewRPPMProcManager(
 					effectId,
 					true,
@@ -151,10 +149,9 @@ func init() {
 			ohAuras := createDancingSteelAuras(2)
 
 			core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-				Name:               "Enchant Weapon - " + name,
-				Callback:           core.CallbackOnSpellHitDealt,
-				RequireDamageDealt: true,
-				ActionID:           core.ActionID{SpellID: procEffectId},
+				Name:     "Enchant Weapon - " + name,
+				Callback: core.CallbackOnSpellHitDealt,
+				ActionID: core.ActionID{SpellID: procEffectId},
 				DPM: character.NewRPPMProcManager(
 					effectId,
 					true,

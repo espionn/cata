@@ -121,12 +121,11 @@ func init() {
 			AttachMultiplyCastSpeed(hasteMulti)
 
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-			Name:               "Haste Trigger",
-			ActionID:           core.ActionID{SpellID: 137592},
-			RequireDamageDealt: true,
-			Callback:           core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
-			Outcome:            core.OutcomeLanded,
-			ICD:                time.Second * 3,
+			Name:     "Haste Trigger",
+			ActionID: core.ActionID{SpellID: 137592},
+			Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
+			Outcome:  core.OutcomeLanded,
+			ICD:      time.Second * 3,
 			DPM: character.NewRPPMProcManager(95347, false, true, core.ProcMaskSpellOrSpellProc, core.RPPMConfig{
 				PPM: 1.35000002384,
 			}.
@@ -170,7 +169,7 @@ func init() {
 			Callback:           core.CallbackOnSpellHitTaken,
 			Outcome:            core.OutcomeLanded,
 			ICD:                time.Second * 3,
-			DPM: character.NewRPPMProcManager(95344, false, true, core.ProcMaskMeleeOrMeleeProc, core.RPPMConfig{
+			DPM: character.NewRPPMProcManager(95344, false, true, core.ProcMaskMeleeOrMeleeProc|core.ProcMaskRangedOrRangedProc, core.RPPMConfig{
 				PPM: 2.56999993324,
 			}),
 			Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {

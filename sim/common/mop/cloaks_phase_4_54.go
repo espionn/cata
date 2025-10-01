@@ -56,8 +56,7 @@ func init() {
 		})
 
 		proctrigger := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-			Name:               label,
-			RequireDamageDealt: true,
+			Name: label,
 			DPM: character.NewRPPMProcManager(102246, false, false, core.ProcMaskSpellOrSpellProc, core.RPPMConfig{
 				PPM: 2.61100006104,
 			}.WithHasteMod().

@@ -42,9 +42,8 @@ func init() {
 			})
 
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-				Name:               label,
-				RequireDamageDealt: true,
-				ICD:                time.Second * 10,
+				Name: label,
+				ICD:  time.Second * 10,
 				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
 					PPM: 1.21000003815,
 				}),
@@ -108,9 +107,8 @@ func init() {
 			})
 
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-				Name:               label,
-				RequireDamageDealt: true,
-				ICD:                time.Second * 3,
+				Name: label,
+				ICD:  time.Second * 3,
 				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskSpellHealing, core.RPPMConfig{
 					PPM: 0.95999997854,
 				}.WithHasteMod()),
@@ -158,9 +156,8 @@ func init() {
 			})
 
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-				Name:               label,
-				RequireDamageDealt: true,
-				ICD:                time.Second * 10,
+				Name: label,
+				ICD:  time.Second * 10,
 				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskSpellOrSpellProc, core.RPPMConfig{
 					PPM: 1.21000003815,
 				}),
@@ -206,9 +203,8 @@ func init() {
 			})
 
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-				Name:               label,
-				RequireDamageDealt: true,
-				ICD:                time.Second * 10,
+				Name: label,
+				ICD:  time.Second * 10,
 				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
 					PPM: 1.21000003815,
 				}),
@@ -290,8 +286,7 @@ func init() {
 			})
 
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-				Name:               label,
-				RequireDamageDealt: true,
+				Name: label,
 				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
 					PPM: 3.5,
 				}),
@@ -339,9 +334,8 @@ func init() {
 			})
 
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-				Name:               label,
-				RequireDamageDealt: true,
-				ICD:                time.Second * 17,
+				Name: label,
+				ICD:  time.Second * 17,
 				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskSpellHealing, core.RPPMConfig{
 					PPM: 1.63999998569,
 				}.WithHasteMod()),
@@ -429,8 +423,7 @@ func init() {
 			})
 
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-				Name:               label,
-				RequireDamageDealt: true,
+				Name: label,
 				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
 					PPM: 3.5,
 				}),
@@ -474,8 +467,7 @@ func init() {
 			})
 
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-				Name:               label,
-				RequireDamageDealt: true,
+				Name: label,
 				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
 					PPM: 0.72000002861,
 				}.WithCritMod()),
@@ -529,9 +521,8 @@ func init() {
 			)
 
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-				Name:               label,
-				RequireDamageDealt: true,
-				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
+				Name: label,
+				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskSpellOrSpellProc, core.RPPMConfig{
 					PPM: 0.57999998331,
 				}.WithApproximateIlvlMod(1.0, 528).
 					WithClassMod(-0.40000000596, int(1<<proto.Class_ClassWarlock)).
@@ -617,8 +608,7 @@ func init() {
 			buffAuras[stats.MasteryRating] = createStatBuffAura("Mastery", 139120)
 
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-				Name:               label,
-				RequireDamageDealt: true,
+				Name: label,
 				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskMeleeOrMeleeProc|core.ProcMaskRangedOrRangedProc, core.RPPMConfig{
 					PPM: 1.10000002384,
 				}.WithApproximateIlvlMod(1.0, 528)),
@@ -760,9 +750,8 @@ func init() {
 			})
 
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-				ActionID:           core.ActionID{SpellID: 138957},
-				Name:               label,
-				RequireDamageDealt: true,
+				ActionID: core.ActionID{SpellID: 138957},
+				Name:     label,
 				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
 					PPM: 11.10000038147,
 				}),
