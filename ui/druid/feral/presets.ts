@@ -41,15 +41,15 @@ export const DOC_EP_PRESET = PresetUtils.makePresetEpWeights(
 		{
 			[Stat.StatStrength]: 0.39,
 			[Stat.StatAgility]: 1.0,
-			[Stat.StatAttackPower]: 0.38,
-			[Stat.StatHitRating]: 0.38,
-			[Stat.StatExpertiseRating]: 0.38,
-			[Stat.StatCritRating]: 0.35,
-			[Stat.StatHasteRating]: 0.22,
-			[Stat.StatMasteryRating]: 0.39,
+			[Stat.StatAttackPower]: 0.37,
+			[Stat.StatHitRating]: 0.45,
+			[Stat.StatExpertiseRating]: 0.45,
+			[Stat.StatCritRating]: 0.36,
+			[Stat.StatHasteRating]: 0.27,
+			[Stat.StatMasteryRating]: 0.42,
 		},
 		{
-			[PseudoStat.PseudoStatMainHandDps]: 0.82,
+			[PseudoStat.PseudoStatMainHandDps]: 0.73,
 		},
 	),
 );
