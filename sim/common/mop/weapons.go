@@ -47,13 +47,13 @@ func init() {
 		})
 
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-			Name:       "Yaungol Fire Carrier",
-			ActionID:   core.ActionID{SpellID: 126212},
-			Harmful:    true,
-			ProcMask:   core.ProcMaskMeleeOrMeleeProc,
-			ProcChance: 0.1,
-			Outcome:    core.OutcomeLanded,
-			Callback:   core.CallbackOnSpellHitDealt,
+			Name:               "Yaungol Fire Carrier",
+			ActionID:           core.ActionID{SpellID: 126212},
+			RequireDamageDealt: true,
+			ProcMask:           core.ProcMaskMeleeOrMeleeProc,
+			ProcChance:         0.1,
+			Outcome:            core.OutcomeLanded,
+			Callback:           core.CallbackOnSpellHitDealt,
 			Handler: func(sim *core.Simulation, _ *core.Spell, result *core.SpellResult) {
 				dot.Cast(sim, result.Target)
 			},
@@ -75,11 +75,11 @@ func init() {
 		})
 
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-			Name:     "The Gloaming Blade",
-			Harmful:  true,
-			DPM:      character.NewDynamicLegacyProcForWeapon(88149, 2, 0),
-			Outcome:  core.OutcomeLanded,
-			Callback: core.CallbackOnSpellHitDealt,
+			Name:               "The Gloaming Blade",
+			RequireDamageDealt: true,
+			DPM:                character.NewDynamicLegacyProcForWeapon(88149, 2, 0),
+			Outcome:            core.OutcomeLanded,
+			Callback:           core.CallbackOnSpellHitDealt,
 			Handler: func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
 				aura.Activate(sim)
 				aura.AddStack(sim)

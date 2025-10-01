@@ -254,9 +254,9 @@ var ItemSetPlateOfTheLightningEmperor = core.NewItemSet(core.ItemSet{
 			})
 
 			setBonusAura.AttachProcTrigger(core.ProcTrigger{
-				Callback: core.CallbackOnSpellHitTaken,
-				Outcome:  core.OutcomeLanded,
-				Harmful:  true,
+				Callback:           core.CallbackOnSpellHitTaken,
+				Outcome:            core.OutcomeLanded,
+				RequireDamageDealt: true,
 
 				Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 					if paladin.DivineProtectionAura.IsActive() {
@@ -403,9 +403,9 @@ var ItemSetPlateOfWingedTriumph = core.NewItemSet(core.ItemSet{
 						blessingOfTheGuardians.Cast(sim, &paladin.Unit)
 					}
 				}).AttachProcTrigger(core.ProcTrigger{
-					Callback: core.CallbackOnSpellHitTaken,
-					Outcome:  core.OutcomeLanded,
-					Harmful:  true,
+					Callback:           core.CallbackOnSpellHitTaken,
+					Outcome:            core.OutcomeLanded,
+					RequireDamageDealt: true,
 
 					Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 						totalDamageTaken += result.Damage
