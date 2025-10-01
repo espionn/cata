@@ -57,6 +57,7 @@ func ScanRawItemData(rows *sql.Rows) (dbc.Item, error) {
 		&raw.ItemClass,
 		&raw.ItemSubClass,
 		&raw.NameDescription,
+		&raw.UpgradeID,
 	)
 	if err != nil {
 		panic(err)
@@ -127,7 +128,8 @@ func LoadAndWriteRawItems(dbHelper *DBHelper, filter string, inputsDir string) (
 			 s.StatModifier_bonusAmount,
 			 i.ClassID,
 			 i.SubClassID,
-			 COALESCE(ind.Description_lang, '')
+			 COALESCE(ind.Description_lang, ''),
+			 COALESCE(riu.ItemUpgradeID, 0)
 		FROM Item i
 		JOIN ItemSparse s ON i.ID = s.ID
 		JOIN ItemClass ic ON i.ClassID = ic.ClassID
@@ -138,6 +140,7 @@ func LoadAndWriteRawItems(dbHelper *DBHelper, filter string, inputsDir string) (
 		LEFT JOIN ItemArmorQuality iaq ON s.ItemLevel = iaq.ID
 		LEFT JOIN ItemNameDescription as ind ON s.ItemNameDescriptionID = ind.ID
 		JOIN ItemArmorTotal at ON s.ItemLevel = at.ItemLevel
+		LEFT JOIN RulesetItemUpgrade as riu ON riu.ItemID = i.ID
 		`
 
 	if strings.TrimSpace(filter) != "" {
