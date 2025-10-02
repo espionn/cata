@@ -1359,6 +1359,10 @@
 					"label": "Temps de réaction",
 					"tooltip": "La quantité de temps spécifiée par le paramètre <b>Temps de réaction</b>."
 				},
+				"spell_in_flight": {
+					"label":"Sort en vol",
+					"tooltip":"<b>Vrai</b> si ce sort est actuellement en cours, sinon <b>Faux</b>."
+				},
 				"aura_known": {
 					"label": "Aura connue",
 					"tooltip": "<b>Vrai</b> si l'aura est actuellement connue, sinon <b>Faux</b>."
@@ -1591,7 +1595,8 @@
 					"shield_spells": "Bouclier",
 					"non_instant_spells": "Sort Non-instantané",
 					"friendly_spells": "Sort Amical",
-					"expected_dot_spells": "DoT"
+					"expected_dot_spells": "DoT",
+					"spells_with_travelTime": "Sort"
 				},
 				"field_configs": {
 					"type": "Type",

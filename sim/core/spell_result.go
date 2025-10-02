@@ -608,6 +608,7 @@ func (spell *Spell) WaitTravelTime(sim *Simulation, callback func(*Simulation)) 
 	pa := sim.GetConsumedPendingActionFromPool()
 	pa.NextActionAt = sim.CurrentTime + spell.TravelTime()
 	pa.OnAction = callback
+	pa.ActionId = spell.ActionID
 	sim.AddPendingAction(pa)
 }
 

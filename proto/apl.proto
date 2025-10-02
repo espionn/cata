@@ -99,7 +99,7 @@ message APLAction {
 }
 
 
-// NextIndex: 118
+// NextIndex: 119
 message APLValue {
 	UUID uuid = 85;
 
@@ -185,6 +185,7 @@ message APLValue {
         APLValueSpellTimeToCharge spell_time_to_charge = 97;
         APLValueSpellGCDHastedDuration spell_gcd_hasted_duration = 115;
         APLValueSpellFullCooldown spell_full_cooldown = 116;
+        APLValueSpellInFlight spell_in_flight = 118;
 
         // Aura values
         APLValueAuraIsKnown aura_is_known = 73;
@@ -644,6 +645,9 @@ message APLValueSpellGCDHastedDuration{
 }
 message APLValueSpellFullCooldown{
     ActionID spell_id = 1;
+}
+message APLValueSpellInFlight{
+	ActionID spell_id = 1;
 }
 
 message APLValueAuraIsKnown {

@@ -668,6 +668,7 @@ func (sim *Simulation) AddPendingAction(pa *PendingAction) {
 // underlying struct, which will be re-used once consumed.
 func (sim *Simulation) GetConsumedPendingActionFromPool() *PendingAction {
 	pa := sim.pendingActionPool.Get().(*PendingAction)
+	pa.ActionId = ActionID{}
 	pa.NextActionAt = 0
 	pa.Priority = 0
 	pa.OnAction = nil

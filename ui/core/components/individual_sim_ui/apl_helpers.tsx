@@ -38,7 +38,8 @@ export type ACTION_ID_SET =
 	| 'shield_spells'
 	| 'non_instant_spells'
 	| 'friendly_spells'
-	| 'expected_dot_spells';
+	| 'expected_dot_spells'
+	| 'spells_with_travelTime';
 
 const actionIdSets: Record<
 	ACTION_ID_SET,
@@ -273,6 +274,21 @@ const actionIdSets: Record<
 				});
 		},
 	},
+	spells_with_travelTime: {
+		defaultLabel: i18n.t('rotation_tab.apl.helpers.action_id_sets.spells_with_travelTime'),
+		getActionIDs: async metadata => {
+			return (
+				metadata
+					.getSpells()
+					.filter(spell => spell.data.hasMissleSpeed)
+					.map(actionId => {
+						return {
+							value: actionId.id,
+						};
+					})
+			);
+		},
+	}
 };
 
 export type DEFAULT_UNIT_REF = 'self' | 'currentTarget';

@@ -5610,6 +5610,22 @@
                     "tooltip"
                   ]
                 },
+                "spell_in_flight": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "tooltip": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "tooltip"
+                  ]
+                },
                 "aura_known": {
                   "type": "object",
                   "properties": {
@@ -6291,6 +6307,7 @@
                 "is_channeling",
                 "channeled_ticks",
                 "number_of_charges",
+                "spell_in_flight",
                 "time_to_next_charge",
                 "gcd_hasted_duration",
                 "full_cooldown",
@@ -6639,6 +6656,9 @@
                     },
                     "expected_dot_spells": {
                       "type": "string"
+                    },
+                    "spells_with_travelTime": {
+                      "type": "string"
                     }
                   },
                   "additionalProperties": false,
@@ -6655,7 +6675,8 @@
                     "shield_spells",
                     "non_instant_spells",
                     "friendly_spells",
-                    "expected_dot_spells"
+                    "expected_dot_spells",
+                    "spells_with_travelTime"
                   ]
                 },
                 "field_configs": {
