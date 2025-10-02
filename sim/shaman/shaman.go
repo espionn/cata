@@ -338,6 +338,7 @@ const (
 	SpellMaskFeralSpirit
 	SpellMaskElementalMastery
 	SpellMaskAscendance
+	SpellMaskWindLash
 	SpellMaskSpiritwalkersGrace
 	SpellMaskShamanisticRage
 	SpellMaskElementalBlast

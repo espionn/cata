@@ -129,9 +129,10 @@ func (shaman *Shaman) ApplyEnhancementTalents() {
 	//Static Shock
 	core.MakeProcTriggerAura(&shaman.Unit, core.ProcTrigger{
 		Name:           "Static Shock",
-		Callback:       core.CallbackOnApplyEffects,
-		ClassSpellMask: SpellMaskStormstrikeCast | SpellMaskLavaLash,
+		Callback:       core.CallbackOnSpellHitDealt,
+		ClassSpellMask: SpellMaskStormstrikeDamage | SpellMaskLavaLash,
 		ProcChance:     0.45,
+		Outcome:        core.OutcomeLanded,
 		ExtraCondition: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) bool {
 			return shaman.SelfBuffs.Shield == proto.ShamanShield_LightningShield
 		},
