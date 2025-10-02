@@ -54,6 +54,25 @@ export const DOC_EP_PRESET = PresetUtils.makePresetEpWeights(
 	),
 );
 
+export const DOC_RORO_PRESET = PresetUtils.makePresetEpWeights(
+	'DoC RoRo',
+	Stats.fromMap(
+		{
+			[Stat.StatStrength]: 0.39,
+			[Stat.StatAgility]: 1.0,
+			[Stat.StatAttackPower]: 0.37,
+			[Stat.StatHitRating]: 0.44,
+			[Stat.StatExpertiseRating]: 0.44,
+			[Stat.StatCritRating]: 0.49,
+			[Stat.StatHasteRating]: 0.42,
+			[Stat.StatMasteryRating]: 0.39,
+		},
+		{
+			[PseudoStat.PseudoStatMainHandDps]: 0.74,
+		},
+	),
+);
+
 export const HOTW_EP_PRESET = PresetUtils.makePresetEpWeights(
 	'HotW Wrath-Weave',
 	Stats.fromMap(

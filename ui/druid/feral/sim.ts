@@ -1,6 +1,6 @@
 import * as OtherInputs from '../../core/components/inputs/other_inputs';
 import * as BuffDebuffInputs from '../../core/components/inputs/buffs_debuffs';
-import { ReforgeOptimizer } from '../../core/components/suggest_reforges_action';
+import { ReforgeOptimizer, RelativeStatCap } from '../../core/components/suggest_reforges_action';
 import * as Mechanics from '../../core/constants/mechanics';
 import { IndividualSimUI, registerSpecConfig } from '../../core/individual_sim_ui';
 import { Player } from '../../core/player';
@@ -115,7 +115,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 	},
 
 	presets: {
-		epWeights: [Presets.DOC_EP_PRESET, Presets.HOTW_EP_PRESET],
+		epWeights: [Presets.DOC_EP_PRESET, Presets.HOTW_EP_PRESET, Presets.DOC_RORO_PRESET],
 		// Preset talents that the user can quickly select.
 		talents: [Presets.StandardTalents, Presets.HotWTalents],
 		rotations: [Presets.SIMPLE_ROTATION_DEFAULT, Presets.APL_ROTATION_DEFAULT],
@@ -244,7 +244,7 @@ export class FeralDruidSimUI extends IndividualSimUI<Spec.SpecFeralDruid> {
 					} else if (player.getTalents().heartOfTheWild) {
 						return Presets.HOTW_EP_PRESET.epWeights;
 					} else {
-						return Presets.DOC_EP_PRESET.epWeights;
+						return (RelativeStatCap.hasRoRo(player) ? Presets.DOC_RORO_PRESET.epWeights : Presets.DOC_EP_PRESET.epWeights);
 					}
 				},
 				defaultRelativeStatCap: Stat.StatMasteryRating,
