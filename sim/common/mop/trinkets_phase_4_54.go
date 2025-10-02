@@ -53,7 +53,6 @@ func init() {
 
 				triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 					Name:       config.baseTrinketLabel,
-					Harmful:    true,
 					ProcChance: 0.15,
 					ICD:        config.icd,
 					ProcMask:   core.ProcMaskDirect | core.ProcMaskProc,
@@ -208,10 +207,9 @@ func init() {
 
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 				Name:       label,
-				Harmful:    true,
 				ICD:        time.Second * 115,
 				ProcChance: 0.15,
-				Outcome:    core.OutcomeCrit,
+				Outcome:    core.OutcomeLanded,
 				Callback:   core.CallbackOnSpellHitDealt,
 				Handler: func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
 					aura.Activate(sim)

@@ -40,7 +40,6 @@ func init() {
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 			Name:     "Enchant Weapon - Windsong",
 			Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt | core.CallbackOnHealDealt | core.CallbackOnPeriodicHealDealt,
-			Harmful:  true,
 			ActionID: core.ActionID{SpellID: 104561},
 			DPM: character.NewRPPMProcManager(
 				4441,
@@ -88,7 +87,6 @@ func init() {
 			core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 				Name:     "Enchant Weapon - " + name,
 				Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt | core.CallbackOnHealDealt | core.CallbackOnPeriodicHealDealt,
-				Harmful:  true,
 				ActionID: core.ActionID{SpellID: procEffectId},
 				ICD:      3 * time.Second,
 				DPM: character.NewRPPMProcManager(
@@ -153,7 +151,6 @@ func init() {
 			core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 				Name:     "Enchant Weapon - " + name,
 				Callback: core.CallbackOnSpellHitDealt,
-				Harmful:  true,
 				ActionID: core.ActionID{SpellID: procEffectId},
 				DPM: character.NewRPPMProcManager(
 					effectId,
@@ -193,10 +190,10 @@ func init() {
 		})
 
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-			Name:     "Enchant Weapon - Colossus",
-			Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
-			Harmful:  true,
-			ActionID: core.ActionID{SpellID: 118314},
+			Name:               "Enchant Weapon - Colossus",
+			Callback:           core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
+			RequireDamageDealt: true,
+			ActionID:           core.ActionID{SpellID: 118314},
 			DPM: character.NewRPPMProcManager(
 				4445,
 				true,
@@ -229,11 +226,11 @@ func init() {
 		)
 
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-			Name:     "Enchant Weapon - River's Song",
-			Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
-			Harmful:  true,
-			ActionID: core.ActionID{SpellID: 104441},
-			ICD:      time.Millisecond * 250,
+			Name:               "Enchant Weapon - River's Song",
+			Callback:           core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
+			RequireDamageDealt: true,
+			ActionID:           core.ActionID{SpellID: 104441},
+			ICD:                time.Millisecond * 250,
 			DPM: character.NewRPPMProcManager(
 				4446,
 				true,
@@ -275,10 +272,10 @@ func init() {
 		})
 
 		core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
-			Name:     "Enchant Weapon - Elemental Force",
-			Callback: core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
-			Harmful:  true,
-			ActionID: core.ActionID{SpellID: 104428},
+			Name:               "Enchant Weapon - Elemental Force",
+			Callback:           core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt,
+			RequireDamageDealt: true,
+			ActionID:           core.ActionID{SpellID: 104428},
 			DPM: character.NewRPPMProcManager(
 				4443,
 				true,

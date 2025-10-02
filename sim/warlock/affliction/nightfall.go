@@ -20,7 +20,7 @@ func (affliction *AfflictionWarlock) registerNightfall() {
 		Callback:       core.CallbackOnPeriodicDamageDealt,
 		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			dot := spell.Dot(result.Target)
-			if dot == nil || dot != affliction.LastCorruption || !sim.Proc(0.1, "Nightfall Proc") {
+			if dot == nil || result.Target != affliction.LastCorruptionTarget || !sim.Proc(0.1, "Nightfall Proc") {
 				return
 			}
 

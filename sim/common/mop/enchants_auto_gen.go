@@ -19,7 +19,7 @@ func RegisterAllEnchants() {
 		Callback:  core.CallbackOnSpellHitDealt,
 		ProcMask:  core.ProcMaskRangedAuto | core.ProcMaskRangedSpecial,
 		Outcome:   core.OutcomeLanded,
-		Harmful:   true,
+		RequireDamageDealt:   true,
 	})
 	
 	// Permanently attaches a mirrored scope to a ranged weapon, sometimes increases critical strike by 900 for
@@ -32,7 +32,7 @@ func RegisterAllEnchants() {
 		Callback:  core.CallbackOnSpellHitDealt,
 		ProcMask:  core.ProcMaskRangedAuto | core.ProcMaskRangedSpecial,
 		Outcome:   core.OutcomeLanded,
-		Harmful:   true,
+		RequireDamageDealt:   true,
 	})
 	
 	// Embroiders a subtle pattern of light into your cloak, giving you a chance to increase your Intellect by
@@ -46,7 +46,7 @@ func RegisterAllEnchants() {
 		Callback:  core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt | core.CallbackOnHealDealt | core.CallbackOnPeriodicHealDealt,
 		ProcMask:  core.ProcMaskSpellDamage | core.ProcMaskSpellHealing | core.ProcMaskSpellDamageProc,
 		Outcome:   core.OutcomeLanded,
-		Harmful:   true,
+		RequireDamageDealt:   false,
 	})
 	
 	// Embroiders a magical pattern into your cloak, giving you a chance to increase your Spirit by 3000 for
@@ -60,7 +60,7 @@ func RegisterAllEnchants() {
 		Callback:  core.CallbackOnSpellHitDealt | core.CallbackOnPeriodicDamageDealt | core.CallbackOnHealDealt | core.CallbackOnPeriodicHealDealt,
 		ProcMask:  core.ProcMaskSpellDamage | core.ProcMaskSpellHealing,
 		Outcome:   core.OutcomeLanded,
-		Harmful:   true,
+		RequireDamageDealt:   false,
 	})
 	
 	// Embroiders a magical pattern into your cloak, causing your damaging melee and ranged attacks to sometimes
@@ -74,6 +74,6 @@ func RegisterAllEnchants() {
 		Callback:  core.CallbackOnSpellHitDealt,
 		ProcMask:  core.ProcMaskMeleeMHAuto | core.ProcMaskMeleeOHAuto | core.ProcMaskMeleeMHSpecial | core.ProcMaskMeleeOHSpecial | core.ProcMaskRangedAuto | core.ProcMaskRangedSpecial,
 		Outcome:   core.OutcomeLanded,
-		Harmful:   true,
+		RequireDamageDealt:   true,
 	})
 }
