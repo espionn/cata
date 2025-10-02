@@ -195,6 +195,31 @@ func (value *APLValueDotTickFrequency) String() string {
 	return fmt.Sprintf("Dot Tick Frequency(%s)", value.dot.Get().Spell.ActionID)
 }
 
+type APLValueDotTimeToNextTick struct {
+	DefaultAPLValueImpl
+	dot *DotReference
+}
+
+func (rot *APLRotation) newValueDotTimeToNextTick(config *proto.APLValueDotTimeToNextTick, _ *proto.UUID) APLValue {
+	dot := rot.NewDotReference(rot.GetTargetUnit(config.TargetUnit), config.SpellId)
+	if dot == nil {
+		return nil
+	}
+	return &APLValueDotTimeToNextTick{
+		dot: dot,
+	}
+}
+
+func (value *APLValueDotTimeToNextTick) Type() proto.APLValueType {
+	return proto.APLValueType_ValueTypeDuration
+}
+func (value *APLValueDotTimeToNextTick) GetDuration(sim *Simulation) time.Duration {
+	return value.dot.Get().TimeUntilNextTick(sim)
+}
+func (value *APLValueDotTimeToNextTick) String() string {
+	return fmt.Sprintf("Time To Next Tick(%s)", value.dot.Get().Spell.ActionID)
+}
+
 type APLValueDotBaseDuration struct {
 	DefaultAPLValueImpl
 	baseDuration time.Duration
