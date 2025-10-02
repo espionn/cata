@@ -115,7 +115,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFeralDruid, {
 	},
 
 	presets: {
-		epWeights: [Presets.DOC_EP_PRESET, Presets.HOTW_EP_PRESET, Presets.DOC_RORO_PRESET],
+		epWeights: [Presets.DOC_EP_PRESET, Presets.HOTW_EP_PRESET, Presets.DOC_RORO_PRESET, Presets.HOTW_RORO_PRESET],
 		// Preset talents that the user can quickly select.
 		talents: [Presets.StandardTalents, Presets.HotWTalents],
 		rotations: [Presets.SIMPLE_ROTATION_DEFAULT, Presets.APL_ROTATION_DEFAULT],
@@ -242,7 +242,7 @@ export class FeralDruidSimUI extends IndividualSimUI<Spec.SpecFeralDruid> {
 					if (this.sim.getUseCustomEPValues()) {
 						return player.getEpWeights();
 					} else if (player.getTalents().heartOfTheWild) {
-						return Presets.HOTW_EP_PRESET.epWeights;
+						return (RelativeStatCap.hasRoRo(player) ? Presets.HOTW_RORO_PRESET.epWeights : Presets.HOTW_EP_PRESET.epWeights);
 					} else {
 						return (RelativeStatCap.hasRoRo(player) ? Presets.DOC_RORO_PRESET.epWeights : Presets.DOC_EP_PRESET.epWeights);
 					}

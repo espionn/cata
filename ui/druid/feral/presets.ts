@@ -92,6 +92,25 @@ export const HOTW_EP_PRESET = PresetUtils.makePresetEpWeights(
 	),
 );
 
+export const HOTW_RORO_PRESET = PresetUtils.makePresetEpWeights(
+	'HotW RoRo',
+	Stats.fromMap(
+		{
+			[Stat.StatStrength]: 0.34,
+			[Stat.StatAgility]: 1.0,
+			[Stat.StatAttackPower]: 0.32,
+			[Stat.StatHitRating]: 0.36,
+			[Stat.StatExpertiseRating]: 0.36,
+			[Stat.StatCritRating]: 0.54,
+			[Stat.StatHasteRating]: 0.35,
+			[Stat.StatMasteryRating]: 0.35,
+		},
+		{
+			[PseudoStat.PseudoStatMainHandDps]: 0.72,
+		},
+	),
+);
+
 export const DefaultRotation = FeralDruidRotation.create({
 	rotationType: FeralDruid_Rotation_AplType.SingleTarget,
 	bearWeave: true,
