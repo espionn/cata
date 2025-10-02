@@ -5930,6 +5930,22 @@
                     "tooltip"
                   ]
                 },
+                "dot_time_to_next_tick": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "tooltip": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "tooltip"
+                  ]
+                },
                 "dot_percent_increase": {
                   "type": "object",
                   "properties": {

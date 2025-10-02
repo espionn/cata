@@ -1439,6 +1439,10 @@
 					"label": "Dot Tick Frequency",
 					"tooltip": "The time between each tick."
 				},
+				"dot_time_to_next_tick": {
+					"label": "Dot Time To Next Tick",
+					"tooltip": "The time remaining until the next tick of this DoT will occur."
+				},
 				"dot_percent_increase": {
 					"label": "Dot Damage Increase %",
 					"tooltip": "How much stronger a new DoT would be compared to the old."

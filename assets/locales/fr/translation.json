@@ -875,7 +875,7 @@
 					"value": "Valeur",
 					"valueTooltip": "L'expression de la valeur que représente cette variable."
 				},
-				"copyName": "{{variableName}} (Copie)",	
+				"copyName": "{{variableName}} (Copie)",
 				"header": "Variables",
 				"name": "Variable",
 				"newVariableName": "Nouvelle variable",
@@ -1438,6 +1438,10 @@
 				"dot_tick_frequency": {
 					"label": "Fréquence de tick du DoT",
 					"tooltip": "Le temps entre chaque tick."
+				},
+				"dot_time_to_next_tick": {
+					"label": "Temps jusqu'au prochain tick du DoT",
+					"tooltip": "Le temps restant avant que le prochain tick de ce DoT se produise."
 				},
 				"dot_percent_increase": {
 					"label": "Augmentation de dégâts DoT %",

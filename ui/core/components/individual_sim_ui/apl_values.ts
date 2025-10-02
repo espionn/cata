@@ -110,6 +110,7 @@ import {
 	APLValueDotBaseDuration,
 	APLValueSpellGCDHastedDuration,
 	APLValueSpellFullCooldown,
+	APLValueDotTimeToNextTick,
 } from '../../proto/apl.js';
 import { Class, Spec } from '../../proto/common.js';
 import { ShamanTotems_TotemType as TotemType } from '../../proto/shaman.js';
@@ -1388,6 +1389,13 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['dot'],
 		shortDescription: i18n.t('rotation_tab.apl.values.dot_tick_frequency.tooltip'),
 		newValue: APLValueDotTickFrequency.create,
+		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
+	}),
+	dotTimeToNextTick: inputBuilder({
+		label: i18n.t('rotation_tab.apl.values.dot_time_to_next_tick.label'),
+		submenu: ['dot'],
+		shortDescription: i18n.t('rotation_tab.apl.values.dot_time_to_next_tick.tooltip'),
+		newValue: APLValueDotTimeToNextTick.create,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
 	}),
 	dotBaseDuration: inputBuilder({
