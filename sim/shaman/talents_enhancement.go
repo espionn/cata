@@ -187,10 +187,11 @@ func (shaman *Shaman) ApplyEnhancementTalents() {
 
 	// This aura is hidden, just applies stacks of the proc aura.
 	core.MakeProcTriggerAura(&shaman.Unit, core.ProcTrigger{
-		Name:     "Maelstrom Weapon",
-		Outcome:  core.OutcomeLanded,
-		Callback: core.CallbackOnSpellHitDealt,
-		DPM:      dpm,
+		Name:               "Maelstrom Weapon",
+		Outcome:            core.OutcomeLanded,
+		Callback:           core.CallbackOnSpellHitDealt,
+		RequireDamageDealt: true,
+		DPM:                dpm,
 		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 			shaman.MaelstromWeaponAura.Activate(sim)
 			shaman.MaelstromWeaponAura.AddStack(sim)

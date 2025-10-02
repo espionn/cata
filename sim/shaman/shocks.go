@@ -80,7 +80,6 @@ func (shaman *Shaman) registerFlameShockSpell(shockTimer *core.Timer) {
 			},
 		},
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			spell.CalcAndDealOutcome(sim, target, spell.OutcomeAlwaysHitNoHitCounter)
 			spell.Dot(target).Apply(sim)
 		},
 	})
