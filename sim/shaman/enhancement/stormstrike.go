@@ -92,6 +92,7 @@ func (enh *EnhancementShaman) newStormstrikeSpellConfig(spellID int32, ssDebuffA
 					ohHit.Cast(sim, target)
 				}
 			}
+			spell.DisposeResult(enh.StormstrikeCastResult)
 		},
 		ExtraCastCondition: func(sim *core.Simulation, target *core.Unit) bool {
 			return (enh.HasMHWeapon() || enh.HasOHWeapon()) && !enh.AscendanceAura.IsActive()
