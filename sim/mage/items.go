@@ -272,10 +272,10 @@ var ItemSetChronomancerRegalia = core.NewItemSet(core.ItemSet{
 			})
 
 			setBonusAura.MakeDependentProcTriggerAura(&mage.Unit, core.ProcTrigger{
-				Name:           "Fiery Adept - Consume",
-				ClassSpellMask: MageSpellPyroblast,
-				Harmful:        true,
-				Callback:       core.CallbackOnSpellHitDealt,
+				Name:               "Fiery Adept - Consume",
+				ClassSpellMask:     MageSpellPyroblast,
+				RequireDamageDealt: true,
+				Callback:           core.CallbackOnSpellHitDealt,
 				Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 					fireAura.Deactivate(sim)
 				},

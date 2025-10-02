@@ -44,12 +44,12 @@ func (bdk *BloodDeathKnight) registerWillOfTheNecropolis() {
 	})
 
 	core.MakeProcTriggerAura(&bdk.Unit, core.ProcTrigger{
-		Name:     "Will of The Necropolis Trigger" + bdk.Label,
-		ActionID: core.ActionID{SpellID: 81164},
-		Callback: core.CallbackOnSpellHitTaken,
-		Outcome:  core.OutcomeLanded,
-		Harmful:  true,
-		ICD:      time.Second * 45,
+		Name:               "Will of The Necropolis Trigger" + bdk.Label,
+		ActionID:           core.ActionID{SpellID: 81164},
+		Callback:           core.CallbackOnSpellHitTaken,
+		Outcome:            core.OutcomeLanded,
+		RequireDamageDealt: true,
+		ICD:                time.Second * 45,
 
 		ExtraCondition: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) bool {
 			maxHealth := bdk.MaxHealth()

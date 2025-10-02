@@ -9,7 +9,7 @@ import (
 const corruptionScale = 0.165
 const corruptionCoeff = 0.165
 
-func (warlock *Warlock) RegisterCorruption(callback WarlockSpellCastedCallback) *core.Spell {
+func (warlock *Warlock) RegisterCorruption(onApplyCallback WarlockSpellCastedCallback, onTickCallback WarlockSpellCastedCallback) *core.Spell {
 	resultSlice := make(core.SpellResultSlice, 1)
 
 	warlock.Corruption = warlock.RegisterSpell(core.SpellConfig{
@@ -40,7 +40,9 @@ func (warlock *Warlock) RegisterCorruption(callback WarlockSpellCastedCallback) 
 			},
 			OnTick: func(sim *core.Simulation, target *core.Unit, dot *core.Dot) {
 				resultSlice[0] = dot.CalcAndDealPeriodicSnapshotDamage(sim, target, dot.OutcomeSnapshotCrit)
-				callback(resultSlice, dot.Spell, sim)
+				if onTickCallback != nil {
+					onTickCallback(resultSlice, dot.Spell, sim)
+				}
 
 				if warlock.SiphonLife != nil {
 					warlock.SiphonLife.Cast(sim, &warlock.Unit)
@@ -50,8 +52,13 @@ func (warlock *Warlock) RegisterCorruption(callback WarlockSpellCastedCallback) 
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			result := spell.CalcOutcome(sim, target, spell.OutcomeMagicHitNoHitCounter)
+			dot := spell.Dot(target)
 			if result.Landed() {
-				warlock.ApplyDotWithPandemic(spell.Dot(target), sim)
+				warlock.ApplyDotWithPandemic(dot, sim)
+			}
+			if onApplyCallback != nil {
+				resultSlice[0] = result
+				onApplyCallback(resultSlice, spell, sim)
 			}
 			spell.DealOutcome(sim, result)
 		},
