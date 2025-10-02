@@ -3015,6 +3015,294 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DB-Incarn-NV-ExternalBleed-aoe-FullBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 1.20430432077e+06
+  tps: 1.88654516117e+06
+  hps: 3676.75813
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DB-Incarn-NV-ExternalBleed-aoe-FullBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 180103.05587
+  tps: 355919.1162
+  hps: 3483.21198
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DB-Incarn-NV-ExternalBleed-aoe-FullBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 235711.53965
+  tps: 270198.47445
+  hps: 3719.46686
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DB-Incarn-NV-ExternalBleed-aoe-NoBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 874241.55013
+  tps: 1.29538360869e+06
+  hps: 3373.4949
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DB-Incarn-NV-ExternalBleed-aoe-NoBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 130731.14737
+  tps: 270513.39974
+  hps: 3144.93025
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DB-Incarn-NV-ExternalBleed-aoe-NoBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 151805.74406
+  tps: 252686.8985
+  hps: 3249.56515
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DB-Incarn-NV-ExternalBleed-default-FullBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 601081.78292
+  tps: 1.09676204277e+06
+  hps: 4062.77628
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DB-Incarn-NV-ExternalBleed-default-FullBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 222326.90328
+  tps: 352278.25426
+  hps: 4034.28011
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DB-Incarn-NV-ExternalBleed-default-FullBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 300759.43824
+  tps: 288153.95111
+  hps: 5708.96007
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DB-Incarn-NV-ExternalBleed-default-NoBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 408877.48118
+  tps: 721708.22485
+  hps: 3606.69216
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DB-Incarn-NV-ExternalBleed-default-NoBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 162051.13579
+  tps: 269256.04541
+  hps: 3536.07826
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DB-Incarn-NV-ExternalBleed-default-NoBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 188452.47225
+  tps: 215271.13125
+  hps: 4866.79767
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DefaultTalents-ExternalBleed-aoe-FullBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 1.26938576787e+06
+  tps: 1.93831610095e+06
+  hps: 10997.23911
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DefaultTalents-ExternalBleed-aoe-FullBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 197879.84533
+  tps: 331232.37078
+  hps: 11533.24618
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DefaultTalents-ExternalBleed-aoe-FullBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 261960.98533
+  tps: 267758.30396
+  hps: 12773.40594
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DefaultTalents-ExternalBleed-aoe-NoBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 901317.76037
+  tps: 1.30707524973e+06
+  hps: 9019.27456
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DefaultTalents-ExternalBleed-aoe-NoBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 144154.49758
+  tps: 258455.56141
+  hps: 10059.16521
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DefaultTalents-ExternalBleed-aoe-NoBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 169012.30254
+  tps: 251538.62029
+  hps: 10257.83267
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DefaultTalents-ExternalBleed-default-FullBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 609595.72406
+  tps: 997085.67825
+  hps: 15477.16824
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DefaultTalents-ExternalBleed-default-FullBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 249018.03984
+  tps: 364235.44945
+  hps: 15420.16673
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DefaultTalents-ExternalBleed-default-FullBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 329779.34634
+  tps: 310975.6868
+  hps: 18413.14348
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DefaultTalents-ExternalBleed-default-NoBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 402986.1268
+  tps: 583155.52552
+  hps: 13256.88046
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DefaultTalents-ExternalBleed-default-NoBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 179255.06962
+  tps: 262382.05137
+  hps: 13296.43207
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-DefaultTalents-ExternalBleed-default-NoBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 211531.19567
+  tps: 215651.1127
+  hps: 14685.08997
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-WC-SotF-HotW-ExternalBleed-aoe-FullBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 1.26792141148e+06
+  tps: 1.93591431411e+06
+  hps: 3649.70518
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-WC-SotF-HotW-ExternalBleed-aoe-FullBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 189868.90595
+  tps: 362216.79663
+  hps: 3436.12063
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-WC-SotF-HotW-ExternalBleed-aoe-FullBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 240858.05743
+  tps: 286952.30428
+  hps: 3437.24664
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-WC-SotF-HotW-ExternalBleed-aoe-NoBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 920045.95489
+  tps: 1.2945274933e+06
+  hps: 3373.13639
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-WC-SotF-HotW-ExternalBleed-aoe-NoBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 136118.80956
+  tps: 269634.90575
+  hps: 3179.1215
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-WC-SotF-HotW-ExternalBleed-aoe-NoBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 155279.06574
+  tps: 269302.98013
+  hps: 3269.12988
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-WC-SotF-HotW-ExternalBleed-default-FullBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 579102.82586
+  tps: 944322.79106
+  hps: 3509.67371
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-WC-SotF-HotW-ExternalBleed-default-FullBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 230783.88593
+  tps: 320817.63681
+  hps: 3451.99452
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-WC-SotF-HotW-ExternalBleed-default-FullBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 315176.0187
+  tps: 264412.97954
+  hps: 3682.59555
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-WC-SotF-HotW-ExternalBleed-default-NoBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 381775.84561
+  tps: 568599.58037
+  hps: 3203.51391
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-WC-SotF-HotW-ExternalBleed-default-NoBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 164492.88661
+  tps: 233429.32018
+  hps: 3100.9018
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Troll-p3-WC-SotF-HotW-ExternalBleed-default-NoBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 205714.23384
+  tps: 175296.73898
+  hps: 3195.4049
+ }
+}
+dps_results: {
  key: "TestFeral-Settings-Troll-preraid-DB-Incarn-NV-ExternalBleed-aoe-FullBuffs-24.0yards-LongMultiTarget"
  value: {
   dps: 783784.32684
@@ -3588,6 +3876,294 @@ dps_results: {
   dps: 132099.37189
   tps: 116039.44254
   hps: 2660.6053
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DB-Incarn-NV-ExternalBleed-aoe-FullBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 1.21711923857e+06
+  tps: 1.97786348604e+06
+  hps: 3680.71141
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DB-Incarn-NV-ExternalBleed-aoe-FullBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 181200.01691
+  tps: 353021.63752
+  hps: 3470.07503
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DB-Incarn-NV-ExternalBleed-aoe-FullBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 232046.78659
+  tps: 267545.67689
+  hps: 3685.6431
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DB-Incarn-NV-ExternalBleed-aoe-NoBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 879702.04716
+  tps: 1.31320840596e+06
+  hps: 3384.90021
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DB-Incarn-NV-ExternalBleed-aoe-NoBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 132076.29721
+  tps: 279872.75027
+  hps: 3218.57863
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DB-Incarn-NV-ExternalBleed-aoe-NoBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 150225.58687
+  tps: 272250.63028
+  hps: 3269.85415
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DB-Incarn-NV-ExternalBleed-default-FullBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 602917.90081
+  tps: 1.09638021356e+06
+  hps: 4013.92158
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DB-Incarn-NV-ExternalBleed-default-FullBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 222135.43458
+  tps: 351782.22883
+  hps: 3890.15552
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DB-Incarn-NV-ExternalBleed-default-FullBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 293799.52061
+  tps: 285203.73505
+  hps: 5314.56659
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DB-Incarn-NV-ExternalBleed-default-NoBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 423584.7286
+  tps: 732115.41947
+  hps: 3647.8471
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DB-Incarn-NV-ExternalBleed-default-NoBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 158624.67324
+  tps: 261598.33256
+  hps: 3551.33153
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DB-Incarn-NV-ExternalBleed-default-NoBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 186609.54113
+  tps: 223037.70769
+  hps: 4814.03196
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DefaultTalents-ExternalBleed-aoe-FullBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 1.27055118514e+06
+  tps: 1.9213328632e+06
+  hps: 11021.39837
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DefaultTalents-ExternalBleed-aoe-FullBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 198926.52345
+  tps: 328149.10959
+  hps: 11484.0186
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DefaultTalents-ExternalBleed-aoe-FullBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 255969.49384
+  tps: 259643.23714
+  hps: 12479.49577
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DefaultTalents-ExternalBleed-aoe-NoBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 902778.20206
+  tps: 1.3244692449e+06
+  hps: 9017.74246
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DefaultTalents-ExternalBleed-aoe-NoBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 144728.53029
+  tps: 267184.33666
+  hps: 10301.19484
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DefaultTalents-ExternalBleed-aoe-NoBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 165942.89778
+  tps: 265747.23094
+  hps: 10751.74338
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DefaultTalents-ExternalBleed-default-FullBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 605433.04791
+  tps: 952825.94776
+  hps: 15328.59562
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DefaultTalents-ExternalBleed-default-FullBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 251529.41278
+  tps: 362686.43146
+  hps: 15113.90368
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DefaultTalents-ExternalBleed-default-FullBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 332502.43442
+  tps: 305004.4953
+  hps: 17947.82956
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DefaultTalents-ExternalBleed-default-NoBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 403652.56028
+  tps: 605899.23416
+  hps: 12975.86841
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DefaultTalents-ExternalBleed-default-NoBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 180497.26765
+  tps: 277217.88874
+  hps: 13434.54046
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-DefaultTalents-ExternalBleed-default-NoBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 212291.92009
+  tps: 247122.97439
+  hps: 13995.57366
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-WC-SotF-HotW-ExternalBleed-aoe-FullBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 1.27838423072e+06
+  tps: 2.01643714764e+06
+  hps: 3665.65456
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-WC-SotF-HotW-ExternalBleed-aoe-FullBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 189187.26167
+  tps: 362768.82108
+  hps: 3456.62697
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-WC-SotF-HotW-ExternalBleed-aoe-FullBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 239106.64499
+  tps: 288430.09248
+  hps: 3500.30469
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-WC-SotF-HotW-ExternalBleed-aoe-NoBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 921719.70981
+  tps: 1.33352508191e+06
+  hps: 3390.26561
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-WC-SotF-HotW-ExternalBleed-aoe-NoBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 138098.78819
+  tps: 266858.55057
+  hps: 3141.9756
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-WC-SotF-HotW-ExternalBleed-aoe-NoBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 157294.64498
+  tps: 277323.62885
+  hps: 3198.42234
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-WC-SotF-HotW-ExternalBleed-default-FullBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 571493.20455
+  tps: 946653.96345
+  hps: 3507.89021
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-WC-SotF-HotW-ExternalBleed-default-FullBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 229290.7646
+  tps: 324195.64367
+  hps: 3466.41752
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-WC-SotF-HotW-ExternalBleed-default-FullBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 310252.73162
+  tps: 260271.02097
+  hps: 3703.04494
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-WC-SotF-HotW-ExternalBleed-default-NoBuffs-24.0yards-LongMultiTarget"
+ value: {
+  dps: 380548.83934
+  tps: 562128.16969
+  hps: 3211.8578
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-WC-SotF-HotW-ExternalBleed-default-NoBuffs-24.0yards-LongSingleTarget"
+ value: {
+  dps: 164551.20878
+  tps: 231826.29311
+  hps: 3142.3097
+ }
+}
+dps_results: {
+ key: "TestFeral-Settings-Worgen-p3-WC-SotF-HotW-ExternalBleed-default-NoBuffs-24.0yards-ShortSingleTarget"
+ value: {
+  dps: 203884.27848
+  tps: 174115.01027
+  hps: 3301.75704
  }
 }
 dps_results: {
