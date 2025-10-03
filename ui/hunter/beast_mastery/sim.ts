@@ -159,7 +159,7 @@ export class BeastMasteryHunterSimUI extends IndividualSimUI<Spec.SpecBeastMaste
 		super(parentElem, player, SPEC_CONFIG);
 
 		player.sim.waitForInit().then(() => {
-			new ReforgeOptimizer(this, {
+			this.reforger = new ReforgeOptimizer(this, {
 				getEPDefaults: (_: Player<Spec.SpecBeastMasteryHunter>) => {
 					return Presets.P1_EP_PRESET.epWeights;
 				},

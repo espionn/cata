@@ -123,8 +123,8 @@ export class RaidSimResultsManager {
 
 	private readonly simUI: SimUI;
 
-	private currentData: ReferenceData | null = null;
-	private referenceData: ReferenceData | null = null;
+	currentData: ReferenceData | null = null;
+	referenceData: ReferenceData | null = null;
 
 	private resetCallbacks: (() => void)[] = [];
 

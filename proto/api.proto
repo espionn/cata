@@ -606,6 +606,7 @@ message BulkSettings {
 	// Currently not used.
 	// Used to fill out gem slots that are not filled in the ItemSpec
 	bool auto_gem = 5;
+        int32 default_prismatic_gem = 100;
 	int32 default_red_gem = 6;
 	int32 default_blue_gem = 7;
 	int32 default_yellow_gem = 8;

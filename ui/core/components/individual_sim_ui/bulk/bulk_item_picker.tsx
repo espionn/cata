@@ -20,7 +20,7 @@ export default class BulkItemPicker extends Component {
 	readonly bulkSlot: BulkSimItemSlot;
 	// If less than 0, the item is currently equipped and not stored in the batch sim's item array
 	readonly index: number;
-	protected item: EquippedItem;
+	item: EquippedItem;
 
 	// Can be used to remove any events in addEventListener
 	// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#add_an_abortable_listener

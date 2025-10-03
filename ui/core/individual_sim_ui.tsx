@@ -31,6 +31,7 @@ import { ItemNotice } from './components/item_notice/item_notice';
 import { addRaidSimAction, RaidSimResultsManager } from './components/raid_sim_action';
 import { SavedDataConfig } from './components/saved_data_manager';
 import { addStatWeightsAction, EpWeightsMenu, StatWeightActionSettings } from './components/stat_weights_action';
+import { ReforgeOptimizer } from './components/suggest_reforges_action';
 import { SimSettingCategories } from './constants/sim_settings';
 import { simLaunchStatuses } from './launched_sims';
 import { Player, PlayerConfig, registerSpecConfig as registerPlayerConfig } from './player';
@@ -223,7 +224,7 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 	readonly individualConfig: IndividualSimUIConfig<SpecType>;
 	private readonly statWeightActionSettings: StatWeightActionSettings;
 
-	private raidSimResultsManager: RaidSimResultsManager | null;
+	raidSimResultsManager: RaidSimResultsManager | null;
 	epWeightsModal: EpWeightsMenu | null = null;
 
 	prevEpIterations: number;
@@ -233,6 +234,7 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 	tankRefStat?: Stat;
 
 	readonly bt: BulkTab | null = null;
+	reforger: ReforgeOptimizer | null = null;
 
 	constructor(parentElem: HTMLElement, player: Player<SpecType>, config: IndividualSimUIConfig<SpecType>) {
 		super(parentElem, player.sim, {
@@ -371,9 +373,7 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 			this.addDetailedResultsTab();
 		}
 
-		// TODO: Fix intermittent memory leak in the Calculate Combos
-		// request so that this can be re-enabled.
-		//this.bt = this.addBulkTab();
+		this.bt = this.addBulkTab();
 
 		this.sim.waitForInit().then(() => {
 			this.addTopbarComponents();
