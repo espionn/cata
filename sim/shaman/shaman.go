@@ -125,14 +125,15 @@ type Shaman struct {
 	LavaBeam          *core.Spell
 	LavaBeamOverloads [2][]*core.Spell
 
-	LavaBurst         *core.Spell
-	LavaBurstOverload [2]*core.Spell
-	FireNova          *core.Spell
-	FireNovas         []*core.Spell
-	LavaLash          *core.Spell
-	Stormstrike       *core.Spell
-	PrimalStrike      *core.Spell
-	Stormblast        *core.Spell
+	LavaBurst             *core.Spell
+	LavaBurstOverload     [2]*core.Spell
+	FireNova              *core.Spell
+	FireNovas             []*core.Spell
+	LavaLash              *core.Spell
+	Stormstrike           *core.Spell
+	PrimalStrike          *core.Spell
+	Stormblast            *core.Spell
+	StormstrikeCastResult *core.SpellResult
 
 	LightningShield       *core.Spell
 	LightningShieldDamage *core.Spell
