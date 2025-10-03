@@ -775,6 +775,7 @@ func (unit *Unit) reset(sim *Simulation, _ Agent) {
 
 	unit.DynamicStatsPets = unit.DynamicStatsPets[:0]
 	unit.DynamicMeleeSpeedPets = unit.DynamicMeleeSpeedPets[:0]
+	unit.SpellsInFlight = nil
 
 	if unit.Type != PetUnit {
 		sim.addTracker(&unit.auraTracker)
