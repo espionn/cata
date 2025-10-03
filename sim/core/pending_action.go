@@ -26,7 +26,6 @@ const (
 )
 
 type PendingAction struct {
-	ActionId     ActionID
 	NextActionAt time.Duration
 	Priority     ActionPriority
 

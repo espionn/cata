@@ -40,10 +40,16 @@ func (mage *Mage) registerHeatingUp() {
 func (mage *Mage) HeatingUpSpellHandler(sim *core.Simulation, spell *core.Spell, result *core.SpellResult, callback func()) {
 	if spell.TravelTime() > time.Duration(FireSpellMaxTimeUntilResult) {
 		pa := sim.GetConsumedPendingActionFromPool()
-		pa.ActionId = spell.ActionID
 		pa.NextActionAt = sim.CurrentTime + time.Duration(FireSpellMaxTimeUntilResult)
 
+		if spell.Unit.SpellsInFlight == nil {
+			spell.Unit.SpellsInFlight = make(map[*core.Spell]int32)
+		}
+
+		spell.Unit.SpellsInFlight[spell] += 1
+
 		pa.OnAction = func(sim *core.Simulation) {
+			spell.Unit.SpellsInFlight[spell] -= 1
 			callback()
 			mage.HandleHeatingUp(sim, spell, result)
 		}

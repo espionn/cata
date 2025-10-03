@@ -206,6 +206,8 @@ type Unit struct {
 	GetSpellPowerValue GetSpellPowerValue
 
 	GetAttackPowerValue GetAttackPowerValue
+
+	SpellsInFlight map[*Spell]int32
 }
 
 func (unit *Unit) getSpellPowerValueImpl(spell *Spell) float64 {

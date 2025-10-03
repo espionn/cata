@@ -607,8 +607,18 @@ func (dot *Dot) CalcAndDealPeriodicSnapshotHealing(sim *Simulation, target *Unit
 func (spell *Spell) WaitTravelTime(sim *Simulation, callback func(*Simulation)) {
 	pa := sim.GetConsumedPendingActionFromPool()
 	pa.NextActionAt = sim.CurrentTime + spell.TravelTime()
-	pa.OnAction = callback
-	pa.ActionId = spell.ActionID
+
+	if spell.Unit.SpellsInFlight == nil {
+		spell.Unit.SpellsInFlight = make(map[*Spell]int32)
+	}
+
+	spell.Unit.SpellsInFlight[spell] += 1
+
+	pa.OnAction = func(sim *Simulation) {
+		spell.Unit.SpellsInFlight[spell] -= 1
+		callback(sim)
+	}
+
 	sim.AddPendingAction(pa)
 }
 
