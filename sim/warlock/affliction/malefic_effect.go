@@ -20,8 +20,15 @@ func (affliction *AfflictionWarlock) registerMaleficEffect() {
 			CritMultiplier:   affliction.DefaultCritMultiplier(),
 			BonusSpellPower:  0, // used to transmit base damage
 			ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-				result := spell.CalcDamage(sim, target, spell.BonusSpellPower, procDot.OutcomeTick)
+				result := spell.CalcDamage(sim, target, spell.BonusSpellPower, procDot.OutcomeTickMagicCrit)
 				spell.DealPeriodicDamage(sim, result)
+
+				// Adjust metrics just for Malefic Effects as it is a edgecase and needs to be handled manually
+				if result.DidCrit() {
+					spell.SpellMetrics[result.Target.UnitIndex].CritTicks++
+				} else {
+					spell.SpellMetrics[result.Target.UnitIndex].Ticks++
+				}
 			},
 		})
 	}
