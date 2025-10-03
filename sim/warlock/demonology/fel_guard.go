@@ -40,6 +40,17 @@ func (demo *DemonologyWarlock) registerFelguardWithName(name string, enabledOnSt
 				pet.AutoCastAbilities = slices.Insert(pet.AutoCastAbilities, 0, felStorm)
 			},
 		})
+
+		oldEnable := pet.OnPetEnable
+		pet.OnPetEnable = func(sim *core.Simulation) {
+			if oldEnable != nil {
+				oldEnable(sim)
+			}
+
+			if len(pet.AutoCastAbilities) > 1 {
+				pet.AutoCastAbilities = pet.AutoCastAbilities[1:]
+			}
+		}
 	} else {
 		oldEnable := pet.OnPetEnable
 		pet.OnPetEnable = func(sim *core.Simulation) {

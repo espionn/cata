@@ -16,6 +16,21 @@ import { formatToNumber } from '../../core/utils';
 
 const hasteBreakpoints = WARLOCK_BREAKPOINTS.presets;
 
+const MIN_HASTE_PERCENT_BREAKPOINT_THRESHOLD = hasteBreakpoints.get('8-tick - Shadowflame')!;
+const MAX_P2_HASTE_PERCENT_BREAKPOINT_THRESHOLD = 26.0;
+const MAX_P3_HASTE_PERCENT_BREAKPOINT_THRESHOLD = hasteBreakpoints.get('9-tick - Shadowflame')!;
+const defaultHasteBreakpoints = [
+	hasteBreakpoints.get('8-tick - Shadowflame')!,
+	hasteBreakpoints.get('6-tick - Doom')!,
+	hasteBreakpoints.get('9-tick - Shadowflame')!,
+	hasteBreakpoints.get('10-tick - Shadowflame')!,
+	hasteBreakpoints.get('7-tick - Doom')!,
+	hasteBreakpoints.get('11-tick - Shadowflame')!,
+	hasteBreakpoints.get('8-tick - Doom')!,
+	hasteBreakpoints.get('12-tick - Shadowflame')!,
+	hasteBreakpoints.get('9-tick - Doom')!,
+];
+
 const SPEC_CONFIG = registerSpecConfig(Spec.SpecDemonologyWarlock, {
 	cssClass: 'demonology-warlock-sim-ui',
 	cssScheme: PlayerClasses.getCssClass(PlayerClasses.Warlock),
@@ -55,19 +70,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecDemonologyWarlock, {
 		// Default soft caps for the Reforge optimizer
 		softCapBreakpoints: (() => {
 			const hasteSoftCapConfig = StatCap.fromPseudoStat(PseudoStat.PseudoStatSpellHastePercent, {
-				breakpoints: [
-					hasteBreakpoints.get('7-tick - Shadowflame')!,
-					hasteBreakpoints.get('5-tick - Doom')!,
-					hasteBreakpoints.get('8-tick - Shadowflame')!,
-					hasteBreakpoints.get('6-tick - Doom')!,
-					hasteBreakpoints.get('9-tick - Shadowflame')!,
-					hasteBreakpoints.get('10-tick - Shadowflame')!,
-					hasteBreakpoints.get('7-tick - Doom')!,
-					hasteBreakpoints.get('11-tick - Shadowflame')!,
-					hasteBreakpoints.get('8-tick - Doom')!,
-					hasteBreakpoints.get('12-tick - Shadowflame')!,
-					hasteBreakpoints.get('9-tick - Doom')!,
-				],
+				breakpoints: defaultHasteBreakpoints,
 				capType: StatCapType.TypeThreshold,
 				postCapEPs: [(Presets.DEFAULT_EP_PRESET.epWeights.getStat(Stat.StatCritRating) - 0.01) * Mechanics.HASTE_RATING_PER_HASTE_PERCENT],
 			});
@@ -172,6 +175,7 @@ export class DemonologyWarlockSimUI extends IndividualSimUI<Spec.SpecDemonologyW
 				statSelectionPresets,
 				enableBreakpointLimits: true,
 				updateSoftCaps: softCaps => {
+					const avgIlvl = player.getGear().getAverageItemLevel(false);
 					const raidBuffs = player.getRaid()?.getBuffs();
 					const hasBL = !!raidBuffs?.bloodlust;
 					const hasBerserking = player.getRace() === Race.RaceTroll;
@@ -201,7 +205,13 @@ export class DemonologyWarlockSimUI extends IndividualSimUI<Spec.SpecDemonologyW
 									}
 								}
 							});
-							softCapToModify.breakpoints = [...adjustedHasteBreakpoints].sort((a, b) => a - b);
+							softCapToModify.breakpoints = [...adjustedHasteBreakpoints]
+								.filter(
+									bp =>
+										bp >= MIN_HASTE_PERCENT_BREAKPOINT_THRESHOLD &&
+										bp <= (avgIlvl >= 525 ? MAX_P3_HASTE_PERCENT_BREAKPOINT_THRESHOLD : MAX_P2_HASTE_PERCENT_BREAKPOINT_THRESHOLD),
+								)
+								.sort((a, b) => a - b);
 						}
 					});
 					return softCaps;
