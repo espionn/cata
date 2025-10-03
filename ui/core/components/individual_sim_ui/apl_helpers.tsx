@@ -280,7 +280,7 @@ const actionIdSets: Record<
 			return (
 				metadata
 					.getSpells()
-					.filter(spell => spell.data.hasMissleSpeed)
+					.filter(spell => spell.data.hasMissileSpeed)
 					.map(actionId => {
 						return {
 							value: actionId.id,
