@@ -19,7 +19,7 @@ export const ROTATION_PRESET_DEFAULT = PresetUtils.makePresetAPLRotation('Defaul
 
 // Preset options for EP weights
 export const P1_EP_PRESET = PresetUtils.makePresetEpWeights(
-	'Default',
+	'Item Level < 500',
 	Stats.fromMap({
 		[Stat.StatIntellect]: 1.0,
 		[Stat.StatSpirit]: 0.9,
@@ -27,6 +27,18 @@ export const P1_EP_PRESET = PresetUtils.makePresetEpWeights(
 		[Stat.StatHitRating]: 0.85,
 		[Stat.StatCritRating]: 0.46,
 		[Stat.StatHasteRating]: 0.49,
+		[Stat.StatMasteryRating]: 0.44,
+	}),
+);
+export const P2_EP_PRESET = PresetUtils.makePresetEpWeights(
+	'Item Level >= 500',
+	Stats.fromMap({
+		[Stat.StatIntellect]: 1.0,
+		[Stat.StatSpirit]: 0.9,
+		[Stat.StatSpellPower]: 0.98,
+		[Stat.StatHitRating]: 0.85,
+		[Stat.StatCritRating]: 0.46,
+		[Stat.StatHasteRating]: 0.59,
 		[Stat.StatMasteryRating]: 0.44,
 	}),
 );
