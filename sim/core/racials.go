@@ -156,7 +156,7 @@ func applyRaceEffects(agent Agent) {
 			character.AddStat(stats.ExpertiseRating, ExpertisePerQuarterPercentReduction*4)
 		}
 
-		applyWeaponSpecialization(character, 4*ExpertisePerQuarterPercentReduction,
+		applyWeaponSpecialization(character, 4*ExpertisePerQuarterPercentReduction, false,
 			proto.WeaponType_WeaponTypeMace)
 
 		actionID := ActionID{SpellID: 20594}
@@ -191,11 +191,11 @@ func applyRaceEffects(agent Agent) {
 	case proto.Race_RaceGnome:
 		character.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexArcane] *= 0.99
 		character.MultiplyStat(stats.Mana, 1.05)
-		applyOneHandWeaponSpecialization(character, 4*ExpertisePerQuarterPercentReduction,
+		applyWeaponSpecialization(character, 4*ExpertisePerQuarterPercentReduction, true,
 			proto.WeaponType_WeaponTypeSword, proto.WeaponType_WeaponTypeDagger)
 	case proto.Race_RaceHuman:
 		character.MultiplyStat(stats.Spirit, 1.03)
-		applyWeaponSpecialization(character, 4*ExpertisePerQuarterPercentReduction,
+		applyWeaponSpecialization(character, 4*ExpertisePerQuarterPercentReduction, false,
 			proto.WeaponType_WeaponTypeMace, proto.WeaponType_WeaponTypeSword)
 	case proto.Race_RaceNightElf:
 		character.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexNature] *= 0.99
@@ -283,7 +283,7 @@ func applyRaceEffects(agent Agent) {
 		})
 
 		// Axe specialization
-		applyWeaponSpecialization(character, 4*ExpertisePerQuarterPercentReduction,
+		applyWeaponSpecialization(character, 4*ExpertisePerQuarterPercentReduction, false,
 			proto.WeaponType_WeaponTypeAxe, proto.WeaponType_WeaponTypeFist)
 	case proto.Race_RaceTauren:
 		character.PseudoStats.SchoolDamageTakenMultiplier[stats.SchoolIndexNature] *= 0.99
@@ -386,26 +386,22 @@ func applyRaceEffects(agent Agent) {
 	}
 }
 
-func applyWeaponSpecialization(character *Character, expertiseBonus float64, weaponTypes ...proto.WeaponType) {
-	mask := character.GetProcMaskForTypes(weaponTypes...)
+func applyWeaponSpecialization(character *Character, expertiseBonus float64, oneHand bool, weaponTypes ...proto.WeaponType) {
+	mask := Ternary(oneHand, character.GetProcMaskForTypesAndHand(false, weaponTypes...), character.GetProcMaskForTypes(weaponTypes...))
 
-	if mask == ProcMaskMelee || (mask == ProcMaskMeleeMH && !character.HasOHWeapon()) {
+	// Always add if main-hand matches
+	if mask.Matches(ProcMaskMeleeMH) {
 		character.AddStat(stats.ExpertiseRating, expertiseBonus)
+		if mask == ProcMaskMeleeMH {
+			// Remove from off-hand attacks if only main-hand matches
+			character.OnSpellRegistered(func(spell *Spell) {
+				if !spell.ProcMask.Matches(mask) {
+					spell.BonusExpertiseRating -= expertiseBonus
+				}
+			})
+		}
 	} else {
-		character.OnSpellRegistered(func(spell *Spell) {
-			if spell.ProcMask.Matches(mask) {
-				spell.BonusExpertiseRating += expertiseBonus
-			}
-		})
-	}
-}
-
-func applyOneHandWeaponSpecialization(character *Character, expertiseBonus float64, weaponTypes ...proto.WeaponType) {
-	mask := character.GetProcMaskForTypesAndHand(false, weaponTypes...)
-
-	if mask == ProcMaskMelee || (mask == ProcMaskMeleeMH && !character.HasOHWeapon()) {
-		character.AddStat(stats.ExpertiseRating, expertiseBonus)
-	} else {
+		// Only add specifically to off-hand attacks
 		character.OnSpellRegistered(func(spell *Spell) {
 			if spell.ProcMask.Matches(mask) {
 				spell.BonusExpertiseRating += expertiseBonus
