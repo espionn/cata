@@ -146,7 +146,11 @@ func main() {
 	db.Encounters = core.PresetEncounters
 	db.ReforgeStats = reforgeStats.ToProto()
 
-	iconsMap, _ := database.LoadArtTexturePaths("./tools/DB2ToSqlite/listfile.csv")
+	iconsMap, err := database.LoadArtTexturePaths("./tools/DB2ToSqlite/listfile.csv")
+	if err != nil {
+		panic(fmt.Sprintf("Error loading icon paths %v", err))
+	}
+
 	var instance = dbc.GetDBC()
 	instance.LoadSpellScaling()
 	database.GenerateProtos(instance, db)

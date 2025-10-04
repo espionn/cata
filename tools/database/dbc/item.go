@@ -91,7 +91,7 @@ func (item *Item) ToScaledUIItem(itemLevel int) *proto.UIItem {
 
 	// Amount of upgrade steps is defined in MAX_UPGRADE_LEVELS
 	// In P2 of MoP it is expected to be 2 steps
-	if item.ItemLevel >= core.MinUpgradeIlvl && UPGRADE_SYSTEM_ACTIVE && item.Flags2.Has(CAN_BE_UPGRADED) && item.UpgradeID > 0 {
+	if item.CanUpgrade() {
 		for _, upgradeLevel := range item.GetMaxUpgradeCount() {
 			upgradedIlvl := item.ItemLevel + item.UpgradeItemLevelBy(upgradeLevel)
 			upgradeStep := proto.ItemLevelState(upgradeLevel)
@@ -105,7 +105,7 @@ func (item *Item) ToScaledUIItem(itemLevel int) *proto.UIItem {
 		}
 	}
 
-	if item.ItemLevel > core.MaxChallengeModeIlvl {
+	if item.ItemLevel != core.MaxChallengeModeIlvl && item.GetMaxIlvl() > core.MaxChallengeModeIlvl {
 		scalingProperties[int32(proto.ItemLevelState_ChallengeMode)] = &proto.ScalingItemProperties{
 			WeaponDamageMin: item.WeaponDmgMin(core.MaxChallengeModeIlvl),
 			WeaponDamageMax: item.WeaponDmgMax(core.MaxChallengeModeIlvl),
@@ -118,9 +118,14 @@ func (item *Item) ToScaledUIItem(itemLevel int) *proto.UIItem {
 	return uiItem
 }
 
+func (item *Item) CanUpgrade() bool {
+	return item.ItemLevel >= core.MinUpgradeIlvl && UPGRADE_SYSTEM_ACTIVE && item.Flags2.Has(CAN_BE_UPGRADED) && item.UpgradeID > 0
+}
+
 func (item *Item) GetMaxIlvl() int {
-	if item.ItemLevel > core.MinUpgradeIlvl {
-		return item.ItemLevel + item.UpgradeItemLevelBy(MAX_UPGRADE_LEVELS[len(MAX_UPGRADE_LEVELS)-1])
+	if item.CanUpgrade() {
+		maxUpgradeCount := item.GetMaxUpgradeCount()
+		return item.ItemLevel + item.UpgradeItemLevelBy(maxUpgradeCount[len(maxUpgradeCount)-1])
 	}
 	return item.ItemLevel
 }

@@ -141,7 +141,7 @@ export class EquippedItem {
 		let upgradeLevel: ItemLevelState;
 		if (!this._challengeMode) {
 			upgradeLevel = this._upgrade;
-		} else if (this._item.scalingOptions[ItemLevelState.Base].ilvl <= MAX_CHALLENGE_MODE_ILVL) {
+		} else if (this._item.scalingOptions[this._upgrade].ilvl <= MAX_CHALLENGE_MODE_ILVL) {
 			upgradeLevel = ItemLevelState.Base;
 		} else {
 			upgradeLevel = ItemLevelState.ChallengeMode;
