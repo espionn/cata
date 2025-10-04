@@ -281,7 +281,7 @@ export default class SelectorModal extends BaseModal {
 
 		const hasRandomSuffixTab = !this.disabledTabs?.includes(SelectorModalTabs.RandomSuffixes);
 		if (hasRandomSuffixTab) this.addRandomSuffixTab(equippedItem, gearData);
-		const hasUpgradesTab = !(this.player.getChallengeModeEnabled() || this.disabledTabs?.includes(SelectorModalTabs.Upgrades));
+		const hasUpgradesTab = !this.disabledTabs?.includes(SelectorModalTabs.Upgrades);
 		if (hasUpgradesTab) this.addUpgradesTab(equippedItem, gearData);
 		const hasReforgingTab = !this.disabledTabs?.includes(SelectorModalTabs.Reforging);
 		if (hasReforgingTab) this.addReforgingTab(equippedItem, gearData);
