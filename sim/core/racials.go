@@ -392,11 +392,22 @@ func applyRaceEffects(agent Agent) {
 func applyWeaponSpecialization(character *Character, label string, spellID int32, oneHand bool, weaponTypes ...proto.WeaponType) {
 	mask := Ternary(oneHand, character.GetDynamicProcMaskForTypesAndHand(false, weaponTypes...), character.GetDynamicProcMaskForTypes(weaponTypes...))
 	expertiseBonus := ExpertisePerQuarterPercentReduction * 4
+
 	expSpellMod := character.AddDynamicMod(SpellModConfig{
-		Kind:       SpellMod_BonusExpertise_Rating,
-		ProcMask:   ProcMaskMeleeOH,
+		Kind: SpellMod_Custom,
+		ApplyCustom: func(mod *SpellMod, spell *Spell) {
+			if spell.ProcMask.Matches(ProcMaskMeleeOH) && !spell.ProcMask.Matches(ProcMaskMeleeMH) {
+				spell.BonusExpertiseRating += mod.GetFloatValue()
+			}
+		},
+		RemoveCustom: func(mod *SpellMod, spell *Spell) {
+			if spell.ProcMask.Matches(ProcMaskMeleeOH) && !spell.ProcMask.Matches(ProcMaskMeleeMH) {
+				spell.BonusExpertiseRating -= mod.GetFloatValue()
+			}
+		},
 		FloatValue: expertiseBonus,
 	})
+
 	expStatAura := character.RegisterAura(Aura{
 		Label:    "ExpertiseStatAura",
 		Duration: NeverExpires,
