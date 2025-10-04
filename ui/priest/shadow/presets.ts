@@ -6,6 +6,7 @@ import { Stats, UnitStat, UnitStatPresets } from '../../core/proto_utils/stats';
 import { defaultRaidBuffMajorDamageCooldowns } from '../../core/proto_utils/utils';
 import DefaultApl from './apls/default.apl.json';
 import P1Gear from './gear_sets/p1.gear.json';
+import P2Gear from './gear_sets/p2.gear.json';
 import PreRaidGear from './gear_sets/pre_raid.gear.json';
 
 // Preset options for this spec.
@@ -13,6 +14,7 @@ import PreRaidGear from './gear_sets/pre_raid.gear.json';
 // keep them in a separate file.
 export const PRE_RAID_PRESET = PresetUtils.makePresetGear('Pre Raid Preset', PreRaidGear);
 export const P1_PRESET = PresetUtils.makePresetGear('P1 Preset', P1Gear);
+export const P2_PRESET = PresetUtils.makePresetGear('P2 Preset', P2Gear);
 export const ROTATION_PRESET_DEFAULT = PresetUtils.makePresetAPLRotation('Default', DefaultApl);
 
 // Preset options for EP weights
