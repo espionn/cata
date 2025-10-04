@@ -222,7 +222,6 @@ export default class ItemList<T extends ItemListType> {
 			}
 		}
 
-		// TODO: Turn this back on once we have proper phase data
 		if (phaseSelectorRef.value) makePhaseSelector(phaseSelectorRef.value, player.sim);
 
 		if (label === SelectorModalTabs.Items) {
@@ -800,11 +799,10 @@ export default class ItemList<T extends ItemListType> {
 	}
 
 	private bindToggleCompare(element: Element) {
-		// TODO: Disabled for now until Batch Sim is fixed
-		// const toggleCompare = () => element.classList[!this.player.sim.getShowExperimental() ? 'add' : 'remove']('hide');
-		// toggleCompare();
-		// this.player.sim.showExperimentalChangeEmitter.on(() => {
-		// 	toggleCompare();
-		// });
+		const toggleCompare = () => element.classList[!this.player.sim.getShowExperimental() ? 'add' : 'remove']('hide');
+		toggleCompare();
+		this.player.sim.showExperimentalChangeEmitter.on(() => {
+			toggleCompare();
+		});
 	}
 }

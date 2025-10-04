@@ -30,7 +30,14 @@ import BulkItemPickerGroup from './bulk/bulk_item_picker_group';
 import BulkItemSearch from './bulk/bulk_item_search';
 import BulkSimResultRenderer from './bulk/bulk_sim_results_renderer';
 import GemSelectorModal from './bulk/gem_selector_modal';
-import { binomialCoefficient, BulkSimItemSlot, bulkSimItemSlotToSingleItemSlot, bulkSimItemSlotToItemSlotPairs, getAllPairs, getBulkItemSlotFromSlot } from './bulk/utils';
+import {
+	binomialCoefficient,
+	BulkSimItemSlot,
+	bulkSimItemSlotToSingleItemSlot,
+	bulkSimItemSlotToItemSlotPairs,
+	getAllPairs,
+	getBulkItemSlotFromSlot,
+} from './bulk/utils';
 import { BulkGearJsonImporter } from './importers';
 
 const WEB_DEFAULT_ITERATIONS = 1000;
@@ -182,14 +189,13 @@ export class BulkTab extends SimTab {
 		this.autoEnchant = true;
 		this.savedTalents = [];
 		this.simTalents = false;
-		this.defaultGems = [UIGem.create(), UIGem.create(), UIGem.create(), UIGem.create()];
+		this.defaultGems = Array.from({ length: 5 }, () => UIGem.create());
 		this.gemIconElements = [];
 
 		this.buildTabContent();
 
 		this.simUI.sim.waitForInit().then(() => {
 			this.loadSettings();
-
 			const loadEquippedItems = () => {
 				// Clear all previously equipped items from the pickers
 				for (const group of this.pickerGroups.values()) {
@@ -470,10 +476,10 @@ export class BulkTab extends SimTab {
 		try {
 			const result = await this.simUI.sim.runBulkSim(this.createBulkSettings(), this.createBulkItemsDatabase(), onProgress);
 			if (result.error?.type == ErrorOutcomeType.ErrorOutcomeAborted) {
-							new Toast({
-				variant: 'info',
-				body: i18n.t('bulk_tab.notifications.bulk_sim_cancelled'),
-			});
+				new Toast({
+					variant: 'info',
+					body: i18n.t('bulk_tab.notifications.bulk_sim_cancelled'),
+				});
 			}
 		} catch (e) {
 			this.isPending = false;
@@ -494,7 +500,7 @@ export class BulkTab extends SimTab {
 
 			if ([BulkSimItemSlot.ItemSlotFinger, BulkSimItemSlot.ItemSlotTrinket, BulkSimItemSlot.ItemSlotHandWeapon].includes(bulkItemSlot)) {
 				if (numOptions < 2) {
-					throw ("At least 2 items must be selected for " + BulkSimItemSlot[bulkItemSlot]);
+					throw 'At least 2 items must be selected for ' + BulkSimItemSlot[bulkItemSlot];
 				}
 
 				const pairsForSlot = getAllPairs(optionsForSlot);
@@ -522,7 +528,10 @@ export class BulkTab extends SimTab {
 			for (const [bulkItemSlot, pickerGroup] of this.pickerGroups.entries()) {
 				const numOptions: number = pickerGroup.pickers.size;
 
-				if ((numOptions > 1) && [BulkSimItemSlot.ItemSlotFinger, BulkSimItemSlot.ItemSlotTrinket, BulkSimItemSlot.ItemSlotHandWeapon].includes(bulkItemSlot)) {
+				if (
+					numOptions > 1 &&
+					[BulkSimItemSlot.ItemSlotFinger, BulkSimItemSlot.ItemSlotTrinket, BulkSimItemSlot.ItemSlotHandWeapon].includes(bulkItemSlot)
+				) {
 					numCombinations *= binomialCoefficient(numOptions, 2);
 				} else {
 					numCombinations *= Math.max(numOptions, 1);
@@ -670,7 +679,7 @@ export class BulkTab extends SimTab {
 
 				await this.calculateBulkCombinations();
 
-				const allItemCombos: Map<ItemSlot,EquippedItem>[] = [];
+				const allItemCombos: Map<ItemSlot, EquippedItem>[] = [];
 
 				for (let comboIdx = 0; comboIdx < this.combinations; comboIdx++) {
 					allItemCombos.push(this.getItemsForCombo(comboIdx));
@@ -678,7 +687,13 @@ export class BulkTab extends SimTab {
 
 				const defaultGemsByColor = new Map<GemColor, UIGem | null>();
 
-				for (const [colorIdx, color] of [GemColor.GemColorRed, GemColor.GemColorYellow, GemColor.GemColorBlue, GemColor.GemColorMeta, GemColor.GemColorPrismatic].entries()) {
+				for (const [colorIdx, color] of [
+					GemColor.GemColorRed,
+					GemColor.GemColorYellow,
+					GemColor.GemColorBlue,
+					GemColor.GemColorMeta,
+					GemColor.GemColorPrismatic,
+				].entries()) {
 					defaultGemsByColor.set(color, this.simUI.sim.db.lookupGem(this.defaultGems[colorIdx].id));
 				}
 
@@ -690,13 +705,17 @@ export class BulkTab extends SimTab {
 					updatedGear = originalGear;
 
 					for (const [itemSlot, equippedItem] of allItemCombos[comboIdx].entries()) {
-						updatedGear = updatedGear.withEquippedItem(itemSlot, originalGear.getEquippedItem(itemSlot)!.withItem(equippedItem.item), this.simUI.player.canDualWield2H());
+						updatedGear = updatedGear.withEquippedItem(
+							itemSlot,
+							originalGear.getEquippedItem(itemSlot)!.withItem(equippedItem.item),
+							this.simUI.player.canDualWield2H(),
+						);
 
 						for (const [socketIdx, socketColor] of equippedItem.curSocketColors(this.simUI.player.isBlacksmithing()).entries()) {
 							if (defaultGemsByColor.get(socketColor)) {
 								updatedGear = updatedGear.withGem(itemSlot, socketIdx, defaultGemsByColor.get(socketColor)!);
 							}
-						}	
+						}
 					}
 
 					this.simUI.player.setGear(TypedEvent.nextEventID(), updatedGear);
@@ -706,7 +725,11 @@ export class BulkTab extends SimTab {
 						this.simUI.reforger.setIncludeGems(TypedEvent.nextEventID(), true);
 
 						if (RelativeStatCap.hasRoRo(this.simUI.player) && this.simUI.reforger.defaultRelativeStatCap) {
-							this.simUI.reforger.relativeStatCap = new RelativeStatCap(this.simUI.reforger.defaultRelativeStatCap, this.simUI.player, this.simUI.player.getClass()); 
+							this.simUI.reforger.relativeStatCap = new RelativeStatCap(
+								this.simUI.reforger.defaultRelativeStatCap,
+								this.simUI.player,
+								this.simUI.player.getClass(),
+							);
 						}
 
 						try {
@@ -716,9 +739,13 @@ export class BulkTab extends SimTab {
 							await this.simUI.sim.updateCharacterStats(TypedEvent.nextEventID());
 							this.simUI.reforger.setIncludeGems(TypedEvent.nextEventID(), false);
 							if (RelativeStatCap.hasRoRo(this.simUI.player) && this.simUI.reforger.defaultRelativeStatCap) {
-								this.simUI.reforger.relativeStatCap = new RelativeStatCap(this.simUI.reforger.defaultRelativeStatCap, this.simUI.player, this.simUI.player.getClass()); 
+								this.simUI.reforger.relativeStatCap = new RelativeStatCap(
+									this.simUI.reforger.defaultRelativeStatCap,
+									this.simUI.player,
+									this.simUI.player.getClass(),
+								);
 							}
-							
+
 							try {
 								await this.simUI.reforger.optimizeReforges(true);
 							} catch (error) {
@@ -737,7 +764,7 @@ export class BulkTab extends SimTab {
 
 					const currentDPS = this.simUI.raidSimResultsManager?.currentData?.simResult?.getFirstPlayer()?.dps?.avg;
 
-					if (currentDPS && (currentDPS > topDPS)) {
+					if (currentDPS && currentDPS > topDPS) {
 						topDPS = currentDPS;
 						topGear = this.simUI.player.getGear();
 					}
@@ -803,53 +830,55 @@ export class BulkTab extends SimTab {
 			</>,
 		);
 
-		Array<GemColor>(GemColor.GemColorRed, GemColor.GemColorYellow, GemColor.GemColorBlue, GemColor.GemColorMeta, GemColor.GemColorPrismatic).forEach((socketColor, socketIndex) => {
-			const gemContainerRef = ref<HTMLDivElement>();
-			const gemIconRef = ref<HTMLImageElement>();
-			const socketIconRef = ref<HTMLImageElement>();
+		Array<GemColor>(GemColor.GemColorRed, GemColor.GemColorYellow, GemColor.GemColorBlue, GemColor.GemColorMeta, GemColor.GemColorPrismatic).forEach(
+			(socketColor, socketIndex) => {
+				const gemContainerRef = ref<HTMLDivElement>();
+				const gemIconRef = ref<HTMLImageElement>();
+				const socketIconRef = ref<HTMLImageElement>();
 
-			socketsContainerRef.value!.appendChild(
-				<div ref={gemContainerRef} className="gem-socket-container">
-					<img ref={gemIconRef} className="gem-icon hide" />
-					<img ref={socketIconRef} className="socket-icon" />
-				</div>,
-			);
+				socketsContainerRef.value!.appendChild(
+					<div ref={gemContainerRef} className="gem-socket-container">
+						<img ref={gemIconRef} className="gem-icon hide" />
+						<img ref={socketIconRef} className="socket-icon" />
+					</div>,
+				);
 
-			this.gemIconElements.push(gemIconRef.value!);
-			socketIconRef.value!.src = getEmptyGemSocketIconUrl(socketColor);
+				this.gemIconElements.push(gemIconRef.value!);
+				socketIconRef.value!.src = getEmptyGemSocketIconUrl(socketColor);
 
-			let selector: GemSelectorModal;
+				let selector: GemSelectorModal;
 
-			const onSelectHandler = (itemData: ItemData<UIGem>) => {
-				this.defaultGems[socketIndex] = itemData.item;
-				this.storeSettings();
-				ActionId.fromItemId(itemData.id)
-					.fill()
-					.then(filledId => {
-						if (itemData.id) {
-							this.gemIconElements[socketIndex].src = filledId.iconUrl;
-							this.gemIconElements[socketIndex].classList.remove('hide');
-						}
-					});
-				selector.close();
-			};
+				const onSelectHandler = (itemData: ItemData<UIGem>) => {
+					this.defaultGems[socketIndex] = itemData.item;
+					this.storeSettings();
+					ActionId.fromItemId(itemData.id)
+						.fill()
+						.then(filledId => {
+							if (itemData.id) {
+								this.gemIconElements[socketIndex].src = filledId.iconUrl;
+								this.gemIconElements[socketIndex].classList.remove('hide');
+							}
+						});
+					selector.close();
+				};
 
-			const onRemoveHandler = () => {
-				this.defaultGems[socketIndex] = UIGem.create();
-				this.storeSettings();
-				this.gemIconElements[socketIndex].classList.add('hide');
-				this.gemIconElements[socketIndex].src = '';
-				selector.close();
-			};
+				const onRemoveHandler = () => {
+					this.defaultGems[socketIndex] = UIGem.create();
+					this.storeSettings();
+					this.gemIconElements[socketIndex].classList.add('hide');
+					this.gemIconElements[socketIndex].src = '';
+					selector.close();
+				};
 
-			const openGemSelector = () => {
-				if (!selector) selector = new GemSelectorModal(this.simUI.rootElem, this.simUI, socketColor, onSelectHandler, onRemoveHandler);
-				selector.show();
-			};
+				const openGemSelector = () => {
+					if (!selector) selector = new GemSelectorModal(this.simUI.rootElem, this.simUI, socketColor, onSelectHandler, onRemoveHandler);
+					selector.show();
+				};
 
-			this.gemIconElements[socketIndex].addEventListener('click', openGemSelector);
-			gemContainerRef.value?.addEventListener('click', openGemSelector);
-		});
+				this.gemIconElements[socketIndex].addEventListener('click', openGemSelector);
+				gemContainerRef.value?.addEventListener('click', openGemSelector);
+			},
+		);
 
 		const dataStr = window.localStorage.getItem(this.simUI.getSavedTalentsStorageKey());
 
@@ -924,9 +953,13 @@ export class BulkTab extends SimTab {
 		const rtn = (
 			<>
 				<span className={clsx(this.showIterationsWarning() && 'text-danger')}>
-					{this.combinations === 1 ? i18n.t('bulk_tab.settings.combination_singular') : i18n.t('bulk_tab.settings.combinations_count', { count: this.combinations })}
+					{this.combinations === 1
+						? i18n.t('bulk_tab.settings.combination_singular')
+						: i18n.t('bulk_tab.settings.combinations_count', { count: this.combinations })}
 					<br />
-					<small>{this.iterations} {i18n.t('bulk_tab.settings.iterations')}</small>
+					<small>
+						{this.iterations} {i18n.t('bulk_tab.settings.iterations')}
+					</small>
 				</span>
 				{this.showIterationsWarning() && (
 					<button className="warning link-warning" ref={warningRef}>
@@ -966,19 +999,15 @@ export class BulkTab extends SimTab {
 
 	private setSimProgress(progress: ProgressMetrics, totalElapsedSeconds: number, currentRound: number, rounds: number, combinations: number) {
 		const roundsRemaining = rounds - currentRound;
-		const secondsRemaining = totalElapsedSeconds * roundsRemaining / currentRound;
+		const secondsRemaining = (totalElapsedSeconds * roundsRemaining) / currentRound;
 		if (isNaN(Number(secondsRemaining))) return;
 
 		this.pendingResults.setContent(
 			<div className="results-sim">
-				<div>
-					{rounds > 0 && (
-						<>
-							{i18n.t('bulk_tab.progress.refining_rounds', { current: currentRound, total: rounds })}
-						</>
-					)}
-				</div>
-				<div innerHTML={i18n.t('bulk_tab.progress.iterations_complete', { completed: progress.completedIterations, total: progress.totalIterations })} />
+				<div>{rounds > 0 && <>{i18n.t('bulk_tab.progress.refining_rounds', { current: currentRound, total: rounds })}</>}</div>
+				<div
+					innerHTML={i18n.t('bulk_tab.progress.iterations_complete', { completed: progress.completedIterations, total: progress.totalIterations })}
+				/>
 				<div>{i18n.t('bulk_tab.progress.seconds_remaining', { seconds: Math.round(secondsRemaining) })}</div>
 			</div>,
 		);
