@@ -144,7 +144,7 @@ func init() {
 				cinderMod.Deactivate()
 			},
 			OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
-				if !result.Landed() {
+				if !result.Landed() || result.Damage == 0 {
 					return
 				}
 

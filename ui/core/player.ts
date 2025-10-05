@@ -40,9 +40,9 @@ import {
 	Stat,
 	UnitReference,
 	UnitStats,
+	WeaponType,
 } from './proto/common';
 import { SimDatabase } from './proto/db';
-import { ShamanOptions } from './proto/shaman';
 import {
 	DungeonDifficulty,
 	RaidFilterOption,
@@ -1644,5 +1644,52 @@ export class Player<SpecType extends Spec> {
 
 	getSpecConfig(): IndividualSimUIConfig<SpecType> {
 		return this.specConfig;
+	}
+
+	// Returns true/false for main-hand / off-hand
+	getActiveRacialExpertiseBonuses(): [boolean, boolean] {
+		const mainHand = this.getEquippedItem(ItemSlot.ItemSlotMainHand);
+		const offHand = this.getEquippedItem(ItemSlot.ItemSlotOffHand);
+
+		if (!mainHand && !offHand) {
+			return [false, false];
+		}
+
+		switch (this.getRace()) {
+			case Race.RaceDwarf:
+				return [
+					mainHand?.item.weaponType === WeaponType.WeaponTypeMace ||
+						mainHand?.item.rangedWeaponType === RangedWeaponType.RangedWeaponTypeBow ||
+						mainHand?.item.rangedWeaponType === RangedWeaponType.RangedWeaponTypeCrossbow ||
+						mainHand?.item.rangedWeaponType === RangedWeaponType.RangedWeaponTypeGun,
+					offHand?.item.weaponType === WeaponType.WeaponTypeMace,
+				];
+			case Race.RaceGnome:
+				return [
+					mainHand?.item.weaponType === WeaponType.WeaponTypeDagger ||
+						(mainHand?.item.handType !== HandType.HandTypeTwoHand && mainHand?.item.weaponType === WeaponType.WeaponTypeSword),
+					offHand?.item.weaponType === WeaponType.WeaponTypeDagger ||
+						(offHand?.item.handType !== HandType.HandTypeTwoHand && offHand?.item.weaponType === WeaponType.WeaponTypeSword),
+				];
+			case Race.RaceHuman:
+				return [
+					mainHand?.item.weaponType === WeaponType.WeaponTypeMace || mainHand?.item.weaponType === WeaponType.WeaponTypeSword,
+					offHand?.item.weaponType === WeaponType.WeaponTypeMace || offHand?.item.weaponType === WeaponType.WeaponTypeSword,
+				];
+			case Race.RaceOrc:
+				return [
+					mainHand?.item.weaponType === WeaponType.WeaponTypeAxe || mainHand?.item.weaponType === WeaponType.WeaponTypeFist,
+					offHand?.item.weaponType === WeaponType.WeaponTypeAxe || offHand?.item.weaponType === WeaponType.WeaponTypeFist,
+				];
+			case Race.RaceTroll:
+				return [
+					mainHand?.item.rangedWeaponType === RangedWeaponType.RangedWeaponTypeBow ||
+						mainHand?.item.rangedWeaponType === RangedWeaponType.RangedWeaponTypeCrossbow ||
+						mainHand?.item.rangedWeaponType === RangedWeaponType.RangedWeaponTypeGun,
+					false,
+				];
+		}
+
+		return [false, false];
 	}
 }
