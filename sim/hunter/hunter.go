@@ -36,6 +36,9 @@ type Hunter struct {
 	ExplosiveTrap        *core.Spell
 	ExplosiveShot        *core.Spell
 	ImprovedSerpentSting *core.Spell
+	RapidFire            *core.Spell
+
+	BestialWrathAura *core.Aura
 
 	// Fake spells to encapsulate weaving logic.
 	HuntersMarkSpell *core.Spell
@@ -255,8 +258,6 @@ const (
 	HunterSpellGlaiveToss
 	HunterSpellBarrage
 	HunterSpellPowershot
-	HunterSpellsTierTwelve = HunterSpellArcaneShot | HunterSpellKillCommand | HunterSpellChimeraShot | HunterSpellExplosiveShot |
-		HunterSpellMultiShot | HunterSpellAimedShot
 	HunterSpellsAll = HunterSpellSteadyShot | HunterSpellCobraShot |
 		HunterSpellArcaneShot | HunterSpellKillCommand | HunterSpellChimeraShot | HunterSpellExplosiveShot |
 		HunterSpellExplosiveTrap | HunterSpellBlackArrow | HunterSpellMultiShot | HunterSpellAimedShot |

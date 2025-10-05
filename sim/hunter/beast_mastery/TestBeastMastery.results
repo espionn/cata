@@ -94,6 +94,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBeastMastery-AllItems-BattlegearoftheUnblinkingVigil"
+ value: {
+  dps: 149731.44012
+  tps: 74249.55766
+ }
+}
+dps_results: {
  key: "TestBeastMastery-AllItems-BlossomofPureSnow-89081"
  value: {
   dps: 153767.52422

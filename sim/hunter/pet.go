@@ -16,7 +16,8 @@ type HunterPet struct {
 
 	hunterOwner *Hunter
 
-	FrenzyAura *core.Aura
+	BestialWrathAura *core.Aura
+	FrenzyAura       *core.Aura
 
 	specialAbility *core.Spell
 	KillCommand    *core.Spell
