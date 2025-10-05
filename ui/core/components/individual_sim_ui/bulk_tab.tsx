@@ -44,6 +44,11 @@ const WEB_DEFAULT_ITERATIONS = 1000;
 const WEB_ITERATIONS_LIMIT = 50_000;
 const LOCAL_ITERATIONS_LIMIT = 1_000_000;
 
+interface TopGearResult {
+	gear: Gear;
+	dpsIncrease: number;
+}
+
 export class BulkTab extends SimTab {
 	readonly simUI: IndividualSimUI<any>;
 	readonly playerCanDualWield: boolean;
@@ -83,6 +88,8 @@ export class BulkTab extends SimTab {
 	defaultGems: SimGem[];
 	savedTalents: TalentLoadout[];
 	gemIconElements: HTMLImageElement[];
+
+	protected topGear: TopGearResult[] | null = null;
 
 	constructor(parentElem: HTMLElement, simUI: IndividualSimUI<any>) {
 		super(parentElem, simUI, { identifier: 'bulk-tab', title: i18n.t('bulk_tab.title') });
@@ -647,6 +654,7 @@ export class BulkTab extends SimTab {
 			this.isPending = true;
 			let waitAbort = false;
 			let isAborted = false;
+			this.topGear = null;
 			try {
 				await this.simUI.sim.signalManager.abortType(RequestTypes.All);
 
@@ -669,14 +677,14 @@ export class BulkTab extends SimTab {
 
 				const originalGear: Gear = this.simUI.player.getGear();
 				let updatedGear: Gear = originalGear;
-				let topDPS: number = 0;
-				let topGear: Gear = updatedGear;
+				let topGear: TopGearResult[] = [];
 
 				await this.calculateBulkCombinations();
 				await this.simUI.runSim((progressMetrics: ProgressMetrics) => {
 					const msSinceStart = new Date().getTime() - simStart;
 					this.setSimProgress(progressMetrics, msSinceStart / 1000, 0, this.combinations);
 				});
+				const referenceDPS = this.simUI.raidSimResultsManager!.currentData!.simResult!.getFirstPlayer()!.dps!.avg!;
 				this.simUI.raidSimResultsManager!.referenceData = this.simUI.raidSimResultsManager!.currentData!;
 				this.simUI.raidSimResultsManager!.referenceChangeEmitter.emit(TypedEvent.nextEventID());
 				this.simUI.raidSimResultsManager!.updateReference();
@@ -763,20 +771,29 @@ export class BulkTab extends SimTab {
 						this.setSimProgress(progressMetrics, msSinceStart / 1000, comboIdx + 1, this.combinations);
 					});
 
-					const currentDPS = this.simUI.raidSimResultsManager?.currentData?.simResult?.getFirstPlayer()?.dps?.avg;
+					const currentDPS = this.simUI.raidSimResultsManager!.currentData!.simResult!.getFirstPlayer()!.dps!.avg!;
+					const dpsIncrease = currentDPS - referenceDPS;
 
-					if (currentDPS && currentDPS > topDPS) {
-						topDPS = currentDPS;
-						topGear = this.simUI.player.getGear();
+					topGear.push({
+						gear: this.simUI.player.getGear(),
+						dpsIncrease: dpsIncrease,
+					})
+
+					topGear.sort((a, b) => b.dpsIncrease - a.dpsIncrease);
+
+					if (topGear.length > 5) {
+						topGear.pop();
 					}
 				}
 
-				this.simUI.player.setGear(TypedEvent.nextEventID(), topGear);
+				this.simUI.player.setGear(TypedEvent.nextEventID(), topGear[0].gear);
 				await this.simUI.sim.updateCharacterStats(TypedEvent.nextEventID());
 
 				await this.simUI.runSim((progressMetrics: ProgressMetrics) => {
 					this.simUI.raidSimResultsManager?.setSimProgress(progressMetrics);
 				});
+
+				this.topGear = topGear;
 			} catch (error) {
 				console.error(error);
 			} finally {
