@@ -12,7 +12,7 @@ func (bmHunter *BeastMasteryHunter) registerBestialWrathCD() {
 		return
 	}
 
-	duration := core.TernaryDuration(bmHunter.CouldHaveSetBonus(hunter.YaunGolSlayersBattlegear, 4), 16, 10) * time.Second
+	duration := core.TernaryDuration(bmHunter.CouldHaveSetBonus(hunter.YaungolSlayersBattlegear, 4), 16, 10) * time.Second
 
 	bwCostMod := bmHunter.AddDynamicMod(core.SpellModConfig{
 		Kind:       core.SpellMod_PowerCost_Pct,

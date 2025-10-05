@@ -24,6 +24,7 @@ type Hunter struct {
 	Pet          *HunterPet
 	StampedePet  []*HunterPet
 	DireBeastPet *HunterPet
+	Thunderhawks []*ThunderhawkPet
 
 	// The most recent time at which moving could have started, for trap weaving.
 	mayMoveAt time.Duration
@@ -94,6 +95,13 @@ func NewHunter(character *core.Character, options *proto.Player, hunterOptions *
 	}
 
 	hunter.DireBeastPet = hunter.NewDireBeastPet()
+
+	// Add 10 just to be protected against weird good luck :)
+	hunter.Thunderhawks = make([]*ThunderhawkPet, 10)
+	for index := range 10 {
+		hunter.Thunderhawks[index] = hunter.NewThunderhawkPet(index)
+	}
+
 	return hunter
 }
 
