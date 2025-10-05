@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/wowsims/mop/sim/core"
+	"github.com/wowsims/mop/sim/core/proto"
 )
 
 var YaungolSlayersBattlegear = core.NewItemSet(core.ItemSet{
@@ -135,6 +136,141 @@ var SaurokStalker = core.NewItemSet(core.ItemSet{
 		},
 	},
 })
+
+var BattlegearOfTheUnblinkingVigil = core.NewItemSet(core.ItemSet{
+	ID:   1195,
+	Name: "Battlegear of the Unblinking Vigil",
+	Bonuses: map[int32]core.ApplySetBonus{
+		2: func(agent core.Agent, setBonusAura *core.Aura) {
+			// Aimed Shot, Arcane Shot and Multi-shot reduce the cooldown of Rapid Fire by [Bestial Wrath: 4] [Aimed Shot: 4 / 8] seconds per cast.
+			hunter := agent.(HunterAgent).GetHunter()
+
+			var cdReduction time.Duration
+			switch hunter.Spec {
+			case proto.Spec_SpecBeastMasteryHunter, proto.Spec_SpecMarksmanshipHunter:
+				cdReduction = time.Second * 4
+			case proto.Spec_SpecSurvivalHunter:
+				cdReduction = time.Second * 8
+			}
+
+			setBonusAura.AttachProcTrigger(core.ProcTrigger{
+				Callback:       core.CallbackOnSpellHitDealt,
+				ClassSpellMask: HunterSpellAimedShot | HunterSpellArcaneShot | HunterSpellMultiShot,
+
+				Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+					if !hunter.RapidFire.CD.IsReady(sim) {
+						hunter.RapidFire.CD.Reduce(cdReduction)
+					}
+				},
+			})
+		},
+		4: func(agent core.Agent, setBonusAura *core.Aura) {
+			// Explosive Shot casts have a 40% chance to not consume a charge of Lock and Load.
+			// Instant Aimed shots reduce the cast time of your next Aimed Shot by 50%.
+			// Offensive abilities used during Bestial Wrath increase all damage you deal by 4% and all damage dealt by your pet by 2%, stacking up to 5 times.
+			hunter := agent.(HunterAgent).GetHunter()
+
+			if hunter.Spec == proto.Spec_SpecSurvivalHunter {
+				// Survival bonus is handled in survival/specializations.go
+				return
+			}
+
+			if hunter.Spec == proto.Spec_SpecMarksmanshipHunter {
+				registerMarksmanT16(hunter, setBonusAura)
+			} else {
+				registerBeastMasteryT16(hunter, setBonusAura)
+			}
+		},
+	},
+})
+
+func registerMarksmanT16(hunter *Hunter, setBonusAura *core.Aura) {
+	var keenEyeAura *core.Aura
+	keenEyeAura = hunter.RegisterAura(core.Aura{
+		Label:    "Keen Eye",
+		ActionID: core.ActionID{SpellID: 144659},
+		Duration: time.Second * 20,
+	}).AttachSpellMod(core.SpellModConfig{
+		Kind:       core.SpellMod_CastTime_Pct,
+		ClassMask:  HunterSpellAimedShot,
+		FloatValue: -0.5,
+	}).AttachProcTrigger(core.ProcTrigger{
+		Callback:       core.CallbackOnCastComplete,
+		ClassSpellMask: HunterSpellAimedShot,
+		ExtraCondition: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) bool {
+			return spell.CurCast.Cost > 0
+		},
+
+		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+			keenEyeAura.Deactivate(sim)
+		},
+	})
+
+	setBonusAura.AttachProcTrigger(core.ProcTrigger{
+		Callback:       core.CallbackOnSpellHitDealt,
+		ClassSpellMask: HunterSpellAimedShot,
+		ExtraCondition: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) bool {
+			return spell.CurCast.Cost == 0
+		},
+
+		Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+			keenEyeAura.Activate(sim)
+		},
+	})
+}
+
+func registerBeastMasteryT16(hunter *Hunter, _ *core.Aura) {
+	hunter.OnSpellRegistered(func(spell *core.Spell) {
+		if spell.ClassSpellMask != HunterSpellBestialWrath {
+			return
+		}
+
+		brutalKinshipPetAura := hunter.Pet.RegisterAura(core.Aura{
+			Label:     "Brutal Kinship",
+			ActionID:  core.ActionID{SpellID: 145737},
+			Duration:  core.NeverExpires,
+			MaxStacks: 5,
+
+			OnStacksChange: func(aura *core.Aura, sim *core.Simulation, oldStacks, newStacks int32) {
+				hunter.Pet.PseudoStats.DamageDealtMultiplier *= (1.0 + 0.02*float64(newStacks)) / (1.0 + 0.02*float64(oldStacks))
+			},
+		})
+
+		hunter.Pet.BestialWrathAura.AttachProcTrigger(core.ProcTrigger{
+			Callback:       core.CallbackOnSpellHitDealt,
+			ClassSpellMask: HunterPetFocusDump,
+
+			Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+				brutalKinshipPetAura.Activate(sim)
+				brutalKinshipPetAura.AddStack(sim)
+			},
+		})
+
+		brutalKinshipAura := hunter.RegisterAura(core.Aura{
+			Label:     "Brutal Kinship",
+			ActionID:  core.ActionID{SpellID: 144670},
+			Duration:  core.NeverExpires,
+			MaxStacks: 5,
+
+			OnStacksChange: func(aura *core.Aura, sim *core.Simulation, oldStacks, newStacks int32) {
+				hunter.Pet.PseudoStats.DamageDealtMultiplier *= (1.0 + 0.04*float64(newStacks)) / (1.0 + 0.04*float64(oldStacks))
+			},
+		})
+
+		hunter.BestialWrathAura.ApplyOnExpire(func(aura *core.Aura, sim *core.Simulation) {
+			brutalKinshipAura.Deactivate(sim)
+			brutalKinshipPetAura.Deactivate(sim)
+		}).AttachProcTrigger(core.ProcTrigger{
+			Callback:       core.CallbackOnCastComplete,
+			ClassSpellMask: HunterSpellsAll | HunterSpellsTalents ^ (HunterSpellFervor | HunterSpellDireBeast | HunterSpellBestialWrath),
+
+			Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+				brutalKinshipAura.Activate(sim)
+				brutalKinshipAura.AddStack(sim)
+			},
+		})
+	})
+}
 
 var ItemSetGladiatorsPursuit = core.NewItemSet(core.ItemSet{
 	ID:   1108,

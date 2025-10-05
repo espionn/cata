@@ -89,8 +89,15 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-BattlegearoftheSaurokStalker"
  value: {
-  dps: 163014.73497
-  tps: 128927.44994
+  dps: 163396.9969
+  tps: 129373.53668
+ }
+}
+dps_results: {
+ key: "TestSurvival-AllItems-BattlegearoftheUnblinkingVigil"
+ value: {
+  dps: 158190.48788
+  tps: 127465.51604
  }
 }
 dps_results: {
@@ -145,8 +152,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 177661.59839
-  tps: 146198.72187
+  dps: 177438.95048
+  tps: 146089.21505
  }
 }
 dps_results: {
@@ -614,8 +621,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-EnchantWeapon-ElementalForce-4443"
  value: {
-  dps: 170426.25439
-  tps: 140310.87694
+  dps: 170436.37604
+  tps: 140355.74347
  }
 }
 dps_results: {
@@ -712,8 +719,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-Fen-Yu,FuryofXuen-102248"
  value: {
-  dps: 189716.74596
-  tps: 156646.22416
+  dps: 190420.49406
+  tps: 157431.14268
  }
 }
 dps_results: {
@@ -810,8 +817,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-Gong-Lu,StrengthofXuen-102249"
  value: {
-  dps: 177095.69406
-  tps: 146545.53858
+  dps: 177277.97424
+  tps: 146826.2074
  }
 }
 dps_results: {
@@ -2329,8 +2336,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-Xing-Ho,BreathofYu'lon-102246"
  value: {
-  dps: 170299.19014
-  tps: 139688.88983
+  dps: 170184.68827
+  tps: 139574.38796
  }
 }
 dps_results: {

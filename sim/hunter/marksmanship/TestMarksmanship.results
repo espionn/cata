@@ -89,8 +89,15 @@ dps_results: {
 dps_results: {
  key: "TestMarksmanship-AllItems-BattlegearoftheSaurokStalker"
  value: {
-  dps: 160829.54241
-  tps: 127277.36263
+  dps: 161798.14414
+  tps: 127916.65867
+ }
+}
+dps_results: {
+ key: "TestMarksmanship-AllItems-BattlegearoftheUnblinkingVigil"
+ value: {
+  dps: 157074.67686
+  tps: 127016.86933
  }
 }
 dps_results: {
@@ -145,8 +152,8 @@ dps_results: {
 dps_results: {
  key: "TestMarksmanship-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 173259.62037
-  tps: 142642.12081
+  dps: 173745.24579
+  tps: 143005.2768
  }
 }
 dps_results: {
@@ -614,8 +621,8 @@ dps_results: {
 dps_results: {
  key: "TestMarksmanship-AllItems-EnchantWeapon-ElementalForce-4443"
  value: {
-  dps: 166245.6754
-  tps: 136657.42472
+  dps: 166370.85942
+  tps: 136693.23246
  }
 }
 dps_results: {
@@ -712,8 +719,8 @@ dps_results: {
 dps_results: {
  key: "TestMarksmanship-AllItems-Fen-Yu,FuryofXuen-102248"
  value: {
-  dps: 185339.91244
-  tps: 153109.35586
+  dps: 186637.99944
+  tps: 154466.13072
  }
 }
 dps_results: {
@@ -810,8 +817,8 @@ dps_results: {
 dps_results: {
  key: "TestMarksmanship-AllItems-Gong-Lu,StrengthofXuen-102249"
  value: {
-  dps: 174856.14709
-  tps: 144990.97543
+  dps: 175472.59207
+  tps: 145482.59662
  }
 }
 dps_results: {
