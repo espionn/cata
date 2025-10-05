@@ -116,7 +116,7 @@ func (mm *MarksmanshipHunter) MasterMarksmanAura() {
 	}))
 }
 func (mm *MarksmanshipHunter) SteadyFocusAura() {
-	attackspeedMultiplier := core.TernaryFloat64(mm.CouldHaveSetBonus(hunter.YaunGolSlayersBattlegear, 4), 1.25, 1.15)
+	attackspeedMultiplier := core.TernaryFloat64(mm.CouldHaveSetBonus(hunter.YaungolSlayersBattlegear, 4), 1.25, 1.15)
 	steadyFocusAura := core.BlockPrepull(mm.RegisterAura(core.Aura{
 		Label:     "Steady Focus",
 		ActionID:  core.ActionID{SpellID: 53224, Tag: 1},

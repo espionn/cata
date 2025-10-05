@@ -959,7 +959,7 @@ export class ActionId {
 			return 'other-' + this.otherId;
 		} else {
 			console.error('Empty action id!');
-			return '';
+			return this.name;
 		}
 	}
 
@@ -1222,6 +1222,8 @@ const petNameToActionId: Record<string, ActionId> = {
 	'Ancient Guardian': ActionId.fromSpellId(86698),
 	'Army of the Dead': ActionId.fromSpellId(42650),
 	Bloodworm: ActionId.fromSpellId(50452),
+	'Dire Beast Pet': ActionId.fromSpellId(120679),
+	Stampede: ActionId.fromSpellId(121818),
 	'Fallen Zandalari': ActionId.fromSpellId(138342),
 	'Flame Orb': ActionId.fromSpellId(82731),
 	'Frozen Orb': ActionId.fromSpellId(84721),
@@ -1308,6 +1310,7 @@ const petNameToIcon: Record<string, string> = {
 	'Spore Bat': 'https://wow.zamimg.com/images/wow/icons/medium/ability_hunter_pet_sporebat.jpg',
 	Succubus: 'https://wow.zamimg.com/images/wow/icons/large/spell_shadow_summonsuccubus.jpg',
 	Tallstrider: 'https://wow.zamimg.com/images/wow/icons/medium/ability_hunter_pet_tallstrider.jpg',
+	Thunderhawk: 'https://wow.zamimg.com/images/wow/icons/medium/ability_hunter_pet_windserpent.jpg',
 	Turtle: 'https://wow.zamimg.com/images/wow/icons/medium/ability_hunter_pet_turtle.jpg',
 	'Warp Stalker': 'https://wow.zamimg.com/images/wow/icons/medium/ability_hunter_pet_warpstalker.jpg',
 	Wasp: 'https://wow.zamimg.com/images/wow/icons/medium/ability_hunter_pet_wasp.jpg',
