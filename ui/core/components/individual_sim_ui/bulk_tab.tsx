@@ -662,15 +662,10 @@ export class BulkTab extends SimTab {
 						waitAbort = false;
 						isAborted = true;
 						if (!isRunning) this.bulkSimButton.disabled = false;
-						//console.error('Bulk sim run was aborted!');
 					}
 				});
 
 				let simStart = new Date().getTime();
-				let lastTotal = 0;
-				let rounds = 0;
-				let currentRound = 0;
-				let combinations = 0;
 
 				const originalGear: Gear = this.simUI.player.getGear();
 				let updatedGear: Gear = originalGear;
@@ -678,6 +673,13 @@ export class BulkTab extends SimTab {
 				let topGear: Gear = updatedGear;
 
 				await this.calculateBulkCombinations();
+				await this.simUI.runSim((progressMetrics: ProgressMetrics) => {
+					const msSinceStart = new Date().getTime() - simStart;
+					this.setSimProgress(progressMetrics, msSinceStart / 1000, 0, this.combinations);
+				});
+				this.simUI.raidSimResultsManager!.referenceData = this.simUI.raidSimResultsManager!.currentData!;
+				this.simUI.raidSimResultsManager!.referenceChangeEmitter.emit(TypedEvent.nextEventID());
+				this.simUI.raidSimResultsManager!.updateReference();
 
 				const allItemCombos: Map<ItemSlot, EquippedItem>[] = [];
 
@@ -758,8 +760,7 @@ export class BulkTab extends SimTab {
 
 					await this.simUI.runSim((progressMetrics: ProgressMetrics) => {
 						const msSinceStart = new Date().getTime() - simStart;
-						this.setSimProgress(progressMetrics, msSinceStart / 1000, comboIdx, this.combinations, progressMetrics.totalSims);
-						//this.simUI.raidSimResultsManager?.setSimProgress(progressMetrics);
+						this.setSimProgress(progressMetrics, msSinceStart / 1000, comboIdx + 1, this.combinations);
 					});
 
 					const currentDPS = this.simUI.raidSimResultsManager?.currentData?.simResult?.getFirstPlayer()?.dps?.avg;
@@ -776,28 +777,6 @@ export class BulkTab extends SimTab {
 				await this.simUI.runSim((progressMetrics: ProgressMetrics) => {
 					this.simUI.raidSimResultsManager?.setSimProgress(progressMetrics);
 				});
-
-				//await this.runBulkSim((progressMetrics: ProgressMetrics) => {
-				//	const msSinceStart = new Date().getTime() - simStart;
-				//	const iterPerSecond = progressMetrics.completedIterations / (msSinceStart / 1000);
-
-				//	if (combinations === 0) {
-				//		combinations = progressMetrics.totalSims;
-				//	}
-				//	if (this.fastMode) {
-				//		if (rounds === 0 && progressMetrics.totalSims > 0) {
-				//			rounds = Math.ceil(Math.log(progressMetrics.totalSims / 20) / Math.log(2)) + 1;
-				//			currentRound = 1;
-				//		}
-				//		if (progressMetrics.totalSims < lastTotal) {
-				//			currentRound += 1;
-				//			simStart = new Date().getTime();
-				//		}
-				//	}
-
-				//	this.setSimProgress(progressMetrics, iterPerSecond, currentRound, rounds, combinations);
-				//	lastTotal = progressMetrics.totalSims;
-				//});
 			} catch (error) {
 				console.error(error);
 			} finally {
@@ -997,8 +976,8 @@ export class BulkTab extends SimTab {
 		return isExternal() ? WEB_ITERATIONS_LIMIT : LOCAL_ITERATIONS_LIMIT;
 	}
 
-	private setSimProgress(progress: ProgressMetrics, totalElapsedSeconds: number, currentRound: number, rounds: number, combinations: number) {
-		const roundsRemaining = rounds - currentRound;
+	private setSimProgress(progress: ProgressMetrics, totalElapsedSeconds: number, currentRound: number, rounds: number) {
+		const roundsRemaining = rounds - currentRound + 1;
 		const secondsRemaining = (totalElapsedSeconds * roundsRemaining) / currentRound;
 		if (isNaN(Number(secondsRemaining))) return;
 

@@ -306,7 +306,7 @@ export class RaidSimResultsManager {
 
 
 
-	private updateReference() {
+	updateReference() {
 		if (!this.referenceData || !this.currentData) {
 			// Remove references
 			this.simUI.resultsViewer.contentElem.querySelector('.results-sim-reference')?.classList.remove('has-reference');
