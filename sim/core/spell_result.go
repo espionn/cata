@@ -3,6 +3,7 @@ package core
 import (
 	"fmt"
 	"math"
+	"time"
 
 	"github.com/wowsims/mop/sim/core/stats"
 )
@@ -604,9 +605,15 @@ func (dot *Dot) CalcAndDealPeriodicSnapshotHealing(sim *Simulation, target *Unit
 	return result
 }
 
+// WaitTravelTime calls RegisterTravelTimeCallback
 func (spell *Spell) WaitTravelTime(sim *Simulation, callback func(*Simulation)) {
+	spell.RegisterTravelTimeCallback(sim, spell.TravelTime(), callback)
+}
+
+// RegisterTravelTimeCallback is used when there is a need for custom timing on NextActionAt otherwise use WaitTravelTime
+func (spell *Spell) RegisterTravelTimeCallback(sim *Simulation, travelTime time.Duration, callback func(*Simulation)) {
 	pa := sim.GetConsumedPendingActionFromPool()
-	pa.NextActionAt = sim.CurrentTime + spell.TravelTime()
+	pa.NextActionAt = sim.CurrentTime + travelTime
 
 	if spell.Unit.SpellsInFlight == nil {
 		spell.Unit.SpellsInFlight = make(map[*Spell]int32)
