@@ -254,7 +254,7 @@ func (value *APLValueDotBaseDuration) String() string {
 type APLValueDotIncreaseCheck struct {
 	DefaultAPLValueImpl
 	spell              *Spell
-	target             *Unit
+	targetRef          UnitReference
 	baseName           string
 	useBaseValue       bool // if true, use the base value before any increases
 	baseValue          float64
@@ -266,7 +266,7 @@ func (rot *APLRotation) newDotIncreaseValue(baseName string, config *proto.APLVa
 	if spell == nil || spell.expectedTickDamageInternal == nil {
 		return nil
 	}
-	target := rot.GetTargetUnit(config.TargetUnit).Get()
+	targetRef := rot.GetTargetUnit(config.TargetUnit)
 
 	var baseValueDummyAura *Aura
 	if config.UseBaseValue {
@@ -278,7 +278,7 @@ func (rot *APLRotation) newDotIncreaseValue(baseName string, config *proto.APLVa
 
 	return &APLValueDotIncreaseCheck{
 		spell:              spell,
-		target:             target,
+		targetRef:          targetRef,
 		baseName:           baseName,
 		useBaseValue:       config.UseBaseValue,
 		baseValueDummyAura: baseValueDummyAura,
@@ -309,20 +309,21 @@ func (rot *APLRotation) newValueDotPercentIncrease(config *proto.APLValueDotPerc
 func (value *APLValueDotPercentIncrease) Finalize(rot *APLRotation) {
 	if value.useBaseValue && value.baseValueDummyAura != nil {
 		value.baseValueDummyAura.ApplyOnEncounterStart(func(aura *Aura, sim *Simulation) {
-			value.baseValue = value.spell.ExpectedTickDamage(sim, value.target)
+			value.baseValue = value.spell.ExpectedTickDamage(sim, value.targetRef.Get())
 		})
 	}
 }
 
 func (value *APLValueDotPercentIncrease) GetFloat(sim *Simulation) float64 {
-	expectedDamage := TernaryFloat64(value.useBaseValue, value.baseValue, value.spell.ExpectedTickDamageFromCurrentSnapshot(sim, value.target))
+	target := value.targetRef.Get()
+	expectedDamage := TernaryFloat64(value.useBaseValue, value.baseValue, value.spell.ExpectedTickDamageFromCurrentSnapshot(sim, target))
 
 	if expectedDamage == 0 {
 		return 1
 	}
 
 	// Rounding this to effectively 3 decimal places as a percentage to avoid floating point errors
-	return math.Round((value.spell.ExpectedTickDamage(sim, value.target)/expectedDamage)*100000)/100000 - 1
+	return math.Round((value.spell.ExpectedTickDamage(sim, target)/expectedDamage)*100000)/100000 - 1
 }
 
 type APLValueDotCritPercentIncrease struct {
@@ -356,11 +357,12 @@ func (value *APLValueDotCritPercentIncrease) GetFloat(sim *Simulation) float64 {
 }
 
 func (value *APLValueDotCritPercentIncrease) getCritChance(useSnapshot bool) float64 {
-	dot := value.spell.Dot(value.target)
+	target := value.targetRef.Get()
+	dot := value.spell.Dot(target)
 	if useSnapshot {
 		return dot.SnapshotCritChance
 	}
-	return TernaryFloat64(value.useBaseValue, value.baseValue, dot.Spell.SpellCritChance(value.target))
+	return TernaryFloat64(value.useBaseValue, value.baseValue, dot.Spell.SpellCritChance(target))
 }
 
 type APLValueDotTickRatePercentIncrease struct {
@@ -394,7 +396,8 @@ func (value *APLValueDotTickRatePercentIncrease) GetFloat(sim *Simulation) float
 }
 
 func (value *APLValueDotTickRatePercentIncrease) getTickRate(useSnapshot bool) float64 {
-	dot := value.spell.Dot(value.target)
+	target := value.targetRef.Get()
+	dot := value.spell.Dot(target)
 	if useSnapshot {
 		return dot.TickPeriod().Seconds()
 	}
