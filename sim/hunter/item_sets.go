@@ -89,7 +89,7 @@ var SaurokStalker = core.NewItemSet(core.ItemSet{
 				Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 					summonThunderhawkSpell.Cast(sim, result.Target)
 				},
-			}).ExposeToAPL(138365)
+			})
 		},
 		4: func(agent core.Agent, setBonusAura *core.Aura) {
 			// Your Arcane Shot, Multi-Shot, and Aimed Shot have a chance to trigger a Lightning Arrow at the target, dealing 100% weapon damage as Nature.
@@ -131,7 +131,7 @@ var SaurokStalker = core.NewItemSet(core.ItemSet{
 				Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
 					lightningArrowSpell.Cast(sim, result.Target)
 				},
-			}).ExposeToAPL(138367)
+			})
 		},
 	},
 })
