@@ -8859,6 +8859,9 @@
             },
             "dual_wield_2h_without_titans_grip": {
               "type": "string"
+            },
+            "shaman_fele_autocast": {
+              "type": "string"
             }
           },
           "additionalProperties": false,
@@ -8868,7 +8871,8 @@
             "too_many_jc_gems",
             "unspent_talent_points",
             "armor_specialization",
-            "dual_wield_2h_without_titans_grip"
+            "dual_wield_2h_without_titans_grip",
+            "shaman_fele_autocast"
           ]
         },
         "buttons": {
