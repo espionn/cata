@@ -90,10 +90,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecAfflictionWarlock, {
 
 	defaults: {
 		// Default equipped gear.
-		gear: Presets.P1_PRESET.gear,
+		gear: Presets.P2_PRESET.gear,
 
 		// Default EP weights for sorting gear in the gear picker.
-		epWeights: Presets.P1_BIS_EP_PRESET.epWeights,
+		epWeights: Presets.P2_BIS_EP_PRESET.epWeights,
 		// Default stat caps for the Reforge optimizer
 		statCaps: (() => {
 			return new Stats().withPseudoStat(PseudoStat.PseudoStatSpellHitPercent, 15);
