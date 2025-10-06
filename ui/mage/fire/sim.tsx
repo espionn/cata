@@ -257,7 +257,9 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFireMage, {
 		// Presence of Mind
 		12043,
 		// Arcane Torrent
-		28730
+		28730,
+		// Bloodfury
+		33697
 	],
 
 	raidSimPresets: [
