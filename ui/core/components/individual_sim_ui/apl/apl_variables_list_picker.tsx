@@ -103,7 +103,9 @@ class APLValueVariablePicker extends Input<Player<any>, APLValueVariable> {
 			label: i18n.t('rotation_tab.apl.variables.attributes.value'),
 			labelTooltip: i18n.t('rotation_tab.apl.variables.attributes.valueTooltip'),
 			changedEvent: (player: Player<any>) => player.rotationChangeEmitter,
-			getValue: () => this.getSourceValue().value,
+			getValue: () => {
+				console.log(this, this.getSourceValue())
+				return this.getSourceValue().value},
 			setValue: (eventID: EventID, player: Player<any>, newValue: any) => {
 				const sourceValue = this.getSourceValue();
 				sourceValue.value = newValue;
