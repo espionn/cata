@@ -472,7 +472,7 @@ func ProtoToEquipmentSpec(es *proto.EquipmentSpec) EquipmentSpec {
 func (item *Item) GetScalingState() proto.ItemLevelState {
 	if !item.ChallengeMode {
 		return item.UpgradeStep
-	} else if item.ScalingOptions[0].Ilvl <= MaxChallengeModeIlvl {
+	} else if item.ScalingOptions[int32(item.UpgradeStep)].Ilvl <= MaxChallengeModeIlvl {
 		return proto.ItemLevelState_Base
 	} else {
 		return proto.ItemLevelState_ChallengeMode

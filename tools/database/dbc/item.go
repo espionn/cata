@@ -105,7 +105,7 @@ func (item *Item) ToScaledUIItem(itemLevel int) *proto.UIItem {
 		}
 	}
 
-	if item.ItemLevel != core.MaxChallengeModeIlvl && item.GetMaxIlvl() > core.MaxChallengeModeIlvl {
+	if item.GetMaxIlvl() > core.MaxChallengeModeIlvl {
 		scalingProperties[int32(proto.ItemLevelState_ChallengeMode)] = &proto.ScalingItemProperties{
 			WeaponDamageMin: item.WeaponDmgMin(core.MaxChallengeModeIlvl),
 			WeaponDamageMax: item.WeaponDmgMax(core.MaxChallengeModeIlvl),
