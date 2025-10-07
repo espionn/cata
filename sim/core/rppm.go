@@ -34,7 +34,7 @@ type rppmHasteMod struct{}
 
 func (r rppmHasteMod) GetCoefficient(proc *RPPMProc) float64 {
 	// as of 5.2 this should no longer include non 'True haste mods' so only i.E. Lust
-	return max(proc.character.TotalRealHasteMultiplier(), proc.character.TotalSpellHasteMultiplier())
+	return max(proc.character.TotalRealRangedHasteMultiplier(), proc.character.TotalRealHasteMultiplier(), proc.character.TotalSpellHasteMultiplier())
 }
 
 func (r rppmHasteMod) IsStatic() bool {
@@ -209,8 +209,8 @@ func (proc *RPPMProc) getProcChance(sim *Simulation) float64 {
 		baseCoeff *= mod.GetCoefficient(proc)
 	}
 
-	lastCheck := min(RppmLastCheckCap, sim.CurrentTime - proc.lastCheck).Seconds()
-	lastProc := min(RppmLastProcCap, sim.CurrentTime - proc.lastProc).Seconds()
+	lastCheck := min(RppmLastCheckCap, sim.CurrentTime-proc.lastCheck).Seconds()
+	lastProc := min(RppmLastProcCap, sim.CurrentTime-proc.lastProc).Seconds()
 
 	// TODO: Adjust implementation if needed
 	// Temporary implementation, targeting the 'intended' MOP proc behavior

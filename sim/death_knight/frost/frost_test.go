@@ -41,7 +41,7 @@ func TestFrostTwoHand(t *testing.T) {
 			Race:       proto.Race_RaceTroll,
 			OtherRaces: []proto.Race{proto.Race_RaceOrc, proto.Race_RaceWorgen},
 
-			GearSet:         core.GetGearSet("../../../ui/death_knight/frost/gear_sets", "p1.2h-obliterate"),
+			GearSet:         core.GetGearSet("../../../ui/death_knight/frost/gear_sets", "p2.2h-obliterate"),
 			Talents:         DefaultTalents,
 			OtherTalentSets: OtherTalentSets,
 			Glyphs:          FrostDefaultGlyphs,

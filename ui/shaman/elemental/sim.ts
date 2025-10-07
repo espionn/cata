@@ -5,18 +5,32 @@ import { IndividualSimUI, registerSpecConfig } from '../../core/individual_sim_u
 import { Player } from '../../core/player.js';
 import { PlayerClasses } from '../../core/player_classes';
 import { APLRotation } from '../../core/proto/apl.js';
-import { Debuffs, Faction, IndividualBuffs, ItemSlot, PartyBuffs, PseudoStat, Race, RaidBuffs, Spec, Stat } from '../../core/proto/common.js';
+import {Faction, IndividualBuffs, ItemSlot, PartyBuffs, PseudoStat, Race, Spec, Stat } from '../../core/proto/common.js';
 import { DEFAULT_HYBRID_CASTER_GEM_STATS, Stats, UnitStat } from '../../core/proto_utils/stats.js';
+import { TypedEvent } from '../../core/typed_event';
 import * as ShamanInputs from '../inputs.js';
 import * as ElementalInputs from './inputs.js';
 import * as Presets from './presets.js';
+import i18n from '../../i18n/config';
 
 const SPEC_CONFIG = registerSpecConfig(Spec.SpecElementalShaman, {
 	cssClass: 'elemental-shaman-sim-ui',
 	cssScheme: PlayerClasses.getCssClass(PlayerClasses.Shaman),
 	// List any known bugs / issues here and they'll be shown on the site.
 	knownIssues: [],
-	warnings: [],
+	warnings: [(simUI) => {
+		return {
+			updateOn : TypedEvent.onAny([simUI.player.specOptionsChangeEmitter, simUI.player.talentsChangeEmitter]),
+			getContent: () => {
+				const autocast = simUI.player.getClassOptions().feleAutocast;
+				if(simUI.player.getTalents().primalElementalist && (autocast?.autocastEmpower || !(autocast?.autocastFireblast && autocast.autocastFirenova && autocast.autocastImmolate))){
+					return i18n.t('sidebar.warnings.shaman_fele_autocast');
+				} else {
+					return '';
+				}
+			}
+		}
+	}],
 
 	// All stats for which EP should be calculated.
 	epStats: [Stat.StatIntellect, Stat.StatSpirit, Stat.StatSpellPower, Stat.StatHitRating, Stat.StatCritRating, Stat.StatHasteRating, Stat.StatMasteryRating],

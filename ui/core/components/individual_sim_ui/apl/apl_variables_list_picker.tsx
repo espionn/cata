@@ -1,15 +1,15 @@
-import i18n from "../../../../i18n/config";
-import { IndividualSimUI } from "../../../individual_sim_ui";
-import { Player } from "../../../player";
-import { APLValueVariable } from "../../../proto/apl";
-import { EventID, TypedEvent } from "../../../typed_event";
-import { randomUUID } from "../../../utils";
-import { Component } from "../../component";
-import { Input } from "../../input";
-import { ListItemPickerConfig, ListPicker } from "../../pickers/list_picker";
-import { AdaptiveStringPicker } from "../../pickers/string_picker";
-import { APLValuePicker } from "../apl_values";
-import { AplFloatingActionBar } from "./apl_floating_action_bar";
+import i18n from '../../../../i18n/config';
+import { IndividualSimUI } from '../../../individual_sim_ui';
+import { Player } from '../../../player';
+import { APLValueVariable } from '../../../proto/apl';
+import { EventID, TypedEvent } from '../../../typed_event';
+import { randomUUID } from '../../../utils';
+import { Component } from '../../component';
+import { Input } from '../../input';
+import { ListItemPickerConfig, ListPicker } from '../../pickers/list_picker';
+import { AdaptiveStringPicker } from '../../pickers/string_picker';
+import { APLValuePicker } from '../apl_values';
+import { AplFloatingActionBar } from './apl_floating_action_bar';
 
 export class APLVariablesListPicker extends Component {
 	constructor(container: HTMLElement, simUI: IndividualSimUI<any>) {
@@ -43,7 +43,7 @@ export class APLVariablesListPicker extends Component {
 			inlineMenuBar: true,
 		});
 
-		new AplFloatingActionBar(this.rootElem, simUI, listPicker, i18n.t('rotation_tab.apl.variables.name'))
+		new AplFloatingActionBar(this.rootElem, simUI, listPicker, i18n.t('rotation_tab.apl.variables.name'));
 	}
 
 	private createValueVariable(): APLValueVariable {
@@ -68,12 +68,7 @@ class APLValueVariablePicker extends Input<Player<any>, APLValueVariable> {
 	public modObject: Player<any>;
 	private index: number;
 
-	constructor(
-		parent: HTMLElement,
-		player: Player<any>,
-		index: number,
-		config: ListItemPickerConfig<Player<any>, APLValueVariable>,
-	) {
+	constructor(parent: HTMLElement, player: Player<any>, index: number, config: ListItemPickerConfig<Player<any>, APLValueVariable>) {
 		super(parent, 'apl-value-variable-picker-root', player, config);
 		this.rootElem.classList.add('apl-list-item-picker-root');
 

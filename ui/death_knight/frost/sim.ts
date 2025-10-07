@@ -122,10 +122,10 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFrostDeathKnight, {
 	},
 
 	presets: {
-		epWeights: [Presets.P1_P2_MASTERFROST_EP_PRESET, Presets.P1_2H_OBLITERATE_EP_PRESET],
+		epWeights: [Presets.P1_P2_MASTERFROST_EP_PRESET, Presets.P1_P2_2H_OBLITERATE_EP_PRESET],
 		talents: [Presets.DefaultTalents],
 		rotations: [Presets.MASTERFROST_ROTATION_PRESET_DEFAULT, Presets.OBLITERATE_ROTATION_PRESET_DEFAULT],
-		gear: [Presets.PREBIS_MASTERFROST_GEAR_PRESET, Presets.P2_MASTERFROST_GEAR_PRESET, Presets.P1_2H_OBLITERATE_GEAR_PRESET],
+		gear: [Presets.PREBIS_MASTERFROST_GEAR_PRESET, Presets.P2_MASTERFROST_GEAR_PRESET, Presets.P2_2H_OBLITERATE_GEAR_PRESET],
 		builds: [Presets.PRESET_BUILD_PREBIS, Presets.PRESET_BUILD_MASTERFROST, Presets.PRESET_BUILD_2H_OBLITERATE],
 	},
 
@@ -179,7 +179,7 @@ export class FrostDeathKnightSimUI extends IndividualSimUI<Spec.SpecFrostDeathKn
 				getEPDefaults: (player: Player<Spec.SpecFrostDeathKnight>) => {
 					const mainHand = player.getEquippedItem(ItemSlot.ItemSlotMainHand);
 					if (mainHand?.item?.handType === HandType.HandTypeTwoHand) {
-						return Presets.P1_2H_OBLITERATE_EP_PRESET.epWeights;
+						return Presets.P1_P2_2H_OBLITERATE_EP_PRESET.epWeights;
 					} else {
 						return Presets.P1_P2_MASTERFROST_EP_PRESET.epWeights;
 					}

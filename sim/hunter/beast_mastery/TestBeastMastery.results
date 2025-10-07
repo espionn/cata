@@ -89,8 +89,15 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-BattlegearoftheSaurokStalker"
  value: {
-  dps: 148159.61886
-  tps: 74951.60441
+  dps: 159560.52288
+  tps: 78088.17328
+ }
+}
+dps_results: {
+ key: "TestBeastMastery-AllItems-BattlegearoftheUnblinkingVigil"
+ value: {
+  dps: 149731.44012
+  tps: 74249.55766
  }
 }
 dps_results: {
@@ -145,8 +152,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 166692.02141
-  tps: 84822.03183
+  dps: 167504.95116
+  tps: 85091.24798
  }
 }
 dps_results: {
@@ -600,8 +607,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-EnchantWeapon-Colossus-4445"
  value: {
-  dps: 159043.06381
-  tps: 79469.03563
+  dps: 159043.24125
+  tps: 79469.21307
  }
 }
 dps_results: {
@@ -614,8 +621,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-EnchantWeapon-ElementalForce-4443"
  value: {
-  dps: 159793.37826
-  tps: 80285.45455
+  dps: 159879.60337
+  tps: 80395.19796
  }
 }
 dps_results: {
@@ -628,8 +635,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-EnchantWeapon-River'sSong-4446"
  value: {
-  dps: 159042.56334
-  tps: 79468.53516
+  dps: 159042.64947
+  tps: 79468.62129
  }
 }
 dps_results: {
@@ -712,8 +719,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-Fen-Yu,FuryofXuen-102248"
  value: {
-  dps: 178064.2406
-  tps: 90463.4864
+  dps: 179621.52126
+  tps: 92201.54585
  }
 }
 dps_results: {
@@ -810,8 +817,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-Gong-Lu,StrengthofXuen-102249"
  value: {
-  dps: 166739.06136
-  tps: 85842.08191
+  dps: 168085.19885
+  tps: 87036.02913
  }
 }
 dps_results: {

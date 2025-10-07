@@ -77,7 +77,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecBrewmasterMonk, {
 
 	defaults: {
 		// Default equipped gear.
-		gear: Presets.P1_BIS_DW_GEAR_PRESET.gear,
+		gear: Presets.P2_BIS_DW_GEAR_PRESET.gear,
 		// Default EP weights for sorting gear in the gear picker.
 		epWeights: Presets.PREPATCH_EP_PRESET.epWeights,
 		// Stat caps for reforge optimizer

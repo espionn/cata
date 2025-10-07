@@ -146,7 +146,11 @@ func main() {
 	db.Encounters = core.PresetEncounters
 	db.ReforgeStats = reforgeStats.ToProto()
 
-	iconsMap, _ := database.LoadArtTexturePaths("./tools/DB2ToSqlite/listfile.csv")
+	iconsMap, err := database.LoadArtTexturePaths("./tools/DB2ToSqlite/listfile.csv")
+	if err != nil {
+		panic(fmt.Sprintf("Error loading icon paths %v", err))
+	}
+
 	var instance = dbc.GetDBC()
 	instance.LoadSpellScaling()
 	database.GenerateProtos(instance, db)
@@ -854,6 +858,7 @@ func GetAllRotationSpellIds() map[string][]int32 {
 			Class:         proto.Class_ClassWarlock,
 			Equipment:     &proto.EquipmentSpec{},
 			TalentsString: "000000",
+			Profession1:   proto.Profession_Herbalism,
 		}, &proto.Player_AfflictionWarlock{AfflictionWarlock: &proto.AfflictionWarlock{Options: &proto.AfflictionWarlock_Options{ClassOptions: &proto.WarlockOptions{}}}}), nil, nil, nil)},
 		{Name: "demonologyWarlock", Raid: core.SinglePlayerRaidProto(core.WithSpec(&proto.Player{
 			Class:         proto.Class_ClassWarlock,

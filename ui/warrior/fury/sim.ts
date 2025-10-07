@@ -51,7 +51,7 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecFuryWarrior, {
 
 	defaults: {
 		// Default equipped gear.
-		gear: Presets.P1_BIS_FURY_TG_PRESET.gear,
+		gear: Presets.P2_BIS_FURY_TG_PRESET.gear,
 		// Default EP weights for sorting gear in the gear picker.
 		epWeights: Presets.P1_FURY_TG_EP_PRESET.epWeights,
 		// Stat caps for reforge optimizer
