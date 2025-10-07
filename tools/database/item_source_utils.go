@@ -14,10 +14,6 @@ func InferPhase(item *proto.UIItem) int32 {
 	description := item.NameDescription
 	quality := item.Quality
 
-	if strings.Contains(name, "Necklace of the Terra-Cotta") {
-		return 4
-	}
-
 	//- Any blue pvp ''Crafted'' item of ilvl 458 is 5.2
 	//- Any blue pvp ''Crafted'' item of ilvl 476 is 5.4
 	if strings.Contains(name, "Crafted") {
