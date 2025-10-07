@@ -236,7 +236,7 @@ message APLValue {
         APLValueCatExcessEnergy cat_excess_energy = 52;
         APLValueCatNewSavageRoarDuration cat_new_savage_roar_duration = 61;
         APLValueWarlockHandOfGuldanInFlight warlock_hand_of_guldan_in_flight = 59;
-        APLValueWarlockHauntInFlight warlock_haunt_in_flight = 60;
+        APLValueWarlockHauntInFlight warlock_haunt_in_flight = 60 [deprecated=true];
         APLValueCurrentEclipsePhase druid_current_eclipse_phase = 70;
 		APLValueMageCurrentCombustionDotEstimate mage_current_combustion_dot_estimate = 77;
         APLValueShamanFireElementalDuration shaman_fire_elemental_duration = 83;

@@ -1484,7 +1484,7 @@
 					"tooltip": "Returns <b>True</b> if the impact of Hand of Guldan currenty is in flight."
 				},
 				"warlock_haunt_in_flight": {
-					"label": "Haunt In Flight",
+					"label": "[DEPRECATED] Haunt In Flight",
 					"tooltip": "Returns <b>True</b> if Haunt currently is in flight."
 				},
 				"mage_current_combustion_dot_estimate": {

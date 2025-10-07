@@ -1484,7 +1484,7 @@
 					"tooltip": "Retourne <b>Vrai</b> si Main de Gul'dan est actuellement en vol."
 				},
 				"warlock_haunt_in_flight": {
-					"label": "Hantise en vol",
+					"label": "[OBSOLETE]  Hantise en vol",
 					"tooltip": "Retourne <b>Vrai</b> si Hantise est actuellement en vol."
 				},
 				"mage_current_combustion_dot_estimate": {

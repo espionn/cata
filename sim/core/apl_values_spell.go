@@ -387,6 +387,10 @@ type APLValueSpellInFlight struct {
 	spell *Spell
 }
 
+func (rot *APLRotation) NewValueSpellInFlight(config *proto.APLValueSpellInFlight, uuid *proto.UUID) APLValue {
+	return rot.newValueSpellInFlight(config, uuid)
+}
+
 func (rot *APLRotation) newValueSpellInFlight(config *proto.APLValueSpellInFlight, _ *proto.UUID) APLValue {
 	spell := rot.GetAPLSpell(config.SpellId)
 	if spell == nil {
