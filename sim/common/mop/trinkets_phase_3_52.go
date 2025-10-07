@@ -519,6 +519,8 @@ func init() {
 				stats.Stats{stats.PhysicalCritPercent: 100, stats.SpellCritPercent: 100},
 				time.Second*4,
 			)
+			// Manually override Crit % to Crit Rating
+			statBuffAura.BuffedStatTypes = []stats.Stat{stats.CritRating}
 
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 				Name: label,
