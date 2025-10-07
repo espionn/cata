@@ -120,9 +120,9 @@ export class Sim {
 	readonly simResultEmitter = new TypedEvent<SimResult>();
 
 	// Fires when a bulk sim API call starts.
-	readonly bulkSimStartEmitter = new TypedEvent<BulkSimRequest>();
+	readonly bulkSimStartEmitter = new TypedEvent<void>();
 	// Fires when a bulk sim API call completes..
-	readonly bulkSimResultEmitter = new TypedEvent<BulkSimResult>();
+	readonly bulkSimResultEmitter = new TypedEvent<void>();
 
 	private readonly _initPromise: Promise<any>;
 	private lastUsedRngSeed = 0;
@@ -298,107 +298,6 @@ export class Sim {
 				debugFirstIteration: true,
 			}),
 		});
-	}
-
-	async runBulkSim(bulkSettings: BulkSettings, bulkItemsDb: SimDatabase, onProgress: WorkerProgressCallback): Promise<BulkSimResult> {
-		if (this.raid.isEmpty()) {
-			throw new Error('Raid is empty! Try adding some players first.');
-		} else if (this.encounter.targets.length < 1) {
-			throw new Error('Encounter has no targets! Try adding some targets first.');
-		}
-
-		await this.waitForInit();
-
-		const request = BulkSimRequest.create({
-			baseSettings: this.makeRaidSimRequest(false),
-			bulkSettings: bulkSettings,
-		});
-
-		if (request.baseSettings != null && request.baseSettings.simOptions != null) {
-			request.baseSettings.simOptions.debugFirstIteration = false;
-		}
-
-		if (!request.baseSettings?.raid || request.baseSettings?.raid?.parties.length == 0 || request.baseSettings?.raid?.parties[0].players.length == 0) {
-			throw new Error('Raid must contain exactly 1 player for bulk sim.');
-		}
-
-		// Attach the extra database to the player.
-		const playerDatabase = request.baseSettings.raid.parties[0].players[0].database!;
-		playerDatabase.items.push(...bulkItemsDb.items);
-		playerDatabase.enchants.push(...bulkItemsDb.enchants);
-		playerDatabase.gems.push(...bulkItemsDb.gems);
-		playerDatabase.reforgeStats.push(...bulkItemsDb.reforgeStats);
-		playerDatabase.itemEffectRandPropPoints.push(...bulkItemsDb.itemEffectRandPropPoints);
-		playerDatabase.randomSuffixes.push(...bulkItemsDb.randomSuffixes);
-		playerDatabase.consumables.push(...bulkItemsDb.consumables);
-		playerDatabase.spellEffects.push(...bulkItemsDb.spellEffects);
-
-		this.bulkSimStartEmitter.emit(TypedEvent.nextEventID(), request);
-
-		const signals = this.signalManager.registerRunning(RequestTypes.BulkSim);
-		try {
-			const result = await this.workerPool.bulkSimAsync(request, onProgress, signals);
-
-			if (result.error) {
-				if (result.error.type != ErrorOutcomeType.ErrorOutcomeError) return result;
-				throw new SimError(result.error.message);
-			}
-
-			this.bulkSimResultEmitter.emit(TypedEvent.nextEventID(), result);
-			return result;
-		} catch (error) {
-			if (error instanceof SimError) throw error;
-			console.log(error);
-			throw new Error('Something went wrong running your raid sim. Reload the page and try again.');
-		} finally {
-			this.signalManager.unregisterRunning(signals);
-		}
-	}
-
-	async calculateBulkCombinations(bulkSettings: BulkSettings, bulkItemsDb: SimDatabase): Promise<BulkSimCombosResult | null> {
-		if (this.raid.isEmpty()) {
-			throw new Error('Raid is empty! Try adding some players first.');
-		} else if (this.encounter.targets.length < 1) {
-			throw new Error('Encounter has no targets! Try adding some targets first.');
-		}
-
-		await this.waitForInit();
-
-		const request = BulkSimCombosRequest.create({
-			baseSettings: this.makeRaidSimRequest(false),
-			bulkSettings: bulkSettings,
-		});
-
-		if (request.baseSettings != null && request.baseSettings.simOptions != null) {
-			request.baseSettings.simOptions.debugFirstIteration = false;
-		}
-
-		if (!request.baseSettings?.raid || request.baseSettings?.raid?.parties.length == 0 || request.baseSettings?.raid?.parties[0].players.length == 0) {
-			throw new Error('Raid must contain exactly 1 player for bulk sim.');
-		}
-
-		// Attach the extra database to the player.
-		const playerDatabase = request.baseSettings.raid.parties[0].players[0].database!;
-		playerDatabase.items.push(...bulkItemsDb.items);
-		playerDatabase.enchants.push(...bulkItemsDb.enchants);
-		playerDatabase.gems.push(...bulkItemsDb.gems);
-		playerDatabase.reforgeStats.push(...bulkItemsDb.reforgeStats);
-		playerDatabase.itemEffectRandPropPoints.push(...bulkItemsDb.itemEffectRandPropPoints);
-		playerDatabase.randomSuffixes.push(...bulkItemsDb.randomSuffixes);
-
-		this.bulkSimStartEmitter.emit(TypedEvent.nextEventID(), request);
-
-		try {
-			const result = await this.workerPool.bulkSimCombosAsync(request);
-			if (result.errorResult != '') {
-				throw new SimError(result.errorResult);
-			}
-			return result;
-		} catch (error) {
-			if (error instanceof SimError) throw error;
-			console.log(error);
-			throw new Error('Something went wrong running your raid sim. Reload the page and try again.');
-		}
 	}
 
 	async runRaidSim(eventID: EventID, onProgress: WorkerProgressCallback): Promise<SimResult | ErrorOutcome> {

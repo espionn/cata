@@ -44,9 +44,9 @@ const WEB_DEFAULT_ITERATIONS = 1000;
 const WEB_ITERATIONS_LIMIT = 50_000;
 const LOCAL_ITERATIONS_LIMIT = 1_000_000;
 
-interface TopGearResult {
+export interface TopGearResult {
 	gear: Gear;
-	dpsIncrease: number;
+	dps: number;
 }
 
 export class BulkTab extends SimTab {
@@ -90,6 +90,7 @@ export class BulkTab extends SimTab {
 	gemIconElements: HTMLImageElement[];
 
 	protected topGear: TopGearResult[] | null = null;
+	protected originalGear: TopGearResult | null = null;
 
 	constructor(parentElem: HTMLElement, simUI: IndividualSimUI<any>) {
 		super(parentElem, simUI, { identifier: 'bulk-tab', title: i18n.t('bulk_tab.title') });
@@ -477,23 +478,6 @@ export class BulkTab extends SimTab {
 		this.settingsChangedEmitter.emit(TypedEvent.nextEventID());
 	}
 
-	protected async runBulkSim(onProgress: WorkerProgressCallback) {
-		this.pendingResults.setPending();
-
-		try {
-			const result = await this.simUI.sim.runBulkSim(this.createBulkSettings(), this.createBulkItemsDatabase(), onProgress);
-			if (result.error?.type == ErrorOutcomeType.ErrorOutcomeAborted) {
-				new Toast({
-					variant: 'info',
-					body: i18n.t('bulk_tab.notifications.bulk_sim_cancelled'),
-				});
-			}
-		} catch (e) {
-			this.isPending = false;
-			this.simUI.handleCrash(e);
-		}
-	}
-
 	protected getItemsForCombo(comboIdx: number): Map<ItemSlot, EquippedItem> {
 		const itemsForCombo = new Map<ItemSlot, EquippedItem>();
 
@@ -619,9 +603,13 @@ export class BulkTab extends SimTab {
 	private buildResultsTabContent() {
 		this.simUI.sim.bulkSimStartEmitter.on(() => this.resultsTabElem.replaceChildren());
 
-		this.simUI.sim.bulkSimResultEmitter.on((_, bulkSimResult) => {
-			for (const r of bulkSimResult.results) {
-				new BulkSimResultRenderer(this.resultsTabElem, this.simUI, this, r, bulkSimResult.equippedGearResult!);
+		this.simUI.sim.bulkSimResultEmitter.on(() => {
+			if (!this.topGear || !this.originalGear) {
+				return;
+			}
+
+			for (const topGearResult of this.topGear) {
+				new BulkSimResultRenderer(this.resultsTabElem, this.simUI, this, topGearResult, this.originalGear);
 			}
 			this.isPending = false;
 			this.resultsTab.show();
@@ -655,6 +643,7 @@ export class BulkTab extends SimTab {
 			let waitAbort = false;
 			let isAborted = false;
 			this.topGear = null;
+			this.originalGear = null;
 			try {
 				await this.simUI.sim.signalManager.abortType(RequestTypes.All);
 
@@ -680,6 +669,7 @@ export class BulkTab extends SimTab {
 				let topGear: TopGearResult[] = [];
 
 				await this.calculateBulkCombinations();
+				this.simUI.sim.bulkSimStartEmitter.emit(TypedEvent.nextEventID());
 				await this.simUI.runSim((progressMetrics: ProgressMetrics) => {
 					const msSinceStart = new Date().getTime() - simStart;
 					this.setSimProgress(progressMetrics, msSinceStart / 1000, 0, this.combinations);
@@ -772,14 +762,13 @@ export class BulkTab extends SimTab {
 					});
 
 					const currentDPS = this.simUI.raidSimResultsManager!.currentData!.simResult!.getFirstPlayer()!.dps!.avg!;
-					const dpsIncrease = currentDPS - referenceDPS;
 
 					topGear.push({
 						gear: this.simUI.player.getGear(),
-						dpsIncrease: dpsIncrease,
+						dps: currentDPS,
 					})
 
-					topGear.sort((a, b) => b.dpsIncrease - a.dpsIncrease);
+					topGear.sort((a, b) => b.dps - a.dps);
 
 					if (topGear.length > 5) {
 						topGear.pop();
@@ -794,6 +783,11 @@ export class BulkTab extends SimTab {
 				});
 
 				this.topGear = topGear;
+				this.originalGear = {
+					gear: originalGear,
+					dps: referenceDPS,
+				};
+				this.simUI.sim.bulkSimResultEmitter.emit(TypedEvent.nextEventID());
 			} catch (error) {
 				console.error(error);
 			} finally {
