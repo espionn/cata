@@ -111,6 +111,7 @@ import {
 	APLValueSpellGCDHastedDuration,
 	APLValueSpellFullCooldown,
 	APLValueDotTimeToNextTick,
+	APLValueSpellInFlight,
 } from '../../proto/apl.js';
 import { Class, Spec } from '../../proto/common.js';
 import { ShamanTotems_TotemType as TotemType } from '../../proto/shaman.js';
@@ -1125,6 +1126,13 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		shortDescription: i18n.t('rotation_tab.apl.values.input_delay.tooltip'),
 		newValue: APLValueInputDelay.create,
 		fields: [],
+	}),
+	spellInFlight: inputBuilder({
+		label: i18n.t('rotation_tab.apl.values.spell_in_flight.label'),
+		submenu: ['spell'],
+		shortDescription: i18n.t('rotation_tab.apl.values.spell_in_flight.tooltip'),
+		newValue: APLValueSpellInFlight.create,
+		fields: [AplHelpers.actionIdFieldConfig('spellId', 'spells_with_travelTime', '')],
 	}),
 
 	// Auras
