@@ -45,8 +45,7 @@ type AfflictionWarlock struct {
 	UnstableAffliction *core.Spell
 	Haunt              *core.Spell
 
-	SoulBurnAura     *core.Aura
-	HauntDebuffAuras core.AuraArray
+	SoulBurnAura *core.Aura
 
 	LastCorruptionTarget *core.Unit // Tracks the last target we've applied corruption to
 	LastInhaleTarget     *core.Unit

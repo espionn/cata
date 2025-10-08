@@ -18,21 +18,6 @@ const hauntCoeff = 2.625
 
 func (affliction *AfflictionWarlock) registerHaunt() {
 	actionID := core.ActionID{SpellID: 48181}
-	hauntAura := core.Aura{
-		Label:    "Haunt-" + affliction.Label,
-		ActionID: actionID,
-
-		OnGain: func(aura *core.Aura, sim *core.Simulation) {
-			core.EnableDamageDoneByCaster(DDBC_Haunt, DDBC_Total, affliction.AttackTables[aura.Unit.UnitIndex], hauntDamageDoneByCasterHandler)
-		},
-
-		OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-			core.DisableDamageDoneByCaster(DDBC_Haunt, affliction.AttackTables[aura.Unit.UnitIndex])
-		},
-	}
-	affliction.HauntDebuffAuras = affliction.NewEnemyAuraArray(func(target *core.Unit) *core.Aura {
-		return target.GetOrRegisterAura(hauntAura)
-	})
 
 	affliction.RegisterSpell(core.SpellConfig{
 		ActionID:       actionID,
@@ -64,7 +49,18 @@ func (affliction *AfflictionWarlock) registerHaunt() {
 		// debuff refreshes. In order to enable the pandemic refresh, we
 		// will register the Haunt debuff as a non-warlock DoT.
 		Dot: core.DotConfig{
-			Aura: hauntAura,
+			Aura: core.Aura{
+				Label:    "Haunt-" + affliction.Label,
+				ActionID: actionID,
+
+				OnGain: func(aura *core.Aura, sim *core.Simulation) {
+					core.EnableDamageDoneByCaster(DDBC_Haunt, DDBC_Total, affliction.AttackTables[aura.Unit.UnitIndex], hauntDamageDoneByCasterHandler)
+				},
+
+				OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+					core.DisableDamageDoneByCaster(DDBC_Haunt, affliction.AttackTables[aura.Unit.UnitIndex])
+				},
+			},
 
 			NumberOfTicks:       4,
 			TickLength:          2 * time.Second,
@@ -82,8 +78,6 @@ func (affliction *AfflictionWarlock) registerHaunt() {
 				}
 			})
 		},
-
-		RelatedAuraArrays: affliction.HauntDebuffAuras.ToMap(),
 	})
 }
 
