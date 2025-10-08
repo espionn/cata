@@ -114,7 +114,8 @@ func (affliction *AfflictionWarlock) OnEncounterStart(sim *core.Simulation) {
 	if affliction.SoulBurnAura.IsActive() {
 		defaultShards -= 1
 	}
-	if affliction.SpellInFlight(affliction.Haunt.SpellID) {
+	//Haunt in-flight
+	if affliction.SpellInFlight(48181) {
 		defaultShards -= 1
 	}
 
