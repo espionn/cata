@@ -22,13 +22,6 @@ func (affliction *AfflictionWarlock) registerHaunt() {
 		return target.GetOrRegisterAura(core.Aura{
 			Label:    "Haunt-" + affliction.Label,
 			ActionID: actionID,
-			Duration: 8 * time.Second,
-			OnGain: func(aura *core.Aura, sim *core.Simulation) {
-				core.EnableDamageDoneByCaster(DDBC_Haunt, DDBC_Total, affliction.AttackTables[aura.Unit.UnitIndex], hauntDamageDoneByCasterHandler)
-			},
-			OnExpire: func(aura *core.Aura, sim *core.Simulation) {
-				core.DisableDamageDoneByCaster(DDBC_Haunt, affliction.AttackTables[aura.Unit.UnitIndex])
-			},
 		})
 	})
 
@@ -57,6 +50,29 @@ func (affliction *AfflictionWarlock) registerHaunt() {
 			return affliction.SoulShards.CanSpend(1)
 		},
 
+		// Despite not being a DoT, Haunt maintains a hidden 2s tick
+		// timer with a Pandemic effect that grants additional time to
+		// debuff refreshes. In order to enable the pandemic refresh, we
+		// will register the Haunt debuff as a non-warlock DoT.
+		Dot: core.DotConfig{
+			Aura: core.Aura{
+				Label:    "Haunt-" + affliction.Label,
+				ActionID: actionID,
+
+				OnGain: func(aura *core.Aura, sim *core.Simulation) {
+					core.EnableDamageDoneByCaster(DDBC_Haunt, DDBC_Total, affliction.AttackTables[aura.Unit.UnitIndex], hauntDamageDoneByCasterHandler)
+				},
+
+				OnExpire: func(aura *core.Aura, sim *core.Simulation) {
+					core.DisableDamageDoneByCaster(DDBC_Haunt, affliction.AttackTables[aura.Unit.UnitIndex])
+				},
+			},
+
+			NumberOfTicks:       4,
+			TickLength:          2 * time.Second,
+			AffectedByCastSpeed: false,
+		},
+
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
 			baseDamage := affliction.CalcScalingSpellDmg(hauntScale)
 			result := spell.CalcDamage(sim, target, baseDamage, spell.OutcomeMagicHitAndCrit)
@@ -64,7 +80,7 @@ func (affliction *AfflictionWarlock) registerHaunt() {
 			spell.WaitTravelTime(sim, func(sim *core.Simulation) {
 				spell.DealDamage(sim, result)
 				if result.Landed() {
-					affliction.HauntDebuffAuras.Get(result.Target).Activate(sim)
+					spell.Dot(target).Apply(sim)
 				}
 			})
 		},
