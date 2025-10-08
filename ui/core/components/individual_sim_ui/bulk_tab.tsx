@@ -782,12 +782,8 @@ export class BulkTab extends SimTab {
 					dpsMetrics: referenceDpsMetrics,
 				};
 
-				topGearResults.splice(
-					topGearResults.findIndex(({ dpsMetrics }) => referenceDpsMetrics.avg >= dpsMetrics.avg),
-					0,
-					this.originalGearResults,
-				);
-
+				this.topGearResults.push(this.originalGearResults);
+				this.topGearResults.sort((a, b) => b.dpsMetrics.avg - a.dpsMetrics.avg);
 				this.simUI.sim.bulkSimResultEmitter.emit(TypedEvent.nextEventID());
 			} catch (error) {
 				console.error(error);
