@@ -1359,6 +1359,10 @@
 					"label": "Input Delay",
 					"tooltip": "The amount of time specified by the <b>Input Dleay</b> setting."
 				},
+				"spell_in_flight": {
+					"label":"Spell in Flight",
+					"tooltip":"<b>True</b> if this spell is currently in flight, otherwise <b>False</b>."
+				},
 				"aura_known": {
 					"label": "Aura Known",
 					"tooltip": "<b>True</b> if the aura is currently known, otherwise <b>False</b>."
@@ -1480,7 +1484,7 @@
 					"tooltip": "Returns <b>True</b> if the impact of Hand of Guldan currenty is in flight."
 				},
 				"warlock_haunt_in_flight": {
-					"label": "Haunt In Flight",
+					"label": "[DEPRECATED] Haunt In Flight",
 					"tooltip": "Returns <b>True</b> if Haunt currently is in flight."
 				},
 				"mage_current_combustion_dot_estimate": {
@@ -1591,7 +1595,8 @@
 					"shield_spells": "Shield Spell",
 					"non_instant_spells": "Non-instant Spell",
 					"friendly_spells": "Friendly Spell",
-					"expected_dot_spells": "DoT Spell"
+					"expected_dot_spells": "DoT Spell",
+					"spells_with_travelTime": "Spell"
 				},
 				"field_configs": {
 					"type": "Type",

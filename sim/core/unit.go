@@ -206,6 +206,8 @@ type Unit struct {
 	GetSpellPowerValue GetSpellPowerValue
 
 	GetAttackPowerValue GetAttackPowerValue
+
+	SpellsInFlight map[*Spell]int32
 }
 
 func (unit *Unit) getSpellPowerValueImpl(spell *Spell) float64 {
@@ -773,6 +775,7 @@ func (unit *Unit) reset(sim *Simulation, _ Agent) {
 
 	unit.DynamicStatsPets = unit.DynamicStatsPets[:0]
 	unit.DynamicMeleeSpeedPets = unit.DynamicMeleeSpeedPets[:0]
+	clear(unit.SpellsInFlight)
 
 	if unit.Type != PetUnit {
 		sim.addTracker(&unit.auraTracker)
@@ -845,6 +848,7 @@ func (unit *Unit) GetMetadata() *proto.UnitMetadata {
 			HasCastTime:     spell.DefaultCast.CastTime > 0,
 			IsFriendly:      spell.Flags.Matches(SpellFlagHelpful),
 			HasExpectedTick: spell.expectedTickDamageInternal != nil,
+			HasMissileSpeed: spell.MissileSpeed > 0.0,
 		}
 	})
 

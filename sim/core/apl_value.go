@@ -210,6 +210,8 @@ func (rot *APLRotation) newAPLValueWithContext(config *proto.APLValue, groupVari
 		value = rot.newValueSpellGCDHastedDuration(config.GetSpellGcdHastedDuration(), config.Uuid)
 	case *proto.APLValue_SpellFullCooldown:
 		value = rot.newValueSpellFullCooldown(config.GetSpellFullCooldown(), config.Uuid)
+	case *proto.APLValue_SpellInFlight:
+		value = rot.newValueSpellInFlight(config.GetSpellInFlight(), config.Uuid)
 
 	// Auras
 	case *proto.APLValue_AuraIsKnown:
