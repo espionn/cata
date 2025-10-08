@@ -7,7 +7,7 @@ import { REPO_RELEASES_URL } from '../../constants/other';
 import { IndividualSimUI } from '../../individual_sim_ui';
 import i18n from '../../../i18n/config';
 import { BulkSettings, DistributionMetrics, ProgressMetrics, TalentLoadout } from '../../proto/api';
-import { GemColor, ItemRandomSuffix, ItemSlot, ItemSpec, ReforgeStat, Spec } from '../../proto/common';
+import { Class, GemColor, ItemRandomSuffix, ItemSlot, ItemSpec, ReforgeStat, Spec } from '../../proto/common';
 import { ItemEffectRandPropPoints, SimDatabase, SimEnchant, SimGem, SimItem } from '../../proto/db';
 import { SavedTalents, UIEnchant, UIGem, UIItem } from '../../proto/ui';
 import { ActionId } from '../../proto_utils/action_id';
@@ -94,7 +94,7 @@ export class BulkTab extends SimTab {
 		super(parentElem, simUI, { identifier: 'bulk-tab', title: i18n.t('bulk_tab.title') });
 
 		this.simUI = simUI;
-		this.playerCanDualWield = this.simUI.player.getPlayerSpec().canDualWield;
+		this.playerCanDualWield = this.simUI.player.getPlayerSpec().canDualWield && (this.simUI.player.getClass() !== Class.ClassHunter);
 		this.playerIsFuryWarrior = this.simUI.player.getSpec() === Spec.SpecFuryWarrior;
 
 		const setupTabBtnRef = ref<HTMLButtonElement>();
