@@ -38,18 +38,10 @@ func (mage *Mage) registerHeatingUp() {
 }
 
 func (mage *Mage) HeatingUpSpellHandler(sim *core.Simulation, spell *core.Spell, result *core.SpellResult, callback func()) {
-	if spell.TravelTime() > time.Duration(FireSpellMaxTimeUntilResult) {
-		spell.RegisterTravelTimeCallback(sim, time.Duration(FireSpellMaxTimeUntilResult), func(sim *core.Simulation) {
-			callback()
-			mage.HandleHeatingUp(sim, spell, result)
-		})
-	} else {
-		spell.WaitTravelTime(sim, func(sim *core.Simulation) {
-			callback()
-			mage.HandleHeatingUp(sim, spell, result)
-		})
-	}
-
+	spell.RegisterTravelTimeCallback(sim, min(spell.TravelTime(), FireSpellMaxTimeUntilResult), func(sim *core.Simulation) {
+		callback()
+		mage.HandleHeatingUp(sim, spell, result)
+	})
 }
 
 func (mage *Mage) HandleHeatingUp(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
