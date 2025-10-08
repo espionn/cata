@@ -631,7 +631,7 @@ export class BulkTab extends SimTab {
 			this.originalGearResults = null;
 			const playerPhase = this.simUI.sim.getPhase() >= 2;
 			const challengeModeEnabled = this.simUI.player.getChallengeModeEnabled();
-			const hasBlacksmithing = this.simUI.player.isBlacksmithing()
+			const hasBlacksmithing = this.simUI.player.isBlacksmithing();
 
 			try {
 				await this.simUI.sim.signalManager.abortType(RequestTypes.All);
@@ -760,13 +760,13 @@ export class BulkTab extends SimTab {
 							gear: this.simUI.player.getGear(),
 							dpsMetrics: this.simUI.raidSimResultsManager!.currentData!.simResult!.getFirstPlayer()!.dps,
 						});
+
+					topGearResults.sort((a, b) => b.dpsMetrics.avg - a.dpsMetrics.avg);
+					if (topGearResults.length > 5) topGearResults.pop();
 				}
 
 				this.simUI.player.setGear(TypedEvent.nextEventID(), this.originalGear);
 				await this.simUI.sim.updateCharacterStats(TypedEvent.nextEventID());
-
-				topGearResults.sort((a, b) => b.dpsMetrics.avg - a.dpsMetrics.avg);
-				if (topGearResults.length > 5) topGearResults.splice(5);
 
 				await this.simUI.runSim((progressMetrics: ProgressMetrics) => {
 					this.simUI.raidSimResultsManager?.setSimProgress(progressMetrics);
