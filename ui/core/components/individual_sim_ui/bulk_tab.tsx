@@ -89,6 +89,7 @@ export class BulkTab extends SimTab {
 	protected topGearResults: TopGearResult[] | null = null;
 	protected originalGear: Gear | null = null;
 	protected originalGearResults: TopGearResult | null = null;
+	protected isRunning: boolean = false;
 
 	constructor(parentElem: HTMLElement, simUI: IndividualSimUI<any>) {
 		super(parentElem, simUI, { identifier: 'bulk-tab', title: i18n.t('bulk_tab.title') });
@@ -200,6 +201,10 @@ export class BulkTab extends SimTab {
 		this.simUI.sim.waitForInit().then(() => {
 			this.loadSettings();
 			const loadEquippedItems = () => {
+				if (this.isRunning) {
+					return;
+				}
+
 				// Clear all previously equipped items from the pickers
 				for (const group of this.pickerGroups.values()) {
 					if (group.has(-1)) {
@@ -218,6 +223,8 @@ export class BulkTab extends SimTab {
 						group.add(idx, equippedItem);
 					}
 				});
+
+				this.itemsChangedEmitter.emit(TypedEvent.nextEventID());
 			};
 			loadEquippedItems();
 
@@ -619,10 +626,10 @@ export class BulkTab extends SimTab {
 	}
 
 	protected buildBatchSettings() {
-		let isRunning = false;
+		this.isRunning = false;
 		this.bulkSimButton.addEventListener('click', async () => {
-			if (isRunning) return;
-			isRunning = true;
+			if (this.isRunning) return;
+			this.isRunning = true;
 			this.bulkSimButton.disabled = true;
 			this.isPending = true;
 			let waitAbort = false;
@@ -651,7 +658,7 @@ export class BulkTab extends SimTab {
 					} finally {
 						waitAbort = false;
 						isAborted = true;
-						if (!isRunning) this.bulkSimButton.disabled = false;
+						if (!this.isRunning) this.bulkSimButton.disabled = false;
 					}
 				});
 
@@ -791,7 +798,7 @@ export class BulkTab extends SimTab {
 				this.simUI.player.setGear(TypedEvent.nextEventID(), this.originalGear!);
 				await this.simUI.sim.updateCharacterStats(TypedEvent.nextEventID());
 
-				isRunning = false;
+				this.isRunning = false;
 				if (!waitAbort) this.bulkSimButton.disabled = false;
 				if (isAborted) {
 					new Toast({

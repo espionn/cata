@@ -31,6 +31,11 @@ export default class BulkItemPickerGroup extends ContentBlock {
 	add(idx: number, item: EquippedItem) {
 		if (!this.pickers.size) this.bodyElement.replaceChildren();
 
+		// Block duplicate items from being added.
+		if (Array.from(this.pickers.values()).map(picker => picker.item.id).includes(item.item.id)) {
+			return;
+		}
+
 		if (this.pickers.has(idx)) {
 			const picker = this.pickers.get(idx);
 			picker!.dispose();
