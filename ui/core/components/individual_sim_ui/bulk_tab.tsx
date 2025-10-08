@@ -6,7 +6,7 @@ import { ref } from 'tsx-vanilla';
 import { REPO_RELEASES_URL } from '../../constants/other';
 import { IndividualSimUI } from '../../individual_sim_ui';
 import i18n from '../../../i18n/config';
-import { BulkSettings, ErrorOutcomeType, ProgressMetrics, TalentLoadout } from '../../proto/api';
+import { BulkSettings, DistributionMetrics, ProgressMetrics, TalentLoadout } from '../../proto/api';
 import { GemColor, ItemRandomSuffix, ItemSlot, ItemSpec, ReforgeStat, Spec } from '../../proto/common';
 import { ItemEffectRandPropPoints, SimDatabase, SimEnchant, SimGem, SimItem } from '../../proto/db';
 import { SavedTalents, UIEnchant, UIGem, UIItem } from '../../proto/ui';
@@ -18,11 +18,9 @@ import { canEquipItem, getEligibleItemSlots, isSecondaryItemSlot } from '../../p
 import { RequestTypes } from '../../sim_signal_manager';
 import { RelativeStatCap } from '../suggest_reforges_action';
 import { TypedEvent } from '../../typed_event';
-import { getEnumValues, isExternal, sleep } from '../../utils';
-import { WorkerProgressCallback } from '../../worker_pool';
+import { getEnumValues, isExternal } from '../../utils';
 import { ItemData } from '../gear_picker/item_list';
 import SelectorModal from '../gear_picker/selector_modal';
-import { BooleanPicker } from '../pickers/boolean_picker';
 import { ResultsViewer } from '../results_viewer';
 import { SimTab } from '../sim_tab';
 import Toast from '../toast';
@@ -46,7 +44,7 @@ const LOCAL_ITERATIONS_LIMIT = 1_000_000;
 
 export interface TopGearResult {
 	gear: Gear;
-	dps: number;
+	dpsMetrics: DistributionMetrics;
 }
 
 export class BulkTab extends SimTab {
@@ -62,7 +60,6 @@ export class BulkTab extends SimTab {
 	private readonly combinationsElem: HTMLElement;
 	private readonly bulkSimButton: HTMLButtonElement;
 	private readonly settingsContainer: HTMLElement;
-	private readonly booleanSettingsContainer: HTMLElement;
 
 	private pendingDiv: HTMLDivElement;
 
@@ -89,8 +86,9 @@ export class BulkTab extends SimTab {
 	savedTalents: TalentLoadout[];
 	gemIconElements: HTMLImageElement[];
 
-	protected topGear: TopGearResult[] | null = null;
-	protected originalGear: TopGearResult | null = null;
+	protected topGearResults: TopGearResult[] | null = null;
+	protected originalGear: Gear | null = null;
+	protected originalGearResults: TopGearResult | null = null;
 
 	constructor(parentElem: HTMLElement, simUI: IndividualSimUI<any>) {
 		super(parentElem, simUI, { identifier: 'bulk-tab', title: i18n.t('bulk_tab.title') });
@@ -106,7 +104,6 @@ export class BulkTab extends SimTab {
 		const settingsContainerRef = ref<HTMLDivElement>();
 		const combinationsElemRef = ref<HTMLHeadingElement>();
 		const bulkSimBtnRef = ref<HTMLButtonElement>();
-		const booleanSettingsContainerRef = ref<HTMLDivElement>();
 
 		this.contentContainer.appendChild(
 			<>
@@ -165,7 +162,6 @@ export class BulkTab extends SimTab {
 							<button className="btn btn-primary bulk-settings-btn" ref={bulkSimBtnRef}>
 								{i18n.t('bulk_tab.actions.simulate_batch')}
 							</button>
-							<div className="bulk-boolean-settings-container" ref={booleanSettingsContainerRef}></div>
 						</div>
 					</div>
 					,
@@ -180,7 +176,6 @@ export class BulkTab extends SimTab {
 		this.combinationsElem = combinationsElemRef.value!;
 		this.bulkSimButton = bulkSimBtnRef.value!;
 		this.settingsContainer = settingsContainerRef.value!;
-		this.booleanSettingsContainer = booleanSettingsContainerRef.value!;
 
 		this.setupTab = new Tab(setupTabBtnRef.value!);
 		this.resultsTab = new Tab(resultsTabBtnRef.value!);
@@ -367,10 +362,10 @@ export class BulkTab extends SimTab {
 	addItems(items: ItemSpec[]) {
 		items.forEach(item => {
 			const equippedItem = this.simUI.sim.db.lookupItemSpec(item)?.withChallengeMode(this.simUI.player.getChallengeModeEnabled()).withDynamicStats();
-			if (!!equippedItem) {
+			if (equippedItem) {
 				getEligibleItemSlots(equippedItem.item, this.playerIsFuryWarrior).forEach(slot => {
 					// Avoid duplicating rings/trinkets/weapons
-					if (this.isSecondaryItemSlot(slot)) return;
+					if (this.isSecondaryItemSlot(slot) || !canEquipItem(equippedItem.item, this.simUI.player.getPlayerSpec(), slot)) return;
 
 					const idx = this.items.push(item) - 1;
 					const bulkSlot = getBulkItemSlotFromSlot(slot, this.playerCanDualWield);
@@ -385,26 +380,25 @@ export class BulkTab extends SimTab {
 	// Add an item to a particular bulk sim item slot
 	addItemToSlot(item: ItemSpec, bulkSlot: BulkSimItemSlot) {
 		const equippedItem = this.simUI.sim.db.lookupItemSpec(item)?.withChallengeMode(this.simUI.player.getChallengeModeEnabled()).withDynamicStats();
-		if (!!equippedItem) {
+		if (equippedItem) {
 			const eligibleItemSlots = getEligibleItemSlots(equippedItem.item, this.playerIsFuryWarrior);
 			if (!canEquipItem(equippedItem.item, this.simUI.player.getPlayerSpec(), eligibleItemSlots[0])) return;
 
 			const idx = this.items.push(item) - 1;
 			const group = this.pickerGroups.get(bulkSlot)!;
 			group.add(idx, equippedItem);
-
 			this.itemsChangedEmitter.emit(TypedEvent.nextEventID());
 		}
 	}
 
 	updateItem(idx: number, newItem: ItemSpec) {
 		const equippedItem = this.simUI.sim.db.lookupItemSpec(newItem)?.withChallengeMode(this.simUI.player.getChallengeModeEnabled()).withDynamicStats();
-		if (!!equippedItem) {
+		if (equippedItem) {
 			this.items[idx] = newItem;
 
 			getEligibleItemSlots(equippedItem.item, this.playerIsFuryWarrior).forEach(slot => {
 				// Avoid duplicating rings/trinkets/weapons
-				if (this.isSecondaryItemSlot(slot)) return;
+				if (this.isSecondaryItemSlot(slot) || !canEquipItem(equippedItem.item, this.simUI.player.getPlayerSpec(), slot)) return;
 
 				const bulkSlot = getBulkItemSlotFromSlot(slot, this.playerCanDualWield);
 				const group = this.pickerGroups.get(bulkSlot)!;
@@ -433,11 +427,12 @@ export class BulkTab extends SimTab {
 
 		const item = this.items[idx]!;
 		const equippedItem = this.simUI.sim.db.lookupItemSpec(item);
-		if (!!equippedItem) {
+		if (equippedItem) {
 			this.items[idx] = null;
 
 			// Try to find the matching item within its eligible groups
 			getEligibleItemSlots(equippedItem.item, this.playerIsFuryWarrior).forEach(slot => {
+				if (!canEquipItem(equippedItem.item, this.simUI.player.getPlayerSpec(), slot)) return;
 				const bulkSlot = getBulkItemSlotFromSlot(slot, this.playerCanDualWield);
 				const group = this.pickerGroups.get(bulkSlot)!;
 				group.remove(idx);
@@ -466,16 +461,6 @@ export class BulkTab extends SimTab {
 			result.push(ItemSpec.clone(spec));
 		});
 		return result;
-	}
-
-	private setCombinations(doCombos: boolean) {
-		this.doCombos = doCombos;
-		this.settingsChangedEmitter.emit(TypedEvent.nextEventID());
-	}
-
-	private setFastMode(fastMode: boolean) {
-		this.fastMode = fastMode;
-		this.settingsChangedEmitter.emit(TypedEvent.nextEventID());
 	}
 
 	protected getItemsForCombo(comboIdx: number): Map<ItemSlot, EquippedItem> {
@@ -604,12 +589,12 @@ export class BulkTab extends SimTab {
 		this.simUI.sim.bulkSimStartEmitter.on(() => this.resultsTabElem.replaceChildren());
 
 		this.simUI.sim.bulkSimResultEmitter.on(() => {
-			if (!this.topGear || !this.originalGear) {
+			if (!this.topGearResults || !this.originalGearResults) {
 				return;
 			}
 
-			for (const topGearResult of this.topGear) {
-				new BulkSimResultRenderer(this.resultsTabElem, this.simUI, this, topGearResult, this.originalGear);
+			for (const topGearResult of this.topGearResults) {
+				new BulkSimResultRenderer(this.resultsTabElem, this.simUI, this, topGearResult, this.originalGearResults);
 			}
 			this.isPending = false;
 			this.resultsTab.show();
@@ -642,10 +627,16 @@ export class BulkTab extends SimTab {
 			this.isPending = true;
 			let waitAbort = false;
 			let isAborted = false;
-			this.topGear = null;
-			this.originalGear = null;
+			this.topGearResults = null;
+			this.originalGearResults = null;
+			const playerPhase = this.simUI.sim.getPhase() >= 2;
+
 			try {
 				await this.simUI.sim.signalManager.abortType(RequestTypes.All);
+
+				this.originalGear = this.simUI.player.getGear();
+				let updatedGear: Gear = this.originalGear;
+				let topGearResults: TopGearResult[] = [];
 
 				this.pendingResults.addAbortButton(async () => {
 					if (waitAbort) return;
@@ -664,17 +655,13 @@ export class BulkTab extends SimTab {
 
 				let simStart = new Date().getTime();
 
-				const originalGear: Gear = this.simUI.player.getGear();
-				let updatedGear: Gear = originalGear;
-				let topGear: TopGearResult[] = [];
-
 				await this.calculateBulkCombinations();
 				this.simUI.sim.bulkSimStartEmitter.emit(TypedEvent.nextEventID());
 				await this.simUI.runSim((progressMetrics: ProgressMetrics) => {
 					const msSinceStart = new Date().getTime() - simStart;
 					this.setSimProgress(progressMetrics, msSinceStart / 1000, 0, this.combinations);
 				});
-				const referenceDPS = this.simUI.raidSimResultsManager!.currentData!.simResult!.getFirstPlayer()!.dps!.avg!;
+				const referenceDpsMetrics = this.simUI.raidSimResultsManager!.currentData!.simResult!.getFirstPlayer()!.dps;
 				this.simUI.raidSimResultsManager!.referenceData = this.simUI.raidSimResultsManager!.currentData!;
 				this.simUI.raidSimResultsManager!.referenceChangeEmitter.emit(TypedEvent.nextEventID());
 				this.simUI.raidSimResultsManager!.updateReference();
@@ -699,15 +686,15 @@ export class BulkTab extends SimTab {
 
 				for (let comboIdx = 0; comboIdx < this.combinations; comboIdx++) {
 					if (isAborted) {
-						break;
+						throw new Error('Bulk Sim Aborted');
 					}
 
-					updatedGear = originalGear;
+					updatedGear = this.originalGear;
 
 					for (const [itemSlot, equippedItem] of allItemCombos[comboIdx].entries()) {
 						updatedGear = updatedGear.withEquippedItem(
 							itemSlot,
-							originalGear.getEquippedItem(itemSlot)!.withItem(equippedItem.item),
+							this.originalGear.getEquippedItem(itemSlot)!.withItem(equippedItem.item),
 							this.simUI.player.canDualWield2H(),
 						);
 
@@ -723,6 +710,7 @@ export class BulkTab extends SimTab {
 
 					if (this.simUI.reforger) {
 						this.simUI.reforger.setIncludeGems(TypedEvent.nextEventID(), true);
+						this.simUI.reforger.setIncludeEOTBPGemSocket(TypedEvent.nextEventID(), playerPhase);
 
 						if (RelativeStatCap.hasRoRo(this.simUI.player) && this.simUI.reforger.defaultRelativeStatCap) {
 							this.simUI.reforger.relativeStatCap = new RelativeStatCap(
@@ -761,38 +749,51 @@ export class BulkTab extends SimTab {
 						this.setSimProgress(progressMetrics, msSinceStart / 1000, comboIdx + 1, this.combinations);
 					});
 
-					const currentDPS = this.simUI.raidSimResultsManager!.currentData!.simResult!.getFirstPlayer()!.dps!.avg!;
-
-					topGear.push({
-						gear: this.simUI.player.getGear(),
-						dps: currentDPS,
-					})
-
-					topGear.sort((a, b) => b.dps - a.dps);
-
-					if (topGear.length > 5) {
-						topGear.pop();
-					}
+					const isOriginalGear = this.originalGear.equals(updatedGear);
+					if (!isOriginalGear)
+						topGearResults.push({
+							gear: this.simUI.player.getGear(),
+							dpsMetrics: this.simUI.raidSimResultsManager!.currentData!.simResult!.getFirstPlayer()!.dps,
+						});
 				}
 
-				this.simUI.player.setGear(TypedEvent.nextEventID(), topGear[0].gear);
+				this.simUI.player.setGear(TypedEvent.nextEventID(), this.originalGear);
 				await this.simUI.sim.updateCharacterStats(TypedEvent.nextEventID());
+
+				topGearResults.sort((a, b) => b.dpsMetrics.avg - a.dpsMetrics.avg);
+				if (topGearResults.length > 5) topGearResults.splice(5);
 
 				await this.simUI.runSim((progressMetrics: ProgressMetrics) => {
 					this.simUI.raidSimResultsManager?.setSimProgress(progressMetrics);
 				});
 
-				this.topGear = topGear;
-				this.originalGear = {
-					gear: originalGear,
-					dps: referenceDPS,
+				this.topGearResults = topGearResults;
+				this.originalGearResults = {
+					gear: this.originalGear,
+					dpsMetrics: referenceDpsMetrics,
 				};
+
+				topGearResults.splice(
+					topGearResults.findIndex(({ dpsMetrics }) => referenceDpsMetrics.avg >= dpsMetrics.avg),
+					0,
+					this.originalGearResults,
+				);
+
 				this.simUI.sim.bulkSimResultEmitter.emit(TypedEvent.nextEventID());
 			} catch (error) {
 				console.error(error);
 			} finally {
+				this.simUI.player.setGear(TypedEvent.nextEventID(), this.originalGear!);
+				await this.simUI.sim.updateCharacterStats(TypedEvent.nextEventID());
+
 				isRunning = false;
 				if (!waitAbort) this.bulkSimButton.disabled = false;
+				if (isAborted) {
+					new Toast({
+						variant: 'error',
+						body: i18n.t('bulk_tab.notifications.bulk_sim_cancelled'),
+					});
+				}
 				this.isPending = false;
 			}
 		});

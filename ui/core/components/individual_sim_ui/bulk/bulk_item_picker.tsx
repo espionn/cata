@@ -65,7 +65,7 @@ export default class BulkItemPicker extends Component {
 	private setupHandlers() {
 		const slot = getEligibleItemSlots(this.item.item)[0];
 		const hasEligibleEnchants = !!this.simUI.sim.db.getEnchants(slot).length;
-		const hasEligibleReforges = !!this.item?.item ? this.simUI.player.getAvailableReforgings(this.item) : [];
+		const hasEligibleReforges = this.item?.item ? this.simUI.player.getAvailableReforgings(this.item) : [];
 
 		const openItemSelector = (event: Event) => {
 			event.preventDefault();
@@ -147,7 +147,7 @@ export default class BulkItemPicker extends Component {
 		copyBtn.addEventListener('click', copyItem);
 		this.addOnDisposeCallback(() => copyBtn.removeEventListener('click', copyItem));
 
-		if (!!removeBtnRef.value) {
+		if (removeBtnRef.value) {
 			const removeBtn = removeBtnRef.value;
 			tippy(removeBtn, { content: 'Remove this item from the batch.' });
 			const removeItem = () => this.bulkUI.removeItemByIndex(this.index);

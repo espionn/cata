@@ -2,14 +2,14 @@ import clsx from 'clsx';
 import { ref } from 'tsx-vanilla';
 
 import { IndividualSimUI } from '../../../individual_sim_ui';
-import { BulkComboResult } from '../../../proto/api';
-import { Gear } from '../../../proto_utils/gear';
 import { TypedEvent } from '../../../typed_event';
-import { formatDeltaTextElem } from '../../../utils';
+import { formatDeltaTextElem, formatToNumber } from '../../../utils';
 import { Component } from '../../component';
 import { ItemRenderer } from '../../gear_picker/gear_picker';
 import Toast from '../../toast';
 import { BulkTab, TopGearResult } from '../bulk_tab';
+import { RaidSimResultsManager } from '../../raid_sim_action';
+import { ItemSpec } from '../../../proto/common';
 
 export default class BulkSimResultRenderer extends Component {
 	readonly simUI: IndividualSimUI<any>;
@@ -23,7 +23,8 @@ export default class BulkSimResultRenderer extends Component {
 			this.rootElem.classList.add('bulk-sim-result-no-talents');
 		}
 
-		const dpsDelta = result.dps - baseResult.dps;
+		const iterations = this.simUI.sim.getIterations();
+		const isBaseResult = result.gear.equals(this.simUI.player.getGear());
 
 		const equipButtonRef = ref<HTMLButtonElement>();
 		const dpsDeltaRef = ref<HTMLDivElement>();
@@ -32,22 +33,36 @@ export default class BulkSimResultRenderer extends Component {
 			<>
 				<div className="results-sim">
 					<div className="results-sim-dps damage-metrics">
-						<span className="topline-result-avg">{this.formatDps(result.dps)}</span>
+						<span className="topline-result-avg">{this.formatDps(result.dpsMetrics.avg)}</span>
 						<div className="results-reference">
-							<span ref={dpsDeltaRef} className={clsx('results-reference-diff', dpsDelta >= 0 ? 'positive' : 'negative')} />
+							{isBaseResult ? <span className="fw-bold">Current Gear</span> : <span ref={dpsDeltaRef} className="results-reference-diff" />}
 						</div>
 					</div>
 				</div>
 				<div ref={itemsContainerRef} className="bulk-gear-combo" />
 				<div className="bulk-results-actions">
-					<button ref={equipButtonRef} className={clsx('btn btn-primary bulk-equip-btn', result.gear.equals(this.simUI.player.getGear()) && 'd-none')}>
+					<button ref={equipButtonRef} className={clsx('btn btn-primary bulk-equip-btn', isBaseResult && 'd-none')}>
 						Equip
 					</button>
 				</div>
 			</>,
 		);
 
-		formatDeltaTextElem(dpsDeltaRef.value!, baseResult.dps, result.dps, 2, undefined, undefined, true);
+		if (isBaseResult) return;
+
+		if (dpsDeltaRef.value) {
+			const isDiff = RaidSimResultsManager.applyZTestTooltip(
+				dpsDeltaRef.value,
+				iterations,
+				result.dpsMetrics.avg,
+				result.dpsMetrics.stdev,
+				iterations,
+				baseResult.dpsMetrics.avg,
+				baseResult.dpsMetrics.stdev,
+				false,
+			);
+			formatDeltaTextElem(dpsDeltaRef.value, baseResult.dpsMetrics.avg, result.dpsMetrics.avg, 2, undefined, !isDiff, true);
+		}
 
 		equipButtonRef.value?.addEventListener('click', () => {
 			simUI.player.setGear(TypedEvent.nextEventID(), result.gear);
@@ -63,7 +78,8 @@ export default class BulkSimResultRenderer extends Component {
 		for (const [idx, spec] of result.gear.asSpec().items.entries()) {
 			const itemContainer = (<div className="bulk-result-item" />) as HTMLElement;
 			const renderer = new ItemRenderer(items, itemContainer, simUI.player);
-			if ((spec.id != 0) && (spec.id != originalEquipmentSpec.items[idx].id)) {
+
+			if (spec.id != 0 && !ItemSpec.equals(spec, originalEquipmentSpec.items[idx])) {
 				const item = simUI.sim.db.lookupItemSpec(spec);
 				renderer.update(item!);
 			} else {
@@ -75,6 +91,6 @@ export default class BulkSimResultRenderer extends Component {
 	}
 
 	private formatDps(dps: number): string {
-		return (Math.round(dps * 100) / 100).toFixed(2);
+		return formatToNumber(dps);
 	}
 }

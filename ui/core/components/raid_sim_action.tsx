@@ -150,7 +150,9 @@ export class RaidSimResultsManager {
 					</div>
 				)}
 				<div>
-					{progress.presimRunning ? i18n.t('sidebar.results.progress.presim_running') : `${progress.completedIterations} / ${progress.totalIterations}`}
+					{progress.presimRunning
+						? i18n.t('sidebar.results.progress.presim_running')
+						: `${progress.completedIterations} / ${progress.totalIterations}`}
 					<br />
 					{i18n.t('sidebar.results.progress.iterations_complete')}
 				</div>
@@ -220,12 +222,8 @@ export class RaidSimResultsManager {
 			`.${RaidSimResultsManager.resultMetricClasses['cod']}`,
 			<>
 				<p>{i18n.t('sidebar.results.metrics.cod.tooltip.title')}</p>
-				<p>
-					{i18n.t('sidebar.results.metrics.cod.tooltip.description')}
-				</p>
-				<p>
-					{i18n.t('sidebar.results.metrics.cod.tooltip.note')}
-				</p>
+				<p>{i18n.t('sidebar.results.metrics.cod.tooltip.description')}</p>
+				<p>{i18n.t('sidebar.results.metrics.cod.tooltip.note')}</p>
 			</>,
 		);
 
@@ -304,8 +302,6 @@ export class RaidSimResultsManager {
 		this.updateReference();
 	}
 
-
-
 	updateReference() {
 		if (!this.referenceData || !this.currentData) {
 			// Remove references
@@ -370,7 +366,7 @@ export class RaidSimResultsManager {
 		} else {
 			const curMetrics = curMetricsTemp as DistributionMetricsProto;
 			const refMetrics = refMetricsTemp as DistributionMetricsProto;
-			const isDiff = this.applyZTestTooltip(
+			const isDiff = RaidSimResultsManager.applyZTestTooltip(
 				elem,
 				ref.iterations,
 				refMetrics.avg,
@@ -384,7 +380,7 @@ export class RaidSimResultsManager {
 		}
 	}
 
-	private applyZTestTooltip(
+	static applyZTestTooltip(
 		elem: HTMLElement,
 		n1: number,
 		avg1: number,
@@ -701,13 +697,16 @@ export class RaidSimResultsManager {
 				{data.map(column => {
 					const errorDecimals = column.unit === 'percentage' ? 2 : 0;
 					const label = translateResultMetricLabel(column.name) || column.name;
-					const prefix = (column.name === 'tmi' || column.name === 'cod') ? '% ' : ' ';
+					const prefix = column.name === 'tmi' || column.name === 'cod' ? '% ' : ' ';
 
 					return (
 						<div className={`results-metric ${column.classes}`}>
 							<span className="topline-result-avg">
 								{column.average.toFixed(2)}
-								<span className="metric-label">{prefix}{label}</span>
+								<span className="metric-label">
+									{prefix}
+									{label}
+								</span>
 							</span>
 							{column.stdev && (
 								<span className="topline-result-stdev">
