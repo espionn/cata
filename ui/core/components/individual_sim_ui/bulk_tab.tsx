@@ -14,7 +14,7 @@ import { ActionId } from '../../proto_utils/action_id';
 import { EquippedItem } from '../../proto_utils/equipped_item';
 import { Gear } from '../../proto_utils/gear';
 import { getEmptyGemSocketIconUrl } from '../../proto_utils/gems';
-import { canEquipItem, getEligibleItemSlots, isSecondaryItemSlot } from '../../proto_utils/utils';
+import { canEquipItem, getEligibleItemSlots, isSecondaryItemSlot, validWeaponCombo } from '../../proto_utils/utils';
 import { RequestTypes } from '../../sim_signal_manager';
 import { RelativeStatCap } from '../suggest_reforges_action';
 import { TypedEvent } from '../../typed_event';
@@ -630,6 +630,8 @@ export class BulkTab extends SimTab {
 			this.topGearResults = null;
 			this.originalGearResults = null;
 			const playerPhase = this.simUI.sim.getPhase() >= 2;
+			const challengeModeEnabled = this.simUI.player.getChallengeModeEnabled();
+			const hasBlacksmithing = this.simUI.player.isBlacksmithing()
 
 			try {
 				await this.simUI.sim.signalManager.abortType(RequestTypes.All);
@@ -692,13 +694,27 @@ export class BulkTab extends SimTab {
 					updatedGear = this.originalGear;
 
 					for (const [itemSlot, equippedItem] of allItemCombos[comboIdx].entries()) {
+						if (
+							itemSlot === ItemSlot.ItemSlotOffHand &&
+							!validWeaponCombo(
+								allItemCombos[comboIdx].get(ItemSlot.ItemSlotMainHand)?.item,
+								allItemCombos[comboIdx].get(ItemSlot.ItemSlotOffHand)?.item,
+								this.playerIsFuryWarrior,
+							)
+						) {
+							continue;
+						}
+
+						const equippedItemInSlot = this.originalGear.getEquippedItem(itemSlot);
 						updatedGear = updatedGear.withEquippedItem(
 							itemSlot,
-							this.originalGear.getEquippedItem(itemSlot)!.withItem(equippedItem.item),
+							equippedItemInSlot
+								? equippedItemInSlot.withItem(equippedItem.item)
+								: new EquippedItem({ item: equippedItem.item, challengeMode: challengeModeEnabled }),
 							this.playerIsFuryWarrior,
 						);
 
-						for (const [socketIdx, socketColor] of equippedItem.curSocketColors(this.simUI.player.isBlacksmithing()).entries()) {
+						for (const [socketIdx, socketColor] of equippedItem.curSocketColors(hasBlacksmithing).entries()) {
 							if (defaultGemsByColor.get(socketColor)) {
 								updatedGear = updatedGear.withGem(itemSlot, socketIdx, defaultGemsByColor.get(socketColor)!);
 							}
