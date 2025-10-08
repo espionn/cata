@@ -825,6 +825,11 @@ func (unit *Unit) GetSpellsMatchingSchool(school SpellSchool) []*Spell {
 	return spells
 }
 
+func (unit *Unit) SpellInFlight(spellID int32) bool {
+	spell := unit.GetSpell(ActionID{SpellID: spellID})
+	return unit.SpellsInFlight[spell] > 0
+}
+
 func (unit *Unit) GetUnit(ref *proto.UnitReference) *Unit {
 	return unit.Env.GetUnit(ref, unit)
 }

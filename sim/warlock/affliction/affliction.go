@@ -43,6 +43,7 @@ type AfflictionWarlock struct {
 	SoulShards         core.SecondaryResourceBar
 	Agony              *core.Spell
 	UnstableAffliction *core.Spell
+	Haunt              *core.Spell
 
 	SoulBurnAura     *core.Aura
 	HauntDebuffAuras core.AuraArray
@@ -111,6 +112,9 @@ func (affliction *AfflictionWarlock) Reset(sim *core.Simulation) {
 func (affliction *AfflictionWarlock) OnEncounterStart(sim *core.Simulation) {
 	defaultShards := MaxSoulShards
 	if affliction.SoulBurnAura.IsActive() {
+		defaultShards -= 1
+	}
+	if affliction.SpellInFlight(affliction.Haunt.SpellID) {
 		defaultShards -= 1
 	}
 
