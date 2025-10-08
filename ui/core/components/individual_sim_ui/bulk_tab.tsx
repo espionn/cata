@@ -695,7 +695,7 @@ export class BulkTab extends SimTab {
 						updatedGear = updatedGear.withEquippedItem(
 							itemSlot,
 							this.originalGear.getEquippedItem(itemSlot)!.withItem(equippedItem.item),
-							this.simUI.player.canDualWield2H(),
+							this.playerIsFuryWarrior,
 						);
 
 						for (const [socketIdx, socketColor] of equippedItem.curSocketColors(this.simUI.player.isBlacksmithing()).entries()) {
