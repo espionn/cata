@@ -694,17 +694,6 @@ export class BulkTab extends SimTab {
 					updatedGear = this.originalGear;
 
 					for (const [itemSlot, equippedItem] of allItemCombos[comboIdx].entries()) {
-						if (
-							itemSlot === ItemSlot.ItemSlotOffHand &&
-							!validWeaponCombo(
-								allItemCombos[comboIdx].get(ItemSlot.ItemSlotMainHand)?.item,
-								allItemCombos[comboIdx].get(ItemSlot.ItemSlotOffHand)?.item,
-								this.playerIsFuryWarrior,
-							)
-						) {
-							continue;
-						}
-
 						const equippedItemInSlot = this.originalGear.getEquippedItem(itemSlot);
 						updatedGear = updatedGear.withEquippedItem(
 							itemSlot,
