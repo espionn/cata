@@ -60,6 +60,10 @@ interface SimProps {
 	type?: SimType;
 }
 
+export type RunSimOptions = {
+	silent?: boolean; // If true, don't emit the simResultEmitter event.
+};
+
 const WASM_CONCURRENCY_STORAGE_KEY = `${LOCAL_STORAGE_PREFIX}_wasmconcurrency`;
 
 // Core Sim module which deals only with api types, no UI-related stuff.
@@ -300,7 +304,7 @@ export class Sim {
 		});
 	}
 
-	async runRaidSim(eventID: EventID, onProgress: WorkerProgressCallback): Promise<SimResult | ErrorOutcome> {
+	async runRaidSim(eventID: EventID, onProgress: WorkerProgressCallback, options: RunSimOptions = {}): Promise<SimResult | ErrorOutcome> {
 		if (this.raid.isEmpty()) {
 			throw new Error('Raid is empty! Try adding some players first.');
 		} else if (this.encounter.targets.length < 1) {
@@ -326,7 +330,9 @@ export class Sim {
 				throw new SimError(result.error.message);
 			}
 			const simResult = await SimResult.makeNew(request, result);
-			this.simResultEmitter.emit(eventID, simResult);
+			if (!options.silent) {
+				this.simResultEmitter.emit(eventID, simResult);
+			}
 			return simResult;
 		} catch (error) {
 			if (error instanceof SimError) throw error;
@@ -337,7 +343,7 @@ export class Sim {
 		}
 	}
 
-	async runRaidSimWithLogs(eventID: EventID): Promise<SimResult | null> {
+	async runRaidSimWithLogs(eventID: EventID, options: RunSimOptions = {}): Promise<SimResult | null> {
 		if (this.raid.isEmpty()) {
 			throw new Error('Raid is empty! Try adding some players first.');
 		} else if (this.encounter.targets.length < 1) {
@@ -354,7 +360,9 @@ export class Sim {
 				throw new SimError(result.error.message);
 			}
 			const simResult = await SimResult.makeNew(request, result);
-			this.simResultEmitter.emit(eventID, simResult);
+			if (!options.silent) {
+				this.simResultEmitter.emit(eventID, simResult);
+			}
 			return simResult;
 		} catch (error) {
 			if (error instanceof SimError) throw error;

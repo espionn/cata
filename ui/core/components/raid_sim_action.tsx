@@ -624,6 +624,7 @@ export class RaidSimResultsManager {
 		}
 
 		if (options.asList) return this.buildResultsList(resultColumns);
+
 		return this.buildResultsTable(resultColumns);
 	}
 

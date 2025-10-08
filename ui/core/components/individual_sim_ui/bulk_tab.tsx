@@ -18,7 +18,7 @@ import { canEquipItem, getEligibleItemSlots, isSecondaryItemSlot, validWeaponCom
 import { RequestTypes } from '../../sim_signal_manager';
 import { RelativeStatCap } from '../suggest_reforges_action';
 import { TypedEvent } from '../../typed_event';
-import { getEnumValues, isExternal } from '../../utils';
+import { getEnumValues, isExternal, sleep } from '../../utils';
 import { ItemData } from '../gear_picker/item_list';
 import SelectorModal from '../gear_picker/selector_modal';
 import { ResultsViewer } from '../results_viewer';
@@ -664,9 +664,6 @@ export class BulkTab extends SimTab {
 					this.setSimProgress(progressMetrics, msSinceStart / 1000, 0, this.combinations);
 				});
 				const referenceDpsMetrics = this.simUI.raidSimResultsManager!.currentData!.simResult!.getFirstPlayer()!.dps;
-				this.simUI.raidSimResultsManager!.referenceData = this.simUI.raidSimResultsManager!.currentData!;
-				this.simUI.raidSimResultsManager!.referenceChangeEmitter.emit(TypedEvent.nextEventID());
-				this.simUI.raidSimResultsManager!.updateReference();
 
 				const allItemCombos: Map<ItemSlot, EquippedItem>[] = [];
 
@@ -749,16 +746,23 @@ export class BulkTab extends SimTab {
 
 					await this.simUI.sim.updateCharacterStats(TypedEvent.nextEventID());
 
-					await this.simUI.runSim((progressMetrics: ProgressMetrics) => {
-						const msSinceStart = new Date().getTime() - simStart;
-						this.setSimProgress(progressMetrics, msSinceStart / 1000, comboIdx + 1, this.combinations);
-					});
+					const result = await this.simUI.runSim(
+						(progressMetrics: ProgressMetrics) => {
+							const msSinceStart = new Date().getTime() - simStart;
+							this.setSimProgress(progressMetrics, msSinceStart / 1000, comboIdx + 1, this.combinations);
+						},
+						{ silent: true },
+					);
+
+					if (result && 'type' in result) {
+						throw new Error(result.message);
+					}
 
 					const isOriginalGear = this.originalGear.equals(updatedGear);
 					if (!isOriginalGear)
 						topGearResults.push({
 							gear: this.simUI.player.getGear(),
-							dpsMetrics: this.simUI.raidSimResultsManager!.currentData!.simResult!.getFirstPlayer()!.dps,
+							dpsMetrics: result!.getFirstPlayer()!.dps,
 						});
 
 					topGearResults.sort((a, b) => b.dpsMetrics.avg - a.dpsMetrics.avg);

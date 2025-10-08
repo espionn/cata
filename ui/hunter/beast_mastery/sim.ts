@@ -174,7 +174,6 @@ export class BeastMasteryHunterSimUI extends IndividualSimUI<Spec.SpecBeastMaste
 							softCapToModify.postCapEPs = softCap.breakpoints.map((_, index) => Math.max(0, baseEP - reduction * (index + 1)));
 						}
 					});
-					console.log(softCaps);
 					return softCaps;
 				},
 			});

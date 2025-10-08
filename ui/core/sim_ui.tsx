@@ -15,10 +15,10 @@ import Toast from './components/toast';
 import { REPO_NEW_ISSUE_URL } from './constants/other';
 import { LaunchStatus, SimStatus } from './launched_sims.js';
 import { PlayerSpec } from './player_spec.js';
-import { ErrorOutcomeType } from './proto/api';
+import { ErrorOutcome, ErrorOutcomeType } from './proto/api';
 import { ActionId } from './proto_utils/action_id.js';
 import { SimResult } from './proto_utils/sim_result';
-import { Sim, SimError } from './sim.js';
+import { RunSimOptions, Sim, SimError } from './sim.js';
 import { RequestTypes } from './sim_signal_manager.js';
 import { EventID, TypedEvent } from './typed_event.js';
 import { WorkerProgressCallback } from './worker_pool';
@@ -191,14 +191,6 @@ export abstract class SimUI extends Component {
 
 		this.simTabContentsContainer = this.rootElem.querySelector('.sim-main.tab-content') as HTMLElement;
 
-		if (!this.isWithinRaidSim) {
-			window.addEventListener('message', async event => {
-				if (event.data == 'runOnce') {
-					this.runSimOnce();
-				}
-			});
-		}
-
 		if (this.disabled) {
 			resultsViewerElem.appendChild(
 				<div className="sim-ui-unlaunched-container d-flex flex-column align-items-center text-center mt-auto mb-auto ms-auto me-auto">
@@ -321,11 +313,11 @@ export abstract class SimUI extends Component {
 		return this.rootElem.classList.contains('individual-sim-ui');
 	}
 
-	async runSim(onProgress: WorkerProgressCallback) {
+	async runSim(onProgress: WorkerProgressCallback, options: RunSimOptions = {}) {
 		this.resultsViewer.setPending();
 		try {
 			await this.sim.signalManager.abortType(RequestTypes.All);
-			const result = await this.sim.runRaidSim(TypedEvent.nextEventID(), onProgress);
+			const result = await this.sim.runRaidSim(TypedEvent.nextEventID(), onProgress, options);
 			if (!(result instanceof SimResult) && result.type == ErrorOutcomeType.ErrorOutcomeAborted) {
 				new Toast({
 					variant: 'info',
@@ -333,16 +325,17 @@ export abstract class SimUI extends Component {
 				});
 				this.resultsViewer.hideAll();
 			}
+			return result;
 		} catch (e) {
 			this.resultsViewer.hideAll();
 			this.handleCrash(e);
 		}
 	}
 
-	async runSimOnce() {
+	async runSimOnce(options: RunSimOptions = {}) {
 		this.resultsViewer.setPending();
 		try {
-			await this.sim.runRaidSimWithLogs(TypedEvent.nextEventID());
+			return await this.sim.runRaidSimWithLogs(TypedEvent.nextEventID(), options);
 		} catch (e) {
 			this.resultsViewer.hideAll();
 			this.handleCrash(e);
