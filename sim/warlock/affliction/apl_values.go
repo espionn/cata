@@ -10,7 +10,6 @@ import (
 func (warlock *AfflictionWarlock) NewAPLValue(rot *core.APLRotation, config *proto.APLValue) core.APLValue {
 	switch config.Value.(type) {
 	case *proto.APLValue_WarlockHauntInFlight:
-		config.GetSpellInFlight()
 		spellInFlight := proto.APLValueSpellInFlight{
 			SpellId: core.Spell{ActionID: core.ActionID{SpellID: 48181}}.ToProto(),
 		}
