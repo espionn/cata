@@ -165,7 +165,6 @@ export class BulkTab extends SimTab {
 							</button>
 						</div>
 					</div>
-					,
 				</div>
 			</>,
 		);
