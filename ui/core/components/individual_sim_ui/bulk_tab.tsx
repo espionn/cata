@@ -6,19 +6,19 @@ import { ref } from 'tsx-vanilla';
 import { REPO_RELEASES_URL } from '../../constants/other';
 import { IndividualSimUI } from '../../individual_sim_ui';
 import i18n from '../../../i18n/config';
-import { BulkSettings, DistributionMetrics, ProgressMetrics, TalentLoadout } from '../../proto/api';
+import { BulkSettings, DistributionMetrics, ProgressMetrics } from '../../proto/api';
 import { Class, GemColor, HandType, ItemRandomSuffix, ItemSlot, ItemSpec, RangedWeaponType, ReforgeStat, Spec } from '../../proto/common';
 import { ItemEffectRandPropPoints, SimDatabase, SimEnchant, SimGem, SimItem } from '../../proto/db';
-import { SavedTalents, UIEnchant, UIGem, UIItem } from '../../proto/ui';
+import { UIEnchant, UIGem, UIItem } from '../../proto/ui';
 import { ActionId } from '../../proto_utils/action_id';
 import { EquippedItem } from '../../proto_utils/equipped_item';
 import { Gear } from '../../proto_utils/gear';
 import { getEmptyGemSocketIconUrl } from '../../proto_utils/gems';
-import { canEquipItem, getEligibleItemSlots, isSecondaryItemSlot, validWeaponCombo } from '../../proto_utils/utils';
+import { canEquipItem, getEligibleItemSlots, isSecondaryItemSlot } from '../../proto_utils/utils';
 import { RequestTypes } from '../../sim_signal_manager';
 import { RelativeStatCap } from '../suggest_reforges_action';
 import { TypedEvent } from '../../typed_event';
-import { getEnumValues, isExternal, sleep } from '../../utils';
+import { getEnumValues, isExternal } from '../../utils';
 import { ItemData } from '../gear_picker/item_list';
 import SelectorModal from '../gear_picker/selector_modal';
 import { ResultsViewer } from '../results_viewer';
@@ -37,6 +37,7 @@ import {
 	getBulkItemSlotFromSlot,
 } from './bulk/utils';
 import { BulkGearJsonImporter } from './importers';
+import { BooleanPicker } from '../pickers/boolean_picker';
 
 const WEB_DEFAULT_ITERATIONS = 1000;
 const WEB_ITERATIONS_LIMIT = 50_000;
@@ -76,14 +77,8 @@ export class BulkTab extends SimTab {
 	protected combinations = 0;
 	protected iterations = 0;
 
-	// TODO: Make a real options probably
-	doCombos: boolean;
-	fastMode: boolean;
-	autoGem: boolean;
-	simTalents: boolean;
-	autoEnchant: boolean;
+	inheritUpgrades: boolean;
 	defaultGems: SimGem[];
-	savedTalents: TalentLoadout[];
 	gemIconElements: HTMLImageElement[];
 
 	protected topGearResults: TopGearResult[] | null = null;
@@ -186,12 +181,7 @@ export class BulkTab extends SimTab {
 			id: 'bulk-selector-modal',
 		});
 
-		this.doCombos = true;
-		this.fastMode = true;
-		this.autoGem = true;
-		this.autoEnchant = true;
-		this.savedTalents = [];
-		this.simTalents = false;
+		this.inheritUpgrades = true;
 		this.defaultGems = Array.from({ length: 5 }, () => UIGem.create());
 		this.gemIconElements = [];
 
@@ -219,7 +209,7 @@ export class BulkTab extends SimTab {
 					const group = this.pickerGroups.get(bulkSlot)!;
 					const idx = this.isSecondaryItemSlot(slot) ? -2 : -1;
 					if (equippedItem) {
-						group.add(idx, equippedItem);
+						group.add(idx, equippedItem, true);
 					}
 				});
 
@@ -228,7 +218,8 @@ export class BulkTab extends SimTab {
 			loadEquippedItems();
 
 			TypedEvent.onAny([this.simUI.player.challengeModeChangeEmitter, this.simUI.player.gearChangeEmitter]).on(() => loadEquippedItems());
-			this.itemsChangedEmitter.on(() => this.storeSettings());
+
+			TypedEvent.onAny([this.settingsChangedEmitter, this.itemsChangedEmitter]).on(() => this.storeSettings());
 
 			TypedEvent.onAny([this.itemsChangedEmitter, this.settingsChangedEmitter, this.simUI.sim.iterationsChangeEmitter]).on(() => {
 				this.getCombinationsCount().then(result => this.combinationsElem.replaceChildren(result));
@@ -248,14 +239,8 @@ export class BulkTab extends SimTab {
 				ignoreUnknownFields: true,
 			});
 
-			this.addItems(settings.items);
-
-			this.doCombos = settings.combinations;
-			this.fastMode = settings.fastMode;
-			this.autoEnchant = settings.autoEnchant;
-			this.savedTalents = settings.talentsToSim;
-			this.autoGem = settings.autoGem;
-			this.simTalents = settings.simTalents;
+			this.addItems(settings.items, true);
+			this.setInheritUpgrades(settings.inheritUpgrades);
 			this.defaultGems = new Array<SimGem>(
 				SimGem.create({ id: settings.defaultRedGem }),
 				SimGem.create({ id: settings.defaultYellowGem }),
@@ -286,14 +271,7 @@ export class BulkTab extends SimTab {
 	protected createBulkSettings(): BulkSettings {
 		return BulkSettings.create({
 			items: this.getItems(),
-			// TODO(Riotdog-GehennasEU): Make all of these configurable.
-			// For now, it's always constant iteration combinations mode for "sim my bags".
-			combinations: this.doCombos,
-			fastMode: this.fastMode,
-			autoEnchant: this.autoEnchant,
-			autoGem: this.autoGem,
-			simTalents: this.simTalents,
-			talentsToSim: this.savedTalents,
+			inheritUpgrades: this.inheritUpgrades,
 			defaultRedGem: this.defaultGems[0].id,
 			defaultYellowGem: this.defaultGems[1].id,
 			defaultBlueGem: this.defaultGems[2].id,
@@ -365,7 +343,7 @@ export class BulkTab extends SimTab {
 		this.addItems([item]);
 	}
 	// Add items to their eligible bulk sim item slot(s). Mainly used for importing and search
-	addItems(items: ItemSpec[]) {
+	addItems(items: ItemSpec[], silent = false) {
 		items.forEach(item => {
 			const equippedItem = this.simUI.sim.db.lookupItemSpec(item)?.withChallengeMode(this.simUI.player.getChallengeModeEnabled()).withDynamicStats();
 			if (equippedItem) {
@@ -376,7 +354,7 @@ export class BulkTab extends SimTab {
 					const idx = this.items.push(item) - 1;
 					const bulkSlot = getBulkItemSlotFromSlot(slot, this.playerCanDualWield);
 					const group = this.pickerGroups.get(bulkSlot)!;
-					group.add(idx, equippedItem);
+					group.add(idx, equippedItem, silent);
 				});
 			}
 		});
@@ -694,7 +672,7 @@ export class BulkTab extends SimTab {
 			}
 
 			for (const topGearResult of this.topGearResults) {
-				new BulkSimResultRenderer(this.resultsTabElem, this.simUI, this, topGearResult, this.originalGearResults);
+				new BulkSimResultRenderer(this.resultsTabElem, this.simUI, topGearResult, this.originalGearResults);
 			}
 			this.isPending = false;
 			this.resultsTab.show();
@@ -792,13 +770,15 @@ export class BulkTab extends SimTab {
 
 					for (const [itemSlot, equippedItem] of allItemCombos[comboIdx].entries()) {
 						const equippedItemInSlot = this.originalGear.getEquippedItem(itemSlot);
-						updatedGear = updatedGear.withEquippedItem(
-							itemSlot,
-							equippedItemInSlot
-								? equippedItemInSlot.withItem(equippedItem.item).withUpgrade(equippedItem._upgrade)
-								: equippedItem.withChallengeMode(challengeModeEnabled),
-							this.playerIsFuryWarrior,
-						);
+						let updatedItem = equippedItemInSlot
+							? equippedItemInSlot.withItem(equippedItem.item)
+							: equippedItem.withChallengeMode(challengeModeEnabled);
+
+						if (!this.inheritUpgrades) {
+							updatedItem = updatedItem.withUpgrade(equippedItem._upgrade);
+						}
+
+						updatedGear = updatedGear.withEquippedItem(itemSlot, updatedItem, this.playerIsFuryWarrior);
 
 						for (const [socketIdx, socketColor] of equippedItem.curSocketColors(hasBlacksmithing).entries()) {
 							if (defaultGemsByColor.get(socketColor)) {
@@ -904,27 +884,32 @@ export class BulkTab extends SimTab {
 		});
 
 		const socketsContainerRef = ref<HTMLDivElement>();
-		const defaultGemDiv = (
-			<div className={clsx('default-gem-container', !this.autoGem && 'hide')}>
-				<h6>{i18n.t('bulk_tab.settings.default_gems')}</h6>
-				<div ref={socketsContainerRef} className="sockets-container"></div>
-			</div>
-		);
-
-		const talentsContainerRef = ref<HTMLDivElement>();
-		const talentsToSimDiv = (
-			<div className={clsx('talents-picker-container', !this.simTalents && 'hide')}>
-				<h6>{i18n.t('bulk_tab.settings.talents_to_sim')}</h6>
-				<div ref={talentsContainerRef} className="talents-container"></div>
-			</div>
-		);
+		const inheritUpgradesDiv = ref<HTMLDivElement>();
+		const reforgeWarningRef = ref<HTMLDivElement>();
 
 		this.settingsContainer.appendChild(
 			<>
-				{defaultGemDiv}
-				{talentsToSimDiv}
+				<div className="default-gem-container">
+					<h6>{i18n.t('bulk_tab.settings.default_gems')}</h6>
+					<div ref={socketsContainerRef} className="sockets-container"></div>
+				</div>
+				<div ref={inheritUpgradesDiv} className="inherit-upgrades-container"></div>
+				<div ref={reforgeWarningRef} />
 			</>,
 		);
+
+		if (inheritUpgradesDiv.value)
+			new BooleanPicker<BulkTab>(inheritUpgradesDiv.value, this, {
+				id: 'inherit-upgrades',
+				label: i18n.t('bulk_tab.settings.inherit_upgrades.label'),
+				labelTooltip: i18n.t('bulk_tab.settings.inherit_upgrades.tooltip'),
+				inline: true,
+				changedEvent: _modObj => this.settingsChangedEmitter,
+				getValue: _modObj => this.inheritUpgrades,
+				setValue: (_, _modObj, newValue: boolean) => {
+					this.setInheritUpgrades(newValue);
+				},
+			});
 
 		Array<GemColor>(GemColor.GemColorRed, GemColor.GemColorYellow, GemColor.GemColorBlue, GemColor.GemColorMeta, GemColor.GemColorPrismatic).forEach(
 			(socketColor, socketIndex) => {
@@ -975,71 +960,6 @@ export class BulkTab extends SimTab {
 				gemContainerRef.value?.addEventListener('click', openGemSelector);
 			},
 		);
-
-		const dataStr = window.localStorage.getItem(this.simUI.getSavedTalentsStorageKey());
-
-		let jsonData;
-		try {
-			if (dataStr !== null) {
-				jsonData = JSON.parse(dataStr);
-			}
-		} catch (e) {
-			console.warn('Invalid json for local storage value: ' + dataStr);
-		}
-
-		const handleToggle = (element: HTMLElement, load: TalentLoadout) => {
-			const exists = this.savedTalents.some(talent => talent.name === load.name); // Replace 'id' with your unique identifier
-
-			if (exists) {
-				// If the object exists, find its index and remove it
-				const indexToRemove = this.savedTalents.findIndex(talent => talent.name === load.name);
-				this.savedTalents.splice(indexToRemove, 1);
-				element?.classList.remove('active');
-			} else {
-				// If the object does not exist, add it
-				this.savedTalents.push(load);
-				element?.classList.add('active');
-			}
-
-			this.settingsChangedEmitter.emit(TypedEvent.nextEventID());
-		};
-
-		const talentSelections = this.simUI.individualConfig.presets.talents.map(preset => {
-			return {
-				talentsString: preset.data.talentsString,
-				glyphs: preset.data.glyphs,
-				name: preset.name,
-			};
-		});
-
-		for (const name in jsonData) {
-			try {
-				const savedTalentLoadout = SavedTalents.fromJson(jsonData[name]);
-				talentSelections.push({
-					talentsString: savedTalentLoadout.talentsString,
-					glyphs: savedTalentLoadout.glyphs,
-					name: name,
-				});
-			} catch (e) {
-				console.log(e);
-				console.warn('Failed parsing saved data: ' + jsonData[name]);
-			}
-		}
-
-		talentSelections.forEach(selection => {
-			const index = this.savedTalents.findIndex(talent => JSON.stringify(talent) === JSON.stringify(selection));
-			const talentChipRef = ref<HTMLDivElement>();
-			const talentButtonRef = ref<HTMLButtonElement>();
-
-			talentsContainerRef.value!.appendChild(
-				<div ref={talentChipRef} className={clsx('saved-data-set-chip badge rounded-pill', index !== -1 && 'active')}>
-					<button ref={talentButtonRef} className="saved-data-set-name">
-						{selection.name}
-					</button>
-				</div>,
-			);
-			talentButtonRef.value!.addEventListener('click', () => handleToggle(talentChipRef.value!, selection));
-		});
 	}
 
 	private async getCombinationsCount(): Promise<Element> {
@@ -1065,7 +985,7 @@ export class BulkTab extends SimTab {
 			</>
 		);
 
-		if (!!warningRef.value) {
+		if (warningRef.value) {
 			tippy(warningRef.value, {
 				content: i18n.t('bulk_tab.warning.iterations_limit', { limit: WEB_ITERATIONS_LIMIT }),
 				placement: 'left',
@@ -1107,5 +1027,10 @@ export class BulkTab extends SimTab {
 				<div>{i18n.t('bulk_tab.progress.seconds_remaining', { seconds: Math.round(secondsRemaining) })}</div>
 			</div>,
 		);
+	}
+
+	private setInheritUpgrades(newValue: boolean) {
+		this.inheritUpgrades = newValue;
+		this.settingsChangedEmitter.emit(TypedEvent.nextEventID());
 	}
 }

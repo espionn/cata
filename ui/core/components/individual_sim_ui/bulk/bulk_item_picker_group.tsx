@@ -1,3 +1,4 @@
+import i18n from '../../../../i18n/config';
 import { IndividualSimUI } from '../../../individual_sim_ui';
 import { EquippedItem } from '../../../proto_utils/equipped_item';
 import { ContentBlock } from '../../content_block';
@@ -28,11 +29,22 @@ export default class BulkItemPickerGroup extends ContentBlock {
 		return !!this.pickers.get(idx);
 	}
 
-	add(idx: number, item: EquippedItem) {
+	add(idx: number, item: EquippedItem, silent = false) {
 		if (!this.pickers.size) this.bodyElement.replaceChildren();
 
 		// Block duplicate items from being added.
-		if (Array.from(this.pickers.values()).map(picker => picker.item.id).includes(item.item.id)) {
+		const pickers = Array.from(this.pickers.values());
+		if (
+			pickers.some(
+				picker => picker.item.id === item.id || (picker.item._item.limitCategory != 0 && picker.item._item.limitCategory === item._item.limitCategory),
+			)
+		) {
+			if (!silent)
+				new Toast({
+					delay: 1000,
+					variant: 'error',
+					body: <>{i18n.t('bulk_tab.search.item_unique', { itemName: item._item.name })}</>,
+				});
 			return;
 		}
 
@@ -43,6 +55,13 @@ export default class BulkItemPickerGroup extends ContentBlock {
 		}
 
 		this.pickers.set(idx, new BulkItemPicker(this.bodyElement, this.simUI, this.bulkUI, item, this.bulkSlot, idx));
+
+		if (!silent)
+			new Toast({
+				delay: 1000,
+				variant: 'success',
+				body: <>{i18n.t('bulk_tab.search.item_added', { itemName: item._item.name })}</>,
+			});
 	}
 
 	update(idx: number, newItem: EquippedItem) {

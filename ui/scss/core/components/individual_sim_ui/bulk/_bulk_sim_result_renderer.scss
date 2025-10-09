@@ -9,12 +9,6 @@
 		margin-bottom: var(--gap-width);
 	}
 
-	&.bulk-sim-result-no-talents {
-		.bulk-gear-combo {
-			flex: 5;
-		}
-	}
-
 	.results-sim {
 		flex: 3;
 	}
@@ -41,7 +35,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: var(--block-spacer);
-		flex: 3;
+		flex: 5;
 
 		.item-picker-root {
 			padding: 0 !important;

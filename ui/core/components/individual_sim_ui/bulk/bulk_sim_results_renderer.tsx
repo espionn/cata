@@ -7,21 +7,17 @@ import { formatDeltaTextElem, formatToNumber } from '../../../utils';
 import { Component } from '../../component';
 import { ItemRenderer } from '../../gear_picker/gear_picker';
 import Toast from '../../toast';
-import { BulkTab, TopGearResult } from '../bulk_tab';
+import { TopGearResult } from '../bulk_tab';
 import { RaidSimResultsManager } from '../../raid_sim_action';
 import { ItemSpec } from '../../../proto/common';
 
 export default class BulkSimResultRenderer extends Component {
 	readonly simUI: IndividualSimUI<any>;
 
-	constructor(parent: HTMLElement, simUI: IndividualSimUI<any>, bulkSimUI: BulkTab, result: TopGearResult, baseResult: TopGearResult) {
+	constructor(parent: HTMLElement, simUI: IndividualSimUI<any>, result: TopGearResult, baseResult: TopGearResult) {
 		super(parent, 'bulk-sim-result-root');
 
 		this.simUI = simUI;
-
-		if (!bulkSimUI.simTalents) {
-			this.rootElem.classList.add('bulk-sim-result-no-talents');
-		}
 
 		const iterations = this.simUI.sim.getIterations();
 		const isBaseResult = result.gear.equals(this.simUI.player.getGear());

@@ -205,16 +205,6 @@ export default class BulkItemSearch extends ContentBlock {
 					event => {
 						event.preventDefault();
 						this.bulkUI.addItem(ItemSpec.create({ id: item.id }));
-
-						new Toast({
-							delay: 1000,
-							variant: 'success',
-							body: (
-								<>
-									<strong>{item.name}</strong> {i18n.t('bulk_tab.search.item_added', { itemName: item.name })}
-								</>
-							),
-						});
 					},
 					{ signal: this.signal },
 				);

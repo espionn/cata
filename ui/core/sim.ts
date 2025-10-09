@@ -5,11 +5,6 @@ import { CURRENT_PHASE, LOCAL_STORAGE_PREFIX } from './constants/other';
 import { Encounter } from './encounter';
 import { Player, UnitMetadata } from './player';
 import {
-	BulkSettings,
-	BulkSimCombosRequest,
-	BulkSimCombosResult,
-	BulkSimRequest,
-	BulkSimResult,
 	ComputeStatsRequest,
 	ErrorOutcome,
 	ErrorOutcomeType,
@@ -33,7 +28,7 @@ import {
 	UnitReference_Type as UnitType,
 	WeaponType,
 } from './proto/common.js';
-import { Consumable, SimDatabase } from './proto/db';
+import { Consumable } from './proto/db';
 import { SpellEffect } from './proto/spell';
 import { DatabaseFilters, RaidFilterOption, SimSettings as SimSettingsProto, SourceFilterOption } from './proto/ui.js';
 import { Database } from './proto_utils/database.js';
@@ -123,9 +118,9 @@ export class Sim {
 	// Fires when a raid sim API call completes.
 	readonly simResultEmitter = new TypedEvent<SimResult>();
 
-	// Fires when a bulk sim API call starts.
+	// Fires when a bulk sim starts.
 	readonly bulkSimStartEmitter = new TypedEvent<void>();
-	// Fires when a bulk sim API call completes..
+	// Fires when a bulk sim completes..
 	readonly bulkSimResultEmitter = new TypedEvent<void>();
 
 	private readonly _initPromise: Promise<any>;
