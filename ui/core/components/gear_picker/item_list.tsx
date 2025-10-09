@@ -613,17 +613,6 @@ export default class ItemList<T extends ItemListType> {
 				compareButton.value!.addEventListener('click', () => {
 					const hasItem = checkHasItem();
 					simUI.bt?.[hasItem ? 'removeItem' : 'addItem'](ItemSpec.create({ id: itemData.id }));
-
-					new Toast({
-						delay: 1000,
-						variant: 'success',
-						body: (
-							<>
-								<strong>{itemData.name}</strong> was {hasItem ? <>removed from the batch</> : <>added to the batch</>}.
-							</>
-						),
-					});
-					// TODO: should we open the bulk sim UI or should we run in the background showing progress, and then sort the items in the picker?
 				});
 			}
 		}

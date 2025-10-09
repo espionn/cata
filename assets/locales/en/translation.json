@@ -771,6 +771,7 @@
 			"no_results": "No results found.",
 			"showing_results": "Showing {{max}} of {{total}} total results.",
 			"item_added": "{{itemName}} was added to the batch.",
+			"item_removed": "{{itemName}} was removed from the batch.",
 			"item_unique": "{{itemName}} is unique and already added."
 		},
 		"settings": {

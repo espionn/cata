@@ -77,13 +77,14 @@ export default class BulkItemPickerGroup extends ContentBlock {
 		picker.setItem(newItem);
 	}
 
-	remove(idx: number) {
+	remove(idx: number, silent = false) {
 		const picker = this.pickers.get(idx);
 		if (!picker) {
-			new Toast({
-				variant: 'error',
-				body: 'Failed to remove item, please report this issue.',
-			});
+			if (!silent)
+				new Toast({
+					variant: 'error',
+					body: 'Failed to remove item, please report this issue.',
+				});
 			return;
 		}
 
@@ -91,6 +92,13 @@ export default class BulkItemPickerGroup extends ContentBlock {
 		this.pickers.delete(idx);
 
 		if (!this.pickers.size) this.addEmptyElement();
+
+		if (!silent)
+			new Toast({
+				delay: 1000,
+				variant: 'success',
+				body: <>{i18n.t('bulk_tab.search.item_removed', { itemName: picker.item._item.name })}</>,
+			});
 	}
 
 	private addEmptyElement() {

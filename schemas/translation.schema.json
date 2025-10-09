@@ -3200,6 +3200,9 @@
             "item_added": {
               "type": "string"
             },
+            "item_removed": {
+              "type": "string"
+            },
             "item_unique": {
               "type": "string"
             }
@@ -3214,6 +3217,7 @@
             "no_results",
             "showing_results",
             "item_added",
+            "item_removed",
             "item_unique"
           ]
         },

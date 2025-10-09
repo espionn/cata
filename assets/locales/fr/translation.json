@@ -769,12 +769,13 @@
 			"min_ilvl": "ILvl min",
 			"max_ilvl": "ILvl max",
 			"no_results": "Aucun résultat trouvé.",
-			"showing_results": "Affichage de {max} sur {total} résultats totaux.",
-			"item_added": "{itemName} a été ajouté au lot.",
-			"item_unique": "{itemName} est unique et a déjà été ajouté."
+			"showing_results": "Affichage de {{max}} sur {{total}} résultats totaux.",
+			"item_added": "{{itemName}} a été ajouté au lot.",
+			"item_removed": "{{itemName}} a été retiré du lot.",
+			"item_unique": "{{itemName}} est unique et a déjà été ajouté."
 		},
 		"settings": {
-			"combinations_count": "{count} Combinaisons",
+			"combinations_count": "{{count}} Combinaisons",
 			"combination_singular": "1 Combinaison",
 			"iterations": "Itérations",
 			"default_gems": "Gemmes par défaut",

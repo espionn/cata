@@ -197,10 +197,10 @@ export class BulkTab extends SimTab {
 				// Clear all previously equipped items from the pickers
 				for (const group of this.pickerGroups.values()) {
 					if (group.has(-1)) {
-						group.remove(-1);
+						group.remove(-1, true);
 					}
 					if (group.has(-2)) {
-						group.remove(-2);
+						group.remove(-2, true);
 					}
 				}
 
@@ -400,7 +400,7 @@ export class BulkTab extends SimTab {
 			}
 		});
 	}
-	removeItemByIndex(idx: number) {
+	removeItemByIndex(idx: number, silent = false) {
 		if (idx < 0 || this.items.length < idx || !this.items[idx]) {
 			new Toast({
 				variant: 'error',
@@ -419,7 +419,7 @@ export class BulkTab extends SimTab {
 				if (!canEquipItem(equippedItem.item, this.simUI.player.getPlayerSpec(), slot)) return;
 				const bulkSlot = getBulkItemSlotFromSlot(slot, this.playerCanDualWield);
 				const group = this.pickerGroups.get(bulkSlot)!;
-				group.remove(idx);
+				group.remove(idx, silent);
 			});
 			this.itemsChangedEmitter.emit(TypedEvent.nextEventID());
 		}
@@ -427,7 +427,7 @@ export class BulkTab extends SimTab {
 
 	clearItems() {
 		for (let idx = 0; idx < this.items.length; idx++) {
-			this.removeItemByIndex(idx);
+			this.removeItemByIndex(idx, true);
 		}
 		this.items = new Array<ItemSpec>();
 		this.itemsChangedEmitter.emit(TypedEvent.nextEventID());
