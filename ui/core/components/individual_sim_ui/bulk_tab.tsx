@@ -7,7 +7,7 @@ import { REPO_RELEASES_URL } from '../../constants/other';
 import { IndividualSimUI } from '../../individual_sim_ui';
 import i18n from '../../../i18n/config';
 import { BulkSettings, DistributionMetrics, ProgressMetrics, TalentLoadout } from '../../proto/api';
-import { Class, GemColor, ItemRandomSuffix, ItemSlot, ItemSpec, ReforgeStat, Spec } from '../../proto/common';
+import { Class, GemColor, HandType, ItemRandomSuffix, ItemSlot, ItemSpec, RangedWeaponType, ReforgeStat, Spec } from '../../proto/common';
 import { ItemEffectRandPropPoints, SimDatabase, SimEnchant, SimGem, SimItem } from '../../proto/db';
 import { SavedTalents, UIEnchant, UIGem, UIItem } from '../../proto/ui';
 import { ActionId } from '../../proto_utils/action_id';
@@ -470,18 +470,100 @@ export class BulkTab extends SimTab {
 		return result;
 	}
 
+	protected getAllWeaponCombos(): [EquippedItem | null, EquippedItem | null][] {
+		const allWeaponCombos: [EquippedItem | null, EquippedItem | null][] = [];
+
+		// First find any configured 2H weapons.
+		let all2HWeapons: EquippedItem[] = [];
+
+		for (const bulkItemSlot of [BulkSimItemSlot.ItemSlotMainHand, BulkSimItemSlot.ItemSlotHandWeapon]) {
+			if (!this.pickerGroups.has(bulkItemSlot)) {
+				continue;
+			}
+
+			const pickerGroup = this.pickerGroups.get(bulkItemSlot)!;
+			const allItemOptions: EquippedItem[] = Array.from(pickerGroup.pickers.values()).map(picker => picker.item);
+			all2HWeapons = all2HWeapons.concat(allItemOptions.filter(equippedItem => ![RangedWeaponType.RangedWeaponTypeUnknown, RangedWeaponType.RangedWeaponTypeWand].includes(equippedItem.item.rangedWeaponType) || (equippedItem.item.handType == HandType.HandTypeTwoHand)));
+		}
+
+		for (const twoHandWeapon of all2HWeapons) {
+			allWeaponCombos.push([twoHandWeapon, null]);
+		}
+
+		// Then loop through all pairs of MH and OH items.
+		const mhGroup = this.pickerGroups.get(BulkSimItemSlot.ItemSlotMainHand);
+		const ohGroup = this.pickerGroups.get(BulkSimItemSlot.ItemSlotOffHand);
+
+		if (mhGroup?.pickers.size) {
+			for (const mhItem of Array.from(mhGroup.pickers.values()).map(picker => picker.item)) {
+				if (all2HWeapons.includes(mhItem)) {
+					continue;
+				}
+
+				if (ohGroup?.pickers.size) {
+					for (const ohItem of Array.from(ohGroup.pickers.values()).map(picker => picker.item)) {
+						allWeaponCombos.push([mhItem, ohItem]);
+					}
+				} else {
+					allWeaponCombos.push([mhItem, null]);
+				}
+			}
+		} else if (ohGroup?.pickers.size) {
+			for (const ohItem of Array.from(ohGroup.pickers.values()).map(picker => picker.item)) {
+				allWeaponCombos.push([null, ohItem]);
+			}
+		}
+
+		// Finally loop through all one-hand weapons. Double count these since they can go in either slot.
+		const oneHandGroup = this.pickerGroups.get(BulkSimItemSlot.ItemSlotHandWeapon);
+
+		if (oneHandGroup?.pickers.size) {
+			const allOneHandWeapons: EquippedItem[] = Array.from(oneHandGroup.pickers.values()).map(picker => picker.item).filter(item => !all2HWeapons.includes(item));
+
+			for (let i = 0; i < allOneHandWeapons.length; i++) {
+				for (let j = i; j < allOneHandWeapons.length; j++) {
+					allWeaponCombos.push([allOneHandWeapons[i], allOneHandWeapons[j]]);
+
+					if (i != j) {
+						allWeaponCombos.push([allOneHandWeapons[j], allOneHandWeapons[i]]);
+					}
+				}
+			}
+		}
+
+		return allWeaponCombos;
+	}
+
 	protected getItemsForCombo(comboIdx: number): Map<ItemSlot, EquippedItem> {
 		const itemsForCombo = new Map<ItemSlot, EquippedItem>();
 
+		// Deal with weapon combos first since they bridge multiple slots.
+		const allWeaponPairs = this.getAllWeaponCombos();
+		const numWeaponPairs = allWeaponPairs.length;
+
+		if (numWeaponPairs > 0) {
+			const weaponPairIdx = comboIdx % numWeaponPairs;
+			comboIdx = Math.floor(comboIdx / numWeaponPairs);
+			const weaponPairToUse = allWeaponPairs[weaponPairIdx];
+
+			if (weaponPairToUse[0]) {
+				itemsForCombo.set(ItemSlot.ItemSlotMainHand, weaponPairToUse[0]);
+			}
+
+			if (weaponPairToUse[1]) {
+				itemsForCombo.set(ItemSlot.ItemSlotOffHand, weaponPairToUse[1]);
+			}
+		}
+
 		for (const [bulkItemSlot, pickerGroup] of this.pickerGroups.entries()) {
-			if (pickerGroup.pickers.size == 0) {
+			if ((pickerGroup.pickers.size == 0) || [BulkSimItemSlot.ItemSlotMainHand, BulkSimItemSlot.ItemSlotOffHand, BulkSimItemSlot.ItemSlotHandWeapon].includes(bulkItemSlot)) {
 				continue;
 			}
 
 			const optionsForSlot: EquippedItem[] = Array.from(pickerGroup.pickers.values()).map(picker => picker.item);
 			const numOptions = optionsForSlot.length;
 
-			if ([BulkSimItemSlot.ItemSlotFinger, BulkSimItemSlot.ItemSlotTrinket, BulkSimItemSlot.ItemSlotHandWeapon].includes(bulkItemSlot)) {
+			if ([BulkSimItemSlot.ItemSlotFinger, BulkSimItemSlot.ItemSlotTrinket].includes(bulkItemSlot)) {
 				if (numOptions < 2) {
 					throw 'At least 2 items must be selected for ' + BulkSimItemSlot[bulkItemSlot];
 				}
@@ -506,14 +588,18 @@ export class BulkTab extends SimTab {
 
 	protected async calculateBulkCombinations() {
 		try {
-			let numCombinations: number = 1;
+			let numCombinations: number = this.getAllWeaponCombos().length;
 
 			for (const [bulkItemSlot, pickerGroup] of this.pickerGroups.entries()) {
+				if ([BulkSimItemSlot.ItemSlotMainHand, BulkSimItemSlot.ItemSlotOffHand, BulkSimItemSlot.ItemSlotHandWeapon].includes(bulkItemSlot)) {
+					continue;
+				}
+
 				const numOptions: number = pickerGroup.pickers.size;
 
 				if (
 					numOptions > 1 &&
-					[BulkSimItemSlot.ItemSlotFinger, BulkSimItemSlot.ItemSlotTrinket, BulkSimItemSlot.ItemSlotHandWeapon].includes(bulkItemSlot)
+					[BulkSimItemSlot.ItemSlotFinger, BulkSimItemSlot.ItemSlotTrinket].includes(bulkItemSlot)
 				) {
 					numCombinations *= binomialCoefficient(numOptions, 2);
 				} else {
