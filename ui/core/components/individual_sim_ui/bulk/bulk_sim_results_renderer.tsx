@@ -20,7 +20,7 @@ export default class BulkSimResultRenderer extends Component {
 		this.simUI = simUI;
 
 		const iterations = this.simUI.sim.getIterations();
-		const isBaseResult = result.gear.equals(this.simUI.player.getGear());
+		const isBaseResult = result.gear.equals(baseResult.gear);
 
 		const equipButtonRef = ref<HTMLButtonElement>();
 		const dpsDeltaRef = ref<HTMLDivElement>();
