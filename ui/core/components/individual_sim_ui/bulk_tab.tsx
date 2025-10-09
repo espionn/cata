@@ -95,7 +95,7 @@ export class BulkTab extends SimTab {
 		super(parentElem, simUI, { identifier: 'bulk-tab', title: i18n.t('bulk_tab.title') });
 
 		this.simUI = simUI;
-		this.playerCanDualWield = this.simUI.player.getPlayerSpec().canDualWield && (this.simUI.player.getClass() !== Class.ClassHunter);
+		this.playerCanDualWield = this.simUI.player.getPlayerSpec().canDualWield && this.simUI.player.getClass() !== Class.ClassHunter;
 		this.playerIsFuryWarrior = this.simUI.player.getSpec() === Spec.SpecFuryWarrior;
 
 		const setupTabBtnRef = ref<HTMLButtonElement>();
@@ -482,7 +482,13 @@ export class BulkTab extends SimTab {
 
 			const pickerGroup = this.pickerGroups.get(bulkItemSlot)!;
 			const allItemOptions: EquippedItem[] = Array.from(pickerGroup.pickers.values()).map(picker => picker.item);
-			all2HWeapons = all2HWeapons.concat(allItemOptions.filter(equippedItem => ![RangedWeaponType.RangedWeaponTypeUnknown, RangedWeaponType.RangedWeaponTypeWand].includes(equippedItem.item.rangedWeaponType) || (equippedItem.item.handType == HandType.HandTypeTwoHand)));
+			all2HWeapons = all2HWeapons.concat(
+				allItemOptions.filter(
+					equippedItem =>
+						![RangedWeaponType.RangedWeaponTypeUnknown, RangedWeaponType.RangedWeaponTypeWand].includes(equippedItem.item.rangedWeaponType) ||
+						equippedItem.item.handType == HandType.HandTypeTwoHand,
+				),
+			);
 		}
 
 		for (const twoHandWeapon of all2HWeapons) {
@@ -517,7 +523,9 @@ export class BulkTab extends SimTab {
 		const oneHandGroup = this.pickerGroups.get(BulkSimItemSlot.ItemSlotHandWeapon);
 
 		if (oneHandGroup?.pickers.size) {
-			const allOneHandWeapons: EquippedItem[] = Array.from(oneHandGroup.pickers.values()).map(picker => picker.item).filter(item => !all2HWeapons.includes(item));
+			const allOneHandWeapons: EquippedItem[] = Array.from(oneHandGroup.pickers.values())
+				.map(picker => picker.item)
+				.filter(item => !all2HWeapons.includes(item));
 
 			for (let i = 0; i < allOneHandWeapons.length; i++) {
 				for (let j = i; j < allOneHandWeapons.length; j++) {
@@ -555,7 +563,10 @@ export class BulkTab extends SimTab {
 		}
 
 		for (const [bulkItemSlot, pickerGroup] of this.pickerGroups.entries()) {
-			if ((pickerGroup.pickers.size == 0) || [BulkSimItemSlot.ItemSlotMainHand, BulkSimItemSlot.ItemSlotOffHand, BulkSimItemSlot.ItemSlotHandWeapon].includes(bulkItemSlot)) {
+			if (
+				pickerGroup.pickers.size == 0 ||
+				[BulkSimItemSlot.ItemSlotMainHand, BulkSimItemSlot.ItemSlotOffHand, BulkSimItemSlot.ItemSlotHandWeapon].includes(bulkItemSlot)
+			) {
 				continue;
 			}
 
@@ -596,10 +607,7 @@ export class BulkTab extends SimTab {
 
 				const numOptions: number = pickerGroup.pickers.size;
 
-				if (
-					numOptions > 1 &&
-					[BulkSimItemSlot.ItemSlotFinger, BulkSimItemSlot.ItemSlotTrinket].includes(bulkItemSlot)
-				) {
+				if (numOptions > 1 && [BulkSimItemSlot.ItemSlotFinger, BulkSimItemSlot.ItemSlotTrinket].includes(bulkItemSlot)) {
 					numCombinations *= binomialCoefficient(numOptions, 2);
 				} else {
 					numCombinations *= Math.max(numOptions, 1);
@@ -787,8 +795,8 @@ export class BulkTab extends SimTab {
 						updatedGear = updatedGear.withEquippedItem(
 							itemSlot,
 							equippedItemInSlot
-								? equippedItemInSlot.withItem(equippedItem.item)
-								: new EquippedItem({ item: equippedItem.item, challengeMode: challengeModeEnabled }),
+								? equippedItemInSlot.withItem(equippedItem.item).withUpgrade(equippedItem._upgrade)
+								: equippedItem.withChallengeMode(challengeModeEnabled),
 							this.playerIsFuryWarrior,
 						);
 
@@ -882,7 +890,6 @@ export class BulkTab extends SimTab {
 			} finally {
 				this.simUI.player.setGear(TypedEvent.nextEventID(), this.originalGear!);
 				await this.simUI.sim.updateCharacterStats(TypedEvent.nextEventID());
-
 				this.isRunning = false;
 				if (!waitAbort) this.bulkSimButton.disabled = false;
 				if (isAborted) {
@@ -891,6 +898,7 @@ export class BulkTab extends SimTab {
 						body: i18n.t('bulk_tab.notifications.bulk_sim_cancelled'),
 					});
 				}
+				this.simUI.resultsViewer.hideAll();
 				this.isPending = false;
 			}
 		});
