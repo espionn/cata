@@ -285,15 +285,16 @@ func (dot *Dot) periodicTick(sim *Simulation) {
 		// Note: even if the clip delay is 0ms, need a WaitUntil so that APL is called after the channel aura fades.
 		if dot.remainingTicks == 0 && dot.Spell.Unit.GCD.IsReady(sim) {
 			dot.Spell.Unit.WaitUntil(sim, sim.CurrentTime+channelDelay)
-		} else if dot.Spell.Unit.Rotation.shouldInterruptChannel(sim) {
-			dot.tickAction.NextActionAt = NeverExpires // don't tick again in ApplyOnExpire
-			dot.Deactivate(sim)
-			if dot.Spell.Unit.GCD.IsReady(sim) {
-				dot.Spell.Unit.WaitUntil(sim, sim.CurrentTime+channelDelay)
-			}
-
-			return // don't schedule another tick
 		}
+		// } else if dot.Spell.Unit.Rotation.shouldInterruptChannel(sim) {
+		// 	dot.tickAction.NextActionAt = NeverExpires // don't tick again in ApplyOnExpire
+		// 	dot.Deactivate(sim)
+		// 	if dot.Spell.Unit.GCD.IsReady(sim) {
+		// 		dot.Spell.Unit.WaitUntil(sim, sim.CurrentTime+channelDelay)
+		// 	}
+
+		// 	return // don't schedule another tick
+		// }
 	}
 
 	// Dot might have been disabled in tick

@@ -330,7 +330,37 @@ func (apl *APLRotation) DoNextAction(sim *Simulation) {
 		return
 	}
 
-	if apl.unit.IsChanneling() && !apl.unit.ChanneledDot.Spell.Flags.Matches(SpellFlagCastWhileChanneling) {
+	if apl.unit.IsChanneling() && apl.shouldInterruptChannel(sim) {
+		nextAction := apl.getNextAction(sim)
+		if nextAction != nil {
+			if channel, ok := nextAction.impl.(*APLActionChannelSpell); ok {
+				if channel.spell == apl.unit.ChanneledDot.Spell {
+					//we are casting the same thing for sure
+
+				} else {
+					//we are casting another channel
+					apl.unit.ChanneledDot.Deactivate(sim)
+
+				}
+
+			} else {
+				return
+			}
+
+		} else {
+			//here we know we are pressing something thatm has higher prio that isnt a recast
+			apl.unit.ChanneledDot.Deactivate(sim)
+		}
+
+	} else if apl.unit.IsChanneling() {
+		nextAction := apl.getNextAction(sim)
+		if nextAction != nil {
+			if _, ok := nextAction.impl.(*APLActionChannelSpell); !ok {
+				apl.unit.ChanneledDot.Deactivate(sim)
+			}
+		}
+
+	} else if apl.unit.IsChanneling() && !apl.unit.ChanneledDot.Spell.Flags.Matches(SpellFlagCastWhileChanneling) {
 		return
 	}
 
@@ -394,6 +424,10 @@ func (apl *APLRotation) popControllingAction(ca APLActionImpl) {
 
 func (apl *APLRotation) shouldInterruptChannel(sim *Simulation) bool {
 	channeledDot := apl.unit.ChanneledDot
+
+	if channeledDot == nil {
+		return false
+	}
 
 	if !channeledDot.ChannelCanBeInterrupted(sim) {
 		return false
