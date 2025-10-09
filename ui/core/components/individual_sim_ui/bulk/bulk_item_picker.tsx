@@ -125,14 +125,10 @@ export default class BulkItemPicker extends Component {
 	}
 
 	private addActions() {
-		const copyBtnRef = ref<HTMLButtonElement>();
 		const removeBtnRef = ref<HTMLButtonElement>();
 
 		this.itemElem.rootElem.appendChild(
 			<div className="item-picker-actions-container">
-				<button className="btn btn-link item-picker-actions-btn" ref={copyBtnRef}>
-					<i className="fas fa-copy" />
-				</button>
 				{this.isEditable() && (
 					<button className="btn btn-link link-danger item-picker-actions-btn" ref={removeBtnRef}>
 						<i className="fas fa-times" />
@@ -140,12 +136,6 @@ export default class BulkItemPicker extends Component {
 				)}
 			</div>,
 		);
-
-		const copyBtn = copyBtnRef.value!;
-		tippy(copyBtn, { content: 'Make an editable copy of this item.' });
-		const copyItem = () => this.bulkUI.addItemToSlot(this.item.asSpec(), this.bulkSlot);
-		copyBtn.addEventListener('click', copyItem);
-		this.addOnDisposeCallback(() => copyBtn.removeEventListener('click', copyItem));
 
 		if (removeBtnRef.value) {
 			const removeBtn = removeBtnRef.value;
