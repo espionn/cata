@@ -219,8 +219,8 @@ export class ReforgeOptimizer {
 	protected previousGear: Gear | null = null;
 	protected previousReforges = new Map<ItemSlot, ReforgeData>();
 	protected currentReforges = new Map<ItemSlot, ReforgeData>();
-	protected defaultRelativeStatCap: Stat | null = null;
-	protected relativeStatCap: RelativeStatCap | null = null;
+	defaultRelativeStatCap: Stat | null = null;
+	relativeStatCap: RelativeStatCap | null = null;
 
 	constructor(simUI: IndividualSimUI<any>, options?: ReforgeOptimizerOptions) {
 		this.simUI = simUI;
@@ -1057,7 +1057,7 @@ export class ReforgeOptimizer {
 		return statCaps;
 	}
 
-	async optimizeReforges() {
+	async optimizeReforges(batchRun?: boolean) {
 		if (isDevMode()) console.log('Starting Reforge optimization...');
 
 		// First, clear all existing Reforges
@@ -1107,7 +1107,7 @@ export class ReforgeOptimizer {
 		const constraints = this.buildYalpsConstraints(baseGear, baseStats);
 
 		// Solve in multiple passes to enforce caps
-		await this.solveModel(baseGear, validatedWeights, reforgeCaps, reforgeSoftCaps, variables, constraints, 5000000, this.includeTimeout ? (this.relativeStatCap ? 120 : 30) : 3600);
+		await this.solveModel(baseGear, validatedWeights, reforgeCaps, reforgeSoftCaps, variables, constraints, 5000000, (this.includeTimeout ? (this.relativeStatCap ? 120 : 30) : 3600) / (batchRun ? 4 : 1));
 		this.currentReforges = this.player.getGear().getAllReforges();
 	}
 
