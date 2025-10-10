@@ -43,7 +43,6 @@ type AfflictionWarlock struct {
 	SoulShards         core.SecondaryResourceBar
 	Agony              *core.Spell
 	UnstableAffliction *core.Spell
-	Haunt              *core.Spell
 
 	SoulBurnAura *core.Aura
 
@@ -114,7 +113,7 @@ func (affliction *AfflictionWarlock) OnEncounterStart(sim *core.Simulation) {
 		defaultShards -= 1
 	}
 	//Haunt in-flight
-	if affliction.SpellInFlight(48181) {
+	if affliction.SpellInFlight(HauntSpellID) {
 		defaultShards -= 1
 	}
 

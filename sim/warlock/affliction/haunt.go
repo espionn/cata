@@ -13,11 +13,13 @@ const (
 	DDBC_Total
 )
 
+const HauntSpellID = 48181
+
 const hauntScale = 2.625
 const hauntCoeff = 2.625
 
 func (affliction *AfflictionWarlock) registerHaunt() {
-	actionID := core.ActionID{SpellID: 48181}
+	actionID := core.ActionID{SpellID: HauntSpellID}
 
 	affliction.RegisterSpell(core.SpellConfig{
 		ActionID:       actionID,
