@@ -113,7 +113,7 @@ func (affliction *AfflictionWarlock) OnEncounterStart(sim *core.Simulation) {
 		defaultShards -= 1
 	}
 	//Haunt in-flight
-	if affliction.SpellInFlight(HauntSpellID) {
+	if affliction.SpellInFlightByID(HauntSpellID) {
 		defaultShards -= 1
 	}
 
