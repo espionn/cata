@@ -2274,10 +2274,10 @@ dps_results: {
 dps_results: {
  key: "TestGuardian-AllItems-RuneofRe-Origination-96918"
  value: {
-  dps: 124241.73963
-  tps: 637488.25158
-  dtps: 13986.06269
-  hps: 11317.21537
+  dps: 123485.17402
+  tps: 634410.91729
+  dtps: 13763.45253
+  hps: 11237.90842
  }
 }
 dps_results: {
