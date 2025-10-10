@@ -611,7 +611,7 @@ func init() {
 
 			triggerAura := core.MakeProcTriggerAura(&character.Unit, core.ProcTrigger{
 				Name: label,
-				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskMeleeOrMeleeProc|core.ProcMaskRangedOrRangedProc, core.RPPMConfig{
+				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
 					PPM: 1.10000002384,
 				}.WithApproximateIlvlMod(1.0, 528)),
 				ICD:      duration,
