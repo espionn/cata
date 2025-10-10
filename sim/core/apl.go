@@ -330,6 +330,7 @@ func (apl *APLRotation) DoNextAction(sim *Simulation) {
 		return
 	}
 
+	//aff seed 121781921 20-21 secs mg
 	if apl.unit.IsChanneling() && apl.shouldInterruptChannel(sim) {
 		nextAction := apl.getNextAction(sim)
 		if nextAction != nil {
@@ -340,27 +341,23 @@ func (apl *APLRotation) DoNextAction(sim *Simulation) {
 				} else {
 					//we are casting another channel
 					apl.unit.ChanneledDot.Deactivate(sim)
-
 				}
-
 			} else {
-				return
+				//here we know we are pressing something thatm has higher prio that isnt a recast
+				apl.unit.ChanneledDot.Deactivate(sim)
 			}
 
 		} else {
-			//here we know we are pressing something thatm has higher prio that isnt a recast
-			apl.unit.ChanneledDot.Deactivate(sim)
+			//this is when theres no next action
+			return
 		}
 
-	} else if apl.unit.IsChanneling() {
-		nextAction := apl.getNextAction(sim)
-		if nextAction != nil {
-			if _, ok := nextAction.impl.(*APLActionChannelSpell); !ok {
-				apl.unit.ChanneledDot.Deactivate(sim)
-			}
-		}
+	} else if apl.unit.IsChanneling() { //we are channelling but the next action shouldn't interrupt it
+		//seems necessary even tho should be irrelevant . probably spell comparison above or shouldinterruoptchannel failing somehow
+		//needed to reproc mg mid chanl
 
 	} else if apl.unit.IsChanneling() && !apl.unit.ChanneledDot.Spell.Flags.Matches(SpellFlagCastWhileChanneling) {
+		//this being after just ifchanneling make
 		return
 	}
 
