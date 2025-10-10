@@ -232,7 +232,7 @@ var ItemSetRegaliaOfTheHornedNightmare = core.NewItemSet(core.ItemSet{
 					for _, target := range warlock.Env.Encounter.AllTargets {
 						dot := spell.Dot(&target.Unit)
 						if dot == nil {
-							continue
+							break
 						}
 						dot.ApplyOnExpire(func(_ *core.Aura, sim *core.Simulation) {
 							if sim.Proc(0.1, "T16 4p") {
