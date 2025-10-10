@@ -74,6 +74,13 @@ export default class BulkSimResultRenderer extends Component {
 		const originalEquipmentSpec = baseResult.gear.asSpec();
 		for (const [idx, spec] of resultAsSpec.items.entries()) {
 			const itemContainer = (<div className="bulk-result-item" />) as HTMLElement;
+
+			if (spec.id != originalEquipmentSpec.items[idx].id) {
+				itemContainer.style.border = '3px solid red';
+			} else {
+				itemContainer.style.border = '3px solid transparent';
+			}
+
 			const renderer = new ItemRenderer(items, itemContainer, simUI.player);
 
 			var shouldRenderItem: boolean;
