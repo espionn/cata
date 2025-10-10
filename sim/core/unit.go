@@ -831,7 +831,7 @@ func (unit *Unit) SpellInFlight(spell *Spell) bool {
 
 func (unit *Unit) SpellInFlightByID(spellID int32) bool {
 	spell := unit.GetSpell(ActionID{SpellID: spellID})
-	return unit.SpellsInFlight[spell] > 0
+	return unit.SpellInFlight(spell)
 }
 
 func (unit *Unit) GetUnit(ref *proto.UnitReference) *Unit {
