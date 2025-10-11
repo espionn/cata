@@ -331,9 +331,9 @@ func (apl *APLRotation) DoNextAction(sim *Simulation) {
 	}
 
 	//potentially remove this entirely
-	if apl.unit.IsChanneling() && !apl.unit.ChanneledDot.Spell.Flags.Matches(SpellFlagCastWhileChanneling) && !apl.shouldRecastChannel(sim) {
-		return
-	}
+	// if apl.unit.IsChanneling() && !apl.unit.ChanneledDot.Spell.Flags.Matches(SpellFlagCastWhileChanneling) && !apl.shouldRecastChannel(sim) {
+	// 	return
+	// }
 
 	if !apl.unit.RotationTimer.IsReady(sim) {
 		return
