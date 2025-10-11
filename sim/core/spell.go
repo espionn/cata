@@ -678,7 +678,7 @@ func (spell *Spell) CanCompleteCast(sim *Simulation, target *Unit, logCastFailur
 func (spell *Spell) CanCastDuringChannel(sim *Simulation) bool {
 	// Don't allow bypassing of channel clip logic for re-casts of the same channel
 	if spell == spell.Unit.ChanneledDot.Spell {
-		return false
+		return true
 	}
 
 	if spell.Flags.Matches(SpellFlagCastWhileChanneling) {
@@ -694,6 +694,10 @@ func (spell *Spell) Cast(sim *Simulation, target *Unit) bool {
 	}
 	if target == nil {
 		target = spell.Unit.CurrentTarget
+	}
+	// if we are currently channeling a dot and this cast isn't either a recast of that spell, or is castable while channeling (check flag on both)
+	if spell.Unit.IsChanneling() && spell != spell.Unit.ChanneledDot.Spell && !(spell.Unit.ChanneledDot.Spell.Flags & spell.Flags).Matches(SpellFlagCastWhileChanneling) {
+		spell.Unit.ChanneledDot.Deactivate(sim)
 	}
 	return spell.castFn(sim, target)
 }

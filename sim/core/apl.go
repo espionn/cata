@@ -330,7 +330,8 @@ func (apl *APLRotation) DoNextAction(sim *Simulation) {
 		return
 	}
 
-	if apl.unit.IsChanneling() && !apl.unit.ChanneledDot.Spell.Flags.Matches(SpellFlagCastWhileChanneling) {
+	//potentially remove this entirely
+	if apl.unit.IsChanneling() && !apl.unit.ChanneledDot.Spell.Flags.Matches(SpellFlagCastWhileChanneling) && !apl.shouldRecastChannel(sim) {
 		return
 	}
 
@@ -410,6 +411,42 @@ func (apl *APLRotation) shouldInterruptChannel(sim *Simulation) bool {
 
 	return true
 }
+
+func (apl *APLRotation) shouldRecastChannel(sim *Simulation) bool {
+	channeledDot := apl.unit.ChanneledDot
+
+	if !channeledDot.ChannelCanBeInterrupted(sim) {
+		return false
+	}
+
+	nextAction := apl.getNextAction(sim)
+	if nextAction != nil {
+		if channelAction, ok := nextAction.impl.(*APLActionChannelSpell); ok && channelAction.spell == channeledDot.Spell {
+			// Newly selected action is channeling the same spell, so continue the channel unless recast is allowed.
+			return apl.allowChannelRecastOnInterrupt
+		}
+	}
+
+	return false
+}
+
+// func (apl *APLRotation) isRecastOfChannel(sim *Simulation) bool {
+// 	channeledDot := apl.unit.ChanneledDot
+
+// 	if channeledDot == nil {
+// 		return false
+// 	}
+
+// 	nextAction := apl.getNextAction(sim)
+// 	if nextAction != nil {
+// 		if channelAction, ok := nextAction.impl.(*APLActionChannelSpell); ok && channelAction.spell == channeledDot.Spell {
+// 			// Newly selected action is channeling the same spell, so continue the channel unless recast is allowed.
+// 			return true
+// 		}
+// 	}
+
+// 	return false
+// }
 
 func APLRotationFromJsonString(jsonString string) *proto.APLRotation {
 	apl := &proto.APLRotation{}

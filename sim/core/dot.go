@@ -286,8 +286,8 @@ func (dot *Dot) periodicTick(sim *Simulation) {
 		if dot.remainingTicks == 0 && dot.Spell.Unit.GCD.IsReady(sim) {
 			dot.Spell.Unit.WaitUntil(sim, sim.CurrentTime+channelDelay)
 		} else if dot.Spell.Unit.Rotation.shouldInterruptChannel(sim) {
-			dot.tickAction.NextActionAt = NeverExpires // don't tick again in ApplyOnExpire
-			dot.Deactivate(sim)
+			//dot.tickAction.NextActionAt = NeverExpires // don't tick again in ApplyOnExpire
+			//dot.Deactivate(sim)
 			if dot.Spell.Unit.GCD.IsReady(sim) {
 				dot.Spell.Unit.WaitUntil(sim, sim.CurrentTime+channelDelay)
 			}
